@@ -4,19 +4,14 @@ set langmenu=zh_cn.utf-8
 set encoding=utf8
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 set termencoding=utf-8
-"reload menu with UTF-8 encoding
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
-set nocompatible
-source $VIMRUNTIME/vimrc_example.vim
-source $VIMRUNTIME/mswin.vim
-behave mswin
 
 
-""Basic settings
+"" 基本设定
 let mapleader=";"
 filetype on
 filetype plugin on
+set backspace=2
+set backspace=indent,eol,start
 
 " 定义快捷键到行首和行尾
 nmap <Leader>lb 0
@@ -77,7 +72,7 @@ let g:Powerline_colorscheme='solarized256'
 set number
 set ruler
 "set cursorline
-"set curorcolumn
+"set cursorcolumn
 set hlsearch
 set laststatus=2
 
@@ -131,9 +126,12 @@ let g:SignatureMap = {
         \ }
 
 " [Plugin]indexer 自动生成tag
+" 默认 --c++-kinds=+p+l，重新设置为 --c++-kinds=+p+l+x+c+d+e+f+g+m+n+s+t+u+v
+" 默认 --fields=+iaS 不满足 YCM 要求，需改为 --fields=+iaSl
 let g:indexer_ctagsCommandLineOptions="--c++-kinds=+p+l+x+c+d+e+f+g+m+n+s+t+u+v --fields=+iaSl --extra=+q"
 " 正向遍历同名标签
 nmap <Leader>tn :tnext<CR>
+" 反向遍历同名标签
 nmap <Leader>tp :tprevious<CR>
 
 " [Plugin]YCM
@@ -327,7 +325,7 @@ filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
-" call vundle#begin('$VIM/vimfiles/bundle/')
+" call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
