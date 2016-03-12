@@ -83,6 +83,12 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 
+autocmd FileType javascript setlocal expandtab ts=2 sw=2 sts=2
+autocmd FileType html setlocal expandtab ts=2 sw=2 sts=2
+autocmd FileType css setlocal expandtab ts=2 sw=2 sts=2
+autocmd FileType xml setlocal expandtab ts=2 sw=2 sts=2
+autocmd FileType json setlocal expandtab ts=2 sw=2 sts=2
+
 "代码折叠 基于缩进或者语法
 "set foldmethod=indent
 set foldmethod=syntax
