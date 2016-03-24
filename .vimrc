@@ -361,6 +361,7 @@ Plugin 'scrooloose/nerdtree'    " 文件列表
 Plugin 'majutsushi/tagbar'      " 标签列表
 Plugin 'fholgado/minibufexpl.vim'
 Plugin 'dyng/ctrlsf.vim'        " 工程内搜索
+Plugin 'kien/ctrlp.vim'         " 工程内搜索文件
 """ Languages
 " C/C++
 Plugin 'a.vim'      " 切换实现和声明
