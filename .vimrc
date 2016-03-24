@@ -336,31 +336,41 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'Valloric/YouCompleteMe'
+""" Apprearance
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'Lokaltog/vim-powerline'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'a.vim'
-Plugin 'kshenoy/vim-signature'
-Plugin 'majutsushi/tagbar'
-Plugin 'dyng/ctrlsf.vim'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'DrawIt'
-Plugin 'scrooloose/nerdtree'
+Plugin 'nathanaelkane/vim-indent-guides'  "提示缩进
+""" General Edit
+" 代码补全
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'SirVer/ultisnips'           " 模板补全
+Plugin 'CrowsT/vim-snippets'        " 自定义模板
+Plugin 'gcmt/wildfire.vim'          " 结对符号补全
+Plugin 'vimprj'                     " indexer的依赖插件
+Plugin 'DfrankUtil'                 " indexer的依赖插件
+Plugin 'indexer.tar.gz'             " 自动生成tags
+" 代码编辑辅助
+Plugin 'scrooloose/syntastic'       " 静态代码检查
+Plugin 'kshenoy/vim-signature'      " 代码书签
+Plugin 'scrooloose/nerdcommenter'   " 开关注释
+Plugin 'DrawIt'                     " 绘制注释
+Plugin 'sjl/gundo.vim'              " 分支撤回工具
+Plugin 'easymotion/vim-easymotion'  " 快速跳转
+""" View codes
+Plugin 'scrooloose/nerdtree'    " 文件列表
+Plugin 'majutsushi/tagbar'      " 标签列表
 Plugin 'fholgado/minibufexpl.vim'
+Plugin 'dyng/ctrlsf.vim'        " 工程内搜索
+""" Languages
+" C/C++
+Plugin 'a.vim'      " 切换实现和声明
+Plugin 'STL-Syntax' " STL代码提示
+" python
+" Markdown
 Plugin 'suan/vim-instant-markdown'
-Plugin 'sjl/gundo.vim'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'SirVer/ultisnips'
-Plugin 'CrowsT/vim-snippets'
-Plugin 'gcmt/wildfire.vim'
-Plugin 'STL-Syntax'
-Plugin 'vimprj'
-Plugin 'DfrankUtil'
-Plugin 'indexer.tar.gz'
+""" Auxiliary function
 Plugin 'lilydjwg/fcitx.vim'
 Plugin 'ternjs/tern_for_vim'
-Plugin 'nvie/vim-flake8'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
