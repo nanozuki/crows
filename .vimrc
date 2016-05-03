@@ -394,7 +394,7 @@ let g:disable_protodef_sorting=1
 autocmd FileType python map <leader>pf :call Flake8()<CR>
 autocmd BufWritePost *.py call Flake8()
 let g:flake8_show_in_gutter=1
-let g:flake8_show_quickfix=1
+let g:flake8_show_quickfix=0
 
 " set ycmd
 let g:ycm_server_python_interpreter="/usr/bin/python"
