@@ -10,6 +10,7 @@ alias vpy="source venv/bin/activate"
 alias rpy="deactivate"
 alias pipup="pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
 alias pipinstall="pip install -r requirements.txt"
+alias piprequire="pip freeze --local | grep -v '^\-e' | cut -d = -f 1 > requirements.txt"
 
 # Ubuntu
 
