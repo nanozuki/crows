@@ -1,6 +1,8 @@
 ## Normal
 alias zshup="source ~/.zshrc"
 alias tree="tree -L 2"
+alias reboot="sudo reboot"
+alias psg="ps -aux | gerp"
 ## Python
 alias vpy="source venv/bin/activate"
 alias rpy="deactivate"
