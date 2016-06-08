@@ -1,6 +1,7 @@
 ## Normal
 alias zshup="source ~/.zshrc"
 alias tree="tree -L 2"
+alias reboot="sudo reboot"
 ## Python
 alias vpy="source venv/bin/activate"
 alias rpy="deactivate"
@@ -21,3 +22,5 @@ alias piprequire="pip freeze --local | grep -v '^\-e' | cut -d = -f 1 > requirem
 ## MacOS
 #alias appadd="brew install"
 #alias appup="brew update && brew upgrade"
+## plugins
+#plugins=(git pip tmux ubuntu python vundle docker django)

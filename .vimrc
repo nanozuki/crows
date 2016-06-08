@@ -19,6 +19,7 @@ filetype on
 filetype plugin on
 set backspace=2
 set backspace=indent,eol,start
+set mouse=a
 
 "" 窗口
 nmap <Leader>q :q<CR>
@@ -207,6 +208,7 @@ nmap <silent> <Leader>ig <Plug>IndentGuidesToggle
 "" 自动生成tag([Plugin]indexer)
 " 默认 --c++-kinds=+p+l，重新设置为 --c++-kinds=+p+l+x+c+d+e+f+g+m+n+s+t+u+v
 " 默认 --fields=+iaS 不满足 YCM 要求，需改为 --fields=+iaSl
+let g:indexer_disableCtagsWarning=1
 let g:indexer_ctagsCommandLineOptions="--c++-kinds=+p+l+x+c+d+e+f+g+m+n+s+t+u+v --fields=+iaSl --extra=+q"
 " 正向遍历同名标签
 nmap <Leader>tn :tnext<CR>
@@ -473,12 +475,15 @@ Plugin 'nvie/vim-flake8'   " PEP8代码风格检查
 Plugin 'suan/vim-instant-markdown'
 " Javascript
 Plugin 'ternjs/tern_for_vim'
+" Rust
+Plugin 'rust-lang/rust.vim'
 """ 辅助功能
 Plugin 'vim-scripts/VimIM'   " 中文输入
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+filetype on
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 "
