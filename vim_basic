@@ -1,0 +1,177 @@
+"=======================
+"|                     |
+"|      基本设置       |
+"|                     |
+"=======================
+
+"" 语言和编码
+let $LANG="zh_CN.UTF-8"
+set langmenu=zh_cn.utf-8
+set encoding=utf8
+set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
+set termencoding=utf-8
+
+"" 快捷键前缀
+let mapleader=";"
+
+"" 基本设置
+filetype on
+filetype plugin on
+set backspace=2
+set backspace=indent,eol,start
+set mouse=a
+
+"" 窗口
+nmap <Leader>q :q<CR>
+" 定义快捷键保存当前窗口内容
+nmap <Leader>w :w<CR>
+" 定义快捷键保存所有窗口内容并退出 vim
+nmap <Leader>WQ :wa<CR>:q<CR>
+" 不做任何保存，直接退出 vim
+nmap <Leader>Q :qa!<CR>
+" 依次遍历子窗口
+nnoremap nw <C-W><C-W>
+" 跳转至右方的窗口
+nnoremap <Leader>lw <C-W>l
+" 跳转至方的窗口
+nnoremap <Leader>hw <C-W>h
+" 跳转至上方的子窗口
+nnoremap <Leader>kw <C-W>k
+" 跳转至下方的子窗口
+nnoremap <Leader>jw <C-W>j
+" 定义快捷键在结对符之间跳转，助记pair
+nmap <Leader>pa %
+
+"" 自定义命令与功能
+" 设置环境保存项
+set sessionoptions="blank,buffers,globals,localoptions,tabpages,sesdir,folds,help,options,resize,winpos,winsize"
+" 保存 undo 历史
+set undodir=~/.undo_history/
+set undofile
+" 保存快捷键
+map <leader>ss :mksession! my.vim<cr> :wviminfo! my.viminfo<cr>
+" 恢复快捷键
+map <leader>rs :source my.vim<cr> :rviminfo my.viminfo<cr>
+
+"=======================
+"|                     |
+"|        外观         |
+"|                     |
+"=======================
+" 去掉菜单栏和工具栏
+"set guioptions-=m
+"set guioptions-=T
+" 去掉滚动条
+set guioptions-=l
+set guioptions-=L
+set guioptions-=r
+set guioptions-=R
+
+" 主题
+set background=dark
+colorscheme solarized
+" 状态栏
+let g:Powerline_colorscheme='solarized256'
+
+" 显示设置
+set number
+set ruler
+"set cursorline
+"set cursorcolumn
+set hlsearch       "高亮搜索结果
+set laststatus=2   "总是显示状态栏
+set colorcolumn=80 "每行不超过80字符
+
+"=======================
+"|                     |
+"|   通用文件编辑      |
+"|                     |
+"=======================
+
+"" 定义快捷键到行首和行尾
+nmap <Leader>lb 0
+nmap <Leader>le $
+" 设置快捷键将选中文本块复制至系统剪贴板
+vnoremap <Leader>y "+y
+" 设置快捷键将系统剪贴板内容粘贴至vim
+nmap <Leader>p "+p
+
+"" 开启实时搜索功能
+set incsearch
+" 搜索时大小写不敏感
+set ignorecase
+" 关闭兼容模式
+set nocompatible
+" vim 自身命令行模式智能补全
+set wildmenu
+
+"" BUFFER管理器 ([plugin]MiniBufExplorer)
+" 显示/隐藏 MiniBufExplorer 窗口
+map <Leader>bl :MBEToggle<cr>
+" buffer 切换快捷键
+map <Leader>bn :MBEbn<cr>
+map <Leader>bp :MBEbp<cr>
+map <Leader>bd :MBEbd<cr>
+
+
+"======================m
+"|                     |
+"|   代码阅读:通用     |
+"|                     |
+"=======================
+
+" 代码高亮
+syntax enable
+syntax on
+
+
+"" 代码折叠 基于缩进或者语法
+"set foldmethod=indent
+set foldmethod=syntax
+set nofoldenable
+" za，打开或关闭折叠；zM，关闭所有折叠；ZR，打开所有折叠
+
+"=======================
+"|                     |
+"|   代码编写:通用     |
+"|                     |
+"=======================
+
+"" 缩进
+filetype indent on
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+" 某些文件类型的特别缩进
+autocmd FileType javascript setlocal expandtab ts=2 sw=2 sts=2
+autocmd FileType html setlocal expandtab ts=2 sw=2 sts=2
+autocmd FileType css setlocal expandtab ts=2 sw=2 sts=2
+autocmd FileType xml setlocal expandtab ts=2 sw=2 sts=2
+autocmd FileType json setlocal expandtab ts=2 sw=2 sts=2
+
+""" diff
+set diffexpr=MyDiff()
+function MyDiff()
+  let opt = '-a --binary '
+  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+  let arg1 = v:fname_in
+  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+  let arg2 = v:fname_new
+  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+  let arg3 = v:fname_out
+  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+  let eq = ''
+  if $VIMRUNTIME =~ ' '
+    if &sh =~ '\<cmd'
+      let cmd = '""' . $VIMRUNTIME . '\diff"'
+      let eq = '"'
+    else
+      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+    endif
+  else
+    let cmd = $VIMRUNTIME . '\diff'
+  endif
+  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
+endfunction
