@@ -399,7 +399,7 @@ let g:flake8_show_in_gutter=1
 let g:flake8_show_quickfix=0
 
 " set ycmd
-let g:ycm_server_python_interpreter="/usr/bin/python2"
+let g:ycm_server_python_interpreter="python"
 
 "python virtualenv support
 py << EOF
