@@ -1,0 +1,4 @@
+patch:
+    "menu/page_size": 9
+    "ascii_composer/switch_key":
+        Shift_L: commit_code
