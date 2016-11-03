@@ -13,7 +13,7 @@ alias piprequire="pip freeze --local | grep -v '^\-e' | cut -d = -f 1 > requirem
 #alias appadd="sudo pacman -S"
 #alias appup="sudo pacman -Syu"
 #alias appsch="pacman -Ss"
-#alias appdel="sudo pacman -Rnsc"
+#alias appdel="sudo pacman -Rnusc"
 #alias extadd="yaourt -S"
 #alias extsch="yaourt -Ss"
 #alias extup="yaourt -Syu --aur"
