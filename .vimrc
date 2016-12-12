@@ -264,7 +264,7 @@ nmap <Leader>fl :NERDTreeToggle<CR>
 " 设置NERDTree子窗口宽度
 let NERDTreeWinSize=32
 " 设置NERDTree子窗口位置
-let NERDTreeWinPos="right"
+let NERDTreeWinPos="left"
 " 显示隐藏文件
 let NERDTreeShowHidden=1
 " NERDTree 子窗口中不显示冗余帮助信息

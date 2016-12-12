@@ -68,8 +68,8 @@ set guioptions-=r
 set guioptions-=R
 
 " 主题
-set background=dark
-colorscheme solarized
+" set background=dark
+" colorscheme solarized
 " 状态栏
 let g:Powerline_colorscheme='solarized256'
 
