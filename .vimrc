@@ -71,7 +71,9 @@ set guioptions-=R
 set background=dark
 colorscheme solarized
 " 状态栏
-let g:Powerline_colorscheme='solarized256'
+let g:airline_theme="solarized"
+let g:airline_powerline_fonts=1
+let g:airline_extensions=['tabline', 'branch', 'virtualenv', 'tmuxline']
 
 " 显示设置
 set number
@@ -105,13 +107,12 @@ set nocompatible
 " vim 自身命令行模式智能补全
 set wildmenu
 
-"" BUFFER管理器 ([plugin]MiniBufExplorer)
-" 显示/隐藏 MiniBufExplorer 窗口
-map <Leader>bl :MBEToggle<cr>
+"" BUFFER管理器 ([plugin]airline#tabline)
+let g:airline#extensions#tabline#buffer_idx_mode=1
 " buffer 切换快捷键
-map <Leader>bn :MBEbn<cr>
-map <Leader>bp :MBEbp<cr>
-map <Leader>bd :MBEbd<cr>
+map <Leader>bn :bn<cr>
+map <Leader>bp :bp<cr>
+map <Leader>bd :bd<cr>
 
 "" 树形UNDO工具 ([plugin]gundo)
 " 调用 gundo 树
@@ -216,8 +217,6 @@ nmap <Leader>tn :tnext<CR>
 nmap <Leader>tp :tprevious<CR>
 
 "" 标签窗口 ([Plugin]tagbar)
-" 设置 tagbar 子窗口的位置出现在主编辑区的左边 
-let tagbar_left=1 
 " 设置显示／隐藏标签列表子窗口的快捷键。速记：tag list 
 nnoremap <Leader>tl :TagbarToggle<CR> 
 " 设置标签子窗口的宽度 
@@ -440,8 +439,10 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 """ 外观
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'Lokaltog/vim-powerline'
+Plugin 'altercation/vim-colors-solarized' "主题
+Plugin 'vim-airline/vim-airline'          "状态栏强化
+Plugin 'vim-airline/vim-airline-themes'   "状态栏主题
+Plugin 'edkolev/tmuxline.vim'             "tmux提示栏
 Plugin 'nathanaelkane/vim-indent-guides'  "提示缩进
 """ 通用编辑
 " 代码补全
@@ -459,10 +460,10 @@ Plugin 'scrooloose/nerdcommenter'   " 开关注释
 Plugin 'DrawIt'                     " 绘制注释
 Plugin 'sjl/gundo.vim'              " 分支撤回工具
 Plugin 'easymotion/vim-easymotion'  " 快速跳转
+Plugin 'tpope/vim-fugitive'         " git信息显示
 """ 代码查看
 Plugin 'scrooloose/nerdtree'    " 文件列表
 Plugin 'majutsushi/tagbar'      " 标签列表
-Plugin 'fholgado/minibufexpl.vim'
 Plugin 'dyng/ctrlsf.vim'        " 工程内搜索
 Plugin 'kien/ctrlp.vim'         " 工程内搜索文件
 """ 特定编程语言
