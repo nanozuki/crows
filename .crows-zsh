@@ -1,0 +1,46 @@
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+export PATH=$PATH:/usr/local/opt/go/libexec/bin
+export GOPATH=/usr/local/go
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git pip tmux ubuntu python vundle docker django)
+export http_proxy='127.0.0.1:7777'
+export https_proxy='127.0.0.1:7777'
+
+# Alias
+## Normal
+alias zshup="source ~/.zshrc"
+alias tree="tree -L 2"
+alias reboot="sudo reboot"
+alias psg="ps aux | grep"
+## Python
+alias vpy="source venv/bin/activate"
+alias rpy="deactivate"
+alias pipup="pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
+alias pipinstall="pip install -r requirements.txt"
+alias piprequire="pip freeze --local | grep -v '^\-e' | cut -d = -f 1 > requirements.txt"
+
+# Config for system
+if [[ `uname -s` == "Darwin" ]] then
+    alias appadd="brew install"
+    alias appup="brew update && brew upgrade"
+    alias appsch="brew search"
+    alias appdel="brew uninstall"
+    alias extadd="brew cask install"
+    alias extsch="brew cask search"
+    alias extdel="brew cask uninstall"
+elif [[ `cat /etc/issue` =~ '^Arch Linux']] then
+    alias appadd="sudo pacman -S"
+    alias appup="sudo pacman -Syu"
+    alias appsch="pacman -Ss"
+    alias appdel="sudo pacman -Rnsc"
+    alias extadd="yaourt -S"
+    alias extsch="yaourt -Ss"
+    alias extup="yaourt -Syu --aur"
+    alias extbuild="yaourt -Sb"
+fi
