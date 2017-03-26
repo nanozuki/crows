@@ -300,9 +300,10 @@ autocmd FileType json setlocal expandtab ts=2 sw=2 sts=2
 " :Distop 停止绘制
 
 "" 智能提示 ([Plugin]YCM)
-nnoremap <leader>jd :YcmCompleter GoToDeclaration<CR>
 " 只能是 #include 或已打开的文件
-nnoremap <leader>je :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>jt :YcmCompleter GoTo<CR>
+nnoremap <leader>jr :YcmCompleter GoToReferences<CR>
+nnoremap <leader>jd :YcmCompleter GetDoc<CR>
 " 补全菜单配色 ([Plugin]YCM)
 " 菜单
 "highlight Pmenu ctermfg=2 ctermbg=3 guifg=#005f87 guibg=#EEE8D5
