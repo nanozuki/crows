@@ -45,5 +45,6 @@ elif [ -f "/etc/issue" ]; then
         alias extsch="yaourt -Ss"
         alias extup="yaourt -Syu --aur"
         alias extbuild="yaourt -Sb"
+        alias extdel="yaourt -Rnsc"
     fi
 fi
