@@ -220,9 +220,9 @@ autocmd FileType json setlocal expandtab ts=2 sw=2 sts=2
 
 "" 智能提示 ([Plugin]YCM)
 " 只能是 #include 或已打开的文件
-nnoremap <leader>jt :YcmCompleter GoTo<CR>
-nnoremap <leader>jr :YcmCompleter GoToReferences<CR>
-nnoremap <leader>jd :YcmCompleter GetDoc<CR>
+nnoremap <leader>gt :YcmCompleter GoTo<CR>
+nnoremap <leader>gr :YcmCompleter GoToReferences<CR>
+nnoremap <leader>gd :YcmCompleter GetDoc<CR>
 " 补全菜单配色 ([Plugin]YCM)
 " 菜单
 "highlight Pmenu ctermfg=2 ctermbg=3 guifg=#005f87 guibg=#EEE8D5
@@ -283,6 +283,8 @@ if 'VIRTUAL_ENV' in os.environ:
     activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
     execfile(activate_this, dict(__file__=activate_this))
 EOF
+
+let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 
 "=======================
 "|                     |
