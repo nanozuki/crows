@@ -65,7 +65,7 @@ set guioptions-=r
 set guioptions-=R
 
 " 主题
-set background=dark
+set background=light
 colorscheme solarized
 " 状态栏
 let g:airline_theme="solarized"
@@ -288,6 +288,19 @@ let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 
 "=======================
 "|                     |
+"|   代码编写:前端     |
+"|                     |
+"=======================
+
+" syntastic
+let g:syntastic_javascript_checkers = ['eslint']
+" vim-jsx:
+let g:jsx_ext_required = 0
+" 修改ycm补全css的触发条件
+let g:ycm_semantic_triggers = {'css': [ 're!^\s{2}', 're!:\s+'], 'html': [ '</' ]}
+
+"=======================
+"|                     |
 "|      插件管理       |
 "|                     |
 "=======================
@@ -335,8 +348,8 @@ Plugin 'nvie/vim-flake8'   " PEP8代码风格检查
 Plugin 'suan/vim-instant-markdown'
 " Javascript
 Plugin 'ternjs/tern_for_vim'
-" Rust
-Plugin 'rust-lang/rust.vim'
+Plugin 'mattn/emmet-vim'  "emmet
+Plugin 'mxw/vim-jsx'  " React
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
