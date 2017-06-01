@@ -65,7 +65,7 @@ set guioptions-=r
 set guioptions-=R
 
 " 主题
-set background=dark
+set background=light
 colorscheme solarized
 " 状态栏
 let g:airline_theme="solarized"
@@ -275,7 +275,7 @@ let g:flake8_show_quickfix=0
 let g:ycm_server_python_interpreter="python3"
 
 "python virtualenv support
-py << EOF
+py3 << EOF
 import os
 import sys
 if 'VIRTUAL_ENV' in os.environ:
