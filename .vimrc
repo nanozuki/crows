@@ -65,7 +65,7 @@ set guioptions-=r
 set guioptions-=R
 
 " 主题
-set background=dark
+set background=light
 colorscheme solarized
 " 状态栏
 let g:airline_theme="solarized"
