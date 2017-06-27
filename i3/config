@@ -172,7 +172,8 @@ bar {
 
 # start with i3
 exec xrandr --output DP1 --off
-exec xrandr --output HDMI1 --dpi 128
+# exec xrandr --output HDMI1 --dpi 96
+exec xrandr --dpi 96
 exec compton -cb
 exec ibus-daemon -x -d -r
 exec --no-startup-id nm-applet
