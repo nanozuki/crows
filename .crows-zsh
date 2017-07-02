@@ -10,8 +10,6 @@ export GOPATH=$HOME/Documents/go
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git pip tmux ubuntu python vundle docker django)
-#export http_proxy='127.0.0.1:7777'
-#export https_proxy='127.0.0.1:7777'
 
 # Alias
 ## Normal
