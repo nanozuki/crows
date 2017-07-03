@@ -2,8 +2,8 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin
 # go path
-export PATH=$PATH:$HOME/Documents/go/bin
-export GOPATH=$HOME/Documents/go
+export GOPATH=$HOME/Projects/go
+export PATH=$PATH:$GOPATH/bin
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/

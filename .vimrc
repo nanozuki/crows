@@ -65,7 +65,7 @@ set guioptions-=r
 set guioptions-=R
 
 " 主题
-set background=light
+set background=dark
 colorscheme solarized
 " 状态栏
 let g:airline_theme="solarized"
@@ -117,6 +117,7 @@ set undodir=~/.undo_history/
 
 "" 查找与替换
 " 查找 ([Plugin]ctrlsf)
+let g:ctrlsf_ackprg = 'rg'
 nnoremap <leader>sp :CtrlSF<CR>
 " 替换 ([Plugin]vim-multiple-cursors)
 " <C-n> 选中更多
@@ -203,11 +204,13 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 " 某些文件类型的特别缩进
-autocmd FileType javascript setlocal expandtab ts=2 sw=2 sts=2
-autocmd FileType html setlocal expandtab ts=2 sw=2 sts=2
-autocmd FileType css setlocal expandtab ts=2 sw=2 sts=2
-autocmd FileType xml setlocal expandtab ts=2 sw=2 sts=2
+"autocmd FileType javascript setlocal expandtab ts=2 sw=2 sts=2
+"autocmd FileType html setlocal expandtab ts=2 sw=2 sts=2
+"autocmd FileType css setlocal expandtab ts=2 sw=2 sts=2
+"autocmd FileType xml setlocal expandtab ts=2 sw=2 sts=2
 autocmd FileType json setlocal expandtab ts=2 sw=2 sts=2
+"autocmd FileType wxss setlocal expandtab ts=2 sw=2 sts=2
+"autocmd FileType wxml setlocal expandtab ts=2 sw=2 sts=2
 
 "" 快速开关注释 ([Plugin]NERD Commenter)
 " 操作方式
@@ -297,7 +300,7 @@ let g:syntastic_javascript_checkers = ['eslint']
 " vim-jsx:
 let g:jsx_ext_required = 0
 " 修改ycm补全css的触发条件
-let g:ycm_semantic_triggers = {'css': [ 're!^\s{2}', 're!:\s+'], 'html': [ '</' ]}
+let g:ycm_semantic_triggers = {'css': [ 're!^\s{4}', 're!:\s+'], 'html': [ '</' ]}
 
 "=======================
 "|                     |
@@ -337,6 +340,7 @@ Plugin 'gcmt/wildfire.vim'             " 快捷选中结对符号内容
 Plugin 'scrooloose/nerdtree'    " 文件列表
 Plugin 'dyng/ctrlsf.vim'        " 工程内搜索
 Plugin 'kien/ctrlp.vim'         " 工程内搜索文件
+Plugin 'BurntSushi/ripgrep'     " ctrlsf的后端
 """ 代码补全
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'SirVer/ultisnips'           " 模板补全
@@ -350,6 +354,9 @@ Plugin 'suan/vim-instant-markdown'
 Plugin 'ternjs/tern_for_vim'
 Plugin 'mattn/emmet-vim'  "emmet
 Plugin 'mxw/vim-jsx'  " React
+"Plugin 'maksimr/vim-jsbeautify'
+" WechatMiniApp
+Plugin 'chemzqm/wxapp.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
