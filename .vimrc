@@ -204,13 +204,13 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 " 某些文件类型的特别缩进
-"autocmd FileType javascript setlocal expandtab ts=2 sw=2 sts=2
-"autocmd FileType html setlocal expandtab ts=2 sw=2 sts=2
-"autocmd FileType css setlocal expandtab ts=2 sw=2 sts=2
-"autocmd FileType xml setlocal expandtab ts=2 sw=2 sts=2
+autocmd FileType javascript setlocal expandtab ts=2 sw=2 sts=2
+autocmd FileType html setlocal expandtab ts=2 sw=2 sts=2
+autocmd FileType css setlocal expandtab ts=2 sw=2 sts=2
+autocmd FileType xml setlocal expandtab ts=2 sw=2 sts=2
 autocmd FileType json setlocal expandtab ts=2 sw=2 sts=2
-"autocmd FileType wxss setlocal expandtab ts=2 sw=2 sts=2
-"autocmd FileType wxml setlocal expandtab ts=2 sw=2 sts=2
+autocmd FileType wxss setlocal expandtab ts=2 sw=2 sts=2
+autocmd FileType wxml setlocal expandtab ts=2 sw=2 sts=2
 
 "" 快速开关注释 ([Plugin]NERD Commenter)
 " 操作方式
@@ -284,7 +284,7 @@ import sys
 if 'VIRTUAL_ENV' in os.environ:
     project_base_dir = os.environ['VIRTUAL_ENV']
     activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-    execfile(activate_this, dict(__file__=activate_this))
+    exec(compile(open(activate_this, 'rb').read(), activate_this, 'exec'), dict(__file__=activate_this))
 EOF
 
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
@@ -354,7 +354,7 @@ Plugin 'suan/vim-instant-markdown'
 Plugin 'ternjs/tern_for_vim'
 Plugin 'mattn/emmet-vim'  "emmet
 Plugin 'mxw/vim-jsx'  " React
-"Plugin 'maksimr/vim-jsbeautify'
+Plugin 'maksimr/vim-jsbeautify'
 " WechatMiniApp
 Plugin 'chemzqm/wxapp.vim'
 
