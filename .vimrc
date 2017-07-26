@@ -66,9 +66,11 @@ set guioptions-=R
 
 " 主题
 set background=dark
-colorscheme solarized
+" colorscheme solarized
+colorscheme Tomorrow-Night
+let g:color_name = "Tomorrow-Night"
 " 状态栏
-let g:airline_theme="solarized"
+let g:airline_theme="tomorrow"
 let g:airline_powerline_fonts=1
 let g:airline_extensions=['tabline', 'branch', 'virtualenv', 'tmuxline']
 
@@ -321,7 +323,8 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 """ 外观
-Plugin 'altercation/vim-colors-solarized' " 主题
+Plugin 'altercation/vim-colors-solarized' " 主题 solarized
+Plugin 'chriskempson/vim-tomorrow-theme'  " 主题 tomorrow
 Plugin 'vim-airline/vim-airline'          " 状态栏强化
 Plugin 'vim-airline/vim-airline-themes'   " 状态栏主题
 Plugin 'edkolev/tmuxline.vim'             " tmux提示栏
