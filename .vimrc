@@ -323,8 +323,6 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 """ 外观
-Plugin 'altercation/vim-colors-solarized' " 主题 solarized
-Plugin 'chriskempson/vim-tomorrow-theme'  " 主题 tomorrow
 Plugin 'vim-airline/vim-airline'          " 状态栏强化
 Plugin 'vim-airline/vim-airline-themes'   " 状态栏主题
 Plugin 'edkolev/tmuxline.vim'             " tmux提示栏
