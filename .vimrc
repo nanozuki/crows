@@ -74,11 +74,13 @@ let g:airline_theme="tomorrow"
 let g:airline_powerline_fonts=1
 let g:airline_extensions=['tabline', 'branch', 'virtualenv', 'tmuxline']
 
-" 显示设置
+"" 显示设置
 set number
+" 相对行号
+set relativenumber
 set ruler
-" set cursorline   "定位当前行
-" set cursorcolumn "定位当前列
+set cursorline   "定位当前行
+"set cursorcolumn "定位当前列
 set hlsearch       "高亮搜索结果
 set laststatus=2   "总是显示状态栏
 set colorcolumn=80 "每行不超过80字符
@@ -124,6 +126,8 @@ nnoremap <leader>sp :CtrlSF<CR>
 " 替换 ([Plugin]vim-multiple-cursors)
 " <C-n> 选中更多
 
+"" 忽略文件 (也能设置到 [Plugin]ctrlP 上)
+:set wildignore+=*/node_modules/*
 
 "======================m
 "|                     |
@@ -209,6 +213,7 @@ set softtabstop=4
 autocmd FileType javascript setlocal expandtab ts=2 sw=2 sts=2
 autocmd FileType html setlocal expandtab ts=2 sw=2 sts=2
 autocmd FileType css setlocal expandtab ts=2 sw=2 sts=2
+autocmd FileType scss setlocal expandtab ts=2 sw=2 sts=2
 autocmd FileType xml setlocal expandtab ts=2 sw=2 sts=2
 autocmd FileType json setlocal expandtab ts=2 sw=2 sts=2
 autocmd FileType wxss setlocal expandtab ts=2 sw=2 sts=2
@@ -302,7 +307,10 @@ let g:syntastic_javascript_checkers = ['eslint']
 " vim-jsx:
 let g:jsx_ext_required = 0
 " 修改ycm补全css的触发条件
-let g:ycm_semantic_triggers = {'css': [ 're!^\s{4}', 're!:\s+'], 'html': [ '</' ]}
+let g:ycm_semantic_triggers = {
+\ 'css': [ 're!^\s{4}', 're!:\s+'], 'html': [ '</' ],
+\ 'scss': [ 're!^\s{4}', 're!:\s+'], 'js': [ '</' ],
+\}
 
 "=======================
 "|                     |
