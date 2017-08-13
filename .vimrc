@@ -42,9 +42,6 @@ nmap <Leader>pa %
 "" 自定义命令与功能
 " 设置环境保存项
 set sessionoptions="blank,buffers,globals,localoptions,tabpages,sesdir,folds,help,options,resize,winpos,winsize"
-" 保存 undo 历史
-set undodir=~/.undo_history/
-set undofile
 " 保存环境
 map <leader>ss :mksession! my.vim<cr> :wviminfo! my.viminfo<cr>
 " 恢复环境
@@ -80,7 +77,7 @@ set number
 set relativenumber
 set ruler
 set cursorline   "定位当前行
-"set cursorcolumn "定位当前列
+set cursorcolumn "定位当前列
 set hlsearch       "高亮搜索结果
 set laststatus=2   "总是显示状态栏
 set colorcolumn=80 "每行不超过80字符
@@ -111,14 +108,6 @@ set wildmenu
 "" BUFFER管理器 ([plugin]airline#tabline)
 let g:airline#extensions#tabline#buffer_idx_mode=1
 
-"" 树形UNDO工具 ([plugin]gundo)
-" 调用 gundo 树
-nnoremap <Leader>ud :GundoToggle<CR>
-" 开启保存 undo 历史功能
-set undofile
-" undo 历史保存路径
-set undodir=~/.undo_history/
-
 "" 查找与替换
 " 查找 ([Plugin]ctrlsf)
 let g:ctrlsf_ackprg = 'rg'
@@ -139,35 +128,22 @@ nnoremap <leader>sp :CtrlSF<CR>
 syntax enable
 syntax on
 
-"" 文档标签([Plugin]vim-signature)
-let g:SignatureMap = {
-        \ 'Leader'             :  "m",
-        \ 'PlaceNextMark'      :  "m,",
-        \ 'ToggleMarkAtLine'   :  "m.",
-        \ 'PurgeMarksAtLine'   :  "m-",
-        \ 'DeleteMark'         :  "dm",
-        \ 'PurgeMarks'         :  "mda",
-        \ 'PurgeMarkers'       :  "m<BS>",
-        \ 'GotoNextLineAlpha'  :  "']",
-        \ 'GotoPrevLineAlpha'  :  "'[",
-        \ 'GotoNextSpotAlpha'  :  "`]",
-        \ 'GotoPrevSpotAlpha'  :  "`[",
-        \ 'GotoNextLineByPos'  :  "]'",
-        \ 'GotoPrevLineByPos'  :  "['",
-        \ 'GotoNextSpotByPos'  :  "mn",
-        \ 'GotoPrevSpotByPos'  :  "mp",
-        \ 'GotoNextMarker'     :  "[+",
-        \ 'GotoPrevMarker'     :  "[-",
-        \ 'GotoNextMarkerAny'  :  "]=",
-        \ 'GotoPrevMarkerAny'  :  "[=",
-        \ 'ListLocalMarks'     :  "ms",
-        \ 'ListLocalMarkers'   :  "m?"
-        \ }
+"" 文档标记([Plugin]vim-signature)
+" m{a-zA-Z} 设置/取消标记, 大写为全局标记
+" `{a-zA-Z} 调到对应的标记
+" 跳转到自动标记:
+"     ``  上次跳转的位置
+"     `.  上次修改的位置
+"     `^  上次插入的位置
+"     `[  字母顺序的下一个标签
+"     `]  字母顺序的上一个标签
+"     `<  上次选区的起始位置
+"     `>  上次选区的结束位置
 
 "" 代码折叠 基于缩进或者语法
 set foldmethod=indent
+set foldlevel=1
 "set foldmethod=syntax
-set nofoldenable
 " 操作说明：
 " zo[O] [嵌套地]打开折叠
 " zc[C] [嵌套地]关闭折叠
@@ -221,29 +197,18 @@ autocmd FileType wxml setlocal expandtab ts=2 sw=2 sts=2
 
 "" 快速开关注释 ([Plugin]NERD Commenter)
 " 操作方式
-" <leader>cc 注释选中文本
-" <leader>cu 全校是是选中文本
-
-"" 绘制ASCII Art风格的注释([Plugin]DrawIt)
-" :Distart 开始绘制
-" :Distop 停止绘制
+" {number}<leader>cc 注释文本
+" {number}<leader>cu 取消注释文本
 
 "" 智能提示 ([Plugin]YCM)
 " 只能是 #include 或已打开的文件
 nnoremap <leader>gt :YcmCompleter GoTo<CR>
 nnoremap <leader>gr :YcmCompleter GoToReferences<CR>
 nnoremap <leader>gd :YcmCompleter GetDoc<CR>
-" 补全菜单配色 ([Plugin]YCM)
-" 菜单
-"highlight Pmenu ctermfg=2 ctermbg=3 guifg=#005f87 guibg=#EEE8D5
-" 选中项
-"highlight PmenuSel ctermfg=2 ctermbg=3 guifg=#AFD700 guibg=#106900
 " 补全功能在注释中同样有效
 let g:ycm_complete_in_comments=1
 " 允许 vim 加载 .ycm_extra_conf.py 文件，不再提示
 let g:ycm_confirm_extra_conf=0
-" YCM 集成 OmniCppComplete 补全引擎，设置其快捷键
-inoremap <leader>; <C-x><C-o>
 " 补全内容不以分割子窗口形式出现，只显示补全列表
 set completeopt-=preview
 " 从第一个键入字符就开始罗列匹配项
@@ -259,15 +224,8 @@ let g:UltiSnipsJumpForwardTrigger="<leader><tab>"
 let g:UltiSnipsJumpBackwardTrigger="<leader><s-tab>"
 
 " 静态语法检查 ([Plugin] syntastic)
-let g:syntastic_error_symbol='メ'
+let g:syntastic_error_symbol='X'
 let g:syntastic_warning_symbol='!'
-
-" 结对符补全 ([Plugin] wildfire)
-" rv: range view
-" rvc: range view cancel
-map <SPACE> <Plug>(wildfire-fuel)
-map <C-SPACE> <Plug>(wildfire-water)
-let g:wildfire_objects=["i'",'i"',"i)","i]","i}","i>","ip","a'",'a"',"a)","a]","a}","a>","ap"]
 
 "=======================
 "|                     |
@@ -308,8 +266,8 @@ let g:syntastic_javascript_checkers = ['eslint']
 let g:jsx_ext_required = 0
 " 修改ycm补全css的触发条件
 let g:ycm_semantic_triggers = {
-\ 'css': [ 're!^\s{4}', 're!:\s+'], 'html': [ '</' ],
-\ 'scss': [ 're!^\s{4}', 're!:\s+'], 'js': [ '</' ],
+\ 'css': [ 're!^\s{2}', 're!:\s+'], 'html': [ '</' ],
+\ 'scss': [ 're!^\s{2}', 're!:\s+'], 'js': [ '</' ],
 \}
 
 "=======================
@@ -337,35 +295,27 @@ Plugin 'edkolev/tmuxline.vim'             " tmux提示栏
 Plugin 'nathanaelkane/vim-indent-guides'  " 提示缩进
 """ 通用编辑
 Plugin 'scrooloose/syntastic'          " 静态代码检查
-Plugin 'kshenoy/vim-signature'         " 代码书签
+Plugin 'kshenoy/vim-signature'         " 代码书签显示
 Plugin 'scrooloose/nerdcommenter'      " 开关注释
-Plugin 'DrawIt'                        " 绘制注释
-Plugin 'sjl/gundo.vim'                 " 分支撤回工具
 Plugin 'easymotion/vim-easymotion'     " 快速跳转
 Plugin 'tpope/vim-fugitive'            " git信息显示
 Plugin 'terryma/vim-multiple-cursors'  " 多重编辑
-Plugin 'gcmt/wildfire.vim'             " 快捷选中结对符号内容
 """ 代码查看
 Plugin 'scrooloose/nerdtree'    " 文件列表
 Plugin 'dyng/ctrlsf.vim'        " 工程内搜索
 Plugin 'kien/ctrlp.vim'         " 工程内搜索文件
 Plugin 'BurntSushi/ripgrep'     " ctrlsf的后端
 """ 代码补全
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'     " ycm
 Plugin 'SirVer/ultisnips'           " 模板补全
 Plugin 'CrowsT/vim-snippets'        " 自定义模板
 """ 特定编程语言
 " python
 Plugin 'nvie/vim-flake8'   " PEP8代码风格检查
-" Markdown
-Plugin 'suan/vim-instant-markdown'
-" Javascript
+" Javascript/React
 Plugin 'ternjs/tern_for_vim'
 Plugin 'mattn/emmet-vim'  "emmet
 Plugin 'mxw/vim-jsx'  " React
-Plugin 'maksimr/vim-jsbeautify'
-" WechatMiniApp
-Plugin 'chemzqm/wxapp.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -382,4 +332,3 @@ filetype on
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
-
