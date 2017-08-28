@@ -111,12 +111,15 @@ let g:airline#extensions#tabline#buffer_idx_mode=1
 "" 查找与替换
 " 查找 ([Plugin]ctrlsf)
 let g:ctrlsf_ackprg = 'rg'
-nnoremap <leader>sp :CtrlSF<CR>
+nmap <leader>sf :CtrlSF 
+nmap <leader>sp :CtrlSF<CR>
 " 替换 ([Plugin]vim-multiple-cursors)
 " <C-n> 选中更多
+" 查找文件 ([Plugin]ctrlP)
+let g:ctrlp_working_path_mode = 'a'
 
 "" 忽略文件 (也能设置到 [Plugin]ctrlP 上)
-:set wildignore+=*/node_modules/*
+:set wildignore+=*/node_modules/*,*.swp,*.pyc,*/venv/*,
 
 "======================m
 "|                     |
@@ -295,6 +298,7 @@ Plugin 'edkolev/tmuxline.vim'             " tmux提示栏
 Plugin 'nathanaelkane/vim-indent-guides'  " 提示缩进
 """ 通用编辑
 Plugin 'scrooloose/syntastic'          " 静态代码检查
+"Plugin 'w0rp/ale'
 Plugin 'kshenoy/vim-signature'         " 代码书签显示
 Plugin 'scrooloose/nerdcommenter'      " 开关注释
 Plugin 'easymotion/vim-easymotion'     " 快速跳转
