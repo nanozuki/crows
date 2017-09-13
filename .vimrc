@@ -53,8 +53,8 @@ map <leader>rs :source my.vim<cr> :rviminfo my.viminfo<cr>
 "|                     |
 "=======================
 " 去掉菜单栏和工具栏
-"set guioptions-=m
-"set guioptions-=T
+set guioptions-=m
+set guioptions-=T
 " 去掉滚动条
 set guioptions-=l
 set guioptions-=L
@@ -145,7 +145,7 @@ syntax on
 
 "" 代码折叠 基于缩进或者语法
 set foldmethod=indent
-set foldlevel=1
+set foldlevel=3
 "set foldmethod=syntax
 " 操作说明：
 " zo[O] [嵌套地]打开折叠
@@ -220,15 +220,13 @@ let g:ycm_min_num_of_chars_for_completion=1
 let g:ycm_cache_omnifunc=0
 " 语法关键字补全         
 let g:ycm_seed_identifiers_with_syntax=1
+"" ale提示
+let g:ale_completion_enabled = 1
 
 " 模板补全 ([Plugin]UltiSnips)
 let g:UltiSnipsExpandTrigger="<leader><tab>"
 let g:UltiSnipsJumpForwardTrigger="<leader><tab>"
 let g:UltiSnipsJumpBackwardTrigger="<leader><s-tab>"
-
-" 静态语法检查 ([Plugin] syntastic)
-let g:syntastic_error_symbol='X'
-let g:syntastic_warning_symbol='!'
 
 "=======================
 "|                     |
@@ -263,14 +261,12 @@ let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 "|                     |
 "=======================
 
-" syntastic
-let g:syntastic_javascript_checkers = ['eslint']
 " vim-jsx:
 let g:jsx_ext_required = 0
 " 修改ycm补全css的触发条件
 let g:ycm_semantic_triggers = {
-\ 'css': [ 're!^\s{2}', 're!:\s+'], 'html': [ '</' ],
-\ 'scss': [ 're!^\s{2}', 're!:\s+'], 'js': [ '</' ],
+\ 'css': [ 're!^\s{2,}', 're!:\s+'], 'html': [ '</' ],
+\ 'scss': [ 're!^\s{2,}', 're!:\s+'], 'js': [ '</' ],
 \}
 
 "=======================
@@ -297,8 +293,7 @@ Plugin 'vim-airline/vim-airline-themes'   " 状态栏主题
 Plugin 'edkolev/tmuxline.vim'             " tmux提示栏
 Plugin 'nathanaelkane/vim-indent-guides'  " 提示缩进
 """ 通用编辑
-Plugin 'scrooloose/syntastic'          " 静态代码检查
-"Plugin 'w0rp/ale'
+Plugin 'w0rp/ale'                      " 语法检查
 Plugin 'kshenoy/vim-signature'         " 代码书签显示
 Plugin 'scrooloose/nerdcommenter'      " 开关注释
 Plugin 'easymotion/vim-easymotion'     " 快速跳转
@@ -320,6 +315,7 @@ Plugin 'nvie/vim-flake8'   " PEP8代码风格检查
 Plugin 'ternjs/tern_for_vim'
 Plugin 'mattn/emmet-vim'  "emmet
 Plugin 'mxw/vim-jsx'  " React
+Plugin 'styled-components/vim-styled-components'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
