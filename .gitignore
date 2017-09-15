@@ -1,2 +1,2 @@
-.vim/bundle/*
-!.vim/bundle/vundle.vim/
+vim/.vim/bundle/*
+!vim/.vim/bundle/vundle.vim/

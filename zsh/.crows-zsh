@@ -44,5 +44,10 @@ elif [ -f "/etc/issue" ]; then
         alias extup="yaourt -Syu --aur"
         alias extbuild="yaourt -Sb"
         alias extdel="yaourt -Rnsc"
+    elif [[ `cat /etc/issue` =~ '^Ubuntu' ]]; then
+        alias appadd="sudo apt install"
+        alias appup="sudo apt update && sudo apt upgrade"
+        alias appsch="apt search"
+        alias appdel="sudo apt autoremove"
     fi
 fi
