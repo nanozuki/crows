@@ -312,10 +312,11 @@ Plugin 'CrowsT/vim-snippets'        " 自定义模板
 " python
 Plugin 'nvie/vim-flake8'   " PEP8代码风格检查
 " Javascript/React
+Plugin 'pangloss/vim-javascript' "syntax
 Plugin 'ternjs/tern_for_vim'
 Plugin 'mattn/emmet-vim'  "emmet
 Plugin 'mxw/vim-jsx'  " React
-Plugin 'styled-components/vim-styled-components'
+" Plugin 'styled-components/vim-styled-components'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
