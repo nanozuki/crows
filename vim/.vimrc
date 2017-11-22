@@ -145,7 +145,7 @@ syntax on
 
 "" 代码折叠 基于缩进或者语法
 set foldmethod=indent
-set foldlevel=3
+set foldlevel=999
 "set foldmethod=syntax
 " 操作说明：
 " zo[O] [嵌套地]打开折叠
@@ -220,13 +220,19 @@ let g:ycm_min_num_of_chars_for_completion=1
 let g:ycm_cache_omnifunc=0
 " 语法关键字补全         
 let g:ycm_seed_identifiers_with_syntax=1
-"" ale提示
+" ale提示 ([Plugin]ale)
 let g:ale_completion_enabled = 1
 
 " 模板补全 ([Plugin]UltiSnips)
 let g:UltiSnipsExpandTrigger="<leader><tab>"
 let g:UltiSnipsJumpForwardTrigger="<leader><tab>"
 let g:UltiSnipsJumpBackwardTrigger="<leader><s-tab>"
+
+" 语法检查, 自动修正 ([Plugin]ale)
+let g:ale_fixers = {
+\   'javascript': ['eslint'],
+\}
+let g:ale_fix_on_save = 1
 
 "=======================
 "|                     |
