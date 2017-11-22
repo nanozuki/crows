@@ -316,7 +316,7 @@ Plugin 'pangloss/vim-javascript' "syntax
 Plugin 'ternjs/tern_for_vim'
 Plugin 'mattn/emmet-vim'  "emmet
 Plugin 'mxw/vim-jsx'  " React
-Plugin 'styled-components/vim-styled-components'
+" Plugin 'styled-components/vim-styled-components'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

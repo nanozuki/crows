@@ -1,12 +1,12 @@
 {
   "plugins": {
     "node": {},
-    "es_modules": {},
-    "react",
+    "es_modules": {}
   },
   "libs": [
     "ecma5",
     "ecma6",
+    "react"
   ],
-  "ecmaVersion": 6,
+  "ecmaVersion": 6
 }
