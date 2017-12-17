@@ -322,6 +322,8 @@ Plugin 'pangloss/vim-javascript' "syntax
 Plugin 'ternjs/tern_for_vim'
 Plugin 'mattn/emmet-vim'  "emmet
 Plugin 'mxw/vim-jsx'  " React
+" Go
+Plugin 'fatih/vim-go' " golang
 " Plugin 'styled-components/vim-styled-components'
 
 " All of your Plugins must be added before the following line
