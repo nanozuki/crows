@@ -161,6 +161,8 @@ let g:indent_guides_enable_on_vim_startup=1
 let g:indent_guides_start_level=2
 let g:indent_guides_guide_size=1
 nmap <silent> <Leader>ig <Plug>IndentGuidesToggle
+hi IndentGuidesOdd  ctermbg=lightgrey
+hi IndentGuidesEven ctermbg=darkgrey
 
 "" 文件列表窗口([plugin]NERDTree)
 " 使用 NERDTree 插件查看工程文件。设置快捷键，速记：file list
@@ -277,67 +279,53 @@ let g:ycm_semantic_triggers = {
 
 "=======================
 "|                     |
+"|   代码编写:Go       |
+"|                     |
+"=======================
+" vim-go
+let g:go_fmt_command = "goimports"
+let g:go_auto_type_info = 1
+
+"=======================
+"|                     |
 "|      插件管理       |
 "|                     |
 "=======================
-""vundle
-set nocompatible              " be iMproved, required
-filetype off                  " required
+" vim-plug
+" Specify a directory for plugins
+call plug#begin('~/.vim/plugins')
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-" call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-""" 外观
-Plugin 'vim-airline/vim-airline'          " 状态栏强化
-Plugin 'vim-airline/vim-airline-themes'   " 状态栏主题
-Plugin 'edkolev/tmuxline.vim'             " tmux提示栏
-Plugin 'nathanaelkane/vim-indent-guides'  " 提示缩进
-""" 通用编辑
-Plugin 'w0rp/ale'                      " 语法检查
-Plugin 'kshenoy/vim-signature'         " 代码书签显示
-Plugin 'scrooloose/nerdcommenter'      " 开关注释
-Plugin 'easymotion/vim-easymotion'     " 快速跳转
-Plugin 'tpope/vim-fugitive'            " git信息显示
-Plugin 'terryma/vim-multiple-cursors'  " 多重编辑
-""" 代码查看
-Plugin 'scrooloose/nerdtree'    " 文件列表
-Plugin 'dyng/ctrlsf.vim'        " 工程内搜索
-Plugin 'kien/ctrlp.vim'         " 工程内搜索文件
-Plugin 'BurntSushi/ripgrep'     " ctrlsf的后端
-""" 代码补全
-Plugin 'Valloric/YouCompleteMe'     " ycm
-Plugin 'SirVer/ultisnips'           " 模板补全
-Plugin 'CrowsT/vim-snippets'        " 自定义模板
-""" 特定编程语言
+" 外观
+Plug 'vim-airline/vim-airline'          " 状态栏强化
+Plug 'vim-airline/vim-airline-themes'   " 状态栏主题
+Plug 'edkolev/tmuxline.vim'             " tmux提示栏
+Plug 'nathanaelkane/vim-indent-guides'  " 提示缩进
+" 通用编辑
+Plug 'w0rp/ale'                      " 语法检查
+Plug 'kshenoy/vim-signature'         " 代码书签显示
+Plug 'scrooloose/nerdcommenter'      " 开关注释
+Plug 'easymotion/vim-easymotion'     " 快速跳转
+Plug 'tpope/vim-fugitive'            " git信息显示
+Plug 'terryma/vim-multiple-cursors'  " 多重编辑
+" 代码查看
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } " 文件列表
+Plug 'dyng/ctrlsf.vim'        " 工程内搜索
+Plug 'kien/ctrlp.vim'         " 工程内搜索文件
+Plug 'BurntSushi/ripgrep'     " ctrlsf的后端
+" 代码补全
+Plug 'Valloric/YouCompleteMe'     " ycm
+Plug 'SirVer/ultisnips'           " 模板补全
+Plug 'CrowsT/vim-snippets'        " 自定义模板
+" 特定编程语言
 " python
-Plugin 'nvie/vim-flake8'   " PEP8代码风格检查
+Plug 'nvie/vim-flake8', { 'for': 'python' } " PEP8代码风格检查
 " Javascript/React
-Plugin 'pangloss/vim-javascript' "syntax
-Plugin 'ternjs/tern_for_vim'
-Plugin 'mattn/emmet-vim'  "emmet
-Plugin 'mxw/vim-jsx'  " React
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' } "syntax
+Plug 'ternjs/tern_for_vim', { 'for': 'javascript' }
+Plug 'mattn/emmet-vim', { 'for': 'javascript' }  "emmet
+Plug 'mxw/vim-jsx', { 'for': 'javascript' }  " React
 " Go
-Plugin 'fatih/vim-go' " golang
-" Plugin 'styled-components/vim-styled-components'
+Plug 'fatih/vim-go', { 'for': 'go' } " golang
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-filetype on
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
+""" Initialize plugin system
+call plug#end()

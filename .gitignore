@@ -1,4 +1,3 @@
-vim/.vim/bundle/*
-!vim/.vim/bundle/vundle.vim/
+vim/.vim/plugins/
 
 .DS_Store
