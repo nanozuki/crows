@@ -21,6 +21,9 @@ set backspace=2
 set backspace=indent,eol,start
 set mouse=a
 
+"" 提高性能
+set ttyfast
+
 "" 窗口
 nmap <Leader>q :q<CR>
 nmap <Leader>w :w<CR>
@@ -76,8 +79,8 @@ set number
 " 相对行号
 set relativenumber
 set ruler
-set cursorline   "定位当前行
-set cursorcolumn "定位当前列
+" set cursorline   "定位当前行
+" set cursorcolumn "定位当前列
 set hlsearch       "高亮搜索结果
 set laststatus=2   "总是显示状态栏
 set colorcolumn=80 "每行不超过80字符
