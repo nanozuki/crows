@@ -6,7 +6,7 @@ RUN echo "Server = https://mirrors.neusoft.edu.cn/archlinux/\$repo/os/\$arch" > 
     echo "Server = https://mirrors.xjtu.edu.cn/archlinux/\$repo/os/\$arch" >> /etc/pacman.d/mirrorlist && \
     echo "Server = https://mirrors.ustc.edu.cn/archlinux/\$repo/os/\$arch" >> /etc/pacman.d/mirrorlist
 RUN cat /etc/pacman.d/mirrorlist
-RUN pacman -Sy && pacman -S --noconfirm git zsh tree tmux python go rust nodejs-lts-carbon npm vim clang ripgrep make cmake
+RUN pacman -Sy && pacman -S --noconfirm git zsh tree tmux python python-pip go rust nodejs-lts-carbon npm vim clang ripgrep make cmake
 RUN git clone https://github.com/CrowsT/CrowsEnv.git
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 RUN echo "source ~/CrowsEnv/zsh/.crows-docker-zsh" >> .zshrc
@@ -50,7 +50,6 @@ RUN git clone https://github.com/vim-airline/vim-airline && \
     git clone https://github.com/fatih/vim-go
 WORKDIR /root/.vim/plugins/YouCompleteMe
 RUN git submodule update --init --recursive
-RUN python3 install.py --clang-completer --go-completer --js-completer --rust-completer --system-clang
+RUN python3 install.py --clang-completer --go-completer --js-completer --rust-completer --system-libclang
 WORKDIR /root/.vim/plugins/tern_for_vim
 RUN npm install
-RUN pacman -Rns
