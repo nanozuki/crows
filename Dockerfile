@@ -5,8 +5,7 @@ WORKDIR /root
 COPY docker/mirrorlist /etc/pacman.d/mirrorlist
 RUN cat /etc/pacman.d/mirrorlist
 RUN pacman -Sy && \
-    pacman -S --noconfirm git zsh tree tmux python python-pip go rust nodejs-lts-carbon npm vim clang ripgrep make cmake && \
-    pacman -Sc
+    pacman -S --noconfirm git zsh tree tmux python python-pip go rust nodejs-lts-carbon npm vim clang ripgrep make cmake
 
 RUN git clone https://github.com/CrowsT/CrowsEnv.git
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
