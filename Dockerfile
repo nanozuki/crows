@@ -21,7 +21,7 @@ VOLUME ["/root/Projects", "/root/go"]
 
 RUN mkdir ~/.vim/plugins
 WORKDIR /root/.vim/plugins
-RUN vim +PlugInstall +qall && vim temp.go +GoInstallBinaries +qall
+RUN vim +PlugInstall +qall
 WORKDIR /root/.vim/plugins/YouCompleteMe
 RUN git submodule update --init --recursive
 RUN python3 install.py --clang-completer --go-completer --js-completer --rust-completer --system-libclang
