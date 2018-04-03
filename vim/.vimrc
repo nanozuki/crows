@@ -67,8 +67,9 @@ set guioptions-=R
 " 主题
 set background=dark
 " colorscheme solarized
-colorscheme Tomorrow-Night
-let g:color_name = "Tomorrow-Night"
+" colorscheme Tomorrow-Night
+colorscheme hybrid
+" let g:color_name = "Tomorrow-Night"
 " 状态栏
 let g:airline_theme="tomorrow"
 let g:airline_powerline_fonts=1
@@ -159,13 +160,9 @@ set foldlevel=999
 " zr    全部折叠减少一级
 " zR    打开全部折叠
 
-"" 代码缩进提示([Plugin]vim-indent-guides)
-let g:indent_guides_enable_on_vim_startup=1
-let g:indent_guides_start_level=2
-let g:indent_guides_guide_size=1
-nmap <silent> <Leader>ig <Plug>IndentGuidesToggle
-hi IndentGuidesOdd  ctermbg=lightgrey
-hi IndentGuidesEven ctermbg=darkgrey
+"" 代码缩进提示([Plugin]indentline)
+" let g:indentLine_enabled=1
+set list lcs=tab:\¦\ 
 
 "" 文件列表窗口([plugin]NERDTree)
 " 使用 NERDTree 插件查看工程文件。设置快捷键，速记：file list
@@ -302,7 +299,7 @@ call plug#begin('~/.vim/plugins')
 Plug 'vim-airline/vim-airline'          " 状态栏强化
 Plug 'vim-airline/vim-airline-themes'   " 状态栏主题
 Plug 'edkolev/tmuxline.vim'             " tmux提示栏
-Plug 'nathanaelkane/vim-indent-guides'  " 提示缩进
+Plug 'yggdroot/indentline'              " 提示缩进 
 " 通用编辑
 Plug 'w0rp/ale'                      " 语法检查
 Plug 'kshenoy/vim-signature'         " 代码书签显示
