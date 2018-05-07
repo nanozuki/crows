@@ -73,7 +73,7 @@ colorscheme hybrid
 " 状态栏
 let g:airline_theme="tomorrow"
 let g:airline_powerline_fonts=1
-let g:airline_extensions=['tabline', 'branch', 'virtualenv', 'tmuxline']
+let g:airline_extensions=['tabline', 'branch', 'virtualenv']
 
 "" 显示设置
 set number
@@ -298,7 +298,6 @@ call plug#begin('~/.vim/plugins')
 " 外观
 Plug 'vim-airline/vim-airline'          " 状态栏强化
 Plug 'vim-airline/vim-airline-themes'   " 状态栏主题
-Plug 'edkolev/tmuxline.vim'             " tmux提示栏
 Plug 'yggdroot/indentline'              " 提示缩进 
 " 通用编辑
 Plug 'w0rp/ale'                      " 语法检查
