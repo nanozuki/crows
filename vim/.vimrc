@@ -135,6 +135,8 @@ let g:ctrlp_working_path_mode = 'a'
 "" 代码高亮
 syntax enable
 syntax on
+" 括号匹配（必须放在 syntax 的后面，否则无效)
+highlight MatchParen ctermbg=darkmagenta ctermfg=white
 
 "" 文档标记([Plugin]vim-signature)
 " m{a-zA-Z} 设置/取消标记, 大写为全局标记
