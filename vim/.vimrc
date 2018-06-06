@@ -110,7 +110,8 @@ set nocompatible
 set wildmenu
 
 "" BUFFER管理器 ([plugin]airline#tabline)
-let g:airline#extensions#tabline#buffer_idx_mode=1
+" let g:airline#extensions#tabline#buffer_idx_mode=1
+let g:airline#extensions#tabline#buffer_nr_show=1
 
 "" 查找与替换
 " 查找 ([Plugin]ctrlsf)
@@ -325,6 +326,7 @@ Plug 'mattn/emmet-vim', { 'for': 'javascript' }  "emmet
 Plug 'mxw/vim-jsx', { 'for': 'javascript' }  " React
 " Go
 Plug 'fatih/vim-go', { 'for': 'go' } " golang
+Plug 'tcnksm/gotests', { 'rtp': 'editor/vim', 'for': 'go' } "gotests
 
 """ Initialize plugin system
 call plug#end()
