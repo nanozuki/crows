@@ -65,13 +65,17 @@ set guioptions-=r
 set guioptions-=R
 
 " 主题
+" true color support
+set termguicolors
+let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
+let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
 set background=dark
 " colorscheme solarized
 " colorscheme Tomorrow-Night
-colorscheme hybrid
-" let g:color_name = "Tomorrow-Night"
+colorscheme gruvbox
+let g:gruvbox_italic=1
 " 状态栏
-let g:airline_theme="tomorrow"
+let g:airline_theme="gruvbox"
 let g:airline_powerline_fonts=1
 let g:airline_extensions=['tabline', 'branch', 'virtualenv']
 
@@ -302,6 +306,7 @@ call plug#begin('~/.vim/plugins')
 Plug 'vim-airline/vim-airline'          " 状态栏强化
 Plug 'vim-airline/vim-airline-themes'   " 状态栏主题
 Plug 'yggdroot/indentline'              " 提示缩进 
+Plug 'morhetz/gruvbox'
 " 通用编辑
 Plug 'w0rp/ale'                      " 语法检查
 Plug 'kshenoy/vim-signature'         " 代码书签显示
@@ -328,7 +333,7 @@ Plug 'mattn/emmet-vim', { 'for': 'javascript' }  "emmet
 Plug 'mxw/vim-jsx', { 'for': 'javascript' }  " React
 " Go
 Plug 'fatih/vim-go', { 'for': 'go' } " golang
-Plug 'tcnksm/gotests', { 'rtp': 'editor/vim', 'for': 'go' } "gotests
+Plug 'buoto/gotests-vim', { 'for': 'go' } "gotests
 
 """ Initialize plugin system
 call plug#end()
