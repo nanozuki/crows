@@ -130,6 +130,9 @@ let g:ctrlp_working_path_mode = 'a'
 "" 忽略文件 (也能设置到 [Plugin]ctrlP 上)
 :set wildignore+=*/node_modules/*,*.swp,*.pyc,*/venv/*,
 
+"" save as sudo
+cmap w!! w !sudo tee %
+
 "======================m
 "|                     |
 "|   代码阅读:通用     |
