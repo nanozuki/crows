@@ -130,6 +130,9 @@ let g:ctrlp_working_path_mode = 'a'
 "" 忽略文件 (也能设置到 [Plugin]ctrlP 上)
 :set wildignore+=*/node_modules/*,*.swp,*.pyc,*/venv/*,
 
+"" save as sudo
+cmap w!! w !sudo tee %
+
 "======================m
 "|                     |
 "|   代码阅读:通用     |
@@ -198,6 +201,7 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 " 某些文件类型的特别缩进
+autocmd BufRead,BufNewFile *html setfiletype html
 autocmd FileType javascript setlocal expandtab ts=2 sw=2 sts=2
 autocmd FileType html setlocal expandtab ts=2 sw=2 sts=2
 autocmd FileType css setlocal expandtab ts=2 sw=2 sts=2
@@ -329,7 +333,7 @@ Plug 'nvie/vim-flake8', { 'for': 'python' } " PEP8代码风格检查
 " Javascript/React
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' } "syntax
 Plug 'ternjs/tern_for_vim', { 'for': 'javascript' }
-Plug 'mattn/emmet-vim', { 'for': 'javascript' }  "emmet
+Plug 'mattn/emmet-vim', { 'for': ['javascript', 'html'] }  "emmet
 Plug 'mxw/vim-jsx', { 'for': 'javascript' }  " React
 " Go
 Plug 'fatih/vim-go', { 'for': 'go' } " golang
