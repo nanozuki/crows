@@ -30,15 +30,15 @@ nmap <Leader>w :w<CR>
 nmap <Leader>WQ :wa<CR>:q<CR>
 nmap <Leader>Q :qa!<CR>
 " 依次遍历子窗口（next window)
-nnoremap nw <C-W><C-W>
+nmap nw <C-W><C-W>
 " 跳转至右方的窗口
-nnoremap <Leader>lw <C-W>l
+nmap <Leader>lw <C-W>l
 " 跳转至方的窗口
-nnoremap <Leader>hw <C-W>h
+nmap <Leader>hw <C-W>h
 " 跳转至上方的子窗口
-nnoremap <Leader>kw <C-W>k
+nmap <Leader>kw <C-W>k
 " 跳转至下方的子窗口
-nnoremap <Leader>jw <C-W>j
+nmap <Leader>jw <C-W>j
 " 定义快捷键在结对符之间跳转，助记pair
 nmap <Leader>pa %
 
@@ -140,7 +140,7 @@ let g:ctrlp_working_path_mode = 'a'
 syntax enable
 syntax on
 " 括号匹配（必须放在 syntax 的后面，否则无效)
-highlight MatchParen ctermbg=darkmagenta ctermfg=white
+" highlight MatchParen ctermbg=darkmagenta ctermfg=white
 
 "" 文档标记([Plugin]vim-signature)
 " m{a-zA-Z} 设置/取消标记, 大写为全局标记
@@ -214,9 +214,9 @@ autocmd FileType wxml setlocal expandtab ts=2 sw=2 sts=2
 
 "" 智能提示 ([Plugin]YCM)
 " 只能是 #include 或已打开的文件
-nnoremap <leader>gt :YcmCompleter GoTo<CR>
-nnoremap <leader>gr :YcmCompleter GoToReferences<CR>
-nnoremap <leader>gd :YcmCompleter GetDoc<CR>
+nmap <leader>gt :YcmCompleter GoTo<CR>
+nmap <leader>gr :YcmCompleter GoToReferences<CR>
+nmap <leader>gd :YcmCompleter GetDoc<CR>
 " 补全功能在注释中同样有效
 let g:ycm_complete_in_comments=1
 " 允许 vim 加载 .ycm_extra_conf.py 文件，不再提示
