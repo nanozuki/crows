@@ -124,8 +124,9 @@ nmap <leader>sf :CtrlSF
 nmap <leader>sp :CtrlSF<CR>
 " 替换 ([Plugin]vim-multiple-cursors)
 " <C-n> 选中更多
-" 查找文件 ([Plugin]ctrlP)
-let g:ctrlp_working_path_mode = 'a'
+
+" 关闭语法隐藏([Plugin]indentLint)
+let g:indentLine_conceallevel=0
 
 "" 忽略文件 (也能设置到 [Plugin]ctrlP 上)
 :set wildignore+=*/node_modules/*,*.swp,*.pyc,*/venv/*,
