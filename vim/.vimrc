@@ -264,6 +264,9 @@ let g:flake8_show_quickfix=0
 let g:ycm_server_python_interpreter="python3"
 
 "python virtualenv support
+if has('python3') && !has('patch-8.1.201')
+  silent! python3 1
+endif
 py3 << EOF
 import os
 import sys
