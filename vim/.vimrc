@@ -46,9 +46,9 @@ nmap <Leader>pa %
 " 设置环境保存项
 set sessionoptions="blank,buffers,globals,localoptions,tabpages,sesdir,folds,help,options,resize,winpos,winsize"
 " 保存环境
-map <leader>ss :mksession! my.vim<cr> :wviminfo! my.viminfo<cr>
+nmap <leader>ss :mksession! my.vim<cr> :wviminfo! my.viminfo<cr>
 " 恢复环境
-map <leader>rs :source my.vim<cr> :rviminfo my.viminfo<cr>
+nmap <leader>rs :source my.vim<cr> :rviminfo my.viminfo<cr>
 
 "=======================
 "|                     |
@@ -238,9 +238,9 @@ let g:ycm_seed_identifiers_with_syntax=1
 let g:ale_completion_enabled = 1
 
 " 模板补全 ([Plugin]UltiSnips)
-let g:UltiSnipsExpandTrigger="<leader><tab>"
-let g:UltiSnipsJumpForwardTrigger="<leader><tab>"
-let g:UltiSnipsJumpBackwardTrigger="<leader><s-tab>"
+" let g:UltiSnipsExpandTrigger="<leader><tab>"
+" let g:UltiSnipsJumpForwardTrigger="<leader><tab>"
+" let g:UltiSnipsJumpBackwardTrigger="<leader><s-tab>"
 
 " 语法检查, 自动修正 ([Plugin]ale)
 let g:ale_fixers = {
@@ -255,7 +255,7 @@ let g:ale_fix_on_save = 1
 "=======================
 
 " PEP8_检查([Plugin] flake8)
-autocmd FileType python map <leader>pf :call Flake8()<CR>
+autocmd FileType python nmap <leader>pf :call Flake8()<CR>
 autocmd BufWritePost *.py call Flake8()
 let g:flake8_show_in_gutter=1
 let g:flake8_show_quickfix=0
