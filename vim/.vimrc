@@ -125,8 +125,8 @@ nmap <leader>sp :CtrlSF<CR>
 " 替换 ([Plugin]vim-multiple-cursors)
 " <C-n> 选中更多
 
-" 关闭语法隐藏([Plugin]indentLint)
-let g:indentLine_conceallevel=0
+" 关闭 json 语法隐藏([Plugin]indentLint)
+autocmd Filetype json let g:indentLine_enabled = 0
 
 "" 忽略文件 (也能设置到 [Plugin]ctrlP 上)
 :set wildignore+=*/node_modules/*,*.swp,*.pyc,*/venv/*,
