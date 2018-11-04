@@ -1,0 +1,10 @@
+alias appadd="brew install"
+alias appup="brew update && brew upgrade && brew cleanup"
+alias appsch="brew search"
+alias appdel="brew uninstall"
+alias appclean="brew cleanup"
+alias appinfo="brew info"
+
+alias appextadd="brew cask install"
+alias appextsch="brew cask search"
+alias appextdel="brew cask uninstall"

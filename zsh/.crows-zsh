@@ -15,37 +15,10 @@ alias zshup="source ~/.zshrc"
 alias tree="tree -L 2"
 alias reboot="sudo reboot"
 alias psg="ps aux | grep"
+alias vim="nvim"
 ## Python
 alias vpy="source venv/bin/activate"
 alias rpy="deactivate"
 alias pipup="pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
 alias pipinstall="pip install -r requirements.txt"
 alias piprequire="pip freeze --local | grep -v '^\-e' | cut -d = -f 1 > requirements.txt"
-
-# Config for system
-if [[ `uname -s` == "Darwin" ]]; then
-    alias appadd="brew install"
-    alias appup="brew update && brew upgrade"
-    alias appsch="brew search"
-    alias appdel="brew uninstall"
-    alias extadd="brew cask install"
-    alias extsch="brew cask search"
-    alias extdel="brew cask uninstall"
-elif [ -f "/etc/issue" ]; then
-    if [[ `cat /etc/issue` =~ '^Arch Linux' ]]; then
-        alias appadd="sudo pacman -S"
-        alias appup="sudo pacman -Syu"
-        alias appsch="pacman -Ss"
-        alias appdel="sudo pacman -Rnsc"
-        alias extadd="pikaur -S"
-        alias extsch="pikaur -Ss"
-        alias extup="pikaur -Syu --aur"
-        alias extbuild="pikaur -Sb"
-        alias extdel="pikaur -Rnsc"
-    elif [[ `cat /etc/issue` =~ '^Ubuntu' ]]; then
-        alias appadd="sudo apt install"
-        alias appup="sudo apt update && sudo apt upgrade"
-        alias appsch="apt search"
-        alias appdel="sudo apt autoremove"
-    fi
-fi
