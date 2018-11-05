@@ -23,12 +23,13 @@ if [[ "$OS" == "macOS" ]]; then
     mkdir $HOME/Source
     git clone https://github.com/CrowsT/CrowsEnv.git
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-    echo "source ~/CrowsEnv/zsh/.crows-zsh" >> .zshrc
-    echo "source ~/CrowsEnv/zsh/.crows-max-zsh" >> .zshrc
+    echo "source ~/Source/CrowsEnv/zsh/.crows-zsh" >> .zshrc
+    echo "source ~/Source/CrowsEnv/zsh/.crows-mac-zsh" >> .zshrc
     ln -sf $HOME/Source/CrowsEnv/tmux/.tmux.conf $HOME/.tmux.conf
-    ln -sf $HOME/Source/CrowsEn/vim/.vimrc $HOME/.vimrc
-    ln -sf $HOME/Source/CrowsEn/vim/.vim $HOME/.vim
-    ln -sf $HOME/Source/CrowsEn/tern/.tern-config.js $HOME/.tern-configs.js
+    ln -sf $HOME/Source/CrowsEnv/vim/.vimrc $HOME/.vimrc
+    rm -rf $HOME/.vim
+    ln -sf $HOME/Source/CrowsEnv/vim/.vim $HOME/.vim
+    ln -sf $HOME/Source/CrowsEnv/tern/.tern-config.js $HOME/.tern-configs.js
     source .zshrc
     pip install flake8 ipython
 
