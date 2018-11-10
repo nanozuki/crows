@@ -1,0 +1,17 @@
+[http]
+	proxy = socks5://127.0.0.1:10718
+[https]
+	proxy = socks5://127.0.0.1:10718
+[core]
+	editor = vim
+[user]
+	name = nanozuki
+	email = nanozuki.crows@gmail.com
+[diff]
+	tool = vimdiff
+[alias]
+    st = status
+	df = difftool
+    ci = commit
+    co = checkout
+    rb = rebase -i
