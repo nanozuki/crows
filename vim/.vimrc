@@ -315,6 +315,8 @@ Plug 'vim-airline/vim-airline'          " 状态栏强化
 Plug 'vim-airline/vim-airline-themes'   " 状态栏主题
 Plug 'yggdroot/indentline'              " 提示缩进 
 Plug 'morhetz/gruvbox'
+" fcitx
+Plug 'CodeFalling/fcitx-vim-osx'
 " 通用编辑
 Plug 'w0rp/ale'                      " 语法检查
 Plug 'kshenoy/vim-signature'         " 代码书签显示
