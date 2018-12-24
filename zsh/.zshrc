@@ -15,12 +15,15 @@ alias rpy="deactivate"
 alias pipup="pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
 alias pipinstall="pip install -r requirements.txt"
 alias piprequire="pip freeze --local | grep -v '^\-e' | cut -d = -f 1 > requirements.txt"
-source ~/Source/CrowsEnv/zsh/.proxy-zsh
-source ~/Source/CrowsEnv/zsh/.crows-mac-zsh
+source ~/.zsh-local
 # GO
 export GOPATH=$HOME/.go
 # direnv
 eval "$(direnv hook zsh)"
+# pyenv
+if command -v pyenv 1>/dev/null 2>&1; then
+    eval "$(pyenv init -)"
+fi
 
 #############
 ## ANTIGEN ##
