@@ -8,7 +8,9 @@ alias zshup="source ~/.zshrc"
 alias tree="tree -L 2"
 alias reboot="sudo reboot"
 alias psg="ps aux | grep"
-alias vim="nvim"
+if command -v nvim 1>/dev/null 2>&1; then
+    alias vim="nvim"
+fi
 ## Python
 alias vpy="source venv/bin/activate"
 alias rpy="deactivate"
@@ -19,7 +21,9 @@ source ~/.zsh-local
 # GO
 export GOPATH=$HOME/.go
 # direnv
-eval "$(direnv hook zsh)"
+if command -v direnv 1>/dev/null 2>&1; then
+    eval "$(direnv hook zsh)"
+fi
 # pyenv
 if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init -)"
