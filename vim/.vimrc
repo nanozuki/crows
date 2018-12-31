@@ -224,12 +224,8 @@ nmap <leader>gr :YcmCompleter GoToReferences<CR>
 nmap <leader>gd :YcmCompleter GetDoc<CR>
 " 补全功能在注释中同样有效
 let g:ycm_complete_in_comments=1
-" 允许 vim 加载 .ycm_extra_conf.py 文件，不再提示
-let g:ycm_confirm_extra_conf=0
 " 补全内容不以分割子窗口形式出现，只显示补全列表
 set completeopt-=preview
-" 从第一个键入字符就开始罗列匹配项
-let g:ycm_min_num_of_chars_for_completion=1
 " 禁止缓存匹配项，每次都重新生成匹配项
 let g:ycm_cache_omnifunc=0
 " 语法关键字补全         
@@ -237,10 +233,17 @@ let g:ycm_seed_identifiers_with_syntax=1
 " ale提示 ([Plugin]ale)
 let g:ale_completion_enabled = 1
 
+" 修改ycm补全触发条件
+" let g:ycm_semantic_triggers = {
+" \ 'go,javascript,python,rust': ['re!^\w{1}'],
+" \ 'css': [ 're!^\s{2,}', 're!:\s+'], 'html': [ '</' ],
+" \ 'scss': [ 're!^\s{2,}', 're!:\s+'], 'js': [ '</' ],
+" \}
+
 " 模板补全 ([Plugin]UltiSnips)
-" let g:UltiSnipsExpandTrigger="<leader><tab>"
-" let g:UltiSnipsJumpForwardTrigger="<leader><tab>"
-" let g:UltiSnipsJumpBackwardTrigger="<leader><s-tab>"
+let g:UltiSnipsExpandTrigger="<c-b>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " 语法检查, 自动修正 ([Plugin]ale)
 let g:ale_fixers = {
@@ -267,15 +270,6 @@ let g:ycm_server_python_interpreter="python3"
 if has('python3') && !has('patch-8.1.201')
   silent! python3 1
 endif
-py3 << EOF
-import os
-import sys
-if 'VIRTUAL_ENV' in os.environ:
-    project_base_dir = os.environ['VIRTUAL_ENV']
-    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-    exec(compile(open(activate_this, 'rb').read(), activate_this, 'exec'), dict(__file__=activate_this))
-EOF
-
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 
 "=======================
@@ -286,11 +280,6 @@ let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 
 " vim-jsx:
 let g:jsx_ext_required = 0
-" 修改ycm补全css的触发条件
-let g:ycm_semantic_triggers = {
-\ 'css': [ 're!^\s{2,}', 're!:\s+'], 'html': [ '</' ],
-\ 'scss': [ 're!^\s{2,}', 're!:\s+'], 'js': [ '</' ],
-\}
 
 "=======================
 "|                     |
@@ -330,7 +319,8 @@ Plug 'dyng/ctrlsf.vim'        " 工程内搜索
 Plug 'kien/ctrlp.vim'         " 工程内搜索文件
 Plug 'BurntSushi/ripgrep'     " ctrlsf的后端
 " 代码补全
-Plug 'Valloric/YouCompleteMe'     " ycm
+" ycm
+Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --go-completer --ts-completer --rust-completer' }
 Plug 'SirVer/ultisnips'           " 模板补全
 Plug 'CrowsT/vim-snippets'        " 自定义模板
 " 特定编程语言
@@ -338,7 +328,6 @@ Plug 'CrowsT/vim-snippets'        " 自定义模板
 Plug 'nvie/vim-flake8', { 'for': 'python' } " PEP8代码风格检查
 " Javascript/React
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' } "syntax
-Plug 'ternjs/tern_for_vim', { 'for': 'javascript' }
 Plug 'mattn/emmet-vim', { 'for': ['javascript', 'html'] }  "emmet
 Plug 'mxw/vim-jsx', { 'for': 'javascript' }  " React
 " Go
