@@ -234,11 +234,11 @@ let g:ycm_seed_identifiers_with_syntax=1
 let g:ale_completion_enabled = 1
 
 " 修改ycm补全触发条件
-" let g:ycm_semantic_triggers = {
-" \ 'go,javascript,python,rust': ['re!^\w{1}'],
-" \ 'css': [ 're!^\s{2,}', 're!:\s+'], 'html': [ '</' ],
-" \ 'scss': [ 're!^\s{2,}', 're!:\s+'], 'js': [ '</' ],
-" \}
+let g:ycm_semantic_triggers = {
+\ 'go,javascript,python,rust': ['re!^\w{1}'],
+\ 'css': [ 're!^\s{2,}', 're!:\s+'], 'html': [ '</' ],
+\ 'scss': [ 're!^\s{2,}', 're!:\s+'], 'js': [ '</' ],
+\}
 
 " 模板补全 ([Plugin]UltiSnips)
 let g:UltiSnipsExpandTrigger="<c-b>"
