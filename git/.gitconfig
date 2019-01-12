@@ -3,12 +3,14 @@
 [user]
 	name = Nanozuki Crows
 	email = nanozuki.crows@gmail.com
+	signingkey = 2037F9D19C6BF918
 [diff]
 	tool = vimdiff
 [alias]
-    st = status
+	st = status
 	df = difftool
-    ci = commit
-    co = checkout
-    rb = rebase -i
-    aa = add .
+	ci = commit -S
+	co = checkout
+	rb = rebase -i
+	aa = add .
+	tg = tag -s
