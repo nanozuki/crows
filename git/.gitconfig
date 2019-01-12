@@ -1,7 +1,7 @@
 [core]
 	editor = vim
 [user]
-	name = nanozuki
+	name = Nanozuki Crows
 	email = nanozuki.crows@gmail.com
 [diff]
 	tool = vimdiff
