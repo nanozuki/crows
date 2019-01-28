@@ -69,7 +69,7 @@ set guioptions-=R
 set termguicolors
 let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
 let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
-set background=dark
+set background=light
 " colorscheme solarized
 " colorscheme Tomorrow-Night
 colorscheme gruvbox
@@ -304,8 +304,6 @@ Plug 'vim-airline/vim-airline'          " 状态栏强化
 Plug 'vim-airline/vim-airline-themes'   " 状态栏主题
 Plug 'yggdroot/indentline'              " 提示缩进 
 Plug 'morhetz/gruvbox'
-" fcitx
-Plug 'CodeFalling/fcitx-vim-osx'
 " 通用编辑
 Plug 'w0rp/ale'                      " 语法检查
 Plug 'kshenoy/vim-signature'         " 代码书签显示
