@@ -319,9 +319,9 @@ Plug 'BurntSushi/ripgrep'     " ctrlsf的后端
 " 代码补全
 " ycm
 if executable('pacman')
-    Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --go-completer --ts-completer --rust-completer --system-libclang' }
+    Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --clang-completer --go-completer --ts-completer --rust-completer --system-libclang' }
 else
-    Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --go-completer --ts-completer --rust-completer' }
+    Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --clang-completer --go-completer --ts-completer --rust-completer' }
 endif
 Plug 'SirVer/ultisnips'           " 模板补全
 Plug 'CrowsT/vim-snippets'        " 自定义模板
