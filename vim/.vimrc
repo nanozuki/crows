@@ -311,6 +311,7 @@ Plug 'scrooloose/nerdcommenter'      " 开关注释
 Plug 'easymotion/vim-easymotion'     " 快速跳转
 Plug 'tpope/vim-fugitive'            " git信息显示
 Plug 'terryma/vim-multiple-cursors'  " 多重编辑
+Plug 'tpope/vim-surround'
 " 代码查看
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } " 文件列表
 Plug 'dyng/ctrlsf.vim'        " 工程内搜索
