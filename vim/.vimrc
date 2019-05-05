@@ -335,7 +335,9 @@ Plug 'mattn/emmet-vim', { 'for': ['javascript', 'html'] }  "emmet
 Plug 'mxw/vim-jsx', { 'for': 'javascript' }  " React
 " Go
 Plug 'fatih/vim-go', { 'for': 'go' } " golang
-Plug 'buoto/gotests-vim', { 'for': 'go', 'do': 'go get -v -u github.com/cweill/gotests/...' } "gotests
+Plug 'buoto/gotests-vim', { 'for': 'go' } "gotests
+" Fish
+Plug 'dag/vim-fish'
 
 """ Initialize plugin system
 call plug#end()

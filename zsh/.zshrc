@@ -45,6 +45,7 @@ antigen bundle pip
 antigen bundle python
 antigen bundle tmux
 antigen bundle yarn
+antigen bundle z
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
 # Fish-like auto suggestions
@@ -55,3 +56,4 @@ antigen bundle zsh-users/zsh-completions
 antigen theme ys
 # Tell antigen that you're done
 antigen apply
+
