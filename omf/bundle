@@ -1,0 +1,6 @@
+package foreign-env
+package fzf
+package https://github.com/jorgebucaran/fish-nvm
+package z
+theme cbjohnson
+theme default
