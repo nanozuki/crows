@@ -9,6 +9,7 @@ alias psg="ps aux | grep"
 
 if type -q vim
     alias vim="nvim"
+    alias vimdiff="nvim -d"
 end
 if type -q direnv
     direnv hook fish | source

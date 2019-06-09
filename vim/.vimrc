@@ -217,29 +217,6 @@ autocmd FileType wxml setlocal expandtab ts=2 sw=2 sts=2
 " {number}<leader>cc 注释文本
 " {number}<leader>cu 取消注释文本
 
-"" 智能提示 ([Plugin]YCM)
-" 只能是 #include 或已打开的文件
-nmap <leader>gt :YcmCompleter GoTo<CR>
-nmap <leader>gr :YcmCompleter GoToReferences<CR>
-nmap <leader>gd :YcmCompleter GetDoc<CR>
-" 补全功能在注释中同样有效
-let g:ycm_complete_in_comments=1
-" 补全内容不以分割子窗口形式出现，只显示补全列表
-set completeopt-=preview
-" 禁止缓存匹配项，每次都重新生成匹配项
-let g:ycm_cache_omnifunc=0
-" 语法关键字补全         
-let g:ycm_seed_identifiers_with_syntax=1
-" ale提示 ([Plugin]ale)
-let g:ale_completion_enabled = 1
-
-" 修改ycm补全触发条件
-let g:ycm_semantic_triggers = {
-\ 'go,javascript,python,rust': ['re!^\w{1}'],
-\ 'css': [ 're!^\s{2,}', 're!:\s+'], 'html': [ '</' ],
-\ 'scss': [ 're!^\s{2,}', 're!:\s+'], 'js': [ '</' ],
-\}
-
 " 模板补全 ([Plugin]UltiSnips)
 let g:UltiSnipsExpandTrigger="<c-b>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
@@ -250,6 +227,128 @@ let g:ale_fixers = {
 \   'javascript': ['eslint'],
 \}
 let g:ale_fix_on_save = 1
+let g:ale_linters = {
+\   'go': ['gopls'],
+\}
+"" 语法补全 ([Plugin]Coc)
+" if hidden is not set, TextEdit might fail.
+set hidden
+
+" Some servers have issues with backup files, see #649
+set nobackup
+set nowritebackup
+
+" Smaller updatetime for CursorHold & CursorHoldI
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Use `[c` and `]c` to navigate diagnostics
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Remap for format selected region
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+
+" Add diagnostic info for https://github.com/itchyny/lightline.vim
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'cocstatus': 'coc#status'
+      \ },
+      \ }
+
+" Using CocList
+" Show all diagnostics
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
 
 "=======================
 "|                     |
@@ -289,6 +388,11 @@ let g:jsx_ext_required = 0
 " vim-go
 let g:go_fmt_command = "goimports"
 let g:go_auto_type_info = 1
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+" autocmd FileType go nmap <leader>gt :GoDef<CR>
+" autocmd FileType go nmap <leader>gr :GoReferrers<CR>
+" autocmd FileType go nmap <leader>gd :GoDoc<CR>
 
 "=======================
 "|                     |
@@ -318,12 +422,7 @@ Plug 'dyng/ctrlsf.vim'        " 工程内搜索
 Plug 'kien/ctrlp.vim'         " 工程内搜索文件
 Plug 'BurntSushi/ripgrep'     " ctrlsf的后端
 " 代码补全
-" ycm
-if executable('pacman')
-    Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --clang-completer --go-completer --ts-completer --rust-completer --system-libclang' }
-else
-    Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --clang-completer --go-completer --ts-completer --rust-completer' }
-endif
+Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
 Plug 'SirVer/ultisnips'           " 模板补全
 Plug 'CrowsT/vim-snippets'        " 自定义模板
 " 特定编程语言
@@ -333,6 +432,7 @@ Plug 'nvie/vim-flake8', { 'for': 'python' } " PEP8代码风格检查
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' } "syntax
 Plug 'mattn/emmet-vim', { 'for': ['javascript', 'html'] }  "emmet
 Plug 'mxw/vim-jsx', { 'for': 'javascript' }  " React
+Plug 'leafgarland/typescript-vim'
 " Go
 Plug 'fatih/vim-go', { 'for': 'go' } " golang
 Plug 'buoto/gotests-vim', { 'for': 'go' } "gotests
