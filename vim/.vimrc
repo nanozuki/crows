@@ -227,9 +227,9 @@ let g:ale_fixers = {
 \   'javascript': ['eslint'],
 \}
 let g:ale_fix_on_save = 1
-let g:ale_linters = {
-\   'go': ['gopls'],
-\}
+" let g:ale_linters = {
+" \   'go': ['gopls'],
+" \}
 "" 语法补全 ([Plugin]Coc)
 " if hidden is not set, TextEdit might fail.
 set hidden
@@ -393,6 +393,8 @@ let g:go_info_mode='gopls'
 " autocmd FileType go nmap <leader>gt :GoDef<CR>
 " autocmd FileType go nmap <leader>gr :GoReferrers<CR>
 " autocmd FileType go nmap <leader>gd :GoDoc<CR>
+" coc
+autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
 
 "=======================
 "|                     |
