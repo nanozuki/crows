@@ -208,6 +208,7 @@ autocmd FileType html setlocal expandtab ts=2 sw=2 sts=2
 autocmd FileType css setlocal expandtab ts=2 sw=2 sts=2
 autocmd FileType scss setlocal expandtab ts=2 sw=2 sts=2
 autocmd FileType xml setlocal expandtab ts=2 sw=2 sts=2
+autocmd FileType yaml setlocal expandtab ts=2 sw=2 sts=2
 autocmd FileType json setlocal expandtab ts=2 sw=2 sts=2
 autocmd FileType wxss setlocal expandtab ts=2 sw=2 sts=2
 autocmd FileType wxml setlocal expandtab ts=2 sw=2 sts=2
@@ -225,11 +226,15 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " 语法检查, 自动修正 ([Plugin]ale)
 let g:ale_fixers = {
 \   'javascript': ['eslint'],
+\   'typescript': ['eslint'],
 \}
 let g:ale_fix_on_save = 1
-" let g:ale_linters = {
-" \   'go': ['gopls'],
-" \}
+let g:ale_linters = {
+\   'go': ['gofmt', 'golangci-lint'],
+\}
+let g:ale_go_golangci_lint_package = 1
+let g:ale_go_golangci_lint_options = "--config $XDG_CONFIG_HOME/nvim/golangci.yml"
+
 "" 语法补全 ([Plugin]Coc)
 " if hidden is not set, TextEdit might fail.
 set hidden
@@ -390,6 +395,8 @@ let g:go_fmt_command = "goimports"
 let g:go_auto_type_info = 1
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
+let g:go_metalinter_enable= 1
+let g:go_metalinter_command="golangci-lint"
 " autocmd FileType go nmap <leader>gt :GoDef<CR>
 " autocmd FileType go nmap <leader>gr :GoReferrers<CR>
 " autocmd FileType go nmap <leader>gd :GoDoc<CR>
@@ -424,9 +431,9 @@ Plug 'dyng/ctrlsf.vim'        " 工程内搜索
 Plug 'kien/ctrlp.vim'         " 工程内搜索文件
 Plug 'BurntSushi/ripgrep'     " ctrlsf的后端
 " 代码补全
-Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
-Plug 'SirVer/ultisnips'           " 模板补全
-Plug 'CrowsT/vim-snippets'        " 自定义模板
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'SirVer/ultisnips'           " 模板补全
+" Plug 'CrowsT/vim-snippets'        " 自定义模板
 " 特定编程语言
 " python
 Plug 'nvie/vim-flake8', { 'for': 'python' } " PEP8代码风格检查
@@ -436,7 +443,7 @@ Plug 'mattn/emmet-vim', { 'for': ['javascript', 'html'] }  "emmet
 Plug 'mxw/vim-jsx', { 'for': 'javascript' }  " React
 Plug 'leafgarland/typescript-vim'
 " Go
-Plug 'fatih/vim-go', { 'for': 'go' } " golang
+Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoUpdateBinaries' } " golang
 Plug 'buoto/gotests-vim', { 'for': 'go' } "gotests
 " Fish
 Plug 'dag/vim-fish'
