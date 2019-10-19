@@ -12,6 +12,7 @@ set mouse=a
 
 " appearance {{{
 "" colorscheme
+set termguicolors
 set background=light
 colorscheme gruvbox
 let g:gruvbox_italic=1
@@ -45,6 +46,7 @@ nnoremap <Leader>e $
 " edit {{{
 syntax enable
 set foldmethod=indent
+set foldlevelstart=99
 " copy selection to system clipboard
 vnoremap <Leader>y "+y
 " paste from system clipboard
