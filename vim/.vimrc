@@ -1,6 +1,13 @@
 " Nanozuki Vim Config
 
 " basic & misc {{{
+" unicode support
+let $LANG="en_US.UTF-8"
+set langmenu=en_US.UTF-8
+set encoding=UTF-8
+set fileencodings=utf-8
+set termencoding=utf-8
+
 "" leader
 let mapleader=" "
 
