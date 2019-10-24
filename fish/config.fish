@@ -7,7 +7,7 @@ set -x SSH_AUTH_SOCK $HOME/.gnupg/S.gpg-agent.ssh
 alias tree="tree -L 2"
 alias psg="ps aux | grep"
 
-if type -q vim
+if type -q nvim
     alias vim="nvim"
     alias vimdiff="nvim -d"
 end
