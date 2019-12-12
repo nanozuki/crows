@@ -334,11 +334,11 @@ function! s:progress_opt(base)
         \ s:git_version_requirement(1, 7, 1) ? '--progress' : ''
 endfunction
 
-if s:is_win
-  function! s:rtp(spec)
-    return s:path(a:spec.dir . get(a:spec, 'rtp', ''))
-  endfunction
+function! s:rtp(spec)
+  return s:path(a:spec.dir . get(a:spec, 'rtp', ''))
+endfunction
 
+if s:is_win
   function! s:path(path)
     return s:trim(substitute(a:path, '/', '\', 'g'))
   endfunction
@@ -376,10 +376,6 @@ if s:is_win
     return [batchfile, cmd]
   endfunction
 else
-  function! s:rtp(spec)
-    return s:dirpath(a:spec.dir . get(a:spec, 'rtp', ''))
-  endfunction
-
   function! s:path(path)
     return s:trim(a:path)
   endfunction
@@ -826,6 +822,7 @@ function! s:chsh(swap)
 endfunction
 
 function! s:bang(cmd, ...)
+  let batchfile = ''
   try
     let [sh, shellcmdflag, shrd] = s:chsh(a:0)
     " FIXME: Escaping is incomplete. We could use shellescape with eval,
@@ -839,7 +836,7 @@ function! s:bang(cmd, ...)
   finally
     unlet g:_plug_bang
     let [&shell, &shellcmdflag, &shellredir] = [sh, shellcmdflag, shrd]
-    if s:is_win
+    if s:is_win && filereadable(batchfile)
       call delete(batchfile)
     endif
   endtry
@@ -2051,6 +2048,7 @@ function! s:with_cd(cmd, dir, ...)
 endfunction
 
 function! s:system(cmd, ...)
+  let batchfile = ''
   try
     let [sh, shellcmdflag, shrd] = s:chsh(1)
     let cmd = a:0 > 0 ? s:with_cd(a:cmd, a:1) : a:cmd
@@ -2060,7 +2058,7 @@ function! s:system(cmd, ...)
     return system(cmd)
   finally
     let [&shell, &shellcmdflag, &shellredir] = [sh, shellcmdflag, shrd]
-    if s:is_win
+    if s:is_win && filereadable(batchfile)
       call delete(batchfile)
     endif
   endtry
@@ -2383,6 +2381,7 @@ function! s:preview_commit()
     wincmd P
   endif
   setlocal previewwindow filetype=git buftype=nofile nobuflisted modifiable
+  let batchfile = ''
   try
     let [sh, shellcmdflag, shrd] = s:chsh(1)
     let cmd = 'cd '.plug#shellescape(g:plugs[name].dir).' && git show --no-color --pretty=medium '.sha
@@ -2392,7 +2391,7 @@ function! s:preview_commit()
     execute 'silent %!' cmd
   finally
     let [&shell, &shellcmdflag, &shellredir] = [sh, shellcmdflag, shrd]
-    if s:is_win
+    if s:is_win && filereadable(batchfile)
       call delete(batchfile)
     endif
   endtry

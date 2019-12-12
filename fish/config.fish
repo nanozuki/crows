@@ -1,5 +1,6 @@
 set -x GOPATH $HOME/.go
-set -x PATH /usr/local/bin /usr/local/sbin /usr/bin /bin /usr/sbin /sbin $GOPATH/bin
+set -x CARGO_HOME $HOME/.cargo
+set -x PATH /usr/local/bin /usr/local/sbin /usr/bin /bin /usr/sbin /sbin $GOPATH/bin $CARGO_HOME/bin
 
 set -x GPG_TTY (tty)
 set -x SSH_AUTH_SOCK $HOME/.gnupg/S.gpg-agent.ssh
