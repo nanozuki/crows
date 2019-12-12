@@ -81,6 +81,7 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 augroup fileindent
+    autocmd!
     autocmd BufRead,BufNewFile *html setfiletype html
     autocmd FileType javascript setlocal expandtab ts=2 sw=2 sts=2
     autocmd FileType html setlocal expandtab ts=2 sw=2 sts=2
