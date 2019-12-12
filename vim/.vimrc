@@ -278,6 +278,11 @@ let g:go_metalinter_enable= 1
 let g:go_metalinter_command="golangci-lint"
 " }}}
 
+" [plugin] rust.vim {{{
+let g:rustfmt_options = '--edition=2018'
+let g:rustfmt_autosave = 1
+" }}}
+
 " [plugin] vim-plug {{{
 call plug#begin('~/.vim/plugins')
 " appearance
@@ -309,6 +314,8 @@ Plug 'leafgarland/typescript-vim'
 " go
 Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoUpdateBinaries' }
 Plug 'buoto/gotests-vim', { 'for': 'go' }
+" rust
+Plug 'rust-lang/rust.vim',
 " fish
 Plug 'dag/vim-fish'
 
