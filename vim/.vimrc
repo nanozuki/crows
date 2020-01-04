@@ -20,7 +20,7 @@ set mouse=a
 " appearance {{{
 "" colorscheme
 set termguicolors
-set background=light
+set background=dark
 colorscheme gruvbox
 let g:gruvbox_italic=1
 
@@ -61,7 +61,7 @@ nnoremap <Leader>p "+p
 " completion for vim command
 set wildmenu
 "" ignore file for all
-:set wildignore+=*/node_modules/*,*.swp,*.pyc,*/venv/*,
+:set wildignore+=*/node_modules/*,*.swp,*.pyc,*/venv/*,*/target/*,
 " save as sudo
 cmap w!! w !sudo tee %
 " }}}
@@ -312,7 +312,7 @@ Plug 'mattn/emmet-vim', { 'for': ['javascript', 'html'] }
 Plug 'mxw/vim-jsx', { 'for': 'javascript' }
 Plug 'leafgarland/typescript-vim'
 " go
-Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoUpdateBinaries' }
+Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'buoto/gotests-vim', { 'for': 'go' }
 " rust
 Plug 'rust-lang/rust.vim',
