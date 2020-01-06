@@ -3,7 +3,7 @@ set -x CARGO_HOME $HOME/.cargo
 set -x PATH /usr/local/bin /usr/local/sbin /usr/bin /bin /usr/sbin /sbin $GOPATH/bin $CARGO_HOME/bin
 
 set -x GPG_TTY (tty)
-set -x SSH_AUTH_SOCK $HOME/.gnupg/S.gpg-agent.ssh
+#set -x SSH_AUTH_SOCK $HOME/.gnupg/S.gpg-agent.ssh
 
 alias tree="tree -L 2"
 alias psg="ps aux | grep"
@@ -16,15 +16,28 @@ if type -q direnv
     direnv hook fish | source
 end
 
-#mac
-alias appadd="brew install"
-alias appup="brew update && brew upgrade && brew cleanup"
-alias appsch="brew search"
-alias appdel="brew uninstall"
-alias appclean="brew cleanup"
-alias appinfo="brew info"
+# mac
+#alias appadd="brew install"
+#alias appup="brew update && brew upgrade && brew cleanup"
+#alias appsch="brew search"
+#alias appdel="brew uninstall"
+#alias appclean="brew cleanup"
+#alias appinfo="brew info"
+#
+#alias appextadd="brew cask install"
+#alias appextsch="brew cask search"
+#alias appextdel="brew cask uninstall"
+#alias appextup="brew cask upgrade"
 
-alias appextadd="brew cask install"
-alias appextsch="brew cask search"
-alias appextdel="brew cask uninstall"
-alias appextup="brew cask upgrade"
+# arch
+alias appadd="sudo pacman -S"
+alias appup="sudo pacman -Syu"
+alias appsch="pacman -Ss"
+alias appdel="sudo pacman -Rs"
+alias appclean="sudo pacman -Scc && pacman -Qdtq | pacman -Rs -"
+alias appinfo="pacman -Si"
+
+alias appextadd="yay -S"
+alias appextup="yay -Syu"
+alias appextsch="yay -Ss"
+alias appextdel="yay -Rs"
