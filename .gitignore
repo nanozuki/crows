@@ -1,5 +1,5 @@
 # vim-plug
-vim/.vim/plugins/
+dots/common/vim/vim/plugins/
 .netrwhist
 
 .DS_Store
