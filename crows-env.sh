@@ -55,7 +55,7 @@ if [[ "$platform" == "osx" ]]; then
     pip3 install pynvim neovim
     yarn global add neovim
 elif [[ "$platform" == "arch" ]]; then
-    sudo pacman -S base-devel fish tmux neovim golang python nodejs yarn rustup gnupg fcitx-rime
+    sudo pacman -S --noconfirm base-devel fish tmux neovim go python nodejs yarn rustup gnupg fcitx-rime
     rustup set profile complete
     rustup update stable
     sudo pip install pynvim neovim
