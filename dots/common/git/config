@@ -1,11 +1,14 @@
 [core]
-	editor = vim
+	editor = nvim
+	sshcommand = ssh -i ~/.ssh/id_ed25519
 [user]
 	name = Nanozuki Crows
 	email = nanozuki.crows@gmail.com
 	signingkey = 2037F9D19C6BF918
 [diff]
-	tool = vimdiff
+    tool = nvimdiff
+[difftool "nvimdiff"]
+    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 [alias]
 	st = status
 	df = difftool
@@ -14,3 +17,5 @@
 	rb = rebase -i
 	aa = add .
 	tg = tag -s
+[include]
+    path = ~/.config/git/config_local
