@@ -1,6 +1,7 @@
 # vim-plug
 dots/common/vim/vim/plugins/
+plug.vim*
 .netrwhist
 
+# osx
 .DS_Store
-

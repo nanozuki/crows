@@ -29,10 +29,18 @@ and then:
 curl -L https://raw.githubusercontent.com/nanozuki/CrowsEnv/master/crows-env.sh | bash -s bootstrap
 ```
 
-## update
+## upgrade
 
-modify files or do git operator in $HOME/.data/CrowsEnv, and: 
+modify config files or do git operator in $HOME/.data/CrowsEnv, and: 
 
 ```bash
-crows-env.sh update
+crows-env upgrade
+```
+
+## update
+
+update enviroment:
+
+```bash
+crows-env update
 ```
