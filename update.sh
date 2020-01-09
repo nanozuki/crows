@@ -1,33 +1,14 @@
 #!/bin/bash
-
-lndir () {
-    rm -rf $2 &> /dev/null || true
-    ln -sf $1 $2
-}
-
-#fish
-echo "Linking fish config..."
-ln -sf $source_path/dots/$platform/fish/config.fish $target_path/.config/fish/config.fish
-ln -sf $source_path/dots/common/before.init.fish $target_path/.config/fish/conf.d/before.init.fish
-#omf
-lndir $source_path/dots/common/omf $target_path/.config/omf
-#git
-echo "Linking global git config..."
-ln -sf $source_path/dots/common/git/config $target_path/.config/git/config
-#tmux
-echo "Linking tmux config..."
-ln -sf $source_path/dots/common/tmux/config $target_path/.tmux.conf
-#nvim
-echo "Linking nvim config..."
-ln -sf $source_path/dots/$platform/nvim/init.vim $target_path/.config/nvim/init.vim
-lndir $source_path/dots/common/vim/vim $target_path/.vim
-ln -sf $source_path/dots/common/vim/vimrc $target_path/.vimrc
-#rime
-echo "Linking rime config..."
 if [[ "$platform" == "osx" ]]; then
-    ln -sf $source_path/dots/common/rime/default.custom.yaml $target_path/Library/Rime/default.custom.yaml
+    brew update && brew upgrade && brew cleanup
+    brew cask upgrade
+    pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U
 elif [[ "$platform" == "arch" ]]; then
-    ln -sf $source_path/dots/common/rime/default.custom.yaml $target_path/.config/fcitx/rime/default.custom.yaml
+    sudo pacman -Syu
+    yay -Syu
+    sudo pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U
 fi
-echo ""
-echo "Update complete!"
+
+rustup update
+yarn global upgrade
+vim temp.go +PlugUpgrade +PlugUpdate +GoUpdateBinaries +qall
