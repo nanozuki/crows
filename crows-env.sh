@@ -31,7 +31,7 @@ fi
 echo "Platform is $platform"
 
 target_path="$HOME"
-source_path="$HOME/.data/CrowsEnv"
+source_path="$HOME/.local/share/CrowsEnv"
 config_path="$HOME/.config/CrowsEnv"
 
 echo "target_path: $target_path"
@@ -78,7 +78,7 @@ echo "Preparing files..."
 md $target_path/.config/fish/conf.d
 #fish omf
 curl -L https://get.oh-my.fish > install
-fish install --path=$target_path/.data/omf --config=$target_path/.config/omf
+fish install --path=$target_path/.local/share/omf --config=$target_path/.config/omf
 
 # git
 md $target_path/.config/git
