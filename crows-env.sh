@@ -56,13 +56,13 @@ echo "Platform is $platform, install basic dependencies..."
 if [[ "$platform" == "osx" ]]; then
     xcode-select --install
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    brew install git make fish tmux neovim go python node yarn rustup-init gnupg tree ripgrep pinentry-mac
+    brew install git make fish tmux neovim go python node yarn rustup-init gnupg tree ripgrep pinentry-mac direnv
     brew cask install squirrel
     rustup-init
     pip3 install pynvim neovim
     yarn global add neovim
 elif [[ "$platform" == "arch" ]]; then
-    sudo pacman -S --noconfirm base-devel fish tmux neovim go python nodejs yarn rustup gnupg fcitx-rime ripgrep
+    sudo pacman -S --noconfirm base-devel fish tmux neovim go python nodejs yarn rustup gnupg fcitx-rime ripgrep direnv
     rustup set profile complete
     rustup update stable
     sudo pip install pynvim neovim
