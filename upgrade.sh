@@ -28,6 +28,7 @@ ln -sf $source_path/dots/$platform/gnupg/gpg-agent.conf $target_path/.gnupg/gpg-
 echo "Linking rime config..."
 if [[ "$platform" == "osx" ]]; then
     ln -sf $source_path/dots/common/rime/default.custom.yaml $target_path/Library/Rime/default.custom.yaml
+    ln -sf $source_path/dots/common/rime/squirrel.custom.yaml $target_path/Library/Rime/squirrel.custom.yaml
 elif [[ "$platform" == "arch" ]]; then
     ln -sf $source_path/dots/common/rime/default.custom.yaml $target_path/.config/fcitx/rime/default.custom.yaml
 fi
