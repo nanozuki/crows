@@ -19,7 +19,7 @@ echo "Linking tmux config..."
 ln -sf $source_path/dots/common/tmux/config $target_path/.tmux.conf
 #nvim
 echo "Linking nvim config..."
-ln -sf $source_path/dots/$platform/nvim/init.vim $target_path/.config/nvim/init.vim
+lndir $source_path/dots/common/nvim $target_path/.config/nvim
 lndir $source_path/dots/common/vim/vim $target_path/.vim
 ln -sf $source_path/dots/common/vim/vimrc $target_path/.vimrc
 #gnupg-agent

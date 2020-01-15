@@ -1,0 +1,36 @@
+linters:
+  disable-all: true
+  enable:
+    - bodyclose
+    - deadcode
+    - dupl
+    - errcheck
+    - goconst
+    - gocritic
+    - gocyclo
+    - gofmt
+    - goimports
+    - golint
+    - gosimple
+    - govet
+    - ineffassign
+    - interfacer
+    - misspell
+    - nakedret
+    - staticcheck
+    - structcheck
+    - stylecheck
+    - typecheck
+    - unconvert
+    - unparam
+    - unused
+    - varcheck
+    # - depguard 这个检查有bug
+    # - funlen 检查函数长度，没有必要，code review 的时候灵活判断即可
+    # - gochecknoglobals 不能使用全局变量，没有必要
+    # - gochecknoinits 这个检查不准 init 函数，没有必要
+    # - gosec 安全检查，没有必要，比如说它不允许使用 md5，即使你不是用 md5 加密
+    # - lll 检查每行长度，可定制项太少，以后如果能自动修复的时候再启用
+    # - maligned 检查结构体能不能调整参数顺序减少大小，没有必要
+    # - prealloc 检查 slice 会不会被重新构建，没有必要
+    # - scopelint 检查循环变量有没有可能造成 bug，检查过于宽泛，和 gotests 生成的模板冲突 

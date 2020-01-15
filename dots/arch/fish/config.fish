@@ -16,14 +16,22 @@ if type -q direnv
     direnv hook fish | source
 end
 
-alias appadd="sudo pacman -S"
-alias appup="sudo pacman -Syu"
-alias appsch="pacman -Ss"
-alias appdel="sudo pacman -Rs"
-alias appclean="sudo pacman -Scc && pacman -Qdtq | pacman -Rs -"
-alias appinfo="pacman -Si"
+# history across fishes
+function save_history --on-event fish_preexec
+    history --save
+    history --merge
+end
+alias hr 'history --merge'  # read and merge history from disk
+bind \e\[A 'history --merge ; up-or-search'
 
-alias appextadd="yay -S"
-alias appextup="yay -Syu"
-alias appextsch="yay -Ss"
-alias appextdel="yay -Rs"
+alias appadd "sudo pacman -S"
+alias appup "sudo pacman -Syu"
+alias appsch "pacman -Ss"
+alias appdel "sudo pacman -Rs"
+alias appclean "sudo pacman -Scc && pacman -Qdtq | pacman -Rs -"
+alias appinfo "pacman -Si"
+
+alias appextadd "yay -S"
+alias appextup "yay -Syu"
+alias appextsch "yay -Ss"
+alias appextdel "yay -Rs"
