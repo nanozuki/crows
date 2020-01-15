@@ -16,14 +16,22 @@ if type -q direnv
     direnv hook fish | source
 end
 
-alias appadd="brew install"
-alias appup="brew update && brew upgrade && brew cleanup"
-alias appsch="brew search"
-alias appdel="brew uninstall"
-alias appclean="brew cleanup"
-alias appinfo="brew info"
+# history across fishes
+function save_history --on-event fish_preexec
+    history --save
+    history --merge
+end
+alias hr 'history --merge'  # read and merge history from disk
+bind \e\[A 'history --merge ; up-or-search'
 
-alias appextadd="brew cask install"
-alias appextsch="brew cask search"
-alias appextdel="brew cask uninstall"
-alias appextup="brew cask upgrade"
+alias appadd "brew install"
+alias appup "brew update && brew upgrade && brew cleanup"
+alias appsch "brew search"
+alias appdel "brew uninstall"
+alias appclean "brew cleanup"
+alias appinfo "brew info"
+
+alias appextadd "brew cask install"
+alias appextsch "brew cask search"
+alias appextdel "brew cask uninstall"
+alias appextup "brew cask upgrade"

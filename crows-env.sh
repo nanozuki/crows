@@ -90,9 +90,6 @@ fi
 # gnupg sshconfig
 md $target_path/.gnupg
 
-# nvim
-md $target_path/.config/nvim
-
 # ssh
 md $target_path/.ssh
 cp $config_path/sshkeys/* $target_path/.ssh
