@@ -7,7 +7,6 @@ import (
 	"os/user"
 	"path"
 
-	"github.com/nanozuki/CrowsEnv/crowsenv/data"
 	"github.com/nanozuki/CrowsEnv/crowsenv/plat"
 	"github.com/nanozuki/CrowsEnv/crowsenv/task"
 	"github.com/pkg/errors"
@@ -47,22 +46,11 @@ func initEnv() {
 	}
 	task.Env.HomePath = cur.HomeDir
 	task.Env.ConfigPath = path.Join(cur.HomeDir, ".config")
-	task.Env.ProjectPath = path.Join(task.Env.HomePath, ".local/share/CrowsEnv")
+	task.Env.RepoPath = path.Join(task.Env.HomePath, ".local/share/CrowsEnv")
 
 	plat, err := plat.GetPlatform()
 	if err != nil {
 		log.Fatal(errors.Wrap(err, "get platform"))
 	}
 	task.Env.Platform = plat
-
-	if err := data.EnsureDataProject(task.Env.DataRepo, task.Env.ProjectPath); err != nil {
-		log.Fatal(err)
-	}
-
-	cfgFile := path.Join(task.Env.DataRepo, fmt.Sprintf("%s.toml", plat.Name()))
-	config, err := data.LoadConfigFile(cfgFile)
-	if err != nil {
-		log.Fatal(err)
-	}
-	task.Env.Config = config
 }

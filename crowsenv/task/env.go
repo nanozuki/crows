@@ -3,9 +3,9 @@ package task
 var Env = struct {
 	DataRepo string
 
-	HomePath    string
-	ConfigPath  string
-	ProjectPath string
+	HomePath   string
+	ConfigPath string
+	RepoPath   string
 
 	Config   *Config
 	Platform Platform
