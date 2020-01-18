@@ -17,6 +17,8 @@ ln -sf $source_path/dots/common/git/config $target_path/.config/git/config
 #tmux
 echo "Linking tmux config..."
 ln -sf $source_path/dots/common/tmux/config $target_path/.tmux.conf
+ln -sf $source_path/dots/common/tmux/config.light $target_path/.tmux.conf.light
+ln -sf $source_path/dots/common/tmux/config.dark $target_path/.tmux.conf.dark
 #nvim
 echo "Linking nvim config..."
 lndir $source_path/dots/common/nvim $target_path/.config/nvim

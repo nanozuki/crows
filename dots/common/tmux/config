@@ -15,20 +15,7 @@ set -g mouse on
 set -g history-limit 32768
 
 # status bar
-# dark mode
-set -g status-style "bg=#504945, fg=#d5c4a1"
-set -g status-left "#[bg=#d65d0e,fg=#d5c4a1] Session:#S "
-set -g status-left-length 100
-set -g window-status-format " #I:#W "
-set -g window-status-current-format "#[bg=#bdae93,fg=#282828] #I:#W "
-set -g window-status-separator "|"
-# light mode
-# set -g status-style "bg=#d5c4a1, fg=#504945"
-# set -g status-left "#[bg=#d65d0e,fg=#fbf1c7] Session:#S "
-# set -g status-left-length 100
-# set -g window-status-format " #I:#W "
-# set -g window-status-current-format "#[bg=#7c6f64,fg=#fbf1c7] #I:#W "
-# set -g window-status-separator ""
+if-shell "[[ '$COLORMODE' == 'dark' ]]" "source-file ~/.tmux.conf.dark" "source-file ~/.tmux.conf.light"
 
 # copy mode
 unbind [

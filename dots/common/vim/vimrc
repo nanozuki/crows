@@ -20,9 +20,13 @@ set mouse=a
 " appearance {{{
 "" colorscheme
 set termguicolors
-set background=dark
 colorscheme gruvbox
 let g:gruvbox_italic=1
+if $COLORMODE == 'dark'
+    set background=dark
+else
+    set background=light
+end
 
 "" ui layout
 set number
