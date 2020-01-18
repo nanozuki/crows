@@ -8,7 +8,7 @@ lndir () {
 #fish
 echo "Linking fish config..."
 ln -sf $source_path/dots/$platform/fish/config.fish $target_path/.config/fish/config.fish
-ln -sf $source_path/dots/common/before.init.fish $target_path/.config/fish/conf.d/before.init.fish
+ln -sf $source_path/dots/common/fish/before.init.fish $target_path/.config/fish/conf.d/before.init.fish
 #omf
 lndir $source_path/dots/common/omf $target_path/.config/omf
 #git
