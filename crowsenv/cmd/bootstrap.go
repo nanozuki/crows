@@ -3,8 +3,10 @@ package cmd
 import (
 	"fmt"
 	"log"
+	"path"
 
-	"github.com/nanozuki/CrowsEnv/crowsenv/plat"
+	"github.com/nanozuki/CrowsEnv/crowsenv/data"
+	"github.com/nanozuki/CrowsEnv/crowsenv/task"
 	"github.com/spf13/cobra"
 )
 
@@ -20,16 +22,29 @@ var bootstrapCmd = &cobra.Command{
 }
 
 func bootstrap() error {
-	plat, err := plat.GetPlatform()
-	fmt.Println("platform: " + plat.Name())
+	if err := task.Env.Platform.Prepare(); err != nil {
+		return err
+	}
+	if err := initConfig(); err != nil {
+		return err
+	}
+	if err := initDataRepo(); err != nil {
+		return err
+	}
+	fmt.Printf("env:\n%+v\nconfig:\n%+v\n", task.Env, *task.Env.Config)
+	return nil
+}
+
+func initConfig() error {
+	cfgFile := path.Join(task.Env.RepoPath, fmt.Sprintf("%s.toml", task.Env.Platform.Name()))
+	config, err := data.LoadConfigFile(cfgFile)
 	if err != nil {
 		return err
 	}
-	if err := plat.Prepare(); err != nil {
-		return err
-	}
-	//if err := task.AddPkgs(plat, cfg.Packages...); err != nil {
-	//	return err
-	//}
+	task.Env.Config = config
 	return nil
+}
+
+func initDataRepo() error {
+	return data.EnsureDataProject(task.Env.DataRepo, task.Env.RepoPath)
 }

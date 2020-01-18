@@ -13,8 +13,8 @@ packages = [
   "gnupg",
   "tree",
   "ripgrep",
-  "direnv"
-  "rime"
+  "direnv",
+  "rime",
 ]
 
 [links]
