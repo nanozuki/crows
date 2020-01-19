@@ -67,6 +67,12 @@ elif [[ "$platform" == "arch" ]]; then
     rustup update stable
     sudo pip install pynvim neovim
     yarn global add neovim
+    yay_path="~/Projects/aur.archlinux.org/yay"
+    md $yay_path
+	git clone https://aur.archlinux.org/yay.git $yay_path
+    cd $yay_path
+	makepkg -si --noconfirm
+	cd -
 fi
 
 echo "Getting CrowsEnv Data..."
@@ -94,7 +100,15 @@ md $target_path/.gnupg
 md $target_path/.ssh
 cp $config_path/sshkeys/* $target_path/.ssh
 
-# TODO: gpg keys
+# gpg keys
+echo "Import gpg public keys..."
+for file in `ls $config_path/gpgkeys/*_pub.gpg`; do
+    gpg --import $file
+done
+echo "Import secret keys..."
+for file in `ls $config_path/gpgkeys/*_sec.gpg`; do
+    gpg --allow-secret-key-import --import $file
+done
 
 # link config file
 source $source_path/update.sh
