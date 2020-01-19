@@ -1,0 +1,32 @@
+platform = "osx"
+
+packages = [
+  "git",
+  "fish",
+  "tmux",
+  "go",
+  "python",
+  "node",
+  "yarn",
+  "neovim",
+  "rust",
+  "gnupg",
+  "tree",
+  "ripgrep",
+  "direnv",
+  "rime",
+]
+
+[links]
+  "fish/config.fish" = ".config/fish/config.fish"
+  "fish/before.init.fish" = ".config/fish/conf.d/before.init.fish"
+  "git/config" = ".config/git/config"
+  "tmux/config" = ".config/.tmux.conf"
+  "vim/vimrc" = ".vimrc"
+  "gnupg/gpg-agent.conf" = ".gnupg/gpg-agent.conf"
+  "rime/default.custom.yaml" = ".config/fcitx/rime/default.custom.yaml"
+
+[link_dirs]
+  "omf" = ".config/omf"
+  "nvim" = ".config/nvim"
+  "vim/vim" = ".vim"
