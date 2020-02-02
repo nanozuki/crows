@@ -51,7 +51,7 @@ md () {
     mkdir -p $1 &> /dev/null || true
 }
 
-
+set -e
 echo "Platform is $platform, install basic dependencies..."
 if [[ "$platform" == "osx" ]]; then
     xcode-select --install
@@ -62,7 +62,7 @@ if [[ "$platform" == "osx" ]]; then
     pip3 install pynvim neovim
     yarn global add neovim
 elif [[ "$platform" == "arch" ]]; then
-    sudo pacman -S --noconfirm base-devel fish tmux neovim go python nodejs yarn rustup gnupg fcitx-rime ripgrep direnv
+    sudo pacman -S --noconfirm base-devel fish tmux neovim go python nodejs yarn rustup gnupg fcitx-rime ripgrep
     rustup set profile complete
     rustup update stable
     sudo pip install pynvim neovim
@@ -73,7 +73,9 @@ elif [[ "$platform" == "arch" ]]; then
     cd $yay_path
 	makepkg -si --noconfirm
 	cd -
+    yay -S --noconfirm direnv
 fi
+set +e
 
 echo "Getting CrowsEnv Data..."
 md $source_path
