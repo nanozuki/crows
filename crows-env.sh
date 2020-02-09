@@ -62,7 +62,7 @@ if [[ "$platform" == "osx" ]]; then
     pip3 install pynvim neovim
     yarn global add neovim
 elif [[ "$platform" == "arch" ]]; then
-    sudo pacman -S --noconfirm base-devel fish tmux neovim go python nodejs yarn rustup gnupg fcitx-rime ripgrep
+    sudo pacman -S --noconfirm base-devel git fish tmux neovim go python python-pip nodejs yarn rustup gnupg fcitx-rime ripgrep
     rustup update stable
     sudo pip install pynvim neovim
     yarn global add neovim
@@ -112,7 +112,7 @@ for file in `ls $config_path/gpgkeys/*_sec.gpg`; do
 done
 
 # link config file
-source $source_path/update.sh
+source $source_path/upgrade.sh
 
 # vim plugins
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
