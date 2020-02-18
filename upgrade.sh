@@ -5,6 +5,11 @@ lndir () {
     ln -sf $1 $2
 }
 
+# pull repo
+cd $source_path
+git pull
+cd -
+
 #fish
 echo "Linking fish config..."
 ln -sf $source_path/dots/$platform/fish/config.fish $target_path/.config/fish/config.fish
