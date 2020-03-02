@@ -87,6 +87,8 @@ set softtabstop=4
 augroup fileindent
     autocmd!
     autocmd BufRead,BufNewFile *html setfiletype html
+    autocmd BufNewFile,BufRead *.jsx set filetype=javascript.tsx
+    autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
     autocmd FileType javascript setlocal expandtab ts=2 sw=2 sts=2
     autocmd FileType html setlocal expandtab ts=2 sw=2 sts=2
     autocmd FileType css setlocal expandtab ts=2 sw=2 sts=2
@@ -269,10 +271,6 @@ nmap <leader>sf :CtrlSF
 nmap <leader>sp :CtrlSF<CR>
 " }}}
 
-" [plugin] vim-jsx {{{
-let g:jsx_ext_required = 0
-" }}}
-
 " [plugin] vim-go {{{
 let g:go_fmt_command = "goimports"
 let g:go_auto_type_info = 1
@@ -312,9 +310,9 @@ Plug 'kien/ctrlp.vim'
 Plug 'BurntSushi/ripgrep'
 " javascript/react
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['javascript', 'typescript'] }
-Plug 'leafgarland/typescript-vim', { 'for': ['javascript', 'typescript'] }
-Plug 'mattn/emmet-vim', { 'for': ['javascript', 'html'] }
+Plug 'peitalin/vim-jsx-typescript', { 'for': ['javascript', 'typescript', 'typescriptreact'] }
+Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'typescriptreact'] }
+Plug 'mattn/emmet-vim'
 " go
 Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'buoto/gotests-vim', { 'for': 'go' }
