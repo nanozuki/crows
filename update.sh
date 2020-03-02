@@ -11,4 +11,4 @@ fi
 
 rustup update
 yarn global upgrade
-nvim temp.go +PlugUpgrade +PlugUpdate +GoUpdateBinaries +qall
+nvim temp.go +PlugUpgrade +PlugClean +PlugInstall +PlugUpdate +GoUpdateBinaries +qall
