@@ -3,4 +3,4 @@ set -g status-left "#[bg=#d65d0e,fg=#d5c4a1] Session:#S "
 set -g status-left-length 100
 set -g window-status-format " #I:#W "
 set -g window-status-current-format "#[bg=#bdae93,fg=#282828] #I:#W "
-set -g window-status-separator "|"
+set -g window-status-separator ""

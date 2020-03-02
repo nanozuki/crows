@@ -312,9 +312,9 @@ Plug 'kien/ctrlp.vim'
 Plug 'BurntSushi/ripgrep'
 " javascript/react
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['javascript', 'typescript'] }
+Plug 'leafgarland/typescript-vim', { 'for': ['javascript', 'typescript'] }
 Plug 'mattn/emmet-vim', { 'for': ['javascript', 'html'] }
-Plug 'mxw/vim-jsx', { 'for': 'javascript' }
-Plug 'leafgarland/typescript-vim'
 " go
 Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'buoto/gotests-vim', { 'for': 'go' }
