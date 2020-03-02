@@ -39,5 +39,6 @@ if [[ "$platform" == "osx" ]]; then
 elif [[ "$platform" == "arch" ]]; then
     ln -sf $source_path/dots/common/rime/default.custom.yaml $target_path/.config/fcitx/rime/default.custom.yaml
 fi
+nvim +PlugClean +PlugInstall +qall
 echo ""
-echo "Update complete!"
+echo "Upgrade complete!"
