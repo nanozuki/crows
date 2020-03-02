@@ -4,6 +4,7 @@ set -x PATH /usr/local/bin /usr/local/sbin /usr/bin /bin /usr/sbin /sbin $GOPATH
 
 set -x GPG_TTY (tty)
 set -x SSH_AUTH_SOCK $HOME/.gnupg/S.gpg-agent.ssh
+gpg-connect-agent updatestartuptty /bye > /dev/null
 
 alias tree="tree -L 3"
 alias psg="ps aux | grep"
