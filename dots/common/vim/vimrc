@@ -65,7 +65,7 @@ nnoremap <Leader>p "+p
 " completion for vim command
 set wildmenu
 "" ignore file for all
-:set wildignore+=*/node_modules/*,*.swp,*.pyc,*/venv/*,*/target/*,
+set wildignore+=*/node_modules/*,*.swp,*.pyc,*/venv/*,*/target/*,
 " save as sudo
 cmap w!! w !sudo tee %
 " }}}
@@ -90,6 +90,7 @@ augroup fileindent
     autocmd BufNewFile,BufRead *.jsx set filetype=javascript.tsx
     autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
     autocmd FileType javascript setlocal expandtab ts=2 sw=2 sts=2
+    autocmd FileType typescript setlocal expandtab ts=2 sw=2 sts=2
     autocmd FileType html setlocal expandtab ts=2 sw=2 sts=2
     autocmd FileType css setlocal expandtab ts=2 sw=2 sts=2
     autocmd FileType scss setlocal expandtab ts=2 sw=2 sts=2
