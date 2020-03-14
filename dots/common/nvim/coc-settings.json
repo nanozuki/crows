@@ -10,6 +10,15 @@
       "command": "ra_lsp_server",
       "filetypes": ["rust"],
       "rootPatterns": ["Cargo.toml"]
+    },
+    "javascript": {
+      "command": "javascript-typescript-stdio",
+      "filetypes": ["javascript"]
+    },
+    "typescript": {
+      "command": "javascript-typescript-stdio",
+      "filetypes": ["typescript", "typescriptreact"]
     }
-  }
+  },
+  "tsserver.enableJavascript": false
 }
