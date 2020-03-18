@@ -6,7 +6,7 @@ if [[ "$platform" == "osx" ]]; then
 elif [[ "$platform" == "arch" ]]; then
     sudo pacman -Syu
     yay -Syu
-    sudo pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 sudo pip install -U
+    pip list --user --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install --user -U
 fi
 
 rustup update
