@@ -68,6 +68,14 @@ set wildmenu
 set wildignore+=*/node_modules/*,*.swp,*.pyc,*/venv/*,*/target/*,
 " save as sudo
 cmap w!! w !sudo tee %
+
+augroup filetypes
+    autocmd!
+    autocmd BufRead,BufNewFile *html setfiletype html
+    autocmd BufNewFile,BufRead *.jsx set filetype=javascript.tsx
+    autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
+    autocmd BufNewFile,BufRead tsconfig.json set filetype=jsonc
+augroup end
 " }}}
 
 " search & replace {{{
@@ -86,9 +94,6 @@ set shiftwidth=4
 set softtabstop=4
 augroup fileindent
     autocmd!
-    autocmd BufRead,BufNewFile *html setfiletype html
-    autocmd BufNewFile,BufRead *.jsx set filetype=javascript.tsx
-    autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
     autocmd FileType javascript setlocal expandtab ts=2 sw=2 sts=2
     autocmd FileType typescript setlocal expandtab ts=2 sw=2 sts=2
     autocmd FileType html setlocal expandtab ts=2 sw=2 sts=2
