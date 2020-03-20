@@ -19,6 +19,5 @@
       "command": "javascript-typescript-stdio",
       "filetypes": ["typescript", "typescriptreact"]
     }
-  },
-  "tsserver.enableJavascript": false
+  }
 }
