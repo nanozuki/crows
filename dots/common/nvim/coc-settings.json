@@ -16,7 +16,8 @@
       "filetypes": ["javascript"]
     },
     "typescript": {
-      "command": "typescript-language-server --stdio",
+      "command": "typescript-language-server",
+      "args": ["--stdio"],
       "filetypes": ["typescript", "typescriptreact"]
     }
   },
