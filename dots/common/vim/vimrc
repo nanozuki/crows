@@ -329,6 +329,8 @@ Plug 'rust-lang/rust.vim',
 Plug 'dag/vim-fish'
 " toml
 Plug 'cespare/vim-toml'
+" graphql
+Plug 'jparise/vim-graphql'
 
 """ Initialize plugin system
 call plug#end()
