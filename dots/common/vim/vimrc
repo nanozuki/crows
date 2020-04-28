@@ -277,6 +277,11 @@ nmap <leader>sf :CtrlSF
 nmap <leader>sp :CtrlSF<CR>
 " }}}
 
+" [plugin] ctrlp {{{
+let g:ctrlp_working_path_mode = 'a'
+" }}}
+
+
 " [plugin] vim-go {{{
 let g:go_fmt_command = "goimports"
 let g:go_auto_type_info = 1
@@ -312,7 +317,7 @@ Plug 'w0rp/ale'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'dyng/ctrlsf.vim'
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'BurntSushi/ripgrep'
 " javascript/react
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
