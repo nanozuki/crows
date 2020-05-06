@@ -12,6 +12,5 @@ elif [[ "$platform" == "arch" ]]; then
 fi
 
 rustup update
-nvim +PlugUpgrade +PlugUpdate +qall
-# disable GoUpdateBinaries because vim-go's issue block +qall
-# nvim temp.go +PlugUpgrade +PlugUpdate +GoUpdateBinaries +qall
+nvim +PlugUpgrade +PlugUpdate
+nvim temp.go +GoUpdateBinaries
