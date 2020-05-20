@@ -86,6 +86,8 @@ md $target_path/.config/fish/conf.d
 #fish omf
 curl -L https://get.oh-my.fish > install
 fish install --path=$target_path/.local/share/omf --config=$target_path/.config/omf
+#fish functions
+md $target_path/.config/fish/functions
 
 # git
 md $target_path/.config/git
