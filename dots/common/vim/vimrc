@@ -8,6 +8,11 @@ set encoding=UTF-8
 set fileencodings=utf-8
 set termencoding=utf-8
 
+" line wrap
+set linebreak
+"let &showbreak = ' ↪'
+let &showbreak = '->'
+
 "" leader
 let mapleader=" "
 
