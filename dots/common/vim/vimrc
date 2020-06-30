@@ -76,7 +76,7 @@ cmap w!! w !sudo tee %
 
 augroup filetypes
     autocmd!
-    autocmd BufRead,BufNewFile *html setfiletype html
+    autocmd BufNewFile,BufRead *html setfiletype html
     autocmd BufNewFile,BufRead *.jsx set filetype=javascript.tsx
     autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
     autocmd BufNewFile,BufRead tsconfig.json set filetype=jsonc
