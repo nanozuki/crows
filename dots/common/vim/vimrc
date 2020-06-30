@@ -286,7 +286,6 @@ nmap <leader>sp :CtrlSF<CR>
 let g:ctrlp_working_path_mode = 'a'
 " }}}
 
-
 " [plugin] vim-go {{{
 let g:go_fmt_command = "goimports"
 let g:go_auto_type_info = 1
