@@ -3,7 +3,6 @@ linters:
   enable:
     - bodyclose
     - deadcode
-    - dupl
     - errcheck
     - goconst
     - gocritic
@@ -25,6 +24,7 @@ linters:
     - unparam
     - unused
     - varcheck
+    # - dupl 太严格
     # - depguard 这个检查有bug
     # - funlen 检查函数长度，没有必要，code review 的时候灵活判断即可
     # - gochecknoglobals 不能使用全局变量，没有必要
