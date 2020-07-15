@@ -1,6 +1,7 @@
-# vim-plug
-dots/common/vim/vim/plugins/
+# nvim plugins and runtime
+dots/common/nvim/plugins/
 plug.vim*
+shada/
 .netrwhist
 
 # osx

@@ -29,8 +29,6 @@ ln -sf $source_path/dots/common/tmux/config.dark $target_path/.tmux.conf.dark
 #nvim
 echo "Linking nvim config..."
 lndir $source_path/dots/common/nvim $target_path/.config/nvim
-lndir $source_path/dots/common/vim/vim $target_path/.vim
-ln -sf $source_path/dots/common/vim/vimrc $target_path/.vimrc
 #gnupg-agent
 ln -sf $source_path/dots/$platform/gnupg/gpg-agent.conf $target_path/.gnupg/gpg-agent.conf
 #rime
