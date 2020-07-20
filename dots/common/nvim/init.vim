@@ -15,7 +15,6 @@ let mapleader=" "
 
 filetype on
 filetype plugin on
-set backspace=indent,eol,start
 set mouse=a
 " }}}
 
@@ -33,10 +32,8 @@ end
 "" ui layout
 set number
 set relativenumber
-set ruler
 " set cursorline
 " set cursorcolumn
-set laststatus=2
 set colorcolumn=120
 " }}}
 
@@ -64,8 +61,6 @@ set foldlevelstart=99
 vnoremap <Leader>y "+y
 " paste from system clipboard
 nnoremap <Leader>p "+p
-" completion for vim command
-set wildmenu
 "" ignore file for all
 set wildignore+=*/node_modules/*,*.swp,*.pyc,*/venv/*,*/target/*,
 " save as sudo
@@ -82,9 +77,7 @@ augroup end
 
 " search & replace {{{
 set modelines=1
-set hlsearch
 nnoremap <leader>/ :nohlsearch<CR>
-set incsearch
 set ignorecase
 " }}}
 
