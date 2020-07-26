@@ -36,6 +36,6 @@ alias appclean "brew cleanup"
 alias appinfo "brew info"
 
 alias appextadd "brew cask install"
-alias appextsch "brew cask search"
+alias appextsch "brew search"
 alias appextdel "brew cask uninstall"
 alias appextup "brew cask upgrade"
