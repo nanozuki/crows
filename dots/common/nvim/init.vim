@@ -102,6 +102,55 @@ augroup fileindent
 augroup end
 " }}}
 
+" [plugin] vim-plug {{{
+call plug#begin('~/.config/nvim/plugins')
+" appearance
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'yggdroot/indentline'
+Plug 'morhetz/gruvbox'
+" edit code
+Plug 'kshenoy/vim-signature'
+Plug 'scrooloose/nerdcommenter'
+Plug 'easymotion/vim-easymotion'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-surround'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+" read code
+Plug 'w0rp/ale'
+Plug 'tpope/vim-fugitive'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'dyng/ctrlsf.vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'BurntSushi/ripgrep'
+" lsp and complete
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
+" javascript/react
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'MaxMEllon/vim-jsx-pretty', { 'for': 'javascript' }
+Plug 'peitalin/vim-jsx-typescript', { 'for': ['typescript', 'typescriptreact'] }
+Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'typescriptreact'] }
+Plug 'mattn/emmet-vim'
+" go
+Plug 'fatih/vim-go', { 'for': 'go' }
+Plug 'buoto/gotests-vim', { 'for': 'go' }
+" rust
+Plug 'rust-lang/rust.vim',
+" fish
+Plug 'dag/vim-fish'
+" toml
+Plug 'cespare/vim-toml'
+" graphql
+Plug 'jparise/vim-graphql'
+
+""" Initialize plugin system
+call plug#end()
+" }}}
+
 " [plugin] airline {{{
 let g:airline_theme="gruvbox"
 let g:airline_powerline_fonts=1
@@ -116,9 +165,9 @@ autocmd Filetype json let g:indentLine_enabled = 0
 " }}}
 
 " [plugin] ultisnips {{{
-let g:UltiSnipsExpandTrigger="<c-b>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsExpandTrigger="<c-e>"
+let g:UltiSnipsJumpForwardTrigger="<c-e>"
+let g:UltiSnipsJumpBackwardTrigger="<c-h>"
 " }}}
 
 " [plugin] ale {{{
@@ -192,6 +241,13 @@ augroup LspTypescript
       \ })
 augroup END
 
+" register ultisnips
+call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
+\ 'name': 'ultisnips',
+\ 'whitelist': ['*'],
+\ 'completor': function('asyncomplete#sources#ultisnips#completor'),
+\ }))
+
 " vim-lsp shortcuts
 function! s:on_lsp_buffer_enabled() abort
     setlocal omnifunc=lsp#complete
@@ -251,54 +307,6 @@ let g:go_metalinter_command="golangci-lint"
 " [plugin] rust.vim {{{
 let g:rustfmt_options = '--edition=2018'
 let g:rustfmt_autosave = 1
-" }}}
-
-" [plugin] vim-plug {{{
-call plug#begin('~/.config/nvim/plugins')
-" appearance
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'yggdroot/indentline'
-Plug 'morhetz/gruvbox'
-" edit code
-Plug 'kshenoy/vim-signature'
-Plug 'scrooloose/nerdcommenter'
-Plug 'easymotion/vim-easymotion'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'tpope/vim-surround'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-" read code
-Plug 'w0rp/ale'
-Plug 'tpope/vim-fugitive'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'dyng/ctrlsf.vim'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'BurntSushi/ripgrep'
-" lsp and complete
-Plug 'prabirshrestha/vim-lsp'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
-" javascript/react
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-Plug 'MaxMEllon/vim-jsx-pretty', { 'for': 'javascript' }
-Plug 'peitalin/vim-jsx-typescript', { 'for': ['typescript', 'typescriptreact'] }
-Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'typescriptreact'] }
-Plug 'mattn/emmet-vim'
-" go
-Plug 'fatih/vim-go', { 'for': 'go' }
-Plug 'buoto/gotests-vim', { 'for': 'go' }
-" rust
-Plug 'rust-lang/rust.vim',
-" fish
-Plug 'dag/vim-fish'
-" toml
-Plug 'cespare/vim-toml'
-" graphql
-Plug 'jparise/vim-graphql'
-
-""" Initialize plugin system
-call plug#end()
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0
