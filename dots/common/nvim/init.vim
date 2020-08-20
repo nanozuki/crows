@@ -129,6 +129,7 @@ Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
+Plug 'prabirshrestha/asyncomplete-buffer.vim'
 " javascript/react
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'MaxMEllon/vim-jsx-pretty', { 'for': 'javascript' }
@@ -216,9 +217,10 @@ augroup END
 augroup LspRust
   au!
   autocmd User lsp_setup call lsp#register_server({
-      \ 'name': 'rust',
-      \ 'cmd': {server_info->['ra_lsp_server']},
-      \ 'whitelist': ['rust'],
+      \ 'name': 'rust-analyzer',
+      \ 'cmd': {server_info-> ['rust-analyzer']},
+      \ 'allowlist': ['rust'],
+      \ 'blocklist': [],
       \ })
 augroup END
 
@@ -242,11 +244,18 @@ augroup LspTypescript
 augroup END
 
 " register ultisnips
-call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
-\ 'name': 'ultisnips',
-\ 'whitelist': ['*'],
-\ 'completor': function('asyncomplete#sources#ultisnips#completor'),
-\ }))
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
+    \ 'name': 'ultisnips',
+    \ 'whitelist': ['*'],
+    \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
+    \ }))
+
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+    \ 'name': 'buffer',
+    \ 'allowlist': ['*'],
+    \ 'blocklist': [],
+    \ 'completor': function('asyncomplete#sources#buffer#completor'),
+    \ }))
 
 " vim-lsp shortcuts
 function! s:on_lsp_buffer_enabled() abort
