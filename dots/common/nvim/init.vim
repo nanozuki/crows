@@ -210,7 +210,7 @@ augroup LspGo
   autocmd User lsp_setup call lsp#register_server({
       \ 'name': 'go-lang',
       \ 'cmd': {server_info->['gopls']},
-      \ 'whitelist': ['go'],
+      \ 'allowlist': ['go'],
       \ })
 augroup END
 
@@ -220,7 +220,6 @@ augroup LspRust
       \ 'name': 'rust-analyzer',
       \ 'cmd': {server_info-> ['rust-analyzer']},
       \ 'allowlist': ['rust'],
-      \ 'blocklist': [],
       \ })
 augroup END
 
@@ -229,7 +228,7 @@ augroup LspJavascript
   autocmd User lsp_setup call lsp#register_server({
       \ 'name': 'javascript',
       \ 'cmd': {server_info->['javascript-typescript-stdio']},
-      \ 'whitelist': ['javascript'],
+      \ 'allowlist': ['javascript'],
       \ })
 augroup END
 
@@ -239,14 +238,32 @@ augroup LspTypescript
       \ 'name': 'typescript',
       \ 'cmd': {server_info->['typescript-language-server', '--stdio']},
       \ 'args': ['--stdio'],
-      \ 'whitelist': ['typescript', 'typescript.tsx'],
+      \ 'allowlist': ['typescript', 'typescript.tsx'],
+      \ })
+augroup END
+
+augroup LspTypescript
+  au!
+  autocmd User lsp_setup call lsp#register_server({
+      \ 'name': 'c',
+      \ 'cmd': {server_info->['ccls']},
+      \ 'allowlist': ['c', 'h', 'cpp', 'hpp'],
+      \ })
+augroup END
+
+augroup LspTypescript
+  au!
+  autocmd User lsp_setup call lsp#register_server({
+      \ 'name': 'pyls',
+      \ 'cmd': {server_info->['pyls']},
+      \ 'allowlist': ['python'],
       \ })
 augroup END
 
 " register ultisnips
 au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
     \ 'name': 'ultisnips',
-    \ 'whitelist': ['*'],
+    \ 'allowlist': ['*'],
     \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
     \ }))
 
