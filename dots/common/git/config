@@ -7,6 +7,7 @@
 	signingkey = 2037F9D19C6BF918
 [diff]
     tool = nvimdiff
+	renameLimit = 65535
 [difftool "nvimdiff"]
     cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 [alias]
