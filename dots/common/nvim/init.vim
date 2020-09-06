@@ -245,15 +245,6 @@ augroup END
 augroup LspTypescript
   au!
   autocmd User lsp_setup call lsp#register_server({
-      \ 'name': 'c',
-      \ 'cmd': {server_info->['ccls']},
-      \ 'allowlist': ['c', 'h', 'cpp', 'hpp'],
-      \ })
-augroup END
-
-augroup LspTypescript
-  au!
-  autocmd User lsp_setup call lsp#register_server({
       \ 'name': 'pyls',
       \ 'cmd': {server_info->['pyls']},
       \ 'allowlist': ['python'],
@@ -270,7 +261,6 @@ au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#source
 au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
     \ 'name': 'buffer',
     \ 'allowlist': ['*'],
-    \ 'blocklist': [],
     \ 'completor': function('asyncomplete#sources#buffer#completor'),
     \ }))
 
