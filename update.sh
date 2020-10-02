@@ -1,7 +1,7 @@
 #!/bin/bash
 if [[ "$platform" == "osx" ]]; then
     brew update && brew upgrade && brew cleanup
-    brew cask upgrade
+    brew upgrade --cask
     pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U
     npm -g update
 elif [[ "$platform" == "arch" ]]; then
