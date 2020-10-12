@@ -29,7 +29,7 @@ alias hr 'history --merge'  # read and merge history from disk
 bind \e\[A 'history --merge ; up-or-search'
 
 alias appadd "brew install"
-alias appup "brew update && brew upgrade && brew cleanup"
+alias appup "brew update && brew upgrade --force-bottle && brew cleanup"
 alias appsch "brew search"
 alias appdel "brew uninstall"
 alias appclean "brew cleanup"
