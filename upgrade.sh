@@ -23,10 +23,12 @@ echo "Linking global git config..."
 ln -sf $source_path/dots/common/git/config $target_path/.config/git/config
 #tmux
 echo "Linking tmux config..."
-ln -sf $source_path/dots/common/tmux/config $target_path/.tmux.conf
-ln -sf $source_path/dots/common/tmux/config.light $target_path/.tmux.conf.light
-ln -sf $source_path/dots/common/tmux/config.dark $target_path/.tmux.conf.dark
-#nvim
+ln -sf $source_path/dots/common/tmux/config $target_path/.config/tmux/tmux.conf
+ln -sf $source_path/dots/common/tmux/config.light $target_path/.config/tmux/tmux.conf.light
+ln -sf $source_path/dots/common/tmux/config.dark $target_path/.config/tmux/tmux.conf.dark
+$target_path/.config/tmux/plugins/tpm/bin/install_plugins
+$target_path/.config/tmux/plugins/tpm/bin/clean_plugins
+# nvim
 echo "Linking nvim config..."
 lndir $source_path/dots/common/nvim $target_path/.config/nvim
 #gnupg-agent

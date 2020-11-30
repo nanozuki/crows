@@ -1,3 +1,7 @@
+# list of plugins
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin "arcticicestudio/nord-tmux"
+
 # basic settings
 # set -g default-shell /usrfish
 set -g prefix C-j
@@ -15,7 +19,7 @@ set -g mouse on
 set -g history-limit 32768
 
 # status bar
-if-shell "[[ '$COLORMODE' == 'dark' ]]" "source-file ~/.tmux.conf.dark" "source-file ~/.tmux.conf.light"
+# if-shell "[[ '$COLORMODE' == 'dark' ]]" "source-file ~/.tmux.conf.dark" "source-file ~/.tmux.conf.light"
 
 # copy mode
 unbind [
@@ -46,3 +50,6 @@ unbind '"'
 bind % split-window
 bind | split-window -h
 bind x kill-pane
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run '~/.config/tmux/plugins/tpm/tpm'

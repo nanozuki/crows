@@ -14,3 +14,4 @@ fi
 rustup update
 nvim +PlugUpgrade +PlugUpdate
 nvim temp.go +GoUpdateBinaries
+~/.config/tmux/plugins/tpm/bin/update_plugins all
