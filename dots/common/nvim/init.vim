@@ -18,18 +18,7 @@ filetype plugin on
 set mouse=a
 " }}}
 
-" appearance {{{
-"" colorscheme
-set termguicolors
-colorscheme gruvbox
-let g:gruvbox_italic=1
-if $COLORMODE == 'dark'
-    set background=dark
-else
-    set background=light
-end
-
-"" ui layout
+" ui & layout {{{
 set number
 set relativenumber
 " set cursorline
@@ -109,6 +98,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'yggdroot/indentline'
 Plug 'morhetz/gruvbox'
+Plug 'sonph/onehalf', { 'rtp': 'vim/' }
+Plug 'arcticicestudio/nord-vim'
 " edit code
 Plug 'kshenoy/vim-signature'
 Plug 'scrooloose/nerdcommenter'
@@ -152,8 +143,27 @@ Plug 'jparise/vim-graphql'
 call plug#end()
 " }}}
 
+" [plugin] colorscheme {{{
+set termguicolors
+"" gruvbox
+"colorscheme gruvbox
+"let g:gruvbox_italic=1
+"let g:airline_theme="gruvbox"
+"" onehalf
+"colorscheme onehalflight
+"let g:airline_theme='onehalfdark'
+" nord
+colorscheme nord
+let g:airline_theme='nord'
+
+"if $COLORMODE == 'dark'
+"    set background=dark
+"else
+"    set background=light
+"end
+" }}}
+
 " [plugin] airline {{{
-let g:airline_theme="gruvbox"
 let g:airline_powerline_fonts=1
 let g:airline_extensions=['tabline', 'branch', 'virtualenv']
 " let g:airline#extensions#tabline#buffer_idx_mode=1
