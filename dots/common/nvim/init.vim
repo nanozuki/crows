@@ -152,7 +152,7 @@ set termguicolors
 "" onehalf
 "colorscheme onehalflight
 "let g:airline_theme='onehalfdark'
-" nord
+"" nord
 colorscheme nord
 let g:airline_theme='nord'
 
