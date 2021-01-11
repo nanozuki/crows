@@ -109,7 +109,7 @@ Plug 'tpope/vim-surround'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 " read code
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'dyng/ctrlsf.vim'
@@ -185,10 +185,12 @@ let g:UltiSnipsJumpBackwardTrigger="<c-h>"
 let g:ale_fixers = {
 \   'javascript': ['eslint'],
 \   'typescript': ['eslint'],
+\   'rust': ['rustfmt'],
 \}
 let g:ale_fix_on_save = 1
 let g:ale_linters = {
 \   'go': ['gofmt', 'golangci-lint'],
+\   'rust': ['analyzer'],
 \}
 let g:ale_go_golangci_lint_package = 1
 let g:ale_go_golangci_lint_options = "--config $XDG_CONFIG_HOME/nvim/golangci.yml"
