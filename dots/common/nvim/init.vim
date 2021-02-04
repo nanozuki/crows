@@ -109,7 +109,6 @@ Plug 'tpope/vim-surround'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 " read code
-Plug 'dense-analysis/ale'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'dyng/ctrlsf.vim'
@@ -182,18 +181,8 @@ let g:UltiSnipsJumpBackwardTrigger="<c-h>"
 " }}}
 
 " [plugin] ale {{{
-let g:ale_fixers = {
-\   'javascript': ['eslint'],
-\   'typescript': ['eslint'],
-\   'rust': ['rustfmt'],
-\}
-let g:ale_fix_on_save = 1
-let g:ale_linters = {
-\   'go': ['gofmt', 'golangci-lint'],
-\   'rust': ['analyzer'],
-\}
-let g:ale_go_golangci_lint_package = 1
-let g:ale_go_golangci_lint_options = "--config $XDG_CONFIG_HOME/nvim/golangci.yml"
+" let g:ale_go_golangci_lint_package = 1
+" let g:ale_go_golangci_lint_options = --config $XDG_CONFIG_HOME/nvim/golangci.yml"
 " }}}
 
 " [plugin] nerdtree {{{
@@ -302,9 +291,15 @@ augroup lsp_install
     autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
 
-" TODO: changed by colorscheme
-highlight link LspErrorText GruvboxRedSign
-highlight link LspWarningText GruvboxRedSign
+let g:lsp_diagnostics_float_cursor = 1
+let g:lsp_diagnostics_signs_error = {'text': '✗'}
+let g:lsp_diagnostics_signs_warning = {'text': '‼'}
+let g:lsp_diagnostics_signs_information = {'text': '!'}
+let g:lsp_diagnostics_signs_hint = {'text': '!'}
+highlight link LspHintHighlight SpellBad
+highlight link LspInformationHighlight SpellCap
+highlight link LspHintVirtualText Underlined
+highlight link LspInformationVirtualText Underlined
 " }}}
 
 " [plugin] asyncomplete.vim {{{
@@ -333,7 +328,6 @@ let g:go_metalinter_command="golangci-lint"
 " }}}
 
 " [plugin] rust.vim {{{
-let g:rustfmt_options = '--edition=2018'
 let g:rustfmt_autosave = 1
 " }}}
 
