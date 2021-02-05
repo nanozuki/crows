@@ -227,7 +227,7 @@ let g:lsp_settings = {
 \   },
 \   'rls': {'disabled': 1},
 \}
-let g:lsp_settings_root_markers = ['.git', '.git/', '.svn', '.hg', '.bzr'
+let g:lsp_settings_root_markers = ['.git', '.git/', '.svn', '.hg', '.bzr',
 \   'settings.json', 'go.mod', 'Cargo.toml', 'package.json',
 \]
 
