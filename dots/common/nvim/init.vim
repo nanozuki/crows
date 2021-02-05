@@ -116,6 +116,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'BurntSushi/ripgrep'
 " lsp and complete
 Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
@@ -217,58 +218,18 @@ let g:rustfmt_autosave = 1
 " }}}
 
 " [plugin] vim-lsp {{{
-" language specific config and register server
-augroup LspGo
-  au!
-  autocmd User lsp_setup call lsp#register_server({
-      \ 'name': 'go-lang',
-      \ 'cmd': {server_info->['gopls']},
-      \ 'allowlist': ['go'],
-      \ })
-  autocmd User lsp_setup call lsp#register_server({
-      \ 'name': 'golangci-lint-langserver',
-      \ 'cmd': {server_info->['golangci-lint-langserver']},
-      \ 'initialization_options': {'command': ['golangci-lint', 'run', '--config', '$XDG_CONFIG_HOME/nvim/golangci.yml', '--out-format', 'json']},
-      \ 'whitelist': ['go'],
-      \ })
-augroup END
 
-augroup LspRust
-  au!
-  autocmd User lsp_setup call lsp#register_server({
-      \ 'name': 'rust-analyzer',
-      \ 'cmd': {server_info-> ['rust-analyzer']},
-      \ 'allowlist': ['rust'],
-      \ })
-augroup END
-
-augroup LspJavascript
-  au!
-  autocmd User lsp_setup call lsp#register_server({
-      \ 'name': 'javascript',
-      \ 'cmd': {server_info->['javascript-typescript-stdio']},
-      \ 'allowlist': ['javascript'],
-      \ })
-augroup END
-
-augroup LspTypescript
-  au!
-  autocmd User lsp_setup call lsp#register_server({
-      \ 'name': 'typescript',
-      \ 'cmd': {server_info->['typescript-language-server', '--stdio']},
-      \ 'args': ['--stdio'],
-      \ 'allowlist': ['typescript', 'typescript.tsx'],
-      \ })
-augroup END
-
-augroup LspTypescript
-  au!
-  autocmd User lsp_setup call lsp#register_server({
-      \ 'name': 'pyls',
-      \ 'cmd': {server_info->['pyls']},
-      \ 'allowlist': ['python'],
-      \ })
-augroup END
+let g:lsp_settings = {
+\   'golangci-lint-langserver': {
+\       'initialization_options': {
+\           'command': ['golangci-lint', 'run', '--config', '$XDG_CONFIG_HOME/nvim/golangci.yml', '--out-format', 'json'],
+\       },
+\   },
+\   'rls': {'disabled': 1},
+\}
+let g:lsp_settings_root_markers = ['.git', '.git/', '.svn', '.hg', '.bzr'
+\   'settings.json', 'go.mod', 'Cargo.toml', 'package.json',
+\]
 
 " register ultisnips
 au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
