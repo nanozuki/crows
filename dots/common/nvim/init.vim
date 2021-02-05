@@ -180,11 +180,6 @@ let g:UltiSnipsJumpForwardTrigger="<c-e>"
 let g:UltiSnipsJumpBackwardTrigger="<c-h>"
 " }}}
 
-" [plugin] ale {{{
-" let g:ale_go_golangci_lint_package = 1
-" let g:ale_go_golangci_lint_options = --config $XDG_CONFIG_HOME/nvim/golangci.yml"
-" }}}
-
 " [plugin] nerdtree {{{
 nmap <Leader>fl :NERDTreeToggle<CR>
 let NERDTreeWinSize=32
@@ -204,6 +199,23 @@ nmap <leader>sp :CtrlSF<CR>
 let g:ctrlp_working_path_mode = 'a'
 " }}}
 
+" [plugin] vim-go {{{
+let g:go_fmt_command = "goimports"
+let g:go_auto_type_info = 1
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+" use lsp to lint and code completion
+let g:go_code_completion_enabled = 0
+let g:go_def_mapping_enabled = 0
+let g:go_doc_keywordprg_enabled = 0
+let g:go_textobj_enabled = 0
+let g:go_metalinter_enable= 0
+" }}}
+
+" [plugin] rust.vim {{{
+let g:rustfmt_autosave = 1
+" }}}
+
 " [plugin] vim-lsp {{{
 " language specific config and register server
 augroup LspGo
@@ -212,6 +224,12 @@ augroup LspGo
       \ 'name': 'go-lang',
       \ 'cmd': {server_info->['gopls']},
       \ 'allowlist': ['go'],
+      \ })
+  autocmd User lsp_setup call lsp#register_server({
+      \ 'name': 'golangci-lint-langserver',
+      \ 'cmd': {server_info->['golangci-lint-langserver']},
+      \ 'initialization_options': {'command': ['golangci-lint', 'run', '--config', '$XDG_CONFIG_HOME/nvim/golangci.yml', '--out-format', 'json']},
+      \ 'whitelist': ['go'],
       \ })
 augroup END
 
@@ -317,18 +335,5 @@ set completeopt=menuone,noinsert,noselect,preview
 " To auto close preview window when completion is done.
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 "}}}
-
-" [plugin] vim-go {{{
-let g:go_fmt_command = "goimports"
-let g:go_auto_type_info = 1
-let g:go_def_mode='gopls'
-let g:go_info_mode='gopls'
-let g:go_metalinter_enable= 1
-let g:go_metalinter_command="golangci-lint"
-" }}}
-
-" [plugin] rust.vim {{{
-let g:rustfmt_autosave = 1
-" }}}
 
 " vim:foldmethod=marker:foldlevel=0
