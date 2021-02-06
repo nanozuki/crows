@@ -97,6 +97,7 @@ call plug#begin('~/.config/nvim/plugins')
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'yggdroot/indentline'
+Plug 'tpope/vim-sleuth'
 Plug 'morhetz/gruvbox'
 Plug 'sonph/onehalf', { 'rtp': 'vim/' }
 Plug 'arcticicestudio/nord-vim'
@@ -121,23 +122,11 @@ Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
 Plug 'prabirshrestha/asyncomplete-buffer.vim'
-" javascript/react
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-Plug 'MaxMEllon/vim-jsx-pretty', { 'for': 'javascript' }
-Plug 'peitalin/vim-jsx-typescript', { 'for': ['typescript', 'typescriptreact'] }
-Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'typescriptreact'] }
+" languages syntax and functions
+Plug 'sheerun/vim-polyglot'
 Plug 'mattn/emmet-vim'
-" go
-Plug 'fatih/vim-go', { 'for': 'go' }
+Plug 'fatih/vim-go'
 Plug 'buoto/gotests-vim', { 'for': 'go' }
-" rust
-Plug 'rust-lang/rust.vim',
-" fish
-Plug 'dag/vim-fish'
-" toml
-Plug 'cespare/vim-toml'
-" graphql
-Plug 'jparise/vim-graphql'
 
 """ Initialize plugin system
 call plug#end()
@@ -222,7 +211,7 @@ let g:rustfmt_autosave = 1
 let g:lsp_settings = {
 \   'golangci-lint-langserver': {
 \       'initialization_options': {
-\           'command': ['golangci-lint', 'run', '--config', '$XDG_CONFIG_HOME/nvim/golangci.yml', '--out-format', 'json'],
+\           'command': ['golangci-lint', 'run', '--config', '~/.config/nvim/golangci.yml', '--out-format', 'json'],
 \       },
 \   },
 \   'rls': {'disabled': 1},
@@ -230,6 +219,8 @@ let g:lsp_settings = {
 let g:lsp_settings_root_markers = ['.git', '.git/', '.svn', '.hg', '.bzr',
 \   'settings.json', 'go.mod', 'Cargo.toml', 'package.json',
 \]
+let g:lsp_settings_filetype_go = ['gopls', 'golangci-lint-langserver']
+let g:lsp_settings_filetype_rust = 'rust-analyzer'
 
 " register ultisnips
 au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
@@ -260,7 +251,11 @@ function! s:on_lsp_buffer_enabled() abort
 
     nmap <buffer> <leader>en <plug>(lsp-next-error)
     nmap <buffer> <leader>ep <plug>(lsp-previous-error)
-    
+
+    " format on save
+    " autocmd! BufWritePre *.rs call execute('LspDocumentFormatSync')
+    " autocmd BufWritePre <buffer> call execute('LspCodeActionSync source.organizeImports')
+
     " refer to doc to add more commands
 endfunction
 
