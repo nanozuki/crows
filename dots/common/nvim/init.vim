@@ -214,7 +214,11 @@ let g:lsp_settings = {
 \           'command': ['golangci-lint', 'run', '--config', '~/.config/nvim/golangci.yml', '--out-format', 'json'],
 \       },
 \   },
-\   'rls': {'disabled': 1},
+\   'rust-analyzer': {
+\       'initialization_options': {
+\           'diagnostics': { 'disabled': ['unresolved-proc-macro'] },
+\       },
+\   },
 \}
 let g:lsp_settings_root_markers = ['.git', '.git/', '.svn', '.hg', '.bzr',
 \   'settings.json', 'go.mod', 'Cargo.toml', 'package.json',
