@@ -12,6 +12,6 @@ elif [[ "$platform" == "arch" ]]; then
 fi
 
 rustup update
-nvim +PlugUpgrade +PlugUpdate
-nvim temp.go +GoUpdateBinaries
-~/.config/tmux/plugins/tpm/bin/update_plugins all
+nvim +PlugUpgrade +PlugUpdate +qall
+nvim $source_path/refer/gotmp/main.go +GoUpdateBinaries +3sleep +qall
+$target_path/.config/tmux/plugins/tpm/bin/update_plugins all
