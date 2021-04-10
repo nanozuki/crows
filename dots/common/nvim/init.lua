@@ -1,3 +1,5 @@
+vim.api.nvim_exec(
+[[
 " Nanozuki Vim Config
 
 " basic & misc {{{
@@ -208,65 +210,21 @@ let g:rustfmt_autosave = 1
 
 " [plugin] vim-lsp {{{
 
-let g:lsp_settings = {
-\   'golangci-lint-langserver': {
-\       'initialization_options': {
-\           'command': ['golangci-lint', 'run', '--config', '~/.config/nvim/golangci.yml', '--out-format', 'json'],
-\       },
-\   },
-\   'rust-analyzer': {
-\       'initialization_options': {
-\           'diagnostics': { 'disabled': ['unresolved-proc-macro'] },
-\       },
-\   },
-\}
-let g:lsp_settings_root_markers = ['.git', '.git/', '.svn', '.hg', '.bzr',
-\   'settings.json', 'go.mod', 'Cargo.toml', 'package.json',
-\]
+let g:lsp_settings = { 'golangci-lint-langserver': { 'initialization_options': { 'command': ['golangci-lint', 'run', '--config', '~/.config/nvim/golangci.yml', '--out-format', 'json'], }, }, 'rust-analyzer': { 'initialization_options': { 'diagnostics': { 'disabled': ['unresolved-proc-macro'] } } } }
+let g:lsp_settings_root_markers = ['.git', '.git/', '.svn', '.hg', '.bzr', 'settings.json', 'go.mod', 'Cargo.toml', 'package.json']
 let g:lsp_settings_filetype_go = ['gopls', 'golangci-lint-langserver']
 let g:lsp_settings_filetype_rust = 'rust-analyzer'
 
 " register ultisnips
-au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
-    \ 'name': 'ultisnips',
-    \ 'allowlist': ['*'],
-    \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
-    \ }))
-
-au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
-    \ 'name': 'buffer',
-    \ 'allowlist': ['*'],
-    \ 'completor': function('asyncomplete#sources#buffer#completor'),
-    \ }))
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({ 'name': 'ultisnips', 'allowlist': ['*'], 'completor': function('asyncomplete#sources#ultisnips#completor') }))
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({ 'name': 'buffer', 'allowlist': ['*'], 'completor': function('asyncomplete#sources#buffer#completor') }))
 
 " vim-lsp shortcuts
-function! s:on_lsp_buffer_enabled() abort
-    setlocal omnifunc=lsp#complete
-    setlocal signcolumn=auto
-    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
-    nmap <buffer> gd <plug>(lsp-definition)
-    nmap <buffer> gr <plug>(lsp-references)
-    nmap <buffer> gi <plug>(lsp-implementation)
-    nmap <buffer> gt <plug>(lsp-type-definition)
-    nmap <buffer> <leader>rn <plug>(lsp-rename)
-    nmap <buffer> [g <Plug>(lsp-previous-diagnostic)
-    nmap <buffer> ]g <Plug>(lsp-next-diagnostic)
-    nmap <buffer> K <plug>(lsp-hover)
-
-    nmap <buffer> <leader>en <plug>(lsp-next-error)
-    nmap <buffer> <leader>ep <plug>(lsp-previous-error)
-
-    " format on save
-    " autocmd! BufWritePre *.rs call execute('LspDocumentFormatSync')
-    " autocmd BufWritePre <buffer> call execute('LspCodeActionSync source.organizeImports')
-
-    " refer to doc to add more commands
-endfunction
 
 augroup lsp_install
     au!
-    " call s:on_lsp_buffer_enabled only for languages that has the server registered.
-    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+    " call lspmapping#on_lsp_buffer_enabled only for languages that has the server registered.
+    autocmd User lsp_buffer_enabled call lspmapping#on_lsp_buffer_enabled()
 augroup END
 
 let g:lsp_diagnostics_float_cursor = 1
@@ -295,5 +253,7 @@ set completeopt=menuone,noinsert,noselect,preview
 " To auto close preview window when completion is done.
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 "}}}
+]]
+, true)
 
-" vim:foldmethod=marker:foldlevel=0
+-- vim:foldmethod=marker:foldlevel=0
