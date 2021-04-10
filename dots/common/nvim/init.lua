@@ -1,62 +1,46 @@
+-- Nanozuki Vim Config
+
+local scopes = {o = vim.o, b = vim.bo, w = vim.wo}
+
+local function opt(scope, key, value)
+  scopes[scope][key] = value
+  if scope ~= 'o' then scopes['o'][key] = value end
+end
+
+local function map(mode, lhs, rhs, opts)
+  local options = {noremap = true}
+  if opts then options = vim.tbl_extend('force', options, opts) end
+  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+end
+
+--- basic & misc {{{
+vim.g.mapleader = ' '
+opt('w', 'linebreak', true)
+opt('o', 'showbreak', '->')
+opt('o', 'mouse', 'ar')
+--- }}}
+
+--- ui & layout {{{
+opt('w', 'number', true)
+opt('w', 'relativenumber', true)
+opt('w', 'colorcolumn', '120')
+--- }}}
+
+--- edit {{{
+vim.cmd 'syntax enable'
+opt('w', 'foldmethod', 'indent')
+opt('o', 'foldlevelstart', 99)
+-- copy selection to system clipboard
+map('v', '<Leader>y', '"+y')
+-- paste from system clipboard
+map('n', '<Leader>p', '"+p')
+-- ignore file for all
+vim.cmd 'set wildignore+=*/node_modules/*,*.swp,*.pyc,*/venv/*,*/target/*'
+-- save as sudo
+map('c', 'w!!', 'w !sudo tee %')
+
 vim.api.nvim_exec(
 [[
-" Nanozuki Vim Config
-
-" basic & misc {{{
-" unicode support
-let $LANG="en_US.UTF-8"
-set langmenu=en_US.UTF-8
-set fileencodings=UTF-8
-
-" line wrap
-set linebreak
-let &showbreak = '->'
-
-"" leader
-let mapleader=" "
-
-filetype on
-filetype plugin on
-set mouse=a
-" }}}
-
-" ui & layout {{{
-set number
-set relativenumber
-" set cursorline
-" set cursorcolumn
-set colorcolumn=120
-" }}}
-
-" shortcuts {{{
-"" switch window
-nnoremap <Leader>nw <C-W><C-W>
-nnoremap <Leader>lw <C-W>l
-nnoremap <Leader>hw <C-W>h
-nnoremap <Leader>kw <C-W>k
-nnoremap <Leader>jw <C-W>j
-
-"" session
-nnoremap <leader>ss :mksession! ./.vimsession<cr> :wviminfo! ./.viminfo<cr>
-nnoremap <leader>rs :source ./.vimsession<cr> :rviminfo ./.viminfo<cr>
-
-nnoremap <Leader>b ^
-nnoremap <Leader>e $
-" }}}
-
-" edit {{{
-syntax enable
-set foldmethod=indent
-set foldlevelstart=99
-" copy selection to system clipboard
-vnoremap <Leader>y "+y
-" paste from system clipboard
-nnoremap <Leader>p "+p
-"" ignore file for all
-set wildignore+=*/node_modules/*,*.swp,*.pyc,*/venv/*,*/target/*,
-" save as sudo
-cmap w!! w !sudo tee %
-
 augroup filetypes
     autocmd!
     autocmd BufNewFile,BufRead *html setfiletype html
@@ -64,7 +48,12 @@ augroup filetypes
     autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
     autocmd BufNewFile,BufRead tsconfig.json set filetype=jsonc
 augroup end
-" }}}
+]]
+, true)
+--- }}}
+
+vim.api.nvim_exec(
+[[
 
 " search & replace {{{
 set modelines=1
@@ -256,4 +245,4 @@ autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 ]]
 , true)
 
--- vim:foldmethod=marker:foldlevel=0
+-- vim:foldmethod=marker:foldlevel=1
