@@ -13,6 +13,11 @@ local function map(mode, lhs, rhs, opts)
   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
+local function nmap(lhs, rhs, opts)
+  if not opts then opts = {} end
+  vim.api.nvim_set_keymap('n', lhs, rhs, opts)
+end
+
 --- basic & misc {{{
 vim.g.mapleader = ' '
 opt('w', 'linebreak', true)
@@ -43,10 +48,10 @@ vim.api.nvim_exec(
 [[
 augroup filetypes
     autocmd!
-    autocmd BufNewFile,BufRead *html setfiletype html
-    autocmd BufNewFile,BufRead *.jsx set filetype=javascript.tsx
-    autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
-    autocmd BufNewFile,BufRead tsconfig.json set filetype=jsonc
+    autocmd BufNewFile,BufRead *html         setfiletype html
+    autocmd BufNewFile,BufRead *.jsx         setfiletype javascript.tsx
+    autocmd BufNewFile,BufRead *.tsx         setfiletype typescript.tsx
+    autocmd BufNewFile,BufRead tsconfig.json setfiletype jsonc
 augroup end
 ]]
 , true)
@@ -69,17 +74,7 @@ vim.api.nvim_exec(
 [[
 augroup fileindent
     autocmd!
-    autocmd FileType javascript setlocal expandtab ts=2 sw=2 sts=2
-    autocmd FileType typescript setlocal expandtab ts=2 sw=2 sts=2
-    autocmd FileType html setlocal expandtab ts=2 sw=2 sts=2
-    autocmd FileType css setlocal expandtab ts=2 sw=2 sts=2
-    autocmd FileType scss setlocal expandtab ts=2 sw=2 sts=2
-    autocmd FileType xml setlocal expandtab ts=2 sw=2 sts=2
-    autocmd FileType yaml setlocal expandtab ts=2 sw=2 sts=2
-    autocmd FileType json setlocal expandtab ts=2 sw=2 sts=2
-    autocmd FileType wxss setlocal expandtab ts=2 sw=2 sts=2
-    autocmd FileType wxml setlocal expandtab ts=2 sw=2 sts=2
-    autocmd FileType lua setlocal expandtab ts=2 sw=2 sts=2
+    autocmd FileType javascript,typescript,html,css,scss,xml,yaml,json,wxss,wxml,lua setlocal expandtab ts=2 sw=2 sts=2
 augroup end
 ]]
 , true)
@@ -156,20 +151,24 @@ end
 set_colorscheme('gruvbox', 'light')
 -- }}}
 
+--- [plugin] nvim-treesitter {{{
+require'nvim-treesitter.configs'.setup{ensure_installed = 'maintained', highlight = {enable = true}}
+--- }}}
+
 --- [plugin] airline {{{
 vim.g['airline_powerline_fonts'] = 1
 vim.g['airline_extensions'] = {'tabline', 'branch', 'virtualenv'}
--- vim.g['airline#extensions#tabline#buffer_idx_mode'] = 1
-vim.g['airline#extensions#tabline#buffer_nr_show'] = 1
+vim.g['airline#extensions#tabline#buffer_idx_mode'] = 1
+for i = 0, 9 do
+  nmap('<leader>'..i, '<Plug>AirlineSelectTab'..i)
+end
+nmap('<leader>-', '<Plug>AirlineSelectPrevTab')
+nmap('<leader>+', '<Plug>AirlineSelectNextTab')
 --- }}}
 
 --- [plugin] indentline {{{
-vim.api.nvim_exec(
-[[
-set list lcs=tab:\¦\ 
-autocmd Filetype json let g:indentLine_enabled = 0
-]]
-, true)
+vim.cmd 'set list lcs=tab:\\¦\\ '
+vim.cmd 'autocmd Filetype json let g:indentLine_enabled = 0'
 --- }}}
 
 --- [plugin] ultisnips {{{
@@ -223,15 +222,9 @@ require'completion'.on_attach({
   matching_strategy_list = {'substring', 'fuzzy', 'exact', 'all'},
   sorting = 'alphabet',
   enable_snippet = 'UltiSnips',
-  enable_auto_popup = 1,
 })
-vim.api.nvim_exec(
-[[
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" set shortmess+=c
-]]
-, true)
+map('i', '<Tab>', 'pumvisible() ? "\\<C-n>" : "\\<Tab>"', {expr = true})
+map('i', '<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<S-Tab>"', {expr = true})
 opt('o', 'completeopt', 'menuone,noinsert,noselect')
 -- }}}
 
