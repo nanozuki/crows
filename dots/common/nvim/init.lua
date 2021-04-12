@@ -7,15 +7,15 @@ local function opt(scope, key, value)
   if scope ~= 'o' then scopes['o'][key] = value end
 end
 
-local function map(mode, lhs, rhs, opts)
+local function noremap(mode, lhs, rhs, opts)
   local options = {noremap = true}
   if opts then options = vim.tbl_extend('force', options, opts) end
   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
-local function nmap(lhs, rhs, opts)
+local function map(mode, lhs, rhs, opts)
   if not opts then opts = {} end
-  vim.api.nvim_set_keymap('n', lhs, rhs, opts)
+  vim.api.nvim_set_keymap(mode, lhs, rhs, opts)
 end
 
 --- basic & misc {{{
@@ -23,12 +23,10 @@ vim.g.mapleader = ' '
 opt('w', 'linebreak', true)
 opt('o', 'showbreak', '->')
 opt('o', 'mouse', 'ar')
---- }}}
-
---- ui & layout {{{
 opt('w', 'number', true)
 opt('w', 'relativenumber', true)
 opt('w', 'colorcolumn', '120')
+opt('o', 'modelines', 1)
 --- }}}
 
 --- edit {{{
@@ -36,13 +34,13 @@ vim.cmd 'syntax enable'
 opt('w', 'foldmethod', 'indent')
 opt('o', 'foldlevelstart', 99)
 -- copy selection to system clipboard
-map('v', '<Leader>y', '"+y')
+noremap('v', '<Leader>y', '"+y')
 -- paste from system clipboard
-map('n', '<Leader>p', '"+p')
+noremap('n', '<Leader>p', '"+p')
 -- ignore file for all
 vim.cmd 'set wildignore+=*/node_modules/*,*.swp,*.pyc,*/venv/*,*/target/*'
 -- save as sudo
-map('c', 'w!!', 'w !sudo tee %')
+noremap('c', 'w!!', 'w !sudo tee %')
 
 vim.api.nvim_exec(
 [[
@@ -58,8 +56,7 @@ augroup end
 --- }}}
 
 -- search & replace {{{
-opt('o', 'modelines', 1)
-map('n', '<leader>/', ':nohlsearch<CR>')
+noremap('n', '<leader>/', ':nohlsearch<CR>')
 opt('o', 'ignorecase', true)
 -- }}}
 
@@ -117,7 +114,6 @@ Plug 'buoto/gotests-vim', { 'for': 'go' }
 
 """ Initialize plugin system
 call plug#end()
-" }}}
 ]]
 , true)
 --- }}}
@@ -160,10 +156,10 @@ vim.g['airline_powerline_fonts'] = 1
 vim.g['airline_extensions'] = {'tabline', 'branch', 'virtualenv'}
 vim.g['airline#extensions#tabline#buffer_idx_mode'] = 1
 for i = 0, 9 do
-  nmap('<leader>'..i, '<Plug>AirlineSelectTab'..i)
+  map('n', '<leader>'..i, '<Plug>AirlineSelectTab'..i)
 end
-nmap('<leader>-', '<Plug>AirlineSelectPrevTab')
-nmap('<leader>+', '<Plug>AirlineSelectNextTab')
+map('n', '<leader>-', '<Plug>AirlineSelectPrevTab')
+map('n', '<leader>+', '<Plug>AirlineSelectNextTab')
 --- }}}
 
 --- [plugin] indentline {{{
@@ -178,7 +174,7 @@ vim.g['UltiSnipsJumpBackwardTrigger'] = "<c-h>"
 --- }}}
 
 --- [plugin] nerdtree {{{
-map('', '<Leader>fl', ':NERDTreeToggle<CR>')
+noremap('', '<Leader>fl', ':NERDTreeToggle<CR>')
 vim.g['NERDTreeWinSize'] = 32
 vim.g['NERDTreeWinPos'] = "left"
 vim.g['NERDTreeShowHidden'] = 1
@@ -188,8 +184,8 @@ vim.g['NERDTreeAutoDeleteBuffer'] = 1
 
 --- [plugin] ctrlsf {{{
 vim.g['ctrlsf_ackprg'] = 'rg'
-map('', '<leader>sf', ':CtrlSF ')
-map('', '<leader>sp', ':CtrlSF<CR>')
+noremap('', '<leader>sf', ':CtrlSF ')
+noremap('', '<leader>sp', ':CtrlSF<CR>')
 --- }}}
 
 -- [plugin] ctrlp {{{
@@ -223,8 +219,8 @@ require'completion'.on_attach({
   sorting = 'alphabet',
   enable_snippet = 'UltiSnips',
 })
-map('i', '<Tab>', 'pumvisible() ? "\\<C-n>" : "\\<Tab>"', {expr = true})
-map('i', '<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<S-Tab>"', {expr = true})
+noremap('i', '<Tab>', 'pumvisible() ? "\\<C-n>" : "\\<Tab>"', {expr = true})
+noremap('i', '<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<S-Tab>"', {expr = true})
 opt('o', 'completeopt', 'menuone,noinsert,noselect')
 -- }}}
 
