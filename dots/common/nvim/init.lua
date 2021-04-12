@@ -112,14 +112,9 @@ Plug 'dyng/ctrlsf.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'BurntSushi/ripgrep'
 " lsp and complete
-Plug 'prabirshrestha/vim-lsp'
-Plug 'mattn/vim-lsp-settings'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
-Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
-Plug 'prabirshrestha/asyncomplete-buffer.vim'
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/completion-nvim'
 " languages syntax and functions
-" Plug 'sheerun/vim-polyglot'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'mattn/emmet-vim'
 Plug 'fatih/vim-go'
@@ -134,22 +129,31 @@ call plug#end()
 
 --- [plugin] colorscheme {{{
 opt('o', 'termguicolors', true)
-local function set_colorscheme(name)
+local function set_colorscheme(name, mode)
   if name == 'gruvbox' then
     vim.cmd 'colorscheme gruvbox'
     vim.g['gruvbox_italic'] = 1
     vim.g['airline_theme'] = "gruvbox"
-    opt('o', 'background', 'light')
+    if mode == 'dark' then
+      opt('o', 'background', 'dark')
+    else
+      opt('o', 'background', 'light')
+    end
   elseif name == 'onehalf' then
-    vim.cmd 'colorscheme onehalflight'
-    vim.g['airline_theme'] = 'onehalflight'
+    if mode == 'dark' then
+      vim.cmd 'colorscheme onehalfdark'
+      vim.g['airline_theme'] = 'onehalfdark'
+    else
+      vim.cmd 'colorscheme onehalflight'
+      vim.g['airline_theme'] = 'onehalflight'
+    end
   elseif name == 'nord' then
     vim.cmd 'colorscheme nord'
     vim.g['airline_theme'] = 'nord'
   end
   return
 end
-set_colorscheme('gruvbox')
+set_colorscheme('gruvbox', 'light')
 -- }}}
 
 --- [plugin] airline {{{
@@ -193,6 +197,8 @@ map('', '<leader>sp', ':CtrlSF<CR>')
 vim.g['ctrlp_working_path_mode'] = 'a'
 -- }}}
 
+require'lsp_settings'
+
 -- [plugin] vim-go {{{
 vim.g['go_fmt_command'] = "goimports"
 vim.g['go_auto_type_info'] = 1
@@ -210,59 +216,23 @@ vim.g['go_metalinter_enable'] = 0
 vim.g['rustfmt_autosave'] = 1
 -- }}}
 
---- [plugin] vim-lsp {{{
+-- [plugin] completion-nvim {{{
+-- completion
+require'completion'.on_attach({
+  confirm_key='',
+  matching_strategy_list = {'substring', 'fuzzy', 'exact', 'all'},
+  sorting = 'alphabet',
+  enable_snippet = 'UltiSnips',
+  enable_auto_popup = 1,
+})
 vim.api.nvim_exec(
 [[
-let g:lsp_settings = { 'golangci-lint-langserver': { 'initialization_options': { 'command': ['golangci-lint', 'run', '--config', '~/.config/nvim/golangci.yml', '--out-format', 'json'], }, }, 'rust-analyzer': { 'initialization_options': { 'diagnostics': { 'disabled': ['unresolved-proc-macro'] } } } }
-let g:lsp_settings_root_markers = ['.git', '.git/', '.svn', '.hg', '.bzr', 'settings.json', 'go.mod', 'Cargo.toml', 'package.json']
-let g:lsp_settings_filetype_go = ['gopls', 'golangci-lint-langserver']
-let g:lsp_settings_filetype_rust = 'rust-analyzer'
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" set shortmess+=c
 ]]
 , true)
-
--- register ultisnips
-vim.cmd "au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({ 'name': 'ultisnips', 'allowlist': ['*'], 'completor': function('asyncomplete#sources#ultisnips#completor') }))"
-vim.cmd "au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({ 'name': 'buffer', 'allowlist': ['*'], 'completor': function('asyncomplete#sources#buffer#completor') }))"
-
--- vim-lsp shortcuts
-vim.api.nvim_exec(
-[[
-augroup lsp_install
-    au!
-    " call lspmapping#on_lsp_buffer_enabled only for languages that has the server registered.
-    autocmd User lsp_buffer_enabled call lspmapping#on_lsp_buffer_enabled()
-augroup END
-let g:lsp_diagnostics_float_cursor = 1
-let g:lsp_diagnostics_signs_error = {'text': '✗'}
-let g:lsp_diagnostics_signs_warning = {'text': '‼'}
-let g:lsp_diagnostics_signs_information = {'text': '!'}
-let g:lsp_diagnostics_signs_hint = {'text': '!'}
-]]
-, true)
-vim.cmd 'highlight link LspHintHighlight SpellBad'
-vim.cmd 'highlight link LspInformationHighlight SpellCap'
-vim.cmd 'highlight link LspHintVirtualText Underlined'
-vim.cmd 'highlight link LspInformationVirtualText Underlined'
+opt('o', 'completeopt', 'menuone,noinsert,noselect')
 -- }}}
 
--- [plugin] asyncomplete.vim {{{
-vim.api.nvim_exec(
-[[
-    inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-    inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-    inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
-    inoremap <c-space> <Plug>(asyncomplete_force_refresh)
-]]
-, true)
---
-
--- allow modifying the completeopt variable, or it will be overridden all the time
-vim.g['asyncomplete_auto_completeopt'] = 0
-
-opt('o', 'completeopt', 'menuone,noinsert,noselect,preview')
-
--- To auto close preview window when completion is done.
-vim.cmd 'autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif'
--- }}}
-
--- vim:foldmethod=marker:foldlevel=1
+-- vim:foldmethod=marker:foldlevel=0
