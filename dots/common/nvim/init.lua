@@ -131,13 +131,21 @@ vim.g['NERDTreeAutoDeleteBuffer'] = 1
 
 --- [plugin] ctrlsf {{{
 vim.g['ctrlsf_ackprg'] = 'rg'
-noremap('', '<leader>sf', ':CtrlSF ')
-noremap('', '<leader>sp', ':CtrlSF<CR>')
+noremap('', '<leader>sf', ':CtrlSF ') -- search current name
+noremap('', '<leader>sp', ':CtrlSF<CR>') -- search in project
 --- }}}
 
--- [plugin] ctrlp {{{
-vim.g['ctrlp_working_path_mode'] = 'a'
--- }}}
+--- [plugin] fzf {{{
+vim.g.fzf_layout = { window = { width = 0.9, height = 0.8 } }
+vim.g.fzf_colors = {
+  gutter = {'bg', 'Tabline'},
+  ['bg+'] = {'bg', 'CursorLine', 'CursorColumn'},
+  ['fg+'] = {'fg', 'CursorLine', 'CursorColumn', 'Normal'},
+  ['hl'] = {'fg', 'Special'},
+  ['hl+'] = {'fg', 'Statement'},
+}
+noremap('', '<C-p>', ':Files<CR>')
+--- }}}
 
 require'lsp_settings'
 
