@@ -45,12 +45,8 @@ local on_attach = function(client, bufnr)
     ]], false)
   end
 
-  require'completion'.on_attach({
-    confirm_key='',
-    matching_strategy_list = {'substring', 'fuzzy', 'exact', 'all'},
-    sorting = 'alphabet',
-    enable_snippet = 'UltiSnips',
-  })
+  -- [Plug] completion-nvim
+  require'completion_nvim'.on_attach()
 end
 
 vim.api.nvim_exec([[

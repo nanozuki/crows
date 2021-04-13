@@ -1,22 +1,8 @@
 -- Nanozuki Vim Config
 
-local scopes = {o = vim.o, b = vim.bo, w = vim.wo}
-
-local function opt(scope, key, value)
-  scopes[scope][key] = value
-  if scope ~= 'o' then scopes['o'][key] = value end
-end
-
-local function noremap(mode, lhs, rhs, opts)
-  local options = {noremap = true}
-  if opts then options = vim.tbl_extend('force', options, opts) end
-  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-end
-
-local function map(mode, lhs, rhs, opts)
-  if not opts then opts = {} end
-  vim.api.nvim_set_keymap(mode, lhs, rhs, opts)
-end
+local opt = require'utils'.opt
+local noremap = require'utils'.noremap
+local map = require'utils'.map
 
 --- basic & misc {{{
 vim.g.mapleader = ' '
@@ -77,46 +63,7 @@ augroup end
 , true)
 --- }}}
 
--- [plugin] vim-plug {{{
-vim.api.nvim_exec(
-[[
-call plug#begin('~/.config/nvim/plugins')
-" appearance
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'yggdroot/indentline'
-Plug 'tpope/vim-sleuth'
-Plug 'morhetz/gruvbox'
-Plug 'sonph/onehalf', { 'rtp': 'vim/' }
-Plug 'arcticicestudio/nord-vim'
-" edit code
-Plug 'kshenoy/vim-signature'
-Plug 'scrooloose/nerdcommenter'
-Plug 'easymotion/vim-easymotion'
-Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-Plug 'tpope/vim-surround'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-" read code
-Plug 'tpope/vim-fugitive'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'dyng/ctrlsf.vim'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'BurntSushi/ripgrep'
-" lsp and complete
-Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/completion-nvim'
-" languages syntax and functions
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'mattn/emmet-vim'
-Plug 'fatih/vim-go'
-Plug 'buoto/gotests-vim', { 'for': 'go' }
-
-""" Initialize plugin system
-call plug#end()
-]]
-, true)
---- }}}
+require 'plugins'
 
 --- [plugin] colorscheme {{{
 opt('o', 'termguicolors', true)
@@ -213,15 +160,7 @@ vim.g['rustfmt_autosave'] = 1
 
 -- [plugin] completion-nvim {{{
 -- completion
-require'completion'.on_attach({
-  confirm_key='',
-  matching_strategy_list = {'substring', 'fuzzy', 'exact', 'all'},
-  sorting = 'alphabet',
-  enable_snippet = 'UltiSnips',
-})
-noremap('i', '<Tab>', 'pumvisible() ? "\\<C-n>" : "\\<Tab>"', {expr = true})
-noremap('i', '<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<S-Tab>"', {expr = true})
-opt('o', 'completeopt', 'menuone,noinsert,noselect')
+require'completion_nvim'.on_attach()
 -- }}}
 
 -- vim:foldmethod=marker:foldlevel=0
