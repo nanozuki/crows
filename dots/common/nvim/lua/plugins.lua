@@ -21,8 +21,9 @@ Plug 'honza/vim-snippets'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'dyng/ctrlsf.vim'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'BurntSushi/ripgrep'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 " lsp and complete
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'

@@ -11,7 +11,7 @@ end
 
 -- set the path to the sumneko installation; if you previously installed via the now deprecated :LspInstall, use
 -- local sumneko_root_path = vim.fn.stdpath('cache')..'/lspconfig/sumneko_lua/lua-language-server'
-local sumneko_root_path = '/Users/crows/Projects/github.com/sumneko/lua-language-server'
+local sumneko_root_path = vim.fn.expand('$HOME')..'/Projects/github.com/sumneko/lua-language-server'
 local sumneko_binary = sumneko_root_path.."/bin/"..system_name.."/lua-language-server"
 
 local M = {}
@@ -30,6 +30,7 @@ M.sumneko_lua_settings = {
         globals = {'vim'},
       },
       workspace = {
+        ignoreSubmodules = false,
         -- Make the server aware of Neovim runtime files
         library = {
           [vim.fn.expand('$VIMRUNTIME/lua')] = true,
