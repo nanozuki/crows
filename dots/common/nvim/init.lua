@@ -24,7 +24,7 @@ noremap('v', '<Leader>y', '"+y')
 -- paste from system clipboard
 noremap('n', '<Leader>p', '"+p')
 -- ignore file for all
-vim.cmd 'set wildignore+=*/node_modules/*,*.swp,*.pyc,*/venv/*,*/target/*'
+vim.cmd 'set wildignore+=*/node_modules/*,*.swp,*.pyc,*/venv/*,*/target/*,.DS_Store'
 -- save as sudo
 noremap('c', 'w!!', 'w !sudo tee %')
 
