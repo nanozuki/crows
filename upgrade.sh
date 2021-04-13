@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 lndir () {
     rm -rf $2 &> /dev/null || true
