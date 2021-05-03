@@ -47,6 +47,8 @@ local on_attach = function(client, bufnr)
 
   -- [Plug] completion-nvim
   require'completion_nvim'.on_attach()
+  -- format buffer on save
+  vim.api.nvim_command[[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()]]
 end
 
 vim.api.nvim_exec([[
@@ -55,12 +57,6 @@ sign define LspDiagnosticsSignWarning text=‼ texthl=LspDiagnosticsSignWarning 
 sign define LspDiagnosticsSignInformation text=! texthl=LspDiagnosticsSignInformation linehl= numhl=
 sign define LspDiagnosticsSignHint text=! texthl=LspDiagnosticsSignHint linehl= numhl=
 ]], true)
---[[
-sign define LspDiagnosticsSignError text=✗ texthl=SpellBad linehl= numhl=
-sign define LspDiagnosticsSignWarning text=‼ texthl=SpellCap linehl= numhl=
-sign define LspDiagnosticsSignInformation text=! texthl=Underlinded linehl= numhl=
-sign define LspDiagnosticsSignHint text=! texthl=Underlined linehl= numhl=
-]]--
 
 -- Use a loop to conveniently both setup defined servers
 -- and map buffer local keybindings when the language server attaches
@@ -70,7 +66,10 @@ local servers_settings = {
   sumneko_lua = require'lua_lsp'.sumneko_lua_settings,
   pyls = {},
   pyright = {},
-  rust_analyzer = { settings = { ["rust-analyzer"] = { diagnostics = { disabled = {'unresolved-proc-macro'} } } } },
+  rust_analyzer = { settings = { ["rust-analyzer"] = {
+    diagnostics = { disabled = {'unresolved-proc-macro'} },
+    checkOnSave = { command = 'clippy' },
+  } } },
   tsserver = {},
   vimls = {},
   zls = {},
