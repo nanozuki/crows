@@ -32,6 +32,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'mattn/emmet-vim'
 Plug 'fatih/vim-go'
 Plug 'buoto/gotests-vim', { 'for': 'go' }
+Plug 'dag/vim-fish'
 
 """ Initialize plugin system
 call plug#end()
