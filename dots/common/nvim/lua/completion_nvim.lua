@@ -3,7 +3,7 @@ local M = {}
 function M.on_attach()
   require'completion'.on_attach({
     confirm_key='',
-    matching_strategy_list = {'substring', 'fuzzy', 'exact', 'all'},
+    matching_strategy_list = {'exact', 'substring', 'fuzzy', 'all'},
     sorting = 'alphabet',
     enable_snippet = 'UltiSnips',
   })

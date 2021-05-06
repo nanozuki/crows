@@ -47,8 +47,8 @@ local on_attach = function(client, bufnr)
 
   -- [Plug] completion-nvim
   require'completion_nvim'.on_attach()
-  -- format buffer on save
-  vim.api.nvim_command[[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()]]
+  -- format on save
+  vim.cmd "autocmd BufWritePre * lua vim.lsp.buf.formatting_sync(nil, 1000)"
 end
 
 vim.api.nvim_exec([[
