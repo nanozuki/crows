@@ -59,7 +59,7 @@ function upgrade
     git pull
     set code $status
     cd -
-    exit code
+    exit $code
 end
 
 ## -- opts --
@@ -71,10 +71,13 @@ switch $argv[1]
     case update
         update $argv[2..]
         exit $status
+    case upgrade
+        upgrade
+        exit $status
     case '*'
         echo "Usage:"
         echo ""
-        echo \t"crows-env.sh <subcmd> [<subjects>]"
+        echo \t"crows-env <subcmd> [<subjects>]"
         echo ""
         echo "Subcmds are: $subcmd"
         echo ""
