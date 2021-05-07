@@ -12,7 +12,7 @@ function install_fish
 end
 
 function install_omf
-    ln -sfF $dots/omf $config/omf
+    link_dir $dots/omf $config/omf
     if not test -d $data/omf
         echo "install omf"
         curl -L https://get.oh-my.fish > /tmp/install
