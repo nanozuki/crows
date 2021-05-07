@@ -31,10 +31,10 @@ set subcmd install update upgrade
 set subjects system fish git ssh gpg rime tmux nvim go rust
 
 function install
-    if test -n $argv[1]
-        set subs $argv
-    else
+    if test (count $argv) -eq 0
         set subs $subjects
+    else
+        set subs $argv
     end
     for subject in $subs
         install_$subject; or exit 1
@@ -43,10 +43,10 @@ function install
 end
 
 function update
-    if test -n $argv[1]
-        set subs $argv
-    else
+    if test (count $argv) -eq 0
         set subs $subjects
+    else
+        set subs $argv
     end
     for subject in $subs
         update_$subject; or exit 1

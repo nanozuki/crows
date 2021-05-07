@@ -11,7 +11,7 @@ function update_system
     echo "Update system..."
     if test $os = archlinux
         update_archlinux
-    else if test = $os macos
+    else if test $os = macos
         update_macos
     end
 end
