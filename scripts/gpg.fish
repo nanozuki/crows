@@ -1,4 +1,5 @@
 function install_gpg
+    echo "Install gpg..."
     if test $os = archlinux
         pacman_install gunpg pinentry
     else if test $os = macos
@@ -24,4 +25,5 @@ function install_gpg
 end
 
 function update_gpg
+    echo "Update gpg..."
 end

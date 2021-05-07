@@ -1,8 +1,8 @@
 function install_nvim
-    if test $os archlinux
+    if test $os = archlinux
         pacman_install neovim pynvim nodejs npm ripgrep fzf
         sudo npm -g install neovim
-    else if test $os macos
+    else if test $os = macos
         brew_install neovim node python luajit ripgrep fzf
         pip3 install pynvim
         npm -g install neovim
@@ -16,9 +16,9 @@ function install_nvim
 end
 
 function update_nvim
-    if test $os archlinux
+    if test $os = archlinux
         sudo npm -g update neovim
-    else if test $os macos
+    else if test $os = macos
         brew_install neovim node python luajit ripgrep fzf
         npm -g update neovim
         pip3 install -U pynvim

@@ -14,6 +14,7 @@ end
 
 function install_tpm
     if not test -d $config/tmux/plugins/tpm
+        echo "install tpm"
         git clone https://github.com/tmux-plugins/tpm $config/tmux/plugins/tpm
     end
     $config/tmux/plugins/tpm/bin/install_plugins
@@ -21,6 +22,7 @@ function install_tpm
 end
 
 function update_tmux
+    echo "Install tmux..."
     update_tpm
 end
 
