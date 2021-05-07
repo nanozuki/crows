@@ -1,5 +1,5 @@
 # nvim plugins and runtime
-dots/common/nvim/plugins/
+dots/nvim/plugins/
 plug.vim*
 shada/
 .netrwhist
