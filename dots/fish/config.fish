@@ -1,7 +1,3 @@
-function set_env_nx
-    set -q $argv[1]; or set -Ux $argv
-end
-
 set -x GPG_TTY (tty)
 if test $os = archlinux
     set -x SSH_AUTH_SOCK $XDG_RUNTIME_DIR/gnupg/S.gpg-agent.ssh
