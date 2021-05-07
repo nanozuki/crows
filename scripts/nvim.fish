@@ -7,11 +7,11 @@ function install_nvim
         pip3 install pynvim
         npm -g install neovim
     end
+    link_dir $dots/nvim $config/nvim
     if not test -f $config/nvim/autoload/plug.vim
         curl -fLo $config/nvim/autoload/plug.vim --create-dirs \
             https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     end
-    ln -sfF $dots/nvim $config/nvim
     nvim +PlugClean +PlugInstall +qall
 end
 
