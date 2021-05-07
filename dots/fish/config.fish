@@ -1,18 +1,6 @@
-detect_os
-
 function set_env_nx
     set -q $argv[1]; or set -Ux $argv
 end
-
-set_env_nx XDG_CONFIG_HOME "$HOME/.config"
-set_env_nx XDG_CACHE_HOME "$HOME/.cache"
-set_env_nx XDG_DATA_HOME "$HOME/.local/share"
-set_env_nx GOPATH $HOME/.go
-set_env_nx CARGO_HOME $HOME/.cargo
-set_env_nx LC_ALL en_US.UTF-8
-set_env_nx LANG en_US.UTF-8
-
-set -x PATH /usr/local/bin /usr/local/sbin /usr/bin /bin /usr/sbin /sbin $GOPATH/bin $CARGO_HOME/bin
 
 set -x GPG_TTY (tty)
 if test $os = archlinux
