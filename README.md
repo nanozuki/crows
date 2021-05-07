@@ -2,45 +2,41 @@
 
 Develop Enviroment of Nanozuki Crows
 
-## bootstrap
-
-put configure files to `$HOME/.config/CrowsEnv`, the structure of config like this:
+## Usage
 
 ```bash
-├── git
-│   ├── config_local
-│   └── config_work
-├── gpgkeys
-│   ├── crows_pub.gpg
-│   ├── crows_sec.gpg
-│   ├── work_pub.gpg
-│   └── work_sec.gpg
-└── sshkeys
-    ├── config
-    ├── id_ed25519
-    ├── id_ed25519.pub
-    ├── id_work
-    └── id_work.pub
+crows-env <subcmd> [<subjects>]
 ```
 
-and then:
+Subcmds are: install update upgrade.
+
+Subjects are: system fish git ssh gpg rime tmux nvim go rust.
+Subcmd 'install', 'update' support subjects.
+
+## Installing
+
+### Arch Linux
 
 ```bash
-curl -L https://raw.githubusercontent.com/nanozuki/CrowsEnv/master/crows-env.sh | bash -s bootstrap
+pacman -S git fish
+git clone git@github.com:nanozuki/CrowsEnv.git ~/.local/share/CrowsEnv
+sudo ln -s ~/.local/share/CrowsEnv/crows-env.fish /usr/local/bin/crows-env
+chsh -s /bin/fish
 ```
 
-## upgrade
+### macOS
 
-modify config files or do git operator in $HOME/.data/CrowsEnv, and: 
+Make sure xcode command line tools is installed. If not:
 
 ```bash
-crows-env upgrade
+xcode-select --install
 ```
 
-## update
-
-update enviroment:
+Install homebrew: https://brew.sh/. And:
 
 ```bash
-crows-env update
+brew install git fish
+git clone git@github.com:nanozuki/CrowsEnv.git ~/.local/share/CrowsEnv
+ln -s ~/.local/share/CrowsEnv/crows-env.fish /usr/local/bin/crows-env
+chsh -s /usr/local/bin/fish
 ```

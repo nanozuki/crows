@@ -1,6 +1,0 @@
-alias appadd="sudo apt install"
-alias appup="sudo apt update && sudo apt upgrade"
-alias appsch="apt search"
-alias appdel="sudo apt clean && sudo apt remove"
-alias appclean="sudo apt autoremove"
-alias appinfo="apt show"
