@@ -4,7 +4,7 @@ function install_rust
     fish_add_path $CARGO_HOME/bin
     if not type -q rustup
         echo "install rustup"
-        # curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
     end
 end
 

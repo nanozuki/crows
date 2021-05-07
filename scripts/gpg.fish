@@ -13,6 +13,7 @@ function install_gpg
         ln -sf $dots/gnupg_mac/gpg-agent.conf $HOME/.gnupg/gpg-agent.conf
     end
 
+    # TODO: import gpg keys
     # gpg keys
     # echo "Import gpg public keys..."
     # for file in `ls $config_path/gpgkeys/*_pb.gpg`; do
