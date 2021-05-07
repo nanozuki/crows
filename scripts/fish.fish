@@ -1,11 +1,12 @@
 function install_fish
+    echo "Install fish..."
     # link config
     mkdir -p $config/fish/conf.d
     ln -sf $dots/fish/config.fish $config/fish/config.fish
     # link functions
     mkdir -p $config/fish/functions
     for func in (ls $dots/fish/functions/)
-        ln -sf $dots/fish/functions/func $config/functions/func
+        ln -sf $dots/fish/functions/$func $config/fish/functions/$func
     end
     install_omf
 end
@@ -13,6 +14,7 @@ end
 function install_omf
     ln -sfF $dots/omf $config/omf
     if not test -d $data/omf
+        echo "install omf"
         curl -L https://get.oh-my.fish > /tmp/install
         fish /tmp/install --path=$data/omf --config=$config/omf
     end
@@ -20,6 +22,7 @@ function install_omf
 end
 
 function update_fish
+    echo "Update fish..."
     update_omf
 end
 
