@@ -28,7 +28,7 @@ detect_os
 ## -- works --
 
 set subcmd install update upgrade
-set subjects system fish git ssh gpg rime tmux nvim go rust
+set subjects system fish git ssh gpg rime tmux nvim go rust zig
 
 function install
     if test (count $argv) -eq 0

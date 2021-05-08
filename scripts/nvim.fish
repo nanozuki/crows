@@ -1,9 +1,11 @@
 function install_nvim
     if test $os = archlinux
-        pacman_install neovim pynvim nodejs npm ripgrep fzf
+        yay_install neovim-nightly-bin
+        pacman_install pynvim nodejs npm ripgrep fzf
         sudo npm -g install neovim
     else if test $os = macos
-        brew_install neovim node python luajit ripgrep fzf
+        brew_head luajit neovim
+        brew_install node python ripgrep fzf
         pip3 install pynvim
         npm -g install neovim
     end
@@ -33,7 +35,8 @@ function lua_lsp
     set repo https://github.com/sumneko/lua-language-server.git
     set repo_path (find_git_repo_path $repo)
     if test -e $repo_path
-        if test (git pull | grep 'Already up to date')
+        set output (git pull); or return 1
+        if test (echo $output | grep 'Already up to date')
             return 0
         end
     else
