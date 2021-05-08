@@ -18,6 +18,7 @@ end
 
 function get_go_pkg
     for pkg in $argv
+        echo "  goget $pkg"
         go get -u $pkg
     end
 end

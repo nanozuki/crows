@@ -1,20 +1,21 @@
 function install_nvim
     if test $os = archlinux
         yay_install neovim-nightly-bin
-        pacman_install pynvim nodejs npm ripgrep fzf
+        pacman_install python-pynvim nodejs npm ripgrep fzf
         sudo npm -g install neovim
+        yay_install lua-language-server
     else if test $os = macos
         brew_head luajit neovim
         brew_install node python ripgrep fzf
         pip3 install pynvim
         npm -g install neovim
+        macos_lua_lsp
     end
     link_dir $dots/nvim $config/nvim
     if not test -f $config/nvim/autoload/plug.vim
         curl -fLo $config/nvim/autoload/plug.vim --create-dirs \
             https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     end
-    lua_lsp
     nvim +PlugClean +PlugInstall +qall
 end
 
@@ -25,24 +26,16 @@ function update_nvim
         brew_install neovim node python luajit ripgrep fzf
         npm -g update neovim
         pip3 install -U pynvim
+        macos_lua_lsp
     end
-    lua_lsp
-    sudo npm -g update neovim
     nvim +PlugUpgrade +PlugUpdate +qall
 end
 
-function lua_lsp
+function macos_lua_lsp
     set repo https://github.com/sumneko/lua-language-server.git
-    set repo_path (find_git_repo_path $repo)
-    if test -e $repo_path
-        set output (git pull); or return 1
-        if test (echo $output | grep 'Already up to date')
-            return 0
-        end
-    else
-        echo "git clone $repo $repo_path"
-        git clone $repo $repo_path
-        or return 1
+    set repo_path (git_latest $repo); or return 1
+    if test -z $repo_path
+        return 0
     end
 
     set cur_dir (pwd)
