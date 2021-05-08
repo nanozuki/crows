@@ -32,16 +32,14 @@ end
 function pacman_install
     for pkg in $argv
         echo "pacman install $pkg"
-        pacman -Qqe | grep $pkg > /dev/null
-        sudo pacman -S --noconfirm &pkg
+        sudo pacman -S --needed --noconfirm $pkg
     end
 end
 
 function yay_install
     for pkg in $argv
         echo "yay install $pkg"
-        yay -Qqe | grep $pkg > /dev/null
-        yay -S --noconfirm direnv
+        yay -S --needed --noconfirm $pkg
     end
 end
 

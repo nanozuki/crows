@@ -17,8 +17,8 @@ function update_system
 end
 
 function install_archlinux
-    pacman_install base-devel go tree
-    if test -q yay
+    pacman_install go tree
+    if not type -q yay
         gitget "~/Projects/aur.archlinux.org/yay"
         makepkg -si --noconfirm
         cd -

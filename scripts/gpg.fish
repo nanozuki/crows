@@ -1,7 +1,7 @@
 function install_gpg
     echo "Install gpg..."
     if test $os = archlinux
-        pacman_install gunpg pinentry
+        pacman_install gnupg pinentry
     else if test $os = macos
         brew_install gnupg pinentry-mac
     end
