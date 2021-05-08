@@ -22,7 +22,7 @@ function get_go_pkg
     end
 end
 
-set go_pkgs \
+set vim_go \
     github.com/klauspost/asmfmt/cmd/asmfmt@master \
     github.com/go-delve/delve/cmd/dlv@master \
     github.com/kisielk/errcheck@master \
@@ -38,9 +38,15 @@ set go_pkgs \
     github.com/josharian/impl@master \
     honnef.co/go/tools/cmd/keyify@master \
     github.com/fatih/motion@master \
-    github.com/koron/iferr@master \
-    github.com/cweill/gotests/... \
-    github.com/google/wire/cmd/wire \
+    github.com/koron/iferr@master
+
+set gotests github.com/cweill/gotests/... 
+set wire github.com/google/wire/cmd/wire
+set grpc \
     google.golang.org/protobuf/cmd/protoc-gen-go \
     google.golang.org/grpc/cmd/protoc-gen-go-grpc \
     github.com/golang/protobuf/{proto,protoc-gen-go}
+
+set lint_lsp github.com/nametake/golangci-lint-langserver
+
+set go_pkgs $vim_go $gotests $wire $grpc $lint_lsp
