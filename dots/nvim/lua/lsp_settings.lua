@@ -1,4 +1,6 @@
-local nvim_lsp = require('lspconfig')
+local nvim_lsp = require 'lspconfig'
+require 'lsp_config_default'
+
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
@@ -41,6 +43,7 @@ local on_attach = function(client, bufnr)
         autocmd! * <buffer>
         autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
         autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+        autocmd CursorHold <buffer> lua vim.lsp.diagnostic.show_line_diagnostics() 
       augroup END
     ]], false)
   end
@@ -52,10 +55,10 @@ local on_attach = function(client, bufnr)
 end
 
 vim.api.nvim_exec([[
-sign define LspDiagnosticsSignError text=✗ texthl=LspDiagnosticsSignError linehl= numhl=
-sign define LspDiagnosticsSignWarning text=‼ texthl=LspDiagnosticsSignWarning linehl= numhl=
-sign define LspDiagnosticsSignInformation text=! texthl=LspDiagnosticsSignInformation linehl= numhl=
-sign define LspDiagnosticsSignHint text=! texthl=LspDiagnosticsSignHint linehl= numhl=
+sign define LspDiagnosticsSignError text=✗ texthl=LspDiagnosticsError linehl= numhl=
+sign define LspDiagnosticsSignWarning text=‼ texthl=LspDiagnosticsWarning linehl= numhl=
+sign define LspDiagnosticsSignInformation text=! texthl=LspDiagnosticsInformation linehl= numhl=
+sign define LspDiagnosticsSignHint text=! texthl=LspDiagnosticsHint linehl= numhl=
 ]], true)
 
 -- Use a loop to conveniently both setup defined servers
@@ -73,13 +76,13 @@ local servers_settings = {
   tsserver = {},
   vimls = {},
   zls = {},
+  golangcilsp = {
+    init_options = {
+        command = { "golangci-lint", "run", "-c", "~/.config/nvim/golangci.yml", "--out-format", "json" };
+    },
+  },
 }
---[[ TODO: require 'lspconfig'.golangci-lint-langserver.setup{
---  settings = {
---    command = {'golangci-lint', 'run', '--config', '~/.config/nvim/golangci.yml', '--out-format', 'json'}
---  }
---}
---]]
+
 for lsp, settings in pairs(servers_settings) do
   settings['on_attach'] = on_attach
   nvim_lsp[lsp].setup(settings)
