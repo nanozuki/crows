@@ -36,6 +36,7 @@ augroup filetypes
     autocmd BufNewFile,BufRead *.jsx         setfiletype javascript.tsx
     autocmd BufNewFile,BufRead *.tsx         setfiletype typescript.tsx
     autocmd BufNewFile,BufRead tsconfig.json setfiletype jsonc
+    autocmd BufNewFile,BufRead *.zig         setfiletype zig
 augroup end
 ]]
 , true)
