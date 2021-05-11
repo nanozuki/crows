@@ -15,5 +15,9 @@ end
 
 function update_rust
     echo "Update rust..."
+    if test (date_cache get rustup_update)
+        return 0
+    end
     rustup update
+    date_cache set rustup_update
 end

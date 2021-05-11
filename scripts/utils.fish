@@ -15,7 +15,7 @@ end
 function brew_install
     for pkg in $argv
         echo "brew install $pkg"
-        brew list | grep $pkg > /dev/null
+        brew list | grep $pkg >/dev/null
         or brew install $pkg
     end
 end
@@ -23,13 +23,12 @@ end
 function brew_head
     for pkg in $argv
         echo "brew install $pkg"
-        if test (date_cache get brew_head_$pkg)
-            return 0
+        if not test (date_cache get brew_head_$pkg)
+            brew list | grep $pkg >/dev/null
+            or brew install --HEAD $pkg
+            and brew reinstall $pkg
+            date_cache set brew_head_$pkg
         end
-        brew list | grep $pkg > /dev/null
-        or brew install --HEAD $pkg
-        and brew reinstall $pkg
-        date_cache set brew_head_$pkg
     end
 end
 
