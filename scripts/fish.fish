@@ -8,24 +8,18 @@ function install_fish
     for func in (ls $dots/fish/functions/)
         ln -sf $dots/fish/functions/$func $config/fish/functions/$func
     end
-    install_omf
+    install_fisher
 end
 
-function install_omf
-    link_dir $dots/omf $config/omf
-    if not test -d $data/omf
-        echo "install omf"
-        curl -L https://get.oh-my.fish > /tmp/install
-        fish /tmp/install --path=$data/omf --config=$config/omf
+function install_fisher
+    ln -sf $dots/fish/fish_plugins $config/fish/fish_plugins
+    if not type -q fisher
+        echo "install fisher"
+        curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
     end
-    omf install
+    fisher update
 end
 
 function update_fish
-    echo "Update fish..."
-    update_omf
-end
-
-function update_omf
-    omf update
+    fisher update
 end
