@@ -12,11 +12,11 @@ function install_fish
 end
 
 function install_fisher
-    ln -sf $dots/fish/fish_plugins $config/fish/fish_plugins
     if not type -q fisher
         echo "install fisher"
         curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
     end
+    ln -sf $dots/fish/fish_plugins $config/fish/fish_plugins
     fisher update
 end
 
