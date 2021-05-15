@@ -15,20 +15,21 @@ function set_date_cache
     if not test -f $date_cache_file
         touch $date_cache_file
     end
+    set key (string replace -a '/' '\/' $argv[1])
     set now (date -u +"%Y-%m-%d")
     for line in (cat $date_cache_file)
         set words (string split ' ' $line)
-        if test $words[2] = $argv[1]
-            set chstr "s/$line/$now $words[2]/"
+        if test $words[2] = $key
+            set chstr "s/$words[1]/$now/"
             if test $os = macos
-                gsed -i "$chstr" $date_cache_file
+                gsed -i "$chstr" "$date_cache_file"
             else if test $os = archlinux
-                sed -i \'s/$line/$now $words[2]/\' $date_cache_file
+                sed -i "$chstr" "$date_cache_file"
             end
             return 0
         end
     end
-    echo (date -u +"%Y-%m-%d") $argv[1] >> $date_cache_file
+    echo (date -u +"%Y-%m-%d") $key >> $date_cache_file
 end
 
 function get_date_cache
@@ -36,10 +37,11 @@ function get_date_cache
     if not test -f $date_cache_file
         touch $date_cache_file
     end
+    set key (string replace -a '/' '\/' $argv[1])
     set now (date -u +"%Y-%m-%d")
     for line in (cat $date_cache_file)
         set words (string split ' ' $line)
-        if test $words[2] = $argv[1]
+        if test $words[2] = $key
             if test $words[1] = $now
                 echo $words[2]
             end
