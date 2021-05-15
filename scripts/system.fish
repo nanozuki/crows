@@ -27,7 +27,7 @@ function install_archlinux
 end
 
 function install_macos
-    brew_install make go tree direnv
+    brew_install make go tree direnv gnu-sed
 end
 
 function update_archlinux
