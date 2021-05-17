@@ -17,10 +17,12 @@ function set_date_cache
     end
     set key (string replace -a '/' '\/' $argv[1])
     set now (date -u +"%Y-%m-%d")
+    set linenum 0
     for line in (cat $date_cache_file)
+        set linenum (math $linenum + 1)
         set words (string split ' ' $line)
         if test $words[2] = $key
-            set chstr "s/$words[1]/$now/"
+            set chstr "$linenum""s/$words[1]/$now/"
             if test $os = macos
                 gsed -i "$chstr" "$date_cache_file"
             else if test $os = archlinux
