@@ -1,8 +1,10 @@
 -- Nanozuki Vim Config
 
-local opt = require'utils'.opt
-local noremap = require'utils'.noremap
-local map = require'utils'.map
+local opt = require'shim'.opt
+local noremap = require'shim'.noremap
+local map = require'shim'.map
+local augroup = require'shim'.augroup
+local autocmd = require'shim'.autocmd
 
 --- basic & misc {{{
 vim.g.mapleader = ' '
@@ -28,18 +30,13 @@ vim.cmd 'set wildignore+=*/node_modules/*,*.swp,*.pyc,*/venv/*,*/target/*,.DS_St
 -- save as sudo
 noremap('c', 'w!!', 'w !sudo tee %')
 
-vim.api.nvim_exec(
-[[
-augroup filetypes
-    autocmd!
-    autocmd BufNewFile,BufRead *html         setfiletype html
-    autocmd BufNewFile,BufRead *.jsx         setfiletype javascript.tsx
-    autocmd BufNewFile,BufRead *.tsx         setfiletype typescript.tsx
-    autocmd BufNewFile,BufRead tsconfig.json setfiletype jsonc
-    autocmd BufNewFile,BufRead *.zig         setfiletype zig
-augroup end
-]]
-, true)
+augroup('filetypes', {
+  autocmd('BufNewFile,BufRead', '*html',         'setfiletype html'),
+  autocmd('BufNewFile,BufRead', '*.jsx',         'setfiletype javascript.tsx'),
+  autocmd('BufNewFile,BufRead', '*.tsx',         'setfiletype typescript.tsx'),
+  autocmd('BufNewFile,BufRead', 'tsconfig.json', 'setfiletype jsonc'),
+  autocmd('BufNewFile,BufRead', '*.zig',         'setfiletype zig'),
+})
 --- }}}
 
 -- search & replace {{{
@@ -54,14 +51,9 @@ opt('b', 'tabstop', 4)
 opt('b', 'shiftwidth', 4)
 opt('b', 'softtabstop', 4)
 
-vim.api.nvim_exec(
-[[
-augroup fileindent
-    autocmd!
-    autocmd FileType javascript,typescript,html,css,scss,xml,yaml,json,wxss,wxml,lua setlocal expandtab ts=2 sw=2 sts=2
-augroup end
-]]
-, true)
+augroup('fileindent', {
+  autocmd('FileType', 'javascript,typescript,html,css,scss,xml,yaml,json,wxss,wxml,lua', 'setlocal expandtab ts=2 sw=2 sts=2'),
+})
 --- }}}
 
 require 'plugins'
