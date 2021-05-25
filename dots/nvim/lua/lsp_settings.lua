@@ -1,4 +1,9 @@
 local nvim_lsp = require 'lspconfig'
+local augroup = require'shim'.augroup
+local autocmd = require'shim'.autocmd
+local set_highlight = require'shim'.set_highlight
+local sign_define = require'shim'.sign_define
+local opt = require'shim'.opt
 require 'lsp_config_default'
 
 local on_attach = function(client, bufnr)
@@ -35,33 +40,29 @@ local on_attach = function(client, bufnr)
 
   -- Set autocommands conditional on server_capabilities
   if client.resolved_capabilities.document_highlight then
-    vim.api.nvim_exec([[
-      hi LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
-      hi LspReferenceText cterm=bold ctermbg=red guibg=LightYellow
-      hi LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow
-      augroup lsp_document_highlight
-        autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-        autocmd CursorHold <buffer> lua vim.lsp.diagnostic.show_line_diagnostics() 
-      augroup END
-    ]], false)
+    set_highlight('LspReferenceRead', {cterm='bold', ctermbg='red', guibg='LightYellow'})
+    set_highlight('LspReferenceText', {cterm='bold', ctermbg='red', guibg='LightYellow'})
+    set_highlight('LspReferenceWrite', {cterm='bold', ctermbg='red', guibg='LightYellow'})
+    augroup('lsp_document_highlight', {
+      autocmd('CursorHold', '<buffer>', 'lua vim.lsp.buf.document_highlight()'),
+      autocmd('CursorMoved', '<buffer>', 'lua vim.lsp.buf.clear_references()'),
+      autocmd('CursorHold', '<buffer>', 'lua vim.lsp.diagnostic.show_line_diagnostics()'),
+    })
   end
 
   -- [Plug] completion-nvim
   require'completion_nvim'.on_attach()
-  -- format on save
-  vim.cmd "autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()"
-  -- vim.cmd "autocmd BufWritePre * lua vim.lsp.buf.formatting()"
-  -- vim.cmd "autocmd BufWinLeave * lua vim.lsp.buf.formatting_sync()"
+  augroup('format_on_save', {
+    autocmd('BufWritePre', '*', 'lua vim.lsp.buf.formatting_sync()'),
+    -- autocmd('BufWritePre', '*', 'lua vim.lsp.buf.formatting()'),
+    -- autocmd('BufWinLeave', '*', 'lua vim.lsp.buf.formatting_sync()'),
+  })
 end
 
-vim.api.nvim_exec([[
-sign define LspDiagnosticsSignError text=✗ texthl=LspDiagnosticsError linehl= numhl=
-sign define LspDiagnosticsSignWarning text=‼ texthl=LspDiagnosticsWarning linehl= numhl=
-sign define LspDiagnosticsSignInformation text=! texthl=LspDiagnosticsInformation linehl= numhl=
-sign define LspDiagnosticsSignHint text=! texthl=LspDiagnosticsHint linehl= numhl=
-]], true)
+sign_define('LspDiagnosticsSignError', {text='✗', texthl='LspDiagnosticsError', linehl='', numhl=''})
+sign_define('LspDiagnosticsSignWarning', {text='‼', texthl='LspDiagnosticsWarning', linehl='', numhl=''})
+sign_define('LspDiagnosticsSignInformation', {text='!', texthl='LspDiagnosticsInformation', linehl='', numhl=''})
+sign_define('LspDiagnosticsSignHint', {text='!', texthl='LspDiagnosticsHint', linehl='', numhl=''})
 
 -- Use a loop to conveniently both setup defined servers
 -- and map buffer local keybindings when the language server attaches

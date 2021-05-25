@@ -9,8 +9,8 @@ function M.on_attach()
   })
 end
 
-local opt = require'utils'.opt
-local noremap = require'utils'.noremap
+local opt = require'shim'.opt
+local noremap = require'shim'.noremap
 
 noremap('i', '<Tab>', 'pumvisible() ? "\\<C-n>" : "\\<Tab>"', {expr = true})
 noremap('i', '<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<S-Tab>"', {expr = true})
