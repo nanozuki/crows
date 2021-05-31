@@ -10,7 +10,7 @@ function install_gpg
     if test $os = archlinux
         ln -sf $dots/gnupg_arch/gpg-agent.conf $HOME/.gnupg/gpg-agent.conf
     else if test $os = macos
-        ln -sf $dots/gnupg_mac/gpg-agent.conf $HOME/.gnupg/gpg-agent.conf
+        ln -sf $dots/gnupg_osx/gpg-agent.conf $HOME/.gnupg/gpg-agent.conf
     end
 
     # TODO: import gpg keys
