@@ -28,7 +28,8 @@ function macos_zls
     cd $repo_path
         git submodule update --init --recursive
         zig build -Drelease-safe
-        ./zig-out/bin/zls config # Configure ZLS
+        # ./zig-out/bin/zls config # Configure ZLS
+        ln -sf $dots/zls/zls.json $HOME/Library/Application\ Support/zls.json
         ln -sf (realpath ./zig-out/bin/zls) /usr/local/bin/zls
     cd $cur_dir
 end
