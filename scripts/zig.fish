@@ -1,17 +1,9 @@
-function install_zig
-    echo "Install zig..."
+function sync_zig
+    title "sync zig"
     if test $os = archlinux
         pacman_install zig
         yay_install zls-bin
     else if test $os = macos
-        brew_head zig
-        macos_zls
-    end
-end
-
-function update_zig
-    echo "Update zig..."
-    if test $os = macos
         brew_head zig
         macos_zls
     end

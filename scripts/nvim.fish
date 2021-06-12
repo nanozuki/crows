@@ -1,4 +1,7 @@
-function install_nvim
+function sync_nvim
+    title "sync nvim"
+
+    # install nvim and language environment
     if test $os = archlinux
         yay_install neovim-nightly-bin
         pacman_install python-pynvim nodejs npm ripgrep fzf
@@ -9,25 +12,28 @@ function install_nvim
         brew_install node python ripgrep fzf
         pip3 install pynvim
         npm -g install neovim
+    end
+
+    # update nvim and language environment
+    if test $os = archlinux
+        sudo npm -g update neovim
+    else if test $os = macos
+        pip3 install -U pynvim
+        npm -g update neovim
         macos_lua_lsp
     end
+
+    # link config
     link_dir $dots/nvim $config/nvim
+
+    # install and clean plugins
     if not test -f $config/nvim/autoload/plug.vim
         curl -fLo $config/nvim/autoload/plug.vim --create-dirs \
             https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     end
     nvim +PlugClean +PlugInstall +qall
-end
 
-function update_nvim
-    if test $os = archlinux
-        sudo npm -g update neovim
-    else if test $os = macos
-        brew_install neovim node python luajit ripgrep fzf
-        npm -g update neovim
-        pip3 install -U pynvim
-        macos_lua_lsp
-    end
+    # update plugins
     nvim +PlugUpgrade +PlugUpdate +qall
 end
 

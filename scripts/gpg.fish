@@ -1,5 +1,6 @@
-function install_gpg
-    echo "Install gpg..."
+function sync_gpg
+    title "sync gpg"
+
     if test $os = archlinux
         pacman_install gnupg pinentry
     else if test $os = macos
@@ -23,8 +24,4 @@ function install_gpg
     # for file in `ls $config_path/gpgkeys/*_sec.gpg`; do
     #     gpg --allow-secret-key-import --import $file
     # done
-end
-
-function update_gpg
-    echo "Update gpg..."
 end
