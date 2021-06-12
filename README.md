@@ -5,13 +5,11 @@ Develop Enviroment of Nanozuki Crows
 ## Usage
 
 ```bash
-crows-env <subcmd> [<subjects>]
+$ crows-env upgrade
+$ crows-env sync [subjects]
 ```
 
-Subcmds are: install update upgrade.
-
-Subjects are: system fish git ssh gpg rime tmux nvim go rust.
-Subcmd 'install', 'update' support subjects.
+Subjects are: system fish git ssh gpg rime tmux nvim go rust zig
 
 ## Installing
 
