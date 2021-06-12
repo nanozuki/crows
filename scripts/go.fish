@@ -1,18 +1,15 @@
-function install_go
-    echo "Install go..."
+function sync_go
+    title "sync go"
+
     set_env_nx GOPATH $HOME/.go
     fish_add_path $GOPATH/bin
+
     if test $os = archlinux
         pacman_install go gopls
         yay_install golangci-lint go-swagger
     else if test $os = macos
         brew_install go gopls golangci-lint go-swagger
     end
-    get_go_pkg $go_pkgs
-end
-
-function update_go
-    echo "Update go..."
     get_go_pkg $go_pkgs
 end
 

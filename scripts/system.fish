@@ -1,18 +1,11 @@
-function install_system
-    echo "Install system..."
-    if test $os = archlinux
-        install_archlinux
-    else if test $os = macos
-        install_macos
-    end
-end
-
-function update_system
-    echo "Update system..."
+function sync_system
+    title "sync system"
     if test $os = archlinux
         update_archlinux
+        install_archlinux
     else if test $os = macos
         update_macos
+        install_macos
     end
 end
 
