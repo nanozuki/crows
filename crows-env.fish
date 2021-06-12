@@ -27,29 +27,17 @@ detect_os
 
 ## -- works --
 
-set subcmd install update upgrade
+set subcmd sync upgrade
 set subjects system fish git ssh gpg rime tmux nvim go rust zig
 
-function install
+function sync
     if test (count $argv) -eq 0
         set subs $subjects
     else
         set subs $argv
     end
     for subject in $subs
-        install_$subject; or exit 1
-    end
-    exit 0
-end
-
-function update
-    if test (count $argv) -eq 0
-        set subs $subjects
-    else
-        set subs $argv
-    end
-    for subject in $subs
-        update_$subject; or exit 1
+        sync_$subject; or exit 1
     end
     exit 0
 end
@@ -65,11 +53,8 @@ end
 ## -- opts --
 
 switch $argv[1]
-    case install
-        install $argv[2..]
-        exit $status
-    case update
-        update $argv[2..]
+    case sync
+        sync $argv[2..]
         exit $status
     case upgrade
         upgrade
@@ -77,11 +62,9 @@ switch $argv[1]
     case '*'
         echo "Usage:"
         echo ""
-        echo \t"crows-env <subcmd> [<subjects>]"
-        echo ""
-        echo "Subcmds are: $subcmd"
+        echo \t"crows-env upgrade"
+        echo \t"crows-env sync [subjects]"
         echo ""
         echo "Subjects are: $subjects"
-        echo "subcmd 'install', 'update' support subjects"
         echo ""
 end

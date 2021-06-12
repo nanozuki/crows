@@ -62,3 +62,11 @@ function git_latest
     end
     echo $repo_path
 end
+
+function title
+    echo ""
+    echo "------->"
+    echo ">>>>>>>>>>>>>>>> $argv[1] <<<<<<<<<<<<<<<<"
+    echo "<-------"
+    echo ""
+end
