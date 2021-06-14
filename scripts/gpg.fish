@@ -9,9 +9,9 @@ function sync_gpg
 
     mkdir -p $HOME/.gnupg
     if test $os = archlinux
-        ln -sf $dots/gnupg_arch/gpg-agent.conf $HOME/.gnupg/gpg-agent.conf
+        ln -sf $dots/gnupg/gpg-agent_arch.conf $HOME/.gnupg/gpg-agent.conf
     else if test $os = macos
-        ln -sf $dots/gnupg_osx/gpg-agent.conf $HOME/.gnupg/gpg-agent.conf
+        ln -sf $dots/gnupg/gpg-agent_osx.conf $HOME/.gnupg/gpg-agent.conf
     end
 
     # TODO: import gpg keys

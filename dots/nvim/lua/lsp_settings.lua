@@ -81,7 +81,7 @@ local servers_settings = {
   zls = {},
   golangcilsp = {
     init_options = {
-        command = { "golangci-lint", "run", "-c", "~/.config/nvim/golangci.yml", "--out-format", "json" };
+        command = { "golangci-lint", "run", "--fast", "--out-format", "json" };
     },
   },
 }

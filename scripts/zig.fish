@@ -3,6 +3,7 @@ function sync_zig
     if test $os = archlinux
         pacman_install zig
         yay_install zls-bin
+        ln -sf $dots/lsp/zls_arch.json $HOME/Library/Application\ Support/zls.json
     else if test $os = macos
         brew_head zig
         macos_zls
@@ -21,7 +22,7 @@ function macos_zls
         git submodule update --init --recursive
         zig build -Drelease-safe
         # ./zig-out/bin/zls config # Configure ZLS
-        ln -sf $dots/zls/zls.json $HOME/Library/Application\ Support/zls.json
+        ln -sf $dots/lsp/zls_osx.json $HOME/Library/Application\ Support/zls.json
         ln -sf (realpath ./zig-out/bin/zls) /usr/local/bin/zls
     cd $cur_dir
 end

@@ -11,6 +11,9 @@ function sync_go
         brew_install go gopls golangci-lint go-swagger
     end
     get_go_pkg $go_pkgs
+
+    # golangci-lint config
+    ln -sf $dots/lsp/golangci.yml ~/Projects/.golangci.yml
 end
 
 function get_go_pkg
