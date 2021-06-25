@@ -84,7 +84,7 @@ local function set_colorscheme(name, mode)
   end
   return
 end
-set_colorscheme('nord', 'dark')
+set_colorscheme('gruvbox', 'light')
 -- }}}
 
 --- [plugin] nvim-treesitter {{{
