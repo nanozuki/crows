@@ -142,17 +142,8 @@ noremap('', '<C-p>', ':Files<CR>')
 
 require'lsp_settings'
 
--- [plugin] vim-go {{{
-vim.g['go_fmt_command'] = "goimports"
-vim.g['go_auto_type_info'] = 1
-vim.g['go_def_mode'] = 'gopls'
-vim.g['go_info_mode'] = 'gopls'
--- use lsp to lint and code completion
-vim.g['go_code_completion_enabled'] = 0
-vim.g['go_def_mapping_enabled'] = 0
-vim.g['go_doc_keywordprg_enabled'] = 0
-vim.g['go_textobj_enabled'] = 0
-vim.g['go_metalinter_enable'] = 0
+-- [plugin] ray-x/go.nvim {{{
+require('go').setup()
 -- }}}
 
 -- [plugin] rust.vim {{{

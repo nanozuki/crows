@@ -30,7 +30,7 @@ Plug 'nvim-lua/completion-nvim'
 " languages syntax and functions
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'mattn/emmet-vim'
-Plug 'fatih/vim-go'
+Plug 'ray-x/go.nvim'
 Plug 'buoto/gotests-vim', { 'for': 'go' }
 Plug 'dag/vim-fish'
 
