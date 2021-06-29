@@ -4,6 +4,7 @@ return require('packer').startup(function (use)
 
   -- appearance
   use 'vim-airline/vim-airline'
+  use 'edkolev/tmuxline.vim'
   use 'yggdroot/indentline'
   use 'tpope/vim-sleuth'
 
@@ -28,10 +29,7 @@ return require('packer').startup(function (use)
   use 'preservim/nerdtree'
   use 'dyng/ctrlsf.vim'
   use 'BurntSushi/ripgrep'
-  use {
-    'junegunn/fzf',
-    run = function() vim.cmd '-> fzf#install()' end,
-  }
+  use 'junegunn/fzf'
   use 'junegunn/fzf.vim'
   -- lsp and complete
   use 'neovim/nvim-lspconfig'
