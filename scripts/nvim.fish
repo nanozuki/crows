@@ -27,14 +27,12 @@ function sync_nvim
     link_dir $dots/nvim $config/nvim
 
     # install and clean plugins
-    if not test -f $config/nvim/autoload/plug.vim
-        curl -fLo $config/nvim/autoload/plug.vim --create-dirs \
-            https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    set packer ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+    if not test -f $packer
+        git clone https://github.com/wbthomason/packer.nvim $packer
     end
-    nvim +PlugClean +PlugInstall +qall
 
-    # update plugins
-    nvim +PlugUpgrade +PlugUpdate +qall
+    nvim +PackerSync +qall
 end
 
 function macos_lua_lsp
