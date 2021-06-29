@@ -13,6 +13,8 @@ return require('packer').startup(function (use)
   use 'Th3Whit3Wolf/one-nvim'
   use {'sonph/onehalf', rtp = 'vim/' }
   use 'arcticicestudio/nord-vim'
+  use 'sainnhe/edge'
+
   -- edit code
   use 'kshenoy/vim-signature'
   use 'scrooloose/nerdcommenter'
@@ -24,6 +26,7 @@ return require('packer').startup(function (use)
   use 'tpope/vim-surround'
   use 'SirVer/ultisnips'
   use 'honza/vim-snippets'
+
   -- read code
   use 'tpope/vim-fugitive'
   use 'preservim/nerdtree'
@@ -31,14 +34,16 @@ return require('packer').startup(function (use)
   use 'BurntSushi/ripgrep'
   use 'junegunn/fzf'
   use 'junegunn/fzf.vim'
-  -- lsp and complete
-  use 'neovim/nvim-lspconfig'
-  use 'nvim-lua/completion-nvim'
-  -- languages syntax and functions
   use {
     'nvim-treesitter/nvim-treesitter',
     run = function () vim.cmd ':TSUpdate' end,
   }
+
+  -- lsp and complete
+  use 'neovim/nvim-lspconfig'
+  use 'nvim-lua/completion-nvim'
+
+  -- languages extra functions
   use 'mattn/emmet-vim'
   use 'ray-x/go.nvim'
   use 'dag/vim-fish'

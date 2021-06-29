@@ -61,31 +61,35 @@ require 'plugins'
 --- [plugin] colorscheme {{{
 opt('o', 'termguicolors', true)
 local function set_colorscheme(name, mode)
+  if mode == 'dark' then
+    opt('o', 'background', 'dark')
+  else
+    opt('o', 'background', 'light')
+  end
+
   if name == 'gruvbox' then
     vim.g['gruvbox_material_enable_italic'] = 1
     vim.g['airline_theme'] = 'gruvbox_material'
-    if mode == 'dark' then
-      opt('o', 'background', 'dark')
-    else
-      opt('o', 'background', 'light')
-    end
     vim.cmd 'colorscheme gruvbox-material'
   elseif name == 'onehalf' then
     if mode == 'dark' then
       vim.g['airline_theme'] = 'onehalfdark'
-      opt('o', 'background', 'dark')
     else
       vim.g['airline_theme'] = 'onehalflight'
-      opt('o', 'background', 'light')
     end
     vim.cmd 'colorscheme one-nvim'
   elseif name == 'nord' then
     vim.g['airline_theme'] = 'nord'
     vim.cmd 'colorscheme nord'
+  elseif name == 'edge' then
+    -- vim.g['edge_style'] = 'aura'
+    vim.g['edge_enable_italic'] = 1
+    vim.g['airline_theme'] = 'edge'
+    vim.cmd 'colorscheme edge'
   end
   return
 end
-set_colorscheme('gruvbox', 'light')
+set_colorscheme('edge', 'light')
 -- }}}
 
 --- [plugin] nvim-treesitter {{{
