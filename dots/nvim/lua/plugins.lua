@@ -1,40 +1,47 @@
-vim.api.nvim_exec(
-[[
-call plug#begin('~/.config/nvim/plugins')
-" appearance
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'yggdroot/indentline'
-Plug 'tpope/vim-sleuth'
-Plug 'morhetz/gruvbox'
-Plug 'sonph/onehalf', { 'rtp': 'vim/' }
-Plug 'arcticicestudio/nord-vim'
-" edit code
-Plug 'kshenoy/vim-signature'
-Plug 'scrooloose/nerdcommenter'
-Plug 'easymotion/vim-easymotion'
-Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-Plug 'tpope/vim-surround'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-" read code
-Plug 'tpope/vim-fugitive'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'dyng/ctrlsf.vim'
-Plug 'BurntSushi/ripgrep'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-" lsp and complete
-Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/completion-nvim'
-" languages syntax and functions
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'mattn/emmet-vim'
-Plug 'ray-x/go.nvim'
-Plug 'buoto/gotests-vim', { 'for': 'go' }
-Plug 'dag/vim-fish'
+return require('packer').startup(function (use)
+  -- Packer itself
+  use 'wbthomason/packer.nvim'
 
-""" Initialize plugin system
-call plug#end()
-]]
-, true)
+  -- appearance
+  use 'vim-airline/vim-airline'
+  use 'yggdroot/indentline'
+  use 'tpope/vim-sleuth'
+
+  -- colorscheme
+  use 'sainnhe/gruvbox-material'
+  use 'Th3Whit3Wolf/one-nvim'
+  use {'sonph/onehalf', rtp = 'vim/' }
+  use 'arcticicestudio/nord-vim'
+  -- edit code
+  use 'kshenoy/vim-signature'
+  use 'scrooloose/nerdcommenter'
+  use 'easymotion/vim-easymotion'
+  use {
+    'mg979/vim-visual-multi',
+    branch = 'master',
+  }
+  use 'tpope/vim-surround'
+  use 'SirVer/ultisnips'
+  use 'honza/vim-snippets'
+  -- read code
+  use 'tpope/vim-fugitive'
+  use 'preservim/nerdtree'
+  use 'dyng/ctrlsf.vim'
+  use 'BurntSushi/ripgrep'
+  use {
+    'junegunn/fzf',
+    run = function() vim.cmd '-> fzf#install()' end,
+  }
+  use 'junegunn/fzf.vim'
+  -- lsp and complete
+  use 'neovim/nvim-lspconfig'
+  use 'nvim-lua/completion-nvim'
+  -- languages syntax and functions
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = function () vim.cmd ':TSUpdate' end,
+  }
+  use 'mattn/emmet-vim'
+  use 'ray-x/go.nvim'
+  use 'dag/vim-fish'
+end)

@@ -62,25 +62,26 @@ require 'plugins'
 opt('o', 'termguicolors', true)
 local function set_colorscheme(name, mode)
   if name == 'gruvbox' then
-    vim.cmd 'colorscheme gruvbox'
-    vim.g['gruvbox_italic'] = 1
-    vim.g['airline_theme'] = "gruvbox"
+    vim.cmd 'colorscheme gruvbox-material'
+    vim.g['gruvbox_material_enable_italic'] = 1
+    vim.g['airline_theme'] = 'gruvbox_material'
     if mode == 'dark' then
       opt('o', 'background', 'dark')
     else
       opt('o', 'background', 'light')
     end
   elseif name == 'onehalf' then
+    vim.cmd 'colorscheme one-nvim'
     if mode == 'dark' then
-      vim.cmd 'colorscheme onehalfdark'
       vim.g['airline_theme'] = 'onehalfdark'
+      opt('o', 'background', 'dark')
     else
-      vim.cmd 'colorscheme onehalflight'
       vim.g['airline_theme'] = 'onehalflight'
+      opt('o', 'background', 'light')
     end
   elseif name == 'nord' then
-    vim.cmd 'colorscheme nord'
     vim.g['airline_theme'] = 'nord'
+    vim.cmd 'colorscheme nord'
   end
   return
 end

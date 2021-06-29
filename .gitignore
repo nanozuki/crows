@@ -1,7 +1,5 @@
 # nvim plugins and runtime
-dots/nvim/plugins/
-plug.vim*
-shada/
+dots/nvim/plugin/packer_compiled.vim
 .netrwhist
 
 # osx
