@@ -3,8 +3,9 @@ local augroup = require'shim'.augroup
 local autocmd = require'shim'.autocmd
 local set_highlight = require'shim'.set_highlight
 local sign_define = require'shim'.sign_define
-local opt = require'shim'.opt
 require 'lsp_config_default'
+
+local M = {}
 
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
@@ -53,7 +54,8 @@ local on_attach = function(client, bufnr)
   -- [Plug] completion-nvim
   require'completion_nvim'.on_attach()
   augroup('format_on_save', {
-    autocmd('BufWritePre', '<buffer>', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'),
+    autocmd('BufWritePre', '<buffer>', 'lua require("lsp_settings").fmt()'),
+    -- autocmd('BufWritePre', '<buffer>', ':silent! lua require("lsp_settings").fmt()'),
   })
 end
 
@@ -88,3 +90,16 @@ for lsp, settings in pairs(servers_settings) do
   settings['on_attach'] = on_attach
   nvim_lsp[lsp].setup(settings)
 end
+
+function M.fmt()
+  local ft = vim.bo.filetype
+  if ft == 'go' then
+    require("go.format").goimport()
+    print("goimport!")
+  else
+    vim.lsp.buf.formatting_sync(nil, 1000)
+    print("lsp format!")
+  end
+end
+
+return M
