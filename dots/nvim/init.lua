@@ -155,9 +155,4 @@ require('go').setup()
 vim.g['rustfmt_autosave'] = 1
 -- }}}
 
--- [plugin] completion-nvim {{{
--- completion
-require'completion_nvim'.on_attach()
--- }}}
-
 -- vim:foldmethod=marker:foldlevel=0
