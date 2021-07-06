@@ -53,9 +53,10 @@ local on_attach = function(client, bufnr)
 
   -- [Plug] completion-nvim
   require'completion_nvim'.on_attach()
+
+  -- format_on_save
   augroup('format_on_save', {
-    autocmd('BufWritePre', '<buffer>', 'lua require("lsp_settings").fmt()'),
-    -- autocmd('BufWritePre', '<buffer>', ':silent! lua require("lsp_settings").fmt()'),
+    autocmd('BufWritePre', '<buffer>', ':silent! lua require("lsp_settings").fmt()'),
   })
 end
 
@@ -95,10 +96,8 @@ function M.fmt()
   local ft = vim.bo.filetype
   if ft == 'go' then
     require("go.format").goimport()
-    print("goimport!")
   else
-    vim.lsp.buf.formatting_sync(nil, 1000)
-    print("lsp format!")
+    vim.lsp.buf.formatting_sync(nil, 10000)
   end
 end
 
