@@ -35,7 +35,7 @@ return require('packer').startup(function (use)
 
   -- lsp and complete
   use 'neovim/nvim-lspconfig'
-  use 'nvim-lua/completion-nvim'
+  use 'hrsh7th/nvim-compe'
 
   -- languages extra functions
   use({'mattn/emmet-vim', ft = {'html', 'javascript.jsx', 'typescript.tsx'}})

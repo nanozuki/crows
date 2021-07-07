@@ -146,5 +146,6 @@ noremap('', '<C-p>', ':Files<CR>')
 --- }}}
 
 require'lsp_settings'
+require'nvim_compe'
 
 -- vim:foldmethod=marker:foldlevel=0
