@@ -51,9 +51,6 @@ local on_attach = function(client, bufnr)
     })
   end
 
-  -- [Plug] completion-nvim
-  require'completion_nvim'.on_attach()
-
   -- format_on_save
   augroup('format_on_save', {
     autocmd('BufWritePre', '<buffer>', ':silent! lua require("lsp_settings").fmt()'),
