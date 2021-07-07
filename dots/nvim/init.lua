@@ -32,7 +32,7 @@ noremap('c', 'w!!', 'w !sudo tee %')
 
 augroup('filetypes', {
   autocmd('BufNewFile,BufRead', '*html',         'setfiletype html'),
-  autocmd('BufNewFile,BufRead', '*.jsx',         'setfiletype javascript.tsx'),
+  autocmd('BufNewFile,BufRead', '*.jsx',         'setfiletype javascript.jsx'),
   autocmd('BufNewFile,BufRead', '*.tsx',         'setfiletype typescript.tsx'),
   autocmd('BufNewFile,BufRead', 'tsconfig.json', 'setfiletype jsonc'),
   autocmd('BufNewFile,BufRead', '*.zig',         'setfiletype zig'),
@@ -146,13 +146,6 @@ noremap('', '<C-p>', ':Files<CR>')
 --- }}}
 
 require'lsp_settings'
-
--- [plugin] ray-x/go.nvim {{{
-require('go').setup()
--- }}}
-
--- [plugin] rust.vim {{{
-vim.g['rustfmt_autosave'] = 1
--- }}}
+require'nvim_compe'
 
 -- vim:foldmethod=marker:foldlevel=0
