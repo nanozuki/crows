@@ -11,7 +11,7 @@ return require('packer').startup(function (use)
   -- colorscheme
   use 'sainnhe/gruvbox-material'
   use 'Th3Whit3Wolf/one-nvim'
-  use {'sonph/onehalf', rtp = 'vim/' }
+  use ({'sonph/onehalf', rtp = 'vim/' })
   use 'arcticicestudio/nord-vim'
   use 'sainnhe/edge'
 
@@ -19,10 +19,7 @@ return require('packer').startup(function (use)
   use 'kshenoy/vim-signature'
   use 'scrooloose/nerdcommenter'
   use 'easymotion/vim-easymotion'
-  use {
-    'mg979/vim-visual-multi',
-    branch = 'master',
-  }
+  use ({'mg979/vim-visual-multi', branch = 'master'})
   use 'tpope/vim-surround'
   use 'SirVer/ultisnips'
   use 'honza/vim-snippets'
@@ -34,17 +31,18 @@ return require('packer').startup(function (use)
   use 'BurntSushi/ripgrep'
   use 'junegunn/fzf'
   use 'junegunn/fzf.vim'
-  use {
-    'nvim-treesitter/nvim-treesitter',
-    run = function () vim.cmd ':TSUpdate' end,
-  }
+  use ({'nvim-treesitter/nvim-treesitter', run = function() vim.cmd ':TSUpdate' end})
 
   -- lsp and complete
   use 'neovim/nvim-lspconfig'
   use 'nvim-lua/completion-nvim'
 
   -- languages extra functions
-  use 'mattn/emmet-vim'
-  use 'ray-x/go.nvim'
-  use 'dag/vim-fish'
+  use({'mattn/emmet-vim', ft = {'html', 'javascript.jsx', 'typescript.tsx'}})
+  use({
+    'ray-x/go.nvim',
+    ft = {'go', 'gomod'},
+    config = "require('go').setup()",
+  })
+  use({'dag/vim-fish', ft = {'fish'}})
 end)
