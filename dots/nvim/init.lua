@@ -125,6 +125,7 @@ vim.g['NERDTreeWinPos'] = "left"
 vim.g['NERDTreeShowHidden'] = 1
 vim.g['NERDTreeMinimalUI'] = 1
 vim.g['NERDTreeAutoDeleteBuffer'] = 1
+vim.g['NERDTreeRespectWildIgnore'] = 1
 --- }}}
 
 --- [plugin] ctrlsf {{{
