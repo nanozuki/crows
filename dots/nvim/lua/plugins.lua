@@ -6,7 +6,7 @@ return require('packer').startup(function (use)
   use 'vim-airline/vim-airline'
   use 'edkolev/tmuxline.vim'
   use 'yggdroot/indentline'
-  use 'tpope/vim-sleuth'
+  use 'tpope/vim-sleuth' -- smart detect indent of file
 
   -- colorscheme
   use 'sainnhe/gruvbox-material'
@@ -17,16 +17,16 @@ return require('packer').startup(function (use)
 
   -- edit code
   use 'kshenoy/vim-signature'
-  use 'scrooloose/nerdcommenter'
+  use 'scrooloose/nerdcommenter' -- <leader>ci (toggle comment), <leader>cs (comment block), <leader>cu (uncomment)
   use 'easymotion/vim-easymotion'
-  use ({'mg979/vim-visual-multi', branch = 'master'})
-  use 'tpope/vim-surround'
+  use ({'mg979/vim-visual-multi', branch = 'master'}) -- Ctrl-N: start, n: next, q: skip, Q: remove current
+  use 'tpope/vim-surround' -- cs"': "a"->'a', ysiw]: word->[word], cs]{: [word]->{ word }
   use 'SirVer/ultisnips'
   use 'honza/vim-snippets'
 
   -- read code
   use 'tpope/vim-fugitive'
-  use 'preservim/nerdtree'
+  use 'preservim/nerdtree' -- use 'm' to open menu to edit filesystem nodes.
   use 'dyng/ctrlsf.vim'
   use 'BurntSushi/ripgrep'
   use 'junegunn/fzf'
