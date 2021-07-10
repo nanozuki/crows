@@ -9,7 +9,7 @@ $ crows-env upgrade
 $ crows-env sync [subjects]
 ```
 
-Subjects are: system fish git ssh gpg rime tmux nvim go rust zig
+Subjects are: system fish git ssh gpg tmux nvim go rust zig
 
 ## Installing
 

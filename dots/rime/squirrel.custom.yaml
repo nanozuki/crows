@@ -1,8 +1,0 @@
-patch:
-  "style/horizontal": true
-  "style/font_face": PingFangSC
-  "style/font_point": 16
-  "style/label_font_point": 14
-  "style/spacing": 2
-  "style/line_spacing": 0
-  "style/corner_radius": 4
