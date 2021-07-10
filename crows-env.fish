@@ -28,7 +28,7 @@ detect_os
 ## -- works --
 
 set subcmd sync upgrade
-set subjects system fish git ssh gpg rime tmux nvim go rust zig
+set subjects system fish git ssh gpg tmux nvim go rust zig
 
 function sync
     if test (count $argv) -eq 0
