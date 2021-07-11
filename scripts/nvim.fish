@@ -27,7 +27,7 @@ function sync_nvim
 
     # install plugins manager
     set packer ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-    if not test -f $packer
+    if not test -d $packer
         git clone https://github.com/wbthomason/packer.nvim $packer
     end
 end
