@@ -15,6 +15,7 @@ opt('w', 'number', true)
 opt('w', 'relativenumber', true)
 opt('w', 'colorcolumn', '120')
 opt('o', 'modelines', 1)
+noremap('t', '<Esc>', [[<C-\><C-N>]])
 --- }}}
 
 --- edit {{{
