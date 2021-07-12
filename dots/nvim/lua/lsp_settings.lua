@@ -93,6 +93,7 @@ function M.fmt()
   local ft = vim.bo.filetype
   if ft == 'go' then
     require("go.format").goimport()
+    require("go.format").gofmt()
   else
     vim.lsp.buf.formatting_sync(nil, 10000)
   end

@@ -42,7 +42,12 @@ return require('packer').startup(function (use)
   use({
     'ray-x/go.nvim',
     ft = {'go', 'gomod'},
-    config = "require('go').setup()",
+    config = function()
+      require('go').setup({
+        goimport='goimports',
+        comment_placeholder='>',
+      })
+    end,
   })
   use({'dag/vim-fish', ft = {'fish'}})
 end)
