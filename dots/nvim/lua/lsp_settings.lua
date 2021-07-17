@@ -68,7 +68,7 @@ local servers_settings = {
   gopls = {},
   graphql = {},
   sumneko_lua = require'lua_lsp'.sumneko_lua_settings,
-  pyls = {},
+  pylsp = {},
   pyright = {},
   rust_analyzer = { settings = { ["rust-analyzer"] = {
     diagnostics = { disabled = {'unresolved-proc-macro'} },
