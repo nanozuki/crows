@@ -23,6 +23,7 @@ return require('packer').startup(function (use)
   use 'tpope/vim-surround' -- cs"': "a"->'a', ysiw]: word->[word], cs]{: [word]->{ word }
   use 'SirVer/ultisnips'
   use 'honza/vim-snippets'
+  use 'sbdchd/neoformat'
 
   -- read code
   use 'tpope/vim-fugitive'
@@ -39,15 +40,5 @@ return require('packer').startup(function (use)
 
   -- languages extra functions
   use({'mattn/emmet-vim', ft = {'html', 'javascript.jsx', 'typescript.tsx'}})
-  use({
-    'ray-x/go.nvim',
-    ft = {'go', 'gomod'},
-    config = function()
-      require('go').setup({
-        goimport='goimports',
-        comment_placeholder='>',
-      })
-    end,
-  })
   use({'dag/vim-fish', ft = {'fish'}})
 end)

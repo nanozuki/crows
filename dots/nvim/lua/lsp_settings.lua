@@ -50,11 +50,6 @@ local on_attach = function(client, bufnr)
       autocmd('CursorHold', '<buffer>', 'lua vim.lsp.diagnostic.show_line_diagnostics()'),
     })
   end
-
-  -- format_on_save
-  augroup('format_on_save', {
-    autocmd('BufWritePre', '<buffer>', ':silent! lua require("lsp_settings").fmt()'),
-  })
 end
 
 sign_define('LspDiagnosticsSignError', {text='✗', texthl='LspDiagnosticsError', linehl='', numhl=''})
@@ -87,16 +82,6 @@ local servers_settings = {
 for lsp, settings in pairs(servers_settings) do
   settings['on_attach'] = on_attach
   nvim_lsp[lsp].setup(settings)
-end
-
-function M.fmt()
-  local ft = vim.bo.filetype
-  if ft == 'go' then
-    require("go.format").goimport()
-    require("go.format").gofmt()
-  else
-    vim.lsp.buf.formatting_sync(nil, 10000)
-  end
 end
 
 return M
