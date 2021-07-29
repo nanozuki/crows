@@ -150,14 +150,6 @@ vim.g.fzf_colors = {
 noremap('', '<C-p>', ':Files<CR>')
 --- }}}
 
-
---- [plugin] neoformat {{{
-vim.g.neoformat_enabled_go = {'goimports'}
-augroup('format_on_save', {
-  autocmd('BufWritePre', '*', 'undojoin | Neoformat'),
-})
---- }}}
-
 require'lsp_settings'
 require'nvim_compe'
 

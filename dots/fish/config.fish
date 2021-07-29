@@ -16,6 +16,12 @@ end
 if type -q direnv
     direnv hook fish | source
 end
+if type -q nvm
+    if test -f ~/.nvmrc
+        echo "lts" > ~/.nvmrc
+    end
+    nvm use > /dev/null
+end
 
 # history across fishes
 function save_history --on-event fish_preexec

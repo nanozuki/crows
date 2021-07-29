@@ -23,7 +23,18 @@ return require('packer').startup(function (use)
   use 'tpope/vim-surround' -- cs"': "a"->'a', ysiw]: word->[word], cs]{: [word]->{ word }
   use 'SirVer/ultisnips'
   use 'honza/vim-snippets'
-  use 'sbdchd/neoformat'
+  use ({
+    'sbdchd/neoformat',
+    ft = {'go'},
+    config = function()
+      local augroup = require'shim'.augroup
+      local autocmd = require'shim'.autocmd
+      vim.g.neoformat_enabled_go = {'goimports'}
+      augroup('format_on_save', {
+        autocmd('BufWritePre', '*', 'Neoformat'),
+      })
+    end
+  })
 
   -- read code
   use 'tpope/vim-fugitive'
