@@ -20,4 +20,5 @@ function sync_fish
 
     # update & install fisher plugin
     fisher update
+    source $config/fish/config.fish
 end
