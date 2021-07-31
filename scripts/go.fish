@@ -6,9 +6,9 @@ function sync_go
 
     if test $os = archlinux
         pacman_install go gopls
-        yay_install golangci-lint go-swagger
+        yay_install golangci-lint
     else if test $os = macos
-        brew_install go gopls golangci-lint go-swagger
+        brew_install go gopls golangci-lint
     end
     get_go_pkg $go_pkgs
 
@@ -35,10 +35,11 @@ set gonvim \
     mvdan.cc/gofumpt
 set gotests github.com/cweill/gotests/... 
 set wire github.com/google/wire/cmd/wire
+set swagger github.com/go-swagger/go-swagger/cmd/swagger
 set grpc \
     google.golang.org/protobuf/cmd/protoc-gen-go \
     google.golang.org/grpc/cmd/protoc-gen-go-grpc \
     github.com/golang/protobuf/{proto,protoc-gen-go}
 set lint_lsp github.com/nametake/golangci-lint-langserver
 
-set go_pkgs $gonvim $gotests $wire $grpc $lint_lsp
+set go_pkgs $gonvim $gotests $wire $swagger $grpc $lint_lsp
