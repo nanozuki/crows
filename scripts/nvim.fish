@@ -5,13 +5,12 @@ function sync_nvim
     if test $os = archlinux
         pacman_install neovim
         pacman_install python-pynvim ripgrep fzf
-        nvm install lts
         npm -g install neovim
         yay_install lua-language-server
     else if test $os = macos
-        brew_install neovim python ripgrep fzf
+        brew_install neovim python node@14 ripgrep fzf
+        brew link --force node@14
         pip3 install pynvim
-        nvm install lts
         npm -g install neovim
     end
 
