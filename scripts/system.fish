@@ -1,15 +1,13 @@
 function sync_system
     title "sync system"
     if test $os = archlinux
-        update_archlinux
-        install_archlinux
+        sync_archlinux
     else if test $os = macos
-        update_macos
-        install_macos
+        sync_macos
     end
 end
 
-function install_archlinux
+function sync_archlinux
     pacman_install go tree
     if not type -q yay
         gitget "~/Projects/aur.archlinux.org/yay"
@@ -17,18 +15,13 @@ function install_archlinux
         cd -
     end
     yay_install direnv
-end
-
-function install_macos
-    brew_install make go tree direnv gnu-sed
-end
-
-function update_archlinux
-    #TODO: update mirror list
     yay -Syu
+    set PATH ~/.local/bin /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin /sbin
 end
 
-function update_macos
+function sync_macos
+    brew_install make go tree direnv gnu-sed
     brew update && brew upgrade && brew cleanup
     brew upgrade --cask
+    set PATH ~/.local/bin /opt/homebrew/bin /usr/local/bin /usr/bin /bin /usr/sbin /sbin /Library/Apple/usr/bin
 end
