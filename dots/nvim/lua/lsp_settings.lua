@@ -77,6 +77,7 @@ local servers_settings = {
         command = { "golangci-lint", "run", "--fast", "--out-format", "json" };
     },
   },
+  yamlls = {},
 }
 
 for lsp, settings in pairs(servers_settings) do
