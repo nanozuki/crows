@@ -2,5 +2,7 @@
 dots/nvim/plugin/*
 .netrwhist
 
+.vscode
+
 # osx
 .DS_Store
