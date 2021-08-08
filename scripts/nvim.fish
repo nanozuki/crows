@@ -34,6 +34,7 @@ function sync_nvim
 end
 
 function macos_lua_lsp
+    brew_install ninja
     set repo https://github.com/sumneko/lua-language-server.git
     set repo_path (git_latest $repo); or return 1
     if test -z $repo_path
@@ -42,10 +43,10 @@ function macos_lua_lsp
 
     set cur_dir (pwd)
     cd $repo_path
-        git submodule update --init --recursive
-        cd 3rd/luamake
-        compile/install.sh
-        cd ../..
-        ./3rd/luamake/luamake rebuild
+    git submodule update --init --recursive
+    cd 3rd/luamake
+    compile/install.sh
+    cd ../..
+    ./3rd/luamake/luamake rebuild
     cd $cur_dir
 end
