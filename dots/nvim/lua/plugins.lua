@@ -23,18 +23,7 @@ return require('packer').startup(function (use)
   use 'tpope/vim-surround' -- cs"': "a"->'a', ysiw]: word->[word], cs]{: [word]->{ word }
   use 'SirVer/ultisnips'
   use 'honza/vim-snippets'
-  use ({
-    'sbdchd/neoformat',
-    ft = {'go'},
-    config = function()
-      local augroup = require'shim'.augroup
-      local autocmd = require'shim'.autocmd
-      vim.g.neoformat_enabled_go = {'goimports'}
-      augroup('format_on_save', {
-        autocmd('BufWritePre', '*', 'Neoformat'),
-      })
-    end
-  })
+  use 'sbdchd/neoformat'
 
   -- read code
   use 'tpope/vim-fugitive'
@@ -50,6 +39,6 @@ return require('packer').startup(function (use)
   use 'hrsh7th/nvim-compe'
 
   -- languages extra functions
-  use({'mattn/emmet-vim', ft = {'html', 'javascript.jsx', 'typescript.tsx'}})
+  use({'mattn/emmet-vim', ft = {'html', 'javascript.jsx', 'typescript.tsx', 'javascriptreact', 'typescriptreact'}})
   use({'dag/vim-fish', ft = {'fish'}})
 end)

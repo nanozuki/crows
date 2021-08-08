@@ -33,8 +33,6 @@ noremap('c', 'w!!', 'w !sudo tee %')
 
 augroup('filetypes', {
   autocmd('BufNewFile,BufRead', '*html',         'setfiletype html'),
-  autocmd('BufNewFile,BufRead', '*.jsx',         'setfiletype javascript.jsx'),
-  autocmd('BufNewFile,BufRead', '*.tsx',         'setfiletype typescript.tsx'),
   autocmd('BufNewFile,BufRead', 'tsconfig.json', 'setfiletype jsonc'),
   autocmd('BufNewFile,BufRead', '*.zig',         'setfiletype zig'),
 })
@@ -53,7 +51,7 @@ opt('b', 'shiftwidth', 4)
 opt('b', 'softtabstop', 4)
 
 augroup('fileindent', {
-  autocmd('FileType', 'javascript,typescript,html,css,scss,xml,yaml,json,wxss,wxml,lua', 'setlocal expandtab ts=2 sw=2 sts=2'),
+  autocmd('FileType', 'javascript,typescript,javascriptreact,typescriptreact,html,css,scss,xml,yaml,json,wxss,wxml,lua', 'setlocal expandtab ts=2 sw=2 sts=2'),
 })
 --- }}}
 
@@ -149,6 +147,14 @@ vim.g.fzf_colors = {
 }
 noremap('', '<C-p>', ':Files<CR>')
 --- }}}
+
+--- [plugin] neoformat
+vim.g.neoformat_enabled_go = {'goimports'}
+vim.g.neoformat_enabled_javascript = {'prettier'}
+augroup('format_on_save', {
+  autocmd('BufWritePre', '*', 'Neoformat'),
+})
+---
 
 require'lsp_settings'
 require'nvim_compe'
