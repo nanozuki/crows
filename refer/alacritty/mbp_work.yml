@@ -178,7 +178,7 @@ font:
 schemes:  
 
   ### Edge (Light variant)
-  edge_light:	  &edge_light
+  edge_light: &edge_light
     primary:
       background: "0xfafafa"
       foreground: "0x4b505b"
