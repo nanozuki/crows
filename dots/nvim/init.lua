@@ -148,13 +148,21 @@ vim.g.fzf_colors = {
 noremap('', '<C-p>', ':Files<CR>')
 --- }}}
 
---- [plugin] neoformat
-vim.g.neoformat_enabled_go = {'goimports'}
-vim.g.neoformat_enabled_javascript = {'prettier'}
-augroup('format_on_save', {
-  autocmd('BufWritePre', '*', 'Neoformat'),
-})
----
+--- [plugin] ale {{{
+vim.g.ale_disable_lsp = 1
+vim.g.ale_fix_on_save = 1
+vim.g.ale_sign_error = '✗'
+vim.g.ale_sign_warning = '‼'
+local ale_config = {
+  javascript = {'eslint'},
+  javascriptreact = {'eslint'},
+  typescript = {'eslint'},
+  typescriptreact = {'eslint'},
+  go = {'goimports'},
+}
+vim.g.ale_linters = ale_config
+vim.g.ale_fixers = ale_config
+--- }}}
 
 require'lsp_settings'
 require'nvim_compe'
