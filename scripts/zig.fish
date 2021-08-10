@@ -5,7 +5,7 @@ function sync_zig
         yay_install zls-bin
         ln -sf $dots/lsp/zls_arch.json $config/zls.json
     else if test $os = macos
-        brew_head zig
+        brew_install zig
         macos_zls
     end
 end
@@ -19,10 +19,10 @@ function macos_zls
 
     set cur_dir (pwd)
     cd $repo_path
-        git submodule update --init --recursive
-        zig build -Drelease-safe
-        # ./zig-out/bin/zls config # Configure ZLS
-        ln -sf $dots/lsp/zls_osx.json $HOME/Library/Application\ Support/zls.json
-        ln -sf (realpath ./zig-out/bin/zls) /usr/local/bin/zls
+    git submodule update --init --recursive
+    zig build -Drelease-safe
+    # ./zig-out/bin/zls config # Configure ZLS
+    ln -sf $dots/lsp/zls_osx.json $HOME/Library/Application\ Support/zls.json
+    ln -sf (realpath ./zig-out/bin/zls) /usr/local/bin/zls
     cd $cur_dir
 end

@@ -23,7 +23,7 @@ return require('packer').startup(function (use)
   use 'tpope/vim-surround' -- cs"': "a"->'a', ysiw]: word->[word], cs]{: [word]->{ word }
   use 'SirVer/ultisnips'
   use 'honza/vim-snippets'
-  use 'sbdchd/neoformat'
+  use 'dense-analysis/ale';
 
   -- read code
   use 'tpope/vim-fugitive'
