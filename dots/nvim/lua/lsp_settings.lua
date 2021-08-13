@@ -72,6 +72,7 @@ local servers_settings = {
   tsserver = {},
   vimls = {},
   zls = {},
+  terraformls = {},
   golangcilsp = {
     init_options = {
         command = { "golangci-lint", "run", "--fast", "--out-format", "json" };
