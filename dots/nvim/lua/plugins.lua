@@ -1,44 +1,50 @@
-return require('packer').startup(function (use)
-  -- Packer itself
-  use 'wbthomason/packer.nvim'
+-- auto install paq-nvim if not exist
+local install_path = vim.fn.stdpath('data') .. '/site/pack/paqs/start/paq-nvim'
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+  vim.fn.system({'git', 'clone', '--depth=1', 'https://github.com/savq/paq-nvim.git', install_path})
+end
+
+require "paq" {
+  -- paq-nvim itself
+  'savq/paq-nvim',
 
   -- appearance
-  use 'vim-airline/vim-airline'
-  use 'edkolev/tmuxline.vim'
-  use 'yggdroot/indentline'
-  use 'tpope/vim-sleuth' -- smart detect indent of file
+  'vim-airline/vim-airline',
+  'edkolev/tmuxline.vim',
+  'yggdroot/indentline',
+  'tpope/vim-sleuth', -- smart detect indent of file
 
   -- colorscheme
-  use 'sainnhe/gruvbox-material'
-  use 'Th3Whit3Wolf/one-nvim'
-  use ({'sonph/onehalf', rtp = 'vim/' })
-  use 'arcticicestudio/nord-vim'
-  use 'sainnhe/edge'
+  'sainnhe/gruvbox-material',
+  'Th3Whit3Wolf/one-nvim',
+  -- ({'sonph/onehalf', rtp = 'vim/' }),
+  'arcticicestudio/nord-vim',
+  'sainnhe/edge',
 
   -- edit code
-  use 'kshenoy/vim-signature'
-  use 'scrooloose/nerdcommenter' -- <leader>ci (toggle comment), <leader>cs (comment block), <leader>cu (uncomment)
-  use 'easymotion/vim-easymotion'
-  use ({'mg979/vim-visual-multi', branch = 'master'}) -- Ctrl-N: start, n: next, q: skip, Q: remove current
-  use 'tpope/vim-surround' -- cs"': "a"->'a', ysiw]: word->[word], cs]{: [word]->{ word }
-  use 'SirVer/ultisnips'
-  use 'honza/vim-snippets'
-  use 'dense-analysis/ale';
+  'kshenoy/vim-signature',
+  'scrooloose/nerdcommenter', -- <leader>ci (toggle comment), <leader>cs (comment block), <leader>cu (uncomment)
+  'easymotion/vim-easymotion',
+  'mg979/vim-visual-multi',
+  'tpope/vim-surround', -- cs"': "a"->'a', ysiw]: word->[word], cs]{: [word]->{ word }
+  'SirVer/ultisnips',
+  'honza/vim-snippets',
+  'dense-analysis/ale',
 
   -- read code
-  use 'tpope/vim-fugitive'
-  use 'preservim/nerdtree' -- use 'm' to open menu to edit filesystem nodes.
-  use 'dyng/ctrlsf.vim'
-  use 'BurntSushi/ripgrep'
-  use 'junegunn/fzf'
-  use 'junegunn/fzf.vim'
-  use ({'nvim-treesitter/nvim-treesitter', run = function() vim.cmd ':TSUpdate' end})
+  'tpope/vim-fugitive',
+  'preservim/nerdtree', -- use 'm' to open menu to edit filesystem nodes.
+  'dyng/ctrlsf.vim',
+  'BurntSushi/ripgrep',
+  'junegunn/fzf',
+  'junegunn/fzf.vim',
+  {'nvim-treesitter/nvim-treesitter', run = function() vim.cmd ':TSUpdate' end},
 
   -- lsp and complete
-  use 'neovim/nvim-lspconfig'
-  use 'hrsh7th/nvim-compe'
+  'neovim/nvim-lspconfig',
+  'hrsh7th/nvim-compe',
 
   -- languages extra functions
-  use({'mattn/emmet-vim', ft = {'html', 'javascript.jsx', 'typescript.tsx', 'javascriptreact', 'typescriptreact'}})
-  use({'dag/vim-fish', ft = {'fish'}})
-end)
+  'mattn/emmet-vim', -- ft = {'html', 'javascript.jsx', 'typescript.tsx', 'javascriptreact', 'typescriptreact'}})
+  'dag/vim-fish', -- ft = {'fish'}})
+}
