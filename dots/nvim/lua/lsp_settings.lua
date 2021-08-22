@@ -1,4 +1,5 @@
 local nvim_lsp = require 'lspconfig'
+local util = require 'lspconfig/util'
 local augroup = require'shim'.augroup
 local autocmd = require'shim'.autocmd
 local set_highlight = require'shim'.set_highlight
@@ -69,7 +70,20 @@ local servers_settings = {
     diagnostics = { disabled = {'unresolved-proc-macro'} },
     checkOnSave = { command = 'clippy' },
   } } },
-  tsserver = {},
+  tsserver = {
+    root_dir = function(fname)
+      return util.root_pattern 'tsconfig.json'(fname)
+        or util.root_pattern('package.json', 'jsconfig.json')(fname)
+    end,
+  },
+  denols = {
+    root_dir = util.root_pattern('deno_root'),
+    init_options = {
+      enable = true,
+      lint = true,
+      unstable = true,
+    }
+  },
   vimls = {},
   zls = {},
   terraformls = {},
