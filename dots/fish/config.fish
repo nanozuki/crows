@@ -16,6 +16,7 @@ end
 if type -q direnv
     direnv hook fish | source
 end
+alias tmuxa="tmux a; or tmux"
 
 # history across fishes
 function save_history --on-event fish_preexec
