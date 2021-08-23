@@ -10,7 +10,7 @@ function sync_rust
         curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
     else
         if not test (date_cache get rustup_update)
-            rustup update
+            rustup -q update
             date_cache set rustup_update
         end
     end
