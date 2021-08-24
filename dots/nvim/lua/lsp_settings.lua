@@ -51,6 +51,10 @@ local on_attach = function(client, bufnr)
       autocmd('CursorHold', '<buffer>', 'lua vim.lsp.diagnostic.show_line_diagnostics()'),
     })
   end
+
+  augroup('lsp_format_on_save', {
+    autocmd('BufWritePre', '<buffer>', 'lua vim.lsp.buf.formatting_sync(nil, 1000)'),
+  })
 end
 
 sign_define('LspDiagnosticsSignError', {text='✗', texthl='LspDiagnosticsError', linehl='', numhl=''})
