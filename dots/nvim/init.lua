@@ -1,170 +1,175 @@
 -- Nanozuki Vim Config
 
-local opt = require'shim'.opt
-local noremap = require'shim'.noremap
-local map = require'shim'.map
-local augroup = require'shim'.augroup
-local autocmd = require'shim'.autocmd
+local opt = require("shim").opt
+local noremap = require("shim").noremap
+local map = require("shim").map
+local augroup = require("shim").augroup
+local autocmd = require("shim").autocmd
 
 --- basic & misc {{{
-vim.g.mapleader = ' '
-opt('w', 'linebreak', true)
-opt('o', 'showbreak', '->')
-opt('o', 'mouse', 'ar')
-opt('w', 'number', true)
-opt('w', 'relativenumber', true)
-opt('w', 'colorcolumn', '120')
-opt('o', 'modelines', 1)
-noremap('t', '<Esc>', [[<C-\><C-N>]])
+vim.g.mapleader = " "
+opt("w", "linebreak", true)
+opt("o", "showbreak", "->")
+opt("o", "mouse", "ar")
+opt("w", "number", true)
+opt("w", "relativenumber", true)
+opt("w", "colorcolumn", "120")
+opt("o", "modelines", 1)
+noremap("t", "<Esc>", [[<C-\><C-N>]])
 --- }}}
 
 --- edit {{{
-vim.cmd 'syntax enable'
-opt('w', 'foldmethod', 'indent')
-opt('o', 'foldlevelstart', 99)
+vim.cmd("syntax enable")
+opt("w", "foldmethod", "indent")
+opt("o", "foldlevelstart", 99)
 -- copy selection to system clipboard
-noremap('v', '<Leader>y', '"+y')
+noremap("v", "<Leader>y", '"+y')
 -- paste from system clipboard
-noremap('n', '<Leader>p', '"+p')
+noremap("n", "<Leader>p", '"+p')
 -- ignore file for all
-vim.cmd 'set wildignore+=*/node_modules/*,*.swp,*.pyc,*/venv/*,*/target/*,.DS_Store'
+vim.cmd("set wildignore+=*/node_modules/*,*.swp,*.pyc,*/venv/*,*/target/*,.DS_Store")
 -- save as sudo
-noremap('c', 'w!!', 'w !sudo tee %')
+noremap("c", "w!!", "w !sudo tee %")
 
-augroup('filetypes', {
-  autocmd('BufNewFile,BufRead', '*html',         'setfiletype html'),
-  autocmd('BufNewFile,BufRead', 'tsconfig.json', 'setfiletype jsonc'),
-  autocmd('BufNewFile,BufRead', '*.zig',         'setfiletype zig'),
+augroup("filetypes", {
+	autocmd("BufNewFile,BufRead", "*html", "setfiletype html"),
+	autocmd("BufNewFile,BufRead", "tsconfig.json", "setfiletype jsonc"),
+	autocmd("BufNewFile,BufRead", "*.zig", "setfiletype zig"),
 })
 --- }}}
 
 -- search & replace {{{
-noremap('n', '<leader>/', ':nohlsearch<CR>')
-opt('o', 'ignorecase', true)
+noremap("n", "<leader>/", ":nohlsearch<CR>")
+opt("o", "ignorecase", true)
 -- }}}
 
 -- indent {{{
-vim.cmd 'filetype indent on'
-opt('b', 'expandtab', true)
-opt('b', 'tabstop', 4)
-opt('b', 'shiftwidth', 4)
-opt('b', 'softtabstop', 4)
+vim.cmd("filetype indent on")
+opt("b", "expandtab", true)
+opt("b", "tabstop", 4)
+opt("b", "shiftwidth", 4)
+opt("b", "softtabstop", 4)
 
-augroup('fileindent', {
-  autocmd('FileType', 'javascript,typescript,javascriptreact,typescriptreact,html,css,scss,xml,yaml,json,wxss,wxml,lua', 'setlocal expandtab ts=2 sw=2 sts=2'),
+augroup("fileindent", {
+	autocmd(
+		"FileType",
+		"javascript,typescript,javascriptreact,typescriptreact,html,css,scss,xml,yaml,json,wxss,wxml,lua",
+		"setlocal expandtab ts=2 sw=2 sts=2"
+	),
 })
 --- }}}
 
-require 'plugins'
+require("plugins")
 
 --- [plugin] colorscheme {{{
-opt('o', 'termguicolors', true)
+opt("o", "termguicolors", true)
 local function set_colorscheme(name, mode)
-  if mode == 'dark' then
-    opt('o', 'background', 'dark')
-  else
-    opt('o', 'background', 'light')
-  end
+	if mode == "dark" then
+		opt("o", "background", "dark")
+	else
+		opt("o", "background", "light")
+	end
 
-  if name == 'gruvbox' then
-    vim.g['gruvbox_material_enable_italic'] = 1
-    vim.g['airline_theme'] = 'gruvbox_material'
-    vim.cmd 'colorscheme gruvbox-material'
-  elseif name == 'onehalf' then
-    if mode == 'dark' then
-      vim.g['airline_theme'] = 'onehalfdark'
-    else
-      vim.g['airline_theme'] = 'onehalflight'
-    end
-    vim.cmd 'colorscheme one-nvim'
-  elseif name == 'nord' then
-    vim.g['airline_theme'] = 'nord'
-    vim.cmd 'colorscheme nord'
-  elseif name == 'edge' then
-    -- vim.g['edge_style'] = 'aura'
-    vim.g['edge_enable_italic'] = 1
-    vim.g['airline_theme'] = 'edge'
-    vim.cmd 'colorscheme edge'
-  end
-  return
+	if name == "gruvbox" then
+		vim.g["gruvbox_material_enable_italic"] = 1
+		vim.g["airline_theme"] = "gruvbox_material"
+		vim.cmd("colorscheme gruvbox-material")
+	elseif name == "onehalf" then
+		if mode == "dark" then
+			vim.g["airline_theme"] = "onehalfdark"
+		else
+			vim.g["airline_theme"] = "onehalflight"
+		end
+		vim.cmd("colorscheme one-nvim")
+	elseif name == "nord" then
+		vim.g["airline_theme"] = "nord"
+		vim.cmd("colorscheme nord")
+	elseif name == "edge" then
+		-- vim.g['edge_style'] = 'aura'
+		vim.g["edge_enable_italic"] = 1
+		vim.g["airline_theme"] = "edge"
+		vim.cmd("colorscheme edge")
+	end
+	return
 end
-set_colorscheme('edge', 'light')
+set_colorscheme("edge", "light")
 -- }}}
 
 --- [plugin] nvim-treesitter {{{
-require'nvim-treesitter.configs'.setup{
-  ensure_installed = 'maintained',
-  highlight = {enable = true},
-}
+require("nvim-treesitter.configs").setup({
+	ensure_installed = "maintained",
+	highlight = { enable = true },
+})
 --- }}}
 
 --- [plugin] airline {{{
-vim.g['airline_powerline_fonts'] = 1
-vim.g['airline_extensions'] = {'tabline', 'branch', 'virtualenv'}
-vim.g['airline#extensions#tabline#buffer_idx_mode'] = 1
+vim.g["airline_powerline_fonts"] = 1
+vim.g["airline_extensions"] = { "tabline", "branch", "virtualenv" }
+vim.g["airline#extensions#tabline#buffer_idx_mode"] = 1
 for i = 0, 9 do
-  map('n', '<leader>'..i, '<Plug>AirlineSelectTab'..i)
+	map("n", "<leader>" .. i, "<Plug>AirlineSelectTab" .. i)
 end
-map('n', '<leader>-', '<Plug>AirlineSelectPrevTab')
-map('n', '<leader>+', '<Plug>AirlineSelectNextTab')
+map("n", "<leader>-", "<Plug>AirlineSelectPrevTab")
+map("n", "<leader>+", "<Plug>AirlineSelectNextTab")
 --- }}}
 
 --- [plugin] indentline {{{
-vim.cmd 'set list lcs=tab:\\¦\\ '
-vim.cmd 'autocmd Filetype json let g:indentLine_enabled = 0'
+vim.cmd("set list lcs=tab:\\¦\\ ")
+vim.cmd("autocmd Filetype json let g:indentLine_enabled = 0")
 --- }}}
 
 --- [plugin] ultisnips {{{
-vim.g['UltiSnipsExpandTrigger'] = "<c-e>"
-vim.g['UltiSnipsJumpForwardTrigger'] = "<c-e>"
-vim.g['UltiSnipsJumpBackwardTrigger'] = "<c-h>"
+vim.g["UltiSnipsExpandTrigger"] = "<c-e>"
+vim.g["UltiSnipsJumpForwardTrigger"] = "<c-e>"
+vim.g["UltiSnipsJumpBackwardTrigger"] = "<c-h>"
 --- }}}
 
 --- [plugin] nerdtree {{{
-noremap('', '<Leader>fl', ':NERDTreeToggle<CR>')
-vim.g['NERDTreeWinSize'] = 32
-vim.g['NERDTreeWinPos'] = "left"
-vim.g['NERDTreeShowHidden'] = 1
-vim.g['NERDTreeMinimalUI'] = 1
-vim.g['NERDTreeAutoDeleteBuffer'] = 1
-vim.g['NERDTreeRespectWildIgnore'] = 1
+noremap("", "<Leader>fl", ":NERDTreeToggle<CR>")
+vim.g["NERDTreeWinSize"] = 32
+vim.g["NERDTreeWinPos"] = "left"
+vim.g["NERDTreeShowHidden"] = 1
+vim.g["NERDTreeMinimalUI"] = 1
+vim.g["NERDTreeAutoDeleteBuffer"] = 1
+vim.g["NERDTreeRespectWildIgnore"] = 1
 --- }}}
 
 --- [plugin] ctrlsf {{{
-vim.g['ctrlsf_ackprg'] = 'rg'
-noremap('', '<leader>sf', ':CtrlSF ') -- search current name
-noremap('', '<leader>sp', ':CtrlSF<CR>') -- search in project
+vim.g["ctrlsf_ackprg"] = "rg"
+noremap("", "<leader>sf", ":CtrlSF ") -- search current name
+noremap("", "<leader>sp", ":CtrlSF<CR>") -- search in project
 --- }}}
 
 --- [plugin] fzf {{{
 vim.g.fzf_layout = { window = { width = 0.9, height = 0.8 } }
 vim.g.fzf_colors = {
-  gutter = {'bg', 'Tabline'},
-  ['bg+'] = {'bg', 'CursorLine', 'CursorColumn'},
-  ['fg+'] = {'fg', 'CursorLine', 'CursorColumn', 'Normal'},
-  ['hl'] = {'fg', 'Special'},
-  ['hl+'] = {'fg', 'Statement'},
+	gutter = { "bg", "Tabline" },
+	["bg+"] = { "bg", "CursorLine", "CursorColumn" },
+	["fg+"] = { "fg", "CursorLine", "CursorColumn", "Normal" },
+	["hl"] = { "fg", "Special" },
+	["hl+"] = { "fg", "Statement" },
 }
-noremap('', '<C-p>', ':Files<CR>')
+noremap("", "<C-p>", ":Files<CR>")
 --- }}}
 
 --- [plugin] ale {{{
 vim.g.ale_disable_lsp = 1
 vim.g.ale_fix_on_save = 1
-vim.g.ale_sign_error = '✗'
-vim.g.ale_sign_warning = '‼'
+vim.g.ale_sign_error = "✗"
+vim.g.ale_sign_warning = "‼"
 local ale_config = {
-  javascript = {'eslint'},
-  javascriptreact = {'eslint'},
-  typescript = {'eslint'},
-  typescriptreact = {'eslint'},
-  go = {'goimports'},
+	javascript = { "eslint" },
+	javascriptreact = { "eslint" },
+	typescript = { "eslint" },
+	typescriptreact = { "eslint" },
+	go = { "goimports" },
+	lua = { "stylua" },
 }
 vim.g.ale_linters = ale_config
 vim.g.ale_fixers = ale_config
 --- }}}
 
-require'lsp_settings'
-require'nvim_compe'
+require("lsp_settings")
+require("nvim_compe")
 
 -- vim:foldmethod=marker:foldlevel=0
