@@ -22,6 +22,7 @@ function sync_nvim
         npm -g update neovim
         macos_lua_lsp
     end
+    cargo install stylua
 
     # link config
     link_dir $dots/nvim $config/nvim
