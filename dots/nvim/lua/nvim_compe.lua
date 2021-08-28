@@ -1,4 +1,4 @@
-vim.o.completeopt = "menuone,noselect"
+vim.opt.completeopt = "menu,menuone,noselect"
 
 -- config
 require("compe").setup({
@@ -6,7 +6,7 @@ require("compe").setup({
 	autocomplete = true,
 	debug = false,
 	min_length = 1,
-	preselect = "enable",
+	preselect = "always",
 	throttle_time = 80,
 	source_timeout = 200,
 	resolve_timeout = 800,
@@ -14,14 +14,7 @@ require("compe").setup({
 	max_abbr_width = 100,
 	max_kind_width = 100,
 	max_menu_width = 100,
-	documentation = {
-		border = { "", "", "", " ", "", "", "", " " }, -- the border option is the same as `|help nvim_open_win|`
-		winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
-		max_width = 120,
-		min_width = 60,
-		max_height = math.floor(vim.o.lines * 0.3),
-		min_height = 1,
-	},
+	documentation = true,
 
 	source = {
 		path = true,
@@ -31,21 +24,9 @@ require("compe").setup({
 		nvim_lua = true,
 		vsnip = false,
 		ultisnips = true,
-		luasnip = true,
+		luasnip = false,
 	},
 })
-
--- mapping
-vim.api.nvim_exec(
-	[[
-inoremap <silent><expr> <C-Space> compe#complete()
-inoremap <silent><expr> <CR>      compe#confirm('<CR>')
-inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
-inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
-]],
-	true
-)
 
 -- smart tab
 local t = function(str)
@@ -82,7 +63,9 @@ _G.s_tab_complete = function()
 	end
 end
 
+-- mapping
 vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", { expr = true })
 vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", { expr = true })
 vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", { expr = true })
 vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", { expr = true })
+vim.api.nvim_set_keymap("i", "<CR>", "compe#confirm({ 'keys': '<CR>', 'select': v:true })", { expr = true })
