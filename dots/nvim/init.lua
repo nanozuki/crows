@@ -1,6 +1,5 @@
 -- Nanozuki Vim Config
 
-local opt = require("shim").opt
 local noremap = require("shim").noremap
 local map = require("shim").map
 local augroup = require("shim").augroup
@@ -8,20 +7,20 @@ local autocmd = require("shim").autocmd
 
 --- basic & misc {{{
 vim.g.mapleader = " "
-opt("w", "linebreak", true)
-opt("o", "showbreak", "->")
-opt("o", "mouse", "ar")
-opt("w", "number", true)
-opt("w", "relativenumber", true)
-opt("w", "colorcolumn", "120")
-opt("o", "modelines", 1)
+vim.opt.linebreak = true
+vim.opt.showbreak = "->"
+vim.opt.mouse = "ar"
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.colorcolumn = "120"
+vim.opt.modelines = 1
 noremap("t", "<Esc>", [[<C-\><C-N>]])
 --- }}}
 
 --- edit {{{
 vim.cmd("syntax enable")
-opt("w", "foldmethod", "indent")
-opt("o", "foldlevelstart", 99)
+vim.opt.foldmethod = "indent"
+vim.opt.foldlevelstart = 99
 -- copy selection to system clipboard
 noremap("v", "<Leader>y", '"+y')
 -- paste from system clipboard
@@ -40,20 +39,20 @@ augroup("filetypes", {
 
 -- search & replace {{{
 noremap("n", "<leader>/", ":nohlsearch<CR>")
-opt("o", "ignorecase", true)
+vim.opt.ignorecase = true
 -- }}}
 
 -- indent {{{
 vim.cmd("filetype indent on")
-opt("b", "expandtab", true)
-opt("b", "tabstop", 4)
-opt("b", "shiftwidth", 4)
-opt("b", "softtabstop", 4)
+vim.opt.expandtab = true
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.softtabstop = 4
 
 augroup("fileindent", {
 	autocmd(
 		"FileType",
-		"javascript,typescript,javascriptreact,typescriptreact,html,css,scss,xml,yaml,json,wxss,wxml,lua",
+		"javascript,typescript,javascriptreact,typescriptreact,html,css,scss,xml,yaml,json",
 		"setlocal expandtab ts=2 sw=2 sts=2"
 	),
 })
@@ -62,12 +61,12 @@ augroup("fileindent", {
 require("plugins")
 
 --- [plugin] colorscheme {{{
-opt("o", "termguicolors", true)
+vim.opt.termguicolors = true
 local function set_colorscheme(name, mode)
 	if mode == "dark" then
-		opt("o", "background", "dark")
+		vim.opt.background = "dark"
 	else
-		opt("o", "background", "light")
+		vim.opt.background = "light"
 	end
 
 	if name == "gruvbox" then

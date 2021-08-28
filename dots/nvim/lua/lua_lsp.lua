@@ -1,18 +1,12 @@
-local system_name
+local sumneko_root_path = vim.fn.expand("$HOME") .. "/Projects/github.com/sumneko/lua-language-server"
+local sumneko_binary
 if vim.fn.has("mac") == 1 then
-	system_name = "macOS"
+	sumneko_binary = sumneko_root_path .. "/bin/macOS/lua-language-server"
 elseif vim.fn.has("unix") == 1 then
-	system_name = "Linux"
-elseif vim.fn.has("win32") == 1 then
-	system_name = "Windows"
+	sumneko_binary = "/usr/bin/lua-language-server"
 else
 	print("Unsupported system for sumneko")
 end
-
--- set the path to the sumneko installation; if you previously installed via the now deprecated :LspInstall, use
--- local sumneko_root_path = vim.fn.stdpath('cache')..'/lspconfig/sumneko_lua/lua-language-server'
-local sumneko_root_path = vim.fn.expand("$HOME") .. "/Projects/github.com/sumneko/lua-language-server"
-local sumneko_binary = sumneko_root_path .. "/bin/" .. system_name .. "/lua-language-server"
 
 local M = {}
 M.sumneko_lua_settings = {
