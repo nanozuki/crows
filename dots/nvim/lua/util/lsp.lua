@@ -6,6 +6,7 @@ local sign_define = require("util/shim").sign_define
 local plugin = require("util/plugin")
 
 plugin.use("neovim/nvim-lspconfig")
+plugin.use("ray-x/lsp_signature.nvim")
 
 local on_attach = function(client, bufnr)
 	local function buf_set_keymap(...)
@@ -54,6 +55,8 @@ local on_attach = function(client, bufnr)
 			autocmd("CursorHold", "<buffer>", "lua vim.lsp.diagnostic.show_line_diagnostics()"),
 		})
 	end
+
+	require("lsp_signature").on_attach()
 
 	augroup("lsp_format_on_save", {
 		autocmd("BufWritePre", "<buffer>", "lua vim.lsp.buf.formatting_sync(nil, 1000)"),
