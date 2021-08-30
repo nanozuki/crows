@@ -1,3 +1,6 @@
+local plugin = require("util/plugin")
+plugin.use("hrsh7th/nvim-compe")
+
 vim.opt.completeopt = "menu,menuone,noselect"
 
 -- config

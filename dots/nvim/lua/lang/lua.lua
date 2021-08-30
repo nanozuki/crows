@@ -8,8 +8,7 @@ else
 	print("Unsupported system for sumneko")
 end
 
-local M = {}
-M.sumneko_lua_settings = {
+local sumneko_lua_settings = {
 	cmd = { sumneko_binary, "-E", sumneko_root_path .. "/main.lua" },
 	settings = {
 		Lua = {
@@ -39,4 +38,4 @@ M.sumneko_lua_settings = {
 	},
 }
 
-return M
+require("util/lsp").set_config("sumneko_lua", sumneko_lua_settings)
