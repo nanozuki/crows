@@ -1,9 +1,9 @@
 local nvim_lsp = require("lspconfig")
 local util = require("lspconfig/util")
-local augroup = require("shim").augroup
-local autocmd = require("shim").autocmd
-local set_highlight = require("shim").set_highlight
-local sign_define = require("shim").sign_define
+local augroup = require("util/shim").augroup
+local autocmd = require("util/shim").autocmd
+local set_highlight = require("util/shim").set_highlight
+local sign_define = require("util/shim").sign_define
 require("lsp_config_default")
 
 local M = {}
