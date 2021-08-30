@@ -1,4 +1,4 @@
-local noremap = require("util/shim").noremap
+local map = require("util/shim").map
 local augroup = require("util/shim").augroup
 local autocmd = require("util/shim").autocmd
 local plugin = require("util/plugin")
@@ -16,13 +16,13 @@ vim.cmd("syntax enable")
 vim.opt.foldmethod = "indent"
 vim.opt.foldlevelstart = 99
 -- copy selection to system clipboard
-noremap("v", "<Leader>y", '"+y')
+map("v", "<Leader>y", '"+y')
 -- paste from system clipboard
-noremap("n", "<Leader>p", '"+p')
+map("n", "<Leader>p", '"+p')
 -- ignore file for all
 vim.cmd("set wildignore+=*/node_modules/*,*.swp,*.pyc,*/venv/*,*/target/*,.DS_Store")
 -- save as sudo
-noremap("c", "w!!", "w !sudo tee %")
+map("c", "w!!", "w !sudo tee %")
 
 augroup("filetypes", {
 	autocmd("BufNewFile,BufRead", "*html", "setfiletype html"),
@@ -37,7 +37,7 @@ vim.g["UltiSnipsJumpBackwardTrigger"] = "<c-h>"
 --- }}}
 
 --- [plugin] nerdtree {{{
-noremap("", "<Leader>fl", ":NERDTreeToggle<CR>")
+map("", "<Leader>fl", ":NERDTreeToggle<CR>")
 vim.g["NERDTreeWinSize"] = 32
 vim.g["NERDTreeWinPos"] = "left"
 vim.g["NERDTreeShowHidden"] = 1
