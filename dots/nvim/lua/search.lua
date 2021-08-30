@@ -1,4 +1,9 @@
 local noremap = require("util/shim").noremap
+local plugin = require("util/plugin")
+
+plugin.use("dyng/ctrlsf.vim")
+plugin.use("BurntSushi/ripgrep")
+plugin.use("nvim-telescope/telescope.nvim")
 
 noremap("n", "<leader>/", ":nohlsearch<CR>")
 vim.opt.ignorecase = true

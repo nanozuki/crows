@@ -1,3 +1,10 @@
+local plugin = require("util/plugin")
+plugin.use("sainnhe/gruvbox-material")
+plugin.use("Th3Whit3Wolf/one-nvim")
+-- plugin.use({'sonph/onehalf', rtp = 'vim/'})
+plugin.use("arcticicestudio/nord-vim")
+plugin.use("sainnhe/edge")
+
 vim.opt.termguicolors = true
 local function set_colorscheme(name, mode)
 	if mode == "dark" then

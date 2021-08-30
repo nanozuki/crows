@@ -1,12 +1,11 @@
-local nvim_lsp = require("lspconfig")
-local util = require("lspconfig/util")
+local lspconfig = require("lspconfig")
 local augroup = require("util/shim").augroup
 local autocmd = require("util/shim").autocmd
 local set_highlight = require("util/shim").set_highlight
 local sign_define = require("util/shim").sign_define
-require("lsp_config_default")
+local plugin = require("util/plugin")
 
-local M = {}
+plugin.use("neovim/nvim-lspconfig")
 
 local on_attach = function(client, bufnr)
 	local function buf_set_keymap(...)
@@ -69,50 +68,11 @@ sign_define(
 )
 sign_define("LspDiagnosticsSignHint", { text = "!", texthl = "LspDiagnosticsHint", linehl = "", numhl = "" })
 
--- Use a loop to conveniently both setup defined servers
--- and map buffer local keybindings when the language server attaches
-local servers_settings = {
-	gopls = {},
-	graphql = {},
-	sumneko_lua = require("lua_lsp").sumneko_lua_settings,
-	pylsp = {},
-	pyright = {},
-	rust_analyzer = {
-		settings = {
-			["rust-analyzer"] = {
-				diagnostics = { disabled = { "unresolved-proc-macro" } },
-				checkOnSave = { command = "clippy" },
-			},
-		},
-	},
-	tsserver = {
-		root_dir = function(fname)
-			return util.root_pattern("tsconfig.json")(fname)
-				or util.root_pattern("package.json", "jsconfig.json")(fname)
-		end,
-	},
-	denols = {
-		root_dir = util.root_pattern("deno_root"),
-		init_options = {
-			enable = true,
-			lint = true,
-			unstable = true,
-		},
-	},
-	vimls = {},
-	zls = {},
-	terraformls = {},
-	golangcilsp = {
-		init_options = {
-			command = { "golangci-lint", "run", "--fast", "--out-format", "json" },
-		},
-	},
-	yamlls = {},
-}
+local lsp = {}
 
-for lsp, settings in pairs(servers_settings) do
-	settings["on_attach"] = on_attach
-	nvim_lsp[lsp].setup(settings)
+function lsp.set_config(name, config)
+	config["on_attach"] = on_attach
+	lspconfig[name].setup(config)
 end
 
-return M
+return lsp
