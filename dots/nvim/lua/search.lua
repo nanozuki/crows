@@ -1,26 +1,22 @@
-local noremap = require("util/shim").noremap
+local map = require("util/shim").map
 local plugin = require("util/plugin")
 
 plugin.use("dyng/ctrlsf.vim")
 plugin.use("BurntSushi/ripgrep")
 plugin.use("nvim-telescope/telescope.nvim")
 
-noremap("n", "<leader>/", ":nohlsearch<CR>")
+map("n", "<leader>/", ":nohlsearch<CR>")
 vim.opt.ignorecase = true
 
 --- [plugin] ctrlsf {{{
 vim.g["ctrlsf_ackprg"] = "rg"
-noremap("", "<leader>sf", ":CtrlSF ") -- search current name
-noremap("", "<leader>sp", ":CtrlSF<CR>") -- search in project
+map("", "<leader>sf", ":CtrlSF ") -- search current name
+map("", "<leader>sp", ":CtrlSF<CR>") -- search in project
 --- }}}
 
 --- [plugin] telescope {{{
-vim.api.nvim_exec(
-	[[
-nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
-nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
-nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
-nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
-]],
-	true
-)
+map("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>")
+map("n", "<C-P>", "<cmd>lua require('telescope.builtin').find_files()<cr>")
+map("n", "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>")
+map("n", "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>")
+map("n", "<leader>fh", "<cmd>lua require('telescope.builtin').help_tags()<cr>")

@@ -1,4 +1,4 @@
-local noremap = require("util/shim").noremap
+local map = require("util/shim").map
 
 vim.g.mapleader = " "
 vim.opt.linebreak = true
@@ -9,4 +9,4 @@ vim.opt.relativenumber = true
 vim.opt.colorcolumn = "120"
 vim.opt.modelines = 1
 -- use <ESC> to normal mode in terminal window
-noremap("t", "<Esc>", [[<C-\><C-N>]])
+map("t", "<Esc>", [[<C-\><C-N>]])
