@@ -139,17 +139,16 @@ noremap("", "<leader>sf", ":CtrlSF ") -- search current name
 noremap("", "<leader>sp", ":CtrlSF<CR>") -- search in project
 --- }}}
 
---- [plugin] fzf {{{
-vim.g.fzf_layout = { window = { width = 0.9, height = 0.8 } }
-vim.g.fzf_colors = {
-	gutter = { "bg", "Tabline" },
-	["bg+"] = { "bg", "CursorLine", "CursorColumn" },
-	["fg+"] = { "fg", "CursorLine", "CursorColumn", "Normal" },
-	["hl"] = { "fg", "Special" },
-	["hl+"] = { "fg", "Statement" },
-}
-noremap("", "<C-p>", ":Files<CR>")
---- }}}
+--- [plugin] telescope {{{
+vim.api.nvim_exec(
+	[[
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+]],
+	true
+)
 
 --- [plugin] ale {{{
 vim.g.ale_disable_lsp = 1

@@ -8,6 +8,9 @@ require("paq")({
 	-- paq-nvim itself
 	"savq/paq-nvim",
 
+	-- basic
+	"nvim-lua/plenary.nvim",
+
 	-- appearance
 	"vim-airline/vim-airline",
 	"edkolev/tmuxline.vim",
@@ -21,7 +24,7 @@ require("paq")({
 	"arcticicestudio/nord-vim",
 	"sainnhe/edge",
 
-	-- edit code
+	-- edit codnie
 	"kshenoy/vim-signature",
 	"scrooloose/nerdcommenter", -- <leader>ci (toggle comment), <leader>cs (comment block), <leader>cu (uncomment)
 	"easymotion/vim-easymotion",
@@ -36,8 +39,7 @@ require("paq")({
 	"preservim/nerdtree", -- use 'm' to open menu to edit filesystem nodes.
 	"dyng/ctrlsf.vim",
 	"BurntSushi/ripgrep",
-	"junegunn/fzf",
-	"junegunn/fzf.vim",
+	"nvim-telescope/telescope.nvim",
 	{
 		"nvim-treesitter/nvim-treesitter",
 		run = function()
