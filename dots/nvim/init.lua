@@ -1,11 +1,11 @@
 -- Nanozuki Vim Config
+require("util/plugin")
 require("basic")
-require("edit")
-require("search")
-require("indent")
 require("colorscheme")
-require("view")
+require("lsp")
+require("complete")
+require("edit")
+require("indent")
 require("languages")
-require("nvim_compe")
-
-require("util/plugin").setup()
+require("search")
+require("view")
