@@ -8,8 +8,6 @@ plugin.use("scrooloose/nerdcommenter") -- <leader>ci (toggle comment), <leader>c
 plugin.use("easymotion/vim-easymotion")
 plugin.use("mg979/vim-visual-multi")
 plugin.use("tpope/vim-surround") -- cs"': "a"->'a', ysiw]: word->[word], cs]{: [word]->{ word }
-plugin.use("SirVer/ultisnips")
-plugin.use("honza/vim-snippets")
 plugin.use("dense-analysis/ale")
 
 vim.cmd("syntax enable")
