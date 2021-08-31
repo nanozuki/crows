@@ -36,11 +36,6 @@ local function vim_kv_args(args)
 	return table.concat(arg_strs, " ")
 end
 
-function M.set_highlight(group, args)
-	local arg = vim_kv_args(args)
-	vim.cmd(string.format("hi %s %s", group, arg))
-end
-
 function M.sign_define(name, args)
 	local arg = vim_kv_args(args)
 	vim.cmd(string.format("sign define %s %s", name, arg))
