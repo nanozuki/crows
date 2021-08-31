@@ -41,4 +41,8 @@ function M.sign_define(name, args)
 	vim.cmd(string.format("sign define %s %s", name, arg))
 end
 
+function M.termcode(str)
+	return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
+
 return M
