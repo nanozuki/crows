@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+TMPPATH=$(mktemp -d "/tmp/lua-language-server.XXXX")
+DEFAULT_LOGPATH="$TMPPATH/log"
+DEFAULT_METAPATH="$TMPPATH/meta"
+
+exec ~/Projects/github.com/sumneko/lua-language-server/bin/macOS/lua-language-server -E \
+    ~/Projects/github.com/sumneko/lua-language-server/main.lua \
+    --logpath="$DEFAULT_LOGPATH" --metapath="$DEFAULT_METAPATH" "$@"

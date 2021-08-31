@@ -45,6 +45,8 @@ function sync_lua
 end
 
 function macos_lua_lsp
+    ln -sf $dots/lsp/lua_lsp.sh /usr/local/bin/lua-language-server
+    chmod +x /usr/local/bin/lua-language-server
     brew_install ninja
     set repo https://github.com/sumneko/lua-language-server.git
     set repo_path (git_latest $repo); or return 1
