@@ -1,10 +1,3 @@
-local plugin = require("util/plugin")
-plugin.use("sainnhe/gruvbox-material")
-plugin.use("Th3Whit3Wolf/one-nvim")
--- plugin.use({'sonph/onehalf', rtp = 'vim/'})
-plugin.use("arcticicestudio/nord-vim")
-plugin.use("sainnhe/edge")
-
 vim.opt.termguicolors = true
 local function set_colorscheme(name, mode)
 	if mode == "dark" then
@@ -17,13 +10,6 @@ local function set_colorscheme(name, mode)
 		vim.g["gruvbox_material_enable_italic"] = 1
 		vim.g["airline_theme"] = "gruvbox_material"
 		vim.cmd("colorscheme gruvbox-material")
-	elseif name == "onehalf" then
-		if mode == "dark" then
-			vim.g["airline_theme"] = "onehalfdark"
-		else
-			vim.g["airline_theme"] = "onehalflight"
-		end
-		vim.cmd("colorscheme one-nvim")
 	elseif name == "nord" then
 		vim.g["airline_theme"] = "nord"
 		vim.cmd("colorscheme nord")
@@ -35,4 +21,4 @@ local function set_colorscheme(name, mode)
 	end
 	return
 end
-set_colorscheme("edge", "light")
+set_colorscheme("gruvbox", "light")

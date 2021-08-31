@@ -1,9 +1,3 @@
-local plugin = require("util/plugin")
-plugin.use("hrsh7th/nvim-compe")
--- snippet source
-plugin.use("hrsh7th/vim-vsnip")
--- plugin.use("L3MON4D3/LuaSnip")
-
 vim.opt.completeopt = "menu,menuone,noselect"
 
 -- config

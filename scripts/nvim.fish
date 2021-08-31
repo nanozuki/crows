@@ -6,7 +6,6 @@ function sync_nvim
         pacman_install neovim
         pacman_install python-pynvim nodejs-lts-fermium npm ripgrep fzf
         sudo npm -g install neovim
-        yay_install lua-language-server
     else if test $os = macos
         brew_install neovim python node@14 ripgrep fzf
         brew link --force node@14
@@ -20,9 +19,7 @@ function sync_nvim
     else if test $os = macos
         pip3 install -U pynvim
         npm -g update neovim
-        macos_lua_lsp
     end
-    cargo install stylua
 
     # link config
     link_dir $dots/nvim $config/nvim
@@ -32,6 +29,19 @@ function sync_nvim
     if not test -d $packer
         git clone https://github.com/wbthomason/packer.nvim $packer
     end
+
+    # sync components requirements
+    sync_lua
+    sync_bat
+end
+
+function sync_lua
+    if test $os = archlinux
+        yay_install lua-language-server
+    else if test $os = macos
+        macos_lua_lsp
+    end
+    cargo install stylua # lua formatter
 end
 
 function macos_lua_lsp
@@ -50,4 +60,14 @@ function macos_lua_lsp
     cd ../..
     ./3rd/luamake/luamake rebuild
     cd $cur_dir
+end
+
+function sync_bat # used by lsputils
+    if test $os = archlinux
+        pacman_install bat
+    else if test $os = macos
+        brew_install bat
+    end
+    mkdir -p $config/bat
+    ln -sf $dots/bat/config $config/bat/config
 end

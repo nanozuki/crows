@@ -1,16 +1,4 @@
 local map = require("util/shim").map
-local plugin = require("util/plugin")
-
-plugin.use({
-	"nvim-treesitter/nvim-treesitter",
-	run = function()
-		vim.cmd(":TSUpdate")
-	end,
-})
-plugin.use("vim-airline/vim-airline")
-plugin.use("edkolev/tmuxline.vim")
-plugin.use("tpope/vim-fugitive")
-plugin.use("preservim/nerdtree") -- use 'm' to open menu to edit filesystem nodes.
 
 require("nvim-treesitter.configs").setup({
 	ensure_installed = "maintained",

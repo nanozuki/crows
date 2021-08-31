@@ -1,11 +1,6 @@
 local lspconfig = require("lspconfig")
 local augroup = require("util/shim").augroup
 local autocmd = require("util/shim").autocmd
-local sign_define = require("util/shim").sign_define
-local plugin = require("util/plugin")
-
-plugin.use("neovim/nvim-lspconfig")
-plugin.use("ray-x/lsp_signature.nvim")
 
 local on_attach = function(_, bufnr) -- function(client, bufnr)
 	local function buf_set_keymap(...)
@@ -43,15 +38,6 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.completion.completionItem.resolveSupport = {
 	properties = { "documentation", "detail", "additionalTextEdits" },
 }
-
--- sign
-sign_define("LspDiagnosticsSignError", { text = "✗", texthl = "LspDiagnosticsError", linehl = "", numhl = "" })
-sign_define("LspDiagnosticsSignWarning", { text = "‼", texthl = "LspDiagnosticsWarning", linehl = "", numhl = "" })
-sign_define(
-	"LspDiagnosticsSignInformation",
-	{ text = "!", texthl = "LspDiagnosticsInformation", linehl = "", numhl = "" }
-)
-sign_define("LspDiagnosticsSignHint", { text = "!", texthl = "LspDiagnosticsHint", linehl = "", numhl = "" })
 
 local lsp = {}
 

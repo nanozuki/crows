@@ -1,9 +1,5 @@
 local augroup = require("util/shim").augroup
 local autocmd = require("util/shim").autocmd
-local plugin = require("util/plugin")
-
-plugin.use("yggdroot/indentline") -- display hint for indent
-plugin.use("tpope/vim-sleuth") -- smart detect indent of file
 
 vim.cmd("filetype indent on")
 vim.opt.expandtab = true
