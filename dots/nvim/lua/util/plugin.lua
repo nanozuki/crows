@@ -12,6 +12,13 @@ return require("packer").startup(function(use)
 	use("wbthomason/packer.nvim")
 	-- basic lua library extension
 	use("nvim-lua/plenary.nvim")
+	-- key mapping
+	use({
+		"folke/which-key.nvim",
+		config = function()
+			require("which-key").setup({})
+		end,
+	})
 
 	-- colorscheme.lua
 	use("sainnhe/gruvbox-material")
