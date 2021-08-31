@@ -32,7 +32,7 @@ local on_attach = function(_, bufnr) -- function(client, bufnr)
 	buf_set_keymap("n", "<leader>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
 	buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 
-	require("lsp_signature").on_attach()
+	require("lsp_signature").on_attach({ bind = true, handler_opts = { border = "none" } })
 	augroup("lsp_format_on_save", {
 		autocmd("BufWritePre", "<buffer>", "lua vim.lsp.buf.formatting_sync()"),
 	})
@@ -44,6 +44,7 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 	properties = { "documentation", "detail", "additionalTextEdits" },
 }
 
+-- sign
 sign_define("LspDiagnosticsSignError", { text = "✗", texthl = "LspDiagnosticsError", linehl = "", numhl = "" })
 sign_define("LspDiagnosticsSignWarning", { text = "‼", texthl = "LspDiagnosticsWarning", linehl = "", numhl = "" })
 sign_define(
