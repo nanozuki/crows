@@ -28,17 +28,12 @@ function M.autocmd(event, pattern, command)
 	return string.format("autocmd %s %s %s", event, pattern, command)
 end
 
-local function vim_kv_args(args)
+function M.vim_kv_args(args)
 	local arg_strs = {}
 	for key, arg in pairs(args) do
 		table.insert(arg_strs, string.format("%s=%s", key, arg))
 	end
 	return table.concat(arg_strs, " ")
-end
-
-function M.sign_define(name, args)
-	local arg = vim_kv_args(args)
-	vim.cmd(string.format("sign define %s %s", name, arg))
 end
 
 function M.termcode(str)
