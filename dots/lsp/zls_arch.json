@@ -1,5 +1,5 @@
 {
-  "zig_exe_path":"/usr/local/bin/zig",
+  "zig_exe_path":"/usr/bin/zig",
   "enable_snippets":true,
   "warn_style":true,
   "enable_semantic_tokens":true,
