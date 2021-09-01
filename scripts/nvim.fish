@@ -6,11 +6,15 @@ function sync_nvim
         pacman_install neovim
         pacman_install python-pynvim nodejs-lts-fermium npm ripgrep fzf
         sudo npm -g install neovim
+        sudo npm -g install graphql-language-service-cli
+        sudo npm -g install vim-language-server
     else if test $os = macos
         brew_install neovim python node@14 ripgrep fzf
         brew link --force node@14
         pip3 install pynvim
         npm -g install neovim
+        npm -g install graphql-language-service-cli
+        npm -g install vim-language-server
     end
 
     # update nvim and language environment

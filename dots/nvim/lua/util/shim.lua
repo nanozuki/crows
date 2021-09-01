@@ -45,4 +45,13 @@ function M.termcode(str)
 	return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
+function M.prequire(pkg, fn)
+	local ok, result = pcall(require, pkg)
+	if ok then
+		fn(result)
+	else
+		print("can't load pkg: " .. pkg)
+	end
+end
+
 return M
