@@ -58,6 +58,7 @@ return require("packer").startup(function(use)
 	use("ray-x/lsp_signature.nvim")
 	use("RishabhRD/popfix")
 	use("RishabhRD/nvim-lsputils")
+	use({ "folke/trouble.nvim", requires = "kyazdani42/nvim-web-devicons" })
 
 	-- complete.lua
 	use("hrsh7th/nvim-compe")
