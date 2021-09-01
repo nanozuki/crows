@@ -2,8 +2,6 @@ local lsp = require("util/lsp")
 
 local simple_servers = {
 	"graphql",
-	"pylsp",
-	"pyright",
 	"vimls",
 	"zls",
 	"terraformls",
