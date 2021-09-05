@@ -33,17 +33,25 @@ local on_attach = function(_, bufnr) -- function(client, bufnr)
 	})
 end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.completion.completionItem.resolveSupport = {
-	properties = { "documentation", "detail", "additionalTextEdits" },
-}
+local capabilities = function()
+	local caps = vim.lsp.protocol.make_client_capabilities()
+	caps.textDocument.completion.completionItem.snippetSupport = true
+	caps.textDocument.completion.completionItem.resolveSupport = {
+		properties = { "documentation", "detail", "additionalTextEdits" },
+	}
+	local exists, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+	if exists then
+		return cmp_nvim_lsp.update_capabilities(caps)
+	else
+		return caps
+	end
+end
 
 local lsp = {}
 
 function lsp.set_config(name, config)
 	config["on_attach"] = on_attach
-	config["capabilities"] = capabilities
+	config["capabilities"] = capabilities()
 	lspconfig[name].setup(config)
 end
 
