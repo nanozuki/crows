@@ -61,8 +61,15 @@ return require("packer").startup(function(use)
 	use({ "folke/trouble.nvim", requires = "kyazdani42/nvim-web-devicons" })
 
 	-- complete.lua
-	use("hrsh7th/nvim-compe")
-	use("hrsh7th/vim-vsnip")
+	use({
+		"hrsh7th/nvim-cmp",
+		requires = {
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/vim-vsnip",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+		},
+	})
 
 	-- languages extra functions
 	use("mattn/emmet-vim") -- ft = {'html', 'javascript.jsx', 'typescript.tsx', 'javascriptreact', 'typescriptreact'}})
