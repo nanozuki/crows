@@ -48,6 +48,12 @@ return require("packer").startup({
 		use({ "edkolev/tmuxline.vim", opt = true })
 		use("tpope/vim-fugitive")
 		use("preservim/nerdtree") -- use 'm' to open menu to edit filesystem nodes.
+		use({
+			"glepnir/dashboard-nvim",
+			config = function()
+				vim.g.dashboard_default_executive = "telescope"
+			end,
+		})
 
 		-- edit.lua
 		use("kshenoy/vim-signature")
