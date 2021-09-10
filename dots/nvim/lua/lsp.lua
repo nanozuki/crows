@@ -9,15 +9,29 @@ for sign, text in pairs(signs) do
 	vim.fn.sign_define(hl, { text = text, texthl = hl, linehl = "", numhl = "" })
 end
 
+--[[
+-- in stable neovim, the lsp client handlers sign is:
+-- function(err, method, params, client_id, bufnr, config)
+-- but in nightly it's:
+-- function(err, result, ctx, config)
+-- ctx is { method, client_id, bufnr }
+--]]
+
+local function compat_handler(nightly_fn)
+	return function(err, method, params, client_id, bufnr, config)
+		nightly_fn(err, params, { method = method, client_id = client_id, bufnr = bufnr }, config)
+	end
+end
+
 -- [plugin] lsputils {{{
 vim.lsp.handlers["textDocument/codeAction"] = require("lsputil.codeAction").code_action_handler
 vim.lsp.handlers["textDocument/references"] = require("lsputil.locations").references_handler
-vim.lsp.handlers["textDocument/definition"] = require("lsputil.locations").definition_handler
-vim.lsp.handlers["textDocument/declaration"] = require("lsputil.locations").declaration_handler
-vim.lsp.handlers["textDocument/typeDefinition"] = require("lsputil.locations").typeDefinition_handler
-vim.lsp.handlers["textDocument/implementation"] = require("lsputil.locations").implementation_handler
-vim.lsp.handlers["textDocument/documentSymbol"] = require("lsputil.symbols").document_handler
-vim.lsp.handlers["workspace/symbol"] = require("lsputil.symbols").workspace_handler
+vim.lsp.handlers["textDocument/definition"] = compat_handler(require("lsputil.locations").definition_handler)
+vim.lsp.handlers["textDocument/declaration"] = compat_handler(require("lsputil.locations").declaration_handler)
+vim.lsp.handlers["textDocument/typeDefinition"] = compat_handler(require("lsputil.locations").typeDefinition_handler)
+vim.lsp.handlers["textDocument/implementation"] = compat_handler(require("lsputil.locations").implementation_handler)
+vim.lsp.handlers["textDocument/documentSymbol"] = compat_handler(require("lsputil.symbols").document_handler)
+vim.lsp.handlers["workspace/symbol"] = compat_handler(require("lsputil.symbols").workspace_handler)
 --- }}}
 
 --- [plugin] nvim.trouble {{{
