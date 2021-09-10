@@ -8,4 +8,9 @@ require("edit")
 require("indent")
 require("lang")
 require("search")
+
+-- require("core").setup({
+-- 	require("features.search"),
+-- })
+
 require("view")

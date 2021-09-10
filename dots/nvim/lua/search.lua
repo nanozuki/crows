@@ -2,10 +2,15 @@ local map = require("util/shim").map
 
 local search = {
 	plugins = {},
+	mapping = { n = {} },
 }
 
-map("n", "<leader>/", ":nohlsearch<CR>")
-vim.opt.ignorecase = true
+search.setup = function()
+	map("n", "<leader>/", ":nohlsearch<CR>")
+	vim.opt.ignorecase = true
+end
+
+search.mapping.n["<leader>/"] = ":nohlsearch<CR>"
 
 --- [plugin] ctrlsf {{{
 search.plugins.ctrlsf = {
@@ -19,6 +24,8 @@ search.plugins.ctrlsf = {
 }
 map("", "<leader>sf", ":CtrlSF ") -- search current name
 map("", "<leader>sp", ":CtrlSF<CR>") -- search in project
+search.mapping.n["<leader>sf"] = ":CtrlSF" -- search current name
+search.mapping.n["<leader>sp"] = ":CtrlSF<CR>" -- search in project
 --- }}}
 
 --- [plugin] telescope {{{
@@ -44,7 +51,6 @@ search.plugins.telescope = {
 	end,
 }
 
-print("mapping")
 map("n", "<leader>z", "<cmd>lua require'telescope'.extensions.z.list{}<CR>", { silent = true })
 map("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>")
 map("n", "<C-P>", "<cmd>lua require('telescope.builtin').find_files()<cr>")
@@ -53,7 +59,6 @@ map("n", "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>")
 map("n", "<leader>fh", "<cmd>lua require('telescope.builtin').help_tags()<cr>")
 map("n", "<leader>fm", "<cmd>lua require('telescope.builtin').marks()<cr>")
 map("n", "<leader>ft", "<cmd>lua require('telescope.builtin').treesitter()<cr>")
-print("mapping ending")
 --- }}}
 
 return search
