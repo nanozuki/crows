@@ -1,6 +1,6 @@
 -- Nanozuki Vim Config
-require("util/plugin")
 require("basic")
+require("plugin")
 require("colorscheme")
 require("lsp")
 require("complete")

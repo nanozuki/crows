@@ -6,13 +6,26 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 end
 --- }}}
 
+local plugin_spec_file = "lua/plugin.lua"
+
 function PackerSync()
-	local path = vim.api.nvim_get_runtime_file("lua/util/plugin.lua", false)[1]
+	local path = vim.api.nvim_get_runtime_file(plugin_spec_file, false)[1]
 	if not path then
 		error("can't find plugin setup file")
 	end
+	require("packer").reset()
 	vim.cmd("source " .. path)
 	require("packer").sync()
+end
+
+function PackerCompile()
+	local path = vim.api.nvim_get_runtime_file(plugin_spec_file, false)[1]
+	if not path then
+		error("can't find plugin setup file")
+	end
+	require("packer").reset()
+	vim.cmd("source " .. path)
+	require("packer").compile()
 end
 
 --- plugins {{{
@@ -48,12 +61,6 @@ return require("packer").startup({
 		use({ "edkolev/tmuxline.vim", opt = true })
 		use("tpope/vim-fugitive")
 		use("preservim/nerdtree") -- use 'm' to open menu to edit filesystem nodes.
-		use({
-			"glepnir/dashboard-nvim",
-			config = function()
-				vim.g.dashboard_default_executive = "telescope"
-			end,
-		})
 
 		-- edit.lua
 		use("kshenoy/vim-signature")
@@ -64,15 +71,16 @@ return require("packer").startup({
 		use("dense-analysis/ale")
 
 		-- search.lua
-		use("dyng/ctrlsf.vim")
-		use("BurntSushi/ripgrep")
-		use("nvim-telescope/telescope.nvim")
+		use(require("search").plugins.ctrlsf)
+		use(require("search").plugins.telescope)
 
 		-- util/lsp
 		use("neovim/nvim-lspconfig")
 		use("ray-x/lsp_signature.nvim")
-		use("RishabhRD/popfix")
-		use("RishabhRD/nvim-lsputils")
+		use({
+			"RishabhRD/nvim-lsputils",
+			requires = { { "RishabhRD/popfix" } },
+		})
 		use({ "folke/trouble.nvim", requires = "kyazdani42/nvim-web-devicons" })
 
 		-- complete.lua
