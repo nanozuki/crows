@@ -25,4 +25,4 @@ local sumneko_lua_settings = {
 	},
 }
 
-require("util/lsp").set_config("sumneko_lua", sumneko_lua_settings)
+require("lib.lsp").set_config("sumneko_lua", sumneko_lua_settings)

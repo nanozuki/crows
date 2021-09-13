@@ -1,13 +1,13 @@
 local lspconfig = require("lspconfig")
-local augroup = require("util/shim").augroup
-local autocmd = require("util/shim").autocmd
+local augroup = require("lib.util").augroup
+local autocmd = require("lib.util").autocmd
 
-local on_attach = function(_, bufnr) -- function(client, bufnr)
+local lsp = {}
+
+local function buf_mapping(_, bufnr)
 	local function buf_set_keymap(...)
 		vim.api.nvim_buf_set_keymap(bufnr, ...)
 	end
-
-	-- Mappings.
 	local opts = { noremap = true, silent = true }
 	buf_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
 	buf_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
@@ -26,14 +26,30 @@ local on_attach = function(_, bufnr) -- function(client, bufnr)
 	buf_set_keymap("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
 	buf_set_keymap("n", "<leader>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
 	buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+end
 
-	require("lsp_signature").on_attach({ bind = true, handler_opts = { border = "none" } })
+local function format_on_save()
 	augroup("lsp_format_on_save", {
 		autocmd("BufWritePre", "<buffer>", "lua vim.lsp.buf.formatting_sync()"),
 	})
 end
 
-local capabilities = function()
+lsp.on_attaches = {
+	buf_mapping,
+	format_on_save,
+}
+
+function lsp.add_on_attach(fn)
+	lsp.on_attaches[#lsp.on_attaches + 1] = fn
+end
+
+function lsp.on_attach(client, bufnr) -- function(client, bufnr)
+	for _, fn in ipairs(lsp.on_attaches) do
+		fn(client, bufnr)
+	end
+end
+
+function lsp.capabilities()
 	local caps = vim.lsp.protocol.make_client_capabilities()
 	caps.textDocument.completion.completionItem.snippetSupport = true
 	caps.textDocument.completion.completionItem.resolveSupport = {
@@ -47,11 +63,9 @@ local capabilities = function()
 	end
 end
 
-local lsp = {}
-
 function lsp.set_config(name, config)
-	config["on_attach"] = on_attach
-	config["capabilities"] = capabilities()
+	config["on_attach"] = lsp.on_attach
+	config["capabilities"] = lsp.capabilities()
 	lspconfig[name].setup(config)
 end
 

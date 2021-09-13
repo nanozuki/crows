@@ -1,14 +1,6 @@
-local M = {}
+local util = {}
 
-function M.map(mode, lhs, rhs, opts)
-	local options = { noremap = true }
-	if opts then
-		options = vim.tbl_extend("force", options, opts)
-	end
-	vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-end
-
-function M.augroup(name, autocmds)
+function util.augroup(name, autocmds)
 	local cmds = {
 		string.format("augroup %s", name),
 		"autocmd!",
@@ -24,11 +16,11 @@ function M.augroup(name, autocmds)
 	vim.api.nvim_exec(cmd_strs, true)
 end
 
-function M.autocmd(event, pattern, command)
+function util.autocmd(event, pattern, command)
 	return string.format("autocmd %s %s %s", event, pattern, command)
 end
 
-function M.vim_kv_args(args)
+function util.vim_kv_args(args)
 	local arg_strs = {}
 	for key, arg in pairs(args) do
 		table.insert(arg_strs, string.format("%s=%s", key, arg))
@@ -36,17 +28,8 @@ function M.vim_kv_args(args)
 	return table.concat(arg_strs, " ")
 end
 
-function M.termcode(str)
+function util.termcode(str)
 	return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
-function M.prequire(pkg, fn)
-	local ok, result = pcall(require, pkg)
-	if ok then
-		fn(result)
-	else
-		print("can't load pkg: " .. pkg)
-	end
-end
-
-return M
+return util
