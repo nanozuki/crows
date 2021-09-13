@@ -1,15 +1,13 @@
-local termcode = require("util/shim").termcode
+local feature = require("lib.feature")
+local termcode = require("lib.util").termcode
 
 local check_back_space = function()
 	local col = vim.fn.col(".") - 1
 	return col == 0 or vim.fn.getline("."):sub(col, col):match("%s") ~= nil
 end
 
-local function setup()
-	local exists, cmp = pcall(require, "cmp")
-	if not exists then
-		return
-	end
+local function nvim_cmp_setup()
+	local cmp = require("cmp")
 	cmp.setup({
 		completion = {
 			completeopt = "menu,menuone,noinsert",
@@ -63,4 +61,19 @@ local function setup()
 	})
 end
 
-setup()
+local complete = feature:new("complete")
+complete.source = "lua/features/complete.lua"
+complete.plugins = {
+	{
+		"hrsh7th/nvim-cmp",
+		requires = {
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/vim-vsnip",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+		},
+		config = nvim_cmp_setup,
+	},
+}
+
+return complete

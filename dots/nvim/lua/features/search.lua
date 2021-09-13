@@ -13,14 +13,13 @@ local replace = feature:new("replace")
 replace.plugins = {
 	{
 		"dyng/ctrlsf.vim",
-		requires = { { "BurntSushi/ripgrep" } },
 		config = function()
 			vim.g.ctrlsf_ackprg = "rg"
 		end,
 	},
 }
 replace.mappings = {
-	{ "n", "<leader>sf", ":CtrlSF" },
+	{ "n", "<leader>sf", ":CtrlSF " },
 	{ "n", "<leader>sp", ":CtrlSF<CR>" },
 }
 
