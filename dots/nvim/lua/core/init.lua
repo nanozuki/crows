@@ -34,6 +34,7 @@ function core.reload(opts)
 	for _, feature in ipairs(core.features) do
 		feature:reload()
 	end
+	vim.cmd("source lua/core/init.lua")
 	core.setup(fs)
 	opts = opts or {}
 	if opts.action == "compile" then
@@ -41,6 +42,14 @@ function core.reload(opts)
 	else
 		plug.sync()
 	end
+end
+
+function PackerSync()
+	plug.sync()
+end
+
+function PackerCompile()
+	plug.compile()
 end
 
 return core

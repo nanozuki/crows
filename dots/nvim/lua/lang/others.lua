@@ -1,4 +1,4 @@
-local lsp = require("util/lsp")
+local lsp = require("lib.lsp")
 
 local simple_servers = {
 	"graphql",

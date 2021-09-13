@@ -1,6 +1,6 @@
 local lspconfig = require("lspconfig")
 local configs = require("lspconfig/configs")
-local lsp = require("util/lsp")
+local lsp = require("lib.lsp")
 
 if not lspconfig.golangcilsp then
 	configs.golangcilsp = {

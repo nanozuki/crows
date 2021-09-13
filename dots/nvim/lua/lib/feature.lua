@@ -50,7 +50,7 @@ function feature:reload()
 	self.plugins = {}
 	for _, mapping in ipairs(self.mappings) do
 		local mode, lhs = mapping[1], mapping[2]
-		vim.api.nvim_buf_del_keymap(mode, lhs)
+		vim.api.nvim_del_keymap(mode, lhs)
 	end
 	self.mappings = {}
 
