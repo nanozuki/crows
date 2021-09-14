@@ -20,7 +20,7 @@ lsp.setup = function()
 		vim.fn.sign_define(hl, { text = text, texthl = hl, linehl = "", numhl = "" })
 	end
 end
-lsp.mapping = {
+lsp.mappings = {
 	{ "n", "<leader>xx", "<cmd>TroubleToggle<cr>", { silent = true } },
 	-- { "n", "<leader>xw", "<cmd>Trouble lsp_workspace_diagnostics<cr>", { silent = true } },
 	-- { "n", "<leader>xd", "<cmd>Trouble lsp_document_diagnostics<cr>", { silent = true } },

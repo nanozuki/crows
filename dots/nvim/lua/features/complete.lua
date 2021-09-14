@@ -1,12 +1,8 @@
 local feature = require("lib.feature")
-local termcode = require("lib.util").termcode
-
-local check_back_space = function()
-	local col = vim.fn.col(".") - 1
-	return col == 0 or vim.fn.getline("."):sub(col, col):match("%s") ~= nil
-end
 
 local function nvim_cmp_setup()
+	local termcode = require("lib.util").termcode
+	local check_back_space = require("lib.util").check_back_space
 	local cmp = require("cmp")
 	cmp.setup({
 		completion = {
