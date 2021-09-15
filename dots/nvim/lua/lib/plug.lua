@@ -44,6 +44,7 @@ end
 
 function plug.unset()
 	plug.specs = {}
+	plug.ensure_packer()
 	require("packer").reset()
 end
 
