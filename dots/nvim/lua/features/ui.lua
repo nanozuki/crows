@@ -55,7 +55,7 @@ filetree.mappings = {
 	{ "n", "<Leader>fl", ":NERDTreeToggle<CR>" },
 }
 
-local colorscheme = feature:new("feature")
+local colorscheme = feature:new("colorscheme")
 colorscheme.plugins = {
 	{ "sainnhe/gruvbox-material", opt = true },
 	{ "arcticicestudio/nord-vim", opt = true },
@@ -96,7 +96,7 @@ colorscheme.setup = function()
 	set_colorscheme("gruvbox_light")
 end
 
-local tmuxline = feature:new("feature")
+local tmuxline = feature:new("tmuxline")
 tmuxline.plugins = {
 	{ "edkolev/tmuxline.vim", opt = true },
 }

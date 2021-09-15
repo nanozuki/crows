@@ -1,14 +1,15 @@
 local plug = require("lib.plug")
+local log = require("lib.log")
 
 local core = {
 	source = "lua/core/init.lua",
 	features = {},
 }
 
-function core.setup(features)
-	core.features = features
-	for _, feature in ipairs(features) do
+function core.setup()
+	for _, feature in ipairs(core.features) do
 		feature:execute()
+		-- feature:execute()
 	end
 end
 
@@ -28,20 +29,24 @@ function core.unset()
 end
 
 function core.reload(opts)
-	local fs = core.features
-	plug.unset()
-
+	log.debug("---- RELOAD ----")
+	require("lib.plug").unset()
+	require("lib.feature").unset()
 	for _, feature in ipairs(core.features) do
 		feature:reload()
 	end
-	vim.cmd("source lua/core/init.lua")
-	core.setup(fs)
+	log.debug("---- REEXECUTE ----")
+	vim.cmd("runtime! init.lua")
 	opts = opts or {}
 	if opts.action == "compile" then
 		plug.compile()
 	else
 		plug.sync()
 	end
+end
+
+function ReloadFeatures()
+	core.reload()
 end
 
 function PackerSync()

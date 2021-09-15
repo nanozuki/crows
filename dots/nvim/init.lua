@@ -1,5 +1,9 @@
 -- Nanozuki Vim Config
-require("core").setup({
+
+-- local log = require("lib.log")
+-- log.level = log.levels.debug
+
+require("core").features = {
 	require("features.basic"),
 	require("features.ui"),
 	require("features.editor"),
@@ -7,4 +11,5 @@ require("core").setup({
 	require("features.lsp"),
 	require("features.complete"),
 	require("lang"),
-})
+}
+require("core").setup()
