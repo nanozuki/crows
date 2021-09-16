@@ -1,4 +1,3 @@
-local lspconfig = require("lspconfig")
 local augroup = require("lib.util").augroup
 local autocmd = require("lib.util").autocmd
 
@@ -64,6 +63,7 @@ function lsp.capabilities()
 end
 
 function lsp.set_config(name, config)
+	local lspconfig = require("lspconfig")
 	config["on_attach"] = lsp.on_attach
 	config["capabilities"] = lsp.capabilities()
 	lspconfig[name].setup(config)
