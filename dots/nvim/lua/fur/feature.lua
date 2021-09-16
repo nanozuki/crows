@@ -1,4 +1,4 @@
-local log = require("lib.log")
+local log = require("fur.log")
 
 local feature = {
 	name = nil,
@@ -53,7 +53,7 @@ function feature:execute()
 	local f = all_features[self.name] -- reload leatest features after source file
 	f.setup()
 	for _, plugin in ipairs(f.plugins) do
-		require("lib.plug").use(plugin)
+		require("fur.plug").use(plugin)
 	end
 	for _, mapping in ipairs(f.mappings) do
 		local mode, lhs, rhs, opts = mapping[1], mapping[2], mapping[3], mapping[4]

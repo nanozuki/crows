@@ -1,9 +1,7 @@
 -- Nanozuki Vim Config
 
--- local log = require("lib.log")
--- log.level = log.levels.debug
-
-require("core").features = {
+local fur = require("fur")
+fur.features = {
 	require("features.basic"),
 	require("features.ui"),
 	require("features.editor"),
@@ -12,4 +10,8 @@ require("core").features = {
 	require("features.complete"),
 	require("lang"),
 }
-require("core").setup()
+fur.start()
+
+vim.cmd([[command! FurReload      lua require('fur').reload()]])
+vim.cmd([[command! FurPlugCompile lua require('fur').plug_compile()]])
+vim.cmd([[command! FurPlugSync    lua require('fur').plug_sync()]])
