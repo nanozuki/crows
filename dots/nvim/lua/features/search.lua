@@ -1,4 +1,4 @@
-local feature = require("lib.feature")
+local feature = require("fur.feature")
 
 local search = feature:new("search")
 search.source = "lua/features/search.lua"

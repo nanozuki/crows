@@ -1,4 +1,4 @@
-local feature = require("lib.feature")
+local feature = require("fur.feature")
 local augroup = require("lib.util").augroup
 local autocmd = require("lib.util").autocmd
 

@@ -1,4 +1,4 @@
-local feature = require("lib.feature")
+local feature = require("fur.feature")
 
 local ui = feature:new("ui")
 ui.source = "lua/features/ui.lua"
