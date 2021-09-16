@@ -3,7 +3,6 @@ local feature = require("fur.feature")
 local basic = feature:new("basic")
 basic.source = "lua/features/basic.lua"
 basic.plugins = {
-	{ "wbthomason/packer.nvim", opt = true },
 	"nvim-lua/plenary.nvim", -- basic lua library extension
 	{
 		"folke/which-key.nvim",
@@ -13,7 +12,6 @@ basic.plugins = {
 	}, -- key mapping manage and hint
 }
 basic.setup = function()
-	vim.g.mapleader = " "
 	vim.opt.linebreak = true
 	vim.opt.showbreak = "->"
 	vim.opt.mouse = "ar"
