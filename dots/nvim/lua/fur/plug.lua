@@ -1,5 +1,7 @@
 local plug = {
-	specs = {},
+	specs = {
+		{ "wbthomason/packer.nvim", opt = true },
+	},
 	packer = {
 		ready = false,
 	},
@@ -43,7 +45,9 @@ function plug.compile()
 end
 
 function plug.unset()
-	plug.specs = {}
+	plug.specs = {
+		{ "wbthomason/packer.nvim", opt = true },
+	}
 	plug.ensure_packer()
 	require("packer").reset()
 end
