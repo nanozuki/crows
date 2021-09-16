@@ -1,5 +1,11 @@
 -- Nanozuki Vim Config
 
+local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/fur.nvim"
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+	vim.fn.system({ "git", "clone", "https://github.com/nanozuki/fur.nvim", install_path })
+	vim.cmd("packadd fur.nvim")
+end
+
 local fur = require("fur")
 fur.features = {
 	require("features.basic"),
