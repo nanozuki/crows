@@ -1,7 +1,7 @@
-local feature = require("lib.feature")
+local feature = require("fur.feature")
 
 local function nvim_cmp_setup()
-	local termcode = require("lib.util").termcode
+local termcode = require("lib.util").termcode
 	local check_back_space = require("lib.util").check_back_space
 	local cmp = require("cmp")
 	cmp.setup({

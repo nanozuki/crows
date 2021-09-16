@@ -1,4 +1,4 @@
-local feature = require("lib.feature")
+local feature = require("fur.feature")
 
 local lang = feature:new("lang")
 lang.source = "lua/lang/init.lua"

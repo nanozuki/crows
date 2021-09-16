@@ -1,4 +1,4 @@
-local feature = require("lib.feature")
+local feature = require("fur.feature")
 
 local typescript = feature:new("typescript")
 typescript.sourct = "lua/lang/typescript.lua"

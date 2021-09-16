@@ -1,4 +1,4 @@
-local feature = require("lib.feature")
+local feature = require("fur.feature")
 
 local basic = feature:new("basic")
 basic.source = "lua/features/basic.lua"
