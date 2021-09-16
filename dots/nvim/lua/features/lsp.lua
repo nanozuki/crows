@@ -1,4 +1,4 @@
-local feature = require("lib.feature")
+local feature = require("fur.feature")
 
 local lsp = feature:new("lsp")
 lsp.source = "lua/features/lsp.lua"
