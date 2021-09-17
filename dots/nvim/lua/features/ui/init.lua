@@ -17,27 +17,16 @@ treesitter.plugins = {
 	},
 }
 
-local airline = feature:new("airline")
-airline.plugins = {
-	"vim-airline/vim-airline",
+local buffer_line = feature:new("buffer_line")
+buffer_line.plugins = {
+	{
+		"akinsho/bufferline.nvim",
+		requires = "kyazdani42/nvim-web-devicons",
+		config = function()
+			require("bufferline").setup({})
+		end,
+	},
 }
-airline.setup = function()
-	vim.g["airline_powerline_fonts"] = 1
-	vim.g["airline_extensions"] = { "tabline", "branch", "virtualenv" }
-	vim.g["airline#extensions#tabline#buffer_idx_mode"] = 1
-end
-airline.mappings = {
-	{ "n", "<leader>-", "<Plug>AirlineSelectPrevTab", { noremap = false } },
-	{ "n", "<leader>+", "<Plug>AirlineSelectNextTab", { noremap = false } },
-}
-for i = 0, 9 do
-	airline.mappings[#airline.mappings + 1] = {
-		"n",
-		"<leader>" .. i,
-		"<Plug>AirlineSelectTab" .. i,
-		{ noremap = false },
-	}
-end
 
 local filetree = feature:new("filetree")
 filetree.setup = function()
@@ -119,10 +108,11 @@ tmuxline.setup = function()
 end
 
 ui.children = {
-	treesitter,
-	airline,
-	filetree,
 	colorscheme,
+	treesitter,
+	require("features.ui.status_line"),
+	buffer_line,
+	filetree,
 	tmuxline,
 }
 
