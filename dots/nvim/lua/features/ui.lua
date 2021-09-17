@@ -40,19 +40,20 @@ for i = 0, 9 do
 end
 
 local filetree = feature:new("filetree")
-filetree.plugins = {
-	"preservim/nerdtree", -- use 'm' to open menu to edit filesystem nodes.
-}
 filetree.setup = function()
-	vim.g.NERDTreeWinSize = 32
-	vim.g.NERDTreeWinPos = "left"
-	vim.g.NERDTreeShowHidden = 1
-	vim.g.NERDTreeMinimalUI = 1
-	vim.g.NERDTreeAutoDeleteBuffer = 1
-	vim.g.NERDTreeRespectWildIgnore = 1
+	vim.g.nvim_tree_lsp_diagnostics = 1
 end
+filetree.plugins = {
+	{
+		"kyazdani42/nvim-tree.lua",
+		requires = "kyazdani42/nvim-web-devicons",
+		config = function()
+			require("nvim-tree.view").View.winopts.signcolumn = "auto"
+		end,
+	},
+}
 filetree.mappings = {
-	{ "n", "<Leader>fl", ":NERDTreeToggle<CR>" },
+	{ "n", "<Leader>fl", ":NvimTreeToggle<CR>" },
 }
 
 local colorscheme = feature:new("colorscheme")
