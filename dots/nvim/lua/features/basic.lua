@@ -21,6 +21,7 @@ basic.setup = function()
 	vim.opt.modelines = 1
 end
 basic.mappings = {
+	{ "n", "<leader>tt", ":terminal<CR>" },
 	{ "t", "<Esc>", [[<C-\><C-N>]] }, -- use <ESC> to normal mode in terminal window
 }
 
