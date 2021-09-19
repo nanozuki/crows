@@ -1,4 +1,5 @@
 local feature = require("fur.feature")
+local packadd = require("fur").packadd
 
 local ui = feature:new("ui")
 ui.source = "lua/features/ui.lua"
@@ -53,29 +54,34 @@ colorscheme.plugins = {
 }
 local colorschemes = {
 	gruvbox_light = function()
-		vim.cmd("packadd gruvbox-material")
-		vim.opt.background = "light"
-		vim.g["gruvbox_material_enable_italic"] = 1
-		vim.g["airline_theme"] = "gruvbox_material"
-		vim.cmd("colorscheme gruvbox-material")
+		if packadd("gruvbox-material") then
+			vim.opt.background = "light"
+			vim.g["gruvbox_material_enable_italic"] = 1
+			vim.g["airline_theme"] = "gruvbox_material"
+			vim.cmd("colorscheme gruvbox-material")
+		end
 	end,
 	gruvbox_dark = function()
-		vim.cmd("packadd gruvbox-material")
-		vim.opt.background = "dark"
-		vim.g["gruvbox_material_enable_italic"] = 1
-		vim.g["airline_theme"] = "gruvbox_material"
-		vim.cmd("colorscheme gruvbox-material")
+		if packadd("gruvbox-material") then
+			vim.opt.background = "dark"
+			vim.g["gruvbox_material_enable_italic"] = 1
+			vim.g["airline_theme"] = "gruvbox_material"
+			vim.cmd("colorscheme gruvbox-material")
+		end
 	end,
 	nord = function()
-		vim.cmd("packadd nord-vim")
-		vim.g["airline_theme"] = "nord"
-		vim.cmd("colorscheme nord")
+		if packadd("nord-vim") then
+			vim.g["airline_theme"] = "nord"
+			vim.cmd("colorscheme nord")
+		end
 	end,
 	edge_light = function()
-		vim.cmd("packadd edge")
-		vim.g["edge_enable_italic"] = 1
-		vim.g["airline_theme"] = "edge"
-		vim.cmd("colorscheme edge")
+		if packadd("edge") then
+			vim.opt.background = "light"
+			vim.g.edge_enable_italic = 1
+			vim.g.airline_theme = "edge"
+			vim.cmd("colorscheme edge")
+		end
 	end,
 }
 colorscheme.setup = function()
@@ -83,7 +89,7 @@ colorscheme.setup = function()
 	local function set_colorscheme(name)
 		colorschemes[name]()
 	end
-	set_colorscheme("gruvbox_light")
+	set_colorscheme("edge_light")
 end
 
 local tmuxline = feature:new("tmuxline")
