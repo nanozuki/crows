@@ -35,7 +35,7 @@ local feline_config = function()
 			fg_sec = "#d8dee9", -- nord4
 		},
 	}
-	local palette = palettes.edge_light
+	local palette = palettes.gruvbox_light
 	local feline = require("feline")
 	require("gitsigns").setup({ signcolumn = false })
 
