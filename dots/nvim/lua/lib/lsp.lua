@@ -63,10 +63,14 @@ function lsp.capabilities()
 end
 
 function lsp.set_config(name, config)
-	local lspconfig = require("lspconfig")
-	config["on_attach"] = lsp.on_attach
-	config["capabilities"] = lsp.capabilities()
-	lspconfig[name].setup(config)
+	local ok, lspconfig = pcall(require, "lspconfig")
+	if ok then
+		config["on_attach"] = lsp.on_attach
+		config["capabilities"] = lsp.capabilities()
+		lspconfig[name].setup(config)
+	else
+		print("require failed: ", lspconfig)
+	end
 end
 
 return lsp

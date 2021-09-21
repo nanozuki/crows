@@ -1,4 +1,5 @@
 local feature = require("fur.feature")
+local packadd = require("fur").packadd
 
 local ui = feature:new("ui")
 ui.source = "lua/features/ui.lua"
@@ -17,27 +18,26 @@ treesitter.plugins = {
 	},
 }
 
-local airline = feature:new("airline")
-airline.plugins = {
-	"vim-airline/vim-airline",
+local buffer_line = feature:new("buffer_line")
+buffer_line.plugins = {
+	{
+		"akinsho/bufferline.nvim",
+		requires = "kyazdani42/nvim-web-devicons",
+		config = function()
+			require("bufferline").setup({
+				options = {
+					offsets = {
+						{ filetype = "NvimTree", text = "Files", highlight = "TabLine", text_align = "center" },
+					},
+				},
+			})
+		end,
+	},
 }
-airline.setup = function()
-	vim.g["airline_powerline_fonts"] = 1
-	vim.g["airline_extensions"] = { "tabline", "branch", "virtualenv" }
-	vim.g["airline#extensions#tabline#buffer_idx_mode"] = 1
-end
-airline.mappings = {
-	{ "n", "<leader>-", "<Plug>AirlineSelectPrevTab", { noremap = false } },
-	{ "n", "<leader>+", "<Plug>AirlineSelectNextTab", { noremap = false } },
+buffer_line.mappings = {
+	{ "n", "<leader>bn", ":BufferLineCycleNext<CR>" },
+	{ "n", "<leader>bp", ":BufferLineCyclePrev<CR>" },
 }
-for i = 0, 9 do
-	airline.mappings[#airline.mappings + 1] = {
-		"n",
-		"<leader>" .. i,
-		"<Plug>AirlineSelectTab" .. i,
-		{ noremap = false },
-	}
-end
 
 local filetree = feature:new("filetree")
 filetree.setup = function()
@@ -64,29 +64,34 @@ colorscheme.plugins = {
 }
 local colorschemes = {
 	gruvbox_light = function()
-		vim.cmd("packadd gruvbox-material")
-		vim.opt.background = "light"
-		vim.g["gruvbox_material_enable_italic"] = 1
-		vim.g["airline_theme"] = "gruvbox_material"
-		vim.cmd("colorscheme gruvbox-material")
+		if packadd("gruvbox-material") then
+			vim.opt.background = "light"
+			vim.g["gruvbox_material_enable_italic"] = 1
+			vim.g["airline_theme"] = "gruvbox_material"
+			vim.cmd("colorscheme gruvbox-material")
+		end
 	end,
 	gruvbox_dark = function()
-		vim.cmd("packadd gruvbox-material")
-		vim.opt.background = "dark"
-		vim.g["gruvbox_material_enable_italic"] = 1
-		vim.g["airline_theme"] = "gruvbox_material"
-		vim.cmd("colorscheme gruvbox-material")
+		if packadd("gruvbox-material") then
+			vim.opt.background = "dark"
+			vim.g["gruvbox_material_enable_italic"] = 1
+			vim.g["airline_theme"] = "gruvbox_material"
+			vim.cmd("colorscheme gruvbox-material")
+		end
 	end,
 	nord = function()
-		vim.cmd("packadd nord-vim")
-		vim.g["airline_theme"] = "nord"
-		vim.cmd("colorscheme nord")
+		if packadd("nord-vim") then
+			vim.g["airline_theme"] = "nord"
+			vim.cmd("colorscheme nord")
+		end
 	end,
 	edge_light = function()
-		vim.cmd("packadd edge")
-		vim.g["edge_enable_italic"] = 1
-		vim.g["airline_theme"] = "edge"
-		vim.cmd("colorscheme edge")
+		if packadd("edge") then
+			vim.opt.background = "light"
+			vim.g.edge_enable_italic = 1
+			vim.g.airline_theme = "edge"
+			vim.cmd("colorscheme edge")
+		end
 	end,
 }
 colorscheme.setup = function()
@@ -119,10 +124,11 @@ tmuxline.setup = function()
 end
 
 ui.children = {
-	treesitter,
-	airline,
-	filetree,
 	colorscheme,
+	treesitter,
+	require("features.ui.status_line"),
+	buffer_line,
+	filetree,
 	tmuxline,
 }
 
