@@ -102,34 +102,12 @@ colorscheme.setup = function()
 	set_colorscheme("gruvbox_light")
 end
 
-local tmuxline = feature:new("tmuxline")
-tmuxline.plugins = {
-	{ "edkolev/tmuxline.vim", opt = true },
-}
-tmuxline.setup = function()
-	function Tmuxline(mode)
-		vim.cmd("packadd tmuxline.vim")
-		if mode == "insert" then
-			vim.cmd("Tmuxline airline_insert")
-		elseif mode == "visual" then
-			vim.cmd("Tmuxline airline_visual")
-		else
-			vim.cmd("Tmuxline airline")
-		end
-	end
-	function TmuxlineSnapshot(file)
-		vim.cmd("packadd tmuxline.vim")
-		vim.cmd("TmuxlineSnapshot " .. file)
-	end
-end
-
 ui.children = {
 	colorscheme,
 	treesitter,
 	require("features.ui.status_line"),
 	buffer_line,
 	filetree,
-	tmuxline,
 }
 
 return ui
