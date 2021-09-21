@@ -24,9 +24,19 @@ buffer_line.plugins = {
 		"akinsho/bufferline.nvim",
 		requires = "kyazdani42/nvim-web-devicons",
 		config = function()
-			require("bufferline").setup({})
+			require("bufferline").setup({
+				options = {
+					offsets = {
+						{ filetype = "NvimTree", text = "Files", highlight = "TabLine", text_align = "center" },
+					},
+				},
+			})
 		end,
 	},
+}
+buffer_line.mappings = {
+	{ "n", "<leader>bn", ":BufferLineCycleNext<CR>" },
+	{ "n", "<leader>bp", ":BufferLineCyclePrev<CR>" },
 }
 
 local filetree = feature:new("filetree")
@@ -89,7 +99,7 @@ colorscheme.setup = function()
 	local function set_colorscheme(name)
 		colorschemes[name]()
 	end
-	set_colorscheme("edge_light")
+	set_colorscheme("gruvbox_light")
 end
 
 local tmuxline = feature:new("tmuxline")
