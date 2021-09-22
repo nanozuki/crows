@@ -48,15 +48,16 @@ lspui_ext.plugins = {
 			-- but in nightly it's:
 			-- function(err, result, ctx, config)
 			-- ctx is { method, client_id, bufnr }
+			-- and, lsputil has some custom params
 			--]]
 			local function compat(nightly_fn)
-				return function(err, method, params, client_id, bufnr, config)
-					nightly_fn(err, params, { method = method, client_id = client_id, bufnr = bufnr }, config)
+				return function(err, method, params, client_id, bufnr, config, ...)
+					nightly_fn(err, params, { method = method, client_id = client_id, bufnr = bufnr }, config, ...)
 				end
 			end
 
-			vim.lsp.handlers["textDocument/codeAction"] = require("lsputil.codeAction").code_action_handler
-			vim.lsp.handlers["textDocument/references"] = require("lsputil.locations").references_handler
+			vim.lsp.handlers["textDocument/codeAction"] = compat(require("lsputil.codeAction").code_action_handler)
+			vim.lsp.handlers["textDocument/references"] = compat(require("lsputil.locations").references_handler)
 			vim.lsp.handlers["textDocument/definition"] = compat(require("lsputil.locations").definition_handler)
 			vim.lsp.handlers["textDocument/declaration"] = compat(require("lsputil.locations").declaration_handler)
 			vim.lsp.handlers["textDocument/typeDefinition"] = compat(
