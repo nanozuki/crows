@@ -18,8 +18,8 @@ treesitter.plugins = {
 	},
 }
 
-local buffer_line = feature:new("buffer_line")
-buffer_line.plugins = {
+local tabline = feature:new("tabline")
+tabline.plugins = {
 	{
 		"akinsho/bufferline.nvim",
 		requires = "kyazdani42/nvim-web-devicons",
@@ -34,7 +34,7 @@ buffer_line.plugins = {
 		end,
 	},
 }
-buffer_line.mappings = {
+tabline.mappings = {
 	{ "n", "<leader>bn", ":BufferLineCycleNext<CR>" },
 	{ "n", "<leader>bp", ":BufferLineCyclePrev<CR>" },
 }
@@ -106,7 +106,7 @@ ui.children = {
 	colorscheme,
 	treesitter,
 	require("features.ui.status_line"),
-	buffer_line,
+	tabline,
 	filetree,
 }
 
