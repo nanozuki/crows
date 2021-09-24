@@ -2,6 +2,15 @@ local feature = require("fur.feature")
 
 local go = feature:new("lang.go")
 go.source = "lua/lang/go.lua"
+go.plugins = {
+	{
+		"ray-x/go.nvim",
+		ft = { "go", "gomod" },
+		config = function()
+			require("go").setup()
+		end,
+	},
+}
 go.setup = function()
 	local lspconfig = require("lspconfig")
 	local configs = require("lspconfig/configs")
