@@ -2,7 +2,7 @@ function sync_gpg
     title "sync gpg"
 
     if test $os = archlinux
-        pacman_install gnupg pinentry
+        paru_install gnupg pinentry
     else if test $os = macos
         brew_install gnupg pinentry-mac
     end

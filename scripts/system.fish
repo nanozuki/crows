@@ -8,14 +8,14 @@ function sync_system
 end
 
 function sync_archlinux
-    pacman_install go tree
-    if not type -q yay
-        gitget "~/Projects/aur.archlinux.org/yay"
+    sudo pacman -S --needed --noconfirm base-devel
+    if not type -q paru
+        gitget "https://aur.archlinux.org/paru.git"
         makepkg -si --noconfirm
         cd -
     end
-    yay_install direnv
-    yay -Syu
+    paru -Syu
+    paru_install go tree direnv
     set PATH ~/.local/bin /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin /sbin
 end
 

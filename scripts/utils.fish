@@ -32,17 +32,10 @@ function brew_head
     end
 end
 
-function pacman_install
+function paru_install
     for pkg in $argv
-        echo "pacman install $pkg"
-        sudo pacman -S --needed --noconfirm $pkg
-    end
-end
-
-function yay_install
-    for pkg in $argv
-        echo "yay install $pkg"
-        yay -S --needed --noconfirm $pkg
+        echo "paru install $pkg"
+        paru -S --needed --noconfirm $pkg
     end
 end
 
