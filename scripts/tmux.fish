@@ -2,7 +2,7 @@ function sync_tmux
     title "sync tmux"
     # install tmux
     if test $os = archlinux
-        pacman_install tmux
+        paru_install tmux
     else if test $os = macos
         brew_install tmux
     end

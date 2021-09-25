@@ -1,8 +1,7 @@
 function sync_zig
     title "sync zig"
     if test $os = archlinux
-        pacman_install zig
-        yay_install zls-bin
+        paru_install zig zls-bin
         ln -sf $dots/lsp/zls_arch.json $config/zls.json
     else if test $os = macos
         brew_install zig

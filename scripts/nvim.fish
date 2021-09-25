@@ -3,8 +3,7 @@ function sync_nvim
 
     # install nvim and language environment
     if test $os = archlinux
-        pacman_install neovim
-        pacman_install python-pynvim nodejs-lts-fermium npm ripgrep fzf
+        paru_install neovim python-pynvim nodejs-lts-fermium npm ripgrep fzf
         sudo npm -g install neovim
         sudo npm -g install graphql-language-service-cli
         sudo npm -g install vim-language-server
@@ -41,7 +40,7 @@ end
 
 function sync_lua
     if test $os = archlinux
-        yay_install lua-language-server
+        paru_install lua-language-server
     else if test $os = macos
         macos_lua_lsp
     end
@@ -70,7 +69,7 @@ end
 
 function sync_bat # used by lsputils
     if test $os = archlinux
-        pacman_install bat
+        paru_install bat
     else if test $os = macos
         brew_install bat
     end

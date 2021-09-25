@@ -5,8 +5,7 @@ function sync_go
     fish_add_path $GOPATH/bin
 
     if test $os = archlinux
-        pacman_install go gopls
-        yay_install golangci-lint
+        paru_install go gopls golangci-lint
     else if test $os = macos
         brew_install go gopls golangci-lint
     end

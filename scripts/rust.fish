@@ -17,7 +17,7 @@ function sync_rust
 
     # install rust-analyzer
     if test $os = archlinux
-        pacman_install rust-analyzer
+        paru_install rust-analyzer
     else if test $os = macos
         brew_install rust-analyzer
     end
