@@ -40,16 +40,15 @@ tabline.mappings = {
 }
 
 local filetree = feature:new("filetree")
-filetree.setup = function()
-	vim.g.nvim_tree_lsp_diagnostics = 1
-end
 filetree.plugins = {
 	{
 		"kyazdani42/nvim-tree.lua",
 		requires = "kyazdani42/nvim-web-devicons",
 		config = function()
 			require("nvim-tree.view").View.winopts.signcolumn = "auto"
-			require("nvim-tree").setup({})
+			require("nvim-tree").setup({
+				lsp_diagnostics = true,
+			})
 		end,
 	},
 }
