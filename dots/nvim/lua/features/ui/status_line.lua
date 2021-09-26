@@ -68,10 +68,14 @@ local feline_config = function()
 		},
 		-- layer 2
 		{
-			provider = "file_info",
-			type = "relative",
-			colored_icon = false,
-			file_readonly_icon = " ",
+			provider = {
+				name = "file_info",
+				opts = {
+					type = "relative",
+					colored_icon = false,
+					file_readonly_icon = " ",
+				},
+			},
 			hl = { fg = "fg", bg = "bg_sec" },
 		},
 		{
