@@ -49,6 +49,7 @@ filetree.plugins = {
 		requires = "kyazdani42/nvim-web-devicons",
 		config = function()
 			require("nvim-tree.view").View.winopts.signcolumn = "auto"
+			require("nvim-tree").setup({})
 		end,
 	},
 }
