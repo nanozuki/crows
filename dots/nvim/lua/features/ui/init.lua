@@ -21,16 +21,10 @@ treesitter.plugins = {
 local tabline = feature:new("tabline")
 tabline.plugins = {
 	{
-		"akinsho/bufferline.nvim",
+		"nanozuki/tabby.nvim",
 		requires = "kyazdani42/nvim-web-devicons",
 		config = function()
-			require("bufferline").setup({
-				options = {
-					offsets = {
-						{ filetype = "NvimTree", text = "Files", highlight = "TabLine", text_align = "center" },
-					},
-				},
-			})
+			require("tabby").setup({})
 		end,
 	},
 }
