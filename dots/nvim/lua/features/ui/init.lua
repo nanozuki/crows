@@ -24,7 +24,7 @@ tabline.plugins = {
 		"nanozuki/tabby.nvim",
 		requires = "kyazdani42/nvim-web-devicons",
 		config = function()
-			require("tabby").setup({})
+			require("tabby").setup()
 		end,
 	},
 }
