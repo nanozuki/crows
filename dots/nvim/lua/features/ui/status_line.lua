@@ -175,10 +175,14 @@ local feline_config = function()
 			hl = { fg = "accent", bg = "bg" },
 		},
 		{
-			provider = "file_info",
-			type = "relative",
-			file_readonly_icon = " ",
-			colored_icon = false,
+			provider = {
+				name = "file_info",
+				opts = {
+					type = "relative",
+					file_readonly_icon = " ",
+					colored_icon = false,
+				},
+			},
 			hl = { fg = "fg", bg = "bg" },
 		},
 	}
