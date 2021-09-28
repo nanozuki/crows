@@ -3,13 +3,20 @@ local feature = require("fur.feature")
 local basic = feature:new("basic")
 basic.source = "lua/features/basic.lua"
 basic.plugins = {
-	"nvim-lua/plenary.nvim", -- basic lua library extension
 	{
 		"folke/which-key.nvim",
 		config = function()
 			require("which-key").setup({})
 		end,
 	}, -- key mapping manage and hint
+	{
+		"rmagatti/auto-session",
+		config = function()
+			require("auto-session").setup({
+				pre_save_cmds = { "NvimTreeClose" },
+			})
+		end,
+	}, -- session
 }
 basic.setup = function()
 	vim.opt.linebreak = true
@@ -19,6 +26,9 @@ basic.setup = function()
 	vim.opt.relativenumber = true
 	vim.opt.colorcolumn = "120"
 	vim.opt.modelines = 1
+
+	-- session
+	vim.opt.sessionoptions = "blank,curdir,folds,help,tabpages,terminal,winsize"
 end
 basic.mappings = {
 	{ "n", "<leader>tt", ":terminal<CR>" },
