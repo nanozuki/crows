@@ -29,8 +29,13 @@ tabline.plugins = {
 	},
 }
 tabline.mappings = {
-	{ "n", "<leader>bn", ":BufferLineCycleNext<CR>" },
-	{ "n", "<leader>bp", ":BufferLineCyclePrev<CR>" },
+	{ "n", "<leader>ta", ":$tabnew<CR>" },
+	{ "n", "<leader>tc", ":tabclose<CR>" },
+	{ "n", "<leader>to", ":tabonly<CR>" },
+	{ "n", "<leader>tn", ":tabn<CR>" },
+	{ "n", "<leader>tp", ":tabp<CR>" },
+	{ "n", "<leader>tmp", ":-tabmove<CR>" }, -- move current tab to preview position
+	{ "n", "<leader>tmn", ":+tabmove<CR>" }, -- move current tab to next position
 }
 
 local filetree = feature:new("filetree")
