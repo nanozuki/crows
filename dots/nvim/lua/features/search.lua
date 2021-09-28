@@ -31,10 +31,12 @@ telescope.plugins = {
 			{ "nvim-lua/plenary.nvim" },
 			{ "nvim-telescope/telescope-z.nvim" },
 			{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+			{ "rmagatti/session-lens" }, -- auto-session
 		},
 		config = function()
 			require("telescope").load_extension("z")
 			require("telescope").load_extension("fzf")
+			require("telescope").load_extension("session-lens")
 			require("telescope").setup({
 				extensions = {
 					fzf = {
@@ -57,6 +59,7 @@ telescope.mappings = {
 	{ "n", "<leader>fh", "<cmd>lua require('telescope.builtin').help_tags()<cr>" },
 	{ "n", "<leader>fm", "<cmd>lua require('telescope.builtin').marks()<cr>" },
 	{ "n", "<leader>ft", "<cmd>lua require('telescope.builtin').treesitter()<cr>" },
+	{ "n", "<leader>fs", "<cmd>SearchSession<cr>" },
 }
 
 search.children = { replace, telescope }
