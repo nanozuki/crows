@@ -15,12 +15,16 @@ lua.setup = function()
 					version = "LuaJIT",
 					path = runtime_path,
 				},
+				completion = {
+					autoRequire = false,
+				},
 				diagnostics = {
 					globals = { "vim" },
 				},
 				workspace = {
 					-- Make the server aware of Neovim runtime files
 					library = vim.api.nvim_get_runtime_file("", true),
+					maxPreload = 5000,
 				},
 				-- Do not send telemetry data containing a randomized but unique identifier
 				telemetry = {
