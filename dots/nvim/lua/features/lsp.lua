@@ -42,32 +42,14 @@ lspui_ext.plugins = {
 		"RishabhRD/nvim-lsputils",
 		requires = { { "RishabhRD/popfix" } },
 		config = function()
-			--[[
-			-- in stable neovim, the lsp client handlers sign is:
-			-- function(err, method, params, client_id, bufnr, config)
-			-- but in nightly it's:
-			-- function(err, result, ctx, config)
-			-- ctx is { method, client_id, bufnr }
-			-- and, lsputil has some custom params
-			--]]
-			local function compat(nightly_fn)
-				return function(err, method, params, client_id, bufnr, config, ...)
-					nightly_fn(err, params, { method = method, client_id = client_id, bufnr = bufnr }, config, ...)
-				end
-			end
-
-			vim.lsp.handlers["textDocument/codeAction"] = compat(require("lsputil.codeAction").code_action_handler)
-			vim.lsp.handlers["textDocument/references"] = compat(require("lsputil.locations").references_handler)
-			vim.lsp.handlers["textDocument/definition"] = compat(require("lsputil.locations").definition_handler)
-			vim.lsp.handlers["textDocument/declaration"] = compat(require("lsputil.locations").declaration_handler)
-			vim.lsp.handlers["textDocument/typeDefinition"] = compat(
-				require("lsputil.locations").typeDefinition_handler
-			)
-			vim.lsp.handlers["textDocument/implementation"] = compat(
-				require("lsputil.locations").implementation_handler
-			)
-			vim.lsp.handlers["textDocument/documentSymbol"] = compat(require("lsputil.symbols").document_handler)
-			vim.lsp.handlers["workspace/symbol"] = compat(require("lsputil.symbols").workspace_handler)
+			vim.lsp.handlers["textDocument/codeAction"] = require("lsputil.codeAction").code_action_handler
+			vim.lsp.handlers["textDocument/references"] = require("lsputil.locations").references_handler
+			vim.lsp.handlers["textDocument/definition"] = require("lsputil.locations").definition_handler
+			vim.lsp.handlers["textDocument/declaration"] = require("lsputil.locations").declaration_handler
+			vim.lsp.handlers["textDocument/typeDefinition"] = require("lsputil.locations").typeDefinition_handler
+			vim.lsp.handlers["textDocument/implementation"] = require("lsputil.locations").implementation_handler
+			vim.lsp.handlers["textDocument/documentSymbol"] = require("lsputil.symbols").document_handler
+			vim.lsp.handlers["workspace/symbol"] = require("lsputil.symbols").workspace_handler
 		end,
 	},
 }
