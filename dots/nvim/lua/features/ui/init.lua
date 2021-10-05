@@ -18,26 +18,6 @@ treesitter.plugins = {
 	},
 }
 
-local tabline = feature:new("tabline")
-tabline.plugins = {
-	{
-		"nanozuki/tabby.nvim",
-		requires = "kyazdani42/nvim-web-devicons",
-		config = function()
-			require("tabby").setup()
-		end,
-	},
-}
-tabline.mappings = {
-	{ "n", "<leader>ta", ":$tabnew<CR>" },
-	{ "n", "<leader>tc", ":tabclose<CR>" },
-	{ "n", "<leader>to", ":tabonly<CR>" },
-	{ "n", "<leader>tn", ":tabn<CR>" },
-	{ "n", "<leader>tp", ":tabp<CR>" },
-	{ "n", "<leader>tmp", ":-tabmove<CR>" }, -- move current tab to preview position
-	{ "n", "<leader>tmn", ":+tabmove<CR>" }, -- move current tab to next position
-}
-
 local filetree = feature:new("filetree")
 filetree.plugins = {
 	{
@@ -105,7 +85,7 @@ ui.children = {
 	colorscheme,
 	treesitter,
 	require("features.ui.status_line"),
-	tabline,
+	require("features.ui.tab_line"),
 	filetree,
 }
 
