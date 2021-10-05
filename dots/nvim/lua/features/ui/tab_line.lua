@@ -3,12 +3,14 @@ local feature = require("fur.feature")
 local tabby_config = function()
 	local palette = require("features.ui.palettes").gruvbox_light
 	local filename = require("tabby.filename")
-	local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+	local cwd = function()
+		return " " .. vim.fn.fnamemodify(vim.fn.getcwd(), ":t") .. " "
+	end
 	local line = {
 		hl = { fg = palette.fg, bg = palette.bg },
 		layout = "active_wins_at_tail",
 		head = {
-			{ " " .. cwd .. " ", hl = { fg = palette.bg, bg = palette.accent } },
+			{ cwd, hl = { fg = palette.bg, bg = palette.accent } },
 			{ "", hl = { fg = palette.accent, bg = palette.bg } },
 		},
 		active_tab = {
