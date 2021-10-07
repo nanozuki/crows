@@ -169,9 +169,9 @@ local feline_config = function()
   })
 end
 
-local status_line = feature:new('status_line')
-status_line.source = 'lua/features/ui/status_line.lua'
-status_line.plugins = {
+local statusline = feature:new('statusline')
+statusline.source = 'lua/features/ui/statusline.lua'
+statusline.plugins = {
   {
     'famiu/feline.nvim',
     requires = {
@@ -183,4 +183,4 @@ status_line.plugins = {
   },
 }
 
-return status_line
+return statusline

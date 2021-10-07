@@ -38,7 +38,7 @@ filetree.mappings = {
 local colorscheme = feature:new('colorscheme')
 colorscheme.plugins = {
   { 'sainnhe/gruvbox-material', opt = true },
-  { 'arcticicestudio/nord-vim', opt = true },
+  { 'shaunsingh/nord.nvim', opt = true },
   { 'sainnhe/edge', opt = true },
 }
 local colorschemes = {
@@ -46,7 +46,6 @@ local colorschemes = {
     if packadd('gruvbox-material') then
       vim.opt.background = 'light'
       vim.g['gruvbox_material_enable_italic'] = 1
-      vim.g['airline_theme'] = 'gruvbox_material'
       vim.cmd('colorscheme gruvbox-material')
     end
   end,
@@ -54,13 +53,13 @@ local colorschemes = {
     if packadd('gruvbox-material') then
       vim.opt.background = 'dark'
       vim.g['gruvbox_material_enable_italic'] = 1
-      vim.g['airline_theme'] = 'gruvbox_material'
       vim.cmd('colorscheme gruvbox-material')
     end
   end,
   nord = function()
-    if packadd('nord-vim') then
-      vim.g['airline_theme'] = 'nord'
+    if packadd('nord.nvim') then
+      vim.g.nord_borders = true
+      require('nord').set()
       vim.cmd('colorscheme nord')
     end
   end,
@@ -68,7 +67,6 @@ local colorschemes = {
     if packadd('edge') then
       vim.opt.background = 'light'
       vim.g.edge_enable_italic = 1
-      vim.g.airline_theme = 'edge'
       vim.cmd('colorscheme edge')
     end
   end,
@@ -84,8 +82,8 @@ end
 ui.children = {
   colorscheme,
   treesitter,
-  require('features.ui.status_line'),
-  require('features.ui.tab_line'),
+  require('features.ui.statusline'),
+  require('features.ui.tabline'),
   filetree,
 }
 
