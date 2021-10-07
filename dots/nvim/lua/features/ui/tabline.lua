@@ -1,7 +1,7 @@
 local feature = require('fur.feature')
 
 local tabby_config = function()
-  local palette = require('features.ui.palettes').gruvbox_light
+  local palette = require('features.ui.colors').palette
   local filename = require('tabby.filename')
   local cwd = function()
     return ' ' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':t') .. ' '

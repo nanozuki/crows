@@ -1,7 +1,7 @@
 local feature = require('fur.feature')
 
 local feline_config = function()
-  local palette = require('features.ui.palettes').gruvbox_light
+  local palette = require('features.ui.colors').palette
   local feline = require('feline')
   require('gitsigns').setup({ signcolumn = false })
 
