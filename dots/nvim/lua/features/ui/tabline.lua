@@ -61,16 +61,16 @@ local tabby_config = function()
   require('tabby').setup({ tabline = line })
 end
 
-local tab_line = feature:new('tab_line')
-tab_line.source = 'lua/features/ui/tab_line.lua'
-tab_line.plugins = {
+local tabline = feature:new('tabline')
+tabline.source = 'lua/features/ui/tabline.lua'
+tabline.plugins = {
   {
     'nanozuki/tabby.nvim',
     requires = 'kyazdani42/nvim-web-devicons',
     config = tabby_config,
   },
 }
-tab_line.mappings = {
+tabline.mappings = {
   { 'n', '<leader>ta', ':$tabnew<CR>' },
   { 'n', '<leader>tc', ':tabclose<CR>' },
   { 'n', '<leader>to', ':tabonly<CR>' },
@@ -80,4 +80,4 @@ tab_line.mappings = {
   { 'n', '<leader>tmn', ':+tabmove<CR>' }, -- move current tab to next position
 }
 
-return tab_line
+return tabline
