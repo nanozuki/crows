@@ -1,5 +1,4 @@
 local feature = require('fur.feature')
-local packadd = require('fur').packadd
 
 local ui = feature:new('ui')
 ui.source = 'lua/features/ui.lua'
@@ -35,52 +34,8 @@ filetree.mappings = {
   { 'n', '<Leader>fl', ':NvimTreeToggle<CR>' },
 }
 
-local colorscheme = feature:new('colorscheme')
-colorscheme.plugins = {
-  { 'sainnhe/gruvbox-material', opt = true },
-  { 'shaunsingh/nord.nvim', opt = true },
-  { 'sainnhe/edge', opt = true },
-}
-local colorschemes = {
-  gruvbox_light = function()
-    if packadd('gruvbox-material') then
-      vim.opt.background = 'light'
-      vim.g['gruvbox_material_enable_italic'] = 1
-      vim.cmd('colorscheme gruvbox-material')
-    end
-  end,
-  gruvbox_dark = function()
-    if packadd('gruvbox-material') then
-      vim.opt.background = 'dark'
-      vim.g['gruvbox_material_enable_italic'] = 1
-      vim.cmd('colorscheme gruvbox-material')
-    end
-  end,
-  nord = function()
-    if packadd('nord.nvim') then
-      vim.g.nord_borders = true
-      require('nord').set()
-      vim.cmd('colorscheme nord')
-    end
-  end,
-  edge_light = function()
-    if packadd('edge') then
-      vim.opt.background = 'light'
-      vim.g.edge_enable_italic = 1
-      vim.cmd('colorscheme edge')
-    end
-  end,
-}
-colorscheme.setup = function()
-  vim.opt.termguicolors = true -- true color
-  local function set_colorscheme(name)
-    colorschemes[name]()
-  end
-  set_colorscheme('gruvbox_light')
-end
-
 ui.children = {
-  colorscheme,
+  require('features.ui.colors'),
   treesitter,
   require('features.ui.statusline'),
   require('features.ui.tabline'),
