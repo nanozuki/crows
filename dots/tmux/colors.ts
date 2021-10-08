@@ -14,7 +14,7 @@ set -g status "on"
 set -g status-style "none,bg={{bg}}"
 set -g status-left "#[fg={{bg}},bg={{accent}}] #S #[fg={{accent}},bg={{bg}}]"
 set -g status-right "#[fg={{bg_sec}},bg={{bg}}]#[fg={{fg}},bg={{bg_sec}}] %Y-%m-%d  %H:%M #[fg={{accent_sec}},bg={{bg_sec}}]#[fg={{bg}},bg={{accent_sec}}] #h "
-setw -g window-status-format "#[fg={{fg}},bg={{bg}}] #I  #W "
+setw -g window-status-format "#[fg={{fg}},bg={{bg}}]  #I  #W  "
 setw -g window-status-current-format "#[fg={{bg}},bg={{bg_sec}}]#[fg={{fg}},bg={{bg_sec}}] #I  #W #[fg={{bg_sec}},bg={{bg}}]"
 `;
 
