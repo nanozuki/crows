@@ -6,6 +6,9 @@ local tabby_config = function()
   local cwd = function()
     return ' ' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':t') .. ' '
   end
+  local tabname = function(tabid)
+    return vim.api.nvim_tabpage_get_number(tabid)
+  end
   local line = {
     hl = { fg = palette.fg, bg = palette.bg },
     layout = 'active_wins_at_tail',
@@ -16,7 +19,7 @@ local tabby_config = function()
     active_tab = {
       label = function(tabid)
         return {
-          '  ' .. tabid .. ' ',
+          '  ' .. tabname(tabid) .. ' ',
           hl = { fg = palette.bg, bg = palette.accent_sec, style = 'bold' },
         }
       end,
@@ -26,7 +29,7 @@ local tabby_config = function()
     inactive_tab = {
       label = function(tabid)
         return {
-          '  ' .. tabid .. ' ',
+          '  ' .. tabname(tabid) .. ' ',
           hl = { fg = palette.fg, bg = palette.bg_sec, style = 'bold' },
         }
       end,
