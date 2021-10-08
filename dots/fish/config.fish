@@ -16,11 +16,6 @@ end
 if type -q direnv
     direnv hook fish | source
 end
-if type -q exa
-    alias ll="exa -l --icons"
-    alias ls="exa --icons"
-    alias la="exa -al --icons"
-end
 alias tmuxa="tmux a; or tmux"
 
 # history across fishes
