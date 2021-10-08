@@ -14,6 +14,7 @@ basic.plugins = {
     config = function()
       require('auto-session').setup({
         pre_save_cmds = { 'NvimTreeClose' },
+        auto_session_suppress_dirs = { '~' },
       })
     end,
   }, -- session
