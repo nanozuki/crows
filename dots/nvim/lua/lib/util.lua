@@ -7,7 +7,6 @@ function util.augroup(name, autocmds)
   }
 
   for _, cmd in ipairs(autocmds) do
-    -- table.insert(cmds, M.autocmd(cmd))
     table.insert(cmds, cmd)
   end
 

@@ -1,9 +1,26 @@
 local feature = require('fur.feature')
 
 local function nvim_cmp_setup()
-  local termcode = require('lib.util').termcode
-  local check_back_space = require('lib.util').check_back_space
   local cmp = require('cmp')
+  local luasnip = require('luasnip')
+  local function tab(fallback)
+    if cmp.visible() then
+      cmp.select_next_item()
+    elseif luasnip.expand_or_jumpable() then
+      luasnip.expand_or_jump()
+    else
+      fallback()
+    end
+  end
+  local function s_tab(fallback)
+    if cmp.visible() then
+      cmp.select_prev_item()
+    elseif luasnip.jumpable(-1) then
+      luasnip.jump(-1)
+    else
+      fallback()
+    end
+  end
   cmp.setup({
     completion = {
       completeopt = 'menu,menuone,noinsert',
@@ -13,7 +30,7 @@ local function nvim_cmp_setup()
     },
     snippet = {
       expand = function(args)
-        vim.fn['vsnip#anonymous'](args.body)
+        luasnip.lsp_expand(args.body)
       end,
     },
     documentation = {},
@@ -21,36 +38,12 @@ local function nvim_cmp_setup()
       ['<C-p>'] = cmp.mapping.select_prev_item(),
       ['<C-n>'] = cmp.mapping.select_next_item(),
       ['<CR>'] = cmp.mapping.confirm({ select = true }),
-      ['<Tab>'] = cmp.mapping(function(fallback)
-        if vim.fn.pumvisible() == 1 then
-          vim.fn.feedkeys(termcode('<C-n>'), 'n')
-        elseif vim.fn['vsnip#available']() == 1 then
-          vim.fn.feedkeys(termcode('<Plug>(vsnip-expand-or-jump)'), '')
-        elseif check_back_space() then
-          vim.fn.feedkeys(termcode('<Tab>'), 'n')
-        else
-          fallback()
-        end
-      end, {
-        'i',
-        's',
-      }),
-      ['<S-Tab>'] = cmp.mapping(function(fallback)
-        if vim.fn.pumvisible() == 1 then
-          vim.fn.feedkeys(termcode('<C-p>'), 'n')
-        elseif vim.fn['vsnip#available']() == 1 then
-          vim.fn.feedkeys(termcode('<Plug>(vsnip-jump-prev)'), '')
-        else
-          fallback()
-        end
-      end, {
-        'i',
-        's',
-      }),
+      ['<Tab>'] = cmp.mapping(tab, { 'i', 's' }),
+      ['<S-Tab>'] = cmp.mapping(s_tab, { 'i', 's' }),
     },
     sources = {
       { name = 'nvim_lsp' },
-      { name = 'vsnip' },
+      { name = 'luasnip' },
       { name = 'path' },
       { name = 'buffer' },
     },
@@ -64,9 +57,12 @@ complete.plugins = {
     'hrsh7th/nvim-cmp',
     requires = {
       'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/vim-vsnip',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
+
+      'L3MON4D3/LuaSnip',
+      'rafamadriz/friendly-snippets',
+      'saadparwaiz1/cmp_luasnip',
     },
     config = nvim_cmp_setup,
   },
