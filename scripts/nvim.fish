@@ -9,7 +9,7 @@ function sync_nvim
         sudo npm -g install vim-language-server
     else if test $os = macos
         brew_install neovim python node@14 ripgrep fzf
-        brew link --force node@14
+        brew link --overwrite --force node@14
         pip3 install pynvim
         npm -g install neovim
         npm -g install graphql-language-service-cli
