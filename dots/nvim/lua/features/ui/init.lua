@@ -25,7 +25,11 @@ filetree.plugins = {
     config = function()
       require('nvim-tree.view').View.winopts.signcolumn = 'auto'
       require('nvim-tree').setup({
-        lsp_diagnostics = true,
+        disable_netrw = false,
+        update_cwd = true,
+        diagnostics = {
+          enable = true,
+        },
       })
     end,
   },
