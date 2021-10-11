@@ -17,9 +17,9 @@ end
 
 function get_go_pkg
     for pkg in $argv
-        echo "  goget $pkg"
+        echo "  goinstall $pkg"
         if not test (date_cache get goget_$pkg)
-            go get -u $pkg
+            go install $pkg
             date_cache set goget_$pkg
         end
     end
