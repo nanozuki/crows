@@ -68,6 +68,7 @@ local colorschemes = {
 }
 
 local colors = feature:new('colors')
+colors.source = 'lua/features/ui/colors.lua'
 colors.plugins = {
   { 'sainnhe/gruvbox-material', opt = true },
   { 'shaunsingh/nord.nvim', opt = true },
