@@ -5,19 +5,19 @@ local function nvim_cmp_setup()
   local luasnip = require('luasnip')
   require('luasnip.loaders.from_vscode').load()
   local function tab(fallback)
-    if luasnip.expand_or_jumpable() then
-      luasnip.expand_or_jump()
-    elseif cmp.visible() then
+    if cmp.visible() then
       cmp.select_next_item()
+    elseif luasnip.expand_or_jumpable() then
+      luasnip.expand_or_jump()
     else
       fallback()
     end
   end
   local function s_tab(fallback)
-    if luasnip.jumpable(-1) then
-      luasnip.jump(-1)
-    elseif cmp.visible() then
+    if cmp.visible() then
       cmp.select_prev_item()
+    elseif luasnip.jumpable(-1) then
+      luasnip.jump(-1)
     else
       fallback()
     end
@@ -38,6 +38,7 @@ local function nvim_cmp_setup()
     mapping = {
       ['<C-p>'] = cmp.mapping.select_prev_item(),
       ['<C-n>'] = cmp.mapping.select_next_item(),
+      ['<C-e>'] = cmp.mapping.close(),
       ['<CR>'] = cmp.mapping.confirm({ select = true }),
       ['<Tab>'] = cmp.mapping(tab, { 'i', 's' }),
       ['<S-Tab>'] = cmp.mapping(s_tab, { 'i', 's' }),
