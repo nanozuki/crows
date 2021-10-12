@@ -50,10 +50,13 @@ end
 local indent = feature:new('indent')
 indent.plugins = {
   {
-    'yggdroot/indentline',
+    'lukas-reineke/indent-blankline.nvim',
     config = function()
-      vim.cmd('set list lcs=tab:\\¦\\ ')
-      vim.cmd('autocmd Filetype json let g:indentLine_enabled = 0')
+      require('indent_blankline').setup({
+        char = '¦',
+        -- show_first_indent_level = false,
+        buftype_exclude = { 'help', 'nofile', 'nowrite', 'quickfix', 'terminal', 'prompt' },
+      })
     end,
   }, -- display hint for indent
   'tpope/vim-sleuth', -- smart detect indent of file
