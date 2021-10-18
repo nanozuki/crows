@@ -76,7 +76,7 @@ colors.plugins = {
 }
 colors.setup = function()
   vim.opt.termguicolors = true -- true color
-  local theme = 'gruvbox_light'
+  local theme = 'edge_light'
   colorschemes[theme]()
   colors.palette = palettes[theme]
 end
