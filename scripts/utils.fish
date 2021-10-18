@@ -63,3 +63,8 @@ function title
     echo "<-------"
     echo ""
 end
+
+function add_path
+    fish_add_path $argv
+    or return 0 # ignore fish_add_path error
+end

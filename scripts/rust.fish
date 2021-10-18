@@ -2,7 +2,7 @@ function sync_rust
     title "sync rust"
 
     set_env_nx CARGO_HOME $HOME/.cargo
-    fish_add_path $CARGO_HOME/bin
+    add_path $CARGO_HOME/bin
     
     # install or update
     if not type -q rustup
