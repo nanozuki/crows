@@ -2,7 +2,7 @@ function sync_go
     title "sync go"
 
     set_env_nx GOPATH $HOME/.go
-    fish_add_path $GOPATH/bin
+    add_path $GOPATH/bin
 
     if test $os = archlinux
         paru_install go gopls golangci-lint
@@ -26,19 +26,17 @@ function get_go_pkg
 end
 
 set gonvim \
-    github.com/davidrjenni/reftools/cmd/fillstruct@master \
-    golang.org/x/tools/cmd/goimports@master \
-    github.com/fatih/gomodifytags@master \
-    github.com/segmentio/golines \
-    mvdan.cc/gofumpt/gofumports \
-    mvdan.cc/gofumpt
-set gotests github.com/cweill/gotests/... 
-set wire github.com/google/wire/cmd/wire
-set swagger github.com/go-swagger/go-swagger/cmd/swagger
+    github.com/davidrjenni/reftools/cmd/fillstruct@latest \
+    golang.org/x/tools/cmd/goimports@latest \
+    github.com/fatih/gomodifytags@latest \
+    github.com/segmentio/golines@latest
+set gotests github.com/cweill/gotests/...@latest
+set wire github.com/google/wire/cmd/wire@latest
+set swagger github.com/go-swagger/go-swagger/cmd/swagger@latest
 set grpc \
-    google.golang.org/protobuf/cmd/protoc-gen-go \
-    google.golang.org/grpc/cmd/protoc-gen-go-grpc \
-    github.com/golang/protobuf/{proto,protoc-gen-go}
-set lint_lsp github.com/nametake/golangci-lint-langserver
+    google.golang.org/protobuf/cmd/protoc-gen-go@latest \
+    google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest \
+    github.com/golang/protobuf/{proto,protoc-gen-go}@latest
+set lint_lsp github.com/nametake/golangci-lint-langserver@latest
 
 set go_pkgs $gonvim $gotests $wire $swagger $grpc $lint_lsp

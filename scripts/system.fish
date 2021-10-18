@@ -17,11 +17,12 @@ function sync_archlinux
     paru -Syu
     paru_install go tree direnv
     fish_add_path ~/.local/bin /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin /sbin
+    or return 0 # ignore fish_add_path error
 end
 
 function sync_macos
     brew_install make go tree direnv gnu-sed
     brew update && brew upgrade && brew cleanup
     brew upgrade --cask
-    fish_add_path ~/.local/bin /opt/homebrew/bin /usr/local/bin /usr/bin /bin /usr/sbin /sbin /Library/Apple/usr/bin
+    add_path ~/.local/bin /opt/homebrew/bin /usr/local/bin /usr/bin /bin /usr/sbin /sbin /Library/Apple/usr/bin
 end
