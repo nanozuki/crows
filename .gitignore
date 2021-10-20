@@ -1,5 +1,6 @@
 # nvim plugins and runtime
 dots/nvim/plugin/*
+dots/kitty/local.conf
 .netrwhist
 
 .vscode
