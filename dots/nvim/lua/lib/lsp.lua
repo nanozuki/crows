@@ -29,7 +29,7 @@ end
 
 local function format_on_save()
   augroup('lsp_format_on_save', {
-    autocmd('BufWritePre', '<buffer>', 'lua vim.lsp.buf.formatting_sync()'),
+    autocmd('BufWritePre', '<buffer>', 'lua vim.lsp.buf.formatting_seq_sync()'),
   })
 end
 
