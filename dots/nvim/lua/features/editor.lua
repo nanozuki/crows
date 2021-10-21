@@ -28,24 +28,27 @@ editor.mappings = {
 
 local format = feature:new('format')
 format.plugins = {
-  'dense-analysis/ale',
+  {
+    'jose-elias-alvarez/null-ls.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'neovim/nvim-lspconfig',
+    },
+    config = function()
+      local null_ls = require('null-ls')
+      require('null-ls').config({
+        sources = {
+          null_ls.builtins.formatting.stylua,
+          null_ls.builtins.formatting.eslint,
+          null_ls.builtins.diagnostics.eslint,
+          null_ls.builtins.formatting.goimports,
+          null_ls.builtins.formatting.rustfmt,
+        },
+      })
+      require('lspconfig')['null-ls'].setup({})
+    end,
+  },
 }
-format.setup = function()
-  vim.g.ale_disable_lsp = 1
-  vim.g.ale_fix_on_save = 1
-  vim.g.ale_sign_error = '✗'
-  vim.g.ale_sign_warning = '‼'
-  local ale_config = {
-    javascript = { 'eslint' },
-    javascriptreact = { 'eslint' },
-    typescript = { 'eslint' },
-    typescriptreact = { 'eslint' },
-    go = { 'goimports' },
-    lua = { 'stylua' },
-  }
-  vim.g.ale_linters = ale_config
-  vim.g.ale_fixers = ale_config
-end
 
 local indent = feature:new('indent')
 indent.plugins = {
