@@ -70,15 +70,23 @@ local colorschemes = {
 local colors = feature:new('colors')
 colors.source = 'lua/features/ui/colors.lua'
 colors.plugins = {
+  { 'norcalli/nvim-colorizer.lua', opt = true },
   { 'sainnhe/gruvbox-material', opt = true },
   { 'shaunsingh/nord.nvim', opt = true },
   { 'sainnhe/edge', opt = true },
 }
+
+function colors.toggle_colors()
+  packadd('nvim-colorizer.lua')
+  vim.cmd([[ColorizerToggle]])
+end
+
 colors.setup = function()
   vim.opt.termguicolors = true -- true color
   local theme = 'edge_light'
   colorschemes[theme]()
   colors.palette = palettes[theme]
+  vim.cmd([[command! ToggleColors lua require('features.ui.colors').toggle_colors()]])
 end
 
 return colors
