@@ -22,24 +22,21 @@ local function nvim_cmp_setup()
       fallback()
     end
   end
+
   cmp.setup({
     completion = {
       completeopt = 'menu,menuone,noinsert',
-    },
-    sorting = {
-      priority_weight = 1,
     },
     snippet = {
       expand = function(args)
         luasnip.lsp_expand(args.body)
       end,
     },
-    documentation = {},
     mapping = {
       ['<C-p>'] = cmp.mapping.select_prev_item(),
       ['<C-n>'] = cmp.mapping.select_next_item(),
       ['<C-e>'] = cmp.mapping.close(),
-      ['<CR>'] = cmp.mapping.confirm({ select = true }),
+      -- ['<CR>'] = cmp.mapping.confirm({ select = true }), // overtaken by auto-pair
       ['<Tab>'] = cmp.mapping(tab, { 'i', 's' }),
       ['<S-Tab>'] = cmp.mapping(s_tab, { 'i', 's' }),
     },
@@ -49,6 +46,19 @@ local function nvim_cmp_setup()
       { name = 'path' },
       { name = 'buffer' },
     },
+  })
+
+  ---@diagnostic disable-next-line: undefined-field
+  cmp.setup.cmdline(':', { sources = cmp.config.sources({ { name = 'path' }, { name = 'cmdline' } }) })
+  ---@diagnostic disable-next-line: undefined-field
+  cmp.setup.cmdline('/', { sources = cmp.config.sources({ { name = 'buffer' } }) })
+
+  require('nvim-autopairs').setup({})
+  require('nvim-autopairs.completion.cmp').setup({
+    map_cr = true, --  map <CR> on insert mode
+    map_complete = true, -- it will auto insert `(` (map_char) after select function or method item
+    auto_select = true, -- automatically select the first item
+    insert = false, -- use insert confirm behavior instead of replace
   })
 end
 
@@ -61,7 +71,9 @@ complete.plugins = {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
-
+      'hrsh7th/cmp-cmdline',
+      'windwp/nvim-autopairs',
+      -- snippets
       'L3MON4D3/LuaSnip',
       'rafamadriz/friendly-snippets',
       'saadparwaiz1/cmp_luasnip',
