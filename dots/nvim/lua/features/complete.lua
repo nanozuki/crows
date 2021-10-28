@@ -36,7 +36,7 @@ local function nvim_cmp_setup()
       ['<C-p>'] = cmp.mapping.select_prev_item(),
       ['<C-n>'] = cmp.mapping.select_next_item(),
       ['<C-e>'] = cmp.mapping.close(),
-      -- ['<CR>'] = cmp.mapping.confirm({ select = true }), // overtaken by auto-pair
+      ['<CR>'] = cmp.mapping.confirm({ select = true }),
       ['<Tab>'] = cmp.mapping(tab, { 'i', 's' }),
       ['<S-Tab>'] = cmp.mapping(s_tab, { 'i', 's' }),
     },
@@ -54,12 +54,8 @@ local function nvim_cmp_setup()
   cmp.setup.cmdline('/', { sources = cmp.config.sources({ { name = 'buffer' } }) })
 
   require('nvim-autopairs').setup({})
-  require('nvim-autopairs.completion.cmp').setup({
-    map_cr = true, --  map <CR> on insert mode
-    map_complete = true, -- it will auto insert `(` (map_char) after select function or method item
-    auto_select = true, -- automatically select the first item
-    insert = false, -- use insert confirm behavior instead of replace
-  })
+  local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+  cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 end
 
 local complete = feature:new('complete')
