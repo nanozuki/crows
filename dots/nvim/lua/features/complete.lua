@@ -22,19 +22,16 @@ local function nvim_cmp_setup()
       fallback()
     end
   end
+
   cmp.setup({
     completion = {
       completeopt = 'menu,menuone,noinsert',
-    },
-    sorting = {
-      priority_weight = 1,
     },
     snippet = {
       expand = function(args)
         luasnip.lsp_expand(args.body)
       end,
     },
-    documentation = {},
     mapping = {
       ['<C-p>'] = cmp.mapping.select_prev_item(),
       ['<C-n>'] = cmp.mapping.select_next_item(),
@@ -50,6 +47,15 @@ local function nvim_cmp_setup()
       { name = 'buffer' },
     },
   })
+
+  ---@diagnostic disable-next-line: undefined-field
+  cmp.setup.cmdline(':', { sources = cmp.config.sources({ { name = 'path' }, { name = 'cmdline' } }) })
+  ---@diagnostic disable-next-line: undefined-field
+  cmp.setup.cmdline('/', { sources = cmp.config.sources({ { name = 'buffer' } }) })
+
+  require('nvim-autopairs').setup({})
+  local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+  cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 end
 
 local complete = feature:new('complete')
@@ -61,7 +67,9 @@ complete.plugins = {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
-
+      'hrsh7th/cmp-cmdline',
+      'windwp/nvim-autopairs',
+      -- snippets
       'L3MON4D3/LuaSnip',
       'rafamadriz/friendly-snippets',
       'saadparwaiz1/cmp_luasnip',
