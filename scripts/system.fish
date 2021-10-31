@@ -14,7 +14,7 @@ function sync_archlinux
         makepkg -si --noconfirm
         cd -
     end
-    paru -Syu
+    paru -Syu --noconfirm
     paru_install go tree direnv
     fish_add_path ~/.local/bin /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin /sbin
     or return 0 # ignore fish_add_path error
