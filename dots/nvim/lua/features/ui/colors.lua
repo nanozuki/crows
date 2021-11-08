@@ -34,6 +34,14 @@ local palettes = {
     fg = '#e5e9f0', -- nord4
     fg_sec = '#d8dee9', -- nord4
   },
+  rose_pine_dawn = {
+    accent = '#b4637a', -- bg_purple
+    accent_sec = '#d7827e', -- grey
+    bg = '#f2e9de', -- bg1
+    bg_sec = '#e4dfde', -- bg4
+    fg = '#575279', -- default:bg1
+    fg_sec = '#6e6a86', -- fg
+  },
 }
 
 local colorschemes = {
@@ -65,6 +73,12 @@ local colorschemes = {
       vim.cmd('colorscheme edge')
     end
   end,
+  rose_pine_dawn = function()
+    if packadd('rose-pine') then
+      vim.g.rose_pine_variant = 'dawn'
+      vim.cmd('colorscheme rose-pine')
+    end
+  end,
 }
 
 local colors = feature:new('colors')
@@ -74,6 +88,7 @@ colors.plugins = {
   { 'sainnhe/gruvbox-material', opt = true },
   { 'shaunsingh/nord.nvim', opt = true },
   { 'sainnhe/edge', opt = true },
+  { 'rose-pine/neovim', opt = true, as = 'rose-pine' },
 }
 
 function colors.toggle_colors()
@@ -83,7 +98,7 @@ end
 
 colors.setup = function()
   vim.opt.termguicolors = true -- true color
-  local theme = 'edge_light'
+  local theme = 'rose_pine_dawn'
   colorschemes[theme]()
   colors.palette = palettes[theme]
   vim.cmd([[command! ToggleColors lua require('features.ui.colors').toggle_colors()]])

@@ -61,6 +61,14 @@ const colors: Record<string, ColorPalette> = {
     fg: "#e5e9f0", // nord4
     fg_sec: "#d8dee9", // nord4
   },
+  "rose-pine-dawn": {
+    accent: "#b4637a", // bg_purple
+    accent_sec: "#d7827e", // grey
+    bg: "#f2e9de", // bg1
+    bg_sec: "#e4dfde", // bg4
+    fg: "#575279", // default:bg1
+    fg_sec: "#6e6a86", // fg
+  },
 };
 
 for (const theme in colors) {

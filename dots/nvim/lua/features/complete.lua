@@ -48,11 +48,6 @@ local function nvim_cmp_setup()
     },
   })
 
-  ---@diagnostic disable-next-line: undefined-field
-  cmp.setup.cmdline(':', { sources = cmp.config.sources({ { name = 'path' }, { name = 'cmdline' } }) })
-  ---@diagnostic disable-next-line: undefined-field
-  cmp.setup.cmdline('/', { sources = cmp.config.sources({ { name = 'buffer' } }) })
-
   require('nvim-autopairs').setup({})
   local cmp_autopairs = require('nvim-autopairs.completion.cmp')
   cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
@@ -67,7 +62,6 @@ complete.plugins = {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
-      'hrsh7th/cmp-cmdline',
       'windwp/nvim-autopairs',
       -- snippets
       'L3MON4D3/LuaSnip',
