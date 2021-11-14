@@ -3,11 +3,9 @@ local feature = require('fur.feature')
 local tabby_config = function()
   local palette = require('features.ui.colors').palette
   local filename = require('tabby.filename')
+  local tabname = require('tabby.tabname').get
   local cwd = function()
     return ' ' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':t') .. ' '
-  end
-  local tabname = function(tabid)
-    return vim.api.nvim_tabpage_get_number(tabid)
   end
   local line = {
     hl = { fg = palette.fg, bg = palette.bg },
