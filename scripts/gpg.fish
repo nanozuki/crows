@@ -1,27 +1,28 @@
 function sync_gpg
     title "sync gpg"
 
+    set_env_nx GNUPGHOME $XDG_DATA_HOME/gnupg
+    mkdir -p $GNUPGHOME
+
     if test $os = archlinux
         paru_install gnupg pinentry
     else if test $os = macos
         brew_install gnupg pinentry-mac
     end
 
-    mkdir -p $HOME/.gnupg
     if test $os = archlinux
-        ln -sf $dots/gnupg/gpg-agent_arch.conf $HOME/.gnupg/gpg-agent.conf
+        ln -sf $dots/gnupg/gpg-agent_arch.conf $GNUPGHOME/gpg-agent.conf
     else if test $os = macos
-        ln -sf $dots/gnupg/gpg-agent_osx.conf $HOME/.gnupg/gpg-agent.conf
+        ln -sf $dots/gnupg/gpg-agent_osx.conf $GNUPGHOME/gpg-agent.conf
     end
 
-    # TODO: import gpg keys
     # gpg keys
-    # echo "Import gpg public keys..."
-    # for file in `ls $config_path/gpgkeys/*_pb.gpg`; do
-    #     gpg --import $file
-    # done
-    # echo "Import secret keys..."
-    # for file in `ls $config_path/gpgkeys/*_sec.gpg`; do
-    #     gpg --allow-secret-key-import --import $file
-    # done
+    echo "Import gpg public keys..."
+    for file in (ls $project/secret/gpgkeys/*pub.gpg)
+        gpg --import $file
+    end
+    echo "Import secret keys..."
+    for file in (ls $project/secret/gpgkeys/*sec.gpg)
+        gpg --allow-secret-key-import --import $file
+    end
 end
