@@ -29,7 +29,7 @@ basic.setup = function()
   vim.opt.modelines = 1
 
   -- session
-  vim.opt.sessionoptions = 'blank,curdir,folds,help,tabpages,terminal,winsize'
+  vim.opt.sessionoptions = 'curdir,folds,help,tabpages,terminal,winsize'
 end
 basic.mappings = {
   { 'n', '<leader>tt', ':terminal<CR>' },
