@@ -1,7 +1,7 @@
 function sync_go
     title "sync go"
 
-    set_env_nx GOPATH $HOME/.go
+    set_env GOPATH $XDG_DATA_HOME/go
     add_path $GOPATH/bin
 
     if test $os = archlinux
@@ -12,7 +12,7 @@ function sync_go
     get_go_pkg $go_pkgs
 
     # golangci-lint config
-    ln -sf $dots/lsp/golangci.yml ~/.golangci.yml
+    ln -sf $dots/lsp/golangci.yml ~/Projects/.golangci.yml
 end
 
 function get_go_pkg
