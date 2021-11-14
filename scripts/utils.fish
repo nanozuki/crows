@@ -2,6 +2,10 @@ function set_env_nx
     set -q $argv[1]; or set -Ux $argv
 end
 
+function set_env
+    set -Ux $argv; or set -gx $argv
+end
+
 # link_dir source target
 function link_dir
     if test -L $argv[2]

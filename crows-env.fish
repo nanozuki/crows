@@ -1,5 +1,15 @@
 #!/usr/bin/env fish
 
+## -- init ---
+
+set_env_nx XDG_CONFIG_HOME $HOME/.config
+set_env_nx XDG_CACHE_HOME $HOME/.cache
+set_env_nx XDG_DATA_HOME $HOME/.local/share
+set_env_nx LC_ALL en_US.UTF-8
+set_env_nx LANG en_US.UTF-8
+
+detect_os
+
 ## -- load project --
 
 set project (dirname (realpath (status filename)))
@@ -15,20 +25,10 @@ for file in (ls $scripts/*.fish)
     source $file
 end
 
-## -- init ---
-
-set_env_nx XDG_CONFIG_HOME $HOME/.config
-set_env_nx XDG_CACHE_HOME $HOME/.cache
-set_env_nx XDG_DATA_HOME $HOME/.local/share
-set_env_nx LC_ALL en_US.UTF-8
-set_env_nx LANG en_US.UTF-8
-
-detect_os
-
 ## -- works --
 
 set subcmd sync upgrade
-set subjects system fish kitty git ssh gpg tmux go rust zig nvim
+set subjects system fish kitty git gpg tmux go rust zig nvim
 
 function sync
     if test (count $argv) -eq 0
