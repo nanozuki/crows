@@ -1,5 +1,18 @@
 #!/usr/bin/env fish
 
+## -- load project --
+
+set project (dirname (realpath (status filename)))
+set dots $project/dots
+set scripts $project/scripts
+
+for func in (ls $dots/fish/functions/*.fish)
+    source $func
+end
+for file in (ls $scripts/*.fish)
+    source $file
+end
+
 ## -- init ---
 
 set_env_nx XDG_CONFIG_HOME $HOME/.config
@@ -10,25 +23,17 @@ set_env_nx LANG en_US.UTF-8
 
 detect_os
 
-## -- load project --
+if test $os = macos
+    set_env_nx XDG_RUNTIME_DIR $TMPDIR
+end
 
-set project (dirname (realpath (status filename)))
-set dots $project/dots
-set scripts $project/scripts
 set config $XDG_CONFIG_HOME
 set data $XDG_DATA_HOME
-
-for func in (ls $dots/fish/functions/*.fish)
-    source $func
-end
-for file in (ls $scripts/*.fish)
-    source $file
-end
 
 ## -- works --
 
 set subcmd sync upgrade
-set subjects system fish kitty git gpg tmux go rust zig nvim
+set subjects system fish kitty git gpg tmux node go rust zig nvim
 
 function sync
     if test (count $argv) -eq 0

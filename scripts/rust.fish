@@ -1,7 +1,8 @@
 function sync_rust
     title "sync rust"
 
-    set_env_nx CARGO_HOME $HOME/.cargo
+    set_env CARGO_HOME $XDG_DATA_HOME/cargo
+    set_env RUSTUP_HOME $XDG_DATA_HOME/rustup
     add_path $CARGO_HOME/bin
     
     # install or update
