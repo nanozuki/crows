@@ -3,7 +3,11 @@ local feature = require('fur.feature')
 local tabby_config = function()
   local palette = require('features.ui.colors').palette
   local filename = require('tabby.filename')
-  local tabname = require('tabby.tabname').get
+  local tabname = function(tabid)
+    local number = vim.api.nvim_tabpage_get_number(tabid)
+    local name = require('tabby.util').get_tab_name(tabid)
+    return string.format('%d: %s', number, name)
+  end
   local cwd = function()
     return ' ' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':t') .. ' '
   end
