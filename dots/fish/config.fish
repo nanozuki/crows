@@ -1,6 +1,10 @@
 set -x GPG_TTY (tty)
 gpg-connect-agent updatestartuptty /bye >/dev/null
-set -x SSH_AUTH_SOCK $GNUPGHOME/S.gpg-agent.ssh
+if test $os = archlinux
+    set -x SSH_AUTH_SOCK $XDG_RUNTIME_DIR/gnupg/S.gpg-agent.ssh
+else if test $os = macos
+    set -x SSH_AUTH_SOCK $GNUPGHOME/S.gpg-agent.ssh
+end
 
 alias tree="tree -L 3"
 alias psg="ps aux | grep"
