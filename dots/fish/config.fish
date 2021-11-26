@@ -26,6 +26,12 @@ end
 alias hr 'history --merge' # read and merge history from disk
 bind \e\[A 'history --merge ; up-or-search'
 
+alias e="exa --icons"
+alias el="exa -l --icons"
+alias ea="exa -a --icons"
+alias eal="exa -al --icons"
+alias ela="exa -la --icons"
+
 if test $os = archlinux
     alias appadd "sudo pacman -S"
     alias appup "sudo pacman -Syu"
