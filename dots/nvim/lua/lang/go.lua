@@ -16,7 +16,7 @@ go.setup = function()
   local configs = require('lspconfig/configs')
   local lsp = require('lib.lsp')
 
-  if not lspconfig.golangcilsp then
+  if not configs.golangcilsp then
     configs.golangcilsp = {
       default_config = {
         cmd = { 'golangci-lint-langserver' },
@@ -27,6 +27,7 @@ go.setup = function()
         },
       },
     }
+    lspconfig.golangcilsp = configs.golangcilsp
   end
 
   lsp.set_config('gopls', {})
