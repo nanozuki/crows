@@ -18,6 +18,13 @@ if type -q direnv
 end
 alias tmuxa="tmux a; or tmux"
 
+# exa
+alias e="exa --icons"
+alias el="exa -l --icons"
+alias ea="exa -a --icons"
+alias eal="exa -al --icons"
+alias et="exa -T --icons"
+
 # history across fishes
 function save_history --on-event fish_preexec
     history --save
