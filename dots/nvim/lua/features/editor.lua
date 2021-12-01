@@ -26,29 +26,6 @@ editor.mappings = {
   { 'c', 'w!!', 'w !sudo tee %' }, -- save as sudo
 }
 
-local format = feature:new('format')
-format.plugins = {
-  {
-    'jose-elias-alvarez/null-ls.nvim',
-    requires = {
-      'nvim-lua/plenary.nvim',
-      'neovim/nvim-lspconfig',
-    },
-    config = function()
-      local null_ls = require('null-ls')
-      require('null-ls').config({
-        sources = {
-          null_ls.builtins.formatting.stylua,
-          null_ls.builtins.formatting.eslint,
-          null_ls.builtins.diagnostics.eslint,
-          null_ls.builtins.formatting.goimports,
-        },
-      })
-      require('lspconfig')['null-ls'].setup({})
-    end,
-  },
-}
-
 local indent = feature:new('indent')
 indent.plugins = {
   {
@@ -78,5 +55,5 @@ indent.setup = function()
   })
 end
 
-editor.children = { format, indent }
+editor.children = { indent }
 return editor
