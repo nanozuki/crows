@@ -37,7 +37,7 @@ local feline_config = function()
       provider = {
         name = 'file_info',
         opts = {
-          type = 'relative',
+          type = 'relative-short',
           colored_icon = false,
           file_readonly_icon = ' ',
         },
@@ -144,7 +144,7 @@ local feline_config = function()
       provider = {
         name = 'file_info',
         opts = {
-          type = 'relative',
+          type = 'relative-short',
           file_readonly_icon = ' ',
           colored_icon = false,
         },
