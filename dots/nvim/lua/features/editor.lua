@@ -26,29 +26,6 @@ editor.mappings = {
   { 'c', 'w!!', 'w !sudo tee %' }, -- save as sudo
 }
 
-local format = feature:new('format')
-format.plugins = {
-  {
-    'jose-elias-alvarez/null-ls.nvim',
-    requires = {
-      'nvim-lua/plenary.nvim',
-      'neovim/nvim-lspconfig',
-    },
-    config = function()
-      local null_ls = require('null-ls')
-      require('null-ls').config({
-        sources = {
-          null_ls.builtins.formatting.stylua,
-          null_ls.builtins.formatting.eslint,
-          null_ls.builtins.diagnostics.eslint,
-          null_ls.builtins.formatting.goimports,
-        },
-      })
-      require('lspconfig')['null-ls'].setup({})
-    end,
-  },
-}
-
 local indent = feature:new('indent')
 indent.plugins = {
   {
@@ -61,7 +38,6 @@ indent.plugins = {
       })
     end,
   }, -- display hint for indent
-  'tpope/vim-sleuth', -- smart detect indent of file
 }
 indent.setup = function()
   vim.cmd('filetype indent on')
@@ -78,5 +54,78 @@ indent.setup = function()
   })
 end
 
-editor.children = { format, indent }
+local treesitter = feature:new('treesitter')
+treesitter.plugins = {
+  {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate',
+    requires = {
+      { 'nvim-treesitter/nvim-treesitter-textobjects' },
+    },
+    config = function()
+      require('nvim-treesitter.configs').setup({
+        ensure_installed = 'maintained',
+        highlight = { enable = true },
+        indent = { enable = true },
+        textobjects = {
+          select = {
+            enable = true,
+            -- Automatically jump forward to textobj, similar to targets.vim
+            lookahead = true,
+            keymaps = {
+              -- You can use the capture groups defined in textobjects.scm
+              ['af'] = '@function.outer',
+              ['if'] = '@function.inner',
+              ['ac'] = '@class.outer',
+              ['ic'] = '@class.inner',
+            },
+          },
+          swap = {
+            enable = true,
+            swap_next = { ['<leader>a'] = '@parameter.inner' },
+            swap_previous = { ['<leader>A'] = '@parameter.inner' },
+          },
+          move = {
+            enable = true,
+            set_jumps = true, -- whether to set jumps in the jumplist
+            goto_next_start = {
+              [']m'] = '@function.outer',
+              [']]'] = '@class.outer',
+            },
+            goto_next_end = {
+              [']M'] = '@function.outer',
+              [']['] = '@class.outer',
+            },
+            goto_previous_start = {
+              ['[m'] = '@function.outer',
+              ['[['] = '@class.outer',
+            },
+            goto_previous_end = {
+              ['[M'] = '@function.outer',
+              ['[]'] = '@class.outer',
+            },
+          },
+        },
+      })
+    end,
+  },
+}
+
+local git = feature:new('git')
+git.plugins = {
+  {
+    'TimUntersberger/neogit',
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'sindrets/diffview.nvim',
+    },
+    config = function()
+      require('neogit').setup({
+        integrations = { diffview = true },
+      })
+    end,
+  },
+}
+
+editor.children = { indent, treesitter, git }
 return editor
