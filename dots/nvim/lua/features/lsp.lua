@@ -39,17 +39,20 @@ lspui_ext.plugins = {
     end,
   },
   {
-    'RishabhRD/nvim-lsputils',
-    requires = { { 'RishabhRD/popfix' } },
+    'RishabhRD/lspactions',
+    requires = {
+      { 'nvim-lua/plenary.nvim' },
+      { 'nvim-lua/popup.nvim' },
+      { 'tjdevries/astronauta.nvim' },
+    },
     config = function()
-      vim.lsp.handlers['textDocument/codeAction'] = require('lsputil.codeAction').code_action_handler
-      vim.lsp.handlers['textDocument/references'] = require('lsputil.locations').references_handler
-      vim.lsp.handlers['textDocument/definition'] = require('lsputil.locations').definition_handler
-      vim.lsp.handlers['textDocument/declaration'] = require('lsputil.locations').declaration_handler
-      vim.lsp.handlers['textDocument/typeDefinition'] = require('lsputil.locations').typeDefinition_handler
-      vim.lsp.handlers['textDocument/implementation'] = require('lsputil.locations').implementation_handler
-      vim.lsp.handlers['textDocument/documentSymbol'] = require('lsputil.symbols').document_handler
-      vim.lsp.handlers['workspace/symbol'] = require('lsputil.symbols').workspace_handler
+      require('astronauta.keymap')
+      local lspactions = require('lspactions')
+      vim.lsp.handlers['textDocument/codeAction'] = lspactions.codeaction
+      vim.lsp.handlers['textDocument/references'] = lspactions.references
+      vim.lsp.handlers['textDocument/definition'] = lspactions.definition
+      vim.lsp.handlers['textDocument/declaration'] = lspactions.declaration
+      vim.lsp.handlers['textDocument/implementation'] = lspactions.implementation
     end,
   },
 }
