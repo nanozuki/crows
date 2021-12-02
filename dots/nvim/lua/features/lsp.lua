@@ -8,15 +8,16 @@ lsp.plugins = {
     'folke/trouble.nvim',
     requires = 'kyazdani42/nvim-web-devicons',
     config = function()
-      require('trouble').setup({})
+      require('trouble').setup({
+        signs = { error = '', warning = '', hint = '', information = '', other = '﫠' },
+      })
     end,
   }, -- lsp signature
 }
 lsp.setup = function()
-  -- local signs = { Error = "", Warning = "", Hint = "", Information = "" }
-  local signs = { Error = '✗', Warning = '‼', Information = '!', Hint = '!' } -- also used by "nvim.trouble"
+  local signs = { Error = '', Warn = '', Info = '', Hint = '' } -- also used by "nvim.trouble"
   for sign, text in pairs(signs) do
-    local hl = 'LspDiagnosticsSign' .. sign
+    local hl = 'DiagnosticSign' .. sign
     vim.fn.sign_define(hl, { text = text, texthl = hl, linehl = '', numhl = '' })
   end
 end
