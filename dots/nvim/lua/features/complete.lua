@@ -36,7 +36,7 @@ local function nvim_cmp_setup()
       ['<C-p>'] = cmp.mapping.select_prev_item(),
       ['<C-n>'] = cmp.mapping.select_next_item(),
       ['<C-e>'] = cmp.mapping.close(),
-      ['<CR>'] = cmp.mapping.confirm({ select = true }),
+      ['<CR>'] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace }),
       ['<Tab>'] = cmp.mapping(tab, { 'i', 's' }),
       ['<S-Tab>'] = cmp.mapping(s_tab, { 'i', 's' }),
     },
@@ -48,6 +48,7 @@ local function nvim_cmp_setup()
     },
   })
 
+  -- nvim-autopairs
   require('nvim-autopairs').setup({})
   local cmp_autopairs = require('nvim-autopairs.completion.cmp')
   cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
