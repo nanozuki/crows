@@ -13,7 +13,7 @@ go.plugins = {
 }
 go.setup = function()
   local lspconfig = require('lspconfig')
-  local configs = require('lspconfig/configs')
+  local configs = require('lspconfig.configs')
   local lsp = require('lib.lsp')
 
   if not configs.golangcilsp then
@@ -27,7 +27,6 @@ go.setup = function()
         },
       },
     }
-    lspconfig.golangcilsp = configs.golangcilsp
   end
 
   lsp.set_config('gopls', {})
