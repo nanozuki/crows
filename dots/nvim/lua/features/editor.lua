@@ -38,7 +38,6 @@ indent.plugins = {
       })
     end,
   }, -- display hint for indent
-  'tpope/vim-sleuth', -- smart detect indent of file
 }
 indent.setup = function()
   vim.cmd('filetype indent on')
@@ -55,5 +54,20 @@ indent.setup = function()
   })
 end
 
-editor.children = { indent }
+local treesitter = feature:new('treesitter')
+treesitter.plugins = {
+  {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate',
+    config = function()
+      require('nvim-treesitter.configs').setup({
+        ensure_installed = 'maintained',
+        highlight = { enable = true },
+        indent = { enable = true },
+      })
+    end,
+  },
+}
+
+editor.children = { indent, treesitter }
 return editor
