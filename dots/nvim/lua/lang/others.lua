@@ -1,9 +1,6 @@
-local feature = require('fur.feature')
+local crows = require('crows')
 
-local others = feature:new('lang.others')
-
-others.source = 'lua/lang/others.lua'
-others.setup = function()
+crows.setup(function()
   local lsp = require('lib.lsp')
   local simple_servers = {
     'graphql',
@@ -16,6 +13,4 @@ others.setup = function()
   for _, name in ipairs(simple_servers) do
     lsp.set_config(name, {})
   end
-end
-
-return others
+end)

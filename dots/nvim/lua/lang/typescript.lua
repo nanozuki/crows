@@ -1,14 +1,10 @@
-local feature = require('fur.feature')
+local crows = require('crows')
 
-local typescript = feature:new('typescript')
-typescript.sourct = 'lua/lang/typescript.lua'
-typescript.plugins = {
-  {
-    'mattn/emmet-vim',
-    ft = { 'html', 'javascript.jsx', 'typescript.tsx', 'javascriptreact', 'typescriptreact' },
-  },
-}
-typescript.setup = function()
+crows.use_plugin({
+  'mattn/emmet-vim',
+  ft = { 'html', 'javascript.jsx', 'typescript.tsx', 'javascriptreact', 'typescriptreact' },
+})
+crows.setup(function()
   local util = require('lspconfig/util')
   require('lib.lsp').set_config('tsserver', {
     root_dir = function(fname)
@@ -23,6 +19,4 @@ typescript.setup = function()
       unstable = true,
     },
   })
-end
-
-return typescript
+end)
