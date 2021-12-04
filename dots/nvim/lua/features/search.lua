@@ -44,7 +44,7 @@ crows.use_plugin({
           b = { "<cmd>lua require('telescope.builtin').buffers()<cr>", 'Find buffer' },
           h = { "<cmd>lua require('telescope.builtin').help_tags()<cr>", 'Find help' },
           m = { "<cmd>lua require('telescope.builtin').marks()<cr>", 'Find mark' },
-          l = { "<cmd>lua require('telescope.builtin').lsp_workspace_symbols()<cr>", 'Find lsp symbol' },
+          y = { "<cmd>lua require('telescope.builtin').lsp_workspace_symbols()<cr>", 'Find lsp symbol' },
           t = { "<cmd>lua require('telescope.builtin').treesitter()<cr>", 'List item by treesitter' },
           s = { '<cmd>SearchSession<cr>' },
         },
