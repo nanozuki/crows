@@ -1,5 +1,25 @@
 local crows = require('crows')
 
+local lspconfig = require('lspconfig')
+local configs = require('lspconfig.configs')
+local lsp = require('lib.lsp')
+
+if not configs.golangcilsp then
+  configs.golangcilsp = {
+    default_config = {
+      cmd = { 'golangci-lint-langserver' },
+      root_dir = lspconfig.util.root_pattern('.git', 'go.mod'),
+      filetypes = { 'go' },
+      init_options = {
+        command = { 'golangci-lint', 'run', '--fast', '--out-format', 'json' },
+      },
+    },
+  }
+end
+
+lsp.set_config('gopls', {})
+lsp.set_config('golangcilsp', {})
+
 crows.use_plugin({
   'ray-x/go.nvim',
   ft = { 'go', 'gomod' },
@@ -7,24 +27,3 @@ crows.use_plugin({
     require('go').setup()
   end,
 })
-crows.setup(function()
-  local lspconfig = require('lspconfig')
-  local configs = require('lspconfig.configs')
-  local lsp = require('lib.lsp')
-
-  if not configs.golangcilsp then
-    configs.golangcilsp = {
-      default_config = {
-        cmd = { 'golangci-lint-langserver' },
-        root_dir = lspconfig.util.root_pattern('.git', 'go.mod'),
-        filetypes = { 'go' },
-        init_options = {
-          command = { 'golangci-lint', 'run', '--fast', '--out-format', 'json' },
-        },
-      },
-    }
-  end
-
-  lsp.set_config('gopls', {})
-  lsp.set_config('golangcilsp', {})
-end)

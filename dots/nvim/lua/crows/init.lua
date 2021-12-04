@@ -11,7 +11,6 @@ local crows = {
       end,
     },
   },
-  setups = {},
   store = {},
   status = {
     run = false,
@@ -34,14 +33,7 @@ local function reset()
       end,
     },
   }
-  crows.setups = {}
   crows.store = {}
-end
-
-local function do_setup()
-  for _, setup in ipairs(crows.setups) do
-    setup()
-  end
 end
 
 local function use_plugins()
@@ -61,7 +53,6 @@ function crows.run()
   if crows.status.run then
     return
   end
-  do_setup()
   crows.status.run = true
 end
 
@@ -71,7 +62,6 @@ function crows.reload_resync_complied()
   if not ok then
     vim.notify("source packer's compiled file fail: " .. tostring(err), 'warn')
   end
-  do_setup()
 end
 
 function crows.reload()
@@ -120,15 +110,10 @@ function crows.use_plugin(spec)
   crows.plugins[#crows.plugins + 1] = spec
 end
 
-function crows.setup(setup_fn)
-  crows.setups[#crows.setups + 1] = setup_fn
-end
-
 function crows.execute(filename)
   if filename ~= 'init.lua' then
     filename = 'lua/' .. filename
   end
-  vim.notify('runtime! ' .. filename)
   vim.cmd('runtime! ' .. filename)
 end
 
@@ -153,12 +138,10 @@ function crows.packadd(pack)
 end
 
 function crows.setv(key, value)
-  vim.notify(string.format('setv key=%s value=%s', key, vim.inspect(value)))
   crows.store[key] = value
 end
 
 function crows.getv(key)
-  vim.notify(string.format('getv key=%s value=%s', key, vim.inspect(crows.store[key])))
   return crows.store[key]
 end
 

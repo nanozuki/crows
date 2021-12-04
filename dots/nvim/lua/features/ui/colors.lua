@@ -87,18 +87,13 @@ crows.use_plugin({ 'rose-pine/neovim', opt = true, as = 'rose-pine' })
 
 local theme = 'rose_pine_dawn'
 crows.setv('palette', palettes[theme])
-
-crows.setup(function()
-  vim.opt.termguicolors = true -- true color
-  colorschemes[theme]()
-end)
+vim.opt.termguicolors = true -- true color
+colorschemes[theme]()
 
 -- live display colors
 crows.use_plugin({ 'norcalli/nvim-colorizer.lua', opt = true })
-crows.setup(function()
-  crows.setv('toggle_colors', function()
-    crows.packadd('nvim-colorizer.lua')
-    vim.cmd([[ColorizerToggle]])
-  end)
-  vim.cmd([[command! ToggleColors lua require('crows').getv('toggle_colors')()]])
+crows.setv('toggle_colors', function()
+  crows.packadd('nvim-colorizer.lua')
+  vim.cmd([[ColorizerToggle]])
 end)
+vim.cmd([[command! ToggleColors lua require('crows').getv('toggle_colors')()]])
