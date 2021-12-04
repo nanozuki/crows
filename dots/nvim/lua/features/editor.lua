@@ -1,6 +1,6 @@
-local feature = require('fur.feature')
-
 local crows = require('crows')
+local augroup = require('lib.util').augroup
+local autocmd = require('lib.util').autocmd
 
 -- display sign for marks
 crows.use_plugin('kshenoy/vim-signature')
@@ -11,21 +11,16 @@ crows.use_plugin('mg979/vim-visual-multi')
 -- surround select and edit
 -- cs"': "a"->'a', ysiw]: word->[word], cs]{: [word]->{ word }
 crows.use_plugin('tpope/vim-surround')
-
-crows.setup(function()
-  local augroup = require('lib.util').augroup
-  local autocmd = require('lib.util').autocmd
-  vim.cmd('syntax enable')
-  vim.opt.foldmethod = 'indent'
-  vim.opt.foldlevelstart = 99
-  -- ignore file for all
-  vim.cmd('set wildignore+=*/node_modules/*,*.swp,*.pyc,*/venv/*,*/target/*,.DS_Store')
-  augroup('filetypes', {
-    autocmd('BufNewFile,BufRead', '*html', 'setfiletype html'),
-    autocmd('BufNewFile,BufRead', 'tsconfig.json', 'setfiletype jsonc'),
-    autocmd('BufNewFile,BufRead', '*.zig', 'setfiletype zig'),
-  })
-end)
+vim.cmd('syntax enable')
+vim.opt.foldmethod = 'indent'
+vim.opt.foldlevelstart = 99
+-- ignore file for all
+vim.cmd('set wildignore+=*/node_modules/*,*.swp,*.pyc,*/venv/*,*/target/*,.DS_Store')
+augroup('filetypes', {
+  autocmd('BufNewFile,BufRead', '*html', 'setfiletype html'),
+  autocmd('BufNewFile,BufRead', 'tsconfig.json', 'setfiletype jsonc'),
+  autocmd('BufNewFile,BufRead', '*.zig', 'setfiletype zig'),
+})
 crows.map('Copy to system clipboard', 'v', '<leader>y', '"+y')
 crows.map('Paste from system clipboard', 'n', '<leader>p', '"+p')
 crows.map('Save as sudo', 'c', 'w!!', 'w !sudo tee %')
@@ -43,22 +38,18 @@ crows.use_plugin({
 })
 
 -- setup indent
-crows.setup(function()
-  local augroup = require('lib.util').augroup
-  local autocmd = require('lib.util').autocmd
-  vim.cmd('filetype indent on')
-  vim.opt.expandtab = true
-  vim.opt.tabstop = 4
-  vim.opt.shiftwidth = 4
-  vim.opt.softtabstop = 4
-  augroup('fileindent', {
-    autocmd(
-      'FileType',
-      'javascript,typescript,javascriptreact,typescriptreact,html,css,scss,xml,yaml,json',
-      'setlocal expandtab ts=2 sw=2 sts=2'
-    ),
-  })
-end)
+vim.cmd('filetype indent on')
+vim.opt.expandtab = true
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.softtabstop = 4
+augroup('fileindent', {
+  autocmd(
+    'FileType',
+    'lua,javascript,typescript,javascriptreact,typescriptreact,html,css,scss,xml,yaml,json',
+    'setlocal expandtab ts=2 sw=2 sts=2'
+  ),
+})
 
 -- treesitter
 crows.use_plugin({

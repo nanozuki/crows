@@ -1,5 +1,11 @@
 local crows = require('crows')
 
+crows.execute('lang/lua.lua')
+crows.execute('lang/go.lua')
+crows.execute('lang/rust.lua')
+crows.execute('lang/typescript.lua')
+crows.execute('lang/fish.lua')
+
 crows.use_plugin({
   'lukas-reineke/format.nvim',
   config = function()
@@ -21,9 +27,15 @@ crows.use_plugin({
   end,
 })
 
-crows.execute('lang/lua.lua')
-crows.execute('lang/go.lua')
-crows.execute('lang/rust.lua')
-crows.execute('lang/typescript.lua')
-crows.execute('lang/fish.lua')
-crows.execute('lang/others.lua')
+local lsp = require('lib.lsp')
+local simple_servers = {
+  'graphql',
+  'vimls',
+  'zls',
+  'terraformls',
+  'yamlls',
+}
+
+for _, name in ipairs(simple_servers) do
+  lsp.set_config(name, {})
+end

@@ -1,8 +1,6 @@
 local crows = require('crows')
 
-crows.setup(function()
-  vim.opt.ignorecase = true
-end)
+vim.opt.ignorecase = true
 crows.map('Clear search', 'n', '<leader>/', ':nohlsearch<CR>')
 
 crows.use_plugin({

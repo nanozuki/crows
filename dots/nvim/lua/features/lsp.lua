@@ -22,13 +22,11 @@ crows.use_plugin({
     })
   end,
 })
-crows.setup(function()
-  local signs = { Error = '', Warn = '', Info = '', Hint = '' } -- also used by "nvim.trouble"
-  for sign, text in pairs(signs) do
-    local hl = 'DiagnosticSign' .. sign
-    vim.fn.sign_define(hl, { text = text, texthl = hl, linehl = '', numhl = '' })
-  end
-end)
+local signs = { Error = '', Warn = '', Info = '', Hint = '' } -- also used by "nvim.trouble"
+for sign, text in pairs(signs) do
+  local hl = 'DiagnosticSign' .. sign
+  vim.fn.sign_define(hl, { text = text, texthl = hl, linehl = '', numhl = '' })
+end
 
 -- function signature hint
 crows.use_plugin({
