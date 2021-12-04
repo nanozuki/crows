@@ -1,9 +1,6 @@
-local feature = require('fur.feature')
+local crows = require('crows')
 
-local rust = feature:new('lang.rust')
-rust.source = 'lua/lang/rust.lua'
-rust.plugins = {
-  {
+crows.use_plugin({
     'simrat39/rust-tools.nvim',
     ft = { 'rust' },
     config = function()
@@ -16,9 +13,8 @@ rust.plugins = {
       }
       require('rust-tools').setup(opts)
     end,
-  },
-}
-rust.setup = function()
+})
+crows.setup(function()
   require('lib.lsp').set_config('rust_analyzer', {
     settings = {
       ['rust-analyzer'] = {
@@ -27,6 +23,4 @@ rust.setup = function()
       },
     },
   })
-end
-
-return rust
+end)

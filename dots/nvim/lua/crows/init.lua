@@ -1,6 +1,18 @@
 local crows = {
-  plugins = {},
+  plugins = {
+    {
+      'wbthomason/packer.nvim',
+      opt = true,
+    },
+    {
+      'folke/which-key.nvim',
+      config = function()
+        require('which-key').setup({})
+      end,
+    },
+  },
   setups = {},
+  store = {},
   status = {
     run = false,
   },
@@ -10,8 +22,20 @@ local function reset()
   vim.cmd('packadd packer.nvim')
   require('packer').reset()
   require('which-key').reset()
-  crows.plugins = {}
+  crows.plugins = {
+    {
+      'wbthomason/packer.nvim',
+      opt = true,
+    },
+    {
+      'folke/which-key.nvim',
+      config = function()
+        require('which-key').setup({})
+      end,
+    },
+  }
   crows.setups = {}
+  crows.store = {}
 end
 
 local function do_setup()
@@ -21,6 +45,12 @@ local function do_setup()
 end
 
 local function use_plugins()
+  vim.cmd('packadd packer.nvim')
+  require('packer').init({
+    display = {
+      open_fn = require('packer.util').float,
+    },
+  })
   for _, plugin in ipairs(crows.plugins) do
     require('packer').use(plugin)
   end
@@ -98,7 +128,38 @@ function crows.execute(filename)
   if filename ~= 'init.lua' then
     filename = 'lua/' .. filename
   end
+  vim.notify('runtime! ' .. filename)
   vim.cmd('runtime! ' .. filename)
+end
+
+function crows.map(msg, mode, lhs, rhs, opt)
+  if mode ~= 'n' then
+    opt = opt or {}
+    opt.mode = mode
+  end
+  require('which-key').register({ [lhs] = { rhs, msg } }, opt)
+end
+
+function crows.maps(mappings, opts)
+  require('which-key').register(mappings, opts)
+end
+
+function crows.packadd(pack)
+  local ok, err = pcall(vim.cmd, 'packadd ' .. pack)
+  if not ok then
+    print('packadd failed: ', err)
+  end
+  return ok
+end
+
+function crows.setv(key, value)
+  vim.notify(string.format('setv key=%s value=%s', key, vim.inspect(value)))
+  crows.store[key] = value
+end
+
+function crows.getv(key)
+  vim.notify(string.format('getv key=%s value=%s', key, vim.inspect(crows.store[key])))
+  return crows.store[key]
 end
 
 return crows

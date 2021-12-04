@@ -1,8 +1,6 @@
-local feature = require('fur.feature')
+local crows = require('crows')
 
-local lua = feature:new('lang.lua')
-lua.source = 'lua/lang/lua.lua'
-lua.setup = function()
+crows.setup(function()
   local runtime_path = vim.split(package.path, ';')
   table.insert(runtime_path, 'lua/?.lua')
   table.insert(runtime_path, 'lua/?/init.lua')
@@ -34,6 +32,4 @@ lua.setup = function()
     },
   }
   require('lib.lsp').set_config('sumneko_lua', sumneko_lua_settings)
-end
-
-return lua
+end)
