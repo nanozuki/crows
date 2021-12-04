@@ -1,4 +1,5 @@
 local crows = require('crows')
+local util = require('lib.util')
 
 vim.g.mapleader = ' '
 vim.opt.linebreak = true
@@ -9,7 +10,7 @@ vim.opt.relativenumber = true
 vim.opt.colorcolumn = '120'
 vim.opt.modelines = 1
 crows.map('Open terminal', 'n', '<leader>tt', ':terminal<CR>')
-crows.map('To normal mode in terminal', 't', '<Esc>', [[<C-\><C-N>]])
+crows.map('To normal mode in terminal', 't', '<Esc>', util.termcode([[<C-\><C-N>]]))
 
 crows.use_plugin({
   'rmagatti/auto-session',
