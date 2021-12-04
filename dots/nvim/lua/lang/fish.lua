@@ -1,12 +1,6 @@
-local feature = require('fur.feature')
+local crows = require('crows')
 
-local fish = feature:new('lang.fish')
-fish.source = 'lua/lang/fish.lua'
-fish.plugins = {
-  {
-    'dag/vim-fish',
-    ft = { 'fish' },
-  },
-}
-
-return fish
+crows.use_plugin({
+  'dag/vim-fish',
+  ft = { 'fish' },
+})

@@ -1,7 +1,5 @@
-local feature = require('fur.feature')
-
 local feline_config = function()
-  local palette = require('features.ui.colors').palette
+  local palette = require('crows').getv('palette')
   local feline = require('feline')
   require('gitsigns').setup({ signcolumn = false })
 
@@ -169,18 +167,13 @@ local feline_config = function()
   })
 end
 
-local statusline = feature:new('statusline')
-statusline.source = 'lua/features/ui/statusline.lua'
-statusline.plugins = {
-  {
-    'famiu/feline.nvim',
-    requires = {
-      'kyazdani42/nvim-web-devicons',
-      'nvim-lua/plenary.nvim',
-      'lewis6991/gitsigns.nvim',
-    },
-    config = feline_config,
+local crows = require('crows')
+crows.use_plugin({
+  'famiu/feline.nvim',
+  requires = {
+    'kyazdani42/nvim-web-devicons',
+    'nvim-lua/plenary.nvim',
+    'lewis6991/gitsigns.nvim',
   },
-}
-
-return statusline
+  config = feline_config,
+})
