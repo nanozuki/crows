@@ -56,7 +56,7 @@ function crows.run()
   crows.status.run = true
 end
 
-function crows.reload_resync_complied()
+function crows.reload_resync_compiled()
   local file = require('packer').config.compile_path
   local ok, err = pcall(vim.cmd, 'source ' .. file)
   if not ok then
@@ -68,7 +68,7 @@ function crows.reload()
   reset()
   crows.execute('init.lua')
   use_plugins()
-  vim.cmd("autocmd User PackerCompileDone lua require'crows'.reload_resync_complied()")
+  vim.cmd("autocmd User PackerCompileDone lua require'crows'.reload_resync_compiled()")
   vim.cmd('doautocmd User PackerCompileDone')
   require('packer').compile()
 end
@@ -77,12 +77,13 @@ function crows.resync()
   reset()
   crows.execute('init.lua')
   use_plugins()
-  vim.cmd("autocmd User PackerCompileDone lua require'crows'.reload_resync_complied()")
+  vim.cmd("autocmd User PackerCompileDone lua require'crows'.reload_resync_compiled()")
   vim.cmd('doautocmd User PackerCompileDone')
   require('packer').sync()
 end
 
 function crows.external_resync_compiled()
+  vim.notify('quit all!')
   vim.cmd('qa!')
 end
 
@@ -90,7 +91,7 @@ function crows.external_resync()
   crows.reset()
   crows.execute('init.lua')
   use_plugins()
-  vim.cmd("autocmd User PackerCompileDone lua require'crows'.external_resync_complied()")
+  vim.cmd("autocmd User PackerCompileDone lua require'crows'.external_resync_compiled()")
   vim.cmd('doautocmd User PackerCompileDone')
   require('packer').sync()
 end
