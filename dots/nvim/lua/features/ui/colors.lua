@@ -1,5 +1,4 @@
-local feature = require('fur.feature')
-local packadd = require('fur').packadd
+local crows = require('crows')
 
 local palettes = {
   gruvbox_light = {
@@ -46,62 +45,55 @@ local palettes = {
 
 local colorschemes = {
   gruvbox_light = function()
-    if packadd('gruvbox-material') then
+    if crows.packadd('gruvbox-material') then
       vim.opt.background = 'light'
       vim.g['gruvbox_material_enable_italic'] = 1
       vim.cmd('colorscheme gruvbox-material')
     end
   end,
   gruvbox_dark = function()
-    if packadd('gruvbox-material') then
+    if crows.packadd('gruvbox-material') then
       vim.opt.background = 'dark'
       vim.g['gruvbox_material_enable_italic'] = 1
       vim.cmd('colorscheme gruvbox-material')
     end
   end,
   nord = function()
-    if packadd('nord.nvim') then
+    if crows.packadd('nord.nvim') then
       vim.g.nord_borders = true
       require('nord').set()
       vim.cmd('colorscheme nord')
     end
   end,
   edge_light = function()
-    if packadd('edge') then
+    if crows.packadd('edge') then
       vim.opt.background = 'light'
       vim.g.edge_enable_italic = 1
       vim.cmd('colorscheme edge')
     end
   end,
   rose_pine_dawn = function()
-    if packadd('rose-pine') then
+    if crows.packadd('rose-pine') then
       vim.g.rose_pine_variant = 'dawn'
       vim.cmd('colorscheme rose-pine')
     end
   end,
 }
 
-local colors = feature:new('colors')
-colors.source = 'lua/features/ui/colors.lua'
-colors.plugins = {
-  { 'norcalli/nvim-colorizer.lua', opt = true },
-  { 'sainnhe/gruvbox-material', opt = true },
-  { 'shaunsingh/nord.nvim', opt = true },
-  { 'sainnhe/edge', opt = true },
-  { 'rose-pine/neovim', opt = true, as = 'rose-pine' },
-}
+crows.use_plugin({ 'sainnhe/gruvbox-material', opt = true })
+crows.use_plugin({ 'shaunsingh/nord.nvim', opt = true })
+crows.use_plugin({ 'sainnhe/edge', opt = true })
+crows.use_plugin({ 'rose-pine/neovim', opt = true, as = 'rose-pine' })
 
-function colors.toggle_colors()
-  packadd('nvim-colorizer.lua')
+local theme = 'rose_pine_dawn'
+crows.setv('palette', palettes[theme])
+vim.opt.termguicolors = true -- true color
+colorschemes[theme]()
+
+-- live display colors
+crows.use_plugin({ 'norcalli/nvim-colorizer.lua', opt = true })
+crows.setv('toggle_colors', function()
+  crows.packadd('nvim-colorizer.lua')
   vim.cmd([[ColorizerToggle]])
-end
-
-colors.setup = function()
-  vim.opt.termguicolors = true -- true color
-  local theme = 'rose_pine_dawn'
-  colorschemes[theme]()
-  colors.palette = palettes[theme]
-  vim.cmd([[command! ToggleColors lua require('features.ui.colors').toggle_colors()]])
-end
-
-return colors
+end)
+vim.cmd([[command! ToggleColors lua require('crows').getv('toggle_colors')()]])
