@@ -9,6 +9,7 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.colorcolumn = '120'
 vim.opt.modelines = 1
+
 crows.map('Open terminal', 'n', '<leader>tt', ':terminal<CR>')
 crows.map('To normal mode in terminal', 't', '<Esc>', util.termcode([[<C-\><C-N>]]))
 

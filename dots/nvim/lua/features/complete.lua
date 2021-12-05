@@ -1,4 +1,5 @@
 local crows = require('crows')
+
 crows.use_plugin({
   'hrsh7th/nvim-cmp',
   requires = {

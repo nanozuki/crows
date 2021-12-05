@@ -5,7 +5,7 @@ crows.map('Clear search', 'n', '<leader>/', ':nohlsearch<CR>')
 
 crows.use_plugin({
   'dyng/ctrlsf.vim',
-  conig = function()
+  config = function()
     vim.g.ctrlsf_ackprg = 'rg'
     -- if use which-key, the prompt will not display immediately
     vim.api.nvim_set_keymap('n', '<leader>sf', ':CtrlSF ', { noremap = true })

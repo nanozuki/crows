@@ -4,28 +4,32 @@ local autocmd = require('lib.util').autocmd
 local lsp = {}
 
 local function buf_mapping(_, bufnr)
-  local function buf_set_keymap(...)
-    vim.api.nvim_buf_set_keymap(bufnr, ...)
-  end
-  local opts = { noremap = true, silent = true }
   -- TODO: let keymap registerable
-  buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  buf_set_keymap('n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  buf_set_keymap('n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', '<leader>rn', '<cmd>lua require("lspactions").rename()<CR>', opts)
-  buf_set_keymap('n', '<leader>ca', '<cmd>lua require("lspactions").code_action()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '<leader>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+  require('which-key').register({
+    g = {
+      D = { '<cmd>lua vim.lsp.buf.declaration()<CR>', 'Goto declaration' },
+      d = { '<cmd>lua vim.lsp.buf.definition()<CR>', 'Goto definition' },
+      i = { '<cmd>lua vim.lsp.buf.implementation()<CR>', 'Goto implementation' },
+      r = { '<cmd>lua vim.lsp.buf.references()<CR>', 'Goto references' },
+    },
+    K = { '<cmd>lua vim.lsp.buf.hover()<CR>', 'Display hover' },
+    ['<C-k>'] = { '<cmd>lua vim.lsp.buf.signature_help()<CR>', 'Display symbol info in cursor' },
+    ['<leader>'] = {
+      wa = { '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', 'Add folder to workspace' },
+      wr = { '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', 'Remove folder to workspace' },
+      wl = { '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', 'List workspace folders' },
+      D = { '<cmd>lua vim.lsp.buf.type_definition()<CR>', 'Goto symbol definition in cursor' },
+      rn = { '<cmd>lua require("lspactions").rename()<CR>', 'Rename symbol in cursor' },
+      ca = { '<cmd>lua require("lspactions").code_action()<CR>', 'Select a code action' },
+      e = { '<cmd>lua vim.diagnostic.open_float()<CR>', 'Show diagnostics' },
+      q = { '<cmd>lua vim.diagnostic.set_loclist()<CR>', 'Add buffer diagnostics' },
+      f = { '<cmd>lua vim.lsp.buf.formatting()<CR>', 'Format current buffer' },
+    },
+    ['[d'] = { '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', 'Goto previous diagnostic' },
+    [']d'] = { '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', 'Goto next diagnostic' },
+  }, {
+    buffer = bufnr,
+  })
 end
 
 local function format_on_save()
