@@ -1,5 +1,3 @@
-local crows = require('crows')
-
 require('lib.lsp').set_config('rust_analyzer', {
   settings = {
     ['rust-analyzer'] = {
@@ -7,19 +5,4 @@ require('lib.lsp').set_config('rust_analyzer', {
       checkOnSave = { command = 'clippy' },
     },
   },
-})
-
-crows.use_plugin({
-  'simrat39/rust-tools.nvim',
-  ft = { 'rust' },
-  config = function()
-    local opts = {
-      tools = {
-        -- inlay_hints = {
-        -- 	show_parameter_hints = false,
-        -- },
-      },
-    }
-    require('rust-tools').setup(opts)
-  end,
 })
