@@ -1,0 +1,152 @@
+
+
+times in msec
+ clock   self+sourced   self:  sourced script
+ clock   elapsed:              other lines
+
+000.008  000.008: --- NVIM STARTING ---
+000.292  000.284: locale set
+000.611  000.319: inits 1
+000.624  000.013: window checked
+003.178  002.555: parsing arguments
+003.253  000.075: expanding arguments
+003.272  000.019: inits 2
+003.559  000.287: init highlight
+003.559  000.001: waiting for UI
+004.504  000.944: done waiting for UI
+004.519  000.015: init screen for UI
+004.531  000.011: init default mappings
+004.583  000.052: init default autocommands
+004.624  000.014  000.014: sourcing /usr/share/nvim/archlinux.vim
+004.626  000.029  000.015: sourcing /etc/xdg/nvim/sysinit.vim
+008.165  001.936  001.936: sourcing /home/crows/.local/share/nvim/site/pack/packer/opt/rose-pine/colors/rose-pine.vim
+008.174  002.750  000.814: sourcing /home/crows/.config/nvim/lua/features/ui/colors.lua
+008.312  000.019  000.019: sourcing /home/crows/.config/nvim/lua/features/ui/filetree.lua
+008.514  000.085  000.085: sourcing /home/crows/.config/nvim/lua/features/ui/statusline.lua
+009.540  000.908  000.908: sourcing /home/crows/.config/nvim/lua/features/ui/tabline.lua
+009.642  004.241  000.478: sourcing /home/crows/.config/nvim/lua/features/ui/init.lua
+009.829  000.079  000.079: sourcing /home/crows/.config/nvim/lua/features/basic.lua
+009.985  000.046  000.046: sourcing /home/crows/.config/nvim/lua/features/complete.lua
+010.317  000.054  000.054: sourcing /usr/share/nvim/runtime/syntax/synload.vim
+014.177  000.016  000.016: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/elixir.vim
+014.194  000.006  000.006: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/fennel.vim
+014.211  000.009  000.009: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/fish.vim
+014.227  000.008  000.008: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/fusion.vim
+014.244  000.009  000.009: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/gdresource.vim
+014.262  000.006  000.006: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/gdscript.vim
+014.276  000.005  000.005: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/glimmer.vim
+014.300  000.016  000.016: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/glsl.vim
+014.315  000.006  000.006: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/gomod.vim
+014.334  000.011  000.011: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/graphql.vim
+014.352  000.010  000.010: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/hcl.vim
+014.368  000.007  000.007: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/heex.vim
+014.390  000.014  000.014: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/hjson.vim
+014.404  000.007  000.007: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/json5.vim
+014.418  000.005  000.005: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/julia.vim
+014.435  000.009  000.009: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/ledger.vim
+014.449  000.006  000.006: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/nix.vim
+014.465  000.008  000.008: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/prisma.vim
+014.479  000.007  000.007: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/pug.vim
+014.496  000.008  000.008: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/ql.vim
+014.516  000.012  000.012: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/query.vim
+014.546  000.006  000.006: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/surface.vim
+014.561  000.006  000.006: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/teal.vim
+014.579  000.010  000.010: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/tlaplus.vim
+014.596  000.008  000.008: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/yang.vim
+014.610  000.006  000.006: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/nvim-treesitter/ftdetect/zig.vim
+014.752  000.007  000.007: sourcing /usr/share/vim/vimfiles/ftdetect/augeas.vim
+014.773  000.013  000.013: sourcing /usr/share/vim/vimfiles/ftdetect/meson.vim
+014.797  000.017  000.017: sourcing /usr/share/vim/vimfiles/ftdetect/nginx.vim
+015.004  004.595  004.336: sourcing /usr/share/nvim/runtime/filetype.vim
+015.532  000.311  000.311: sourcing /usr/share/nvim/runtime/scripts.vim
+015.580  005.422  000.463: sourcing /usr/share/nvim/runtime/syntax/syntax.vim
+015.734  000.008  000.008: sourcing /usr/share/nvim/runtime/filetype.vim
+015.857  000.019  000.019: sourcing /usr/share/nvim/runtime/indent.vim
+015.929  005.833  000.384: sourcing /home/crows/.config/nvim/lua/features/editor.lua
+016.105  000.064  000.064: sourcing /home/crows/.config/nvim/lua/features/lsp.lua
+016.281  000.065  000.065: sourcing /home/crows/.config/nvim/lua/features/search.lua
+016.383  011.013  000.685: sourcing /home/crows/.config/nvim/lua/features/init.lua
+021.919  005.386  005.386: sourcing /home/crows/.config/nvim/lua/lang/lua.lua
+022.206  000.169  000.169: sourcing /home/crows/.config/nvim/lua/lang/go.lua
+022.467  000.154  000.154: sourcing /home/crows/.config/nvim/lua/lang/rust.lua
+023.104  000.529  000.529: sourcing /home/crows/.config/nvim/lua/lang/typescript.lua
+023.231  000.013  000.013: sourcing /home/crows/.config/nvim/lua/lang/fish.lua
+023.894  007.401  001.150: sourcing /home/crows/.config/nvim/lua/lang/init.lua
+023.997  019.358  000.944: sourcing /home/crows/.config/nvim/init.lua
+024.000  000.030: sourcing vimrc file(s)
+024.111  000.024  000.024: sourcing /usr/share/nvim/runtime/ftplugin.vim
+024.846  000.132  000.132: sourcing /usr/share/nvim/runtime/plugin/gzip.vim
+024.862  000.006  000.006: sourcing /usr/share/nvim/runtime/plugin/health.vim
+024.919  000.050  000.050: sourcing /usr/share/nvim/runtime/plugin/man.vim
+025.207  000.119  000.119: sourcing /usr/share/nvim/runtime/pack/dist/opt/matchit/plugin/matchit.vim
+025.263  000.336  000.217: sourcing /usr/share/nvim/runtime/plugin/matchit.vim
+025.362  000.091  000.091: sourcing /usr/share/nvim/runtime/plugin/matchparen.vim
+025.631  000.260  000.260: sourcing /usr/share/nvim/runtime/plugin/netrwPlugin.vim
+025.744  000.007  000.007: sourcing /home/crows/.local/share/nvim/rplugin.vim
+025.749  000.094  000.086: sourcing /usr/share/nvim/runtime/plugin/rplugin.vim
+025.824  000.065  000.065: sourcing /usr/share/nvim/runtime/plugin/shada.vim
+025.853  000.015  000.015: sourcing /usr/share/nvim/runtime/plugin/spellfile.vim
+025.957  000.093  000.093: sourcing /usr/share/nvim/runtime/plugin/tarPlugin.vim
+026.025  000.053  000.053: sourcing /usr/share/nvim/runtime/plugin/tohtml.vim
+026.049  000.011  000.011: sourcing /usr/share/nvim/runtime/plugin/tutor.vim
+026.174  000.114  000.114: sourcing /usr/share/nvim/runtime/plugin/zipPlugin.vim
+026.604  000.384  000.384: sourcing /usr/share/vim/vimfiles/plugin/fzf.vim
+077.094  000.063  000.063: sourcing /home/crows/.local/share/nvim/site/pack/packer/opt/vim-fish/ftdetect/fish.vim
+077.102  050.450  050.387: sourcing /home/crows/.config/nvim/plugin/packer_compiled.lua
+077.393  001.213: loading rtp plugins
+077.822  000.169  000.169: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/LuaSnip/plugin/luasnip.vim
+077.900  000.014  000.014: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/astronauta.nvim/plugin/astronauta.vim
+078.121  000.159  000.159: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/auto-session/plugin/auto-session.vim
+078.432  000.101  000.101: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/ctrlsf.vim/autoload/ctrlsf/backend.vim
+078.650  000.401  000.300: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/ctrlsf.vim/plugin/ctrlsf.vim
+080.537  001.819  001.819: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/diffview.nvim/plugin/diffview.vim
+080.638  000.022  000.022: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/format.nvim/plugin/format.vim
+080.952  000.012  000.012: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim/autoload/indent_blankline.vim
+081.032  000.312  000.299: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim/plugin/indent_blankline.vim
+081.236  000.118  000.118: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/neogit/plugin/neogit.vim
+081.730  000.394  000.394: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/nvim-cmp/plugin/cmp.lua
+081.824  000.043  000.043: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/nvim-lspconfig/plugin/lspconfig.vim
+081.934  000.037  000.037: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/nvim-tree.lua/plugin/nvim-tree-startup.lua
+082.280  000.309  000.309: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/nvim-treesitter/plugin/nvim-treesitter.vim
+083.236  000.884  000.884: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/nvim-treesitter-textobjects/plugin/nvim-treesitter-textobjects.vim
+083.325  000.025  000.025: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/nvim-web-devicons/plugin/nvim-web-devicons.vim
+083.405  000.022  000.022: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/plenary.nvim/plugin/plenary.vim
+083.505  000.032  000.032: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/session-lens/plugin/session-lens.vim
+083.572  000.011  000.011: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/tabby.nvim/plugin/tabby.vim
+083.768  000.118  000.118: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/telescope.nvim/plugin/telescope.vim
+083.909  000.081  000.081: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/trouble.nvim/plugin/trouble.vim
+084.145  000.067  000.067: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/vim-signature/autoload/signature/utils.vim
+084.686  000.719  000.652: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/vim-signature/plugin/signature.vim
+084.989  000.236  000.236: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/vim-surround/plugin/surround.vim
+085.300  000.096  000.096: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/vim-visual-multi/autoload/vm/plugs.vim
+085.678  000.100  000.100: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/vim-visual-multi/autoload/vm/maps.vim
+085.864  000.066  000.066: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/vim-visual-multi/autoload/vm/maps/all.vim
+086.675  001.618  001.356: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/vim-visual-multi/plugin/visual-multi.vim
+086.754  000.009  000.009: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/which-key.nvim/plugin/which-key.vim
+086.851  001.910: loading packages
+086.977  000.022  000.022: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/ctrlsf.vim/after/plugin/ctrlsf.vim
+087.048  000.029  000.029: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/vim-signature/after/plugin/signature.vim
+087.344  000.260  000.260: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/cmp-buffer/after/plugin/cmp_buffer.lua
+087.434  000.050  000.050: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp/after/plugin/cmp_nvim_lsp.lua
+087.616  000.148  000.148: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/cmp-path/after/plugin/cmp_path.lua
+087.817  000.160  000.160: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/cmp_luasnip/after/plugin/cmp_luasnip.lua
+087.870  000.350: loading after plugins
+087.879  000.009: inits 3
+090.126  002.247: reading ShaDa
+090.357  000.231: opening buffers
+090.623  000.109  000.109: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/vim-signature/autoload/signature/sign.vim
+090.960  000.136  000.136: sourcing /home/crows/.local/share/nvim/site/pack/packer/start/vim-signature/autoload/signature/mark.vim
+092.813  002.211: BufEnter autocommands
+092.816  000.003: editing files in windows
+101.567  000.473  000.473: sourcing /usr/share/nvim/runtime/syntax/lua.vim
+102.049  000.033  000.033: sourcing /usr/share/nvim/runtime/indent/lua.vim
+103.953  000.071  000.071: sourcing /usr/share/nvim/runtime/ftplugin/lua.vim
+145.894  000.443  000.443: sourcing /usr/share/nvim/runtime/syntax/lua.vim
+146.357  000.018  000.018: sourcing /usr/share/nvim/runtime/indent/lua.vim
+147.141  000.047  000.047: sourcing /usr/share/nvim/runtime/ftplugin/lua.vim
+217.997  119.072  117.987: sourcing /home/crows/.local/share/nvim/sessions/%home%crows%.local%share%CrowsEnv%dots%nvim.vim
+218.889  007.001: VimEnter autocommands
+218.892  000.003: UIEnter autocommands
+218.896  000.004: before starting main loop
+275.063  056.167: first screen update
+275.067  000.004: --- NVIM STARTED ---
