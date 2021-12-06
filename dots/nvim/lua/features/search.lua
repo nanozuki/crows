@@ -46,7 +46,7 @@ crows.use_plugin({
           m = { "<cmd>lua require('telescope.builtin').marks()<cr>", 'Find mark' },
           y = { "<cmd>lua require('telescope.builtin').lsp_workspace_symbols()<cr>", 'Find lsp symbol' },
           t = { "<cmd>lua require('telescope.builtin').treesitter()<cr>", 'List item by treesitter' },
-          s = { '<cmd>SearchSession<cr>' },
+          s = { '<cmd>lua require("session-lens").search_session()<cr>', 'Search Session' },
         },
         z = { "<cmd>lua require'telescope'.extensions.z.list{}<CR>", 'Find path by z' },
       },
