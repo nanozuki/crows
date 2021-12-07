@@ -1,0 +1,11 @@
+#!/usr/bin/env fish
+
+set -Ux XDG_CONFIG_HOME $HOME/.config
+set -Ux XDG_CACHE_HOME $HOME/.cache
+set -Ux XDG_DATA_HOME $HOME/.local/share
+set -Ux LC_ALL en_US.UTF-8
+set -Ux LANG en_US.UTF-8
+
+#{{if eq .chezmoi.os "darwin" -}}
+set -Ux XDG_RUNTIME_DIR $TMPDIR
+#{{end}}
