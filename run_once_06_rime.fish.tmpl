@@ -2,7 +2,7 @@
 source ~/.local/share/chezmoi/utils.fish
 
 #{{if eq .chezmoi.os "darwin" -}}
-brew_install squirrel
+brew_install --cask squirrel
 #{{else}}
 paru_install fcitx5-rime
 #{{end}}
