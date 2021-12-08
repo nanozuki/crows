@@ -81,3 +81,17 @@ function macos_sync_zls
     ln -sf (realpath ./zig-out/bin/zls) /usr/local/bin/zls
     cd $cur_dir
 end
+
+function sync_rime_schema
+#{{if eq .chezmoi.os "linux"}}
+    set -lx rime_frontend fcitx5-rime
+#{{end}}
+    bash $XDG_DATA_HOME/plum/rime-install :preset
+    bash $XDG_DATA_HOME/plum/rime-install prelude
+    bash $XDG_DATA_HOME/plum/rime-install essay
+    bash $XDG_DATA_HOME/plum/rime-install luna-pinyin
+    bash $XDG_DATA_HOME/plum/rime-install double-pinyin
+    bash $XDG_DATA_HOME/plum/rime-install emoji
+    bash $XDG_DATA_HOME/plum/rime-install emoji:customize:schema=luna_pinyin
+    bash $XDG_DATA_HOME/plum/rime-install emoji:customize:schema=double_pinyin_flypy
+end

@@ -7,15 +7,7 @@ brew_install squirrel
 paru_install fcitx5-rime
 #{{end}}
 
-git clone --depth 1 https://github.com/rime/plum.git $XDG_DATA_HOME/plum
-#{{if eq .chezmoi.os "darwin" -}}
-set -lx rime_frontend fcitx5-rime
-#{{end}}
-bash $XDG_DATA_HOME/plum/rime-install :preset
-bash $XDG_DATA_HOME/plum/rime-install prelude
-bash $XDG_DATA_HOME/plum/rime-install essay
-bash $XDG_DATA_HOME/plum/rime-install luna-pinyin
-bash $XDG_DATA_HOME/plum/rime-install double-pinyin
-bash $XDG_DATA_HOME/plum/rime-install emoji
-bash $XDG_DATA_HOME/plum/rime-install emoji:customize:schema=luna-pinyin
-bash $XDG_DATA_HOME/plum/rime-install emoji:customize:schema=double-pinyin
+if not test -d $XDG_DATA_HOME/plum
+    git clone --depth 1 https://github.com/rime/plum.git $XDG_DATA_HOME/plum
+end
+sync_rime_schema

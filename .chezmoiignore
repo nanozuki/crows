@@ -1,0 +1,10 @@
+{{ if ne .chezmoi.os "darwin" }}
+Library
+Library/*
+{{ end }}
+
+{{ if ne .chezmoi.os "linux" }}
+.local/share/fcitx5
+.local/share/fcitx5/*
+.config/zls.json
+{{ end }}
