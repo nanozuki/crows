@@ -2,10 +2,11 @@
 source ~/.local/share/chezmoi/utils.fish
 
 setUx XDG_CONFIG_HOME $HOME/.config
-setUx XDG_CACHE_HOME $HOME/.cache
-setUx XDG_DATA_HOME $HOME/.local/share
-setUx LC_ALL en_US.UTF-8
-setUx LANG en_US.UTF-8
+setUx XDG_CACHE_HOME  $HOME/.cache
+setUx XDG_DATA_HOME   $HOME/.local/share
+setUx LC_ALL          en_US.UTF-8
+setUx LANG            en_US.UTF-8
+setUx EDITOR          nvim
 #{{if eq .chezmoi.os "darwin" -}}
 setUx XDG_RUNTIME_DIR $TMPDIR
 #{{end}}
