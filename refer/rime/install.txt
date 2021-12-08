@@ -1,8 +1,0 @@
-* install plum
-* bash rime-install prelude
-* bash rime-install essay
-* bash rime-install luna-pinyin
-* bash rime-install double-pinyin
-* bash rime-install emoji
-* bash rime-install emoji:customize:schema=luna-pinyin
-* bash rime-install emoji:customize:schema=double-pinyin
