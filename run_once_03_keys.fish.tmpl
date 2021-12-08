@@ -1,0 +1,27 @@
+#!/usr/bin/env fish
+
+set -Ux GNUPGHOME $XDG_DATA_HOME/gnupg
+mkdir -p $GNUPGHOME
+
+source ./utils.fish
+#{{if eq .chezmoi.os "darwin" -}}
+brew_install gnupg pinentry-mac
+#{{else}}
+paru_install gnupg pinentry
+#{{end}}
+
+#if test $os = archlinux
+#    ln -sf $dots/gnupg/gpg-agent_arch.conf $GNUPGHOME/gpg-agent.conf
+#else if test $os = macos
+#    ln -sf $dots/gnupg/gpg-agent_osx.conf $GNUPGHOME/gpg-agent.conf
+#end
+#
+## gpg keys
+#echo "Import gpg public keys..."
+#for file in (ls $project/secret/gpgkeys/*pub.gpg)
+#    gpg --import $file
+#end
+#echo "Import secret keys..."
+#for file in (ls $project/secret/gpgkeys/*sec.gpg)
+#    gpg --allow-secret-key-import --import $file
+#end

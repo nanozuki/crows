@@ -1,0 +1,36 @@
+#!/usr/bin/env fish
+source ./utils.fish
+
+setUx XDG_CONFIG_HOME $HOME/.config
+setUx XDG_CACHE_HOME $HOME/.cache
+setUx XDG_DATA_HOME $HOME/.local/share
+setUx LC_ALL en_US.UTF-8
+setUx LANG en_US.UTF-8
+#{{if eq .chezmoi.os "darwin" -}}
+setUx XDG_RUNTIME_DIR $TMPDIR
+#{{end}}
+
+function install_archlinux
+    sudo pacman -S --needed --noconfirm base-devel
+    if not type -q paru
+        gitget "https://aur.archlinux.org/paru.git"
+        makepkg -si --noconfirm
+        cd -
+    end
+    paru -Syu --noconfirm
+    paru_install direnv exa bat
+    add_path ~/.local/bin /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin /sbin
+end
+
+function install_macos
+    brew_install make gnu-sed direnv exa bat
+    brew update && brew upgrade && brew cleanup
+    brew upgrade --cask
+    add_path ~/.local/bin /opt/homebrew/bin /usr/local/bin /usr/bin /bin /usr/sbin /sbin /Library/Apple/usr/bin
+end
+
+#{{if eq .chezmoi.os "darwin" -}}
+install_macos
+#{{else}}
+install_archlinux
+#{{end}}
