@@ -25,7 +25,7 @@ crows.use_plugin({
     u.augroup('renew_auto_session_cwd', {
       u.autocmd('DirChanged', 'global', 'lua require("auto-session-library").conf.last_loaded_session = nil'),
     })
-    crows.maps({
+    require('crows').maps({
       ['<leader>s'] = {
         r = { '<cmd>RestoreSession', 'Restore session' },
         s = { '<cmd>SaveSession', 'Save session' },
