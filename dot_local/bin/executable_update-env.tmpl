@@ -57,14 +57,5 @@ sudo npm -g install graphql-language-service-cli
 sudo npm -g install vim-language-server
 #{{end}}
 
-#{{if eq .chezmoi.os "darwin" -}}
-set -lx rime_frontend fcitx5-rime
-#{{end}}
-bash $XDG_DATA_HOME/plum/rime-install :preset
-bash $XDG_DATA_HOME/plum/rime-install prelude
-bash $XDG_DATA_HOME/plum/rime-install essay
-bash $XDG_DATA_HOME/plum/rime-install luna-pinyin
-bash $XDG_DATA_HOME/plum/rime-install double-pinyin
-bash $XDG_DATA_HOME/plum/rime-install emoji
-bash $XDG_DATA_HOME/plum/rime-install emoji:customize:schema=luna-pinyin
-bash $XDG_DATA_HOME/plum/rime-install emoji:customize:schema=double-pinyin
+### rime
+sync_rime_schema
