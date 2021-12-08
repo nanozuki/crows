@@ -27,8 +27,8 @@ crows.use_plugin({
     })
     require('crows').maps({
       ['<leader>s'] = {
-        r = { '<cmd>RestoreSession', 'Restore session' },
-        s = { '<cmd>SaveSession', 'Save session' },
+        r = { '<cmd>RestoreSession<cr>', 'Restore session' },
+        s = { '<cmd>SaveSession<cr>', 'Save session' },
       },
     })
   end,
