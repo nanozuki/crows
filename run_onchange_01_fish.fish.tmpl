@@ -1,8 +1,0 @@
-#!/usr/bin/env fish
-# watch fish_plugins. hash: {{ include "./dot_config/fish/fish_plugins" | sha256sum }}
-if not type -q fisher
-    echo "install fisher"
-    curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
-end
-fisher update
-source $config/fish/config.fish

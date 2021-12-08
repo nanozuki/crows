@@ -1,0 +1,7 @@
+#!/usr/bin/env fish
+#
+#{{if eq .chezmoi.os "darwin" -}}
+brew update && brew upgrade && brew cleanup
+#{{else}}
+paru -Syu --noconfirm
+#{{end}}
