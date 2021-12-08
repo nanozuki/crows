@@ -1,5 +1,5 @@
 #!/usr/bin/env fish
-source ./utils.fish
+source ~/.local/share/chezmoi/utils.fish
 
 # golang
 go install github.com/davidrjenni/reftools/cmd/fillstruct@latest 
@@ -27,6 +27,6 @@ macos_sync_lua_lsp
 
 # zig
 #{{if eq .chezmoi.os "darwin"}}
-brew reinstall zig --HEAD
+brew reinstall zig
 macos_sync_zls
 #{{end}}

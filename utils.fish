@@ -52,7 +52,7 @@ end
 function macos_sync_lua_lsp
     brew_install ninja
     set repo https://github.com/sumneko/lua-language-server.git
-    set repo_path (git_latest $repo); or return 1
+    set repo_path (git_latest $repo); or return 0
     if test -z $repo_path
         return 0
     end
@@ -69,7 +69,7 @@ end
 
 function macos_sync_zls
     set repo https://github.com/zigtools/zls.git
-    set repo_path (git_latest $repo); or return 1
+    set repo_path (git_latest $repo); or return 0
     if test -z $repo_path
         return 0
     end
