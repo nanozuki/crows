@@ -1,5 +1,5 @@
 #!/usr/bin/env fish
-source ./utils.fish
+source ~/.local/share/chezmoi/utils.fish
 
 ### golang
 setUx GOPATH $XDG_DATA_HOME/go
@@ -62,7 +62,7 @@ npm config set init-module $XDG_CONFIG_HOME/npm/config/npm-init.js
 
 ### zig
 #{{if eq .chezmoi.os "darwin"}}
-brew_install --HEAD zig
+brew_install zig --HEAD
 macos_sync_lua_lsp
 #{{else}}
 paru_install zig zls-bin

@@ -1,5 +1,5 @@
 #!/usr/bin/env fish
-source ./utils.fish
+source ~/.local/share/chezmoi/utils.fish
 
 ### fish
 # watch fish_plugins. hash: {{ include "./dot_config/fish/fish_plugins" | sha256sum }}
@@ -29,7 +29,7 @@ brew_install kitty
 paru_install kitty
 #{{end}}
 if not test -f $XDG_CONFIG_HOME/kitty/local.conf
-    touch $config/kitty/local.conf
+    touch $XDG_CONFIG_HOME/kitty/local.conf
 end
 
 ### wezterm
