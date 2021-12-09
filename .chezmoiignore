@@ -1,3 +1,7 @@
+# for this repo
+utils.fish
+README.md
+
 {{ if ne .chezmoi.os "darwin" }}
 Library
 Library/*
