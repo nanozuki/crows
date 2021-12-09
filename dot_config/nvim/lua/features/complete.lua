@@ -7,6 +7,7 @@ crows.use_plugin({
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-path',
     'windwp/nvim-autopairs',
+    'hrsh7th/cmp-cmdline',
     -- snippets
     'L3MON4D3/LuaSnip',
     'rafamadriz/friendly-snippets',
@@ -19,7 +20,7 @@ crows.use_plugin({
     local function tab(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
+      elseif luasnip.expand_or_locally_jumpable() then
         luasnip.expand_or_jump()
       else
         fallback()
@@ -48,7 +49,16 @@ crows.use_plugin({
         ['<C-p>'] = cmp.mapping.select_prev_item(),
         ['<C-n>'] = cmp.mapping.select_next_item(),
         ['<C-e>'] = cmp.mapping.close(),
-        ['<CR>'] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace }),
+        ['<CR>'] = cmp.mapping({
+          i = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace }),
+          c = function(fallback)
+            if cmp.visible() then
+              cmp.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace }, fallback)
+            else
+              fallback()
+            end
+          end,
+        }),
         ['<Tab>'] = cmp.mapping(tab, { 'i', 's' }),
         ['<S-Tab>'] = cmp.mapping(s_tab, { 'i', 's' }),
       },
@@ -59,6 +69,10 @@ crows.use_plugin({
         { name = 'buffer' },
       },
     })
+
+    -- cmp-cmdline
+    cmp.setup.cmdline(':', { sources = { { name = 'cmdline' }, { name = 'path' } } })
+    cmp.setup.cmdline('/', { sources = { { name = 'buffer' } } })
 
     -- nvim-autopairs
     require('nvim-autopairs').setup({})
