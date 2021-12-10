@@ -26,4 +26,8 @@ return {
   use_ime = true,
   colors = rose_pine_dawn,
   enable_tab_bar = false,
+  keys = {
+    -- fix issue: press <S-Del> will input text '<S-Del>' in vim
+    { key = 'Delete', mods = 'SHIFT', action = { SendKey = { key = 'Delete' } } },
+  },
 }
