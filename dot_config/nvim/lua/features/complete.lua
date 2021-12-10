@@ -49,14 +49,13 @@ crows.use_plugin({
         ['<C-p>'] = cmp.mapping.select_prev_item(),
         ['<C-n>'] = cmp.mapping.select_next_item(),
         ['<C-e>'] = cmp.mapping.close(),
+        ['<C-y>'] = cmp.mapping({
+          c = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace }),
+        }),
         ['<CR>'] = cmp.mapping({
           i = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace }),
           c = function(fallback)
-            if cmp.visible() then
-              cmp.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace }, fallback)
-            else
-              fallback()
-            end
+            fallback()
           end,
         }),
         ['<Tab>'] = cmp.mapping(tab, { 'i', 's' }),
