@@ -1,7 +1,7 @@
 set -x GPG_TTY (tty)
 gpg-connect-agent updatestartuptty /bye >/dev/null
 if test $os = archlinux
-    set -x SSH_AUTH_SOCK $XDG_RUNTIME_DIR/gnupg/S.gpg-agent.ssh
+    set -x SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
 else if test $os = macos
     set -x SSH_AUTH_SOCK $GNUPGHOME/S.gpg-agent.ssh
 end
