@@ -1,5 +1,5 @@
 # theme
-source-file ~/.config/tmux/{{.theme}}.conf
+source-file ~/.config/tmux/{{default "rose-pine-dawn" .theme}}.conf
 
 # basic settings
 set -g prefix C-j
@@ -11,7 +11,7 @@ set -g focus-events on
 set -g default-terminal "xterm-256color"
 set -sa terminal-overrides ',xterm-256color:RGB'
 set -g base-index 1
-set -g pane-base-index 1 
+set -g pane-base-index 1
 set -g mouse on
 set -g history-limit 32768
 
