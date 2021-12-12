@@ -2,7 +2,7 @@
 source ~/.local/share/chezmoi/utils.fish
 
 ### package mangager
-#{{if eq .chezmoi.os "darwin" -}}
+#{{if eq .chezmoi.os "darwin"}}
 brew update && brew upgrade && brew cleanup
 #{{else}}
 paru -Syu --noconfirm
