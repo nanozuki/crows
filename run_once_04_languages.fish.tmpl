@@ -49,7 +49,7 @@ cargo install stylua
 
 ### node (lts)
 setUx NPM_CONFIG_USERCONFIG $XDG_CONFIG_HOME/npm/npmrc
-#{{if eq .chezmoi.os "darwin" -}}
+#{{if eq .chezmoi.os "darwin" }}
 brew_install node@16
 brew link --overwrite --force node@16
 #{{else}}

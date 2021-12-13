@@ -10,7 +10,7 @@ vim.opt.relativenumber = true
 vim.opt.colorcolumn = '120'
 vim.opt.modelines = 1
 
-crows.map('Open terminal', 'n', '<leader>tt', ':tabnew | terminal<CR>')
+crows.map('Open terminal in new tab', 'n', '<leader>tt', ':tabnew | terminal<CR>')
 crows.map('To normal mode in terminal', 't', '<Esc>', util.termcode([[<C-\><C-N>]]))
 
 crows.use_plugin({

@@ -7,7 +7,7 @@ setUx XDG_DATA_HOME   $HOME/.local/share
 setUx LC_ALL          en_US.UTF-8
 setUx LANG            en_US.UTF-8
 setUx EDITOR          nvim
-#{{if eq .chezmoi.os "darwin" -}}
+#{{if eq .chezmoi.os "darwin" }}
 setUx XDG_RUNTIME_DIR $TMPDIR
 #{{end}}
 
@@ -30,7 +30,7 @@ function install_macos
     add_path ~/.local/bin /opt/homebrew/bin /usr/local/bin /usr/bin /bin /usr/sbin /sbin /Library/Apple/usr/bin
 end
 
-#{{if eq .chezmoi.os "darwin" -}}
+#{{if eq .chezmoi.os "darwin" }}
 install_macos
 #{{else}}
 install_archlinux
