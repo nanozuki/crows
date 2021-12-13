@@ -4,7 +4,7 @@ set -Ux GNUPGHOME $XDG_DATA_HOME/gnupg
 mkdir -p $GNUPGHOME
 
 source ~/.local/share/chezmoi/utils.fish
-#{{if eq .chezmoi.os "darwin" -}}
+#{{if eq .chezmoi.os "darwin" }}
 brew_install gnupg pinentry-mac
 #{{else}}
 paru_install gnupg pinentry

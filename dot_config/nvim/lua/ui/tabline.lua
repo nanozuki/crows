@@ -72,8 +72,8 @@ crows.use_plugin({
 })
 crows.maps({
   ['<leader>t'] = {
-    a = { ':$tabnew<CR>', 'Create new tab' },
-    c = { ':tabclose<CR>', 'Close current tab' },
+    c = { ':$tabnew<CR>', 'Create new tab' },
+    x = { ':tabclose<CR>', 'Close current tab' },
     o = { ':tabonly<CR>', 'Close other tabs' },
     n = { ':tabn<CR>', 'Go to next tab' },
     p = { ':tabp<CR>', 'Go to previous tab' },

@@ -16,14 +16,14 @@ if not test -f $XDG_CONFIG_HOME/git/config_local
 end
 
 ### tmux
-#{{if eq .chezmoi.os "darwin" -}}
+#{{if eq .chezmoi.os "darwin" }}
 brew_install tmux
 #{{else}}
 paru_install tmux
 #{{end}}
 
 ### kitty
-#{{if eq .chezmoi.os "darwin" -}}
+#{{if eq .chezmoi.os "darwin" }}
 brew_install kitty
 #{{else}}
 paru_install kitty
@@ -33,7 +33,7 @@ if not test -f $XDG_CONFIG_HOME/kitty/local.conf
 end
 
 ### wezterm
-#{{if eq .chezmoi.os "darwin" -}}
+#{{if eq .chezmoi.os "darwin" }}
 brew_install --cask wezterm-nightly --no-quarantine
 #{{else}}
 paru_install wezterm
