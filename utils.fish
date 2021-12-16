@@ -83,9 +83,6 @@ function macos_sync_zls
 end
 
 function sync_rime_schema
-#{{if eq .chezmoi.os "linux"}}
-    set -lx rime_frontend fcitx5-rime
-#{{end}}
     bash $XDG_DATA_HOME/plum/rime-install :preset
     bash $XDG_DATA_HOME/plum/rime-install prelude
     bash $XDG_DATA_HOME/plum/rime-install essay

@@ -10,4 +10,8 @@ paru_install fcitx5-rime
 if not test -d $XDG_DATA_HOME/plum
     git clone --depth 1 https://github.com/rime/plum.git $XDG_DATA_HOME/plum
 end
+
+#{{if eq .chezmoi.os "linux"}}
+    set -lx rime_frontend fcitx5-rime
+#{{end}}
 sync_rime_schema

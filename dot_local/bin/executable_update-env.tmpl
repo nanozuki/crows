@@ -58,4 +58,7 @@ sudo npm -g install vim-language-server
 #{{end}}
 
 ### rime
+#{{if eq .chezmoi.os "linux"}}
+set -lx rime_frontend fcitx5-rime
+#{{end}}
 sync_rime_schema
