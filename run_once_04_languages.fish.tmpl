@@ -60,10 +60,38 @@ npm config set cache       $XDG_CACHE_HOME/npm
 npm config set tmp         $XDG_RUNTIME_DIR/npm
 npm config set init-module $XDG_CONFIG_HOME/npm/config/npm-init.js
 
+add_path $XDG_DATA_HOME/npm/bin
+
+function npm_install
+#{{if eq .chezmoi.os "darwin" }}
+    npm -g install $argv
+#{{else}}
+    sudo npm -g install $argv
+#{{end}}
+end
+npm_install typescript typescript-language-server
+
 ### zig
 #{{if eq .chezmoi.os "darwin"}}
 brew_install zig --HEAD
-macos_sync_lua_lsp
+macos_sync_zls
 #{{else}}
 paru_install zig zls-bin
 #{{end}}
+
+### deno
+#{{if eq .chezmoi.os "darwin" }}
+brew_install deno
+#{{else}}
+paru_install deno
+#{{end}}
+
+### terraform
+#{{if eq .chezmoi.os "darwin" }}
+brew_install terraform terraform-ls
+#{{else}}
+paru_install terraform terraform-ls
+#{{end}}
+
+### other langs and lsps
+npm_install graphql-language-service-cli vim-language-server yaml-language-server

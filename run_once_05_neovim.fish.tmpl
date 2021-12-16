@@ -5,11 +5,7 @@ source ~/.local/share/chezmoi/utils.fish
 brew_install neovim python ripgrep fzf
 pip3 install pynvim
 npm -g install neovim
-npm -g install graphql-language-service-cli
-npm -g install vim-language-server
 #{{else}}
 paru_install neovim python-pynvim ripgrep fzf
 sudo npm -g install neovim
-sudo npm -g install graphql-language-service-cli
-sudo npm -g install vim-language-server
 #{{end}}
