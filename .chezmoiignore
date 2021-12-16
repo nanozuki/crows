@@ -11,4 +11,6 @@ Library/*
 .local/share/fcitx5
 .local/share/fcitx5/*
 .config/zls.json
+.config/sway
+.config/wayland
 {{ end }}

@@ -1,0 +1,59 @@
+{
+    "spacing": 4, // Gaps between modules (4px)
+    // Choose the order of the modules
+    "modules-left": ["sway/workspaces", "sway/mode"],
+    "modules-center": ["sway/window"],
+    "modules-right": ["pulseaudio", "network", "cpu", "memory", "temperature", "clock", "tray"],
+    // Modules configuration
+    "sway/workspaces": {
+        "disable-scroll": false,
+        "format": "{name}",
+    },
+    "sway/mode": {
+        "format": "aaaaaaaaaaaaaaaaa"
+    },
+    "sway/window": {
+        "rewrite": {
+            ".*tmux.*": "Terminal",
+            ".*fish.*": "Terminal",
+            ".*Firefox.*": "Firefox",
+            "": "This is Sway!"
+        }
+    },
+    "cpu": {
+        "format": " {usage}% / {load}",
+        "tooltip": true
+    },
+    "memory": {
+        "format": " {}%"
+    },
+    "temperature": {
+        "format": "{icon} {temperatureC}°C",
+        "format-icons": [""]
+    },
+    "network": {
+        "format-ethernet": " {ifname}",
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-linked": " {ifname} [No IP]",
+        "format-disconnected": "⚠ Disconnected",
+        "format-alt": "{ipaddr}/{cidr}"
+    },
+    "pulseaudio": {
+        "scroll-step": 5,
+        "format": "{icon} {volume}%",
+        "format-icons": {
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+    "clock": {
+        "format": "{:%H:%M %a}",
+        "format-alt": "{:%Y-%m-%d}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    },
+    "tray": {
+        "icon-size": 12,
+        "spacing": 8
+    }
+}
+
