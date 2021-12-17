@@ -8,7 +8,7 @@ set -s escape-time 2
 set -g mode-keys vi
 bind r source-file ~/.config/tmux/tmux.conf \; display "TmuxConfig Reloaded!"
 set -g focus-events on
-set -g default-terminal "xterm-256color"
+set -g default-terminal {{if eq .chezmoi.os "darwin"}}"xterm-256color"{{else}}"tmux-256color"{{end}}
 set -sa terminal-overrides ',xterm-256color:RGB'
 set -g base-index 1
 set -g pane-base-index 1
