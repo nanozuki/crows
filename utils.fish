@@ -18,7 +18,7 @@ function paru_install
 end
 
 function find_git_repo_path
-    set repo (string trim -rc '.git' $argv[1]) 
+    set repo (string trim -rc '.git' $argv[1])
     set words (string match -r "(git@|https?://)(.*)/(.*)" $repo)
     if test (count $words) -lt 4
         echo "invalid repository path"
@@ -89,6 +89,4 @@ function sync_rime_schema
     bash $XDG_DATA_HOME/plum/rime-install luna-pinyin
     bash $XDG_DATA_HOME/plum/rime-install double-pinyin
     bash $XDG_DATA_HOME/plum/rime-install emoji
-    bash $XDG_DATA_HOME/plum/rime-install emoji:customize:schema=luna_pinyin
-    bash $XDG_DATA_HOME/plum/rime-install emoji:customize:schema=double_pinyin_flypy
 end
