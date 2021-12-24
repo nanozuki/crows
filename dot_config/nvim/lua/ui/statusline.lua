@@ -158,13 +158,13 @@ local feline_config = function()
   }
 
   feline.setup({
-    colors = palette,
     components = {
       active = { left, right },
       inactive = { in_left, in_right },
     },
     force_inactive = { filetypes = { 'NvimTree', 'help' }, buftypes = { 'terminal' }, bufnames = {} },
   })
+  feline.use_theme(palette)
 end
 
 local crows = require('crows')
