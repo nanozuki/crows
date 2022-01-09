@@ -10,7 +10,7 @@
         "format": "{name}",
     },
     "sway/mode": {
-        "format": "aaaaaaaaaaaaaaaaa"
+        "format": "{}"
     },
     "sway/window": {
         "rewrite": {
@@ -56,4 +56,4 @@
         "spacing": 8
     }
 }
-
+// vim: set filetype=jsonc :
