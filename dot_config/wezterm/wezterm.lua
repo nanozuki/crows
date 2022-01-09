@@ -31,4 +31,5 @@ return {
     { key = 'Delete', mods = 'SHIFT', action = { SendKey = { key = 'Delete' } } },
   },
   window_padding = { left = 2, right = 2, top = 0, bottom = 0 },
+  enable_wayland = true,
 }
