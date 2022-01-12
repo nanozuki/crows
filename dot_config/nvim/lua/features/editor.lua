@@ -65,6 +65,7 @@ crows.use_plugin({
 })
 
 -- git manage
+crows.use_plugin('tpope/vim-fugitive')
 crows.use_plugin({
   'TimUntersberger/neogit',
   requires = {
