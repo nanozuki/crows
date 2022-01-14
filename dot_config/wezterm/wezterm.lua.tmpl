@@ -15,6 +15,12 @@ local rose_pine_dawn = {
 }
 
 return {
+  use_ime = true,
+  keys = {
+    -- fix issue: press <S-Del> will input text '<S-Del>' in vim
+    { key = 'Delete', mods = 'SHIFT', action = { SendKey = { key = 'Delete' } } },
+  },
+
   font = wezterm.font_with_fallback({
     'JetBrainsMono Nerd Font',
     'Menlo',
@@ -23,13 +29,10 @@ return {
     'Apple Color Emoji',
     'PingFang SC',
   }),
-  use_ime = true,
+  font_size = {{ default "10" .term.font_size }},
+
   colors = rose_pine_dawn,
   enable_tab_bar = false,
-  keys = {
-    -- fix issue: press <S-Del> will input text '<S-Del>' in vim
-    { key = 'Delete', mods = 'SHIFT', action = { SendKey = { key = 'Delete' } } },
-  },
   window_padding = { left = 2, right = 2, top = 0, bottom = 0 },
   enable_wayland = true,
 }
