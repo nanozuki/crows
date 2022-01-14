@@ -219,7 +219,7 @@ output DP-3 scale 2
 gaps inner 6
 gaps outer 3
 
-default_border pixel 6
+default_border pixel 4
 default_floating_border none
 
 # colorpalette
@@ -241,11 +241,10 @@ default_floating_border none
 # highlightOverlay  #e4dfde
 
 # class                 border  backgr. text    indicator child_border
-client.focused          #b4637a #faf4ed #575279 #b4637a   #b4637a
+client.focused          #575279 #faf4ed #575279 #575279   #575279
 client.focused_inactive #6e6a86 #faf4ed #575279 #6e6a86   #6e6a86
 client.unfocused        #9893a5 #faf4ed #575279 #9893a5   #9893a5
 client.urgent           #ea9d34 #faf4ed #575279 #ea9d34   #ea9d34
-# client.placeholder
 
 #
 # Status Bar:
