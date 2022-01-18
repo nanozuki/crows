@@ -41,6 +41,7 @@ crows.use_plugin({
 -- lsp ui extension
 crows.use_plugin({
   'RishabhRD/lspactions',
+  branch = 'nvim-0.6-compatible',
   requires = {
     { 'nvim-lua/plenary.nvim' },
     { 'nvim-lua/popup.nvim' },
