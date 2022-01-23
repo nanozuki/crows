@@ -59,12 +59,13 @@ crows.use_plugin({
     require('nvim-treesitter.configs').setup({
       ensure_installed = 'maintained',
       highlight = { enable = true },
-      indent = { enable = true },
+      -- indent = { enable = true },
     })
   end,
 })
 
 -- git manage
+crows.use_plugin('tpope/vim-fugitive')
 crows.use_plugin({
   'TimUntersberger/neogit',
   requires = {
