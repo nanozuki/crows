@@ -10,6 +10,9 @@ crows.use_plugin({
       update_cwd = true,
       diagnostics = { enable = true },
       view = { signcolumn = 'auto' },
+      git = {
+        ignore = false,
+      },
     })
     require('crows').map('Toggle filetree', 'n', '<Leader>fl', ':NvimTreeToggle<CR>')
   end,
