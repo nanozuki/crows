@@ -36,19 +36,20 @@ crows.use_plugin({
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-path',
     -- snippets
-    'L3MON4D3/LuaSnip',
+    'hrsh7th/cmp-vsnip',
+    'hrsh7th/vim-vsnip',
     'rafamadriz/friendly-snippets',
-    'saadparwaiz1/cmp_luasnip',
   },
   config = function()
     local cmp = require('cmp')
-    local luasnip = require('luasnip')
-    require('luasnip.loaders.from_vscode').load()
+    local feedkey = function(key, mode)
+      vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
+    end
     local function tab(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      elseif luasnip.expand_or_locally_jumpable() then
-        luasnip.expand_or_jump()
+      elseif vim.fn['vsnip#available'](1) == 1 then
+        feedkey('<Plug>(vsnip-expand-or-jump)', '')
       else
         fallback()
       end
@@ -56,8 +57,8 @@ crows.use_plugin({
     local function s_tab(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
+      elseif vim.fn['vsnip#available'](1) == 1 then
+        feedkey('<Plug>(vsnip-expand-or-jump)', '')
       else
         fallback()
       end
@@ -69,7 +70,7 @@ crows.use_plugin({
       },
       snippet = {
         expand = function(args)
-          luasnip.lsp_expand(args.body)
+          vim.fn['vsnip#anonymous'](args.body)
         end,
       },
       mapping = {
@@ -90,7 +91,7 @@ crows.use_plugin({
       },
       sources = {
         { name = 'nvim_lsp' },
-        { name = 'luasnip' },
+        { name = 'vsnip' },
         { name = 'path' },
         { name = 'buffer' },
       },
