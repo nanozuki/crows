@@ -8,9 +8,8 @@ crows.use_plugin('kshenoy/vim-signature')
 -- multi select and edit
 crows.use_plugin('mg979/vim-visual-multi')
 
--- surround select and edit
--- cs"': "a"->'a', ysiw]: word->[word], cs]{: [word]->{ word }
-crows.use_plugin('tpope/vim-surround')
+-- surround edit
+crows.use_plugin('machakann/vim-sandwich')
 vim.cmd('syntax enable')
 vim.opt.foldmethod = 'indent'
 vim.opt.foldlevelstart = 99
