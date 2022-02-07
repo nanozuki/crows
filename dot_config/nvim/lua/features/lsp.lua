@@ -59,3 +59,9 @@ crows.use_plugin({
     vim.lsp.handlers['textDocument/implementation'] = lspactions.implementation
   end,
 })
+crows.use_plugin({
+  'j-hui/fidget.nvim',
+  config = function()
+    require('fidget').setup({})
+  end,
+}) -- print lang server status
