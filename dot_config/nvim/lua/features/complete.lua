@@ -1,13 +1,40 @@
 local crows = require('crows')
 
+-- autopairs
+crows.use_plugin('jiangmiao/auto-pairs')
+
+-- cmdline completion
+crows.use_plugin({
+  'gelguy/wilder.nvim',
+  config = function()
+    vim.cmd([[
+      call wilder#setup({'modes': [':', '/', '?']})
+      call wilder#set_option('pipeline', [
+        \   wilder#branch(
+        \     wilder#cmdline_pipeline({
+        \       'language': 'python',
+        \       'fuzzy': 1,
+        \     }),
+        \     wilder#python_search_pipeline({
+        \       'pattern': wilder#python_fuzzy_pattern(),
+        \       'sorter': wilder#python_difflib_sorter(),
+        \       'engine': 're',
+        \     }),
+        \   ),
+        \ ])
+      call wilder#set_option('renderer', wilder#popupmenu_renderer({
+        \ 'highlighter': wilder#basic_highlighter(),
+        \ }))
+    ]])
+  end,
+})
+
 crows.use_plugin({
   'hrsh7th/nvim-cmp',
   requires = {
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-path',
-    'windwp/nvim-autopairs',
-    'hrsh7th/cmp-cmdline',
     -- snippets
     'L3MON4D3/LuaSnip',
     'rafamadriz/friendly-snippets',
@@ -68,14 +95,5 @@ crows.use_plugin({
         { name = 'buffer' },
       },
     })
-
-    -- cmp-cmdline
-    cmp.setup.cmdline(':', { sources = { { name = 'cmdline' }, { name = 'path' } } })
-    cmp.setup.cmdline('/', { sources = { { name = 'buffer' } } })
-
-    -- nvim-autopairs
-    require('nvim-autopairs').setup({})
-    local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-    cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
   end,
 })
