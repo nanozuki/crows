@@ -1,6 +1,7 @@
 # for this repo
 utils.fish
 README.md
+LICENSE
 
 {{ if ne .chezmoi.os "darwin" }}
 Library
