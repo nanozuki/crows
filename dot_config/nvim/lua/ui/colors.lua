@@ -74,7 +74,7 @@ local colorschemes = {
   end,
   rose_pine_dawn = function()
     if crows.packadd('rose-pine') then
-      vim.g.rose_pine_variant = 'dawn'
+      vim.o.background = 'light'
       vim.cmd('colorscheme rose-pine')
     end
   end,
