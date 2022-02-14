@@ -7,6 +7,10 @@ require('lib.lsp').set_config('tsserver', {
   end,
 })
 
+require('lib.lsp').set_config('tailwindcss', {
+  root_dir = util.root_pattern('tailwind.config.js', 'tailwind.config.ts'),
+})
+
 require('lib.lsp').set_config('denols', {
   root_dir = util.root_pattern('deno_root'),
   init_options = {
