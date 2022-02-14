@@ -69,7 +69,7 @@ function npm_install
     sudo npm -g install $argv
 #{{end}}
 end
-npm_install typescript typescript-language-server
+npm_install typescript typescript-language-server @tailwindcss/language-server
 
 ### zig
 #{{if eq .chezmoi.os "darwin"}}
