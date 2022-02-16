@@ -74,7 +74,6 @@ crows.use_plugin({
 
 local lsp = require('lib.lsp')
 local simple_servers = {
-  'graphql',
   'vimls',
   'zls',
   'terraformls',
