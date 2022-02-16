@@ -20,6 +20,10 @@ require('lib.lsp').set_config('denols', {
   },
 })
 
+require('lib.lsp').set_config('graphql', {
+  filetypes = { 'graphql' },
+})
+
 crows.use_plugin({
   'mattn/emmet-vim',
   ft = { 'html', 'javascript.jsx', 'typescript.tsx', 'javascriptreact', 'typescriptreact' },
