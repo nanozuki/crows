@@ -30,7 +30,6 @@ crows.use_plugin({
   config = function()
     require('indent_blankline').setup({
       char = '¦',
-      -- show_first_indent_level = false,
       buftype_exclude = { 'help', 'nofile', 'nowrite', 'quickfix', 'terminal', 'prompt' },
     })
   end,
@@ -38,6 +37,7 @@ crows.use_plugin({
 
 -- setup indent
 vim.cmd('filetype indent on')
+vim.opt.cindent = true
 vim.opt.expandtab = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
@@ -58,7 +58,6 @@ crows.use_plugin({
     require('nvim-treesitter.configs').setup({
       ensure_installed = 'maintained',
       highlight = { enable = true },
-      indent = { enable = true },
     })
   end,
 })
