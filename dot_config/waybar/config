@@ -1,9 +1,12 @@
 {
     "spacing": 4, // Gaps between modules (4px)
     // Choose the order of the modules
-    "modules-left": ["sway/workspaces", "sway/mode"],
-    "modules-center": ["sway/window"],
-    "modules-right": ["pulseaudio", "network", "cpu", "memory", "temperature", "clock", "tray"],
+    "modules-left": ["sway/workspaces", "sway/mode", "custom/window", "sway/window"],
+    "modules-center": ["clock"],
+    "modules-right": [
+        "cpu", "memory", "temperature", "pulseaudio",
+        "network", "custom/dunst", "custom/tray", "tray"
+    ],
     // Modules configuration
     "sway/workspaces": {
         "disable-scroll": false,
@@ -12,16 +15,23 @@
     "sway/mode": {
         "format": "{}"
     },
+    "custom/window": {
+        "format": "  "
+    },
     "sway/window": {
         "rewrite": {
             ".*tmux.*": "Terminal",
             ".*fish.*": "Terminal",
             ".*Firefox.*": "Firefox",
-            "": "This is Sway!"
+            "": "Sway!"
         }
     },
+    "clock": {
+        "format": " {:%Y-%m-%d %a %H:%M}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    },
     "cpu": {
-        "format": " {usage}% / {load}",
+        "format": " {usage}%",
         "tooltip": true
     },
     "memory": {
@@ -32,7 +42,7 @@
         "format-icons": [""]
     },
     "network": {
-        "format-ethernet": " {ifname}",
+        "format-ethernet": " wired",
         "format-wifi": "{essid} ({signalStrength}%) ",
         "format-linked": " {ifname} [No IP]",
         "format-disconnected": "⚠ Disconnected",
@@ -46,10 +56,13 @@
         },
         "on-click": "pavucontrol"
     },
-    "clock": {
-        "format": "{:%H:%M %a}",
-        "format-alt": "{:%Y-%m-%d}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "custom/dunst": {
+        "exec": "~/.config/waybar/dunst.sh",
+        "on-click": "dunstctl set-paused toggle",
+        "restart-interval": 1,
+    },
+    "custom/tray": {
+        "format": " "
     },
     "tray": {
         "icon-size": 12,
