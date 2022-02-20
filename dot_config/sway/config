@@ -227,7 +227,7 @@ default_floating_border none
 # base              #faf4ed                     background, inactive tab background
 # surface           #fffaf3
 # overlay           #f2e9de black               active tab background
-# inactive          #9893a5                     cursor
+# muted             #9893a5                     cursor
 # subtle            #6e6a86 bright black        inactive tab foreground
 # text              #575279 (bright) white      foreground, selection foreground, cursor text, active tab foreground
 # love              #b4637a (bright) red
