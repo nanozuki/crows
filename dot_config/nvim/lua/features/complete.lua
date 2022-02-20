@@ -1,7 +1,12 @@
 local crows = require('crows')
 
 -- autopairs
-crows.use_plugin('jiangmiao/auto-pairs')
+crows.use_plugin({
+  'windwp/nvim-autopairs',
+  config = function()
+    require('nvim-autopairs').setup({})
+  end,
+})
 
 -- cmdline completion
 crows.use_plugin({
@@ -63,6 +68,8 @@ crows.use_plugin({
         fallback()
       end
     end
+    local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+    cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({ map_char = { tex = '' } }))
 
     cmp.setup({
       completion = {
