@@ -11,7 +11,7 @@ paru -Syu --noconfirm
 ### terminals
 fisher update
 #{{if eq .chezmoi.os "darwin"}}
-brew reinstall --cask wezterm-nightly --no-quarantine
+brew upgrade --cask wezterm --no-quarantine
 #{{end}}
 
 ### languages
