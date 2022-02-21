@@ -68,6 +68,8 @@ crows.use_plugin({
     local autocmd = require('lib.util').autocmd
     augroup('format_on_save', {
       autocmd('BufWritePost', '*', 'silent! FormatWrite'),
+      -- use lsp to extended format, if needed
+      -- autocmd('BufWritePre', '<buffer>', 'lua vim.lsp.buf.formatting_seq_sync()'),
     })
   end,
 })

@@ -1,6 +1,3 @@
-local augroup = require('lib.util').augroup
-local autocmd = require('lib.util').autocmd
-
 local lsp = {}
 
 local function buf_mapping(_, bufnr)
@@ -32,15 +29,8 @@ local function buf_mapping(_, bufnr)
   })
 end
 
-local function format_on_save()
-  augroup('lsp_format_on_save', {
-    autocmd('BufWritePre', '<buffer>', 'lua vim.lsp.buf.formatting_seq_sync()'),
-  })
-end
-
 lsp.on_attaches = {
   buf_mapping,
-  format_on_save,
 }
 
 function lsp.add_on_attach(fn)
