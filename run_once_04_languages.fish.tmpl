@@ -41,7 +41,7 @@ paru_install rust-analyzer
 
 ### lua
 #{{if eq .chezmoi.os "darwin"}}
-macos_sync_lua_lsp
+brew_install lua-language-server
 #{{else}}
 paru lua-language-server
 #{{end}}
