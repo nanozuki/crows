@@ -8,6 +8,9 @@ crows.use_plugin('kshenoy/vim-signature')
 -- multi select and edit
 crows.use_plugin('mg979/vim-visual-multi')
 
+-- autopairs
+crows.use_plugin('Raimondi/delimitMate')
+
 -- surround edit
 crows.use_plugin('machakann/vim-sandwich')
 vim.cmd('syntax enable')
