@@ -6,12 +6,13 @@ source ~/.local/share/chezmoi/utils.fish
 brew update && brew upgrade && brew cleanup
 #{{else}}
 paru -Syu --noconfirm
+sudo flatpak upgrade
 #{{end}}
 
 ### terminals
 fisher update
 #{{if eq .chezmoi.os "darwin"}}
-brew upgrade --cask wezterm --no-quarantine
+brew upgrade --cask wezterm-nightly --no-quarantine --greedy-latest
 #{{end}}
 
 ### languages
