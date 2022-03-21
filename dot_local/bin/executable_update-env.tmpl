@@ -16,28 +16,39 @@ brew upgrade --cask wezterm-nightly --no-quarantine --greedy-latest
 #{{end}}
 
 ### languages
-# golang
-go install github.com/davidrjenni/reftools/cmd/fillstruct@latest
-go install golang.org/x/tools/cmd/goimports@latest
-go install github.com/fatih/gomodifytags@latest
-go install github.com/segmentio/golines@latest
-go install github.com/cweill/gotests/...@latest
-
+## golang
+# go dev tools
+go install golang.org/x/tools/gopls@latest finished
+go install github.com/josharian/impl@latest finished
+go install github.com/kyoh86/richgo@latest finished
+go install github.com/davidrjenni/reftools/cmd/fillstruct@latest finished
+go install mvdan.cc/gofumpt@latest finished
+go install github.com/davidrjenni/reftools/cmd/fixplurals@latest finished
+go install golang.org/x/tools/cmd/goimports@latest finished
+go install github.com/segmentio/golines@latest finished
+go install github.com/davidrjenni/reftools/cmd/fillswitch@latest finished
+go install github.com/onsi/ginkgo/ginkgo@latest finished
+go install github.com/cweill/gotests/...@latest finished
+go install github.com/go-delve/delve/cmd/dlv@latest finished
+go install github.com/fatih/gomodifytags@latest finished
+go install golang.org/x/tools/cmd/gorename@latest finished
+go install github.com/koron/iferr@latest finished
+go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest finished
+go install github.com/nametake/golangci-lint-langserver@latest
+# some go generated tools
 go install github.com/google/wire/cmd/wire@latest
 go install github.com/go-swagger/go-swagger/cmd/swagger@latest
-go install github.com/nametake/golangci-lint-langserver@latest
-
 go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
 go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
 go install github.com/golang/protobuf/{proto,protoc-gen-go}@latest
 
-# rust
+## rust
 rustup update
 
-# lua
+## lua
 cargo install stylua
 
-# zig
+## zig
 #{{if eq .chezmoi.os "darwin"}}
 brew reinstall zig
 macos_sync_zls
