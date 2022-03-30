@@ -1,5 +1,5 @@
 local feline_config = function()
-  local palette = require('ui.colors').palette
+  local palette = require('ui.themes').palette
   local feline = require('feline')
   require('gitsigns').setup({ signcolumn = false })
 

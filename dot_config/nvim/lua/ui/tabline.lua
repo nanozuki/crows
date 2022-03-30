@@ -1,5 +1,5 @@
 local tabby_config = function()
-  local palette = require('ui.colors').palette
+  local palette = require('ui.themes').palette
   local filename = require('tabby.filename')
   local tabname = function(tabid)
     local number = vim.api.nvim_tabpage_get_number(tabid)
