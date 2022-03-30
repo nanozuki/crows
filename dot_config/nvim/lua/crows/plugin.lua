@@ -28,7 +28,7 @@ function plugin.bootstrap()
   if plugin.bootstrapped then
     return
   end
-  local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+  local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
   local packer = 'https://github.com/wbthomason/packer.nvim'
   if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
     vim.fn.system({ 'git', 'clone', '--depth', '1', packer, install_path })
@@ -82,7 +82,7 @@ end
 function plugin.sync()
   use_plugins()
   vim.cmd("autocmd User PackerCompileDone lua require'crows.plugin'.source_compiled()")
-  require('packer').compile()
+  require('packer').sync()
 end
 
 function plugin.compile()
