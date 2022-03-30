@@ -12,7 +12,6 @@ crows.use_plugin('mg979/vim-visual-multi')
 crows.use_plugin('Raimondi/delimitMate')
 vim.g.delimitMate_expand_cr = 1
 vim.g.delimitMate_expand_space = 1
-vim.g.delimitMate_jump_expansion = 1
 
 -- surround edit
 crows.use_plugin('machakann/vim-sandwich')
