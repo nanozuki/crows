@@ -1,4 +1,5 @@
 local keymap = require('crows.keymap')
+local lsp = require('crows.lsp')
 local plugin = require('crows.plugin')
 
 ---@class CrowsModule
@@ -45,6 +46,7 @@ local function reset()
   end
   plugin.reset()
   keymap.reset()
+  lsp.stop_all_clients()
   vim.cmd('runtime! init.lua')
 end
 

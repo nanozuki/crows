@@ -1,6 +1,6 @@
 local crows = require('crows')
-local augroup = require('lib.util').augroup
-local autocmd = require('lib.util').autocmd
+local augroup = require('crows.util').augroup
+local autocmd = require('crows.util').autocmd
 
 -- display sign for marks
 crows.plugin.use('kshenoy/vim-signature')
