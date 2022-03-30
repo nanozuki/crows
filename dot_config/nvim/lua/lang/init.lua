@@ -64,8 +64,8 @@ crows.plugin.use({
         terraform = { linters.terraform },
       },
     })
-    local augroup = require('lib.util').augroup
-    local autocmd = require('lib.util').autocmd
+    local augroup = require('crows.util').augroup
+    local autocmd = require('crows.util').autocmd
     augroup('format_on_save', {
       autocmd('BufWritePost', '*', 'silent! FormatWrite'),
       -- use lsp to extended format, if needed
@@ -74,7 +74,7 @@ crows.plugin.use({
   end,
 })
 
-local lsp = require('lib.lsp')
+local lsp = require('crows.lsp')
 local simple_servers = {
   'vimls',
   'zls',

@@ -1,8 +1,6 @@
 local crows = require('crows')
 
-crows.plugin.use('neovim/nvim-lspconfig')
-
--- lsp signature
+-- lsp diagnostics
 crows.plugin.use({
   'folke/trouble.nvim',
   requires = 'kyazdani42/nvim-web-devicons',
@@ -32,7 +30,7 @@ end
 crows.plugin.use({
   'ray-x/lsp_signature.nvim',
   config = function()
-    require('lib.lsp').add_on_attach(function(_, _)
+    require('crows.lsp').add_on_attach(function(_, _)
       require('lsp_signature').on_attach({ bind = true, handler_opts = { border = 'none' } })
     end)
   end,
@@ -57,11 +55,16 @@ crows.plugin.use({
     vim.lsp.handlers['textDocument/definition'] = lspactions.definition
     vim.lsp.handlers['textDocument/declaration'] = lspactions.declaration
     vim.lsp.handlers['textDocument/implementation'] = lspactions.implementation
+    local lsp = require('crows.lsp')
+    lsp.set_key_cmd(lsp.buffer_keys.rename, '<cmd>lua require("lspactions").rename()<CR>')
+    lsp.set_key_cmd(lsp.buffer_keys.code_action, '<cmd>lua require("lspactions").code_action()<CR>')
   end,
 })
+
+-- print lang server status
 crows.plugin.use({
   'j-hui/fidget.nvim',
   config = function()
     require('fidget').setup({})
   end,
-}) -- print lang server status
+})

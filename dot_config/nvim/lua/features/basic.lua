@@ -1,5 +1,5 @@
 local crows = require('crows')
-local util = require('lib.util')
+local util = require('crows.util')
 
 vim.g.mapleader = ' '
 vim.opt.linebreak = true
@@ -21,7 +21,7 @@ crows.plugin.use({
       pre_save_cmds = { 'NvimTreeClose' },
       auto_session_suppress_dirs = { '~' },
     })
-    local u = require('lib.util')
+    local u = require('crows.util')
     u.augroup('renew_auto_session_cwd', {
       u.autocmd('DirChanged', 'global', 'lua require("auto-session-library").conf.last_loaded_session = nil'),
     })

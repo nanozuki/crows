@@ -36,7 +36,7 @@ local sumneko_lua_settings = {
     },
   },
 }
-require('lib.lsp').set_config('sumneko_lua', sumneko_lua_settings)
+require('crows.lsp').set_config('sumneko_lua', sumneko_lua_settings)
 
 -- Teal Luangage
 require('crows').plugin.use('teal-language/vim-teal')
