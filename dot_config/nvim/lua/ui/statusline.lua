@@ -1,5 +1,5 @@
 local feline_config = function()
-  local palette = require('crows').getv('palette')
+  local palette = require('ui.colors').palette
   local feline = require('feline')
   require('gitsigns').setup({ signcolumn = false })
 
@@ -168,7 +168,7 @@ local feline_config = function()
 end
 
 local crows = require('crows')
-crows.use_plugin({
+crows.plugin.use({
   'famiu/feline.nvim',
   requires = {
     'kyazdani42/nvim-web-devicons',

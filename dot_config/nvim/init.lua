@@ -1,15 +1,16 @@
 -- Nanozuki Vim Config
 
 local crows = require('crows')
+crows.plugin.bootstrap()
 
-crows.must_install('packer.nvim', 'https://github.com/wbthomason/packer.nvim.git', 'opt')
-crows.must_install('which-key.nvim', 'https://github.com/folke/which-key.nvim', 'start')
-crows.must_install('nvim-lspconfig', 'https://github.com/neovim/nvim-lspconfig', 'start')
+require('features')
+require('ui')
+require('lang')
 
-crows.execute('features/init.lua')
-crows.execute('ui/init.lua')
-crows.execute('lang/init.lua')
-
-vim.cmd([[command! CrowsReload lua require('crows').reload()]])
-vim.cmd([[command! CrowsResync lua require('crows').resync()]])
-vim.cmd([[command! CrowsUpdate lua require('crows').external_resync()]])
+crows.setup({
+  reload_modules = {
+    'features',
+    'lang',
+    'ui',
+  },
+})

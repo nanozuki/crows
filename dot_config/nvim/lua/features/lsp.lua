@@ -1,16 +1,16 @@
 local crows = require('crows')
 
-crows.use_plugin('neovim/nvim-lspconfig')
+crows.plugin.use('neovim/nvim-lspconfig')
 
 -- lsp signature
-crows.use_plugin({
+crows.plugin.use({
   'folke/trouble.nvim',
   requires = 'kyazdani42/nvim-web-devicons',
   config = function()
     require('trouble').setup({
       signs = { error = '', warning = '', hint = '', information = '', other = '﫠' },
     })
-    require('crows').maps({
+    require('crows').key.maps({
       ['<leader>x'] = {
         name = 'lsp trouble',
         x = { '<cmd>TroubleToggle<cr>', 'Toggle Trouble' },
@@ -29,7 +29,7 @@ for sign, text in pairs(signs) do
 end
 
 -- function signature hint
-crows.use_plugin({
+crows.plugin.use({
   'ray-x/lsp_signature.nvim',
   config = function()
     require('lib.lsp').add_on_attach(function(_, _)
@@ -39,7 +39,7 @@ crows.use_plugin({
 })
 
 -- lsp ui extension
-crows.use_plugin({
+crows.plugin.use({
   'RishabhRD/lspactions',
   branch = 'nvim-0.6-compatible',
   requires = {
@@ -59,7 +59,7 @@ crows.use_plugin({
     vim.lsp.handlers['textDocument/implementation'] = lspactions.implementation
   end,
 })
-crows.use_plugin({
+crows.plugin.use({
   'j-hui/fidget.nvim',
   config = function()
     require('fidget').setup({})

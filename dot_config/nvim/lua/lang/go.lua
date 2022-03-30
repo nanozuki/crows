@@ -20,7 +20,7 @@ end
 lsp.set_config('gopls', {})
 lsp.set_config('golangcilsp', {})
 
-crows.use_plugin({
+crows.plugin.use({
   'ray-x/go.nvim',
   ft = { 'go', 'gomod' },
   config = function()

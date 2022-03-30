@@ -3,18 +3,18 @@ local augroup = require('lib.util').augroup
 local autocmd = require('lib.util').autocmd
 
 -- display sign for marks
-crows.use_plugin('kshenoy/vim-signature')
+crows.plugin.use('kshenoy/vim-signature')
 
 -- multi select and edit
-crows.use_plugin('mg979/vim-visual-multi')
+crows.plugin.use('mg979/vim-visual-multi')
 
 -- autopairs
-crows.use_plugin('Raimondi/delimitMate')
+crows.plugin.use('Raimondi/delimitMate')
 vim.g.delimitMate_expand_cr = 1
 vim.g.delimitMate_expand_space = 1
 
 -- surround edit
-crows.use_plugin('machakann/vim-sandwich')
+crows.plugin.use('machakann/vim-sandwich')
 vim.cmd('syntax enable')
 vim.opt.foldmethod = 'indent'
 vim.opt.foldlevelstart = 99
@@ -25,12 +25,12 @@ augroup('filetypes', {
   autocmd('BufNewFile,BufRead', 'tsconfig.json', 'setfiletype jsonc'),
   autocmd('BufNewFile,BufRead', '*.zig', 'setfiletype zig'),
 })
-crows.map('Copy to system clipboard', 'v', '<leader>y', '"+y')
-crows.map('Paste from system clipboard', 'n', '<leader>p', '"+p')
-crows.map('Save as sudo', 'c', 'w!!', 'w !sudo tee %')
+crows.key.map('Copy to system clipboard', 'v', '<leader>y', '"+y')
+crows.key.map('Paste from system clipboard', 'n', '<leader>p', '"+p')
+crows.key.map('Save as sudo', 'c', 'w!!', 'w !sudo tee %')
 
 -- indent hint
-crows.use_plugin({
+crows.plugin.use({
   'lukas-reineke/indent-blankline.nvim',
   config = function()
     require('indent_blankline').setup({
@@ -56,7 +56,7 @@ augroup('fileindent', {
 })
 
 -- treesitter
-crows.use_plugin({
+crows.plugin.use({
   'nvim-treesitter/nvim-treesitter',
   run = ':TSUpdate',
   config = function()
@@ -68,8 +68,8 @@ crows.use_plugin({
 })
 
 -- git manage
-crows.use_plugin('tpope/vim-fugitive')
-crows.use_plugin({
+crows.plugin.use('tpope/vim-fugitive')
+crows.plugin.use({
   'TimUntersberger/neogit',
   requires = {
     'nvim-lua/plenary.nvim',

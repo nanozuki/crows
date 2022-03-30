@@ -10,10 +10,10 @@ vim.opt.relativenumber = true
 vim.opt.colorcolumn = '120'
 vim.opt.modelines = 1
 
-crows.map('Open terminal in new tab', 'n', '<leader>tt', ':tabnew | terminal<CR>')
-crows.map('To normal mode in terminal', 't', '<Esc>', util.termcode([[<C-\><C-N>]]))
+crows.key.map('Open terminal in new tab', 'n', '<leader>tt', ':tabnew | terminal<CR>')
+crows.key.map('To normal mode in terminal', 't', '<Esc>', util.termcode([[<C-\><C-N>]]))
 
-crows.use_plugin({
+crows.plugin.use({
   'rmagatti/auto-session',
   config = function()
     vim.opt.sessionoptions = 'curdir,folds,help,tabpages,terminal,winsize'
@@ -25,7 +25,7 @@ crows.use_plugin({
     u.augroup('renew_auto_session_cwd', {
       u.autocmd('DirChanged', 'global', 'lua require("auto-session-library").conf.last_loaded_session = nil'),
     })
-    require('crows').maps({
+    require('crows').key.maps({
       ['<leader>s'] = {
         r = { '<cmd>RestoreSession<cr>', 'Restore session' },
         s = { '<cmd>SaveSession<cr>', 'Save session' },

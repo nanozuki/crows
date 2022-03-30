@@ -1,6 +1,6 @@
 local crows = require('crows')
 
-crows.execute('ui/colors.lua')
-crows.execute('ui/filetree.lua')
-crows.execute('ui/statusline.lua')
-crows.execute('ui/tabline.lua')
+require('ui.colors')
+require('ui.filetree')
+require('ui.statusline')
+require('ui.tabline')

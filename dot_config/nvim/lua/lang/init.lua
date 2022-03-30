@@ -1,12 +1,12 @@
 local crows = require('crows')
 
-crows.execute('lang/lua.lua')
-crows.execute('lang/go.lua')
-crows.execute('lang/rust.lua')
-crows.execute('lang/typescript.lua')
-crows.execute('lang/fish.lua')
+require('lang.lua')
+require('lang.go')
+require('lang.rust')
+require('lang.typescript')
+require('lang.fish')
 
-crows.use_plugin({
+crows.plugin.use({
   'mhartington/formatter.nvim',
   config = function()
     local linters = {

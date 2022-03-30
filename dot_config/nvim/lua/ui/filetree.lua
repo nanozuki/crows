@@ -1,7 +1,7 @@
 local crows = require('crows')
 
 -- filetree
-crows.use_plugin({
+crows.plugin.use({
   'kyazdani42/nvim-tree.lua',
   requires = 'kyazdani42/nvim-web-devicons',
   config = function()
@@ -14,6 +14,6 @@ crows.use_plugin({
         ignore = false,
       },
     })
-    require('crows').map('Toggle filetree', 'n', '<Leader>fl', ':NvimTreeToggle<CR>')
+    require('crows').key.map('Toggle filetree', 'n', '<Leader>fl', ':NvimTreeToggle<CR>')
   end,
 })
