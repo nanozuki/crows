@@ -1,19 +1,19 @@
 local crows = require('crows')
 
 vim.opt.ignorecase = true
-crows.map('Clear search', 'n', '<leader>/', ':nohlsearch<CR>')
+crows.key.map('Clear search', 'n', '<leader>/', ':nohlsearch<CR>')
 
-crows.use_plugin({
+crows.plugin.use({
   'dyng/ctrlsf.vim',
   config = function()
     vim.g.ctrlsf_ackprg = 'rg'
     -- if use which-key, the prompt will not display immediately
     vim.api.nvim_set_keymap('n', '<leader>sf', ':CtrlSF ', { noremap = true })
-    require('crows').map('Search in cursor', 'n', '<leader>sp', ':CtrlSF<CR>')
+    require('crows').key.map('Search in cursor', 'n', '<leader>sp', ':CtrlSF<CR>')
   end,
 })
 
-crows.use_plugin({
+crows.plugin.use({
   'nvim-telescope/telescope.nvim',
   requires = {
     { 'nvim-lua/plenary.nvim' },
@@ -35,7 +35,7 @@ crows.use_plugin({
         },
       },
     })
-    require('crows').maps({
+    require('crows').key.maps({
       ['<leader>'] = {
         name = 'telescope search',
         f = {

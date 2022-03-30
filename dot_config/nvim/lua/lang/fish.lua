@@ -1,6 +1,6 @@
 local crows = require('crows')
 
-crows.use_plugin({
+crows.plugin.use({
   'dag/vim-fish',
   ft = { 'fish' },
 })

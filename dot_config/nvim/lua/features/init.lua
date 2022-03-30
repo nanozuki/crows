@@ -1,7 +1,5 @@
-local crows = require('crows')
-
-crows.execute('features/basic.lua')
-crows.execute('features/complete.lua')
-crows.execute('features/editor.lua')
-crows.execute('features/lsp.lua')
-crows.execute('features/search.lua')
+require('features.basic')
+require('features.complete')
+require('features.editor')
+require('features.lsp')
+require('features.search')

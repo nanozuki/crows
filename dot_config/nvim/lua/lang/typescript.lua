@@ -24,7 +24,7 @@ require('lib.lsp').set_config('graphql', {
   filetypes = { 'graphql' },
 })
 
-crows.use_plugin({
+crows.plugin.use({
   'mattn/emmet-vim',
   ft = { 'html', 'javascript.jsx', 'typescript.tsx', 'javascriptreact', 'typescriptreact' },
 })

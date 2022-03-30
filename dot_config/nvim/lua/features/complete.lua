@@ -1,7 +1,7 @@
 local crows = require('crows')
 
 -- cmdline completion
-crows.use_plugin({
+crows.plugin.use({
   'gelguy/wilder.nvim',
   config = function()
     vim.cmd([[
@@ -26,7 +26,7 @@ crows.use_plugin({
   end,
 })
 
-crows.use_plugin({
+crows.plugin.use({
   'hrsh7th/nvim-cmp',
   requires = {
     'hrsh7th/cmp-nvim-lsp',

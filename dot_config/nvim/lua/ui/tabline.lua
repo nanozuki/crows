@@ -1,5 +1,5 @@
 local tabby_config = function()
-  local palette = require('crows').getv('palette')
+  local palette = require('ui.colors').palette
   local filename = require('tabby.filename')
   local tabname = function(tabid)
     local number = vim.api.nvim_tabpage_get_number(tabid)
@@ -65,12 +65,12 @@ local tabby_config = function()
 end
 
 local crows = require('crows')
-crows.use_plugin({
+crows.plugin.use({
   'nanozuki/tabby.nvim',
   requires = 'kyazdani42/nvim-web-devicons',
   config = tabby_config,
 })
-crows.maps({
+crows.key.maps({
   ['<leader>t'] = {
     c = { ':$tabnew<CR>', 'Create new tab' },
     x = { ':tabclose<CR>', 'Close current tab' },
