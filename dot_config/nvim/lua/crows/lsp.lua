@@ -1,7 +1,3 @@
-local wk = require('which-key')
-local lspconfig = require('lspconfig')
-local configs = require('lspconfig.configs')
-
 ---@class LspModule
 ---@field keys LspKeyMappers
 ---@field buffer_keys LspKeyMappers
@@ -74,6 +70,7 @@ end
 ---mapping lsp keys
 ---@param bufnr number buffer number
 local function mapping(bufnr)
+  local wk = require('which-key')
   local mappings = {}
   for _, mapper in pairs(lsp.keys) do
     mappings[mapper[1]] = { mapper[2], mapper[3] }
@@ -115,12 +112,14 @@ end
 ---@param name string language server string
 ---@param config table language server config
 function lsp.set_config(name, config)
+  local lspconfig = require('lspconfig')
   config.on_attach = on_attach
   config.capabilities = capabilities()
   lspconfig[name].setup(config)
 end
 
 function lsp.add_default(name, default_config)
+  local configs = require('lspconfig.configs')
   if not configs[name] then
     configs[name] = {
       default_config = default_config,

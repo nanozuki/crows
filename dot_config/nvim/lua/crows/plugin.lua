@@ -13,27 +13,25 @@ local plugin = {
   plugins = {},
   base_plugins = {
     { 'wbthomason/packer.nvim', opt = true },
-    {
-      'folke/which-key.nvim',
-      config = function()
-        require('which-key').setup({})
-      end,
-    },
+    'folke/which-key.nvim',
     'nvim-lua/plenary.nvim',
     'neovim/nvim-lspconfig',
   },
 }
 
-function plugin.bootstrap()
-  if plugin.bootstrapped then
-    return
+local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
+local repository = 'https://github.com/wbthomason/packer.nvim'
+
+function plugin.is_ready()
+  return vim.fn.empty(vim.fn.glob(install_path)) == 0
+end
+
+function plugin.init(hook)
+  if not plugin.is_ready() then
+    vim.fn.system({ 'git', 'clone', '--depth', '1', repository, install_path })
   end
-  local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
-  local packer = 'https://github.com/wbthomason/packer.nvim'
-  if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    vim.fn.system({ 'git', 'clone', '--depth', '1', packer, install_path })
-  end
-  plugin.bootstrapped = true
+  plugin.load()
+  plugin.sync(hook)
 end
 
 function plugin.load()
@@ -61,7 +59,6 @@ function plugin.use(spec)
 end
 
 local function use_plugins()
-  plugin.bootstrap()
   plugin.load()
   for _, p in ipairs(plugin.base_plugins) do
     require('packer').use(p)
@@ -79,15 +76,29 @@ function plugin.source_compiled()
   end
 end
 
-function plugin.sync()
+---set compiled hook function
+---@param hook string
+function plugin.set_compiled_hook(hook)
+  vim.cmd(string.format(
+    [[augroup compiled_hook
+      autocmd!
+      autocmd User PackerCompileDone lua %s
+    augroup end]],
+    hook
+  ))
+end
+
+function plugin.sync(hook)
   use_plugins()
-  vim.cmd("autocmd User PackerCompileDone lua require'crows.plugin'.source_compiled()")
+  hook = hook or "require'crows.plugin'.source_compiled()"
+  plugin.set_compiled_hook(hook)
   require('packer').sync()
 end
 
-function plugin.compile()
+function plugin.compile(hook)
   use_plugins()
-  vim.cmd("autocmd User PackerCompileDone lua require'crows.plugin'.source_compiled()")
+  hook = hook or "require'crows.plugin'.source_compiled()"
+  plugin.set_compiled_hook(hook)
   require('packer').compile()
 end
 

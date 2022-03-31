@@ -14,34 +14,59 @@ local crows = {
   },
   plugin = {
     use = plugin.use,
-    bootstrap = plugin.bootstrap,
   },
 }
 
-local reload_modules = {}
+local modules = {}
 
 ---@class CrowsOption
----@field reload_modules string[]
+---@field modules string[]
 
 ---setup crows
 ---@param opt CrowsOption
 function crows.setup(opt)
-  reload_modules = opt.reload_modules
-  vim.cmd([[command! CrowsReload lua require('crows').reload()]])
-  vim.cmd([[command! CrowsResync lua require('crows').resync()]])
-  vim.cmd([[command! CrowsUpdate lua require('crows').external_resync()]])
+  modules = opt.modules
+  vim.cmd([[command! CrowsReload lua require('crows').reload()
+            command! CrowsResync lua require('crows').resync()
+            command! CrowsInit   lua require('crows').init()
+            command! CrowsUpdate lua require('crows').external_resync()]])
+  if plugin.is_ready() then
+    require('which-key').setup({})
+    for _, mod in ipairs(modules) do
+      require(mod)
+    end
+    return
+  end
+  crows.init()
 end
 
-function crows.packadd(pack)
+function crows.init()
+  plugin.init("require'crows'.after_init()")
+end
+
+function crows.after_init()
+  for _, mod in ipairs(modules) do
+    require(mod)
+  end
+  crows.resync()
+end
+
+function crows.ensure_pack(pack)
   local ok, err = pcall(vim.cmd, 'packadd ' .. pack)
   if not ok then
-    print('packadd failed: ', err)
+    vim.notify('packadd failed: ' .. tostring(err), 'warn')
+    return false
   end
-  return ok
+  ok, err = pcall(require, pack)
+  if not ok then
+    vim.notify('require failed: ' .. tostring(err), 'warn')
+    return false
+  end
+  return true
 end
 
 local function reset()
-  for _, m in ipairs(reload_modules) do
+  for _, m in ipairs(modules) do
     require('plenary.reload').reload_module(m)
   end
   plugin.reset()
@@ -61,7 +86,6 @@ function crows.resync()
 end
 
 function crows.external_resync_compiled()
-  vim.notify('quit all!')
   vim.cmd('qa!')
 end
 

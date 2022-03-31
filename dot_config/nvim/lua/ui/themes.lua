@@ -52,7 +52,7 @@ local palettes = {
 }
 
 function themes.gruvbox_light()
-  if crows.packadd('gruvbox-material') then
+  if crows.ensure_pack('gruvbox-material') then
     vim.opt.background = 'light'
     vim.g['gruvbox_material_enable_italic'] = 1
     vim.cmd('colorscheme gruvbox-material')
@@ -60,7 +60,7 @@ function themes.gruvbox_light()
   end
 end
 function themes.gruvbox_dark()
-  if crows.packadd('gruvbox-material') then
+  if crows.ensure_pack('gruvbox-material') then
     vim.opt.background = 'dark'
     vim.g['gruvbox_material_enable_italic'] = 1
     vim.cmd('colorscheme gruvbox-material')
@@ -68,7 +68,7 @@ function themes.gruvbox_dark()
   end
 end
 function themes.nord()
-  if crows.packadd('nord.nvim') then
+  if crows.ensure_pack('nord.nvim') then
     vim.opt.background = 'dark'
     vim.g.nord_borders = true
     require('nord').set()
@@ -77,7 +77,7 @@ function themes.nord()
   end
 end
 function themes.edge_light()
-  if crows.packadd('edge') then
+  if crows.ensure_pack('edge') then
     vim.opt.background = 'light'
     vim.g.edge_enable_italic = 1
     vim.cmd('colorscheme edge')
@@ -85,7 +85,7 @@ function themes.edge_light()
   end
 end
 function themes.rose_pine_dawn()
-  if crows.packadd('rose-pine') then
+  if crows.ensure_pack('rose-pine') then
     vim.o.background = 'light'
     vim.cmd('colorscheme rose-pine')
     themes.palette = palettes.rose_pine_dawn
@@ -97,7 +97,7 @@ themes.rose_pine_dawn()
 -- live display colors
 crows.plugin.use({ 'norcalli/nvim-colorizer.lua', opt = true })
 function themes.toggle_colors()
-  crows.packadd('nvim-colorizer.lua')
+  crows.ensure_pack('nvim-colorizer.lua')
   vim.cmd([[ColorizerToggle]])
 end
 vim.cmd([[command! ToggleColors lua require('ui.themes').toggle_colors()]])
