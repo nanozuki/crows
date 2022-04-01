@@ -13,6 +13,7 @@ vim.opt.modelines = 1
 crows.key.map('Open terminal in new tab', 'n', '<leader>tt', ':tabnew | terminal<CR>')
 crows.key.map('To normal mode in terminal', 't', '<Esc>', util.termcode([[<C-\><C-N>]]))
 
+crows.plugin.use('lewis6991/impatient.nvim')
 crows.plugin.use({
   'rmagatti/auto-session',
   config = function()

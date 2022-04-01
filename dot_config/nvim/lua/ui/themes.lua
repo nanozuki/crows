@@ -52,43 +52,43 @@ local palettes = {
 }
 
 function themes.gruvbox_light()
+  themes.palette = palettes.gruvbox_light
   if crows.ensure_pack('gruvbox-material') then
     vim.opt.background = 'light'
     vim.g['gruvbox_material_enable_italic'] = 1
     vim.cmd('colorscheme gruvbox-material')
-    themes.palette = palettes.gruvbox_light
   end
 end
 function themes.gruvbox_dark()
+  themes.palette = palettes.gruvbox_dark
   if crows.ensure_pack('gruvbox-material') then
     vim.opt.background = 'dark'
     vim.g['gruvbox_material_enable_italic'] = 1
     vim.cmd('colorscheme gruvbox-material')
-    themes.palette = palettes.gruvbox_dark
   end
 end
 function themes.nord()
+  themes.palette = palettes.nord
   if crows.ensure_pack('nord.nvim') then
     vim.opt.background = 'dark'
     vim.g.nord_borders = true
     require('nord').set()
     vim.cmd('colorscheme nord')
-    themes.palette = palettes.nord
   end
 end
 function themes.edge_light()
+  themes.palette = palettes.edge_light
   if crows.ensure_pack('edge') then
     vim.opt.background = 'light'
     vim.g.edge_enable_italic = 1
     vim.cmd('colorscheme edge')
-    themes.palette = palettes.edge_light
   end
 end
 function themes.rose_pine_dawn()
+  themes.palette = palettes.rose_pine_dawn
   if crows.ensure_pack('rose-pine') then
     vim.o.background = 'light'
     vim.cmd('colorscheme rose-pine')
-    themes.palette = palettes.rose_pine_dawn
   end
 end
 
