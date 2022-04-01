@@ -45,9 +45,6 @@ function crows.init()
 end
 
 function crows.after_init()
-  for _, mod in ipairs(modules) do
-    require(mod)
-  end
   crows.resync()
 end
 
