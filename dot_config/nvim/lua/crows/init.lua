@@ -62,6 +62,14 @@ function crows.ensure_pack(pack)
   return true
 end
 
+function crows.require(mod)
+  local ok, result = pcall(require, mod)
+  if not ok then
+    return nil
+  end
+  return result
+end
+
 local function reset()
   for _, m in ipairs(modules) do
     require('plenary.reload').reload_module(m)
