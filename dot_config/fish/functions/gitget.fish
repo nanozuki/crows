@@ -11,8 +11,8 @@ function gitget
 end
 
 function find_git_repo_path
-    set repo (string trim -rc '.git' $argv[1]) 
-    set words (string match -r "(git@|https?://)(.*)/(.*)" $repo)
+    set trim_dot_git (string match -r '^(.*?)(\.git)?$' $argv[1])
+    set words (string match -r "(git@|https?://)(.*)/(.*)" $trim_dot_git[2])
     if test (count $words) -lt 4
         echo "invalid repository path"
         return 1

@@ -16,7 +16,7 @@ end
 if type -q direnv
     direnv hook fish | source
 end
-alias tmuxa="tmux a; or tmux"
+alias tmuxa="tmux new-session -A"
 
 # exa
 alias e="exa --icons"
