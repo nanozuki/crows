@@ -41,10 +41,14 @@ editor.plugins[2] = 'mg979/vim-visual-multi'
 
 -- autopairs
 editor.plugins[3] = {
-  'Raimondi/delimitMate',
+  'windwp/nvim-autopairs',
+  requires = { 'hrsh7th/nvim-cmp' },
   config = function()
-    vim.g.delimitMate_expand_cr = 1
-    vim.g.delimitMate_expand_space = 1
+    require('nvim-autopairs').setup({ check_ts = true })
+    -- If you want insert `(` after select function or method item
+    local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+    local cmp = require('cmp')
+    cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({ map_char = { tex = '' } }))
   end,
 }
 
