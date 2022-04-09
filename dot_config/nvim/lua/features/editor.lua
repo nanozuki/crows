@@ -2,35 +2,57 @@ local crows = require('crows')
 local augroup = require('crows.util').augroup
 local autocmd = require('crows.util').autocmd
 
+---@type Feature
+local editor = { plugins = {} }
+
+editor.pre = function()
+  vim.cmd('syntax enable')
+  vim.opt.foldmethod = 'indent'
+  vim.opt.foldlevelstart = 99
+  -- ignore file for all
+  vim.cmd('set wildignore+=*/node_modules/*,*.swp,*.pyc,*/venv/*,*/target/*,.DS_Store')
+  -- filetype
+  augroup('filetypes', {
+    autocmd('BufNewFile,BufRead', '*html', 'setfiletype html'),
+    autocmd('BufNewFile,BufRead', 'tsconfig.json', 'setfiletype jsonc'),
+    autocmd('BufNewFile,BufRead', '*.zig', 'setfiletype zig'),
+  })
+  -- setup indent
+  vim.cmd('filetype indent on')
+  vim.opt.cindent = true
+  vim.opt.expandtab = true
+  vim.opt.tabstop = 4
+  vim.opt.shiftwidth = 4
+  vim.opt.softtabstop = 4
+  augroup('fileindent', {
+    autocmd(
+      'FileType',
+      'lua,javascript,typescript,javascriptreact,typescriptreact,html,css,scss,xml,yaml,json',
+      'setlocal expandtab ts=2 sw=2 sts=2'
+    ),
+  })
+end
+
 -- display sign for marks
-crows.plugin.use('kshenoy/vim-signature')
+editor.plugins[1] = 'kshenoy/vim-signature'
 
 -- multi select and edit
-crows.plugin.use('mg979/vim-visual-multi')
+editor.plugins[2] = 'mg979/vim-visual-multi'
 
 -- autopairs
-crows.plugin.use('Raimondi/delimitMate')
-vim.g.delimitMate_expand_cr = 1
-vim.g.delimitMate_expand_space = 1
+editor.plugins[3] = {
+  'Raimondi/delimitMate',
+  config = function()
+    vim.g.delimitMate_expand_cr = 1
+    vim.g.delimitMate_expand_space = 1
+  end,
+}
 
 -- surround edit
-crows.plugin.use('machakann/vim-sandwich')
-vim.cmd('syntax enable')
-vim.opt.foldmethod = 'indent'
-vim.opt.foldlevelstart = 99
--- ignore file for all
-vim.cmd('set wildignore+=*/node_modules/*,*.swp,*.pyc,*/venv/*,*/target/*,.DS_Store')
-augroup('filetypes', {
-  autocmd('BufNewFile,BufRead', '*html', 'setfiletype html'),
-  autocmd('BufNewFile,BufRead', 'tsconfig.json', 'setfiletype jsonc'),
-  autocmd('BufNewFile,BufRead', '*.zig', 'setfiletype zig'),
-})
-crows.key.map('Copy to system clipboard', 'v', '<leader>y', '"+y')
-crows.key.map('Paste from system clipboard', 'n', '<leader>p', '"+p')
-crows.key.map('Save as sudo', 'c', 'w!!', 'w !sudo tee %')
+editor.plugins[4] = 'machakann/vim-sandwich'
 
 -- indent hint
-crows.plugin.use({
+editor.plugins[5] = {
   'lukas-reineke/indent-blankline.nvim',
   config = function()
     require('indent_blankline').setup({
@@ -38,25 +60,10 @@ crows.plugin.use({
       buftype_exclude = { 'help', 'nofile', 'nowrite', 'quickfix', 'terminal', 'prompt' },
     })
   end,
-})
-
--- setup indent
-vim.cmd('filetype indent on')
-vim.opt.cindent = true
-vim.opt.expandtab = true
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.softtabstop = 4
-augroup('fileindent', {
-  autocmd(
-    'FileType',
-    'lua,javascript,typescript,javascriptreact,typescriptreact,html,css,scss,xml,yaml,json',
-    'setlocal expandtab ts=2 sw=2 sts=2'
-  ),
-})
+}
 
 -- treesitter
-crows.plugin.use({
+editor.plugins[6] = {
   'nvim-treesitter/nvim-treesitter',
   run = ':TSUpdate',
   config = function()
@@ -65,11 +72,11 @@ crows.plugin.use({
       highlight = { enable = true },
     })
   end,
-})
+}
 
--- git manage
-crows.plugin.use('tpope/vim-fugitive')
-crows.plugin.use({
+-- git management
+editor.plugins[7] = 'tpope/vim-fugitive'
+editor.plugins[8] = {
   'TimUntersberger/neogit',
   requires = {
     'nvim-lua/plenary.nvim',
@@ -80,4 +87,12 @@ crows.plugin.use({
       integrations = { diffview = true },
     })
   end,
-})
+}
+
+editor.post = function()
+  crows.key.map('Copy to system clipboard', 'v', '<leader>y', '"+y')
+  crows.key.map('Paste from system clipboard', 'n', '<leader>p', '"+p')
+  crows.key.map('Save as sudo', 'c', 'w!!', 'w !sudo tee %')
+end
+
+return editor

@@ -1,7 +1,16 @@
-local crows = require('crows')
+---@type Feature
+local lsp = { plugins = {} }
+
+lsp.pre = function()
+  local signs = { Error = '', Warn = '', Info = '', Hint = '' }
+  for sign, text in pairs(signs) do
+    local hl = 'DiagnosticSign' .. sign
+    vim.fn.sign_define(hl, { text = text, texthl = hl, linehl = '', numhl = '' })
+  end
+end
 
 -- lsp diagnostics
-crows.plugin.use({
+lsp.plugins[1] = {
   'folke/trouble.nvim',
   requires = 'kyazdani42/nvim-web-devicons',
   config = function()
@@ -19,25 +28,20 @@ crows.plugin.use({
       },
     })
   end,
-})
-local signs = { Error = '', Warn = '', Info = '', Hint = '' }
-for sign, text in pairs(signs) do
-  local hl = 'DiagnosticSign' .. sign
-  vim.fn.sign_define(hl, { text = text, texthl = hl, linehl = '', numhl = '' })
-end
+}
 
 -- function signature hint
-crows.plugin.use({
+lsp.plugins[2] = {
   'ray-x/lsp_signature.nvim',
   config = function()
     require('crows.lsp').add_on_attach(function(_, _)
       require('lsp_signature').on_attach({ bind = true, handler_opts = { border = 'none' } })
     end)
   end,
-})
+}
 
 -- lsp ui extension
-crows.plugin.use({
+lsp.plugins[3] = {
   'RishabhRD/lspactions',
   branch = 'nvim-0.6-compatible',
   requires = {
@@ -55,16 +59,18 @@ crows.plugin.use({
     vim.lsp.handlers['textDocument/definition'] = lspactions.definition
     vim.lsp.handlers['textDocument/declaration'] = lspactions.declaration
     vim.lsp.handlers['textDocument/implementation'] = lspactions.implementation
-    local lsp = require('crows.lsp')
-    lsp.set_key_cmd(lsp.buffer_keys.rename, '<cmd>lua require("lspactions").rename()<CR>')
-    lsp.set_key_cmd(lsp.buffer_keys.code_action, '<cmd>lua require("lspactions").code_action()<CR>')
+    local lsputil = require('crows.lsp')
+    lsputil.set_key_cmd(lsputil.buffer_keys.rename, '<cmd>lua require("lspactions").rename()<CR>')
+    lsputil.set_key_cmd(lsputil.buffer_keys.code_action, '<cmd>lua require("lspactions").code_action()<CR>')
   end,
-})
+}
 
 -- print lang server status
-crows.plugin.use({
+lsp.plugins[4] = {
   'j-hui/fidget.nvim',
   config = function()
     require('fidget').setup({})
   end,
-})
+}
+
+return lsp
