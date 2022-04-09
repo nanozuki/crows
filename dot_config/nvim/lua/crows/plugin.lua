@@ -2,7 +2,6 @@
 ---@field bootstrapped boolean is bootstraped
 ---@field loaded boolean is packer.nvim loaded
 ---@field plugins PluginSpec[] used plugins
----@field base_plugins PluginSpec[] used plugins
 
 ---@alias PluginSpec string|table
 
@@ -11,12 +10,6 @@ local plugin = {
   bootstrapped = false,
   loaded = false,
   plugins = {},
-  base_plugins = {
-    { 'wbthomason/packer.nvim', opt = true },
-    'folke/which-key.nvim',
-    'nvim-lua/plenary.nvim',
-    'neovim/nvim-lspconfig',
-  },
 }
 
 local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
@@ -60,9 +53,6 @@ end
 
 local function use_plugins()
   plugin.load()
-  for _, p in ipairs(plugin.base_plugins) do
-    require('packer').use(p)
-  end
   for _, p in ipairs(plugin.plugins) do
     require('packer').use(p)
   end

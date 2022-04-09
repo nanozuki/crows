@@ -1,5 +1,5 @@
 local tabby_config = function()
-  local palette = require('ui.themes').palette
+  local palette = require('features.theme').palette
   local filename = require('tabby.filename')
   local tabname = function(tabid)
     local number = vim.api.nvim_tabpage_get_number(tabid)
@@ -64,22 +64,31 @@ local tabby_config = function()
   require('tabby').setup({ tabline = line })
 end
 
-local crows = require('crows')
-crows.plugin.use({
-  'nanozuki/tabby.nvim',
-  requires = 'kyazdani42/nvim-web-devicons',
-  config = tabby_config,
-})
-crows.key.maps({
-  ['<leader>t'] = {
-    c = { ':$tabnew<CR>', 'Create new tab' },
-    x = { ':tabclose<CR>', 'Close current tab' },
-    o = { ':tabonly<CR>', 'Close other tabs' },
-    n = { ':tabn<CR>', 'Go to next tab' },
-    p = { ':tabp<CR>', 'Go to previous tab' },
-    m = {
-      p = { ':-tabmove<CR>', 'Move current tab to previous position' },
-      n = { ':+tabmove<CR>', 'Move current tab to next position ' },
-    },
+---@type Feature
+local tabline = {}
+
+tabline.plugins = {
+  {
+    'nanozuki/tabby.nvim',
+    requires = 'kyazdani42/nvim-web-devicons',
+    config = tabby_config,
   },
-})
+}
+
+tabline.post = function()
+  require('crows').key.maps({
+    ['<leader>t'] = {
+      c = { ':$tabnew<CR>', 'Create new tab' },
+      x = { ':tabclose<CR>', 'Close current tab' },
+      o = { ':tabonly<CR>', 'Close other tabs' },
+      n = { ':tabn<CR>', 'Go to next tab' },
+      p = { ':tabp<CR>', 'Go to previous tab' },
+      m = {
+        p = { ':-tabmove<CR>', 'Move current tab to previous position' },
+        n = { ':+tabmove<CR>', 'Move current tab to next position ' },
+      },
+    },
+  })
+end
+
+return tabline

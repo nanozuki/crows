@@ -1,7 +1,7 @@
-local crows = require('crows')
+---@type Feature
+local completion = { plugins = {} }
 
--- cmdline completion
-crows.plugin.use({
+completion.plugins[1] = {
   'gelguy/wilder.nvim',
   config = function()
     vim.cmd([[
@@ -24,9 +24,9 @@ crows.plugin.use({
         \ }))
     ]])
   end,
-})
+}
 
-crows.plugin.use({
+completion.plugins[2] = {
   'hrsh7th/nvim-cmp',
   requires = {
     'hrsh7th/cmp-nvim-lsp',
@@ -94,4 +94,6 @@ crows.plugin.use({
       },
     })
   end,
-})
+}
+
+return completion

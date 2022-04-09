@@ -127,6 +127,10 @@ function lsp.add_default(name, default_config)
   end
 end
 
+function lsp.root_pattern(...)
+  require('lspconfig.util').root_pattern(...)
+end
+
 function lsp.stop_all_clients()
   vim.lsp.stop_client(vim.lsp.get_active_clients())
 end
