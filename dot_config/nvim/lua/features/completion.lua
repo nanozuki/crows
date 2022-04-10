@@ -87,8 +87,14 @@ completion.plugins[2] = {
             fallback()
           end,
         }),
-        ['<Tab>'] = cmp.mapping(tab, { 'i', 's' }),
-        ['<S-Tab>'] = cmp.mapping(s_tab, { 'i', 's' }),
+        ['<Tab>'] = cmp.mapping({
+          i = tab,
+          c = cmp.config.disable,
+        }),
+        ['<S-Tab>'] = cmp.mapping({
+          i = s_tab,
+          c = cmp.config.disable,
+        }),
       },
       sources = {
         { name = 'nvim_lsp' },
