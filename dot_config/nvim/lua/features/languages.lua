@@ -14,7 +14,7 @@ local fish = {
 ---@type Feature
 local go = {
   pre = function()
-    fmt.by_formatter.go = fmt.formatters.goimports
+    fmt.by_formatter.go = { fmt.formatters.goimports }
   end,
   plugins = {
     {
