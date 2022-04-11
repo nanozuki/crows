@@ -27,15 +27,7 @@ local go = {
   },
   post = function()
     lsp.set_config('gopls', {})
-    lsp.add_default('golangcilsp', {
-      cmd = { 'golangci-lint-langserver' },
-      root_dir = lsp.root_pattern('.git', 'go.mod'),
-      filetypes = { 'go' },
-      init_options = {
-        command = { 'golangci-lint', 'run', '--fast', '--out-format', 'json' },
-      },
-    })
-    lsp.set_config('golangcilsp', {})
+    lsp.set_config('golangci_lint_ls', {})
   end,
 }
 
