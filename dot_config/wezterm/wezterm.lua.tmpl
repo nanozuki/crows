@@ -1,25 +1,37 @@
 local wezterm = require('wezterm')
 
-local rose_pine_dawn = {
-  foreground = '#575279',
-  background = '#faf4ed',
-  cursor_bg = '#9893a5',
-  cursor_fg = '#575279',
-  cursor_border = '#9893a5',
-  selection_fg = '#575279',
-  selection_bg = '#eee9e6',
-  scrollbar_thumb = '#f2e9de',
-  split = '#f2e9de',
-  ansi = { '#f2e9de', '#b4637a', '#286983', '#ea9d34', '#56949f', '#907aa9', '#d7827e', '#575279' },
-  brights = { '#6e6a86', '#b4637a', '#286983', '#ea9d34', '#56949f', '#907aa9', '#d7827e', '#575279' },
+local keys = {
+  -- fix issue: press <S-Del> will input text '<S-Del>' in vim
+  { key = 'Delete', mods = 'SHIFT', action = { SendKey = { key = 'Delete' } } },
+  -- split vertical
+  { key = '|', mods = 'LEADER', action = wezterm.action({ SplitHorizontal = { domain = 'CurrentPaneDomain' } }) },
+  -- split horizontal
+  { key = '%', mods = 'LEADER', action = wezterm.action({ SplitVertical = { domain = 'CurrentPaneDomain' } }) },
+  -- nav between panels
+  { key = 'h', mods = 'LEADER', action = wezterm.action({ ActivatePaneDirection = 'Left' }) },
+  { key = 'j', mods = 'LEADER', action = wezterm.action({ ActivatePaneDirection = 'Down' }) },
+  { key = 'k', mods = 'LEADER', action = wezterm.action({ ActivatePaneDirection = 'Up' }) },
+  { key = 'l', mods = 'LEADER', action = wezterm.action({ ActivatePaneDirection = 'Right' }) },
+  -- new tab
+  { key = 'c', mods = 'LEADER', action = wezterm.action({ SpawnTab = 'DefaultDomain' }) },
+  { key = 'C', mods = 'LEADER|SHIFT', action = wezterm.action({ SpawnTab = 'DefaultDomain' }) },
+  -- close current tab
+  { key = 'x', mods = 'LEADER', action = wezterm.action({ CloseCurrentTab = { confirm = true } }) },
 }
+for i = 1, 9, 1 do
+  table.insert(keys, {
+    key = string.format('%d', i),
+    mods = 'LEADER',
+    action = wezterm.action({ ActivateTab = i - 1 }),
+  })
+end
 
 return {
   use_ime = true,
-  keys = {
-    -- fix issue: press <S-Del> will input text '<S-Del>' in vim
-    { key = 'Delete', mods = 'SHIFT', action = { SendKey = { key = 'Delete' } } },
-  },
+
+  -- keymapping
+  leader = { key = 'j', mods = 'CTRL', timeout_milliseconds = 1000 },
+  keys = keys,
 
   font = wezterm.font_with_fallback({
     'JetBrainsMono Nerd Font',
@@ -29,10 +41,11 @@ return {
     'Apple Color Emoji',
     'PingFang SC',
   }),
+  color_scheme = 'rose-pine-dawn',
+  colors = require('lua/rose-pine-dawn').colors(),
+  window_frame = require('lua/rose-pine-dawn').window_frame(),
   font_size = {{ default "10" .term.font_size }},
-
-  colors = rose_pine_dawn,
-  enable_tab_bar = false,
+  enable_tab_bar = true,
   window_padding = { left = 2, right = 2, top = 0, bottom = 0 },
   enable_wayland = true,
 }
