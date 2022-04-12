@@ -27,12 +27,10 @@ for i = 1, 9, 1 do
 end
 
 return {
-  use_ime = true,
-
   -- keymapping
   leader = { key = 'j', mods = 'CTRL', timeout_milliseconds = 1000 },
   keys = keys,
-
+  -- text config
   font = wezterm.font_with_fallback({
     'JetBrainsMono Nerd Font',
     'Menlo',
@@ -41,11 +39,18 @@ return {
     'Apple Color Emoji',
     'PingFang SC',
   }),
+  font_size = {{ default "10" .term.font_size }},
+  -- appearance/color
   color_scheme = 'rose-pine-dawn',
   colors = require('lua/rose-pine-dawn').colors(),
-  window_frame = require('lua/rose-pine-dawn').window_frame(),
-  font_size = {{ default "10" .term.font_size }},
+  -- appearance/tab
   enable_tab_bar = true,
+  use_fancy_tab_bar = false,
+  tab_max_width = 99,
+  -- appearance/window
+  window_frame = require('lua/rose-pine-dawn').window_frame(),
   window_padding = { left = 2, right = 2, top = 0, bottom = 0 },
+  -- misc
+  use_ime = true,
   enable_wayland = true,
 }
