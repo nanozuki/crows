@@ -41,11 +41,10 @@ paru_install rust-analyzer
 
 ### lua
 #{{if eq .chezmoi.os "darwin"}}
-brew_install lua-language-server
+brew_install lua-language-server stylua
 #{{else}}
-paru lua-language-server
+paru_install lua-language-server stylua
 #{{end}}
-cargo install stylua
 
 ### node (lts)
 setUx NPM_CONFIG_USERCONFIG $XDG_CONFIG_HOME/npm/npmrc
