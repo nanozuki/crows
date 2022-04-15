@@ -40,7 +40,8 @@ basic.plugins = {
 }
 
 basic.post = function()
-  crows.key.map('Open terminal in new tab', 'n', '<leader>tt', ':terminal<CR>')
+  crows.key.map('Open terminal in current window', 'n', '<leader>tw', ':terminal<CR>')
+  crows.key.map('Open terminal in new tab', 'n', '<leader>tt', ':tabnew | terminal<CR>')
   crows.key.map('To normal mode in terminal', 't', '<C-K>', util.termcode([[<C-\><C-N>]]))
 end
 
