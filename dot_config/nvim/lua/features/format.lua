@@ -50,12 +50,16 @@ format.plugins = {
       require('formatter').setup({
         filetype = fmt.by_formatter,
       })
-      local lsp_patterns = table.concat(fmt.by_lsp, ',')
-      local augroup = require('crows.util').augroup
-      local autocmd = require('crows.util').autocmd
-      augroup('format_on_save', {
-        autocmd('BufWritePost', '*', 'silent! FormatWrite'),
-        autocmd('BufWritePost', lsp_patterns, 'lua vim.lsp.buf.formatting_seq_sync()'),
+      local group = vim.api.nvim_create_augroup('format_on_save', {})
+      vim.api.nvim_create_autocmd('BufWritePost', {
+        group = group,
+        pattern = '*',
+        command = 'silent! FormatWrite',
+      })
+      vim.api.nvim_create_autocmd('BufWritePost', {
+        group = group,
+        pattern = table.concat(fmt.by_lsp, ','),
+        callback = vim.lsp.buf.formatting_seq_sync,
       })
     end,
   },

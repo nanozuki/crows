@@ -53,38 +53,38 @@ local feline_config = function()
         return branch, ' '
       end,
       hl = { fg = 'fg_sec' },
-      enabled = function(winid)
-        return vim.api.nvim_win_get_width(winid) > 100
+      enabled = function()
+        return vim.api.nvim_win_get_width(0) > 100
       end,
     },
     {
       provider = 'git_diff_added',
       hl = { fg = 'fg_sec' },
-      enabled = function(winid)
-        return vim.api.nvim_win_get_width(winid) > 120
+      enabled = function()
+        return vim.api.nvim_win_get_width(0) > 120
       end,
     },
     {
       provider = 'git_diff_removed',
       hl = { fg = 'fg_sec' },
-      enabled = function(winid)
-        return vim.api.nvim_win_get_width(winid) > 120
+      enabled = function()
+        return vim.api.nvim_win_get_width(0) > 120
       end,
     },
     {
       provider = 'git_diff_changed',
       hl = { fg = 'fg_sec' },
-      enabled = function(winid)
-        return vim.api.nvim_win_get_width(winid) > 120
+      enabled = function()
+        return vim.api.nvim_win_get_width(0) > 120
       end,
     },
   }
   local right = {
     -- layer 3
     {
-      provider = function(_, winid)
+      provider = function()
         local clients = {}
-        for _, client in pairs(vim.lsp.buf_get_clients(vim.api.nvim_win_get_buf(winid))) do
+        for _, client in pairs(vim.lsp.buf_get_clients(vim.api.nvim_win_get_buf(0))) do
           clients[#clients + 1] = ' ' .. client.name
         end
         return table.concat(clients, ' ')
@@ -97,8 +97,8 @@ local feline_config = function()
     },
     -- layer 2
     {
-      provider = function(_, winid)
-        return ' ' .. vim.bo[vim.api.nvim_win_get_buf(winid)].filetype
+      provider = function()
+        return ' ' .. vim.bo[vim.api.nvim_win_get_buf(0)].filetype
       end,
       hl = { fg = 'fg', bg = 'bg_sec' },
     },
@@ -108,9 +108,9 @@ local feline_config = function()
       hl = { fg = 'accent_sec', bg = 'bg_sec' },
     },
     {
-      provider = function(_, winid)
-        local row, col = unpack(vim.api.nvim_win_get_cursor(winid))
-        local lines = vim.api.nvim_buf_line_count(vim.api.nvim_win_get_buf(winid))
+      provider = function()
+        local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+        local lines = vim.api.nvim_buf_line_count(vim.api.nvim_win_get_buf(0))
         local text
         if row == 1 then
           text = string.format('TOP/%d:%d', lines, col)
@@ -125,8 +125,8 @@ local feline_config = function()
       hl = { fg = 'bg', bg = 'accent_sec' },
     }, -- current lines / total lines
     {
-      provider = function(_, winid)
-        local bufnr = vim.api.nvim_win_get_buf(winid)
+      provider = function()
+        local bufnr = vim.api.nvim_win_get_buf(0)
         local enc = (vim.bo[bufnr].fenc ~= '' and vim.bo[bufnr].fenc) or vim.o.enc
         return enc .. ' ', ' '
       end,

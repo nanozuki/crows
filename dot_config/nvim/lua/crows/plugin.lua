@@ -19,6 +19,7 @@ function plugin.is_ready()
   return vim.fn.empty(vim.fn.glob(install_path)) == 0
 end
 
+---@param hook function()
 function plugin.init(hook)
   if not plugin.is_ready() then
     vim.fn.system({ 'git', 'clone', '--depth', '1', repository, install_path })
@@ -67,35 +68,31 @@ function plugin.source_compiled()
 end
 
 ---set compiled hook function
----@param hook string
+---@param hook function
 function plugin.set_compiled_hook(hook)
-  vim.cmd(string.format(
-    [[augroup compiled_hook
-      autocmd!
-      autocmd User PackerCompileDone lua %s
-    augroup end]],
-    hook
-  ))
+  vim.api.nvim_create_autocmd('User PackerCompileDone', { callback = hook, once = true })
 end
 
 function plugin.sync(hook)
   use_plugins()
-  hook = hook or "require'crows.plugin'.source_compiled()"
+  hook = hook or plugin.source_compiled
   plugin.set_compiled_hook(hook)
   require('packer').sync()
 end
 
 function plugin.compile(hook)
   use_plugins()
-  hook = hook or "require'crows.plugin'.source_compiled()"
+  hook = hook or plugin.source_compiled
   plugin.set_compiled_hook(hook)
   require('packer').compile()
 end
 
 function plugin.sync_and_quit()
   use_plugins()
-  vim.cmd('autocmd User PackerCompileDone <cmd>qall')
-  require('packer').compile()
+  local qall = function()
+    vim.cmd([[qall]])
+  end
+  require('packer').compile(qall)
 end
 
 return plugin
