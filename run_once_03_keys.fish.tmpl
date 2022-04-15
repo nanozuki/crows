@@ -10,11 +10,11 @@ brew_install gnupg pinentry-mac
 paru_install gnupg pinentry
 #{{end}}
 
-#if test $os = archlinux
-#    ln -sf $dots/gnupg/gpg-agent_arch.conf $GNUPGHOME/gpg-agent.conf
-#else if test $os = macos
-#    ln -sf $dots/gnupg/gpg-agent_osx.conf $GNUPGHOME/gpg-agent.conf
-#end
+##{{if eq .chezmoi.os "darwin" }}
+#ln -sf $dots/gnupg/gpg-agent_osx.conf $GNUPGHOME/gpg-agent.conf
+##{{else}}
+#ln -sf $dots/gnupg/gpg-agent_arch.conf $GNUPGHOME/gpg-agent.conf
+##{{end}}
 #
 ## gpg keys
 #echo "Import gpg public keys..."

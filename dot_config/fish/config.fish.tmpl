@@ -1,0 +1,67 @@
+# vi: ft=fish
+set -x GPG_TTY (tty)
+gpg-connect-agent updatestartuptty /bye >/dev/null
+#{{if eq .chezmoi.os "darwin" }}
+set -x SSH_AUTH_SOCK $GNUPGHOME/S.gpg-agent.ssh
+#{{else}}
+set -x SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
+#{{end}}
+
+alias tree="tree -L 3"
+alias psg="ps aux | grep"
+
+if type -q nvim
+    alias vim="nvim"
+    alias vimdiff="nvim -d"
+end
+if type -q direnv
+    direnv hook fish | source
+end
+alias tmuxa="tmux new-session -A"
+
+# exa
+alias e="exa --icons"
+alias el="exa -l --icons"
+alias ea="exa -a --icons"
+alias eal="exa -al --icons"
+alias et="exa -T --icons"
+
+# history across fishes
+function save_history --on-event fish_preexec
+    history --save
+    history --merge
+end
+alias hr 'history --merge' # read and merge history from disk
+bind \e\[A 'history --merge ; up-or-search'
+
+alias e="exa --icons"
+alias el="exa -l --icons"
+alias ea="exa -a --icons"
+alias eal="exa -al --icons"
+alias ela="exa -la --icons"
+
+#{{if eq .chezmoi.os "darwin" }}
+alias appadd "brew install"
+alias appup "brew update && brew upgrade --force-bottle && brew cleanup"
+alias appsch "brew search"
+alias appdel "brew uninstall"
+alias appclean "brew cleanup"
+alias appinfo "brew info"
+
+alias appextadd "brew --cask install"
+alias appextsch "brew search"
+alias appextdel "brew --cask uninstall"
+alias appextup "brew --cask upgrade"
+#{{else}}
+alias appadd "sudo pacman -S"
+alias appup "sudo pacman -Syu"
+alias appsch "pacman -Ss"
+alias appdel "sudo pacman -Rs"
+alias appclean "sudo pacman -Scc && pacman -Qdtq | pacman -Rs -"
+alias appinfo "pacman -Si"
+
+alias appextadd "paru -S"
+alias appextup "paru -Syu"
+alias appextsch "paru -Ss"
+alias appextdel "paru -Rs"
+#{{end}}
