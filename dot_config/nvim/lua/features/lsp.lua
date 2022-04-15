@@ -43,14 +43,11 @@ lsp.plugins[2] = {
 -- lsp ui extension
 lsp.plugins[3] = {
   'RishabhRD/lspactions',
-  branch = 'nvim-0.6-compatible',
   requires = {
     { 'nvim-lua/plenary.nvim' },
     { 'nvim-lua/popup.nvim' },
-    { 'tjdevries/astronauta.nvim' },
   },
   config = function()
-    require('astronauta.keymap')
     local lspactions = require('lspactions')
     vim.ui.select = lspactions.select
     vim.ui.input = lspactions.input

@@ -1,6 +1,4 @@
 local crows = require('crows')
-local augroup = require('crows.util').augroup
-local autocmd = require('crows.util').autocmd
 
 ---@type Feature
 local editor = { plugins = {} }
@@ -11,12 +9,21 @@ editor.pre = function()
   vim.opt.foldlevelstart = 99
   -- ignore file for all
   vim.cmd('set wildignore+=*/node_modules/*,*.swp,*.pyc,*/venv/*,*/target/*,.DS_Store')
-  -- filetype
-  augroup('filetypes', {
-    autocmd('BufNewFile,BufRead', '*html', 'setfiletype html'),
-    autocmd('BufNewFile,BufRead', 'tsconfig.json', 'setfiletype jsonc'),
-    autocmd('BufNewFile,BufRead', '*.zig', 'setfiletype zig'),
-  })
+
+  -- custom filetypes
+  local filetypes = {
+    ['*html'] = 'html',
+    ['tsconfig.json'] = 'jsonc',
+    ['*.zig'] = 'zig',
+  }
+  local ft_group = vim.api.nvim_create_augroup('filetypes', {})
+  for pattern, filetype in pairs(filetypes) do
+    vim.api.nvim_create_autocmd(
+      { 'BufNewFile', 'BufRead' },
+      { group = ft_group, pattern = pattern, command = 'setfiletype ' .. filetype }
+    )
+  end
+
   -- setup indent
   vim.cmd('filetype indent on')
   vim.opt.cindent = true
@@ -24,12 +31,11 @@ editor.pre = function()
   vim.opt.tabstop = 4
   vim.opt.shiftwidth = 4
   vim.opt.softtabstop = 4
-  augroup('fileindent', {
-    autocmd(
-      'FileType',
-      'lua,javascript,typescript,javascriptreact,typescriptreact,html,css,scss,xml,yaml,json',
-      'setlocal expandtab ts=2 sw=2 sts=2'
-    ),
+  local fi_group = vim.api.nvim_create_augroup('fileindent', {})
+  vim.api.nvim_create_autocmd('FileType', {
+    group = fi_group,
+    pattern = 'lua,javascript,typescript,javascriptreact,typescriptreact,html,css,scss,xml,yaml,json',
+    command = 'setlocal expandtab ts=2 sw=2 sts=2',
   })
 end
 

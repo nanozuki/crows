@@ -13,7 +13,7 @@ function color_hint.toggle_colors()
 end
 
 function color_hint.post()
-  vim.cmd([[command! ToggleColors lua require('features.color_hint').toggle_colors()]])
+  vim.api.nvim_create_user_command('ToggleColors', color_hint.toggle_colors, {})
 end
 
 return color_hint

@@ -49,9 +49,9 @@ end
 ---setup crows
 ---@param opt CrowsOption
 function crows.setup(opt)
-  vim.cmd([[command! CrowsReload lua require('crows').reload()
-            command! CrowsResync lua require('crows').resync()
-            command! CrowsUpdateSync lua require('crows').external_resync()]])
+  vim.api.nvim_create_user_command('CrowsReload', crows.reload, {})
+  vim.api.nvim_create_user_command('CrowsResync', crows.resync, {})
+  vim.api.nvim_create_user_command('CrowsUpdateSync', crows.external_resync, {})
   crows.modules = opt.modules or {}
   crows.features = opt.features or {}
   for _, feature in ipairs(crows.features) do
@@ -63,7 +63,7 @@ function crows.setup(opt)
     crows.post_setup()
   else
     load_plugins()
-    plugin.init("require('crows').post_setup()")
+    plugin.init(crows.post_setup)
   end
 end
 

@@ -1,5 +1,4 @@
 local crows = require('crows')
-local util = require('crows.util')
 
 ---@type Feature
 local basic = {}
@@ -25,10 +24,6 @@ basic.plugins = {
         pre_save_cmds = { 'NvimTreeClose' },
         auto_session_suppress_dirs = { '~' },
       })
-      local u = require('crows.util')
-      u.augroup('renew_auto_session_cwd', {
-        u.autocmd('DirChanged', 'global', 'lua require("auto-session-library").conf.last_loaded_session = nil'),
-      })
       require('crows').key.maps({
         ['<leader>s'] = {
           r = { '<cmd>RestoreSession<cr>', 'Restore session' },
@@ -40,9 +35,12 @@ basic.plugins = {
 }
 
 basic.post = function()
+  local termcode = function(str)
+    return vim.api.nvim_replace_termcodes(str, true, true, true)
+  end
   crows.key.map('Open terminal in current window', 'n', '<leader>tw', ':terminal<CR>')
   crows.key.map('Open terminal in new tab', 'n', '<leader>tt', ':tabnew | terminal<CR>')
-  crows.key.map('To normal mode in terminal', 't', '<C-K>', util.termcode([[<C-\><C-N>]]))
+  crows.key.map('To normal mode in terminal', 't', '<C-K>', termcode([[<C-\><C-N>]]))
 end
 
 return basic

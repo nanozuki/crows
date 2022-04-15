@@ -16,11 +16,11 @@
 ---@type LspModule
 local lsp = {
   keys = {
-    diag_float = { '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', 'Open diagnostic floating window' },
+    diag_float = { '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', 'Open diagnostic floating window' },
     diag_prev = { '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', 'Goto prev diagnostic' },
     diag_next = { ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', 'Goto next diagnostic' },
     diag_loclist = {
-      '<space>q',
+      '<leader>q',
       '<cmd>lua vim.diagnostic.setloclist()<CR>',
       'Add buffer diagnostics to the location list.',
     },
@@ -31,18 +31,18 @@ local lsp = {
     hover = { 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', 'Display hover information' },
     goto_impl = { 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', 'Goto implementation' },
     sign_help = { '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', 'Display signature infomation' },
-    add_folder = { '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', 'Add workspace folder' },
-    del_folder = { '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', 'Remove workspace folder' },
+    add_folder = { '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', 'Add workspace folder' },
+    del_folder = { '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', 'Remove workspace folder' },
     list_folders = {
-      '<space>wl',
+      '<leader>wl',
       '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>',
       'List workspace folder',
     },
-    type_def = { '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', 'Goto type definition' },
-    rename = { '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', 'Rename symbol' },
-    code_action = { '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', 'Code action' },
+    type_def = { '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', 'Goto type definition' },
+    rename = { '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', 'Rename symbol' },
+    code_action = { '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', 'Code action' },
     list_ref = { 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', 'List references' },
-    format = { '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', 'Format buffer' },
+    -- format = { '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', 'Format buffer' },
   },
   on_attaches = {},
 }
