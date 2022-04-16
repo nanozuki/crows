@@ -16,33 +16,31 @@
 ---@type LspModule
 local lsp = {
   keys = {
-    diag_float = { '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', 'Open diagnostic floating window' },
-    diag_prev = { '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', 'Goto prev diagnostic' },
-    diag_next = { ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', 'Goto next diagnostic' },
-    diag_loclist = {
-      '<leader>q',
-      '<cmd>lua vim.diagnostic.setloclist()<CR>',
-      'Add buffer diagnostics to the location list.',
-    },
+    diag_float = { '<leader>e', vim.diagnostic.open_float, 'Open diagnostic floating window' },
+    diag_prev = { '[d', vim.diagnostic.goto_prev, 'Goto prev diagnostic' },
+    diag_next = { ']d', vim.diagnostic.goto_next, 'Goto next diagnostic' },
+    diag_loclist = { '<leader>q', vim.diagnostic.setloclist, 'Add buffer diagnostics to the location list.' },
   },
   buffer_keys = {
-    goto_decl = { 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', 'Goto declaration' },
-    goto_def = { 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', 'Goto definition' },
-    hover = { 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', 'Display hover information' },
-    goto_impl = { 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', 'Goto implementation' },
-    sign_help = { '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', 'Display signature infomation' },
-    add_folder = { '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', 'Add workspace folder' },
-    del_folder = { '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', 'Remove workspace folder' },
+    goto_decl = { 'gD', vim.lsp.buf.declaration, 'Goto declaration' },
+    goto_def = { 'gd', vim.lsp.buf.definition, 'Goto definition' },
+    hover = { 'K', vim.lsp.buf.hover, 'Display hover information' },
+    goto_impl = { 'gi', vim.lsp.buf.implementation, 'Goto implementation' },
+    sign_help = { '<C-k>', vim.lsp.buf.signature_help, 'Display signature infomation' },
+    add_folder = { '<leader>wa', vim.lsp.buf.add_workspace_folder, 'Add workspace folder' },
+    del_folder = { '<leader>wr', vim.lsp.buf.remove_workspace_folder, 'Remove workspace folder' },
     list_folders = {
       '<leader>wl',
-      '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>',
+      function()
+        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+      end,
       'List workspace folder',
     },
-    type_def = { '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', 'Goto type definition' },
-    rename = { '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', 'Rename symbol' },
-    code_action = { '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', 'Code action' },
-    list_ref = { 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', 'List references' },
-    -- format = { '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', 'Format buffer' },
+    type_def = { '<leader>D', vim.lsp.buf.type_definition, 'Goto type definition' },
+    rename = { '<leader>rn', vim.lsp.buf.rename, 'Rename symbol' },
+    code_action = { '<leader>ca', vim.lsp.buf.code_action, 'Code action' },
+    list_ref = { 'gr', vim.lsp.buf.references, 'List references' },
+    -- format = { '<leader>f', vim.lsp.buf.formatting, 'Format buffer' },
   },
   on_attaches = {},
 }

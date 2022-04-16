@@ -3,6 +3,24 @@ local crows = require('crows')
 ---@type Feature
 local editor = { plugins = {} }
 
+local function set_filetype()
+  vim.cmd([[filetype on]])
+  vim.cmd([[filetype plugin on]])
+  vim.g.do_filetype_lua = 1
+  vim.g.did_load_filetypes = 1
+  local filetypes = {
+    ['*html'] = 'html',
+    ['tsconfig.json'] = 'jsonc',
+  }
+  local ft_group = vim.api.nvim_create_augroup('filetypes', {})
+  for pattern, filetype in pairs(filetypes) do
+    vim.api.nvim_create_autocmd(
+      { 'BufNewFile', 'BufRead' },
+      { group = ft_group, pattern = pattern, command = 'setfiletype ' .. filetype, once = true }
+    )
+  end
+end
+
 editor.pre = function()
   vim.cmd('syntax enable')
   vim.opt.foldmethod = 'indent'
@@ -10,19 +28,7 @@ editor.pre = function()
   -- ignore file for all
   vim.cmd('set wildignore+=*/node_modules/*,*.swp,*.pyc,*/venv/*,*/target/*,.DS_Store')
 
-  -- custom filetypes
-  local filetypes = {
-    ['*html'] = 'html',
-    ['tsconfig.json'] = 'jsonc',
-    ['*.zig'] = 'zig',
-  }
-  local ft_group = vim.api.nvim_create_augroup('filetypes', {})
-  for pattern, filetype in pairs(filetypes) do
-    vim.api.nvim_create_autocmd(
-      { 'BufNewFile', 'BufRead' },
-      { group = ft_group, pattern = pattern, command = 'setfiletype ' .. filetype }
-    )
-  end
+  set_filetype()
 
   -- setup indent
   vim.cmd('filetype indent on')
