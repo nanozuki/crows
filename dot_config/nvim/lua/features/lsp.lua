@@ -57,8 +57,8 @@ lsp.plugins[3] = {
     vim.lsp.handlers['textDocument/declaration'] = lspactions.declaration
     vim.lsp.handlers['textDocument/implementation'] = lspactions.implementation
     local lsputil = require('crows.lsp')
-    lsputil.set_key_cmd(lsputil.buffer_keys.rename, '<cmd>lua require("lspactions").rename()<CR>')
-    lsputil.set_key_cmd(lsputil.buffer_keys.code_action, '<cmd>lua require("lspactions").code_action()<CR>')
+    lsputil.set_key_cmd(lsputil.buffer_keys.rename, lspactions.rename)
+    lsputil.set_key_cmd(lsputil.buffer_keys.code_action, lspactions.code_action)
   end,
 }
 
