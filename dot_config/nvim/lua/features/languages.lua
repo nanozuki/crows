@@ -4,10 +4,7 @@ local fmt = require('features.format')
 ---@type Feature
 local fish = {
   plugins = {
-    {
-      'dag/vim-fish',
-      ft = { 'fish' },
-    },
+    { 'dag/vim-fish', ft = { 'fish' } },
   },
 }
 
@@ -36,6 +33,13 @@ local json = {
   pre = function()
     fmt.by_formatter.json = { fmt.formatters.prettier }
   end,
+}
+
+---@type Feature
+local kitty = {
+  plugins = {
+    { 'fladson/vim-kitty', ft = { 'kitty' } },
+  },
 }
 
 ---@type Feature
@@ -193,6 +197,7 @@ return {
   fish,
   go,
   json,
+  kitty,
   lua,
   markdown,
   rust,
