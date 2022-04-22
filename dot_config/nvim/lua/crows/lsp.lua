@@ -26,7 +26,7 @@ local lsp = {
     goto_def = { 'gd', vim.lsp.buf.definition, 'Goto definition' },
     hover = { 'K', vim.lsp.buf.hover, 'Display hover information' },
     goto_impl = { 'gi', vim.lsp.buf.implementation, 'Goto implementation' },
-    sign_help = { '<C-k>', vim.lsp.buf.signature_help, 'Display signature infomation' },
+    sign_help = { '<C-k>', vim.lsp.buf.signature_help, 'Display signature information' },
     add_folder = { '<leader>wa', vim.lsp.buf.add_workspace_folder, 'Add workspace folder' },
     del_folder = { '<leader>wr', vim.lsp.buf.remove_workspace_folder, 'Remove workspace folder' },
     list_folders = {
@@ -123,10 +123,6 @@ function lsp.add_default(name, default_config)
       default_config = default_config,
     }
   end
-end
-
-function lsp.root_pattern(...)
-  require('lspconfig.util').root_pattern(...)
 end
 
 function lsp.stop_all_clients()
