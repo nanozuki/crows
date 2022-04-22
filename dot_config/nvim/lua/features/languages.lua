@@ -100,7 +100,7 @@ local markdown = {
 ---@type Feature
 local terraform = {
   pre = function()
-    fmt.by_formatter.terraform = { fmt.formatters.prettier }
+    fmt.by_formatter.terraform = { fmt.formatters.terraform }
   end,
   post = function()
     lsp.set_config('terraformls', {})
@@ -141,18 +141,19 @@ local typescript = {
     },
   },
   post = function()
+    local util = require('lspconfig.util')
     lsp.set_config('tsserver', {
       root_dir = function(fname)
-        return lsp.root_pattern('tsconfig.json')(fname) or lsp.root_pattern('package.json', 'jsconfig.json')(fname)
+        return util.root_pattern('tsconfig.json')(fname) or util.root_pattern('package.json', 'jsconfig.json')(fname)
       end,
     })
 
     lsp.set_config('tailwindcss', {
-      root_dir = lsp.root_pattern('tailwind.config.js', 'tailwind.config.ts'),
+      root_dir = util.root_pattern('tailwind.config.js', 'tailwind.config.ts'),
     })
 
     lsp.set_config('denols', {
-      root_dir = lsp.root_pattern('deno_root'),
+      root_dir = util.root_pattern('deno_root'),
       init_options = {
         enable = true,
         lint = true,
