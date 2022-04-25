@@ -37,20 +37,17 @@ completion.plugins[2] = {
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-path',
     -- snippets
-    'hrsh7th/cmp-vsnip',
-    'hrsh7th/vim-vsnip',
-    'rafamadriz/friendly-snippets',
+    'L3MON4D3/LuaSnip',
+    'saadparwaiz1/cmp_luasnip',
   },
   config = function()
     local cmp = require('cmp')
-    local feedkey = function(key, mode)
-      vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
-    end
+    local luasnip = require('luasnip')
     local function tab(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      elseif vim.fn['vsnip#available'](1) == 1 then
-        feedkey('<Plug>(vsnip-expand-or-jump)', '')
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
       else
         fallback()
       end
@@ -58,8 +55,8 @@ completion.plugins[2] = {
     local function s_tab(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif vim.fn['vsnip#available'](1) == 1 then
-        feedkey('<Plug>(vsnip-expand-or-jump)', '')
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
       else
         fallback()
       end
@@ -71,7 +68,7 @@ completion.plugins[2] = {
       },
       snippet = {
         expand = function(args)
-          vim.fn['vsnip#anonymous'](args.body)
+          luasnip.lsp_expand(args.body)
         end,
       },
       mapping = {
@@ -90,12 +87,13 @@ completion.plugins[2] = {
         ['<Tab>'] = cmp.mapping({ i = tab }),
         ['<S-Tab>'] = cmp.mapping({ i = s_tab }),
       },
-      sources = {
+      sources = cmp.config.sources({
         { name = 'nvim_lsp' },
-        { name = 'vsnip' },
+        { name = 'luasnip' },
+      }, {
         { name = 'path' },
         { name = 'buffer' },
-      },
+      }),
     })
   end,
 }
