@@ -2,6 +2,7 @@
 local features = {
   require('features.basic'),
   require('features.color_hint'),
+  require('snippets'),
   require('features.completion'),
   require('features.editor'),
   require('features.file_browser'),
