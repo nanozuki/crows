@@ -72,18 +72,26 @@ section.buttons = {
   },
 }
 
+math.randomseed(os.time())
+local footers = {
+  'Hyperextensible Vim-based text editor.             ',
+  'Help poor children in Uganda!                      ',
+  'Customized by @Nanozuki.Crows.                     ',
+}
+
 section.footer = {
   type = 'text',
-  val = 'Help poor children in Uganda!',
+  val = footers[math.random(#footers)],
   opts = {
     position = 'center',
-    hl = 'Number',
+    hl = 'Tag',
+    width = 50,
   },
 }
 
 startify.config = {
   layout = {
-    { type = 'padding', val = 4 },
+    { type = 'padding', val = 8 },
     section.header,
     { type = 'padding', val = 4 },
     section.buttons,
