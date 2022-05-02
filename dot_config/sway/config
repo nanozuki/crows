@@ -215,7 +215,7 @@ bindsym $mod+r mode "resize"
 #
 # Gaps
 #
-output DP-3 scale 2
+output DP-3 scale 1.5
 gaps inner 6
 gaps outer 3
 
