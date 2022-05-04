@@ -91,7 +91,7 @@ section.footer = {
 
 startify.config = {
   layout = {
-    { type = 'padding', val = 16 },
+    { type = 'padding', val = 4 },
     section.header,
     { type = 'padding', val = 4 },
     section.buttons,
