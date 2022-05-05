@@ -6,10 +6,8 @@ color_hint.plugins = {
 }
 
 function color_hint.toggle_colors()
-  vim.cmd([[
-    packadd nvim-colorizer.lua
-    ColorizerToggle
-  ]])
+  vim.cmd([[ packadd nvim-colorizer.lua ]])
+  vim.cmd([[ ColorizerToggle ]])
 end
 
 function color_hint.post()
