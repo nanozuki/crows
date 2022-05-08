@@ -172,7 +172,7 @@ local statusline = {}
 
 statusline.plugins = {
   {
-    'famiu/feline.nvim',
+    'feline-nvim/feline.nvim',
     requires = {
       'kyazdani42/nvim-web-devicons',
       'nvim-lua/plenary.nvim',
