@@ -1,0 +1,25 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+[character]
+success_symbol = '[»](bold purple)'
+error_symbol = '[»](bold red)'
+
+[directory]
+truncation_length=10
+truncate_to_repo=false
+fish_style_pwd_dir_length = 1
+
+[status]
+disabled=false
+
+# languages
+[golang]
+symbol = ' '
+[lua]
+disabled = true
+
+# disabled modules
+[aws]
+format=''  
+[gcloud]
+format=''

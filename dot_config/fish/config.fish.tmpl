@@ -65,3 +65,6 @@ alias appextup "paru -Syu"
 alias appextsch "paru -Ss"
 alias appextdel "paru -Rs"
 #{{end}}
+
+set -x STARSHIP_CONFIG ~/.config/starship/config.toml
+starship init fish | source
