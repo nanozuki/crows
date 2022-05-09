@@ -9,6 +9,11 @@ if not type -q fisher
 end
 fisher update
 source $config/fish/config.fish
+#{{if eq .chezmoi.os "darwin" }}
+brew_install starship
+#{{else}}
+paru_install starship
+#{{end}}
 
 ### git
 if not test -f $XDG_CONFIG_HOME/git/config_local
