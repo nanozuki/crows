@@ -11,29 +11,22 @@ function install-env
     setUx XDG_RUNTIME_DIR $TMPDIR
     #{{end}}
 
-    function install_archlinux
-        sudo pacman -S --needed --noconfirm base-devel
-        if not type -q paru
-            gitget "https://aur.archlinux.org/paru.git"
-            makepkg -si --noconfirm
-            cd -
+    #{{if eq .chezmoi.os "darwin" }}
+    brew_install make gnu-sed direnv exa bat
+    brew update && brew upgrade && brew cleanup
+    brew upgrade --cask
+    add_path ~/.local/bin /opt/homebrew/bin /usr/local/bin /usr/bin /bin /usr/sbin /sbin /Library/Apple/usr/bin
+    #{{else}}
+    sudo pacman -S --needed --noconfirm base-devel
+    if not type -q paru
+        install_rust
+        gitget "https://aur.archlinux.org/paru.git"
+        makepkg -si --noconfirm
+        cd -
     end
     paru -Syu --noconfirm
     paru_install direnv exa bat
     add_path ~/.local/bin /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin /sbin
-    end
-    
-    function install_macos
-        brew_install make gnu-sed direnv exa bat
-        brew update && brew upgrade && brew cleanup
-        brew upgrade --cask
-        add_path ~/.local/bin /opt/homebrew/bin /usr/local/bin /usr/bin /bin /usr/sbin /sbin /Library/Apple/usr/bin
-    end
-    
-    #{{if eq .chezmoi.os "darwin" }}
-    install_macos
-    #{{else}}
-    install_archlinux
     #{{end}}
     
     #### Step 2: Terminal
@@ -123,13 +116,7 @@ function install-env
     go install github.com/golang/protobuf/{proto,protoc-gen-go}@latest
     
     ### rust
-    setUx CARGO_HOME $XDG_DATA_HOME/cargo
-    setUx RUSTUP_HOME $XDG_DATA_HOME/rustup
-    add_path $CARGO_HOME/bin
-    if not type -q rustup
-        echo "install rustup"
-        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-    end
+    install_rust
     #{{if eq .chezmoi.os "darwin"}}
     brew_install rust-analyzer
     #{{else}}
@@ -145,6 +132,8 @@ function install-env
     
     ### node (lts)
     setUx NPM_CONFIG_USERCONFIG $XDG_CONFIG_HOME/npm/npmrc
+    add_path $XDG_DATA_HOME/npm/bin
+
     #{{if eq .chezmoi.os "darwin" }}
     brew_install node@16
     brew link --overwrite --force node@16
@@ -156,15 +145,6 @@ function install-env
     npm config set tmp         $XDG_RUNTIME_DIR/npm
     npm config set init-module $XDG_CONFIG_HOME/npm/config/npm-init.js
     
-    add_path $XDG_DATA_HOME/npm/bin
-    
-    function npm_install
-    #{{if eq .chezmoi.os "darwin" }}
-        npm -g install $argv
-    #{{else}}
-        sudo npm -g install $argv
-    #{{end}}
-    end
     npm_install typescript typescript-language-server @tailwindcss/language-server
     
     ### zig
@@ -219,3 +199,19 @@ function install-env
     sync_rime_schema
 end
 
+function install_rust
+    if not type -q rustup
+        setUx CARGO_HOME $XDG_DATA_HOME/cargo
+        setUx RUSTUP_HOME $XDG_DATA_HOME/rustup
+        add_path $CARGO_HOME/bin
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    end
+end
+
+function npm_install
+    #{{if eq .chezmoi.os "darwin" }}
+    npm -g install $argv
+    #{{else}}
+    sudo npm -g install $argv
+    #{{end}}
+end
