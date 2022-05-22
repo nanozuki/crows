@@ -1,0 +1,217 @@
+# vi: ft=fish
+function install-env
+    #### Step 1: System
+    setUx XDG_CONFIG_HOME $HOME/.config
+    setUx XDG_CACHE_HOME  $HOME/.cache
+    setUx XDG_DATA_HOME   $HOME/.local/share
+    setUx LC_ALL          en_US.UTF-8
+    setUx LANG            en_US.UTF-8
+    setUx EDITOR          nvim
+    #{{if eq .chezmoi.os "darwin" }}
+    setUx XDG_RUNTIME_DIR $TMPDIR
+    #{{end}}
+
+    #{{if eq .chezmoi.os "darwin" }}
+    brew_install make gnu-sed direnv exa bat
+    brew update && brew upgrade && brew cleanup
+    brew upgrade --cask
+    add_path ~/.local/bin /opt/homebrew/bin /usr/local/bin /usr/bin /bin /usr/sbin /sbin /Library/Apple/usr/bin
+    #{{else}}
+    sudo pacman -S --needed --noconfirm base-devel
+    if not type -q paru
+        install_rust
+        gitget "https://aur.archlinux.org/paru.git"
+        makepkg -si --noconfirm
+        cd -
+    end
+    paru -Syu --noconfirm
+    paru_install direnv exa bat
+    add_path ~/.local/bin /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin /sbin
+    #{{end}}
+    
+    #### Step 2: Terminal
+    ### fish
+    # watch fish_plugins. hash: {{ include "./dot_config/fish/fish_plugins" | sha256sum }}
+    if not type -q fisher
+        echo "install fisher"
+        curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
+    end
+    fisher update
+    source $config/fish/config.fish
+    #{{if eq .chezmoi.os "darwin" }}
+    brew_install starship
+    #{{else}}
+    paru_install starship
+    #{{end}}
+    
+    ### git
+    if not test -f $XDG_CONFIG_HOME/git/config_local
+        touch $XDG_CONFIG_HOME/git/config_local
+    end
+    
+    ### tmux
+    #{{if eq .chezmoi.os "darwin" }}
+    brew_install tmux
+    #{{else}}
+    paru_install tmux
+    #{{end}}
+    
+    ### wezterm
+    #{{if eq .chezmoi.os "darwin" }}
+    brew_install --cask wezterm-nightly --no-quarantine
+    #{{else}}
+    paru_install wezterm
+    #{{end}}
+    
+    #### Step 3: Keys
+    set -Ux GNUPGHOME $XDG_DATA_HOME/gnupg
+    mkdir -p $GNUPGHOME
+    
+    source ~/.local/share/chezmoi/utils.fish
+    #{{if eq .chezmoi.os "darwin" }}
+    brew_install gnupg pinentry-mac
+    #{{else}}
+    paru_install gnupg pinentry
+    #{{end}}
+    
+    ##{{if eq .chezmoi.os "darwin" }}
+    #ln -sf $dots/gnupg/gpg-agent_osx.conf $GNUPGHOME/gpg-agent.conf
+    ##{{else}}
+    #ln -sf $dots/gnupg/gpg-agent_arch.conf $GNUPGHOME/gpg-agent.conf
+    ##{{end}}
+    #
+    ## gpg keys
+    #echo "Import gpg public keys..."
+    #for file in (ls $project/secret/gpgkeys/*pub.gpg)
+    #    gpg --import $file
+    #end
+    #echo "Import secret keys..."
+    #for file in (ls $project/secret/gpgkeys/*sec.gpg)
+    #    gpg --allow-secret-key-import --import $file
+    #end
+
+    #### Step 4: Languages
+    ### golang
+    setUx GOPATH $XDG_DATA_HOME/go
+    add_path $GOPATH/bin
+    #{{if eq .chezmoi.os "darwin"}}
+    brew_install go gopls golangci-lint
+    #{{else}}
+    paru_install go gopls golangci-lint
+    #{{end}}
+    
+    # golang utils
+    go install github.com/davidrjenni/reftools/cmd/fillstruct@latest 
+    go install golang.org/x/tools/cmd/goimports@latest 
+    go install github.com/fatih/gomodifytags@latest 
+    go install github.com/segmentio/golines@latest
+    go install github.com/cweill/gotests/...@latest
+    
+    go install github.com/google/wire/cmd/wire@latest
+    go install github.com/go-swagger/go-swagger/cmd/swagger@latest
+    go install github.com/nametake/golangci-lint-langserver@latest
+    
+    go install google.golang.org/protobuf/cmd/protoc-gen-go@latest 
+    go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest 
+    go install github.com/golang/protobuf/{proto,protoc-gen-go}@latest
+    
+    ### rust
+    install_rust
+    #{{if eq .chezmoi.os "darwin"}}
+    brew_install rust-analyzer
+    #{{else}}
+    paru_install rust-analyzer
+    #{{end}}
+    
+    ### lua
+    #{{if eq .chezmoi.os "darwin"}}
+    brew_install lua-language-server stylua
+    #{{else}}
+    paru_install lua-language-server stylua
+    #{{end}}
+    
+    ### node (lts)
+    setUx NPM_CONFIG_USERCONFIG $XDG_CONFIG_HOME/npm/npmrc
+    add_path $XDG_DATA_HOME/npm/bin
+
+    #{{if eq .chezmoi.os "darwin" }}
+    brew_install node@16
+    brew link --overwrite --force node@16
+    #{{else}}
+    paru_install nodejs-lts-gallium npm
+    #{{end}}
+    npm config set prefix      $XDG_DATA_HOME/npm
+    npm config set cache       $XDG_CACHE_HOME/npm
+    npm config set tmp         $XDG_RUNTIME_DIR/npm
+    npm config set init-module $XDG_CONFIG_HOME/npm/config/npm-init.js
+    
+    npm_install typescript typescript-language-server @tailwindcss/language-server
+    
+    ### zig
+    #{{if eq .chezmoi.os "darwin"}}
+    brew_install zig --HEAD
+    macos_sync_zls
+    #{{else}}
+    paru_install zig zls-bin
+    #{{end}}
+    
+    ### deno
+    #{{if eq .chezmoi.os "darwin" }}
+    brew_install deno
+    #{{else}}
+    paru_install deno
+    #{{end}}
+    
+    ### terraform
+    #{{if eq .chezmoi.os "darwin" }}
+    brew_install terraform terraform-ls
+    #{{else}}
+    paru_install terraform terraform-ls
+    #{{end}}
+    
+    ### other langs and lsps
+    npm_install graphql-language-service-cli vim-language-server yaml-language-server
+
+    #### Step 5: Neovim
+    #{{if eq .chezmoi.os "darwin" }}
+    brew_install neovim python ripgrep fzf
+    pip3 install pynvim
+    npm -g install neovim
+    #{{else}}
+    paru_install neovim python-pynvim ripgrep fzf
+    sudo npm -g install neovim
+    #{{end}}
+
+    #### Step 6: Rime
+    #{{if eq .chezmoi.os "darwin" }}
+    brew_install --cask squirrel
+    #{{else}}
+    paru_install fcitx5-rime
+    #{{end}}
+    
+    if not test -d $XDG_DATA_HOME/plum
+        git clone --depth 1 https://github.com/rime/plum.git $XDG_DATA_HOME/plum
+    end
+    
+    #{{if eq .chezmoi.os "linux"}}
+        set -lx rime_frontend fcitx5-rime
+    #{{end}}
+    sync_rime_schema
+end
+
+function install_rust
+    if not type -q rustup
+        setUx CARGO_HOME $XDG_DATA_HOME/cargo
+        setUx RUSTUP_HOME $XDG_DATA_HOME/rustup
+        add_path $CARGO_HOME/bin
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    end
+end
+
+function npm_install
+    #{{if eq .chezmoi.os "darwin" }}
+    npm -g install $argv
+    #{{else}}
+    sudo npm -g install $argv
+    #{{end}}
+end
