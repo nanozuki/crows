@@ -12,7 +12,7 @@ function install-env
     #{{end}}
 
     #{{if eq .chezmoi.os "darwin" }}
-    brew_install make gnu-sed direnv exa bat
+    brew_install make gnu-sed direnv exa bat btop
     brew update && brew upgrade && brew cleanup
     brew upgrade --cask
     add_path ~/.local/bin /opt/homebrew/bin /usr/local/bin /usr/bin /bin /usr/sbin /sbin /Library/Apple/usr/bin
@@ -25,7 +25,7 @@ function install-env
         cd -
     end
     paru -Syu --noconfirm
-    paru_install direnv exa bat
+    paru_install direnv exa bat btop
     add_path ~/.local/bin /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin /sbin
     #{{end}}
     
@@ -37,12 +37,12 @@ function install-env
         curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
     end
     fisher update
-    source $config/fish/config.fish
     #{{if eq .chezmoi.os "darwin" }}
     brew_install starship
     #{{else}}
     paru_install starship
     #{{end}}
+    source $config/fish/config.fish
     
     ### git
     if not test -f $XDG_CONFIG_HOME/git/config_local
@@ -132,8 +132,6 @@ function install-env
     
     ### node (lts)
     setUx NPM_CONFIG_USERCONFIG $XDG_CONFIG_HOME/npm/npmrc
-    add_path $XDG_DATA_HOME/npm/bin
-
     #{{if eq .chezmoi.os "darwin" }}
     brew_install node@16
     brew link --overwrite --force node@16
@@ -170,7 +168,7 @@ function install-env
     #{{end}}
     
     ### other langs and lsps
-    npm_install graphql-language-service-cli vim-language-server yaml-language-server
+    npm_install graphql-language-service-cli vim-language-server yaml-language-server vscode-langservers-extracted
 
     #### Step 5: Neovim
     #{{if eq .chezmoi.os "darwin" }}
