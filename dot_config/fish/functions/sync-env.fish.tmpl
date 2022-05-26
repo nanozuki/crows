@@ -1,0 +1,305 @@
+# vi: ft=fish
+function sync-env
+    #### System settings
+    ####
+    setUx XDG_CONFIG_HOME $HOME/.config
+    setUx XDG_CACHE_HOME  $HOME/.cache
+    setUx XDG_DATA_HOME   $HOME/.local/share
+    setUx LC_ALL          en_US.UTF-8
+    setUx LANG            en_US.UTF-8
+    setUx EDITOR          nvim
+    #{{if eq .chezmoi.os "darwin" }}
+    setUx XDG_RUNTIME_DIR $TMPDIR
+    add_path ~/.local/bin /opt/homebrew/bin /usr/local/bin /usr/bin /bin /usr/sbin /sbin /Library/Apple/usr/bin
+    #{{else}}
+    add_path ~/.local/bin /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin /sbin
+    #{{end}}
+
+    #### Upgrade package managers
+    ####
+    #{{if eq .chezmoi.os "darwin" }}
+    brew_update
+    #{{else}}
+    paru_update
+    #{{end}}
+    fisher_update
+    cargo_update
+    npm_update
+
+    #### Terminal tools
+    ####
+    #{{if eq .chezmoi.os "darwin" }}
+    brew_install direnv exa bat btop startship tmux ripgrep fzf
+    brew_install --cask wez/wezterm/wezterm-nightly
+    #{{else}}
+    paru_install direnv exa bat btop startship tmux wezterm ripgrep fzf
+    #{{end}}
+    fisher_install jethrokuan/z PatrickF1/fzf.fish
+
+    #### GNUPG
+    ####
+    set -Ux GNUPGHOME $XDG_DATA_HOME/gnupg
+    mkdir -p $GNUPGHOME
+    #{{if eq .chezmoi.os "darwin" }}
+    brew_install gnupg pinentry-mac
+    #{{else}}
+    paru_install gnupg pinentry
+    #{{end}}
+    #echo "Import gpg public keys..."
+    #for file in (ls $project/secret/gpgkeys/*pub.gpg)
+    #    gpg --import $file
+    #end
+    #echo "Import secret keys..."
+    #for file in (ls $project/secret/gpgkeys/*sec.gpg)
+    #    gpg --allow-secret-key-import --import $file
+    #end
+
+    #### Rime
+    #{{if eq .chezmoi.os "darwin" }}
+    brew_install --cask squirrel
+    #{{else}}
+    paru_install fcitx5-rime
+    setUx rime_frontend fcitx5-rime
+    #{{end}}
+    if not test -d $XDG_DATA_HOME/plum
+        git clone --depth 1 https://github.com/rime/plum.git $XDG_DATA_HOME/plum
+    end
+    bash $XDG_DATA_HOME/plum/rime-install :preset
+    bash $XDG_DATA_HOME/plum/rime-install prelude
+    bash $XDG_DATA_HOME/plum/rime-install essay
+    bash $XDG_DATA_HOME/plum/rime-install luna-pinyin
+    bash $XDG_DATA_HOME/plum/rime-install double-pinyin
+    bash $XDG_DATA_HOME/plum/rime-install emoji
+
+    #### Neovim
+    ####
+    #{{if eq .chezmoi.os "darwin" }}
+    brew_install neovim python
+    pip3 install -U pynvim
+    npm_install neovim
+    #{{else}}
+    paru_install neovim python-pynvim ripgrep fzf
+    npm_install neovim
+    #{{end}}
+    
+    #### Languages developments
+    ### golang
+    setUx GOPATH $XDG_DATA_HOME/go
+    add_path $GOPATH/bin
+    #{{if eq .chezmoi.os "darwin"}}
+    brew_install go golangci-lint
+    go install golang.org/x/tools/gopls@latest
+    #{{else}}
+    paru_install go gopls golangci-lint
+    #{{end}}
+    go install github.com/davidrjenni/reftools/cmd/fillstruct@latest 
+    go install golang.org/x/tools/cmd/goimports@latest 
+    go install github.com/fatih/gomodifytags@latest 
+    go install github.com/segmentio/golines@latest
+    go install github.com/cweill/gotests/...@latest
+    ## golang code-gen tools
+    go install github.com/google/wire/cmd/wire@latest
+    go install github.com/go-swagger/go-swagger/cmd/swagger@latest
+    go install github.com/nametake/golangci-lint-langserver@latest
+    ## golang grpc
+    go install google.golang.org/protobuf/cmd/protoc-gen-go@latest 
+    go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest 
+    go install github.com/golang/protobuf/{proto,protoc-gen-go}@latest
+    ### rust
+    #{{if eq .chezmoi.os "darwin"}}
+    brew_install rust-analyzer
+    #{{else}}
+    paru_install rust-analyzer
+    #{{end}}
+    ### lua
+    #{{if eq .chezmoi.os "darwin"}}
+    brew_install lua-language-server stylua
+    #{{else}}
+    paru_install lua-language-server stylua
+    #{{end}}
+    ### frontend
+    npm_install typescript typescript-language-server @tailwindcss/language-server prettier vscode-langservers-extracted
+    ### zig
+    #{{if eq .chezmoi.os "darwin"}}
+    brew_install zig --HEAD
+    macos_sync_zls
+    #{{else}}
+    paru_install zig zls-bin
+    #{{end}}
+    ### deno
+    #{{if eq .chezmoi.os "darwin" }}
+    brew_install deno
+    #{{else}}
+    paru_install deno
+    #{{end}}
+    ### terraform
+    #{{if eq .chezmoi.os "darwin" }}
+    brew_install terraform terraform-ls
+    #{{else}}
+    paru_install terraform terraform-ls
+    #{{end}}
+    ### others
+    npm_install graphql-language-service-cli vim-language-server yaml-language-server
+end
+
+
+#### Homebrew
+
+function brew_install
+    brew install $argv;or return 0
+end
+
+function brew_update
+    brew update && brew upgrade && brew --cask upgrade && brew cleanup
+end
+
+#### Paru
+
+function paru_install
+    __ensure_paru
+    paru -S --needed --noconfirm $argv
+end
+
+function paru_update
+    __ensure_paru
+    paru -Syu --noconfirm
+end
+
+function __ensure_paru
+    if not type -q paru
+        __ensure_cargo
+        pacman -S --needed --noconfirm base-devel
+        gitget "https://aur.archlinux.org/paru.git"
+        makepkg -si --noconfirm
+        cd -
+    end
+end
+
+#### Fisher
+
+function fisher_install
+    __ensure_fisher
+    for pkg in $argv
+        if not contains $pkg (fisher list) then
+            fisher install $pkg
+        end
+    end
+end
+
+function fisher_update
+    __ensure_fisher
+    fisher update
+end
+
+function __ensure_fisher
+    if not type -q fisher
+        echo "install fisher"
+        curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
+    end
+end
+
+#### Cargo
+
+function cargo_install
+    __ensure_cargo
+    cargo install $argv
+end
+
+function cargo_update
+    __ensure_cargo
+end
+
+function __ensure_cargo
+    if not type -q cargo
+        setUx CARGO_HOME $XDG_DATA_HOME/cargo
+        setUx RUSTUP_HOME $XDG_DATA_HOME/rustup
+        add_path $CARGO_HOME/bin
+        #{{if eq .chezmoi.os "darwin" }}
+        brew install rustup
+        rustup-init
+        #{{else}}
+        sudo pacman -S --needed --noconfirm rustup
+        rustup toolchain install stable
+        rustup default stable
+        #{{end}}
+    end
+end
+
+#### Npm
+
+function npm_install
+    __ensure_npm
+    #{{if eq .chezmoi.os "darwin" }}
+    npm -g install $argv
+    #{{else}}
+    sudo npm -g install $argv
+    #{{end}}
+end
+
+function npm_update
+    __ensure_npm
+    #{{if eq .chezmoi.os "darwin" }}
+    npm -g upgrade
+    #{{else}}
+    sudo npm -g upgrade
+    #{{end}}
+end
+
+function __ensure_npm
+    if not type -q npm
+        setUx NPM_CONFIG_USERCONFIG $XDG_CONFIG_HOME/npm/npmrc
+        #{{if eq .chezmoi.os "darwin" }}
+        brew_install node@16
+        brew link --overwrite --force node@16
+        #{{else}}
+        paru_install nodejs-lts-gallium npm
+        #{{end}}
+        npm config set prefix      $XDG_DATA_HOME/npm
+        npm config set cache       $XDG_CACHE_HOME/npm
+        npm config set tmp         $XDG_RUNTIME_DIR/npm
+        npm config set init-module $XDG_CONFIG_HOME/npm/config/npm-init.js
+    end
+end
+
+#### Utils
+
+function setUx 
+    set -Ux $argv;or return 0
+end
+
+function add_path
+    fish_add_path $argv;or return 0
+end
+
+function git_latest
+    set repo_path (find_git_repo_path $argv[1])
+    if test -e $repo_path
+        set cur_dir (pwd)
+        cd $repo_path
+        set output (git pull); or cd $cur_dir && return 1
+        cd $cur_dir
+        if test (echo $output | grep 'Already up to date')
+            return 1
+        end
+    else
+        git clone $argv[1] $repo_path
+        or return 0
+    end
+    echo $repo_path
+end
+
+function macos_sync_zls
+    set repo https://github.com/zigtools/zls.git
+    set repo_path (git_latest $repo); or return 0
+    if test -z $repo_path
+        return 0
+    end
+
+    set cur_dir (pwd)
+    cd $repo_path
+    git submodule update --init --recursive
+    zig build -Drelease-safe
+    ln -sf (realpath ./zig-out/bin/zls) /usr/local/bin/zls
+    cd $cur_dir
+end
+

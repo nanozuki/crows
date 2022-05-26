@@ -76,10 +76,10 @@ completion.plugins[2] = {
         ['<C-n>'] = cmp.mapping.select_next_item(),
         ['<C-e>'] = cmp.mapping.close(),
         ['<C-y>'] = cmp.mapping({
-          c = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace }),
+          c = cmp.mapping.confirm({ select = true }),
         }),
         ['<CR>'] = cmp.mapping({
-          i = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace }),
+          i = cmp.mapping.confirm({ select = true }),
           c = function(fallback)
             fallback()
           end,
