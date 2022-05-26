@@ -30,7 +30,11 @@ function sync-env
     ####
     #{{if eq .chezmoi.os "darwin" }}
     brew_install direnv exa bat btop startship tmux ripgrep fzf
-    brew_install --cask wez/wezterm/wezterm-nightly
+    if not type -q wezterm
+        brew_install --cask wez/wezterm/wezterm-nightly
+    else
+        brew upgrade --cask wezterm-nightly --no-quarantine --greedy-latest
+    end
     #{{else}}
     paru_install direnv exa bat btop startship tmux wezterm ripgrep fzf
     #{{end}}
@@ -302,4 +306,3 @@ function macos_sync_zls
     ln -sf (realpath ./zig-out/bin/zls) /usr/local/bin/zls
     cd $cur_dir
 end
-
