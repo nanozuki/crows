@@ -23,7 +23,6 @@ function sync-env
     paru_update
     #{{end}}
     fisher_update
-    cargo_update
     npm_update
 
     #### Terminal tools
@@ -49,14 +48,6 @@ function sync-env
     #{{else}}
     paru_install gnupg pinentry
     #{{end}}
-    #echo "Import gpg public keys..."
-    #for file in (ls $project/secret/gpgkeys/*pub.gpg)
-    #    gpg --import $file
-    #end
-    #echo "Import secret keys..."
-    #for file in (ls $project/secret/gpgkeys/*sec.gpg)
-    #    gpg --allow-secret-key-import --import $file
-    #end
 
     #### Rime
     #{{if eq .chezmoi.os "darwin" }}
@@ -143,6 +134,7 @@ function sync-env
     paru_install terraform terraform-ls
     #{{end}}
     ### others
+    cargo_install typos-cli
     npm_install graphql-language-service-cli vim-language-server yaml-language-server
 end
 
@@ -207,10 +199,6 @@ end
 function cargo_install
     __ensure_cargo
     cargo install $argv
-end
-
-function cargo_update
-    __ensure_cargo
 end
 
 function __ensure_cargo
