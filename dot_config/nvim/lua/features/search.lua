@@ -11,7 +11,7 @@ search.post = function()
 end
 
 -- global replace
-search.plugins[1] = {
+search.plugins[#search.plugins + 1] = {
   'dyng/ctrlsf.vim',
   config = function()
     vim.g.ctrlsf_ackprg = 'rg'
@@ -22,7 +22,7 @@ search.plugins[1] = {
 }
 
 -- telescope
-search.plugins[2] = {
+search.plugins[#search.plugins + 1] = {
   'nvim-telescope/telescope.nvim',
   requires = {
     { 'nvim-lua/plenary.nvim' },

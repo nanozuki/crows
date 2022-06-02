@@ -103,7 +103,7 @@ startify.config = {
   },
 }
 
-startify.plugins[1] = {
+startify.plugins[#startify.plugins + 1] = {
   'goolord/alpha-nvim',
   requires = { 'kyazdani42/nvim-web-devicons' },
   config = function()
