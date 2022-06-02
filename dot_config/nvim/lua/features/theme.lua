@@ -83,6 +83,12 @@ local themes = {
     },
     apply = function()
       vim.cmd('packadd rose-pine')
+      require('rose-pine').setup({
+        highlight_groups = {
+          NormalFloat = { bg = 'base' },
+          FloatBorder = { fg = 'iris' },
+        },
+      })
       vim.o.background = 'light'
       vim.cmd('colorscheme rose-pine')
     end,
@@ -93,7 +99,6 @@ local used_theme = themes.rose_pine_dawn
 
 theme.pre = function()
   vim.opt.termguicolors = true -- true color
-  theme.palette = used_theme.palette
 end
 theme.plugins = {
   { 'sainnhe/gruvbox-material', opt = true },
@@ -103,6 +108,7 @@ theme.plugins = {
 }
 theme.post = function()
   used_theme.apply()
+  theme.palette = used_theme.palette
 end
 
 return theme
