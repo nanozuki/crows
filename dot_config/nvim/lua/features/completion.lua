@@ -1,7 +1,7 @@
 ---@type Feature
 local completion = { plugins = {} }
 
-completion.plugins[1] = {
+completion.plugins[#completion.plugins + 1] = {
   'gelguy/wilder.nvim',
   config = function()
     local wilder = require('wilder')
@@ -30,7 +30,7 @@ completion.plugins[1] = {
   end,
 }
 
-completion.plugins[2] = {
+completion.plugins[#completion.plugins + 1] = {
   'hrsh7th/nvim-cmp',
   requires = {
     'hrsh7th/cmp-nvim-lsp',
@@ -95,6 +95,13 @@ completion.plugins[2] = {
         { name = 'buffer' },
       }),
     })
+  end,
+}
+
+completion.plugins[#completion.plugins + 1] = {
+  'hrsh7th/cmp-nvim-lsp',
+  config = function()
+    require('crows.lsp').add_caps_setter(require('cmp_nvim_lsp').update_capabilities)
   end,
 }
 

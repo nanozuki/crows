@@ -10,7 +10,7 @@ lsp.pre = function()
 end
 
 -- lsp diagnostics
-lsp.plugins[1] = {
+lsp.plugins[#lsp.plugins + 1] = {
   'folke/trouble.nvim',
   requires = 'kyazdani42/nvim-web-devicons',
   config = function()
@@ -31,7 +31,7 @@ lsp.plugins[1] = {
 }
 
 -- function signature hint
-lsp.plugins[2] = {
+lsp.plugins[#lsp.plugins + 1] = {
   'ray-x/lsp_signature.nvim',
   config = function()
     require('crows.lsp').add_on_attach(function(_, _)
@@ -41,7 +41,7 @@ lsp.plugins[2] = {
 }
 
 -- lsp ui extension
-lsp.plugins[3] = {
+lsp.plugins[#lsp.plugins + 1] = {
   'RishabhRD/lspactions',
   requires = {
     { 'nvim-lua/plenary.nvim' },
@@ -63,7 +63,7 @@ lsp.plugins[3] = {
 }
 
 -- print lang server status
-lsp.plugins[4] = {
+lsp.plugins[#lsp.plugins + 1] = {
   'j-hui/fidget.nvim',
   config = function()
     require('fidget').setup({})

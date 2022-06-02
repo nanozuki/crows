@@ -46,13 +46,13 @@ editor.pre = function()
 end
 
 -- display sign for marks
-editor.plugins[1] = 'kshenoy/vim-signature'
+editor.plugins[#editor.plugins + 1] = 'kshenoy/vim-signature'
 
 -- multi select and edit
-editor.plugins[2] = 'mg979/vim-visual-multi'
+editor.plugins[#editor.plugins + 1] = 'mg979/vim-visual-multi'
 
 -- autopairs
-editor.plugins[3] = {
+editor.plugins[#editor.plugins + 1] = {
   'windwp/nvim-autopairs',
   requires = { 'hrsh7th/nvim-cmp' },
   config = function()
@@ -65,10 +65,10 @@ editor.plugins[3] = {
 }
 
 -- surround edit
-editor.plugins[4] = 'machakann/vim-sandwich'
+editor.plugins[#editor.plugins + 1] = 'machakann/vim-sandwich'
 
 -- indent hint
-editor.plugins[5] = {
+editor.plugins[#editor.plugins + 1] = {
   'lukas-reineke/indent-blankline.nvim',
   config = function()
     require('indent_blankline').setup({
@@ -79,7 +79,7 @@ editor.plugins[5] = {
 }
 
 -- treesitter
-editor.plugins[6] = {
+editor.plugins[#editor.plugins + 1] = {
   'nvim-treesitter/nvim-treesitter',
   run = ':TSUpdate',
   config = function()
@@ -92,8 +92,8 @@ editor.plugins[6] = {
 }
 
 -- git management
-editor.plugins[7] = 'tpope/vim-fugitive'
-editor.plugins[8] = {
+editor.plugins[#editor.plugins + 1] = 'tpope/vim-fugitive'
+editor.plugins[#editor.plugins + 1] = {
   'TimUntersberger/neogit',
   requires = {
     'nvim-lua/plenary.nvim',

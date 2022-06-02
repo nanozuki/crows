@@ -1,7 +1,7 @@
 # for this repo
-utils.fish
 README.md
 LICENSE
+stylua.toml
 
 {{ if ne .chezmoi.os "darwin" }}
 Library
