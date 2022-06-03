@@ -83,12 +83,6 @@ local themes = {
     },
     apply = function()
       vim.cmd('packadd rose-pine')
-      require('rose-pine').setup({
-        highlight_groups = {
-          NormalFloat = { bg = 'base' },
-          FloatBorder = { fg = 'iris' },
-        },
-      })
       vim.o.background = 'light'
       vim.cmd('colorscheme rose-pine')
     end,
