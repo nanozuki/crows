@@ -146,7 +146,7 @@ function brew_install
 end
 
 function brew_update
-    brew update && brew upgrade && brew --cask upgrade && brew cleanup
+    brew update && brew upgrade && brew upgrade --cask && brew cleanup
 end
 
 #### Paru
@@ -222,18 +222,18 @@ end
 function npm_install
     __ensure_npm
     #{{if eq .chezmoi.os "darwin" }}
-    npm -g install $argv
+    npm --location=global install $argv
     #{{else}}
-    sudo npm -g install $argv
+    sudo npm --location=global install $argv
     #{{end}}
 end
 
 function npm_update
     __ensure_npm
     #{{if eq .chezmoi.os "darwin" }}
-    npm -g upgrade
+    npm --location=global upgrade
     #{{else}}
-    sudo npm -g upgrade
+    sudo npm --location=global upgrade
     #{{end}}
 end
 
