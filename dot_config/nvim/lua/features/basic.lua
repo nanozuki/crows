@@ -63,6 +63,12 @@ basic.plugins[#basic.plugins + 1] = {
   end,
 }
 
+-- improve vim quickfix UI
+basic.plugins[#basic.plugins + 1] = {
+  'kevinhwang91/nvim-bqf',
+  ft = 'qf',
+}
+
 basic.post = function()
   local termcode = function(str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)
