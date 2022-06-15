@@ -1,0 +1,19 @@
+let mapleader = " "
+set ideajoin
+nmap <leader>:  <action>(GotoAction)
+
+" telescope like actions
+nmap <leader>ff <action>(GotoFile)
+nmap <leader>fg <action>(FindInPath)
+nmap <leader>sf <action>(ReplaceInPath)
+
+"" lsp like actions
+" no need map to gd
+nmap gi <action>(GotoImplementation)
+nmap gu <action>(GotoSuperMethod)
+nmap gr <action>(FindUsagesInFile)
+
+"" window/tab manager
+" tab only
+nmap <leader>to <action>(CloseAllEditorsButActive)
+nmap <leader>q  <action>(CloseAllEditors)
