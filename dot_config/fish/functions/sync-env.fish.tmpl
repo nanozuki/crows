@@ -28,14 +28,14 @@ function sync-env
     #### Terminal tools
     ####
     #{{if eq .chezmoi.os "darwin" }}
-    brew_install direnv exa bat btop startship tmux ripgrep fzf
+    brew_install direnv exa bat btop starship tmux ripgrep fzf
     if not type -q wezterm
         brew_install --cask wez/wezterm/wezterm-nightly
     else
         brew upgrade --cask wezterm-nightly --no-quarantine --greedy-latest
     end
     #{{else}}
-    paru_install direnv exa bat btop startship tmux wezterm ripgrep fzf
+    paru_install direnv exa bat btop starship tmux wezterm ripgrep fzf
     #{{end}}
     fisher_install jethrokuan/z PatrickF1/fzf.fish
 
@@ -116,7 +116,7 @@ function sync-env
     npm_install typescript typescript-language-server @tailwindcss/language-server prettier vscode-langservers-extracted
     ### zig
     #{{if eq .chezmoi.os "darwin"}}
-    brew_install zig --HEAD
+    brew_install zig
     macos_sync_zls
     #{{else}}
     paru_install zig zls-bin
@@ -263,34 +263,13 @@ function add_path
     fish_add_path $argv;or return 0
 end
 
-function git_latest
-    set repo_path (find_git_repo_path $argv[1])
-    if test -e $repo_path
-        set cur_dir (pwd)
-        cd $repo_path
-        set output (git pull); or cd $cur_dir && return 1
-        cd $cur_dir
-        if test (echo $output | grep 'Already up to date')
-            return 1
-        end
-    else
-        git clone $argv[1] $repo_path
-        or return 0
-    end
-    echo $repo_path
-end
-
 function macos_sync_zls
-    set repo https://github.com/zigtools/zls.git
-    set repo_path (git_latest $repo); or return 0
-    if test -z $repo_path
-        return 0
-    end
-
-    set cur_dir (pwd)
-    cd $repo_path
-    git submodule update --init --recursive
-    zig build -Drelease-safe
-    ln -sf (realpath ./zig-out/bin/zls) /usr/local/bin/zls
-    cd $cur_dir
+    mkdir -p $XDG_CACHE_HOME/zls
+    cd $XDG_CACHE_HOME/zls
+        set zls_url (curl -s https://api.github.com/repos/zigtools/zls/releases/latest \
+            | grep "https://.*macos.tar.xz" | cut -d\" -f4)
+        curl -L $zls_url  | tar -xJ --strip-components=1 -C .
+        chmod +x zls
+        mv zls /usr/local/bin/zls
+    cd -
 end
