@@ -221,20 +221,12 @@ end
 
 function npm_install
     __ensure_npm
-    #{{if eq .chezmoi.os "darwin" }}
-    npm --location=global install $argv
-    #{{else}}
-    sudo npm --location=global install $argv
-    #{{end}}
+    npm -g install $argv
 end
 
 function npm_update
     __ensure_npm
-    #{{if eq .chezmoi.os "darwin" }}
-    npm --location=global upgrade
-    #{{else}}
-    sudo npm --location=global upgrade
-    #{{end}}
+    npm -g upgrade
 end
 
 function __ensure_npm
@@ -247,8 +239,8 @@ function __ensure_npm
         paru_install nodejs-lts-gallium npm
         #{{end}}
         npm config set prefix      $XDG_DATA_HOME/npm
+        add_path $XDG_DATA_HOME/npm/bin
         npm config set cache       $XDG_CACHE_HOME/npm
-        npm config set tmp         $XDG_RUNTIME_DIR/npm
         npm config set init-module $XDG_CONFIG_HOME/npm/config/npm-init.js
     end
 end
