@@ -40,7 +40,7 @@ editor.pre = function()
   local fi_group = vim.api.nvim_create_augroup('fileindent', {})
   vim.api.nvim_create_autocmd('FileType', {
     group = fi_group,
-    pattern = 'lua,javascript,typescript,javascriptreact,typescriptreact,html,css,scss,xml,yaml,json',
+    pattern = 'lua,javascript,typescript,javascriptreact,typescriptreact,html,css,scss,xml,yaml,json,terraform',
     command = 'setlocal expandtab ts=2 sw=2 sts=2',
   })
 end

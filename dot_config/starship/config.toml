@@ -5,18 +5,18 @@ success_symbol = '[»](bold purple)'
 error_symbol = '[»](bold red)'
 
 [directory]
-truncation_length=10
-truncate_to_repo=false
+truncation_length = 10
+truncate_to_repo = false
 fish_style_pwd_dir_length = 1
 
 [git_metrics]
 added_style = "green"
 deleted_style = "red"
 format = '([+$added]($added_style))([-$deleted]($deleted_style)) '
-disabled=false
+disabled = false
 
 [status]
-disabled=false
+disabled = false
 
 # languages
 [golang]
@@ -26,6 +26,6 @@ disabled = true
 
 # disabled modules
 [aws]
-format=''  
+disabled = true
 [gcloud]
-format=''
+disabled = true
