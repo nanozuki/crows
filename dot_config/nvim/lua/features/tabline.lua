@@ -1,9 +1,9 @@
 local tabby_config = function()
   local palette = require('features.theme').palette
-  local filename = require('tabby.filename')
+  local filename = require('tabby.module.filename')
   local tabname = function(tabid)
     local number = vim.api.nvim_tabpage_get_number(tabid)
-    local name = require('tabby.util').get_tab_name(tabid)
+    local name = require('tabby.tab').get_name(tabid)
     return string.format('%d: %s', number, name)
   end
   local cwd = function()
