@@ -31,8 +31,8 @@ function sync-env
     brew_install direnv exa bat btop starship tmux ripgrep fzf
     if not type -q wezterm
         brew_install --cask wez/wezterm/wezterm-nightly
-    ##else
-        ##brew upgrade --cask wezterm-nightly --no-quarantine --greedy-latest
+    else
+        brew upgrade --cask wezterm-nightly --no-quarantine --greedy-latest
     end
     #{{else}}
     paru_install direnv exa bat btop starship tmux wezterm ripgrep fzf
@@ -146,7 +146,7 @@ function brew_install
 end
 
 function brew_update
-    brew update && brew upgrade && brew upgrade --cask --greedy && brew cleanup
+    brew update && brew upgrade && brew upgrade --cask && brew cleanup
 end
 
 #### Paru
