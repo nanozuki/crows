@@ -13,13 +13,13 @@ local tabby_config = function()
     hl = { fg = palette.fg, bg = palette.bg },
     layout = 'active_wins_at_tail',
     head = {
-      { cwd, hl = { fg = palette.bg, bg = palette.accent } },
+      { cwd, hl = { fg = palette.bg, bg = palette.accent, style = 'italic' } },
       { '', hl = { fg = palette.accent, bg = palette.bg } },
     },
     active_tab = {
       label = function(tabid)
         return {
-          '  ' .. tabname(tabid) .. ' ',
+          '  ' .. tabname(tabid) .. ' ',
           hl = { fg = palette.bg, bg = palette.accent_sec, style = 'bold' },
         }
       end,
@@ -29,7 +29,7 @@ local tabby_config = function()
     inactive_tab = {
       label = function(tabid)
         return {
-          '  ' .. tabname(tabid) .. ' ',
+          '  ' .. tabname(tabid) .. ' ',
           hl = { fg = palette.fg, bg = palette.bg_sec, style = 'bold' },
         }
       end,

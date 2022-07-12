@@ -74,8 +74,8 @@ local themes = {
   },
   rose_pine_dawn = {
     palette = {
-      accent = '#b4637a', -- bg_purple
-      accent_sec = '#d7827e', -- grey
+      accent = '#907aa9', -- Iris
+      accent_sec = '#d7827e', -- Rose
       bg = '#f2e9de', -- bg1
       bg_sec = '#e4dfde', -- bg4
       fg = '#575279', -- default:bg1
