@@ -8,9 +8,9 @@ local tabby_config = function()
     win = { fg = palette.fg, bg = palette.bg_sec },
     tail = { fg = palette.bg, bg = palette.accent_sec, style = 'bold' },
   }
-  local cwd = ' ' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':t') .. ' '
   vim.opt.showtabline = 2
   require('tabby.tabline').set(function(line)
+    local cwd = ' ' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':t') .. ' '
     return {
       { { cwd, hl = theme.head }, line.sep('', theme.head, theme.line) },
       line.tabs().foreach(function(tab)
