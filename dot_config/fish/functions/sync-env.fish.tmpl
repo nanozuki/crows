@@ -24,6 +24,7 @@ function sync-env
     #{{end}}
     fisher_update
     npm_update
+    cargo_update
 
     #### Terminal tools
     ####
@@ -198,6 +199,10 @@ end
 function cargo_install
     __ensure_cargo
     cargo install $argv
+end
+
+function cargo_update
+    rustup update
 end
 
 function __ensure_cargo
