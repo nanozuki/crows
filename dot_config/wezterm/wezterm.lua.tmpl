@@ -9,18 +9,38 @@ local function set(options)
   end
 end
 
+local function get_font(family)
+  if family == 'JetBrainsMono' then
+    return wezterm.font_with_fallback({
+      'JetBrainsMono Nerd Font',
+      'Menlo',
+      'Apple Braille',
+      'Geneva',
+      'Apple Color Emoji',
+      'PingFang SC',
+    })
+  elseif family == 'VictorMono' then
+    return wezterm.font_with_fallback({
+      'VictorMono Nerd Font',
+      'Apple Color Emoji',
+      'PingFang SC',
+    })
+  elseif family == 'Iosevka' then
+    return wezterm.font_with_fallback({
+      'Iosevka Term Slab',
+      'Iosevka Nerd Font',
+      'Apple Color Emoji',
+      'PingFang SC',
+    })
+  else
+    return wezterm.font('monospace')
+  end
+end
+
 -- font
 set({
-  font = wezterm.font_with_fallback({
-    'JetBrainsMono Nerd Font',
-    'Menlo',
-    'Apple Braille',
-    'Geneva',
-    'Apple Color Emoji',
-    'PingFang SC',
-  }),
-  -- font_size = {{ default "10" .term.font_size }},
-  font_size = {{ default "10" .term.font_size }},
+  font = get_font('{{.term.font_family}}'),
+  font_size = {{.term.font_size}},
 })
 
 -- theme
@@ -36,7 +56,7 @@ set({
   tab_max_width = 99,
   -- appearance/window
   window_frame = require('lua/rose-pine-dawn').window_frame(),
-  window_padding = { left = 2, right = 2, top = 0, bottom = 0 },
+  window_padding = { left = "2px", right = "2px", top = "2px", bottom = "2px" },
 })
 
 -- key mapping
