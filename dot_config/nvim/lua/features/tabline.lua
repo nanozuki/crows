@@ -49,7 +49,6 @@ tabline.plugins = {
   {
     'nanozuki/tabby.nvim',
     requires = 'kyazdani42/nvim-web-devicons',
-    branch = 'v2-preview',
     config = tabby_config,
   },
 }
