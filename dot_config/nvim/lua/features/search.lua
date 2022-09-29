@@ -35,6 +35,12 @@ search.plugins[#search.plugins + 1] = {
     require('telescope').load_extension('fzf')
     require('telescope').load_extension('session-lens')
     require('telescope').setup({
+      defaults = {
+        preview = {
+          filesize_limit = 0.5,
+          timeout = 100,
+        },
+      },
       extensions = {
         fzf = {
           fuzzy = true,
