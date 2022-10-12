@@ -17,6 +17,11 @@ local function set_filetype()
       { group = ft_group, pattern = pattern, command = 'setfiletype ' .. filetype, once = true }
     )
   end
+  vim.api.nvim_create_autocmd({ 'FileType' }, {
+    group = ft_group,
+    pattern = { 'help' },
+    command = 'set conceallevel=0',
+  })
 end
 
 editor.pre = function()
@@ -94,7 +99,7 @@ editor.plugins[#editor.plugins + 1] = {
 -- git management
 editor.plugins[#editor.plugins + 1] = 'tpope/vim-fugitive'
 editor.plugins[#editor.plugins + 1] = {
-  'TimUntersberger/neogit',
+  'nanozuki/neogit',
   requires = {
     'nvim-lua/plenary.nvim',
     'sindrets/diffview.nvim',
