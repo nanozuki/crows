@@ -11,7 +11,6 @@ local features = {
   require('features.theme'),
   require('features.statusline'),
   require('features.tabline'),
-  require('features.cmdline'),
   require('features.startify'),
   require('features.lsp'),
 }
