@@ -19,7 +19,8 @@ local themes = {
     apply = function()
       vim.cmd('packadd gruvbox-material')
       vim.opt.background = 'light'
-      vim.g['gruvbox_material_enable_italic'] = 1
+      vim.g.gruvbox_material_enable_italic = 1
+      vim.g.gruvbox_material_background = 'hard'
       vim.cmd('colorscheme gruvbox-material')
     end,
   },
