@@ -28,26 +28,6 @@ basic.pre = function()
   })
 end
 
-basic.plugins = {
-  'lewis6991/impatient.nvim',
-  {
-    'rmagatti/auto-session',
-    config = function()
-      vim.opt.sessionoptions = 'curdir,folds,help,tabpages,terminal,winsize'
-      require('auto-session').setup({
-        pre_save_cmds = { 'NvimTreeClose' },
-        auto_session_suppress_dirs = { '~' },
-      })
-      require('crows').key.maps({
-        ['<leader>s'] = {
-          r = { '<cmd>RestoreSession<cr>', 'Restore session' },
-          s = { '<cmd>SaveSession<cr>', 'Save session' },
-        },
-      })
-    end,
-  },
-}
-
 basic.plugins[#basic.plugins + 1] = 'lewis6991/impatient.nvim'
 
 basic.plugins[#basic.plugins + 1] = {
