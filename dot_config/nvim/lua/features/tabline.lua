@@ -66,6 +66,33 @@ tabline.post = function()
         n = { ':+tabmove<CR>', 'Move current tab to next position ' },
       },
     },
+    ['<leader>w'] = {
+      o = {
+        function()
+          local tabid = vim.api.nvim_get_current_tabpage()
+          local wins = vim.api.nvim_tabpage_list_wins(tabid)
+          local current = vim.api.nvim_get_current_win()
+          for _, win in ipairs(wins) do
+            if win ~= current then
+              vim.api.nvim_win_close(win, false)
+            end
+          end
+        end,
+        'Close other windows in this tab',
+      },
+      O = {
+        function()
+          local tabid = vim.api.nvim_get_current_tabpage()
+          local wins = vim.api.nvim_tabpage_list_wins(tabid)
+          for _, win in ipairs(wins) do
+            if vim.api.nvim_win_get_config(win).relative ~= '' then
+              vim.api.nvim_win_close(win, false)
+            end
+          end
+        end,
+        'Close floating windows in this tab',
+      },
+    },
   })
 end
 
