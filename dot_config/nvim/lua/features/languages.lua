@@ -129,11 +129,12 @@ local typescript = {
     fmt.by_formatter.javascriptreact = { fmt.formatters.prettier }
     fmt.by_formatter.css = { fmt.formatters.prettier }
     fmt.by_formatter.html = { fmt.formatters.prettier }
+    fmt.by_formatter.xml = { fmt.formatters.prettier }
   end,
   plugins = {
     {
       'mattn/emmet-vim',
-      ft = { 'html', 'javascript.jsx', 'typescript.tsx', 'javascriptreact', 'typescriptreact' },
+      ft = { 'html', 'javascript.jsx', 'typescript.tsx', 'javascriptreact', 'typescriptreact', 'xml' },
     },
   },
   post = function()

@@ -1,35 +1,36 @@
 ---@type Feature
 local completion = { plugins = {} }
 
--- completion.plugins[#completion.plugins + 1] = {
---   'gelguy/wilder.nvim',
---   config = function()
---     local wilder = require('wilder')
---     wilder.setup({
---       modes = { ':', '/', '?' },
---     })
---     wilder.set_option('pipeline', {
---       wilder.branch(
---         wilder.cmdline_pipeline({
---           language = 'python',
---           fuzzy = 1,
---         }),
---         wilder.python_search_pipeline({
---           pattern = wilder.python_fuzzy_pattern(),
---           sorter = wilder.python_difflib_sorter(),
---           engine = 're',
---         })
---       ),
---     })
---     wilder.set_option(
---       'renderer',
---       wilder.popupmenu_renderer({
---         highlighter = wilder.basic_highlighter(),
---       })
---     )
---   end,
--- }
+completion.plugins[#completion.plugins + 1] = {
+  'gelguy/wilder.nvim',
+  config = function()
+    local wilder = require('wilder')
+    wilder.setup({
+      modes = { ':', '/', '?' },
+    })
+    wilder.set_option('pipeline', {
+      wilder.branch(
+        wilder.cmdline_pipeline({
+          language = 'python',
+          fuzzy = 1,
+        }),
+        wilder.python_search_pipeline({
+          pattern = wilder.python_fuzzy_pattern(),
+          sorter = wilder.python_difflib_sorter(),
+          engine = 're',
+        })
+      ),
+    })
+    wilder.set_option(
+      'renderer',
+      wilder.popupmenu_renderer({
+        highlighter = wilder.basic_highlighter(),
+      })
+    )
+  end,
+}
 
+--[[
 completion.plugins[#completion.plugins + 1] = {
   'hrsh7th/cmp-cmdline',
   config = function()
@@ -45,6 +46,7 @@ completion.plugins[#completion.plugins + 1] = {
     })
   end,
 }
+--]]
 
 completion.plugins[#completion.plugins + 1] = {
   'hrsh7th/nvim-cmp',
@@ -117,7 +119,7 @@ completion.plugins[#completion.plugins + 1] = {
 completion.plugins[#completion.plugins + 1] = {
   'hrsh7th/cmp-nvim-lsp',
   config = function()
-    require('crows.lsp').add_caps_setter(require('cmp_nvim_lsp').update_capabilities)
+    require('crows.lsp').add_caps_setter(require('cmp_nvim_lsp').default_capabilities)
   end,
 }
 
