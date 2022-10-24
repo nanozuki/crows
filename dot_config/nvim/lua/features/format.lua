@@ -1,4 +1,9 @@
----@type Feature
+---@class FormatModule: Feature
+---@field by_formatter table
+---@field by_lsp table
+---@field formatters table
+
+---@type FormatModule
 local format = {
   by_formatter = {},
   by_lsp = {},
