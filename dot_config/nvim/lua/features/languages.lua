@@ -44,7 +44,21 @@ local lua = {
     fmt.by_formatter.lua = { fmt.formatters.stylua }
   end,
   post = function()
-    lsp.set_config('sumneko_lua', { Lua = { telemetry = { enable = false } } })
+    lsp.set_config('sumneko_lua', {
+      settings = {
+        Lua = {
+          runtime = {
+            version = 'LuaJIT',
+          },
+          diagnostics = {
+            globals = { 'vim' },
+          },
+          telemetry = {
+            enable = false,
+          },
+        },
+      },
+    })
   end,
 }
 

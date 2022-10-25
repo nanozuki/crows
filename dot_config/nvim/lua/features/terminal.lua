@@ -27,7 +27,7 @@ terminal.plugins[#terminal.plugins + 1] = {
   tag = '*',
   config = function()
     require('toggleterm').setup({
-      open_mapping = '<leader>tf', -- terminal floating
+      open_mapping = [[<c-\>]],
       direction = 'float',
     })
     require('features.terminal').xplr()
