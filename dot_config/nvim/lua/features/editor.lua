@@ -99,7 +99,7 @@ editor.plugins[#editor.plugins + 1] = {
 -- git management
 editor.plugins[#editor.plugins + 1] = 'tpope/vim-fugitive'
 editor.plugins[#editor.plugins + 1] = {
-  'nanozuki/neogit',
+  'TimUntersberger/neogit',
   requires = {
     'nvim-lua/plenary.nvim',
     'sindrets/diffview.nvim',
