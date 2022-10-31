@@ -11,13 +11,13 @@ local palette = {
 }
 
 local active_tab = {
-  bg_color = palette.overlay,
-  fg_color = palette.text,
+  bg_color = palette.text,
+  fg_color = palette.base,
 }
 
 local inactive_tab = {
   bg_color = palette.base,
-  fg_color = palette.muted,
+  fg_color = palette.text,
 }
 
 function M.colors()
