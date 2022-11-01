@@ -140,9 +140,18 @@ end
 #### Homebrew
 
 function brew_install
-    for pkg in $argv
-        if not brew list --version $pkg
-            brew install $pkg
+    set params
+    set pkgs
+    for $arg in $argv
+        if string match -- '--*' $arg > /dev/null
+            set -a params $arg
+        else
+            set -a pkgs $arg
+        end
+    end
+    for pkg in $pkgs
+        if not brew list --version $params $pkg
+            brew install $params $pkg
         end
     end
 end
