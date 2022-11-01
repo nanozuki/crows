@@ -1,8 +1,13 @@
 {
-  "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
-  "diagnostics.globals": ["vim"],
-  "workspace.checkThirdParty": false,
-  "workspace.library": ["~/.local/share/nvim/site"],
-  "runtime.version": "LuaJIT",
-  "telemetry.enable": false
+    "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+    "Lua.completion.autoRequire": false,
+    "diagnostics.globals": [
+        "vim"
+    ],
+    "runtime.version": "LuaJIT",
+    "telemetry.enable": false,
+    "workspace.checkThirdParty": false,
+    "workspace.library": [
+        "~/.local/share/nvim/site"
+    ]
 }
