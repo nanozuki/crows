@@ -30,11 +30,10 @@ function sync-env
     ####
     #{{if eq .chezmoi.os "darwin" }}
     brew_install direnv exa bat btop starship tmux ripgrep fzf
-    if not type -q wezterm
-        brew_install --cask wez/wezterm/wezterm-nightly
-    else
-        brew upgrade --cask wezterm-nightly --no-quarantine --greedy-latest
+    if not brew tap | grep wezterm
+        brew tap wez/wezterm
     end
+    brew_install --cask wezterm
     #{{else}}
     paru_install direnv exa bat btop starship tmux wezterm ripgrep fzf
     #{{end}}
@@ -99,7 +98,6 @@ function sync-env
     ## golang grpc
     go install google.golang.org/protobuf/cmd/protoc-gen-go@latest 
     go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest 
-    go install github.com/golang/protobuf/{proto,protoc-gen-go}@latest
     ### rust
     #{{if eq .chezmoi.os "darwin"}}
     brew_install rust-analyzer
@@ -142,7 +140,11 @@ end
 #### Homebrew
 
 function brew_install
-    brew install $argv;or return 0
+    for pkg in $argv
+        if not brew list --version $pkg
+            brew install $pkg
+        end
+    end
 end
 
 function brew_update
