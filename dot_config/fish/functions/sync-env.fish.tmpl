@@ -142,7 +142,7 @@ end
 function brew_install
     set params
     set pkgs
-    for $arg in $argv
+    for arg in $argv
         if string match -- '--*' $arg > /dev/null
             set -a params $arg
         else
