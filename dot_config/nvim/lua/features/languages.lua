@@ -2,26 +2,10 @@ local lsp = require('crows.lsp')
 local fmt = require('features.format')
 
 ---@type Feature
-local fish = {
-  plugins = {
-    { 'dag/vim-fish', ft = { 'fish' } },
-  },
-}
-
----@type Feature
 local go = {
   pre = function()
     fmt.by_formatter.go = { fmt.formatters.goimports }
   end,
-  plugins = {
-    {
-      'ray-x/go.nvim',
-      ft = { 'go', 'gomod' },
-      config = function()
-        require('go').setup()
-      end,
-    },
-  },
   post = function()
     lsp.set_config('gopls', {})
     lsp.set_config('golangci_lint_ls', {})
@@ -107,12 +91,6 @@ local typescript = {
     fmt.by_formatter.html = { fmt.formatters.prettier }
     fmt.by_formatter.xml = { fmt.formatters.prettier }
   end,
-  plugins = {
-    {
-      'mattn/emmet-vim',
-      ft = { 'html', 'javascript.jsx', 'typescript.tsx', 'javascriptreact', 'typescriptreact', 'xml' },
-    },
-  },
   post = function()
     local util = require('lspconfig.util')
     lsp.set_config('tsserver', {
@@ -171,7 +149,6 @@ local zig = {
 
 ---@type Feature[]
 return {
-  fish,
   go,
   json,
   lua,
