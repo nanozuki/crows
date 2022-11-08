@@ -19,7 +19,7 @@ set -g message-style "fg=black,bg=#{@accent}"
 set -g mode-style "fg=black,bg=#{@accent}"
 set -g status-style "fg=white,bg=#{?#{client_prefix},#{@accent},black}"
 set -g status-left-length 100
-set -g status-left "#[fg=black,bg=white]   #h #[fg=white,bg=brightblack]#[fg=brightblack,bg=#{@inactive}]#[fg=black] #S #[fg=#{@inactive},bg=#{?#{client_prefix},#{@accent},black}]"
+set -g status-left "#[fg=black,bg=white]   #h #[fg=white,bg=brightblack]#[fg=brightblack,bg=#{@h_overlay}]#[fg=white,bg=#{@h_overlay}] #S #[fg=#{@h_overlay},bg=#{?#{client_prefix},#{@accent},black}]"
 
 set -g status-right-length 100
 set -g status-right "#[fg=#{@inactive},bg=#{?#{client_prefix},#{@accent},black}]#[fg=black,bg=#{@inactive}]#{?pane_in_mode, #{pane_mode} ,}#[fg=brightblack,bg=#{@inactive}]#[fg=black,bg=brightblack] ﲅ #{client_width}:#{client_height} "
