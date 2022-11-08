@@ -1,4 +1,3 @@
----@type Feature
 local theme = {}
 
 ---@class Theme
@@ -91,19 +90,8 @@ local themes = {
 }
 
 local used_theme = themes.rose_pine_dawn
-
-theme.pre = function()
-  vim.opt.termguicolors = true -- true color
-end
-theme.plugins = {
-  { 'sainnhe/gruvbox-material', opt = true },
-  { 'shaunsingh/nord.nvim', opt = true },
-  { 'sainnhe/edge', opt = true },
-  { 'rose-pine/neovim', opt = true, as = 'rose-pine' },
-}
-theme.post = function()
-  used_theme.apply()
-  theme.palette = used_theme.palette
-end
+vim.opt.termguicolors = true -- true color
+used_theme.apply()
+theme.palette = used_theme.palette
 
 return theme
