@@ -18,7 +18,6 @@ local Xplr = Terminal:new({
     end)
   end,
 })
-local crows = require('crows')
-crows.key.map('Toggle xplr', 'n', '<leader>fx', function()
+vim.keymap.set('n', '<leader>fx', function()
   Xplr:toggle()
-end)
+end, { desc = 'Toggle xplr' })

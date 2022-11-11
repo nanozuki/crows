@@ -10,17 +10,17 @@ function M.viml()
 end
 
 function M.yaml()
-  format.formatters.yaml = format.prettier
+  M.formatters.yaml = format.prettier
   lsp.set_config('yamlls', {})
 end
 
 function M.json()
-  format.formatters.json = format.prettier
+  M.formatters.json = format.prettier
   lsp.set_config('jsonls', {})
 end
 
 function M.lua()
-  format.formatters.lua = format.stylua
+  M.formatters.lua = format.stylua
   lsp.set_config('sumneko_lua', {
     settings = {
       Lua = {
@@ -39,24 +39,19 @@ function M.lua()
 end
 
 function M.markdown()
-  format.formatters.markdown = format.prettier
+  M.formatters.markdown = format.prettier
 end
 
 -- # opt-in languages
 
 function M.go()
-  format.formatters.go = format.goimports
+  M.formatters.go = format.goimports
   lsp.set_config('gopls', {})
   lsp.set_config('golangci_lint_ls', {})
 end
 
-function M.terraform()
-  format.formatters.terraform = format.terraform
-  lsp.set_config('terraformls', {})
-end
-
 function M.rust()
-  format.formatters.rust = format.rustfmt
+  M.formatters.rust = format.rustfmt
   lsp.set_config('rust_analyzer', {
     settings = {
       ['rust-analyzer'] = {
@@ -68,13 +63,13 @@ function M.rust()
 end
 
 function M.typescript()
-  format.formatters.typescript = format.prettier
-  format.formatters.javascript = format.prettier
-  format.formatters.typescriptreact = format.prettier
-  format.formatters.javascriptreact = format.prettier
-  format.formatters.css = format.prettier
-  format.formatters.html = format.prettier
-  format.formatters.xml = format.prettier
+  M.formatters.typescript = format.prettier
+  M.formatters.javascript = format.prettier
+  M.formatters.typescriptreact = format.prettier
+  M.formatters.javascriptreact = format.prettier
+  M.formatters.css = format.prettier
+  M.formatters.html = format.prettier
+  M.formatters.xml = format.prettier
   local util = require('lspconfig.util')
   lsp.set_config('tsserver', {
     root_dir = function(fname)
@@ -102,9 +97,27 @@ function M.typescript()
   lsp.set_config('eslint', {})
 end
 
+function M.terraform()
+  M.formatters.terraform = format.terraform
+  lsp.set_config('terraformls', {})
+end
+
 function M.zig()
   lsp.set_format({ '*.zig' }, 'zls')
   lsp.set_config('zls', {})
+end
+
+function M.use(...)
+  -- built-in languages
+  M.viml()
+  M.yaml()
+  M.json()
+  M.lua()
+  M.markdown()
+  for _, lang in ipairs({ ... }) do
+    lang()
+  end
+  return M.formatters
 end
 
 return M
