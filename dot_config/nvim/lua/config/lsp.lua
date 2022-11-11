@@ -44,72 +44,36 @@ local lsp = {
     list_ref = { 'gr', vim.lsp.buf.references, 'List references' },
     -- format = { '<leader>f', vim.lsp.buf.formatting, 'Format buffer' },
   },
-  on_attaches = {},
-  caps_setters = {},
 }
 
----set lsp function of the key
----@param mapper LspKeyMapper
----@param command string
-function lsp.set_key_cmd(mapper, command)
-  mapper[2] = command
-end
-
----set lsp key of the function
----@param mapper LspKeyMapper
----@param key string
-function lsp.set_cmd_key(mapper, key)
-  mapper[1] = key
-end
-
----add 'on_attach' hook
----@param fn OnAttachFn
-function lsp.add_on_attach(fn)
-  lsp.on_attaches[#lsp.on_attaches + 1] = fn
-end
-
----add a capabilities setter
----@param setter CapsSetter
-function lsp.add_caps_setter(setter)
-  lsp.caps_setters[#lsp.caps_setters + 1] = setter
-end
-
----mapping lsp keys
----@param bufnr number buffer number
-local function mapping(bufnr)
-  local wk = require('which-key')
-  local mappings = {}
-  for _, mapper in pairs(lsp.keys) do
-    mappings[mapper[1]] = { mapper[2], mapper[3] }
-  end
-  wk.register(mappings, { silent = true })
-
-  local buf_mappings = {}
-  for _, mapper in pairs(lsp.buffer_keys) do
-    buf_mappings[mapper[1]] = { mapper[2], mapper[3] }
-  end
-  wk.register(buf_mappings, { buffer = bufnr })
+local signs = { Error = '', Warn = '', Info = '', Hint = '' }
+for sign, text in pairs(signs) do
+  local hl = 'DiagnosticSign' .. sign
+  vim.fn.sign_define(hl, { text = text, texthl = hl, linehl = '', numhl = '' })
 end
 
 ---on attach function
 ---@param client table client object
 ---@param bufnr number buffer number
 local function on_attach(client, bufnr)
-  mapping(bufnr)
+  -- mapping
+  for _, mapper in pairs(lsp.keys) do
+    vim.keymap.set('n', mapper[1], mapper[2], { desc = mapper[3] })
+  end
+  for _, mapper in pairs(lsp.buffer_keys) do
+    vim.keymap.set('n', mapper[1], mapper[2], { desc = mapper[3], buffer = bufnr })
+  end
   for _, fn in ipairs(lsp.on_attaches) do
     fn(client, bufnr)
   end
+  -- Plug('ray-x/lsp_signature.nvim')
+  require('lsp_signature').on_attach({ bind = true, handler_opts = { border = 'none' } })
 end
 
 local function capabilities()
   local caps = vim.lsp.protocol.make_client_capabilities()
-  caps.textDocument.completion.completionItem.snippetSupport = true
-  caps.textDocument.completion.completionItem.resolveSupport = {
-    properties = { 'documentation', 'detail', 'additionalTextEdits' },
-  }
-  for _, setter in ipairs(lsp.caps_setters) do
-    caps = setter(caps)
-  end
+  -- Plug('hrsh7th/cmp-nvim-lsp')
+  caps = require('cmp_nvim_lsp').default_capabilities(caps)
   return caps
 end
 
@@ -123,17 +87,15 @@ function lsp.set_config(name, config)
   lspconfig[name].setup(config)
 end
 
-function lsp.add_default(name, default_config)
-  local configs = require('lspconfig.configs')
-  if not configs[name] then
-    configs[name] = {
-      default_config = default_config,
-    }
-  end
-end
-
-function lsp.stop_all_clients()
-  vim.lsp.stop_client(vim.lsp.get_active_clients())
+local format_group = vim.api.nvim_create_augroup('LspFormat')
+function lsp.set_format(pattern, client)
+  vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+    group = format_group,
+    pattern = pattern,
+    callback = function()
+      vim.lsp.buf.format({ name = client })
+    end,
+  })
 end
 
 return lsp
