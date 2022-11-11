@@ -54,5 +54,3 @@ cmp.setup({
     { name = 'buffer' },
   }),
 })
-
-require('crows.lsp').add_caps_setter(require('cmp_nvim_lsp').default_capabilities)
