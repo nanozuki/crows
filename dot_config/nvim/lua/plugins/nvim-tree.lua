@@ -7,4 +7,4 @@ require('nvim-tree').setup({
     ignore = false,
   },
 })
-require('crows').key.map('Toggle filetree', 'n', '<Leader>fl', ':NvimTreeToggle<CR>')
+vim.keymap.set('n', '<Leader>fl', ':NvimTreeToggle<CR>', { desc = 'Toggle filetree' })

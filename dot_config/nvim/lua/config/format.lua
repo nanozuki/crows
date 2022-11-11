@@ -4,7 +4,7 @@ end
 
 local M = {}
 
-M.hormatters = {}
+M.formatters = {}
 
 M.prettier = function()
   return {
