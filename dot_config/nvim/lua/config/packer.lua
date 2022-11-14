@@ -111,7 +111,7 @@ require('packer').startup({
       'mattn/emmet-vim',
       ft = { 'html', 'javascript.jsx', 'typescript.tsx', 'javascriptreact', 'typescriptreact', 'xml' },
     })
-    local custom = require('custom')
+    local custom = require('config.custom')
     if custom.opt_languages.go then
       use({
         'ray-x/go.nvim',

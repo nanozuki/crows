@@ -118,7 +118,7 @@ M.json()
 M.lua()
 M.markdown()
 -- ## opt-in languages
-for lang, enable in pairs(require('custom').opt_languages) do
+for lang, enable in pairs(require('config.custom').opt_languages) do
   if enable then
     M[lang]()
   end
