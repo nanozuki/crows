@@ -82,42 +82,27 @@ function sync-env
     setUx GOPATH $XDG_DATA_HOME/go
     add_path $GOPATH/bin
     #{{if eq .chezmoi.os "darwin"}}
-    brew_install go golangci-lint
-    go install golang.org/x/tools/gopls@latest
+    brew_install go 
     #{{else}}
-    paru_install go gopls golangci-lint
+    paru_install go
     #{{end}}
-    go install github.com/davidrjenni/reftools/cmd/fillstruct@latest 
-    go install golang.org/x/tools/cmd/goimports@latest 
-    go install github.com/fatih/gomodifytags@latest 
-    go install github.com/segmentio/golines@latest
-    go install github.com/cweill/gotests/...@latest
     ## golang code-gen tools
     go install github.com/google/wire/cmd/wire@latest
-    go install github.com/nametake/golangci-lint-langserver@latest
-    ## golang grpc
     go install google.golang.org/protobuf/cmd/protoc-gen-go@latest 
     go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest 
+
     ### rust
-    #{{if eq .chezmoi.os "darwin"}}
-    brew_install rust-analyzer
-    #{{else}}
-    paru_install rust-analyzer
-    #{{end}}
-    ### lua
-    #{{if eq .chezmoi.os "darwin"}}
-    brew_install lua-language-server stylua
-    #{{else}}
-    paru_install lua-language-server stylua
-    #{{end}}
+    install_rust
+
     ### frontend
-    npm_install typescript typescript-language-server @tailwindcss/language-server prettier vscode-langservers-extracted
+    install_node_lts
+    npm_install typescript
+
     ### zig
     #{{if eq .chezmoi.os "darwin"}}
     brew_install zig
-    macos_sync_zls
     #{{else}}
-    paru_install zig zls-bin
+    paru_install zig
     #{{end}}
     ### deno
     #{{if eq .chezmoi.os "darwin" }}
@@ -127,13 +112,12 @@ function sync-env
     #{{end}}
     ### terraform
     #{{if eq .chezmoi.os "darwin" }}
-    brew_install terraform terraform-ls
+    brew_install terraform 
     #{{else}}
-    paru_install terraform terraform-ls
+    paru_install terraform
     #{{end}}
     ### others
     cargo_install typos-cli
-    npm_install graphql-language-service-cli vim-language-server yaml-language-server
 end
 
 
@@ -174,9 +158,8 @@ end
 
 function __ensure_paru
     if not type -q paru
-        __ensure_cargo
         pacman -S --needed --noconfirm base-devel
-        gitget "https://aur.archlinux.org/paru.git"
+        gitget "https://aur.archlinux.org/paru-bin.git"
         makepkg -si --noconfirm
         cd -
     end
@@ -208,7 +191,7 @@ end
 #### Cargo
 
 function cargo_install
-    __ensure_cargo
+    install_rust
     cargo install $argv
 end
 
@@ -216,7 +199,7 @@ function cargo_update
     rustup update
 end
 
-function __ensure_cargo
+function install_rust
     if not type -q cargo
         setUx CARGO_HOME $XDG_DATA_HOME/cargo
         setUx RUSTUP_HOME $XDG_DATA_HOME/rustup
@@ -235,29 +218,34 @@ end
 #### Npm
 
 function npm_install
-    __ensure_npm
+    install_node_lts
     npm --location=global install $argv
 end
 
 function npm_update
-    __ensure_npm
+    install_node_lts
     npm --location=global upgrade
 end
 
-function __ensure_npm
-    if not type -q npm
-        setUx NPM_CONFIG_USERCONFIG $XDG_CONFIG_HOME/npm/npmrc
-        #{{if eq .chezmoi.os "darwin" }}
-        brew_install node@16
-        brew link --overwrite --force node@16
-        #{{else}}
-        paru_install nodejs-lts-gallium npm
-        #{{end}}
-        npm config set prefix      $XDG_DATA_HOME/npm
-        add_path $XDG_DATA_HOME/npm/bin
-        npm config set cache       $XDG_CACHE_HOME/npm
-        npm config set init-module $XDG_CONFIG_HOME/npm/config/npm-init.js
+function install_node_lts
+    setUx NPM_CONFIG_USERCONFIG $XDG_CONFIG_HOME/npm/npmrc
+    set node_index "https://nodejs.org/download/release/index.json"
+    #{{if eq .chezmoi.os "darwin" }}
+    brew_install gron
+    set ver (curl -s $node_index | grep -v 'lts":false' | sed -n '2p' | gron | grep version | cut -d= -f2 | cut -d v -f2 | cut -d. -f1)
+    if not brew list --version "node@$ver"
+        brew install "node@$ver"
+        brew link --overwrite --force "node@$ver"
     end
+    #{{else}}
+    paru_install gron
+    set code (curl -s $node_index | grep -v 'lts":false' | sed -n '2p' | gron | grep lts | cut -d= -d\" -f2 | string lower) 
+    paru_install "nodejs-lts-$code" npm
+    #{{end}}
+    npm config set prefix      $XDG_DATA_HOME/npm
+    add_path $XDG_DATA_HOME/npm/bin
+    npm config set cache       $XDG_CACHE_HOME/npm
+    npm config set init-module $XDG_CONFIG_HOME/npm/config/npm-init.js
 end
 
 #### Utils
