@@ -1,5 +1,3 @@
 pcall(require, 'impatient')
-require('crows').setup({
-  modules = { 'features' },
-  features = require('features'),
-})
+require('config.editor')
+require('config.packer')

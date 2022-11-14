@@ -1,6 +1,3 @@
----@type Feature
-local startify = { plugins = {} }
-
 local if_nil = vim.F.if_nil
 
 local section = {}
@@ -89,7 +86,7 @@ section.footer = {
   },
 }
 
-startify.config = {
+require('alpha').setup({
   layout = {
     { type = 'padding', val = 4 },
     section.header,
@@ -101,14 +98,4 @@ startify.config = {
   opts = {
     margin = 5,
   },
-}
-
-startify.plugins[#startify.plugins + 1] = {
-  'goolord/alpha-nvim',
-  requires = { 'kyazdani42/nvim-web-devicons' },
-  config = function()
-    require('alpha').setup(require('features.startify').config)
-  end,
-}
-
-return startify
+})
