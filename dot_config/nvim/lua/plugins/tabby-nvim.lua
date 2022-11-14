@@ -1,4 +1,4 @@
-local palette = require('features.theme').palette
+local palette = require('config.theme').palette
 local theme = {
   line = { fg = palette.fg, bg = palette.bg },
   head = { fg = palette.bg, bg = palette.accent, style = 'italic' },

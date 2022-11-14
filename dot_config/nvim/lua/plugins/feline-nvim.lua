@@ -1,4 +1,4 @@
-local palette = require('features.theme').palette
+local palette = require('config.theme').palette
 local feline = require('feline')
 require('gitsigns').setup({ signcolumn = false })
 
