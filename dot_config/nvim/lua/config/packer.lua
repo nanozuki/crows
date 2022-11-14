@@ -5,6 +5,13 @@ if fn.empty(fn.glob(install_path)) > 0 then
   fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
 end
 
+vim.api.nvim_create_augroup('packer_user_config', {})
+vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
+  group = 'packer_user_config',
+  pattern = { 'packer.lua' },
+  command = 'source <afile> | PackerCompile',
+})
+
 local function cfg(plug)
   return ("require('plugins.%s')"):format(plug)
 end
@@ -38,15 +45,11 @@ require('packer').startup({
       config = cfg('feline-nvim'),
     })
     use({ 'nanozuki/tabby.nvim', requires = 'kyazdani42/nvim-web-devicons', config = cfg('tabby-nvim') })
-    use({
-      'akinsho/toggleterm.nvim',
-      tag = '*',
-      config = cfg('toggleterm-nvim'),
-    })
+    use({ 'akinsho/toggleterm.nvim', tag = '*', config = cfg('toggleterm-nvim') })
     -- ## normal editor
     use('kshenoy/vim-signature') -- display sign for marks
     use('mg979/vim-visual-multi') -- multi select and edit
-    use({ 'windwp/nvim-autopairs', requires = { 'hrsh7th/nvim-cmp' } }) -- autopairs
+    use({ 'windwp/nvim-autopairs', requires = { 'hrsh7th/nvim-cmp' }, config = cfg('nvim-autopairs') }) -- autopairs
     use('machakann/vim-sandwich') -- surround edit
     use({ 'lukas-reineke/indent-blankline.nvim', config = cfg('indent-blankline-nvim') }) -- indent hint
     use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdateSync', config = cfg('nvim-treesitter') }) -- treesitter
@@ -77,7 +80,7 @@ require('packer').startup({
     use({ 'gelguy/wilder.nvim', config = cfg('wilder-nvim') }) -- cmdline completion
     use({ 'mhartington/formatter.nvim', config = cfg('formatter-nvim') }) -- formatter
     -- ## lsp enhancement
-    use({ 'folke/trouble.nvim', requires = 'kyazdani42/nvim-web-devicons' })
+    use({ 'folke/trouble.nvim', requires = 'kyazdani42/nvim-web-devicons', config = cfg('trouble-nvim') })
     use('ray-x/lsp_signature.nvim')
     use({
       'j-hui/fidget.nvim',
@@ -105,16 +108,19 @@ require('packer').startup({
     -- ## languages
     use({ 'dag/vim-fish', ft = { 'fish' } })
     use({
-      'ray-x/go.nvim',
-      ft = { 'go', 'gomod' },
-      config = function()
-        require('go').setup()
-      end,
-    })
-    use({
       'mattn/emmet-vim',
       ft = { 'html', 'javascript.jsx', 'typescript.tsx', 'javascriptreact', 'typescriptreact', 'xml' },
     })
+    local custom = require('custom')
+    if custom.opt_languages.go then
+      use({
+        'ray-x/go.nvim',
+        ft = { 'go', 'gomod' },
+        config = function()
+          require('go').setup()
+        end,
+      })
+    end
   end,
   config = {
     display = {
