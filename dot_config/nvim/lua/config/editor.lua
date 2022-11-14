@@ -87,5 +87,5 @@ local function close_floating_win()
   end
 end
 
-vim.keymap.set('n', '<leader>wo', win_only, 'Close other windows in this tab')
-vim.keymap.set('n', '<leader>wO', close_floating_win, 'Close floating windows in this tab')
+vim.keymap.set('n', '<leader>wo', win_only, { desc = 'Close other windows in this tab' })
+vim.keymap.set('n', '<leader>wO', close_floating_win, { desc = 'Close floating windows in this tab' })

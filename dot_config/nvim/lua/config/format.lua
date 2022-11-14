@@ -25,7 +25,7 @@ end
 M.stylua = function()
   return {
     exe = 'stylua',
-    args = { '--stdin-filepath', cur_file(), '-' },
+    args = { '--search-parent-directories', '--stdin-filepath', cur_file(), '-' },
     stdin = true,
   }
 end
