@@ -11,7 +11,7 @@ local Xplr = Terminal:new({
   hidden = false,
   direction = 'float',
   on_close_exit = true,
-  on_close = function()
+  on_close = function(_)
     local file = require('plenary.path'):new(xplr_file):read()
     vim.schedule(function()
       vim.cmd(('e  %s'):format(file))

@@ -121,6 +121,12 @@ require('packer').startup({
         end,
       })
     end
+    -- ## languages used packages
+    use({
+      'williamboman/mason.nvim',
+      requires = { 'WhoIsSethDaniel/mason-tool-installer.nvim' },
+      config = cfg('mason-nvim'),
+    })
   end,
   config = {
     display = {

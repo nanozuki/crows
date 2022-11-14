@@ -1,6 +1,8 @@
 local M = {
   ---@type table<string, fun()>
   formatters = {},
+  ---@type table<string, (string|table)[]>
+  packages = {},
 }
 
 local lsp = require('config.lsp')
@@ -10,11 +12,13 @@ local format = require('config.format')
 
 function M.viml()
   lsp.set_config('vimls', {})
+  M.packages.viml = { 'vim-language-server' }
 end
 
 function M.yaml()
-  M.formatters.yaml = format.prettier
   lsp.set_config('yamlls', {})
+  M.formatters.yaml = format.prettier
+  M.packages.yaml = { 'yaml-language-server' }
 end
 
 function M.json()
@@ -23,7 +27,6 @@ function M.json()
 end
 
 function M.lua()
-  M.formatters.lua = format.stylua
   lsp.set_config('sumneko_lua', {
     settings = {
       Lua = {
@@ -39,6 +42,8 @@ function M.lua()
       },
     },
   })
+  M.formatters.lua = format.stylua
+  M.packages.lua = { 'lua-language-server', 'stylua' }
 end
 
 function M.markdown()
@@ -48,13 +53,24 @@ end
 -- # opt-in languages
 
 function M.go()
-  M.formatters.go = format.goimports
   lsp.set_config('gopls', {})
   lsp.set_config('golangci_lint_ls', {})
+  M.formatters.go = format.goimports
+  M.packages.go = {
+    'gopls',
+    'golangci-lint',
+    'golangci-lint-langserver',
+    'goimports',
+    'gomodifytags',
+    'golines',
+    'gotests',
+    'gotestsum',
+    'iferr',
+    'impl',
+  }
 end
 
 function M.rust()
-  M.formatters.rust = format.rustfmt
   lsp.set_config('rust_analyzer', {
     settings = {
       ['rust-analyzer'] = {
@@ -63,16 +79,11 @@ function M.rust()
       },
     },
   })
+  M.formatters.rust = format.rustfmt
+  M.packages.rust = { 'rust-analyzer', 'rustfmt' }
 end
 
 function M.typescript()
-  M.formatters.typescript = format.prettier
-  M.formatters.javascript = format.prettier
-  M.formatters.typescriptreact = format.prettier
-  M.formatters.javascriptreact = format.prettier
-  M.formatters.css = format.prettier
-  M.formatters.html = format.prettier
-  M.formatters.xml = format.prettier
   local util = require('lspconfig.util')
   lsp.set_config('tsserver', {
     root_dir = function(fname)
@@ -98,16 +109,32 @@ function M.typescript()
   lsp.set_config('html', {})
   lsp.set_config('cssls', {})
   lsp.set_config('eslint', {})
+  M.formatters.typescript = format.prettier
+  M.formatters.javascript = format.prettier
+  M.formatters.typescriptreact = format.prettier
+  M.formatters.javascriptreact = format.prettier
+  M.formatters.css = format.prettier
+  M.formatters.html = format.prettier
+  M.formatters.xml = format.prettier
+  M.packages.typescript = {
+    'typescript-language-server',
+    'tailwindcss-language-server',
+    'prettier',
+    'graphql-language-service-cli',
+    'eslint-lsp',
+  }
 end
 
 function M.terraform()
-  M.formatters.terraform = format.terraform
   lsp.set_config('terraformls', {})
+  M.formatters.terraform = format.terraform
+  M.packages.terraform = { 'terraform-ls' }
 end
 
 function M.zig()
   lsp.set_format({ '*.zig' }, 'zls')
   lsp.set_config('zls', {})
+  M.packages.zig = { 'zls' }
 end
 
 -- # load languages
