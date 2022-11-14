@@ -6,8 +6,8 @@
 
 ---@class LspKeyMapper
 ---@field [1] string key
----@field [2] string command
----@field [3] string introduce
+---@field [2] string|function command
+---@field [3] string description
 
 ---@alias LspKeyMappers table<string, LspKeyMapper>
 ---@alias OnAttachFn function(client:table,bufnr:number)

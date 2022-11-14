@@ -1,4 +1,7 @@
-local M = {}
+local M = {
+  ---@type table<string, fun()>
+  formatters = {},
+}
 
 local lsp = require('config.lsp')
 local format = require('config.format')
@@ -107,17 +110,18 @@ function M.zig()
   lsp.set_config('zls', {})
 end
 
-function M.use(...)
-  -- built-in languages
-  M.viml()
-  M.yaml()
-  M.json()
-  M.lua()
-  M.markdown()
-  for _, lang in ipairs({ ... }) do
-    lang()
+-- # load languages
+-- ## built-in languages
+M.viml()
+M.yaml()
+M.json()
+M.lua()
+M.markdown()
+-- ## opt-in languages
+for lang, enable in pairs(require('custom').opt_languages) do
+  if enable then
+    M[lang]()
   end
-  return M.formatters
 end
 
 return M
