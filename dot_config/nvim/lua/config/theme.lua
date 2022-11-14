@@ -87,9 +87,7 @@ local themes = {
 
 local theme = {
   ---@type ColorPalette
-  palette = {},
+  palette = themes[require('custom').theme](),
 }
-
-themes[require('custom').theme]()
 
 return theme

@@ -1,21 +1,18 @@
 -- ensure packer installed
 local fn = vim.fn
-local install_path = fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
+local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
   fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
 end
 
-vim.cmd([[packadd packer.nvim]])
-vim.api.nvim_create_autocmd('User PackerCompileDone', { command = 'qall' })
-
 local function cfg(plug)
-  return ("require('plugins.%s)"):format(plug)
+  return ("require('plugins.%s')"):format(plug)
 end
 
 require('packer').startup({
   function(use)
     -- ## basic plugins
-    use({ 'wbthomason/packer.nvim', opt = true }) -- plugins manager itself
+    use({ 'wbthomason/packer.nvim' }) -- plugins manager itself
     use('folke/which-key.nvim') -- keymapping hint
     use('neovim/nvim-lspconfig') -- lspconfig
     use('lewis6991/impatient.nvim') -- boost startup time
@@ -29,7 +26,7 @@ require('packer').startup({
     })
     use({ 'kevinhwang91/nvim-bqf', ft = 'qf' }) -- improve vim quickfix UI
     -- ## ui component
-    use({ 'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons' })
+    use({ 'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons', config = cfg('nvim-tree') })
     use({ 'goolord/alpha-nvim', requires = { 'kyazdani42/nvim-web-devicons' }, config = cfg('alpha-nvim') })
     use({
       'feline-nvim/feline.nvim',
@@ -38,19 +35,13 @@ require('packer').startup({
         'nvim-lua/plenary.nvim',
         'lewis6991/gitsigns.nvim',
       },
-      config = cfg('feline-nvim.lua'),
+      config = cfg('feline-nvim'),
     })
     use({ 'nanozuki/tabby.nvim', requires = 'kyazdani42/nvim-web-devicons', config = cfg('tabby-nvim') })
     use({
       'akinsho/toggleterm.nvim',
       tag = '*',
-      config = function()
-        require('toggleterm').setup({
-          open_mapping = [[<c-\>]],
-          direction = 'float',
-        })
-        require('features.terminal').xplr()
-      end,
+      config = cfg('toggleterm-nvim'),
     })
     -- ## normal editor
     use('kshenoy/vim-signature') -- display sign for marks
@@ -58,7 +49,7 @@ require('packer').startup({
     use({ 'windwp/nvim-autopairs', requires = { 'hrsh7th/nvim-cmp' } }) -- autopairs
     use('machakann/vim-sandwich') -- surround edit
     use({ 'lukas-reineke/indent-blankline.nvim', config = cfg('indent-blankline-nvim') }) -- indent hint
-    use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = cfg('nvim-treesitter') }) -- treesitter
+    use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdateSync', config = cfg('nvim-treesitter') }) -- treesitter
     use({ 'L3MON4D3/LuaSnip', config = cfg('luasnip') })
     -- ### git enhancement
     use('tpope/vim-fugitive')

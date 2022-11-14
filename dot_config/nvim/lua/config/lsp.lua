@@ -63,9 +63,6 @@ local function on_attach(client, bufnr)
   for _, mapper in pairs(lsp.buffer_keys) do
     vim.keymap.set('n', mapper[1], mapper[2], { desc = mapper[3], buffer = bufnr })
   end
-  for _, fn in ipairs(lsp.on_attaches) do
-    fn(client, bufnr)
-  end
   -- Plug('ray-x/lsp_signature.nvim')
   require('lsp_signature').on_attach({ bind = true, handler_opts = { border = 'none' } })
 end
@@ -87,7 +84,7 @@ function lsp.set_config(name, config)
   lspconfig[name].setup(config)
 end
 
-local format_group = vim.api.nvim_create_augroup('LspFormat')
+local format_group = vim.api.nvim_create_augroup('LspFormat', {})
 function lsp.set_format(pattern, client)
   vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
     group = format_group,
