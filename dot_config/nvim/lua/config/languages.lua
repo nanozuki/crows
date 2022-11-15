@@ -137,6 +137,11 @@ function M.zig()
   M.packages.zig = { 'zls' }
 end
 
+function M.ocaml()
+  lsp.set_config('ocamllsp', {})
+  M.packages.ocaml = { 'ocaml-lsp' }
+end
+
 -- # load languages
 -- ## built-in languages
 M.viml()

@@ -6,6 +6,7 @@ return {
   ---@type table<string, boolean>
   opt_languages = {
     go = true,
+    ocaml = true,
     rust = true,
     typescript = true,
     terraform = true,

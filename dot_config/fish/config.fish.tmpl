@@ -67,5 +67,10 @@ alias appextsch "paru -Ss"
 alias appextdel "paru -Rs"
 #{{end}}
 
+# starship
 set -x STARSHIP_CONFIG ~/.config/starship/config.toml
 starship init fish | source
+
+# ocaml
+# opam configuration
+source ~/.local/share/opam/opam-init/init.fish > /dev/null 2> /dev/null; or true

@@ -104,18 +104,31 @@ function sync-env
     #{{else}}
     paru_install zig
     #{{end}}
+    
     ### deno
     #{{if eq .chezmoi.os "darwin" }}
     brew_install deno
     #{{else}}
     paru_install deno
     #{{end}}
+
     ### terraform
     #{{if eq .chezmoi.os "darwin" }}
     brew_install terraform 
     #{{else}}
     paru_install terraform
     #{{end}}
+    
+    ### ocaml
+    #{{if eq .chezmoi.os "darwin" }}
+    brew_install opam 
+    #{{else}}
+    paru_install opam
+    #{{end}}
+    setUx OPAMROOT $XDG_DATA_HOME/opam
+    opam init --disable-shell-hook
+    opam update && opam upgrade
+
     ### others
     cargo_install typos-cli
 end
