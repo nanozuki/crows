@@ -20,7 +20,7 @@ require('packer').startup({
   function(use)
     -- ## basic plugins
     use({ 'wbthomason/packer.nvim' }) -- plugins manager itself
-    use('folke/which-key.nvim') -- keymapping hint
+    use({ 'folke/which-key.nvim', config = "require('which-key').setup({})" }) -- keymapping hint
     use('neovim/nvim-lspconfig') -- lspconfig
     use('lewis6991/impatient.nvim') -- boost startup time
     use({ 'rmagatti/auto-session', config = cfg('auto-session') })
@@ -82,12 +82,7 @@ require('packer').startup({
     -- ## lsp enhancement
     use({ 'folke/trouble.nvim', requires = 'kyazdani42/nvim-web-devicons', config = cfg('trouble-nvim') })
     use('ray-x/lsp_signature.nvim')
-    use({
-      'j-hui/fidget.nvim',
-      config = function()
-        require('fidget').setup({})
-      end,
-    })
+    use({ 'j-hui/fidget.nvim', config = "require('fidget').setup({})" })
     -- ## search
     use({ 'dyng/ctrlsf.vim', config = cfg('ctrlsf-vim') })
     use({
@@ -113,13 +108,7 @@ require('packer').startup({
     })
     local custom = require('config.custom')
     if custom.opt_languages.go then
-      use({
-        'ray-x/go.nvim',
-        ft = { 'go', 'gomod' },
-        config = function()
-          require('go').setup()
-        end,
-      })
+      use({ 'ray-x/go.nvim', ft = { 'go', 'gomod' }, config = "require('go').setup()" })
     end
     -- ## languages used packages
     use({

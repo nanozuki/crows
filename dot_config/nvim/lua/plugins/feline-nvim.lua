@@ -40,6 +40,7 @@ local left = {
       },
     },
     hl = { fg = 'fg', bg = 'bg_sec' },
+    right_sep = { str = ' ', hl = { fg = 'fg', bg = 'bg_sec' } },
   },
   {
     provider = ' ',
