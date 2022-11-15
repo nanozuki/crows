@@ -1,10 +1,10 @@
-# nvim plugins and runtime
-dots/nvim/plugin/*
-dots/kitty/local.conf
+# nvim
+dot_config/nvim/plugin/packer_compiled.lua
 .netrwhist
-
+# kitty
+dots/kitty/local.conf
+# vscode
 .vscode
-
 # osx
 .DS_Store
 secret
