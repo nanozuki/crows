@@ -31,7 +31,7 @@ require('packer').startup({
     use('lewis6991/impatient.nvim') -- boost startup time
     use({ 'rmagatti/auto-session', config = cfg('auto_session') })
     -- ## ui improving
-    use({ 'stevearc/dressing.nvim', config = icfg('dressing_nvim') }) -- improve vim select/input UI
+    use({ 'stevearc/dressing.nvim', config = cfg('dressing_nvim') }) -- improve vim select/input UI
     use({ 'kevinhwang91/nvim-bqf', ft = 'qf' }) -- improve vim quickfix UI
     -- ## ui component
     use({ 'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons', config = cfg('nvim_tree') })
