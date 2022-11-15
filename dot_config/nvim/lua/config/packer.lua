@@ -12,29 +12,30 @@ vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
   command = 'source <afile> | PackerCompile',
 })
 
+-- using seprated config file
 local function cfg(plug)
   return ("require('plugins.%s')"):format(plug)
+end
+
+-- using inline config
+local function icfg(plug)
+  return ("require('plugins').%s()"):format(plug)
 end
 
 require('packer').startup({
   function(use)
     -- ## basic plugins
     use({ 'wbthomason/packer.nvim' }) -- plugins manager itself
-    use({ 'folke/which-key.nvim', config = "require('which-key').setup({})" }) -- keymapping hint
+    use({ 'folke/which-key.nvim', config = icfg('which_key_nvim') }) -- keymapping hint
     use('neovim/nvim-lspconfig') -- lspconfig
     use('lewis6991/impatient.nvim') -- boost startup time
-    use({ 'rmagatti/auto-session', config = cfg('auto-session') })
+    use({ 'rmagatti/auto-session', config = cfg('auto_session') })
     -- ## ui improving
-    use({ -- improve vim select/input UI
-      'stevearc/dressing.nvim',
-      config = function()
-        require('dressing').setup({ input = { winblend = 0 } })
-      end,
-    })
+    use({ 'stevearc/dressing.nvim', config = icfg('dressing_nvim') }) -- improve vim select/input UI
     use({ 'kevinhwang91/nvim-bqf', ft = 'qf' }) -- improve vim quickfix UI
     -- ## ui component
-    use({ 'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons', config = cfg('nvim-tree') })
-    use({ 'goolord/alpha-nvim', requires = { 'kyazdani42/nvim-web-devicons' }, config = cfg('alpha-nvim') })
+    use({ 'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons', config = cfg('nvim_tree') })
+    use({ 'goolord/alpha-nvim', requires = { 'kyazdani42/nvim-web-devicons' }, config = cfg('alpha_nvim') })
     use({
       'feline-nvim/feline.nvim',
       requires = {
@@ -42,26 +43,24 @@ require('packer').startup({
         'nvim-lua/plenary.nvim',
         'lewis6991/gitsigns.nvim',
       },
-      config = cfg('feline-nvim'),
+      config = cfg('feline_nvim'),
     })
-    use({ 'nanozuki/tabby.nvim', requires = 'kyazdani42/nvim-web-devicons', config = cfg('tabby-nvim') })
-    use({ 'akinsho/toggleterm.nvim', tag = '*', config = cfg('toggleterm-nvim') })
+    use({ 'nanozuki/tabby.nvim', requires = 'kyazdani42/nvim-web-devicons', config = cfg('tabby_nvim') })
+    use({ 'akinsho/toggleterm.nvim', tag = '*', config = cfg('toggleterm_nvim') })
     -- ## normal editor
     use('kshenoy/vim-signature') -- display sign for marks
     use('mg979/vim-visual-multi') -- multi select and edit
-    use({ 'windwp/nvim-autopairs', requires = { 'hrsh7th/nvim-cmp' }, config = cfg('nvim-autopairs') }) -- autopairs
+    use({ 'windwp/nvim-autopairs', requires = { 'hrsh7th/nvim-cmp' }, config = cfg('nvim_autopairs') }) -- autopairs
     use('machakann/vim-sandwich') -- surround edit
-    use({ 'lukas-reineke/indent-blankline.nvim', config = cfg('indent-blankline-nvim') }) -- indent hint
-    use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdateSync', config = cfg('nvim-treesitter') }) -- treesitter
+    use({ 'lukas-reineke/indent-blankline.nvim', config = cfg('indent_blankline_nvim') }) -- indent hint
+    use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdateSync', config = cfg('nvim_treesitter') }) -- treesitter
     use({ 'L3MON4D3/LuaSnip', config = cfg('luasnip') })
     -- ### git enhancement
     use('tpope/vim-fugitive')
     use({
       'TimUntersberger/neogit',
       requires = { 'nvim-lua/plenary.nvim', 'sindrets/diffview.nvim' },
-      config = function()
-        require('neogit').setup({ integrations = { diffview = true } })
-      end,
+      config = icfg('neogit'),
     })
     -- ## config helper
     use({ 'norcalli/nvim-colorizer.lua', opt = true, cmd = 'ColorizerToggle' })
@@ -75,16 +74,16 @@ require('packer').startup({
         'L3MON4D3/LuaSnip', -- snippets
         'saadparwaiz1/cmp_luasnip',
       },
-      config = cfg('nvim-cmp'),
+      config = cfg('nvim_cmp'),
     })
-    use({ 'gelguy/wilder.nvim', config = cfg('wilder-nvim') }) -- cmdline completion
-    use({ 'mhartington/formatter.nvim', config = cfg('formatter-nvim') }) -- formatter
+    use({ 'gelguy/wilder.nvim', config = cfg('wilder_nvim') }) -- cmdline completion
+    use({ 'mhartington/formatter.nvim', config = cfg('formatter_nvim') }) -- formatter
     -- ## lsp enhancement
-    use({ 'folke/trouble.nvim', requires = 'kyazdani42/nvim-web-devicons', config = cfg('trouble-nvim') })
+    use({ 'folke/trouble.nvim', requires = 'kyazdani42/nvim-web-devicons', config = cfg('trouble_nvim') })
     use('ray-x/lsp_signature.nvim')
-    use({ 'j-hui/fidget.nvim', config = "require('fidget').setup({})" })
+    use({ 'j-hui/fidget.nvim', config = icfg('fidget_nvim') })
     -- ## search
-    use({ 'dyng/ctrlsf.vim', config = cfg('ctrlsf-vim') })
+    use({ 'dyng/ctrlsf.vim', config = cfg('ctrlsf_vim') })
     use({
       'nvim-telescope/telescope.nvim',
       requires = {
@@ -93,7 +92,7 @@ require('packer').startup({
         { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
         { 'rmagatti/session-lens' }, -- auto-session
       },
-      config = cfg('telescope-nvim'),
+      config = cfg('telescope_nvim'),
     })
     -- ## theme
     use({ 'sainnhe/gruvbox-material', opt = true })
@@ -108,13 +107,13 @@ require('packer').startup({
     })
     local custom = require('config.custom')
     if custom.opt_languages.go then
-      use({ 'ray-x/go.nvim', ft = { 'go', 'gomod' }, config = "require('go').setup()" })
+      use({ 'ray-x/go.nvim', ft = { 'go', 'gomod' }, config = icfg('go_nvim') })
     end
     -- ## languages used packages
     use({
       'williamboman/mason.nvim',
       requires = { 'WhoIsSethDaniel/mason-tool-installer.nvim' },
-      config = cfg('mason-nvim'),
+      config = cfg('mason_nvim'),
     })
   end,
   config = {
