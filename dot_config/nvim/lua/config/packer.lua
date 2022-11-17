@@ -100,11 +100,13 @@ require('packer').startup({
     use({ 'sainnhe/edge', opt = true })
     use({ 'rose-pine/neovim', opt = true, as = 'rose-pine' })
     -- ## languages
-    use({ 'dag/vim-fish', ft = { 'fish' } })
+    use({ 'dag/vim-fish', ft = { 'fish' } }) -- fish
     use({
       'mattn/emmet-vim',
       ft = { 'html', 'javascript.jsx', 'typescript.tsx', 'javascriptreact', 'typescriptreact', 'xml' },
-    })
+    }) -- *ml tag
+    use('b0o/schemastore.nvim') -- json/yaml
+    use('folke/neodev.nvim') -- neovim lua
     local custom = require('config.custom')
     if custom.opt_languages.go then
       use({ 'ray-x/go.nvim', ft = { 'go', 'gomod' }, config = icfg('go_nvim') })

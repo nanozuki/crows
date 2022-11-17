@@ -23,10 +23,18 @@ end
 
 function M.json()
   M.formatters.json = format.prettier
-  lsp.set_config('jsonls', {})
+  lsp.set_config('jsonls', {
+    settings = {
+      json = {
+        schemas = require('schemastore').json.schemas(), -- Plug'b0o/schemastore.nvim'
+        validate = { enable = true },
+      },
+    },
+  })
 end
 
 function M.lua()
+  require('neodev').setup({}) -- Plug'folke/neodev.nvim'
   lsp.set_config('sumneko_lua', {
     settings = {
       Lua = {
@@ -139,6 +147,7 @@ end
 
 function M.ocaml()
   lsp.set_config('ocamllsp', {})
+  lsp.set_format('*.ml', 'ocamllsp')
   M.packages.ocaml = { 'ocaml-lsp' }
 end
 
