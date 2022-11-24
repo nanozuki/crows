@@ -3,7 +3,7 @@
 return {
   ---@type Theme
   theme = 'rose_pine_dawn',
-  ---@type table<string, boolean>
+  built_in_languages = { 'lua', 'viml', 'json', 'yaml', 'markdown' },
   opt_languages = {
     go = true,
     ocaml = true,

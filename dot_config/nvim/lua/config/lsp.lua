@@ -1,9 +1,3 @@
----@class LspModule
----@field keys LspKeyMappers
----@field buffer_keys LspKeyMappers
----@field on_attaches OnAttachFn[]
----@field caps_setters CapsSetter[]
-
 ---@class LspKeyMapper
 ---@field [1] string key
 ---@field [2] string|function command
@@ -15,14 +9,15 @@
 
 -- local opts = { noremap=true, silent=true }
 
----@type LspModule
 local lsp = {
+  ---@type LspKeyMappers
   keys = {
     diag_float = { '<leader>e', vim.diagnostic.open_float, 'Open diagnostic floating window' },
     diag_prev = { '[d', vim.diagnostic.goto_prev, 'Goto prev diagnostic' },
     diag_next = { ']d', vim.diagnostic.goto_next, 'Goto next diagnostic' },
     diag_loclist = { '<leader>q', vim.diagnostic.setloclist, 'Add buffer diagnostics to the location list.' },
   },
+  ---@type LspKeyMappers
   buffer_keys = {
     goto_decl = { 'gD', vim.lsp.buf.declaration, 'Goto declaration' },
     goto_def = { 'gd', vim.lsp.buf.definition, 'Goto definition' },
@@ -44,18 +39,18 @@ local lsp = {
     list_ref = { 'gr', vim.lsp.buf.references, 'List references' },
     -- format = { '<leader>f', vim.lsp.buf.formatting, 'Format buffer' },
   },
+  signs = { Error = '', Warn = '', Info = '', Hint = '' },
 }
 
-local signs = { Error = '', Warn = '', Info = '', Hint = '' }
-for sign, text in pairs(signs) do
+for sign, text in pairs(lsp.signs) do
   local hl = 'DiagnosticSign' .. sign
   vim.fn.sign_define(hl, { text = text, texthl = hl, linehl = '', numhl = '' })
 end
 
 ---on attach function
----@param client table client object
+---@param _ table client object
 ---@param bufnr number buffer number
-local function on_attach(client, bufnr)
+function lsp.on_attach(_, bufnr)
   -- mapping
   for _, mapper in pairs(lsp.keys) do
     vim.keymap.set('n', mapper[1], mapper[2], { desc = mapper[3] })
@@ -67,21 +62,11 @@ local function on_attach(client, bufnr)
   require('lsp_signature').on_attach({ bind = true, handler_opts = { border = 'none' } })
 end
 
-local function capabilities()
+function lsp.capabilities()
   local caps = vim.lsp.protocol.make_client_capabilities()
   -- Plug('hrsh7th/cmp-nvim-lsp')
   caps = require('cmp_nvim_lsp').default_capabilities(caps)
   return caps
-end
-
----set lsp config
----@param name string language server string
----@param config table language server config
-function lsp.set_config(name, config)
-  local lspconfig = require('lspconfig')
-  config.on_attach = on_attach
-  config.capabilities = capabilities()
-  lspconfig[name].setup(config)
 end
 
 local format_group = vim.api.nvim_create_augroup('LspFormat', {})

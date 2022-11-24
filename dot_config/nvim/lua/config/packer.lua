@@ -27,7 +27,7 @@ require('packer').startup({
     -- ## basic plugins
     use({ 'wbthomason/packer.nvim' }) -- plugins manager itself
     use({ 'folke/which-key.nvim', config = icfg('which_key_nvim') }) -- keymapping hint
-    use('neovim/nvim-lspconfig') -- lspconfig
+    use({ 'neovim/nvim-lspconfig', config = cfg('nvim_lspconfig') }) -- lspconfig
     use('lewis6991/impatient.nvim') -- boost startup time
     use({ 'rmagatti/auto-session', config = cfg('auto_session') })
     -- ## ui improving
@@ -53,7 +53,7 @@ require('packer').startup({
     use({ 'windwp/nvim-autopairs', requires = { 'hrsh7th/nvim-cmp' }, config = cfg('nvim_autopairs') }) -- autopairs
     use('machakann/vim-sandwich') -- surround edit
     use({ 'lukas-reineke/indent-blankline.nvim', config = cfg('indent_blankline_nvim') }) -- indent hint
-    use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdateSync', config = cfg('nvim_treesitter') }) -- treesitter
+    use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = cfg('nvim_treesitter') }) -- treesitter
     use({ 'L3MON4D3/LuaSnip', config = cfg('luasnip') })
     -- ### git enhancement
     use('tpope/vim-fugitive')
@@ -106,10 +106,13 @@ require('packer').startup({
       ft = { 'html', 'javascript.jsx', 'typescript.tsx', 'javascriptreact', 'typescriptreact', 'xml' },
     }) -- *ml tag
     use('b0o/schemastore.nvim') -- json/yaml
-    use('folke/neodev.nvim') -- neovim lua
+    use({ 'folke/neodev.nvim', config = icfg('neodev_nvim') }) -- neovim lua
     local custom = require('config.custom')
     if custom.opt_languages.go then
-      use({ 'ray-x/go.nvim', ft = { 'go', 'gomod' }, config = icfg('go_nvim') })
+      use({ 'ray-x/go.nvim', ft = { 'go', 'gomod', 'gowork' }, config = icfg('go_nvim') })
+    end
+    if custom.opt_languages.rust then
+      use({ 'simrat39/rust-tools.nvim', ft = { 'rust' }, config = cfg('rust_tools_nvim') })
     end
     -- ## languages used packages
     use({

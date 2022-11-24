@@ -1,5 +1,12 @@
+local signs = require('config.lsp').signs
 require('trouble').setup({
-  signs = { error = '', warning = '', hint = '', information = '', other = '﫠' },
+  signs = {
+    error = signs.Error,
+    warning = signs.Warn,
+    information = signs.Info,
+    hint = signs.Hint,
+    other = '﫠',
+  },
 })
 vim.keymap.set('n', '<leader>xx', '<cmd>TroubleToggle<cr>', { desc = 'Toggle Trouble' })
 vim.keymap.set('n', '<leader>xw', '<cmd>Trouble lsp_workspace_diagnostics<cr>', { desc = 'Workspace diagnostics' })

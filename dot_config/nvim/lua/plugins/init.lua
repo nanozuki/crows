@@ -16,4 +16,8 @@ plugins.go_nvim = function()
   require('go').setup()
 end
 
+plugins.neodev_nvim = function()
+  require('neodev').setup({})
+end
+
 return plugins
