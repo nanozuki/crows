@@ -1,0 +1,25 @@
+{
+  "shell": "fish",
+  "system-manager": "brew",
+  "envs": {
+    "XDG_CONFIG_HOME": "$HOME/.config",
+    "XDG_CACHE_HOME ": "$HOME/.cache",
+    "XDG_DATA_HOME  ": "$HOME/.local/share",
+    "LC_ALL         ": "en_US.UTF-8",
+    "LANG           ": "en_US.UTF-8",
+    "EDITOR         ": "nvim",
+    "XDG_RUNTIME_DIR": "$TMPDIR",
+    "fish_user_paths": [
+      "~/.local/bin",
+      "/opt/homebrew/bin",
+      "/usr/local/bin",
+      "/usr/local/sbin",
+      "/usr/bin",
+      "/usr/sbin",
+      "/bin",
+      "/sbin",
+      "/Library/Apple/usr/bin"
+    ]
+  },
+  "packages": ["fisher-jethrokuan-z", "fisher-PatrickF1-fzf"]
+}
