@@ -10,9 +10,9 @@ function sync-env
     setUx EDITOR          nvim
     #{{if eq .chezmoi.os "darwin" }}
     setUx XDG_RUNTIME_DIR $TMPDIR
-    add_path ~/.local/bin /opt/homebrew/bin /usr/local/bin /usr/bin /bin /usr/sbin /sbin /Library/Apple/usr/bin
+    setUx fish_user_paths ~/.local/bin /opt/homebrew/bin /usr/local/bin /usr/local/sbin /usr/bin /usr/sbin /bin /sbin /Library/Apple/usr/bin
     #{{else}}
-    add_path ~/.local/bin /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin /sbin
+    setUx fish_user_paths ~/.local/bin /usr/local/bin /usr/local/sbin /usr/bin /usr/sbin /bin /sbin
     #{{end}}
 
     #### Upgrade package managers
@@ -76,6 +76,7 @@ function sync-env
     paru_install neovim python-pynvim ripgrep fzf
     npm_install neovim
     #{{end}}
+    add_path $XDG_DATA_HOME/nvim/mason/bin
     
     #### Languages developments
     ### golang
@@ -214,10 +215,10 @@ function cargo_update
 end
 
 function install_rust
+    setUx CARGO_HOME $XDG_DATA_HOME/cargo
+    setUx RUSTUP_HOME $XDG_DATA_HOME/rustup
+    add_path $CARGO_HOME/bin
     if not type -q cargo
-        setUx CARGO_HOME $XDG_DATA_HOME/cargo
-        setUx RUSTUP_HOME $XDG_DATA_HOME/rustup
-        add_path $CARGO_HOME/bin
         #{{if eq .chezmoi.os "darwin" }}
         brew install rustup
         rustup-init
@@ -243,6 +244,8 @@ end
 
 function install_node_lts
     setUx NPM_CONFIG_USERCONFIG $XDG_CONFIG_HOME/npm/npmrc
+    add_path $XDG_DATA_HOME/npm/bin
+
     set node_index "https://nodejs.org/download/release/index.json"
     #{{if eq .chezmoi.os "darwin" }}
     brew_install gron
@@ -257,7 +260,6 @@ function install_node_lts
     paru_install "nodejs-lts-$code" npm
     #{{end}}
     npm config set prefix      $XDG_DATA_HOME/npm
-    add_path $XDG_DATA_HOME/npm/bin
     npm config set cache       $XDG_CACHE_HOME/npm
     npm config set init-module $XDG_CONFIG_HOME/npm/config/npm-init.js
 end
