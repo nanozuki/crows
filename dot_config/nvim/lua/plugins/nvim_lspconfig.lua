@@ -42,7 +42,21 @@ set_config('jsonls', {
 
 --# opt languages
 if opt_languages.go then
-  set_config('gopls', {})
+  set_config('gopls', {
+    settings = {
+      gopls = {
+        hints = {
+          assignVariableTypes = true,
+          compositeLiteralFields = true,
+          compositeLiteralTypes = true,
+          constantValues = true,
+          functionTypeParameters = true,
+          parameterNames = true,
+          rangeVariableTypes = true,
+        },
+      },
+    },
+  })
   set_config('golangci_lint_ls', {})
 end
 if opt_languages.ocaml then
