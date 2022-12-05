@@ -273,15 +273,3 @@ end
 function add_path
     fish_add_path $argv;or return 0
 end
-
-function macos_sync_zls
-    mkdir -p $XDG_CACHE_HOME/zls
-    set platform (uname -m)
-    cd $XDG_CACHE_HOME/zls
-        set zls_url (curl -s https://api.github.com/repos/zigtools/zls/releases/latest | \
-            grep "https://.*macos.tar.zst" | grep $platform | cut -d\" -f4)
-        curl -L $zls_url  | tar -xJ --strip-components=1 -C .
-        chmod +x zls
-        mv zls /usr/local/bin/zls
-    cd -
-end
