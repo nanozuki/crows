@@ -43,7 +43,7 @@ vim.opt.softtabstop = 4
 local fi_group = vim.api.nvim_create_augroup('fileindent', {})
 vim.api.nvim_create_autocmd('FileType', {
   group = fi_group,
-  pattern = 'lua,javascript,typescript,javascriptreact,typescriptreact,html,css,scss,xml,yaml,json,terraform',
+  pattern = 'lua,javascript,typescript,javascriptreact,typescriptreact,html,css,scss,xml,yaml,json,terraform,graphql',
   command = 'setlocal expandtab ts=2 sw=2 sts=2',
 })
 
@@ -52,9 +52,12 @@ vim.opt.foldmethod = 'indent'
 vim.opt.foldlevelstart = 99
 
 -- # terminal
+local termcode = function(str)
+  return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
 vim.keymap.set('n', '<leader>tw', ':terminal<CR>', { desc = 'Open terminal in current window' })
 vim.keymap.set('n', '<leader>tt', ':tabnew | terminal<CR>', { desc = 'Open terminal in new tab' })
-vim.keymap.set('t', '<C-K>', [[<C-\><C-N>]], { desc = 'To normal mode in terminal', expr = true })
+vim.keymap.set('t', '<C-K>', termcode([[<C-\><C-N>]]), { desc = 'To normal mode in terminal' })
 
 -- # keymap for tab
 vim.keymap.set('n', '<leader>tc', ':$tabnew<CR>', { desc = 'Create new tab' })
