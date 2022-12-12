@@ -128,7 +128,7 @@ function sync-env
     #{{end}}
     setUx OPAMROOT $XDG_DATA_HOME/opam
     opam init --disable-shell-hook
-    opam update && opam upgrade
+    opam update -y && opam upgrade -y
     opam install ocamlformat
 
     ### others
