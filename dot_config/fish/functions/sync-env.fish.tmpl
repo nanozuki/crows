@@ -21,6 +21,9 @@ function sync-env
     brew_update
     #{{else}}
     paru_update
+    if type -q flatpak
+        sudo flatpak upgrade
+    end
     #{{end}}
     fisher_update
     npm_update
