@@ -1,5 +1,5 @@
 local rt = require('rust-tools')
-local lsp = require('config.lsp')
+local lsp = require('plugins.nvim_lspconfig')
 rt.setup({
   server = {
     on_attach = function(client, bufnr)

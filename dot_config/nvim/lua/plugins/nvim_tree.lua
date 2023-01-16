@@ -7,4 +7,3 @@ require('nvim-tree').setup({
     ignore = false,
   },
 })
-vim.keymap.set('n', '<Leader>fl', ':NvimTreeToggle<CR>', { desc = 'Toggle filetree' })

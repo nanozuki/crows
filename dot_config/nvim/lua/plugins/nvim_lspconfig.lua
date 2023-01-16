@@ -1,6 +1,78 @@
-local M = {}
+---@class LspKeyMapper
+---@field [1] string key
+---@field [2] string|function command
+---@field [3] string description
+---@alias LspKeyMappers table<string, LspKeyMapper>
 
-local lsp = require('config.lsp')
+---@type LspKeyMappers
+local keys = {
+  diag_float = { '<leader>e', vim.diagnostic.open_float, 'Open diagnostic floating window' },
+  diag_prev = { '[d', vim.diagnostic.goto_prev, 'Goto prev diagnostic' },
+  diag_next = { ']d', vim.diagnostic.goto_next, 'Goto next diagnostic' },
+  diag_loclist = { '<leader>q', vim.diagnostic.setloclist, 'Add buffer diagnostics to the location list.' },
+}
+for _, mapper in pairs(keys) do
+  vim.keymap.set('n', mapper[1], mapper[2], { desc = mapper[3] })
+end
+
+for sign, text in pairs(vim.g.diag_signs) do
+  local hl = 'DiagnosticSign' .. sign
+  vim.fn.sign_define(hl, { text = text, texthl = hl, linehl = '', numhl = '' })
+end
+
+---@type LspKeyMappers
+local buffer_keys = {
+  goto_decl = { 'gD', vim.lsp.buf.declaration, 'Goto declaration' },
+  goto_def = { 'gd', vim.lsp.buf.definition, 'Goto definition' },
+  hover = { 'K', vim.lsp.buf.hover, 'Display hover information' },
+  goto_impl = { 'gi', vim.lsp.buf.implementation, 'Goto implementation' },
+  sign_help = { '<C-k>', vim.lsp.buf.signature_help, 'Display signature information' },
+  add_folder = { '<leader>wa', vim.lsp.buf.add_workspace_folder, 'Add workspace folder' },
+  del_folder = { '<leader>wr', vim.lsp.buf.remove_workspace_folder, 'Remove workspace folder' },
+  list_folders = {
+    '<leader>wl',
+    function()
+      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end,
+    'List workspace folder',
+  },
+  type_def = { '<leader>D', vim.lsp.buf.type_definition, 'Goto type definition' },
+  rename = { '<leader>rn', vim.lsp.buf.rename, 'Rename symbol' },
+  code_action = { '<leader>ca', vim.lsp.buf.code_action, 'Code action' },
+  list_ref = { 'gr', vim.lsp.buf.references, 'List references' },
+  -- format = { '<leader>f', vim.lsp.buf.formatting, 'Format buffer' },
+}
+
+---on attach function
+---@param _ table client object
+---@param bufnr number buffer number
+local function on_attach(_, bufnr)
+  -- buffer mapping
+  for _, mapper in pairs(buffer_keys) do
+    vim.keymap.set('n', mapper[1], mapper[2], { desc = mapper[3], buffer = bufnr })
+  end
+  -- Plug('ray-x/lsp_signature.nvim')
+  require('lsp_signature').on_attach({ bind = true, handler_opts = { border = 'none' } })
+end
+
+local function capabilities()
+  local caps = vim.lsp.protocol.make_client_capabilities()
+  -- Plug('hrsh7th/cmp-nvim-lsp')
+  caps = require('cmp_nvim_lsp').default_capabilities(caps)
+  return caps
+end
+
+local format_group = vim.api.nvim_create_augroup('LspFormat', {})
+local function set_format(pattern, client)
+  vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+    group = format_group,
+    pattern = pattern,
+    callback = function()
+      vim.lsp.buf.format({ name = client })
+    end,
+  })
+end
+
 local lspconfig = require('lspconfig')
 local opt_languages = require('config.custom').opt_languages
 
@@ -8,8 +80,8 @@ local opt_languages = require('config.custom').opt_languages
 ---@param name string language server string
 ---@param config table language server config
 local function set_config(name, config)
-  config.on_attach = lsp.on_attach
-  config.capabilities = lsp.capabilities()
+  config.on_attach = on_attach
+  config.capabilities = capabilities()
   lspconfig[name].setup(config)
 end
 
@@ -30,7 +102,15 @@ set_config('sumneko_lua', {
   },
 })
 set_config('vimls', {})
-set_config('yamlls', {})
+set_config('yamlls', {
+  settings = {
+    yaml = {
+      schemaStore = {
+        enable = true,
+      },
+    },
+  },
+})
 set_config('jsonls', {
   settings = {
     json = {
@@ -61,11 +141,11 @@ if opt_languages.go then
 end
 if opt_languages.ocaml then
   set_config('ocamllsp', {})
-  lsp.set_format('*.ml', 'ocamllsp')
+  set_format('*.ml', 'ocamllsp')
 end
 if opt_languages.rust then
   -- lsp is controlled by rust_tools.nvim
-  lsp.set_format('*.rs', 'rust_analyzer')
+  set_format('*.rs', 'rust_analyzer')
 end
 if opt_languages.terraform then
   set_config('terraformls', {})
@@ -97,8 +177,11 @@ if opt_languages.typescript then
   set_config('eslint', {})
 end
 if opt_languages.zig then
-  lsp.set_format({ '*.zig' }, 'zls')
+  set_format({ '*.zig' }, 'zls')
   set_config('zls', {})
 end
 
-return M
+return {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
