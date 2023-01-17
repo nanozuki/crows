@@ -34,6 +34,7 @@ local plugins = {
     end,
   },
   { 'rmagatti/auto-session', config = cfg('auto_session') },
+  { 'dstein64/vim-startuptime', cmd = 'StartupTime' },
 
   -- ## theme
   { 'sainnhe/gruvbox-material', enabled = (custom.theme == 'gruvbox_dark' or custom.theme == 'gruvbox_light') },
@@ -48,7 +49,7 @@ local plugins = {
   { 'kevinhwang91/nvim-bqf', ft = 'qf' },
   {
     'nvim-tree/nvim-tree.lua',
-    cmd = 'NvimTreeToggle',
+    cmd = { 'NvimTreeToggle', 'NvimTreeClose' },
     keys = { { '<Leader>fl', ':NvimTreeToggle<CR>', 'n', { desc = 'Toggle filetree' } } },
     dependencies = 'nvim-tree/nvim-web-devicons',
     config = cfg('nvim_tree'),
@@ -65,7 +66,12 @@ local plugins = {
     dependencies = {
       'nvim-tree/nvim-web-devicons',
       'nvim-lua/plenary.nvim',
-      'lewis6991/gitsigns.nvim',
+      {
+        'lewis6991/gitsigns.nvim',
+        config = function()
+          require('gitsigns').setup({ signcolumn = false, trouble = false })
+        end,
+      },
     },
     config = cfg('feline_nvim'),
   },
@@ -121,7 +127,7 @@ local plugins = {
     },
     config = cfg('nvim_cmp'),
   },
-  { 'gelguy/wilder.nvim', build = ':UpdateRemotePlugins', config = cfg('wilder_nvim') }, -- cmdline completion
+  { 'gelguy/wilder.nvim', event = 'CmdlineEnter', build = ':UpdateRemotePlugins', config = cfg('wilder_nvim') }, -- cmdline completion
   { 'mhartington/formatter.nvim', event = 'BufReadPost', config = cfg('formatter_nvim') }, -- formatter
 
   -- ## lsp config
@@ -165,7 +171,6 @@ local plugins = {
   { 'dyng/ctrlsf.vim', event = 'VeryLazy', config = cfg('ctrlsf_vim') },
   {
     'nvim-telescope/telescope.nvim',
-    cmd = 'Telescope',
     event = 'VeryLazy',
     dependencies = {
       { 'nvim-lua/plenary.nvim' },
@@ -202,7 +207,6 @@ local plugins = {
   },
   {
     'williamboman/mason.nvim',
-    cmd = { 'Mason', 'MasonInstall' },
     dependencies = { 'WhoIsSethDaniel/mason-tool-installer.nvim' },
     config = cfg('mason_nvim'),
   },
