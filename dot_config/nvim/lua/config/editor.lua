@@ -92,3 +92,6 @@ end
 
 vim.keymap.set('n', '<leader>wo', win_only, { desc = 'Close other windows in this tab' })
 vim.keymap.set('n', '<leader>wO', close_floating_win, { desc = 'Close floating windows in this tab' })
+
+-- # diagnostic sign
+vim.g.diag_signs = { Error = '', Warn = '', Info = '', Hint = '' }

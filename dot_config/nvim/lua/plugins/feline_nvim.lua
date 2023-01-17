@@ -1,6 +1,5 @@
 local palette = require('config.theme').palette
 local feline = require('feline')
-require('gitsigns').setup({ signcolumn = false })
 
 local left = {
   -- layer 1
@@ -84,7 +83,7 @@ local right = {
   {
     provider = function()
       local clients = {}
-      for _, client in pairs(vim.lsp.buf_get_clients(vim.api.nvim_win_get_buf(0))) do
+      for _, client in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
         clients[#clients + 1] = ' ' .. client.name
       end
       return table.concat(clients, ' ')

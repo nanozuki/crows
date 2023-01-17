@@ -9,7 +9,6 @@
 ---@type table<string, fun():ColorPalette>
 local themes = {
   gruvbox_light = function()
-    vim.cmd('packadd gruvbox-material')
     vim.opt.background = 'light'
     vim.g.gruvbox_material_enable_italic = 1
     vim.g.gruvbox_material_background = 'hard'
@@ -25,7 +24,6 @@ local themes = {
   end,
 
   gruvbox_dark = function()
-    vim.cmd('packadd gruvbox-material')
     vim.opt.background = 'dark'
     vim.g['gruvbox_material_enable_italic'] = 1
     vim.cmd('colorscheme gruvbox-material')
@@ -40,7 +38,6 @@ local themes = {
   end,
 
   edge_light = function()
-    vim.cmd('packadd edge')
     vim.opt.background = 'light'
     vim.g.edge_enable_italic = 1
     vim.cmd('colorscheme edge')
@@ -55,7 +52,6 @@ local themes = {
   end,
 
   nord = function()
-    vim.cmd('packadd nord.nvim')
     vim.opt.background = 'dark'
     vim.g.nord_borders = true
     require('nord').set()
@@ -71,7 +67,6 @@ local themes = {
   end,
 
   rose_pine_dawn = function()
-    vim.cmd('packadd rose-pine')
     vim.o.background = 'light'
     vim.cmd('colorscheme rose-pine')
     return {
