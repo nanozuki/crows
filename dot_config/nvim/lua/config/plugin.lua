@@ -100,7 +100,13 @@ local plugins = {
   -- indent hint
   { 'lukas-reineke/indent-blankline.nvim', event = 'BufReadPre', config = cfg('indent_blankline_nvim') },
   -- treesitter
-  { 'nvim-treesitter/nvim-treesitter', event = 'BufReadPost', run = ':TSUpdate', config = cfg('nvim_treesitter') },
+  {
+    'nvim-treesitter/nvim-treesitter',
+    event = 'BufReadPost',
+    cmd = 'TSUpdate',
+    run = ':TSUpdate',
+    config = cfg('nvim_treesitter'),
+  },
   -- git command enhancement
   { 'tpope/vim-fugitive', event = 'VeryLazy' },
   {
