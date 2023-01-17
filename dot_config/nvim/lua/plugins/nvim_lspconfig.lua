@@ -24,6 +24,7 @@ end
 local buffer_keys = {
   goto_decl = { 'gD', vim.lsp.buf.declaration, 'Goto declaration' },
   goto_def = { 'gd', vim.lsp.buf.definition, 'Goto definition' },
+  goto_typedef = { 'dt', vim.lsp.buf.type_definition, 'Goto type definition' },
   hover = { 'K', vim.lsp.buf.hover, 'Display hover information' },
   goto_impl = { 'gi', vim.lsp.buf.implementation, 'Goto implementation' },
   sign_help = { '<C-k>', vim.lsp.buf.signature_help, 'Display signature information' },

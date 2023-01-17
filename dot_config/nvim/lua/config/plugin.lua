@@ -43,7 +43,7 @@ local plugins = {
 
   -- ## ui
   -- improve vim select/input UI
-  { 'stevearc/dressing.nvim', event = 'BufReadPost', config = cfg('dressing_nvim') },
+  { 'stevearc/dressing.nvim', event = 'VeryLazy', config = cfg('dressing_nvim') },
   -- improve vim quickfix UI
   { 'kevinhwang91/nvim-bqf', ft = 'qf' },
   {
@@ -147,13 +147,14 @@ local plugins = {
   },
   {
     'folke/trouble.nvim',
-    event = 'BufReadPre',
+    cmd = 'TroubleToggle',
+    keys = { { '<leader>xx', ':TroubleToggle<CR>', 'n', { desc = 'Toggle trouble quickfix' } } },
     dependencies = { 'nvim-tree/nvim-web-devicons', 'neovim/nvim-lspconfig' },
     config = cfg('trouble_nvim'),
   },
   {
     'j-hui/fidget.nvim',
-    event = 'BufReadPre',
+    event = 'BufReadPost',
     dependencies = { 'neovim/nvim-lspconfig' },
     config = function()
       require('fidget').setup({})
