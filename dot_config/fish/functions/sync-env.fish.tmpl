@@ -68,18 +68,6 @@ function sync-env
     bash $XDG_DATA_HOME/plum/rime-install luna-pinyin
     bash $XDG_DATA_HOME/plum/rime-install double-pinyin
     bash $XDG_DATA_HOME/plum/rime-install emoji
-
-    #### Neovim
-    ####
-    #{{if eq .chezmoi.os "darwin" }}
-    brew_install neovim python
-    pip3 install -U pynvim
-    npm_install neovim
-    #{{else}}
-    paru_install neovim python-pynvim ripgrep fzf
-    npm_install neovim
-    #{{end}}
-    add_path $XDG_DATA_HOME/nvim/mason/bin
     
     #### Languages developments
     ### golang
@@ -136,6 +124,19 @@ function sync-env
 
     ### others
     cargo_install typos-cli
+
+    #### Neovim
+    #{{if eq .chezmoi.os "darwin" }}
+    brew_install neovim python
+    pip3 install -U pynvim
+    npm_install neovim
+    #{{else}}
+    paru_install neovim python-pynvim ripgrep fzf
+    npm_install neovim
+    #{{end}}
+    add_path $XDG_DATA_HOME/nvim/mason/bin
+    ## update nvim/treesitter/mason packages
+    nvim --headless "+Lazy! sync" "+TSUpdateSync" "+MasonToolsUpdate" +qa
 end
 
 

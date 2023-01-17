@@ -103,7 +103,7 @@ local plugins = {
   {
     'nvim-treesitter/nvim-treesitter',
     event = 'BufReadPost',
-    cmd = 'TSUpdate',
+    cmd = { 'TSUpdate', 'TSUpdateSync' },
     run = ':TSUpdate',
     config = cfg('nvim_treesitter'),
   },
