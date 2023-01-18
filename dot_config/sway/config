@@ -19,8 +19,7 @@ set $term wezterm
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 # set $menu dmenu_path | dmenu | xargs swaymsg exec --
-set $menu j4-dmenu-desktop --dmenu="bemenu -i -l 10 " \
-    --term="wezterm" --usage-log="~/.cache/j4-dmenu-desktop/usage.log"
+set $menu $HOME/.local/bin/swaymenu.sh
 
 ### Output configuration
 #
