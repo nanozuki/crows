@@ -27,9 +27,11 @@ if opt_languages.typescript then
   vim.list_extend(packages, {
     'typescript-language-server',
     'tailwindcss-language-server',
-    'prettier',
     'graphql-language-service-cli',
+    'html-lsp',
+    'css-lsp',
     'eslint-lsp',
+    'prettier',
   })
 end
 if opt_languages.terraform then
