@@ -6,25 +6,25 @@
 }
 
 window#waybar {
-  border-bottom: 1px solid #9893a5; 
+  border-bottom: 1px solid #9893a5;
   background: #f2e9de;
 }
 
 #workspaces {
   margin-left: 9px; /* sway gap's outer + inner */
-  border-left: 1px solid #9893a5; 
+  border-left: 1px solid #9893a5;
   margin-top: 4px;
   margin-bottom: 4px;
 }
 
 #workspaces button {
   color: #575279;
-  border-right: 1px solid #9893a5; 
-  border-bottom: 1px solid #9893a5; 
-  border-top: 1px solid #9893a5; 
+  border-right: 1px solid #9893a5;
+  border-bottom: 1px solid #9893a5;
+  border-top: 1px solid #9893a5;
   border-radius: 0;
   padding-left: 4px;
-  padding-right:4px;
+  padding-right: 4px;
   background: #fffaf3;
 }
 
@@ -40,8 +40,16 @@ window#waybar {
   box-shadow: none;
 }
 
-#mode,#window,#pulseaudio,#network,#cpu,#memory,#temperature,#clock,#tray {
-  border: 1px solid #9893a5; 
+#mode,
+#window,
+#pulseaudio,
+#network,
+#cpu,
+#memory,
+#temperature,
+#clock,
+#tray {
+  border: 1px solid #9893a5;
   margin-top: 4px;
   margin-bottom: 4px;
   padding-left: 8px;
@@ -51,7 +59,7 @@ window#waybar {
 }
 
 #custom-dunst {
-  border: 1px solid #9893a5; 
+  border: 1px solid #9893a5;
   margin-top: 4px;
   margin-bottom: 4px;
   padding-left: 8px;
