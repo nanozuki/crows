@@ -95,12 +95,12 @@ input * {
 #
 # Screenshot
 #
-    bindsym $mod+Shift+Ctrl+4   exec grimshot copy area
-    bindsym $mod+Shift+4        exec grimshot save area - | swappy -f -
-    bindsym $mod+Shift+Ctrl+3   exec grimshot copy screen
-    bindsym $mod+Shift+3        exec grimshot save screen - | swappy -f -
-    bindsym $mod+Shift+Ctrl+1   exec grimshot copy window
-    bindsym $mod+Shift+1        exec grimshot save window - | swappy -f -
+    bindsym $mod+Ctrl+Shift+4  exec grimshot copy area
+    bindsym $mod+Ctrl+4        exec grimshot save area - | swappy -f -
+    bindsym $mod+Ctrl+Shift+3  exec grimshot copy screen
+    bindsym $mod+Ctrl+3        exec grimshot save screen - | swappy -f -
+    bindsym $mod+Ctrl+Shift+1  exec grimshot copy window
+    bindsym $mod+Ctrl+1        exec grimshot save window - | swappy -f -
 #
 # Moving around:
 #
@@ -140,16 +140,16 @@ input * {
     bindsym $mod+9 workspace number 9
     bindsym $mod+0 workspace number 10
     # Move focused container to workspace
-    bindsym $mod+Ctrl+1 move container to workspace number 1
-    bindsym $mod+Ctrl+2 move container to workspace number 2
-    bindsym $mod+Ctrl+3 move container to workspace number 3
-    bindsym $mod+Ctrl+4 move container to workspace number 4
-    bindsym $mod+Ctrl+5 move container to workspace number 5
-    bindsym $mod+Ctrl+6 move container to workspace number 6
-    bindsym $mod+Ctrl+7 move container to workspace number 7
-    bindsym $mod+Ctrl+8 move container to workspace number 8
-    bindsym $mod+Ctrl+9 move container to workspace number 9
-    bindsym $mod+Ctrl+0 move container to workspace number 10
+    bindsym $mod+Shift+1 move container to workspace number 1
+    bindsym $mod+Shift+2 move container to workspace number 2
+    bindsym $mod+Shift+3 move container to workspace number 3
+    bindsym $mod+Shift+4 move container to workspace number 4
+    bindsym $mod+Shift+5 move container to workspace number 5
+    bindsym $mod+Shift+6 move container to workspace number 6
+    bindsym $mod+Shift+7 move container to workspace number 7
+    bindsym $mod+Shift+8 move container to workspace number 8
+    bindsym $mod+Shift+9 move container to workspace number 9
+    bindsym $mod+Shift+0 move container to workspace number 10
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
 #
