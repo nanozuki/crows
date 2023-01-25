@@ -22,7 +22,7 @@ function sync-env
     #{{else}}
     paru_update
     if type -q flatpak
-        sudo flatpak upgrade
+        sudo flatpak upgrade -y
     end
     #{{end}}
     fisher_update
