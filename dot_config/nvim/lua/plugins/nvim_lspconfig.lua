@@ -157,13 +157,14 @@ if opt_languages.typescript then
     root_dir = function(fname)
       return util.root_pattern('tsconfig.json')(fname) or util.root_pattern('package.json', 'jsconfig.json')(fname)
     end,
+    single_file_support = false, -- Don't start in deno files
   })
 
   set_config('tailwindcss', {
     root_dir = util.root_pattern('tailwind.config.js', 'tailwind.config.ts'),
   })
   set_config('denols', {
-    root_dir = util.root_pattern('deno_root'),
+    root_dir = util.root_pattern('deno.json', 'deno.jsonc'),
     init_options = {
       enable = true,
       lint = true,
