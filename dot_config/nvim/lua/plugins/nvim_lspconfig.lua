@@ -175,7 +175,15 @@ if opt_languages.typescript then
     filetypes = { 'graphql' },
   })
   set_config('html', {})
-  set_config('cssls', {})
+  set_config('cssls', {
+    settings = {
+      css = {
+        lint = {
+          unknownAtRules = 'ignore',
+        },
+      },
+    },
+  })
   set_config('eslint', {})
 end
 if opt_languages.zig then
