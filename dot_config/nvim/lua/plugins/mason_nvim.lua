@@ -19,6 +19,7 @@ if opt_languages.go then
 end
 if opt_languages.ocaml then
   packages[#packages + 1] = 'ocaml-lsp'
+  packages[#packages + 1] = 'ocamlformat'
 end
 if opt_languages.rust then
   vim.list_extend(packages, { 'rust-analyzer', 'rustfmt' })
