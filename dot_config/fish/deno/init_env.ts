@@ -44,9 +44,9 @@ async function initFish(): Promise<void> {
   await fish.installPlugins('jethrokuan/z', 'PatrickF1/fzf.fish');
   const tools = ['exa', 'starship', 'tmux', 'fzf'];
   if (isMacOS) {
-    pkg.brewInstall(...tools);
+    await pkg.brewInstall(...tools);
   } else {
-    pkg.paruInstall(...tools);
+    await pkg.paruInstall(...tools);
   }
 }
 
@@ -142,22 +142,21 @@ async function initOCaml(): Promise<void> {
   if (await fish.hasCommand('opam')) {
     return;
   }
-  fish.setVar('OPAMROOT', '$XDG_DATA_HOME/opam');
+  await fish.setVar('OPAMROOT', '$XDG_DATA_HOME/opam');
   if (isMacOS) {
-    pkg.brewInstall('opam');
+    await pkg.brewInstall('opam');
   } else {
-    pkg.paruInstall('opam');
+    await pkg.paruInstall('opam');
   }
   await exec.run('opam', 'init', '--disable-shell-hook');
 }
 
-const allItems = new Map<string, () => Promise<void>>([
-  ['gpg', initGnupg],
-  ['rime', initRime],
-  ['go', initGolang],
-  ['rust', initRust],
-  ['ocaml', initOCaml],
-]);
+const allItems = new Map<string, () => Promise<void>>();
+allItems.set('gpg', initGnupg);
+allItems.set('rime', initRime);
+allItems.set('go', initGolang);
+allItems.set('rust', initRust);
+allItems.set('ocaml', initOCaml);
 
 async function init(): Promise<void> {
   if (Deno.args.length === 0) {

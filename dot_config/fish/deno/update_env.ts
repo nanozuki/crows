@@ -25,7 +25,7 @@ async function upgradeNpm(): Promise<void> {
   if (!(await fish.hasCommand('npm'))) {
     return;
   }
-  if (!node.checkVersion()) {
+  if (!(await node.checkVersion())) {
     return;
   }
   await node.npmPkgUpgrade();
@@ -61,7 +61,7 @@ async function upgradeGoInstall(): Promise<void> {
   if (!(await fish.hasCommand('go'))) {
     return;
   }
-  if (!(await fish.hasCommand('go'))) {
+  if (!(await fish.hasCommand('go-global-update'))) {
     await exec.run('go', 'install', 'github.com/Gelio/go-global-update@latest');
   }
   try {

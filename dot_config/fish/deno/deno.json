@@ -3,5 +3,10 @@
     "options": {
       "singleQuote": true
     }
+  },
+  "lint": {
+    "rules": {
+      "tags": ["recommended"]
+    }
   }
 }
