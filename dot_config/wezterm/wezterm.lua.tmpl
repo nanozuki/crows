@@ -61,7 +61,7 @@ set({
   window_padding = { left = '0px', right = '0px', top = '0px', bottom = '0px' },
 })
 
-local use_tmux = true
+local use_tmux = {{if .term.use_tmux}}true{{else}}false{{end}}
 
 local function use_wezterm_as_tmux()
   -- key mapping
@@ -95,7 +95,7 @@ local function use_wezterm_as_tmux()
     })
   end
   set({
-    leader = { key = 'j', mods = 'CTRL', timeout_milliseconds = 1000 },
+    leader = { key = 't', mods = 'CTRL', timeout_milliseconds = 1000 },
     keys = keys,
   })
 end

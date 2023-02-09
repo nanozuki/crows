@@ -22,6 +22,7 @@ local palette = {
 local active_tab = {
   bg_color = palette.overlay,
   fg_color = palette.text,
+  intensity = 'Bold',
 }
 
 local inactive_tab = {
