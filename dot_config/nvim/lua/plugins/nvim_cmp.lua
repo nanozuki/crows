@@ -1,26 +1,6 @@
 local cmp = require('cmp')
 local luasnip = require('luasnip')
 
-local function tab(fallback)
-  if cmp.visible() then
-    cmp.select_next_item()
-  elseif luasnip.expand_or_jumpable() then
-    luasnip.expand_or_jump()
-  else
-    fallback()
-  end
-end
-
-local function s_tab(fallback)
-  if cmp.visible() then
-    cmp.select_prev_item()
-  elseif luasnip.jumpable(-1) then
-    luasnip.jump(-1)
-  else
-    fallback()
-  end
-end
-
 cmp.setup({
   completion = {
     completeopt = 'menu,menuone,noinsert',
@@ -34,17 +14,21 @@ cmp.setup({
     ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-n>'] = cmp.mapping.select_next_item(),
     ['<C-e>'] = cmp.mapping.close(),
-    ['<C-y>'] = cmp.mapping({
-      c = cmp.mapping.confirm({ select = true }),
-    }),
-    ['<CR>'] = cmp.mapping({
-      i = cmp.mapping.confirm({ select = true }),
-      c = function(fallback)
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    ['<Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      else
         fallback()
-      end,
-    }),
-    ['<Tab>'] = cmp.mapping({ i = tab }),
-    ['<S-Tab>'] = cmp.mapping({ i = s_tab }),
+      end
+    end, { 'i', 's' }),
+    ['<S-Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
   },
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
