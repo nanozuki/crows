@@ -87,7 +87,7 @@ local function set_config(name, config)
 end
 
 --# built-in languages
-set_config('sumneko_lua', {
+set_config('lua_ls', {
   settings = {
     Lua = {
       runtime = {
