@@ -104,7 +104,7 @@ local plugins = {
     'nvim-treesitter/nvim-treesitter',
     event = 'BufReadPost',
     cmd = { 'TSUpdate', 'TSUpdateSync' },
-    run = ':TSUpdate',
+    build = ':TSUpdate',
     config = cfg('nvim_treesitter'),
   },
   -- git command enhancement

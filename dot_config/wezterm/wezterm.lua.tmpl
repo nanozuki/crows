@@ -1,3 +1,4 @@
+-- vim: ts=2 sw=2 sts=2
 local wezterm = require('wezterm')
 local config = {}
 
@@ -12,7 +13,7 @@ end
 local function get_font(family)
   if family == 'JetBrainsMono' then
     return wezterm.font_with_fallback({
-      'JetBrainsMono Nerd Font',
+      'JetBrainsMonoNL Nerd Font',
       'Menlo',
       'Apple Braille',
       'Geneva',
@@ -27,7 +28,7 @@ local function get_font(family)
     })
   elseif family == 'Iosevka' then
     return wezterm.font_with_fallback({
-      'Iosevka Term Slab',
+      { family = 'Iosevka Term Slab', harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' } },
       'Iosevka Nerd Font',
       'Apple Color Emoji',
       'PingFang SC',
@@ -40,7 +41,6 @@ end
 -- font
 set({
   font = get_font('{{.term.font_family}}'),
-  harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
   font_size = {{.term.font_size}},
 })
 
