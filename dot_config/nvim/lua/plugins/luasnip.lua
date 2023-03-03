@@ -45,7 +45,6 @@ local function goErrorHandle(index)
   })
 end
 local function goReceiver(args)
-  print(vim.inspect(args))
   local type = args[1][1]
   if type == '' then
     return ''
@@ -56,6 +55,8 @@ local function goReceiver(args)
   end
   return string.match(type, '%l')
 end
+
+-- golang snippet
 -- stylua: ignore start
 ls.add_snippets('go', {
   s('ife', fmt([[
@@ -81,3 +82,56 @@ ls.add_snippets('go', {
   }}]], { f(goReceiver, {1}), i(1), i(2), i(3), i(4), i(5) })),
 })
 -- stylua: ignore end
+
+-- tsx snippet
+-- stylua: ignore start
+local function componentProp(args)
+  return (args[1][1] or '')..'Props'
+end
+ls.add_snippets('typescriptreact', {
+  s('comp', fmt([[
+interface {} {{
+  className?: string;
+}}
+
+function {}({{ className }}: {}) {{
+  return (
+    <div className={{`${{className}}`}}>
+    {}
+    </div>
+  );
+}}]], {
+    f(componentProp, {1}),
+    i(1, "Component"),
+    f(componentProp, {1}),
+    i(0),
+  })),
+  s('ep', t('export')),
+  s('epd', t('export default')),
+})
+-- stylua: ignore end
+--[[
+interface NominationProps {
+  name: string;
+  alias: string[];
+  className?: string;
+}
+
+export default function Nomination({
+  name,
+  alias,
+  className,
+}: NominationProps) {
+  return (
+    <div className={`${className}`}>
+      <p>{name}</p>
+      <div>
+        {alias.map((a) => (
+          <p key={a}>{a}</p>
+        ))}
+      </div>
+    </div>
+  );
+}
+]]
+--

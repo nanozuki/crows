@@ -61,7 +61,7 @@ local plugins = {
     config = cfg('alpha_nvim'),
   },
   {
-    'feline-nvim/feline.nvim',
+    'freddiehaddad/feline.nvim',
     event = 'VimEnter',
     dependencies = {
       'nvim-tree/nvim-web-devicons',
