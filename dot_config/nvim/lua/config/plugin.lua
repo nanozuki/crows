@@ -93,6 +93,7 @@ local plugins = {
     'windwp/nvim-autopairs',
     event = 'InsertEnter',
     config = cfg('nvim_autopairs'),
+    enabled = custom.use_copilot == false,
   },
   -- surround edit
   { 'machakann/vim-sandwich', event = 'BufReadPre' },
@@ -132,7 +133,7 @@ local plugins = {
     },
     config = cfg('nvim_cmp'),
   },
-  { 'github/copilot.vim', event = 'InsertEnter', config = cfg('copilot_vim') },
+  { 'github/copilot.vim', event = 'InsertEnter', config = cfg('copilot_vim'), enabled = custom.use_copilot },
   { 'gelguy/wilder.nvim', event = 'CmdlineEnter', build = ':UpdateRemotePlugins', config = cfg('wilder_nvim') }, -- cmdline completion
   { 'mhartington/formatter.nvim', event = 'BufReadPost', config = cfg('formatter_nvim') }, -- formatter
 

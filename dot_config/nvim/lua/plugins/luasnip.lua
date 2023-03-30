@@ -96,7 +96,7 @@ interface {} {{
 
 function {}({{ className }}: {}) {{
   return (
-    <div className={{`${{className}}`}}>
+    <div className={{`${{className || ''}}`}}>
     {}
     </div>
   );

@@ -4,6 +4,7 @@ return {
   ---@type Theme
   theme = 'rose_pine_dawn',
   built_in_languages = { 'lua', 'viml', 'json', 'yaml', 'markdown' },
+  use_copilot = true,
   opt_languages = {
     go = true,
     ocaml = true,
