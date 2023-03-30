@@ -148,13 +148,6 @@ local plugins = {
       'hrsh7th/cmp-nvim-lsp',
       -- jsonls schema helper
       { 'b0o/schemastore.nvim', ft = { 'json', 'yaml' } },
-      -- lua lsp enhancement
-      {
-        'folke/neodev.nvim',
-        config = function()
-          require('neodev').setup({})
-        end,
-      },
     },
   },
   {
