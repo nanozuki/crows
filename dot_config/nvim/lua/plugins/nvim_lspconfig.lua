@@ -86,6 +86,15 @@ local function set_config(name, config)
   lspconfig[name].setup(config)
 end
 
+local function lua_library()
+  local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
+  if cwd == 'nvim' then
+    return vim.api.nvim_get_runtime_file('', true)
+  else
+    return nil
+  end
+end
+
 --# built-in languages
 set_config('lua_ls', {
   settings = {
@@ -95,6 +104,10 @@ set_config('lua_ls', {
       },
       diagnostics = {
         globals = { 'vim' },
+      },
+      workspace = {
+        checkThirdParty = false,
+        library = lua_library(),
       },
       telemetry = {
         enable = false,

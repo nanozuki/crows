@@ -81,7 +81,7 @@ local plugins = {
     dependencies = 'nvim-tree/nvim-web-devicons',
     config = cfg('tabby_nvim'),
   },
-  { 'akinsho/toggleterm.nvim', event = 'VeryLazy', config = cfg('toggleterm_nvim') },
+  { 'akinsho/toggleterm.nvim', event = 'VeryLazy', cmd = 'Copilot', config = cfg('toggleterm_nvim') },
 
   -- ## general editing
   -- display sign for marks
@@ -132,6 +132,7 @@ local plugins = {
     },
     config = cfg('nvim_cmp'),
   },
+  { 'github/copilot.vim', event = 'InsertEnter', config = cfg('copilot_vim') },
   { 'gelguy/wilder.nvim', event = 'CmdlineEnter', build = ':UpdateRemotePlugins', config = cfg('wilder_nvim') }, -- cmdline completion
   { 'mhartington/formatter.nvim', event = 'BufReadPost', config = cfg('formatter_nvim') }, -- formatter
 
