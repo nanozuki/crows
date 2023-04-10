@@ -84,7 +84,7 @@ local plugins = {
     'windwp/nvim-autopairs',
     event = 'InsertEnter',
     config = cfg('nvim_autopairs'),
-    enabled = custom.use_copilot == false,
+    -- enabled = custom.use_copilot == false,
   },
   -- surround edit
   { 'machakann/vim-sandwich', event = 'BufReadPre' },
