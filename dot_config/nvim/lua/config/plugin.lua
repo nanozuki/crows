@@ -61,19 +61,10 @@ local plugins = {
     config = cfg('alpha_nvim'),
   },
   {
-    'freddiehaddad/feline.nvim',
-    event = 'VimEnter',
-    dependencies = {
-      'nvim-tree/nvim-web-devicons',
-      'nvim-lua/plenary.nvim',
-      {
-        'lewis6991/gitsigns.nvim',
-        config = function()
-          require('gitsigns').setup({ signcolumn = false, trouble = false })
-        end,
-      },
-    },
-    config = cfg('feline_nvim'),
+    'nvim-lualine/lualine.nvim',
+    event = 'VeryLazy',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    config = cfg('lualine_nvim'),
   },
   {
     'nanozuki/tabby.nvim',
@@ -133,7 +124,16 @@ local plugins = {
     },
     config = cfg('nvim_cmp'),
   },
-  { 'github/copilot.vim', event = 'InsertEnter', config = cfg('copilot_vim'), enabled = custom.use_copilot },
+  {
+    'github/copilot.vim',
+    init = function()
+      vim.g.copilot_no_tab_map = true
+    end,
+    cmd = 'Copilot',
+    event = 'InsertEnter',
+    config = cfg('copilot_vim'),
+    enabled = custom.use_copilot,
+  },
   { 'gelguy/wilder.nvim', event = 'CmdlineEnter', build = ':UpdateRemotePlugins', config = cfg('wilder_nvim') }, -- cmdline completion
   { 'mhartington/formatter.nvim', event = 'BufReadPost', config = cfg('formatter_nvim') }, -- formatter
 

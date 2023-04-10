@@ -69,13 +69,14 @@ local themes = {
   rose_pine_dawn = function()
     vim.o.background = 'light'
     vim.cmd('colorscheme rose-pine')
+    local palette = require('rose-pine.palette')
     return {
-      accent = '#907aa9', -- Iris
-      accent_sec = '#d7827e', -- Rose
-      bg = '#f2e9de', -- bg1
-      bg_sec = '#e4dfde', -- bg4
-      fg = '#575279', -- default:bg1
-      fg_sec = '#6e6a86', -- fg
+      accent = palette.iris,
+      accent_sec = palette.rose,
+      bg = palette.surface,
+      bg_sec = palette.overlay,
+      fg = palette.text,
+      fg_sec = palette.subtle, -- fg
     }
   end,
 }
