@@ -187,7 +187,7 @@ local plugins = {
   -- *ml tag editing
   {
     'mattn/emmet-vim',
-    ft = { 'html', 'javascript.jsx', 'typescript.tsx', 'javascriptreact', 'typescriptreact', 'xml' },
+    ft = { 'html', 'javascriptreact', 'typescriptreact', 'xml', 'jsx', 'markdown' },
   },
   {
     'ray-x/go.nvim',

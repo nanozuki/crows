@@ -24,6 +24,7 @@ vim.cmd([[filetype plugin on]])
 local filetypes = {
   ['*html'] = 'html',
   ['tsconfig.json'] = 'jsonc',
+  ['*.mdx'] = 'markdown',
 }
 local ft_group = vim.api.nvim_create_augroup('filetypes', {})
 for pattern, filetype in pairs(filetypes) do
@@ -43,7 +44,7 @@ vim.opt.softtabstop = 4
 local fi_group = vim.api.nvim_create_augroup('fileindent', {})
 vim.api.nvim_create_autocmd('FileType', {
   group = fi_group,
-  pattern = 'lua,javascript,typescript,javascriptreact,typescriptreact,html,css,scss,xml,yaml,json,terraform,graphql',
+  pattern = 'lua,javascript,typescript,javascriptreact,typescriptreact,html,css,scss,xml,yaml,json,terraform,graphql,markdown,jsx',
   command = 'setlocal expandtab ts=2 sw=2 sts=2',
 })
 
