@@ -42,7 +42,22 @@ if opt_languages.zig then
   packages[#packages + 1] = 'zls'
 end
 
-require('mason').setup()
-require('mason-tool-installer').setup({
-  ensure_installed = packages,
-})
+return {
+  {
+    'williamboman/mason.nvim',
+    dependencies = { 'WhoIsSethDaniel/mason-tool-installer.nvim' },
+    build = ':MasonUpdate',
+    config = function()
+      require('mason').setup()
+    end,
+  },
+  {
+    'WhoIsSethDaniel/mason-tool-installer.nvim',
+    config = function()
+      require('mason-tool-installer').setup({
+        ensure_installed = packages,
+        auto_update = true,
+      })
+    end,
+  },
+}

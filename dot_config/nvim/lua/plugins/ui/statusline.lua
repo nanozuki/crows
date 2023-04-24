@@ -26,14 +26,25 @@ end
 
 local function lsp()
   local clients = vim.lsp.get_active_clients()
-  local text = {}
+  local status = {
+    lang_servers = 0,
+    copilot = false,
+  }
   if clients and #clients > 0 then
-    text[#text + 1] = 'LSP'
     for _, client in ipairs(clients) do
       if client.name == 'copilot' then
-        text[#text + 1] = 'AI'
+        status.copilot = true
+      else
+        status.lang_servers = status.lang_servers + 1
       end
     end
+  end
+  local text = {}
+  if status.lang_servers > 0 then
+    text[#text + 1] = 'LSP'
+  end
+  if status.copilot then
+    text[#text + 1] = 'AI'
   end
   return table.concat(text, '+')
 end
@@ -68,32 +79,38 @@ local nvim_tree = {
   },
 }
 
--- config
-require('lualine').setup({
-  options = {
-    theme = make_theme(),
-    component_separators = { left = '', right = '' },
-    section_separators = { left = '', right = '' },
-  },
-  sections = {
-    lualine_a = { 'mode' },
-    lualine_b = {
-      { 'branch', draw_empty = true },
-      'diff',
-      'diagnostics',
-    },
-    lualine_c = { { 'filename', path = 4 } },
-    lualine_x = { 'filetype', { file_info, icon = '' } },
-    lualine_y = { { lsp, icon = '' } },
-    lualine_z = { { position, icon = '' } },
-  },
-  inactive_sections = {
-    lualine_a = { block },
-    lualine_b = {},
-    lualine_c = { { 'filename', path = 4 } },
-    lualine_x = { { file_info, icon = '' } },
-    lualine_y = {},
-    lualine_z = { block },
-  },
-  extensions = { nvim_tree },
-})
+return {
+  'nvim-lualine/lualine.nvim',
+  event = 'VeryLazy',
+  dependencies = { 'nvim-tree/nvim-web-devicons' },
+  config = function()
+    require('lualine').setup({
+      options = {
+        theme = make_theme(),
+        component_separators = { left = '', right = '' },
+        section_separators = { left = '', right = '' },
+      },
+      sections = {
+        lualine_a = { 'mode' },
+        lualine_b = {
+          { 'branch', draw_empty = true },
+          'diff',
+          'diagnostics',
+        },
+        lualine_c = { { 'filename', path = 4 } },
+        lualine_x = { 'filetype', { file_info, icon = '' } },
+        lualine_y = { { lsp, icon = '' } },
+        lualine_z = { { position, icon = '' } },
+      },
+      inactive_sections = {
+        lualine_a = { block },
+        lualine_b = {},
+        lualine_c = { { 'filename', path = 4 } },
+        lualine_x = { { file_info, icon = '' } },
+        lualine_y = {},
+        lualine_z = { block },
+      },
+      extensions = { nvim_tree },
+    })
+  end,
+}
