@@ -92,13 +92,12 @@ end
 ls.add_snippets('typescriptreact', {
   s('comp', fmt([[
 interface {} {{
-  className?: string;
 }}
 
-function {}({{ className }}: {}) {{
+function {}({{}}: {}) {{
   return (
-    <div className={{`${{className || ''}}`}}>
-    {}
+    <div className="">
+      {}
     </div>
   );
 }}]], {
@@ -110,32 +109,6 @@ function {}({{ className }}: {}) {{
   s('ep', t('export')),
   s('epd', t('export default')),
 })
-  -- stylua: ignore end
-  --[[
-interface NominationProps {
-  name: string;
-  alias: string[];
-  className?: string;
-}
-
-export default function Nomination({
-  name,
-  alias,
-  className,
-}: NominationProps) {
-  return (
-    <div className={`${className}`}>
-      <p>{name}</p>
-      <div>
-        {alias.map((a) => (
-          <p key={a}>{a}</p>
-        ))}
-      </div>
-    </div>
-  );
-}
-]]
-  --
 end
 
 return {
