@@ -1,9 +1,9 @@
-local base = require('plugins.lsp.base')
-
 return {
   {
     'ray-x/lsp_signature.nvim',
+    event = 'BufReadPre',
     config = function()
+      local base = require('plugins.lsp.base')
       base.on_attaches[#base.on_attaches + 1] = function(_, _)
         require('lsp_signature').on_attach({ bind = true, handler_opts = { border = 'none' } })
       end
@@ -11,19 +11,22 @@ return {
   },
   {
     'hrsh7th/cmp-nvim-lsp',
+    event = 'BufReadPre',
     config = function()
+      local base = require('plugins.lsp.base')
       base.capabilities[#base.capabilities + 1] = require('cmp_nvim_lsp').default_capabilities
     end,
   },
   { 'b0o/schemastore.nvim', ft = { 'json', 'yaml' } },
   {
     'neovim/nvim-lspconfig',
+    event = 'BufReadPre',
     config = function()
+      local base = require('plugins.lsp.base')
       base.set_keymapping_and_sign()
       require('plugins.lsp.servers')
       base.set_lsp_format()
     end,
-    event = 'BufReadPre',
     dependencies = {
       'ray-x/lsp_signature.nvim',
       'hrsh7th/cmp-nvim-lsp',

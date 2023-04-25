@@ -1,4 +1,3 @@
-local lsp = require('plugins.lsp.base')
 local opt_languages = require('config.custom').opt_languages
 
 return {
@@ -25,6 +24,7 @@ return {
     ft = { 'rust' },
     config = function()
       local rt = require('rust-tools')
+      local lsp = require('plugins.lsp.base')
       rt.setup({
         server = {
           on_attach = function(client, bufnr)

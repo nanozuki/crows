@@ -56,6 +56,7 @@ return {
   },
   {
     'nvim-treesitter/nvim-treesitter-textobjects',
+    event = 'BufReadPost',
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     config = function()
       require('nvim-treesitter.configs').setup({
@@ -100,7 +101,7 @@ return {
     end,
   },
   -- git command enhancement
-  { 'tpope/vim-fugitive', event = 'VeryLazy' },
+  { 'tpope/vim-fugitive', cmd = 'Git' },
   {
     'TimUntersberger/neogit',
     cmd = 'Neogit',
