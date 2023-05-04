@@ -11,13 +11,6 @@ local function set_config(name, config)
   lspconfig[name].setup(config)
 end
 
----set lsp formatter
----@param pattern string file pattern
----@param client string client name
-local function set_format(pattern, client)
-  base.fomatters[pattern] = client
-end
-
 --# built-in languages
 set_config('lua_ls', {
   settings = {
@@ -83,15 +76,15 @@ if opt_languages.go then
 end
 if opt_languages.ocaml then
   set_config('ocamllsp', {})
-  set_format('*.ml', 'ocamllsp')
+  base.fomatters.ocamllsp = { 'ocaml' }
 end
 if opt_languages.rust then
   -- lsp is controlled by rust_tools.nvim
-  set_format('*.rs', 'rust_analyzer')
+  base.fomatters.rust_analyzer = { 'rust' }
 end
 if opt_languages.terraform then
   set_config('terraformls', {})
-  set_format('*.tf', 'terraformls')
+  base.fomatters.terraformls = { 'terraform' }
 end
 if opt_languages.typescript then
   local util = require('lspconfig.util')
@@ -130,5 +123,5 @@ if opt_languages.typescript then
 end
 if opt_languages.zig then
   set_config('zls', {})
-  set_format('*.zig', 'zls')
+  base.fomatters.zls = { 'zig' }
 end

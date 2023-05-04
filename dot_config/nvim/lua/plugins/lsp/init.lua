@@ -31,6 +31,7 @@ return {
       'ray-x/lsp_signature.nvim',
       'hrsh7th/cmp-nvim-lsp',
       'b0o/schemastore.nvim',
+      'jose-elias-alvarez/null-ls.nvim',
     },
   },
   {
@@ -58,4 +59,5 @@ return {
       require('fidget').setup({})
     end,
   },
+  { import = 'plugins.lsp.null_ls' },
 }

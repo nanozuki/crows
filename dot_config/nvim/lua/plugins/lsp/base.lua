@@ -52,8 +52,8 @@ M.on_attaches = {
 ---@type (fun(caps:table):table)[]
 M.capabilities = {}
 
----set fomatters by {pattern = client}
----@type table<string, string>
+---set fomatters by {client = [ filetypes ]}
+---@type table<string, string[]>
 M.fomatters = {}
 
 function M.set_keymapping_and_sign()
@@ -86,15 +86,17 @@ end
 
 function M.set_lsp_format()
   local format_group = vim.api.nvim_create_augroup('LspFormat', {})
-  for pattern, client in pairs(M.fomatters) do
-    vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
-      group = format_group,
-      pattern = pattern,
-      callback = function()
-        vim.lsp.buf.format({ name = client })
-      end,
-    })
-  end
+  vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+    group = format_group,
+    pattern = '*',
+    callback = function()
+      vim.lsp.buf.format({
+        filter = function(client)
+          return M.fomatters[client.name] and vim.tbl_contains(M.fomatters[client.name], vim.bo.filetype)
+        end,
+      })
+    end,
+  })
 end
 
 return M
