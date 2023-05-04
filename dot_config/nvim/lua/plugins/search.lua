@@ -15,12 +15,10 @@ return {
       { 'nvim-lua/plenary.nvim' },
       { 'nvim-telescope/telescope-z.nvim' },
       { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-      { 'rmagatti/session-lens' }, -- auto-session
     },
     config = function()
       require('telescope').load_extension('z')
       require('telescope').load_extension('fzf')
-      require('telescope').load_extension('session-lens')
       require('telescope').setup({
         defaults = {
           preview = {
@@ -49,7 +47,6 @@ return {
         { desc = 'Find lsp symbol' }
       )
       vim.keymap.set('n', '<leader>ft', require('telescope.builtin').treesitter, { desc = 'List item by treesitter' })
-      vim.keymap.set('n', '<leader>fs', require('session-lens').search_session, { desc = 'Search Session' })
       vim.keymap.set('n', '<leader>z', require('telescope').extensions.z.list, { desc = 'Find path by z' })
     end,
   },
