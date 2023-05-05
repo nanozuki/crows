@@ -10,11 +10,9 @@ if opt_languages.go then
     'golangci-lint-langserver',
     'goimports',
     'gomodifytags',
-    'golines',
+    'impl',
     'gotests',
     'gotestsum',
-    'iferr',
-    'impl',
   })
 end
 if opt_languages.ocaml then

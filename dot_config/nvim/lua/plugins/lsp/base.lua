@@ -54,7 +54,7 @@ M.capabilities = {}
 
 ---set fomatters by {client = [ filetypes ]}
 ---@type table<string, string[]>
-M.fomatters = {}
+M.formatters = {}
 
 function M.set_keymapping_and_sign()
   for _, mapper in pairs(M.keys) do
@@ -92,7 +92,7 @@ function M.set_lsp_format()
     callback = function()
       vim.lsp.buf.format({
         filter = function(client)
-          return M.fomatters[client.name] and vim.tbl_contains(M.fomatters[client.name], vim.bo.filetype)
+          return M.formatters[client.name] and vim.tbl_contains(M.formatters[client.name], vim.bo.filetype)
         end,
       })
     end,

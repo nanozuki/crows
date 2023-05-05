@@ -76,15 +76,15 @@ if opt_languages.go then
 end
 if opt_languages.ocaml then
   set_config('ocamllsp', {})
-  base.fomatters.ocamllsp = { 'ocaml' }
+  base.formatters.ocamllsp = { 'ocaml' }
 end
 if opt_languages.rust then
   -- lsp is controlled by rust_tools.nvim
-  base.fomatters.rust_analyzer = { 'rust' }
+  base.formatters.rust_analyzer = { 'rust' }
 end
 if opt_languages.terraform then
   set_config('terraformls', {})
-  base.fomatters.terraformls = { 'terraform' }
+  base.formatters.terraformls = { 'terraform' }
 end
 if opt_languages.typescript then
   local util = require('lspconfig.util')
@@ -123,5 +123,5 @@ if opt_languages.typescript then
 end
 if opt_languages.zig then
   set_config('zls', {})
-  base.fomatters.zls = { 'zig' }
+  base.formatters.zls = { 'zig' }
 end

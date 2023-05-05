@@ -9,15 +9,6 @@ return {
     ft = { 'html', 'javascriptreact', 'typescriptreact', 'xml', 'jsx', 'markdown' },
   },
   {
-    'ray-x/go.nvim',
-    dependencies = { 'neovim/nvim-lspconfig' },
-    enabled = opt_languages.go,
-    ft = { 'go', 'gomod', 'gowork' },
-    config = function()
-      require('go').setup()
-    end,
-  },
-  {
     'simrat39/rust-tools.nvim',
     dependencies = { 'neovim/nvim-lspconfig' },
     enabled = opt_languages.rust,
