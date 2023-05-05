@@ -25,28 +25,35 @@ local function file_info()
 end
 
 local function lsp()
-  local clients = vim.lsp.get_active_clients()
+  local clients = vim.lsp.get_active_clients({ bufnr = 0 })
   local status = {
-    lang_servers = 0,
+    lang_servers = false,
+    null_ls = false,
     copilot = false,
   }
   if clients and #clients > 0 then
     for _, client in ipairs(clients) do
       if client.name == 'copilot' then
         status.copilot = true
+      elseif client.name == 'null-ls' then
+        status.null_ls = true
       else
-        status.lang_servers = status.lang_servers + 1
+        status.lang_servers = true
       end
     end
   end
   local text = {}
-  if status.lang_servers > 0 then
-    text[#text + 1] = 'LSP'
+  if status.lang_servers then
+    if status.null_ls then
+      text[#text + 1] = 'LSP+'
+    else
+      text[#text + 1] = 'LSP'
+    end
   end
   if status.copilot then
     text[#text + 1] = 'AI'
   end
-  return table.concat(text, '+')
+  return table.concat(text, ',')
 end
 
 local function position()
