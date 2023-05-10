@@ -100,6 +100,14 @@ return {
       })
     end,
   },
+  {
+    'nvim-treesitter/nvim-treesitter-context',
+    event = 'BufReadPost',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    config = function()
+      require('treesitter-context').setup({})
+    end,
+  },
   -- git command enhancement
   { 'tpope/vim-fugitive', cmd = 'Git' },
   {
