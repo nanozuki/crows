@@ -25,9 +25,6 @@ return {
       })
       vim.list_extend(format_types, { 'go' })
     end
-    if custom.opt_languages.typescript or custom.opt_languages.go then
-      sources[#sources + 1] = null_ls.builtins.formatting.refactoring
-    end
     null_ls.setup({ sources = sources })
     vim.list_extend(format_types, { 'go' })
     base.formatters['null-ls'] = format_types
