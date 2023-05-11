@@ -16,7 +16,7 @@
         "format": "{}"
     },
     "custom/window": {
-        "format": "  "
+        "format": " 󰀻 "
     },
     "sway/window": {
         "rewrite": {
@@ -27,7 +27,7 @@
         }
     },
     "clock": {
-        "format": " {:%Y-%m-%d %a %H:%M}",
+        "format": "󰃰 {:%Y-%m-%d %a %H:%M}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
     },
     "cpu": {
@@ -44,7 +44,7 @@
     "network": {
         "format-ethernet": " wired",
         "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-linked": " {ifname} [No IP]",
+        "format-linked": "󰊗 {ifname} [No IP]",
         "format-disconnected": "⚠ Disconnected",
         "format-alt": "{ipaddr}/{cidr}"
     },

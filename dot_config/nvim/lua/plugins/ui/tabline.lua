@@ -17,7 +17,7 @@ local function config()
         local hl = tab.is_current() and theme.current_tab or theme.tab
         return {
           line.sep('', hl, theme.line),
-          tab.is_current() and '' or '',
+          tab.is_current() and '󰆤' or '󰆣',
           string.format('%s:', tab.number()),
           tab.name(),
           line.sep('', hl, theme.line),

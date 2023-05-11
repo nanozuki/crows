@@ -46,7 +46,7 @@ return {
           warning = vim.g.diag_signs.Warn,
           information = vim.g.diag_signs.Info,
           hint = vim.g.diag_signs.Hint,
-          other = '﫠',
+          other = '󰗡',
         },
       })
     end,

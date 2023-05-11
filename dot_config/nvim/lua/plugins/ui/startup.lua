@@ -58,11 +58,11 @@ section.buttons = {
   val = {
     button('e', '  New file', '<cmd>ene <CR>'),
     button('SPC z', '  Zip to recent folder'),
-    button('SPC f s', '  Open Session'),
-    button('SPC f f', '  Find file'),
-    button('SPC f g', '  Find word'),
+    button('SPC f s', '󰉓  Open Session'),
+    button('SPC f f', '󰍉  Find file'),
+    button('SPC f g', '󰈬  Find word'),
     button('SPC f m', '  Jump to bookmarks'),
-    button('SPC f h', 'ﬤ  Find help documents'),
+    button('SPC f h', '󰘥  Find help documents'),
   },
   opts = {
     spacing = 1,
