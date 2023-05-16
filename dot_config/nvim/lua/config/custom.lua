@@ -1,8 +1,13 @@
----@alias Theme 'gruvbox_light'|'gruvbox_dark'|'edge_light'|'nord'|'rose_pine_dawn'
+-- available themes:
+--  rose_pine (variant: 'main', 'dawn', 'moon'),
+--  edge (variant: 'dark', 'aura', 'neon', 'light'),
+--  nord,
 
 return {
-  ---@type Theme
-  theme = 'rose_pine_dawn',
+  theme = {
+    name = 'rose_pine',
+    variant = 'dawn',
+  },
   built_in_languages = { 'lua', 'viml', 'json', 'yaml', 'markdown' },
   use_copilot = true,
   opt_languages = {

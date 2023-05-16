@@ -1,11 +1,13 @@
 -- custom theme
+
+local custom = require('config.custom')
+local store = require('config.store')
 local modes = { 'normal', 'insert', 'visual', 'replace', 'command', 'inactive' }
 local function make_theme()
-  local custom = require('config.custom')
-  if custom.theme ~= 'rose_pine_dawn' then
+  if custom.theme ~= 'rose_pine' then
     return nil
   end
-  local palette = require('rose-pine.palette')
+  local palette = store.color_palette
   local theme = require('lualine.themes.rose-pine')
   for _, mode in ipairs(modes) do
     theme[mode].b.bg = palette.overlay

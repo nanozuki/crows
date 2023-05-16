@@ -1,13 +1,22 @@
+local custom = require('config.custom')
+local store = require('config.store')
+
+local function make_theme()
+  local palette = store.color_palette
+  if custom.theme.name then
+    return {
+      line = { fg = palette.text, bg = palette.surface },
+      head = { fg = palette.surface, bg = palette.iris, style = 'italic' },
+      current_tab = { fg = palette.surface, bg = palette.rose, style = 'bold' },
+      tab = { fg = palette.text, bg = palette.overlay, style = 'bold' },
+      win = { fg = palette.text, bg = palette.overlay },
+      tail = { fg = palette.surface, bg = palette.rose, style = 'bold' },
+    }
+  end
+end
+
 local function config()
-  local palette = require('config.theme').palette
-  local theme = {
-    line = { fg = palette.fg, bg = palette.bg },
-    head = { fg = palette.bg, bg = palette.accent, style = 'italic' },
-    current_tab = { fg = palette.bg, bg = palette.accent_sec, style = 'bold' },
-    tab = { fg = palette.fg, bg = palette.bg_sec, style = 'bold' },
-    win = { fg = palette.fg, bg = palette.bg_sec },
-    tail = { fg = palette.bg, bg = palette.accent_sec, style = 'bold' },
-  }
+  local theme = make_theme()
   vim.opt.showtabline = 2
   require('tabby.tabline').set(function(line)
     local cwd = ' ' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':t') .. ' '
