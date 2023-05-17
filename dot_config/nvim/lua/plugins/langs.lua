@@ -15,7 +15,7 @@ return {
     ft = { 'rust' },
     config = function()
       local rt = require('rust-tools')
-      local lsp = require('plugins.lsp.base')
+      local lsp = require('config.lsp_base')
       rt.setup({
         server = {
           on_attach = function(client, bufnr)

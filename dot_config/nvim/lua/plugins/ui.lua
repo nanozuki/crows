@@ -38,7 +38,4 @@ return {
       })
     end,
   },
-  { import = 'plugins.ui.startup' },
-  { import = 'plugins.ui.statusline' },
-  { import = 'plugins.ui.tabline' },
 }
