@@ -94,5 +94,15 @@ end
 vim.keymap.set('n', '<leader>wo', win_only, { desc = 'Close other windows in this tab' })
 vim.keymap.set('n', '<leader>wO', close_floating_win, { desc = 'Close floating windows in this tab' })
 
--- # diagnostic sign
-vim.g.diag_signs = { Error = '󰅚', Warn = '󰀪', Info = '', Hint = '󰌶' }
+-- # diagnostic
+-- ## keymap
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open diagnostic floating window' })
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Goto prev diagnostic' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Goto next diagnostic' })
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Add buffer diagnostics to the location list.' })
+-- ## sign
+local store = require('config.store')
+for sign, text in pairs(store.diagnostic_signs) do
+  local hl = 'DiagnosticSign' .. sign
+  vim.fn.sign_define(hl, { text = text, texthl = hl, linehl = '', numhl = '' })
+end

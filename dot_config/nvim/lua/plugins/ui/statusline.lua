@@ -4,7 +4,7 @@ local custom = require('config.custom')
 local store = require('config.store')
 local modes = { 'normal', 'insert', 'visual', 'replace', 'command', 'inactive' }
 local function make_theme()
-  if custom.theme ~= 'rose_pine' then
+  if custom.theme.name ~= 'rose_pine' then
     return nil
   end
   local palette = store.color_palette

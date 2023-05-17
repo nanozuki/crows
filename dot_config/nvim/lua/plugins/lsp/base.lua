@@ -1,18 +1,4 @@
----@class LspKeyMapper
----@field [1] string key
----@field [2] string|function command
----@field [3] string description
----@alias LspKeyMappers table<string, LspKeyMapper>
-
 local M = {}
-
----@type LspKeyMappers
-M.keys = {
-  diag_float = { '<leader>e', vim.diagnostic.open_float, 'Open diagnostic floating window' },
-  diag_prev = { '[d', vim.diagnostic.goto_prev, 'Goto prev diagnostic' },
-  diag_next = { ']d', vim.diagnostic.goto_next, 'Goto next diagnostic' },
-  diag_loclist = { '<leader>q', vim.diagnostic.setloclist, 'Add buffer diagnostics to the location list.' },
-}
 
 ---@type LspKeyMappers
 M.buffer_keys = {
@@ -55,17 +41,6 @@ M.capabilities = {}
 ---set fomatters by {client = [ filetypes ]}
 ---@type table<string, string[]>
 M.formatters = {}
-
-function M.set_keymapping_and_sign()
-  for _, mapper in pairs(M.keys) do
-    vim.keymap.set('n', mapper[1], mapper[2], { desc = mapper[3] })
-  end
-
-  for sign, text in pairs(vim.g.diag_signs) do
-    local hl = 'DiagnosticSign' .. sign
-    vim.fn.sign_define(hl, { text = text, texthl = hl, linehl = '', numhl = '' })
-  end
-end
 
 ---on attach function
 ---@param client table client object

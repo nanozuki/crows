@@ -1,3 +1,5 @@
+local store = require('config.store')
+
 return {
   {
     'ray-x/lsp_signature.nvim',
@@ -23,7 +25,6 @@ return {
     event = 'BufReadPre',
     config = function()
       local base = require('plugins.lsp.base')
-      base.set_keymapping_and_sign()
       require('plugins.lsp.servers')
       base.set_lsp_format()
     end,
@@ -42,10 +43,10 @@ return {
     config = function()
       require('trouble').setup({
         signs = {
-          error = vim.g.diag_signs.Error,
-          warning = vim.g.diag_signs.Warn,
-          information = vim.g.diag_signs.Info,
-          hint = vim.g.diag_signs.Hint,
+          error = store.diagnostic_signs.Error,
+          warning = store.diagnostic_signs.Warn,
+          information = store.diagnostic_signs.Info,
+          hint = store.diagnostic_signs.Hint,
           other = '󰗡',
         },
       })
