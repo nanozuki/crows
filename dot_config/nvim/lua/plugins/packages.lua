@@ -2,7 +2,8 @@
 local packages = { 'lua-language-server', 'stylua', 'vim-language-server', 'yaml-language-server' }
 
 -- opt languages
-local opt_languages = require('config.custom').opt_languages
+local values = require('config.values')
+local opt_languages = values.languages.optional
 if opt_languages.go then
   vim.list_extend(packages, {
     'gopls',

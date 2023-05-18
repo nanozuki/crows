@@ -1,3 +1,5 @@
+local values = require('config.values')
+
 -- # basic setting
 vim.g.mapleader = ' '
 vim.opt.linebreak = true
@@ -101,8 +103,8 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Goto prev diagnost
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Goto next diagnostic' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Add buffer diagnostics to the location list.' })
 -- ## sign
-local store = require('config.store')
-for sign, text in pairs(store.diagnostic_signs) do
+local signs = values.diagnostic_signs
+for sign, text in pairs(signs) do
   local hl = 'DiagnosticSign' .. sign
   vim.fn.sign_define(hl, { text = text, texthl = hl, linehl = '', numhl = '' })
 end

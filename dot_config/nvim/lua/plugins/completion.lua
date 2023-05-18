@@ -1,4 +1,4 @@
-local custom = require('config.custom')
+local values = require('config.values')
 
 return {
   {
@@ -68,7 +68,7 @@ return {
         replace_keycodes = false,
       })
     end,
-    enabled = custom.use_copilot,
+    enabled = values.use_copilot,
   },
   {
     'gelguy/wilder.nvim',

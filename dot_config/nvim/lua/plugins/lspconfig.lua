@@ -1,145 +1,104 @@
-local base = require('config.lsp_base')
-local opt_languages = require('config.custom').opt_languages
-
----set lsp config
----@param name string language server string
----@param config table language server config
-local function set_config(name, config)
-  local lspconfig = require('lspconfig')
-  config.on_attach = base.on_attach
-  config.capabilities = base.make_capabilities()
-  lspconfig[name].setup(config)
-end
-
-local function config()
-  -- # set lang servers
-  -- ## built-in languages
-  set_config('lua_ls', {
-    settings = {
-      Lua = {
-        runtime = {
-          version = 'LuaJIT',
-        },
-        diagnostics = {
-          globals = { 'vim' },
-        },
-        workspace = {
-          checkThirdParty = false,
-          library = (function()
-            local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
-            if cwd == 'nvim' then
-              return vim.api.nvim_get_runtime_file('', true)
-            else
-              return nil
-            end
-          end)(),
-        },
-        telemetry = {
-          enable = false,
-        },
-      },
-    },
-  })
-  set_config('vimls', {})
-  set_config('yamlls', {
-    settings = {
-      yaml = {
-        schemas = require('schemastore').yaml.schemas(), -- Plug'b0o/schemastore.nvim'
-      },
-    },
-  })
-  set_config('jsonls', {
-    settings = {
-      json = {
-        schemas = require('schemastore').json.schemas(), -- Plug'b0o/schemastore.nvim'
-        validate = { enable = true },
-      },
-    },
-  })
-
-  -- ## opt languages
-  if opt_languages.go then
-    set_config('gopls', {
-      settings = {
-        gopls = {
-          hints = {
-            assignVariableTypes = true,
-            compositeLiteralFields = true,
-            compositeLiteralTypes = true,
-            constantValues = true,
-            functionTypeParameters = true,
-            parameterNames = true,
-            rangeVariableTypes = true,
-          },
-        },
-      },
-    })
-    set_config('golangci_lint_ls', {})
-  end
-  if opt_languages.ocaml then
-    set_config('ocamllsp', {})
-    base.formatters.ocamllsp = { 'ocaml' }
-  end
-  if opt_languages.rust then
-    -- lsp is controlled by rust_tools.nvim
-    base.formatters.rust_analyzer = { 'rust' }
-  end
-  if opt_languages.terraform then
-    set_config('terraformls', {})
-    base.formatters.terraformls = { 'terraform' }
-  end
-  if opt_languages.typescript then
-    local util = require('lspconfig.util')
-    set_config('tsserver', {
-      root_dir = function(fname)
-        return util.root_pattern('tsconfig.json')(fname) or util.root_pattern('package.json', 'jsconfig.json')(fname)
-      end,
-      single_file_support = false, -- Don't start in deno files
-    })
-
-    set_config('tailwindcss', {
-      root_dir = util.root_pattern('tailwind.config.js', 'tailwind.config.ts'),
-    })
-    set_config('denols', {
-      root_dir = util.root_pattern('deno.json', 'deno.jsonc'),
-      init_options = {
-        enable = true,
-        lint = true,
-        unstable = true,
-      },
-    })
-    set_config('graphql', {
-      filetypes = { 'graphql' },
-    })
-    set_config('html', {})
-    set_config('cssls', {
-      settings = {
-        css = {
-          lint = {
-            unknownAtRules = 'ignore',
-          },
-        },
-      },
-    })
-    set_config('eslint', {})
-  end
-  if opt_languages.zig then
-    set_config('zls', {})
-    base.formatters.zls = { 'zig' }
-  end
-
-  -- # set formatter
-  base.set_lsp_format()
-end
+local values = require('config.values')
+local lsp = require('config.lsp')
 
 return {
-  'neovim/nvim-lspconfig',
-  event = 'BufReadPre',
-  config = config,
-  dependencies = {
+  -- # load before nvim-lspconfig
+  {
     'ray-x/lsp_signature.nvim',
+    lazy = true,
+    config = function()
+      lsp.on_attach_callbacks[#lsp.on_attach_callbacks + 1] = function(_, _)
+        require('lsp_signature').on_attach({ bind = true, handler_opts = { border = 'none' } })
+      end
+    end,
+  },
+  {
     'hrsh7th/cmp-nvim-lsp',
-    'b0o/schemastore.nvim',
+    lazy = true,
+    config = function()
+      lsp.capabilities[#lsp.capabilities + 1] = require('cmp_nvim_lsp').default_capabilities
+    end,
+  },
+  {
     'jose-elias-alvarez/null-ls.nvim',
+    lazy = true,
+    config = function()
+      local null_ls = require('null-ls')
+      local opt_lang = values.languages.optional
+
+      -- builtins languages
+      local sources = {
+        null_ls.builtins.formatting.prettier,
+        null_ls.builtins.formatting.stylua,
+      }
+      local format_types = {}
+      vim.list_extend(format_types, null_ls.builtins.formatting.prettier.filetypes)
+      vim.list_extend(format_types, null_ls.builtins.formatting.stylua.filetypes)
+
+      -- optional languages
+      if opt_lang.go then
+        vim.list_extend(sources, {
+          null_ls.builtins.formatting.goimports,
+          null_ls.builtins.code_actions.gomodifytags,
+          null_ls.builtins.code_actions.impl,
+          -- TODO: waiting gotests: https://github.com/jose-elias-alvarez/null-ls.nvim/pull/1362
+        })
+        vim.list_extend(format_types, { 'go' })
+      end
+      null_ls.setup({ sources = sources })
+      vim.list_extend(format_types, { 'go' })
+      lsp.formatters['null-ls'] = format_types
+    end,
+  },
+  -- # nvim-lspconfig
+  {
+    'neovim/nvim-lspconfig',
+    event = { 'BufReadPre', 'BufNewFile' },
+    config = function()
+      local lspconfig = require('lspconfig')
+      for client, config in pairs(lsp.servers) do
+        if config._enabled == nil or config._enabled == true then
+          config.on_attach = lsp.on_attach
+          config.capabilities = lsp.make_capabilities()
+          if config._root_patterns then
+            config.root_dir = require('lspconfig.util').root_pattern(unpack(config._root_patterns))
+          end
+          lspconfig[client].setup(config)
+        end
+      end
+      lsp.format_on_save()
+    end,
+    dependencies = {
+      'ray-x/lsp_signature.nvim',
+      'hrsh7th/cmp-nvim-lsp',
+      'b0o/schemastore.nvim',
+      'jose-elias-alvarez/null-ls.nvim',
+    },
+  },
+  -- # load after nvim-lspconfig
+  {
+    'folke/trouble.nvim',
+    cmd = 'TroubleToggle',
+    keys = { { '<leader>xx', ':TroubleToggle<CR>', 'n', { desc = 'Toggle trouble quickfix' } } },
+    dependencies = { 'nvim-tree/nvim-web-devicons', 'neovim/nvim-lspconfig' },
+    config = function()
+      require('trouble').setup({
+        signs = {
+          error = values.diagnostic_signs.Error,
+          warning = values.diagnostic_signs.Warn,
+          information = values.diagnostic_signs.Info,
+          hint = values.diagnostic_signs.Hint,
+          other = '󰗡',
+        },
+      })
+    end,
+  },
+  {
+    'j-hui/fidget.nvim',
+    event = 'BufReadPost',
+    dependencies = { 'neovim/nvim-lspconfig' },
+    config = function()
+      require('fidget').setup({})
+    end,
   },
 }

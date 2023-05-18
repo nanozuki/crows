@@ -1,9 +1,9 @@
-local custom = require('config.custom')
-local store = require('config.store')
+local values = require('config.values')
 
 local function make_theme()
-  local palette = store.color_palette
-  if custom.theme.name then
+  local theme = values.theme
+  local palette = values.theme.palette
+  if theme.name == 'rose_pine' then
     return {
       line = { fg = palette.text, bg = palette.surface },
       head = { fg = palette.surface, bg = palette.iris, style = 'italic' },
