@@ -1,7 +1,7 @@
 local values = require('config.values')
 
 -- custom theme
---
+
 local modes = { 'normal', 'insert', 'visual', 'replace', 'command', 'inactive' }
 local function make_theme()
   local theme_name = values.theme.name

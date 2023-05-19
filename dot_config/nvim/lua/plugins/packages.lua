@@ -44,7 +44,7 @@ end
 return {
   {
     'williamboman/mason.nvim',
-    dependencies = { 'WhoIsSethDaniel/mason-tool-installer.nvim' },
+    -- dependencies = { 'WhoIsSethDaniel/mason-tool-installer.nvim' },
     event = 'VeryLazy',
     build = ':MasonUpdate',
     config = function()
@@ -53,6 +53,7 @@ return {
   },
   {
     'WhoIsSethDaniel/mason-tool-installer.nvim',
+    dependencies = { 'williamboman/mason.nvim' },
     event = 'VeryLazy',
     config = function()
       require('mason-tool-installer').setup({

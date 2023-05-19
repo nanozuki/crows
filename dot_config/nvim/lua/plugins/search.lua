@@ -1,7 +1,7 @@
 return {
   {
     'dyng/ctrlsf.vim',
-    event = 'VeryLazy',
+    cmd = 'CtrlSF',
     config = function()
       vim.g.ctrlsf_ackprg = 'rg'
       vim.keymap.set('n', '<leader>sf', ':CtrlSF ', { desc = 'search in files' })
