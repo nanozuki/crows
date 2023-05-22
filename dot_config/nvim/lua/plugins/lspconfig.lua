@@ -95,7 +95,7 @@ return {
   },
   {
     'j-hui/fidget.nvim',
-    event = 'BufReadPost',
+    event = { 'BufReadPre', 'BufNewFile' },
     dependencies = { 'neovim/nvim-lspconfig' },
     config = function()
       require('fidget').setup({})
