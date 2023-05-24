@@ -13,14 +13,12 @@ local function packages()
   for _, pkg in pairs(values.packages) do
     pkgs[#pkgs + 1] = pkg
   end
-  vim.notify('Installing packages: ' .. vim.inspect(pkgs))
   return pkgs
 end
 
 return {
   {
     'williamboman/mason.nvim',
-    -- event = 'VeryLazy',
     build = ':MasonUpdate',
     config = function()
       require('mason').setup()
@@ -29,12 +27,12 @@ return {
   {
     'WhoIsSethDaniel/mason-tool-installer.nvim',
     dependencies = { 'williamboman/mason.nvim' },
-    -- event = 'VeryLazy',
     config = function()
       require('mason-tool-installer').setup({
         ensure_installed = packages(),
         auto_update = true,
       })
+      require('mason-registry').update()
     end,
   },
 }
