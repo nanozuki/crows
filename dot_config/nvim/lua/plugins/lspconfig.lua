@@ -22,16 +22,31 @@ return {
   {
     'jose-elias-alvarez/null-ls.nvim',
     lazy = true,
+    init = function()
+      -- builtins languages
+      vim.list_extend(values.packages, { 'prettier', 'stylua' })
+      -- optional languages
+      local opt_lang = values.languages.optional
+      if opt_lang.go then
+        vim.list_extend(values.packages, { 'goimports', 'gomodifytags', 'impl', 'gotests', 'gotestsum' })
+      end
+      if opt_lang.ocaml then
+        table.insert(values.packages, 'ocamlformat')
+      end
+      if opt_lang.rust then
+        table.insert(values.packages, 'rustfmt')
+      end
+    end,
     config = function()
       local null_ls = require('null-ls')
       local opt_lang = values.languages.optional
+      local format_types = {}
 
       -- builtins languages
       local sources = {
         null_ls.builtins.formatting.prettier,
         null_ls.builtins.formatting.stylua,
       }
-      local format_types = {}
       vim.list_extend(format_types, null_ls.builtins.formatting.prettier.filetypes)
       vim.list_extend(format_types, null_ls.builtins.formatting.stylua.filetypes)
 
@@ -43,10 +58,17 @@ return {
           null_ls.builtins.code_actions.impl,
           -- TODO: waiting gotests: https://github.com/jose-elias-alvarez/null-ls.nvim/pull/1362
         })
-        vim.list_extend(format_types, { 'go' })
+        table.insert(format_types, 'go')
+      end
+      if opt_lang.ocaml then
+        table.insert(sources, null_ls.builtins.formatting.ocamlformat)
+        table.insert(format_types, 'ocamlformat')
+      end
+      if opt_lang.rust then
+        table.insert(sources, null_ls.builtins.formatting.rustfmt)
+        table.insert(format_types, 'rustfmt')
       end
       null_ls.setup({ sources = sources })
-      vim.list_extend(format_types, { 'go' })
       lsp.formatters['null-ls'] = format_types
     end,
   },
@@ -57,11 +79,11 @@ return {
     config = function()
       local lspconfig = require('lspconfig')
       for client, config in pairs(lsp.servers) do
-        if config._enabled == nil or config._enabled == true then
+        if config.meta.auto_setup == nil or config.meta.auto_setup == true then
           config.on_attach = lsp.on_attach
           config.capabilities = lsp.make_capabilities()
-          if config._root_patterns then
-            config.root_dir = require('lspconfig.util').root_pattern(unpack(config._root_patterns))
+          if config.meta.root_patterns then
+            config.root_dir = require('lspconfig.util').root_pattern(unpack(config.meta.root_patterns))
           end
           lspconfig[client].setup(config)
         end

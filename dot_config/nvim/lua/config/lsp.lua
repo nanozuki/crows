@@ -13,9 +13,13 @@ local lsp = {}
 ---@alias LspOnAttachCallback fun(client:table,bufnr:number)
 ---@alias LspCapabilitiesMaker fun(caps:table):table
 
----@class LangServerConfig: table
----@field _enabled boolean
----@field _root_patterns string[]
+---@class LangServerMeta
+---@field auto_setup? boolean default is true
+---@field root_patterns string[]
+---@field pkg string|string[] the package(s) should be installed
+
+---@class LspConfig: table
+---@field meta LangServerMeta
 
 -- # keymap settings
 
@@ -109,23 +113,11 @@ end
 
 -- # lang server settings
 
-local function nvim_lua_library()
-  local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
-  if cwd ~= 'nvim' then
-    return nil
-  end
-  local config_path = vim.fn.stdpath('config')
-  local runtime = vim.api.nvim_get_runtime_file('', true)
-  -- find all non-config files in runtime
-  return vim.tbl_filter(function(file)
-    return not file:sub(1, #config_path) == config_path
-  end, runtime)
-end
-
----@type table<string, LangServerConfig>
+---@type table<string, LspConfig>
 lsp.servers = {
   -- ## built-in languages
   lua_ls = {
+    meta = { pkg = 'lua-language-server' },
     settings = {
       Lua = {
         runtime = {
@@ -136,7 +128,6 @@ lsp.servers = {
         },
         workspace = {
           checkThirdParty = false,
-          library = nvim_lua_library(),
         },
         telemetry = {
           enable = false,
@@ -144,14 +135,27 @@ lsp.servers = {
       },
     },
   },
-  vimls = {},
-  yamlls = {},
-  jsonls = {},
+  vimls = { meta = { pkg = 'vim-language-server' } },
+  yamlls = { meta = { pkg = 'yaml-language-server' } },
+  jsonls = { meta = { pkg = 'json-lsp' } },
   -- ## opt languages
-  gopls = { _enabled = values.languages.optional.go },
-  golangci_lint_ls = { _enabled = values.languages.optional.go },
+  gopls = {
+    meta = {
+      auto_setup = values.languages.optional.go,
+      pkg = 'gopls',
+    },
+  },
+  golangci_lint_ls = {
+    meta = {
+      auto_setup = values.languages.optional.go,
+      pkg = { 'golangci-lint', 'golangci-lint-langserver' },
+    },
+  },
   rust_analyzer = {
-    _enabled = values.languages.optional.rust,
+    meta = {
+      auto_setup = values.languages.optional.rust,
+      pkg = 'rust-analyzer',
+    },
     settings = {
       ['rust-analyzer'] = {
         diagnostics = {
@@ -162,17 +166,25 @@ lsp.servers = {
     },
   },
   tsserver = {
-    _enabled = values.languages.optional.typescript,
-    _root_patterns = { 'tsconfig.json', 'jsconfig.json', 'package.json' },
+    meta = {
+      auto_setup = values.languages.optional.typescript,
+      root_patterns = { 'tsconfig.json', 'jsconfig.json', 'package.json' },
+      pkg = 'typescript-language-server',
+    },
     single_file_support = false, -- Don't start in deno files
   },
   tailwindcss = {
-    _enabled = values.languages.optional.typescript,
-    _root_patterns = { 'tailwind.config.js', 'tailwind.config.ts' },
+    meta = {
+      auto_setup = values.languages.optional.typescript,
+      root_patterns = { 'tailwind.config.js', 'tailwind.config.ts' },
+      pkg = 'tailwindcss-language-server',
+    },
   },
   denols = {
-    _enabled = values.languages.optional.typescript,
-    _root_patterns = { 'deno.json', 'deno.jsonc' },
+    meta = {
+      auto_setup = values.languages.optional.typescript,
+      root_patterns = { 'deno.json', 'deno.jsonc' },
+    },
     init_options = {
       enable = true,
       lint = true,
@@ -180,12 +192,21 @@ lsp.servers = {
     },
   },
   graphql = {
-    _enabled = values.languages.optional.typescript,
+    meta = {
+      auto_setup = values.languages.optional.typescript,
+      pkg = 'graphql-language-service-cli',
+    },
     filetypes = { 'graphql' },
   },
-  html = { _enabled = values.languages.optional.typescript },
+  html = { meta = {
+    auto_setup = values.languages.optional.typescript,
+    pkg = 'html-lsp',
+  } },
   cssls = {
-    _enabled = values.languages.optional.typescript,
+    meta = {
+      auto_setup = values.languages.optional.typescript,
+      pkg = 'css-lsp',
+    },
     settings = {
       css = {
         lint = {
@@ -194,10 +215,22 @@ lsp.servers = {
       },
     },
   },
-  eslint = { _enabled = values.languages.optional.typescript },
-  ocamllsp = { _enabled = values.languages.optional.ocaml },
-  terraformls = { _enabled = values.languages.optional.terraform },
-  zls = { _enabled = values.languages.optional.zig },
+  eslint = { meta = {
+    auto_setup = values.languages.optional.typescript,
+    pkg = 'eslint-lsp',
+  } },
+  ocamllsp = { meta = {
+    auto_setup = values.languages.optional.ocaml,
+    pkg = 'ocaml-lsp',
+  } },
+  terraformls = { meta = {
+    auto_setup = values.languages.optional.terraform,
+    pkg = 'terraform-ls',
+  } },
+  zls = { meta = {
+    auto_setup = values.languages.optional.zig,
+    pkg = 'zls',
+  } },
 }
 
 return lsp

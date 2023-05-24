@@ -23,6 +23,9 @@ local values = {
   use_copilot = true,
   ---@type table<string, string>
   diagnostic_signs = { Error = '󰅚', Warn = '󰀪', Info = '', Hint = '󰌶' },
+  -- packages need to be installed, except for lang servers, which are defind in 'config.lsp'
+  ---@type string[]
+  packages = {},
 }
 
 return values

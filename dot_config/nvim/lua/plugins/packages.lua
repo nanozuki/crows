@@ -1,51 +1,26 @@
--- built-in languages
-local packages = { 'lua-language-server', 'stylua', 'vim-language-server', 'yaml-language-server' }
-
--- opt languages
+local lsp = require('config.lsp')
 local values = require('config.values')
-local opt_languages = values.languages.optional
-if opt_languages.go then
-  vim.list_extend(packages, {
-    'gopls',
-    'golangci-lint',
-    'golangci-lint-langserver',
-    'goimports',
-    'gomodifytags',
-    'impl',
-    'gotests',
-    'gotestsum',
-  })
-end
-if opt_languages.ocaml then
-  packages[#packages + 1] = 'ocaml-lsp'
-  packages[#packages + 1] = 'ocamlformat'
-end
-if opt_languages.rust then
-  vim.list_extend(packages, { 'rust-analyzer', 'rustfmt' })
-end
-if opt_languages.typescript then
-  vim.list_extend(packages, {
-    'typescript-language-server',
-    'tailwindcss-language-server',
-    'graphql-language-service-cli',
-    'html-lsp',
-    'css-lsp',
-    'eslint-lsp',
-    'prettier',
-  })
-end
-if opt_languages.terraform then
-  packages[#packages + 1] = 'terraform-ls'
-end
-if opt_languages.zig then
-  packages[#packages + 1] = 'zls'
+
+local function packages()
+  local pkgs = {}
+  for _, server in pairs(lsp.servers) do
+    if type(server.meta.pkg) == 'string' then
+      pkgs[#pkgs + 1] = server.meta.pkg
+    elseif type(server.meta.pkg) == 'table' then
+      vim.list_extend(pkgs, server.meta.pkg--[=[@as string[]]=])
+    end
+  end
+  for _, pkg in pairs(values.packages) do
+    pkgs[#pkgs + 1] = pkg
+  end
+  vim.notify('Installing packages: ' .. vim.inspect(pkgs))
+  return pkgs
 end
 
 return {
   {
     'williamboman/mason.nvim',
-    -- dependencies = { 'WhoIsSethDaniel/mason-tool-installer.nvim' },
-    event = 'VeryLazy',
+    -- event = 'VeryLazy',
     build = ':MasonUpdate',
     config = function()
       require('mason').setup()
@@ -54,10 +29,10 @@ return {
   {
     'WhoIsSethDaniel/mason-tool-installer.nvim',
     dependencies = { 'williamboman/mason.nvim' },
-    event = 'VeryLazy',
+    -- event = 'VeryLazy',
     config = function()
       require('mason-tool-installer').setup({
-        ensure_installed = packages,
+        ensure_installed = packages(),
         auto_update = true,
       })
     end,

@@ -31,13 +31,32 @@ return {
       })
     end,
   },
+  -- lua
+  {
+    'folke/neodev.nvim',
+    ft = { 'lua' },
+    dependencies = { 'neovim/nvim-lspconfig' },
+    init = function()
+      lsp.servers.lua_ls.meta.auto_setup = false
+    end,
+    config = function()
+      local neodev = require('neodev')
+      neodev.setup({ setup_jsonls = false })
+
+      local lspconfig = require('lspconfig')
+      local lua_config = lsp.servers.lua_ls
+      lua_config.on_attach = lsp.on_attach
+      lua_config.capabilities = lsp.make_capabilities()
+      lspconfig.lua_ls.setup(lua_config)
+    end,
+  },
   {
     'simrat39/rust-tools.nvim',
     dependencies = { 'neovim/nvim-lspconfig' },
     enabled = values.languages.optional.rust,
     ft = { 'rust' },
     init = function()
-      lsp.servers.rust_analyzer._enabled = false
+      lsp.servers.rust_analyzer.meta.auto_setup = false
     end,
     config = function()
       local rt = require('rust-tools')
