@@ -21,7 +21,9 @@ return {
     'williamboman/mason.nvim',
     build = ':MasonUpdate',
     config = function()
-      require('mason').setup()
+      require('mason').setup({
+        max_concurrent_installers = 16,
+      })
     end,
   },
   {
