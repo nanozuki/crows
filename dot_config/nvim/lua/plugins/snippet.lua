@@ -1,5 +1,8 @@
 local function config()
   local ls = require('luasnip')
+  ls.setup({
+    updateevents = { 'TextChanged', 'TextChangedI' },
+  })
 
   -- # keymapings
   vim.keymap.set({ 'i', 's' }, '<C-j>', function()
@@ -56,59 +59,104 @@ local function config()
     end
     return string.match(type, '%l')
   end
+  local function copy(args)
+    return args[1][1]
+  end
 
 -- golang snippet
 -- stylua: ignore start
 ls.add_snippets('go', {
+
   s('ife', fmt([[
-  if {} := {}; err != nil {{
-      {}
-  }}]], { i(1, 'err'), i(2), goErrorHandle(3), })),
+    if {} := {}; err != nil {{
+        {}
+    }}]],
+    { i(1, 'err'), i(2), goErrorHandle(3), }
+  )),
 
   s('efi', fmt([[
-  if err != nil {{
-      {}
-  }}]], { goErrorHandle(1) })),
+    if err != nil {{
+        {}
+    }}]],
+    { goErrorHandle(1) }
+  )),
 
   s('cc', t("ctx context.Context")), -- context parameter
 
   s('func', fmt([[
-  func {}({}) {} {{
-      {}
-  }}]], { i(1), i(2), i(3), i(4) })),
+    func {}({}) {} {{
+        {}
+    }}]],
+    { i(1), i(2), i(3), i(4) }
+  )),
 
   s('method', fmt([[
-  func ({} {}) {}({}) {} {{
-      {}
-  }}]], { f(goReceiver, {1}), i(1), i(2), i(3), i(4), i(5) })),
-})
--- stylua: ignore end
+    func ({} {}) {}({}) {} {{
+        {}
+    }}]],
+    { f(goReceiver, {1}), i(1), i(2), i(3), i(4), i(5) }
+  )),
 
--- tsx snippet
+  s('endpoint', fmt([[
+    type {}Request struct {{
+        {}
+    }}
+    
+    type {}Response struct {{
+        {}
+    }}
+    
+    func ({} {}) {}(ctx context.Context, req *{}Request) (*{}Response, error) {{
+        {}
+    }}]], {
+      f(copy, {2}), i(3),
+      f(copy, {2}), i(4),
+      f(goReceiver, {1}), i(1), i(2), f(copy, {2}), f(copy, {2}),
+      i(5),
+    }
+  ))
+})
+  -- stylua: ignore end
+
+  -- Typescript and React:
+  -- tsx snippet
+  local function componentProp(args)
+    return (args[1][1] or '') .. 'Props'
+  end
+
 -- stylua: ignore start
-local function componentProp(args)
-  return (args[1][1] or '')..'Props'
-end
 ls.add_snippets('typescriptreact', {
   s('comp', fmt([[
-interface {} {{
-}}
+    interface {} {{
+    }}
+    
+    function {}({{}}: {}) {{
+      return (
+        <div className="">
+          {}
+        </div>
+      );
+    }}]],
+    {
+      f(componentProp, {1}),
+      i(1, "Component"),
+      f(componentProp, {1}),
+      i(0),
+    }
+  )),
 
-function {}({{}}: {}) {{
-  return (
-    <div className="">
-      {}
-    </div>
-  );
-}}]], {
-    f(componentProp, {1}),
-    i(1, "Component"),
-    f(componentProp, {1}),
-    i(0),
-  })),
   s('ep', t('export')),
+
   s('epd', t('export default')),
 })
+
+ls.add_snippets('typescript', {
+  s('ep', t('export')),
+
+  s('epd', t('export default')),
+})
+  -- stylua: ignore end
+  -- the end of LuaSnip config
 end
 
 return {
