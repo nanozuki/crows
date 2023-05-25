@@ -1,6 +1,6 @@
 # nvim
-dot_config/nvim/plugin/packer_compiled.lua
 dot_config/nvim/lazy-lock.json
+dot_config/nvim/.luarc.json
 .netrwhist
 
 # kitty
