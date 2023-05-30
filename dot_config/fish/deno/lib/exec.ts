@@ -1,33 +1,46 @@
 async function run(...cmd: string[]): Promise<void> {
-  const p = Deno.run({ cmd, stderr: 'piped' });
-  const [{ code }, rawError] = await Promise.all([
-    p.status(),
-    p.stderrOutput(),
-  ]);
-  if (code != 0) {
-    const errorString = new TextDecoder().decode(rawError);
-    throw new Error(`error(${code}): ${errorString}`);
+  const args = cmd.length > 1 ? cmd.slice(1) : undefined;
+  const command = new Deno.Command(cmd[0], {
+    args,
+    stderr: "piped",
+    stdout: "inherit",
+    stdin: "inherit",
+  });
+  const { success, code, stderr } = await command.output();
+  if (!success) {
+    const errorString = new TextDecoder().decode(stderr);
+    throw new Error(
+      `Execute '${cmd.join(" ")}' failed(${code}):\n${errorString}`
+    );
   }
 }
 
 async function check(...cmd: string[]): Promise<boolean> {
-  const p = Deno.run({ cmd, stdin: 'piped', stdout: 'piped', stderr: 'piped' });
-  const status = await p.status();
-  return status.success;
+  const args = cmd.length > 1 ? cmd.slice(1) : undefined;
+  const command = new Deno.Command(cmd[0], {
+    args,
+    stdout: "piped",
+    stderr: "piped",
+  });
+  const { success } = await command.output();
+  return success;
 }
 
 async function output(...cmd: string[]): Promise<string> {
-  const p = Deno.run({ cmd, stdout: 'piped', stderr: 'piped' });
-  const [{ code }, rawOutput, rawError] = await Promise.all([
-    p.status(),
-    p.output(),
-    p.stderrOutput(),
-  ]);
-  if (code != 0) {
-    const errorString = new TextDecoder().decode(rawError);
-    throw new Error(`error(${code}): ${errorString}`);
+  const args = cmd.length > 1 ? cmd.slice(1) : undefined;
+  const command = new Deno.Command(cmd[0], {
+    args,
+    stdout: "piped",
+    stderr: "piped",
+  });
+  const { success, code, stdout, stderr } = await command.output();
+  if (!success) {
+    const errorString = new TextDecoder().decode(stderr);
+    throw new Error(
+      `Execute '${cmd.join(" ")}' failed(${code}):\n${errorString}`
+    );
   }
-  const outString = new TextDecoder().decode(rawOutput);
+  const outString = new TextDecoder().decode(stdout);
   return outString.trim();
 }
 
