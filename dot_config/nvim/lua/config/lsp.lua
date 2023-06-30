@@ -145,12 +145,6 @@ lsp.servers = {
       pkg = 'gopls',
     },
   },
-  golangci_lint_ls = {
-    meta = {
-      auto_setup = values.languages.optional.go,
-      pkg = { 'golangci-lint', 'golangci-lint-langserver' },
-    },
-  },
   rust_analyzer = {
     meta = {
       auto_setup = values.languages.optional.rust,

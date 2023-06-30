@@ -27,6 +27,7 @@ local filetypes = {
   ['*html'] = 'html',
   ['tsconfig.json'] = 'jsonc',
   ['*.mdx'] = 'markdown',
+  ['*.gotmpl'] = 'gotmpl',
 }
 local ft_group = vim.api.nvim_create_augroup('filetypes', {})
 for pattern, filetype in pairs(filetypes) do
@@ -48,6 +49,11 @@ vim.api.nvim_create_autocmd('FileType', {
   group = fi_group,
   pattern = 'lua,javascript,typescript,javascriptreact,typescriptreact,html,css,scss,xml,yaml,json,terraform,graphql,markdown,jsx',
   command = 'setlocal expandtab ts=2 sw=2 sts=2',
+})
+vim.api.nvim_create_autocmd('FileType', {
+  group = fi_group,
+  pattern = 'go,gotmpl',
+  command = 'setlocal noexpandtab ts=4 sw=4',
 })
 
 -- # fold
