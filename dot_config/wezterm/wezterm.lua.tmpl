@@ -108,6 +108,8 @@ end
 set({
   use_ime = true,
   enable_wayland = true,
+  {{- if not .term.use_tmux}}
+  term = 'wezterm',{{end}}
 })
 
 return config
