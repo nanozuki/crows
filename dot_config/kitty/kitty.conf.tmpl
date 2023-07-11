@@ -2,7 +2,9 @@
 
 ##: Fonts
 
-font_family      JetBrainsMono Nerd Font
+font_family      {{if eq .term.font_family "JetBrainsMono" -}}JetBrainsMonoNL Nerd Font
+{{- else if eq .term.font_family "VictorMono" -}}VictorMono Nerd Font
+{{- else if eq .term.font_family "Iosevka"}}Iosevka Nerd Font{{- end}}
 bold_font        auto
 italic_font      auto
 bold_italic_font auto
@@ -39,9 +41,11 @@ tab_title_template "{index}: {title}"
 
 ##: Color scheme
 
-include ./themes/rose-pine-dawn.conf
+include rose-pine-dawn.conf
 
 ##: Advanced
+
+shell_integration no-cursor
 
 ##: OS specific tweaks
 
@@ -51,7 +55,9 @@ wayland_titlebar_color background
 #: Keyboard shortcuts
 
 #: Scrolling
+
 #: Window management
+
 #: Tab management
 map cmd+1 goto_tab 1
 map cmd+2 goto_tab 2
@@ -62,9 +68,13 @@ map cmd+6 goto_tab 6
 map cmd+7 goto_tab 7
 map cmd+8 goto_tab 8
 map cmd+9 goto_tab 9
+
 #: Layout management
+
 #: Font sizes
+
 #: Select and act on visible text
+
 #: Miscellaneous
+
 # Reload config
-map ctrl+shift+c load_config_file
