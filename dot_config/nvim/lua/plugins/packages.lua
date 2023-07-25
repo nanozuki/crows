@@ -20,6 +20,7 @@ return {
   {
     'williamboman/mason.nvim',
     build = ':MasonUpdate',
+    lazy = true,
     config = function()
       require('mason').setup({
         max_concurrent_installers = 16,
@@ -28,13 +29,14 @@ return {
   },
   {
     'WhoIsSethDaniel/mason-tool-installer.nvim',
+    event = 'VeryLazy',
     dependencies = { 'williamboman/mason.nvim' },
     config = function()
       require('mason-tool-installer').setup({
         ensure_installed = packages(),
         auto_update = true,
       })
-      require('mason-registry').update()
+      vim.cmd('MasonToolsInstall')
     end,
   },
 }
