@@ -1,5 +1,4 @@
 local lsp = require('config.lsp')
-local values = require('config.values')
 local langs = require('config.langs')
 
 return {
@@ -54,7 +53,7 @@ return {
   {
     'simrat39/rust-tools.nvim',
     dependencies = { 'neovim/nvim-lspconfig' },
-    enabled = values.languages.optional.rust,
+    enabled = langs.rust.enable,
     ft = { 'rust' },
     init = function()
       langs.rust.servers.rust_analyzer.meta = { delayed_start = true }

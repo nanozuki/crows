@@ -9,21 +9,20 @@ local values = {
     ---@type table<string, string>
     palette = {},
   },
-  languages = {
-    built_in = { 'lua', 'viml', 'json', 'yaml', 'markdown' },
-    optional = {
-      go = vim.fn.executable('gopls') == 1,
-      ocaml = vim.fn.executable('ocamllsp') == 1,
-      rust = vim.fn.executable('rust-analyzer') == 1,
-      typescript = vim.fn.executable('tsserver') == 1,
-      terraform = vim.fn.executable('terraform-ls') == 1,
-      zig = vim.fn.executable('zls') == 1,
-    },
-  },
+  languages = {},
   use_copilot = true,
   ---@type table<string, string>
   diagnostic_signs = { Error = '󰅚', Warn = '󰀪', Info = '', Hint = '󰌶' },
 }
+
+local custom_file = vim.fn.stdpath('config') .. '/custom.json'
+local file = io.open(custom_file, 'r')
+if file then
+  local content = file:read('*all')
+  local cfg = vim.fn.json_decode(content)
+  vim.print(vim.inspect(cfg))
+  values = vim.tbl_deep_extend('force', values, cfg)
+end
 
 values.formatter_filetypes = {
   stylua = { 'lua' },

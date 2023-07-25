@@ -1,0 +1,18 @@
+{
+  "theme": {
+    "name": "rose_pine",
+    "variant": "dawn"
+  },
+  "languages": {
+    "vim": true,
+    "yaml": true,
+    "json": true,
+    "go": true,
+    "rust": true,
+    "frontend": true,
+    "deno": true,
+    "ocaml": true,
+    "terraform": true,
+    "zig": true
+  }
+}

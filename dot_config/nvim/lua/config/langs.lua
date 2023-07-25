@@ -11,6 +11,8 @@
 ---@type table<string, LanguageSpec>
 local langs = {}
 
+local values = require('config.values')
+
 langs.lua = {
   enable = true,
   formatters = { 'stylua' },
@@ -36,27 +38,25 @@ langs.lua = {
   },
 }
 
-local has_nodejs = vim.fn.executable('node') == 1
-
 langs.vim = {
-  enable = has_nodejs,
+  enable = values.languages.vim,
   servers = { vimls = {} },
 }
 
 langs.yaml = {
-  enable = has_nodejs,
+  enable = values.languages.yaml,
   formatters = { 'prettier' },
   servers = { yamlls = {} },
 }
 
 langs.json = {
-  enable = has_nodejs,
+  enable = values.languages.json,
   formatters = { 'prettier' },
   servers = { jsonls = {} },
 }
 
 langs.go = {
-  enable = vim.fn.executable('go') == 1,
+  enable = values.languages.go,
   linters = { 'golangci-lint' },
   formatters = { 'goimports' },
   tools = {
@@ -71,7 +71,7 @@ langs.go = {
 }
 
 langs.rust = {
-  enable = vim.fn.executable('cargo') == 1,
+  enable = values.languages.rust,
   formatters = { 'lsp:rust_analyzer' },
   servers = {
     rust_analyzer = {
@@ -87,16 +87,14 @@ langs.rust = {
   },
 }
 
-local has_deno = vim.fn.executable('deno') == 1
-
 langs.typescript = {
-  enable = has_nodejs,
+  enable = values.languages.frontend,
   linters = { 'eslint_d' },
   formatters = { 'prettier' },
   servers = {
     tsserver = {
       meta = { root_patterns = { 'tsconfig.json', 'jsconfig.json', 'package.json' } },
-      single_file_support = not has_deno, -- Don't start in deno files
+      single_file_support = not values.languages.deno, -- Don't start in deno files
     },
     tailwindcss = {
       meta = { root_patterns = { 'tailwind.config.js', 'tailwind.config.ts' } },
@@ -105,7 +103,7 @@ langs.typescript = {
 }
 
 langs.css = {
-  enable = has_nodejs,
+  enable = values.languages.frontend,
   formatters = { 'prettier' },
   servers = {
     cssls = {
@@ -117,13 +115,13 @@ langs.css = {
 }
 
 langs.html = {
-  enable = has_nodejs,
+  enable = values.languages.frontend,
   formatters = { 'prettier' },
   servers = { html = {} },
 }
 
 langs.deno = {
-  enable = has_deno,
+  enable = values.languages.deno,
   formatters = { 'prettier' },
   servers = {
     denols = {
@@ -138,19 +136,19 @@ langs.deno = {
 }
 
 langs.ocaml = {
-  enable = vim.fn.executable('opam') == 1,
+  enable = values.languages.ocaml,
   formatters = { 'ocamlformat' },
   servers = { ocamllsp = {} },
 }
 
 langs.terraform = {
-  enable = vim.fn.executable('terraform') == 1,
+  enable = values.languages.terraform,
   formatters = { 'lsp:terraformls' },
   servers = { terraformls = {} },
 }
 
 langs.zig = {
-  enable = vim.fn.executable('zig') == 1,
+  enable = values.languages.zig,
   formatters = { 'lsp:zls' },
   servers = { zls = {} },
 }
