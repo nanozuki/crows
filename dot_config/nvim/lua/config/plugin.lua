@@ -11,4 +11,9 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup({ { import = 'plugins' } }, { concurrency = 16 })
+require('lazy').setup({ { import = 'plugins' } }, {
+  concurrency = 16,
+  change_detection = {
+    notify = false,
+  },
+})

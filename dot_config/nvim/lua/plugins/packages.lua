@@ -1,17 +1,52 @@
-local lsp = require('config.lsp')
-local values = require('config.values')
+local langs = require('config.langs')
+
+local dont_install = "DON'T INSTALL"
+
+local package_map = {
+  cssls = 'css-lsp',
+  denols = dont_install,
+  dlv = 'delve',
+  html = 'html-lsp',
+  jsonls = 'json-lsp',
+  lua_ls = 'lua-language-server',
+  ocamllsp = 'ocaml-lsp',
+  rust_analyzer = 'rust-analyzer',
+  rustfmt = dont_install,
+  tailwindcss = 'tailwindcss-language-server',
+  terraformls = 'terraform-ls',
+  tsserver = 'typescript-language-server',
+  vimls = 'vim-language-server',
+  yamlls = 'yaml-language-server',
+}
+
+local pkgs = {}
+
+local function add_pkg(pkg)
+  if string.match(pkg, '^lsp:') then
+    return
+  end
+  local p = package_map[pkg]
+  if p == nil then
+    pkgs[#pkgs + 1] = pkg
+  elseif p ~= dont_install then
+    pkgs[#pkgs + 1] = p
+  end
+end
 
 local function packages()
-  local pkgs = {}
-  for _, server in pairs(lsp.servers) do
-    if type(server.meta.pkg) == 'string' then
-      pkgs[#pkgs + 1] = server.meta.pkg
-    elseif type(server.meta.pkg) == 'table' then
-      vim.list_extend(pkgs, server.meta.pkg--[=[@as string[]]=])
+  for _, spec in pairs(langs) do
+    for _, linter in ipairs(spec.linters or {}) do
+      add_pkg(linter)
     end
-  end
-  for _, pkg in pairs(values.packages) do
-    pkgs[#pkgs + 1] = pkg
+    for _, formatter in ipairs(spec.formatters or {}) do
+      add_pkg(formatter)
+    end
+    for _, tool in ipairs(spec.tools or {}) do
+      add_pkg(tool)
+    end
+    for ls, _ in pairs(spec.servers or {}) do
+      add_pkg(ls)
+    end
   end
   return pkgs
 end

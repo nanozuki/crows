@@ -1,5 +1,6 @@
 local lsp = require('config.lsp')
 local values = require('config.values')
+local langs = require('config.langs')
 
 return {
   -- fish
@@ -14,7 +15,7 @@ return {
     'b0o/schemastore.nvim',
     lazy = true,
     config = function()
-      lsp.servers.jsonls = vim.tbl_deep_extend('force', lsp.servers.jsonls, {
+      langs.json.servers.jsonls = vim.tbl_deep_extend('force', langs.json.servers.jsonls, {
         settings = {
           json = {
             schemas = require('schemastore').json.schemas(),
@@ -22,7 +23,7 @@ return {
           },
         },
       })
-      lsp.servers.yamlls = vim.tbl_deep_extend('force', lsp.servers.yamlls, {
+      langs.yaml.servers.yamlls = vim.tbl_deep_extend('force', langs.yaml.servers.yamlls, {
         settings = {
           yaml = {
             schemas = require('schemastore').yaml.schemas(),
@@ -37,14 +38,14 @@ return {
     ft = { 'lua' },
     dependencies = { 'neovim/nvim-lspconfig' },
     init = function()
-      lsp.servers.lua_ls.meta.auto_setup = false
+      langs.lua.servers.lua_ls.meta = { delayed_start = true }
     end,
     config = function()
       local neodev = require('neodev')
       neodev.setup({ setup_jsonls = false })
 
       local lspconfig = require('lspconfig')
-      local lua_config = lsp.servers.lua_ls
+      local lua_config = langs.lua.servers.lua_ls
       lua_config.on_attach = lsp.on_attach
       lua_config.capabilities = lsp.make_capabilities()
       lspconfig.lua_ls.setup(lua_config)
@@ -56,11 +57,11 @@ return {
     enabled = values.languages.optional.rust,
     ft = { 'rust' },
     init = function()
-      lsp.servers.rust_analyzer.meta.auto_setup = false
+      langs.rust.servers.rust_analyzer.meta = { delayed_start = true }
     end,
     config = function()
       local rt = require('rust-tools')
-      local config = lsp.servers.rust_analyzer
+      local config = langs.rust.servers.rust_analyzer
       config.on_attach = function(client, bufnr)
         lsp.on_attach(client, bufnr)
         vim.keymap.set('n', '<leader>ha', rt.hover_actions.hover_actions, { buffer = bufnr, desc = 'Hover actions' })

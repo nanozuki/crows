@@ -1,5 +1,3 @@
-local values = require('config.values')
-
 local lsp = {}
 
 -- # types
@@ -14,12 +12,12 @@ local lsp = {}
 ---@alias LspCapabilitiesMaker fun(caps:table):table
 
 ---@class LangServerMeta
----@field auto_setup? boolean default is true
----@field root_patterns string[]
----@field pkg string|string[] the package(s) should be installed
+---@field delayed_start? boolean default is true
+---@field root_patterns? string[]
+---@field pkg? string|string[] the package(s) should be installed
 
 ---@class LspConfig: table
----@field meta LangServerMeta
+---@field meta? LangServerMeta
 
 -- # keymap settings
 
@@ -110,121 +108,5 @@ function lsp.format_on_save()
     callback = lsp.format,
   })
 end
-
--- # lang server settings
-
----@type table<string, LspConfig>
-lsp.servers = {
-  -- ## built-in languages
-  lua_ls = {
-    meta = { pkg = 'lua-language-server' },
-    settings = {
-      Lua = {
-        runtime = {
-          version = 'LuaJIT',
-        },
-        diagnostics = {
-          globals = { 'vim' },
-        },
-        workspace = {
-          checkThirdParty = false,
-        },
-        telemetry = {
-          enable = false,
-        },
-      },
-    },
-  },
-  vimls = { meta = { pkg = 'vim-language-server' } },
-  yamlls = { meta = { pkg = 'yaml-language-server' } },
-  jsonls = { meta = { pkg = 'json-lsp' } },
-  -- ## opt languages
-  gopls = {
-    meta = {
-      auto_setup = values.languages.optional.go,
-      pkg = 'gopls',
-    },
-  },
-  rust_analyzer = {
-    meta = {
-      auto_setup = values.languages.optional.rust,
-      pkg = 'rust-analyzer',
-    },
-    settings = {
-      ['rust-analyzer'] = {
-        diagnostics = {
-          diagnostics = { disabled = { 'unresolved-proc-macro' } },
-          checkOnSave = { command = 'clippy' },
-        },
-      },
-    },
-  },
-  tsserver = {
-    meta = {
-      auto_setup = values.languages.optional.typescript,
-      root_patterns = { 'tsconfig.json', 'jsconfig.json', 'package.json' },
-      pkg = 'typescript-language-server',
-    },
-    single_file_support = false, -- Don't start in deno files
-  },
-  tailwindcss = {
-    meta = {
-      auto_setup = values.languages.optional.typescript,
-      root_patterns = { 'tailwind.config.js', 'tailwind.config.ts' },
-      pkg = 'tailwindcss-language-server',
-    },
-  },
-  denols = {
-    meta = {
-      auto_setup = values.languages.optional.typescript,
-      root_patterns = { 'deno.json', 'deno.jsonc' },
-    },
-    init_options = {
-      enable = true,
-      lint = true,
-      unstable = true,
-    },
-  },
-  graphql = {
-    meta = {
-      auto_setup = values.languages.optional.typescript,
-      pkg = 'graphql-language-service-cli',
-    },
-    filetypes = { 'graphql' },
-  },
-  html = { meta = {
-    auto_setup = values.languages.optional.typescript,
-    pkg = 'html-lsp',
-  } },
-  cssls = {
-    meta = {
-      auto_setup = values.languages.optional.typescript,
-      pkg = 'css-lsp',
-    },
-    settings = {
-      css = {
-        lint = {
-          unknownAtRules = 'ignore',
-        },
-      },
-    },
-  },
-  eslint = { meta = {
-    auto_setup = values.languages.optional.typescript,
-    pkg = 'eslint-lsp',
-  } },
-  ocamllsp = { meta = {
-    auto_setup = values.languages.optional.ocaml,
-    pkg = 'ocaml-lsp',
-  } },
-  terraformls = { meta = {
-    auto_setup = values.languages.optional.terraform,
-    pkg = 'terraform-ls',
-  } },
-  zls = { meta = {
-    auto_setup = values.languages.optional.zig,
-    pkg = 'zls',
-  } },
-}
 
 return lsp

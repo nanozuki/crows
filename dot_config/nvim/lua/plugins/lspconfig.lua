@@ -1,5 +1,6 @@
 local values = require('config.values')
 local lsp = require('config.lsp')
+local langs = require('config.langs')
 
 return {
   -- # load before nvim-lspconfig
@@ -22,53 +23,60 @@ return {
   {
     'jose-elias-alvarez/null-ls.nvim',
     lazy = true,
-    init = function()
-      -- builtins languages
-      vim.list_extend(values.packages, { 'prettier', 'stylua' })
-      -- optional languages
-      local opt_lang = values.languages.optional
-      if opt_lang.go then
-        vim.list_extend(values.packages, { 'goimports', 'gomodifytags', 'impl', 'gotests', 'gotestsum' })
-      end
-      if opt_lang.ocaml then
-        table.insert(values.packages, 'ocamlformat')
-      end
-      if opt_lang.rust then
-        table.insert(values.packages, 'rustfmt')
-      end
-    end,
     config = function()
+      local linters = {}
+      for _, spec in pairs(langs) do
+        for _, linter in ipairs(spec.linters or {}) do
+          if not string.match(linter, '^lsp:') then
+            linters[linter] = true
+          end
+        end
+      end
+      local formatters = {}
+      for _, spec in pairs(langs) do
+        for _, formatter in ipairs(spec.formatters or {}) do
+          formatters[formatter] = true
+        end
+      end
+      local tools = {}
+      for _, spec in pairs(langs) do
+        for _, tool in ipairs(spec.tools or {}) do
+          tools[tool] = true
+        end
+      end
+
       local null_ls = require('null-ls')
-      local opt_lang = values.languages.optional
+      local sources = {}
       local format_types = {}
 
-      -- builtins languages
-      local sources = {
-        null_ls.builtins.formatting.prettier,
-        null_ls.builtins.formatting.stylua,
-      }
-      vim.list_extend(format_types, null_ls.builtins.formatting.prettier.filetypes)
-      vim.list_extend(format_types, null_ls.builtins.formatting.stylua.filetypes)
-
-      -- optional languages
-      if opt_lang.go then
-        vim.list_extend(sources, {
-          null_ls.builtins.formatting.goimports,
-          null_ls.builtins.code_actions.gomodifytags,
-          null_ls.builtins.code_actions.impl,
-          null_ls.builtins.diagnostics.golangci_lint,
-          -- TODO: waiting gotests: https://github.com/jose-elias-alvarez/null-ls.nvim/pull/1362
-        })
-        table.insert(format_types, 'go')
+      if linters['golangci_lint'] then
+        table.insert(sources, null_ls.builtins.diagnostics.golangci_lint)
       end
-      if opt_lang.ocaml then
+
+      if formatters['stylua'] then
+        table.insert(sources, null_ls.builtins.formatting.stylua)
+        vim.list_extend(format_types, null_ls.builtins.formatting.stylua.filetypes)
+      end
+      if formatters['prettier'] then
+        table.insert(sources, null_ls.builtins.formatting.prettier)
+        vim.list_extend(format_types, null_ls.builtins.formatting.prettier.filetypes)
+      end
+      if formatters['goimports'] then
+        table.insert(sources, null_ls.builtins.formatting.goimports)
+        vim.list_extend(format_types, null_ls.builtins.formatting.goimports.filetypes)
+      end
+      if formatters['ocamlformat'] then
         table.insert(sources, null_ls.builtins.formatting.ocamlformat)
         table.insert(format_types, 'ocamlformat')
       end
-      if opt_lang.rust then
-        table.insert(sources, null_ls.builtins.formatting.rustfmt)
-        table.insert(format_types, 'rustfmt')
+
+      if tools['gomodifytags'] then
+        table.insert(sources, null_ls.builtins.code_actions.gomodifytags)
       end
+      if tools['impl'] then
+        table.insert(sources, null_ls.builtins.code_actions.impl)
+      end
+
       null_ls.setup({ sources = sources })
       lsp.formatters['null-ls'] = format_types
     end,
@@ -79,14 +87,22 @@ return {
     event = { 'BufReadPre', 'BufNewFile' },
     config = function()
       local lspconfig = require('lspconfig')
-      for client, config in pairs(lsp.servers) do
-        if config.meta.auto_setup == nil or config.meta.auto_setup == true then
+      local setup = function(name, config)
+        local load = (config.meta or {}).delayed_start ~= true
+        if load then
           config.on_attach = lsp.on_attach
           config.capabilities = lsp.make_capabilities()
-          if config.meta.root_patterns then
+          if config.meta and config.meta.root_patterns then
             config.root_dir = require('lspconfig.util').root_pattern(unpack(config.meta.root_patterns))
           end
-          lspconfig[client].setup(config)
+          lspconfig[name].setup(config)
+        end
+      end
+      for _, lang in pairs(langs) do
+        if lang.enable then
+          for name, config in pairs(lang.servers or {}) do
+            setup(name, config)
+          end
         end
       end
       lsp.format_on_save()
