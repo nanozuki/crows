@@ -25,7 +25,6 @@ local lsp = {}
 lsp.buffer_keys = {
   goto_decl = { 'gD', vim.lsp.buf.declaration, 'Goto declaration' },
   goto_def = { 'gd', vim.lsp.buf.definition, 'Goto definition' },
-  goto_typedef = { 'tp', vim.lsp.buf.type_definition, 'Goto type definition' },
   hover = { 'K', vim.lsp.buf.hover, 'Display hover information' },
   goto_impl = { 'gi', vim.lsp.buf.implementation, 'Goto implementation' },
   sign_help = { '<C-k>', vim.lsp.buf.signature_help, 'Display signature information' },
@@ -41,6 +40,7 @@ lsp.buffer_keys = {
   type_def = { '<leader>D', vim.lsp.buf.type_definition, 'Goto type definition' },
   rename = { '<leader>rn', vim.lsp.buf.rename, 'Rename symbol' },
   code_action = { '<leader>ca', vim.lsp.buf.code_action, 'Code action' },
+  codelens = { '<leader>cl', vim.lsp.codelens.run, 'Code action' },
   list_ref = { 'gr', vim.lsp.buf.references, 'List references' },
 
   -- format = { '<leader>f', vim.lsp.buf.formatting, 'Format buffer' },
