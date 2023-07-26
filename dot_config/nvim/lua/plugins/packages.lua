@@ -72,7 +72,7 @@ return {
         ensure_installed = packages(),
         auto_update = true,
       })
-      vim.cmd('MasonToolsInstall')
+      vim.cmd('MasonToolsUpdate')
     end,
   },
 }

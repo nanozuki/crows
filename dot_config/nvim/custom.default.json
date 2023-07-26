@@ -15,5 +15,5 @@
     "terraform": false,
     "zig": false
   },
-  "use_null_ls": true
+  "use_null_ls": false
 }

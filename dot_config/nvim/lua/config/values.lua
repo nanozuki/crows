@@ -21,7 +21,7 @@ local values = {
     terraform = false,
     zig = false,
   },
-  use_null_ls = true,
+  use_null_ls = false,
   use_copilot = true,
   ---@type table<string, string>
   diagnostic_signs = { Error = '󰅚', Warn = '󰀪', Info = '', Hint = '󰌶' },
