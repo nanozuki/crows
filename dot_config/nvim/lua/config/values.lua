@@ -21,6 +21,7 @@ local values = {
     terraform = false,
     zig = false,
   },
+  use_null_ls = true,
   use_copilot = true,
   ---@type table<string, string>
   diagnostic_signs = { Error = '󰅚', Warn = '󰀪', Info = '', Hint = '󰌶' },
@@ -34,6 +35,7 @@ if file then
   values = vim.tbl_deep_extend('force', values, cfg)
 end
 
+---@type table<string, string[]>
 values.formatter_filetypes = {
   stylua = { 'lua' },
   prettier = {
@@ -57,6 +59,7 @@ values.formatter_filetypes = {
   goimports = { 'go' },
 }
 
+---@type table<string, string[]>
 values.linter_filetypes = {
   eslint_d = {
     'javascript',

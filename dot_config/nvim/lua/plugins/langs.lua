@@ -1,18 +1,20 @@
 local lsp = require('config.lsp')
 local langs = require('config.langs')
+local values = require('config.values')
 
 return {
   -- fish
   { 'dag/vim-fish', ft = { 'fish' } },
-  -- *ml tag editing
+  -- html/xml/react/markdown element editing
   {
     'mattn/emmet-vim',
-    ft = { 'html', 'javascriptreact', 'typescriptreact', 'xml', 'jsx', 'markdown' },
+    ft = { 'html', 'javascriptreact', 'typescriptreact', 'xml', 'markdown' },
   },
   -- json/yaml schema
   {
     'b0o/schemastore.nvim',
     lazy = true,
+    enabled = langs.json.enable or langs.yaml.enable,
     config = function()
       langs.json.servers.jsonls = vim.tbl_deep_extend('force', langs.json.servers.jsonls, {
         settings = {
@@ -48,6 +50,19 @@ return {
       lua_config.on_attach = lsp.on_attach
       lua_config.capabilities = lsp.make_capabilities()
       lspconfig.lua_ls.setup(lua_config)
+    end,
+  },
+  {
+    'ray-x/go.nvim',
+    ft = { 'go', 'gomod' },
+    enabled = (not values.use_null_ls) and langs.go.enable,
+    dependencies = {
+      'ray-x/guihua.lua',
+      'neovim/nvim-lspconfig',
+      'nvim-treesitter/nvim-treesitter',
+    },
+    config = function()
+      require('go').setup()
     end,
   },
   {

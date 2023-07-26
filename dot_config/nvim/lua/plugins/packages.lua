@@ -1,17 +1,17 @@
 local langs = require('config.langs')
 
-local dont_install = "DON'T INSTALL"
+local no_need = 'NO NEED'
 
 local package_map = {
   cssls = 'css-lsp',
-  denols = dont_install,
+  denols = no_need,
   dlv = 'delve',
   html = 'html-lsp',
   jsonls = 'json-lsp',
   lua_ls = 'lua-language-server',
   ocamllsp = 'ocaml-lsp',
   rust_analyzer = 'rust-analyzer',
-  rustfmt = dont_install,
+  rustfmt = no_need,
   tailwindcss = 'tailwindcss-language-server',
   terraformls = 'terraform-ls',
   tsserver = 'typescript-language-server',
@@ -19,36 +19,37 @@ local package_map = {
   yamlls = 'yaml-language-server',
 }
 
-local pkgs = {}
-
-local function add_pkg(pkg)
-  if string.match(pkg, '^lsp:') then
-    return
-  end
-  local p = package_map[pkg]
-  if p == nil then
-    pkgs[#pkgs + 1] = pkg
-  elseif p ~= dont_install then
-    pkgs[#pkgs + 1] = p
-  end
-end
-
 local function packages()
-  for _, spec in pairs(langs) do
-    for _, linter in ipairs(spec.linters or {}) do
-      add_pkg(linter)
+  local pkgs = {} ---@type table<string, boolean>
+  local add_pkg = function(name)
+    if string.match(name, '^lsp:') then
+      return
     end
-    for _, formatter in ipairs(spec.formatters or {}) do
-      add_pkg(formatter)
-    end
-    for _, tool in ipairs(spec.tools or {}) do
-      add_pkg(tool)
-    end
-    for ls, _ in pairs(spec.servers or {}) do
-      add_pkg(ls)
+    local p = package_map[name]
+    if p == nil then
+      pkgs[name] = true
+    elseif p ~= no_need then
+      pkgs[p] = true
+    else
     end
   end
-  return pkgs
+  for _, spec in pairs(langs) do
+    if spec.enable then
+      for _, linter in ipairs(spec.linters or {}) do
+        add_pkg(linter)
+      end
+      for _, formatter in ipairs(spec.formatters or {}) do
+        add_pkg(formatter)
+      end
+      for _, tool in ipairs(spec.tools or {}) do
+        add_pkg(tool)
+      end
+      for ls, _ in pairs(spec.servers or {}) do
+        add_pkg(ls)
+      end
+    end
+  end
+  return vim.tbl_keys(pkgs)
 end
 
 return {

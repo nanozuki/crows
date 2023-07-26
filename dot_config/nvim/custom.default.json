@@ -14,5 +14,6 @@
     "ocaml": false,
     "terraform": false,
     "zig": false
-  }
+  },
+  "use_null_ls": true
 }

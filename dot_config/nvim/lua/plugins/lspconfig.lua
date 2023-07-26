@@ -23,6 +23,7 @@ return {
   {
     'jose-elias-alvarez/null-ls.nvim',
     lazy = true,
+    enabled = values.use_null_ls,
     config = function()
       local linters = {}
       for _, spec in pairs(langs) do
