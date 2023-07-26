@@ -9,7 +9,18 @@ local values = {
     ---@type table<string, string>
     palette = {},
   },
-  languages = {},
+  languages = {
+    vim = true,
+    yaml = true,
+    json = true,
+    go = false,
+    rust = false,
+    frontend = false,
+    deno = false,
+    ocaml = false,
+    terraform = false,
+    zig = false,
+  },
   use_copilot = true,
   ---@type table<string, string>
   diagnostic_signs = { Error = '󰅚', Warn = '󰀪', Info = '', Hint = '󰌶' },
@@ -18,9 +29,8 @@ local values = {
 local custom_file = vim.fn.stdpath('config') .. '/custom.json'
 local file = io.open(custom_file, 'r')
 if file then
-  local content = file:read('*all')
+  local content = file:read('*a')
   local cfg = vim.fn.json_decode(content)
-  vim.print(vim.inspect(cfg))
   values = vim.tbl_deep_extend('force', values, cfg)
 end
 

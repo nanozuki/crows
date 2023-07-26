@@ -7,12 +7,12 @@
     "vim": true,
     "yaml": true,
     "json": true,
-    "go": true,
-    "rust": true,
-    "frontend": true,
-    "deno": true,
-    "ocaml": true,
-    "terraform": true,
-    "zig": true
+    "go": false,
+    "rust": false,
+    "frontend": false,
+    "deno": false,
+    "ocaml": false,
+    "terraform": false,
+    "zig": false
   }
 }

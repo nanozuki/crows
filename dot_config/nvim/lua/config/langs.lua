@@ -38,19 +38,21 @@ langs.lua = {
   },
 }
 
+local has_nodejs = vim.fn.executable('node') == 1
+
 langs.vim = {
-  enable = values.languages.vim,
+  enable = values.languages.vim and has_nodejs,
   servers = { vimls = {} },
 }
 
 langs.yaml = {
-  enable = values.languages.yaml,
+  enable = values.languages.yaml and has_nodejs,
   formatters = { 'prettier' },
   servers = { yamlls = {} },
 }
 
 langs.json = {
-  enable = values.languages.json,
+  enable = values.languages.json and has_nodejs,
   formatters = { 'prettier' },
   servers = { jsonls = {} },
 }
