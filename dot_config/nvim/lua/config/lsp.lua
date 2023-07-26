@@ -42,6 +42,7 @@ lsp.buffer_keys = {
   rename = { '<leader>rn', vim.lsp.buf.rename, 'Rename symbol' },
   code_action = { '<leader>ca', vim.lsp.buf.code_action, 'Code action' },
   list_ref = { 'gr', vim.lsp.buf.references, 'List references' },
+
   -- format = { '<leader>f', vim.lsp.buf.formatting, 'Format buffer' },
 }
 
