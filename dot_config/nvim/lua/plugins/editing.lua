@@ -87,6 +87,7 @@ return {
         prettier = require('formatter.defaults').prettier,
         goimports = require('formatter.filetypes.go').goimports,
         ocamlformat = require('formatter.defaults').ocamlformat,
+        ['nixpkgs-fmt'] = require('formatter.defaults').nixpkgs_fmt,
       }
 
       local formatters = {} ---@type table<string, boolean>

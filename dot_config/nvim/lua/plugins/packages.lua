@@ -1,14 +1,17 @@
 local langs = require('config.langs')
+local values = require('config.values')
 
 local no_need = 'NO NEED'
 
 local package_map = {
+  ['nixpkgs-fmt'] = no_need,
   cssls = 'css-lsp',
   denols = no_need,
   dlv = 'delve',
   html = 'html-lsp',
   jsonls = 'json-lsp',
   lua_ls = 'lua-language-server',
+  nil_ls = no_need,
   ocamllsp = 'ocaml-lsp',
   rust_analyzer = 'rust-analyzer',
   rustfmt = no_need,
@@ -55,6 +58,7 @@ end
 return {
   {
     'williamboman/mason.nvim',
+    enabled = not values.use_nix,
     build = ':MasonUpdate',
     lazy = true,
     config = function()
@@ -65,6 +69,7 @@ return {
   },
   {
     'WhoIsSethDaniel/mason-tool-installer.nvim',
+    enabled = not values.use_nix,
     event = 'VeryLazy',
     dependencies = { 'williamboman/mason.nvim' },
     config = function()

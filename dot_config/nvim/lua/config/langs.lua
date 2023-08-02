@@ -155,4 +155,10 @@ langs.zig = {
   servers = { zls = {} },
 }
 
+langs.nix = {
+  enable = values.use_nix,
+  formatters = { 'nixpkgs-fmt' },
+  servers = { nil_ls = {} },
+}
+
 return langs

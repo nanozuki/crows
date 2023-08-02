@@ -10,19 +10,21 @@ local values = {
     palette = {},
   },
   languages = {
+    -- default enable languages:
     vim = true,
     yaml = true,
     json = true,
-    go = false,
-    rust = false,
-    frontend = false,
+    -- default disable languages:
     deno = false,
+    frontend = false,
+    go = false,
     ocaml = false,
+    rust = false,
     terraform = false,
     zig = false,
   },
+  use_nix = false,
   use_null_ls = false,
-  use_copilot = true,
   ---@type table<string, string>
   diagnostic_signs = { Error = '󰅚', Warn = '󰀪', Info = '', Hint = '󰌶' },
 }
@@ -57,6 +59,7 @@ values.formatter_filetypes = {
     'handlebars',
   },
   goimports = { 'go' },
+  ['nixpkgs-fmt'] = { 'nix' },
 }
 
 ---@type table<string, string[]>
