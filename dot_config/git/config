@@ -12,9 +12,6 @@
     smtpserverport = 587
 [diff]
     tool = nvimdiff
-	renameLimit = 65535
-[difftool "nvimdiff"]
-    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 [alias]
 	st = status
 	df = difftool
