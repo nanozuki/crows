@@ -1,5 +1,3 @@
-local values = require('config.values')
-
 return {
   {
     'hrsh7th/nvim-cmp',
@@ -68,7 +66,6 @@ return {
         replace_keycodes = false,
       })
     end,
-    enabled = values.use_copilot,
   },
   {
     'gelguy/wilder.nvim',

@@ -1,5 +1,3 @@
-local start = os.clock()
-
 local values = require('config.values')
 local lsp = require('config.lsp')
 local langs = require('config.langs')

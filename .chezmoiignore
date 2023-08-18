@@ -21,3 +21,6 @@ Library/*
 .config/nvim/lazy-lock.json
 .config/nvim/.luarc.json
 .netrwhist
+
+# use nix to manage fish
+.config/fish/config.fish

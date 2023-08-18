@@ -47,12 +47,12 @@ vim.opt.softtabstop = 4
 local fi_group = vim.api.nvim_create_augroup('fileindent', {})
 vim.api.nvim_create_autocmd('FileType', {
   group = fi_group,
-  pattern = 'lua,javascript,typescript,javascriptreact,typescriptreact,html,css,scss,xml,yaml,json,terraform,graphql,markdown,jsx',
+  pattern = 'lua,javascript,typescript,javascriptreact,typescriptreact,html,css,scss,xml,yaml,json,terraform,graphql,markdown,jsx,proto,nix',
   command = 'setlocal expandtab ts=2 sw=2 sts=2',
 })
 vim.api.nvim_create_autocmd('FileType', {
   group = fi_group,
-  pattern = 'go,gotmpl',
+  pattern = 'go,gotmpl,make',
   command = 'setlocal noexpandtab ts=4 sw=4',
 })
 
