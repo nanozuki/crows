@@ -31,4 +31,8 @@
     enable = true;
     withPython3 = true;
   };
+
+  home.sessionVariables = {
+    EDITOR = "nvim";
+  };
 }

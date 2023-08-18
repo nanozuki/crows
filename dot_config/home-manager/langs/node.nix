@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   home.packages = with pkgs; [
     nodePackages.nodejs
@@ -14,5 +14,11 @@
     nodePackages.prettier
     # deno runtime
     deno
+  ];
+  home.sessionVariables = {
+    NPM_CONFIG_USERCONFIG = "${config.xdg.configHome}/npm/npmrc";
+  };
+  home.sessionPath = [
+    "${config.xdg.dataHome}/npm/bin"
   ];
 }

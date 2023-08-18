@@ -10,6 +10,7 @@
     iferr
     impl
     delve
+    go-global-update
   ];
 
   home.sessionPath = [

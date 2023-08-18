@@ -10,7 +10,26 @@ async function run(...cmd: string[]): Promise<void> {
   if (!success) {
     const errorString = new TextDecoder().decode(stderr);
     throw new Error(
-      `Execute '${cmd.join(" ")}' failed(${code}):\n${errorString}`
+      `Execute '${cmd.join(" ")}' failed(${code}):\n${errorString}`,
+    );
+  }
+}
+
+async function runWithOptions(
+  cmd: string[],
+  opt: Deno.CommandOptions,
+): Promise<void> {
+  const args = cmd.length > 1 ? cmd.slice(1) : undefined;
+  opt.args = args;
+  opt.stderr = "piped";
+  opt.stdout = "inherit";
+  opt.stdin = "inherit";
+  const command = new Deno.Command(cmd[0], opt);
+  const { success, code, stderr } = await command.output();
+  if (!success) {
+    const errorString = new TextDecoder().decode(stderr);
+    throw new Error(
+      `Execute '${cmd.join(" ")}' failed(${code}):\n${errorString}`,
     );
   }
 }
@@ -37,7 +56,7 @@ async function output(...cmd: string[]): Promise<string> {
   if (!success) {
     const errorString = new TextDecoder().decode(stderr);
     throw new Error(
-      `Execute '${cmd.join(" ")}' failed(${code}):\n${errorString}`
+      `Execute '${cmd.join(" ")}' failed(${code}):\n${errorString}`,
     );
   }
   const outString = new TextDecoder().decode(stdout);
@@ -48,4 +67,5 @@ export default {
   run,
   check,
   output,
+  runWithOptions,
 };
