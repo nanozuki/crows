@@ -10,7 +10,6 @@
     iferr
     impl
     delve
-    go-global-update
   ];
 
   home.sessionPath = [
@@ -23,3 +22,4 @@
     goPrivate = [  ];
   };
 }
+# escaped packages: go-global-update
