@@ -5,7 +5,8 @@ function find_git_repo_path
         echo "invalid repository path"
         return 1
     end
-    set ppath "$HOME/Projects/$words[3]"
+    set dirpath (string replace -ar '~' '_' $words[3])
+    set ppath "$HOME/Projects/$dirpath"
     if test $words[2] = "git@"
         set ppath (string replace : / $ppath)
     end
