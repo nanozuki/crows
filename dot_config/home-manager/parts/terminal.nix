@@ -16,6 +16,8 @@
     btop
     tokei
     bat
+    fd
+    ffmpeg
   ] ++ [ (if (pkgs.system == "x86_64-darwin" || pkgs.system == "aarch64-darwin") then pkgs.pinentry_mac else pkgs.pinentry) ];
   home.sessionPath = [
     "$HOME/.local/bin"

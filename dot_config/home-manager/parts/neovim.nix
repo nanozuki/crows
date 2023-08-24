@@ -25,6 +25,9 @@
     vscode-langservers-extracted # include {html,css,json,eslint}-language-server
     nodePackages.yaml-language-server
     nodePackages.prettier
+
+    # other editors
+    helix
   ];
 
   programs.neovim = {
