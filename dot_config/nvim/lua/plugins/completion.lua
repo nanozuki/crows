@@ -52,18 +52,17 @@ return {
     end,
   },
   {
-    'github/copilot.vim',
+    'zbirenbaum/copilot.lua',
     init = function()
       vim.g.copilot_no_tab_map = true
     end,
     cmd = 'Copilot',
     event = 'InsertEnter',
     config = function()
-      vim.keymap.set('i', '<C-e>', [[copilot#Accept("\<CR>")]], {
-        silent = true,
-        expr = true,
-        script = true,
-        replace_keycodes = false,
+      require('copilot').setup({
+        suggestion = {
+          auto_trigger = true,
+        },
       })
     end,
   },
