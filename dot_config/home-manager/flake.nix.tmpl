@@ -14,11 +14,13 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, ... }:
+  outputs = { nixpkgs, home-manager, stratosphere, ... }:
     let
       system = "{{if eq .chezmoi.arch "amd64"}}x86_64{{else}}aarch64{{end}}-{{.chezmoi.os}}";
       pkgs = nixpkgs.legacyPackages.${system};
-    in {
+      spkgs = stratosphere.packages.${system};
+    in
+    {
       homeConfigurations."crows" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = { inherit spkgs; };

@@ -12,4 +12,8 @@ dots/kitty/local.conf
 # osx
 .DS_Store
 
+# nix
+flake.lock
+*.private.nix
+
 secret
