@@ -1,0 +1,4 @@
+{ ... }:
+{
+  programs.go.goPrivate = [ ];
+}
