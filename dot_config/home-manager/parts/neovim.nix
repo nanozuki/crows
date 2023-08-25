@@ -1,12 +1,5 @@
 { pkgs, ... }:
 {
-  imports = [
-    ./langs/go.nix
-    ./langs/rust.nix
-    ./langs/node.nix
-    ./langs/others.nix
-  ];
-
   home.packages = with pkgs; [
     # tools
     ripgrep
@@ -25,6 +18,9 @@
     vscode-langservers-extracted # include {html,css,json,eslint}-language-server
     nodePackages.yaml-language-server
     nodePackages.prettier
+
+    # other editors
+    helix
   ];
 
   programs.neovim = {
