@@ -1,12 +1,5 @@
 { pkgs, ... }:
 {
-  imports = [
-    ./langs/go.nix
-    ./langs/rust.nix
-    ./langs/node.nix
-    ./langs/others.nix
-  ];
-
   home.packages = with pkgs; [
     # tools
     ripgrep

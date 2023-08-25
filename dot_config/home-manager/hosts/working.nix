@@ -2,10 +2,10 @@
 
 {
   imports = [
-    ./parts/terminal.nix
-    ./parts/neovim.nix
-    ./parts/languages.nix
-    ./parts/working.private.nix # private settings
+    ../parts/terminal.nix
+    ../parts/neovim.nix
+    ../parts/languages.nix
+    ./working.private.nix # private settings
   ];
   config = {
     home.username = "crows";

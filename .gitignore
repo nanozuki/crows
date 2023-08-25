@@ -14,5 +14,6 @@ dots/kitty/local.conf
 
 # nix
 flake.lock
+*.private.nix
 
 secret
