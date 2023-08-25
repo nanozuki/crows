@@ -62,6 +62,11 @@ return {
       require('copilot').setup({
         suggestion = {
           auto_trigger = true,
+          keymap = {
+            accept = '<C-e>',
+            next = '<C-.>',
+            prev = '<C-,>',
+          },
         },
       })
     end,
