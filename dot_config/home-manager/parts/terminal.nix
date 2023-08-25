@@ -9,7 +9,7 @@
     wezterm
     chezmoi
     exa
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    (nerdfonts.override { fonts = [ "JetBrainsMono" "IosevkaTerm" "VictorMono" ]; })
     starship
     pinentry
     pinentry_mac
