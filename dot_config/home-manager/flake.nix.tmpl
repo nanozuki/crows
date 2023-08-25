@@ -8,6 +8,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    stratosphere = {
+      url = "git+https://git.sr.ht/~fubuki/stratosphere";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { nixpkgs, home-manager, ... }:
@@ -17,6 +21,7 @@
     in {
       homeConfigurations."crows" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
+        extraSpecialArgs = { inherit spkgs; };
 
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
