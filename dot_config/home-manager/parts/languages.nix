@@ -1,4 +1,4 @@
-{ pkgs, config ... }:
+{ pkgs, config, ... }:
 {
   home.packages = with pkgs; [
 
@@ -56,7 +56,7 @@
     ## frontend languages
     NPM_CONFIG_USERCONFIG = "${config.xdg.configHome}/npm/npmrc";
     ## rust
-    CARGO_HOME = "${xdg.dataHome}/cargo"
+    CARGO_HOME = "${config.xdg.dataHome}/cargo";
   };
 
   home.sessionPath = [
@@ -65,7 +65,7 @@
     ## frontend languages
     "${config.xdg.dataHome}/npm/bin"
     ## rust
-    "${xdg.dataHome}/cargo/bin"
+    "${config.xdg.dataHome}/cargo/bin"
   ];
 
   programs.go = {

@@ -2,9 +2,9 @@
 
 {
   imports = [
-    ./parts/terminal.nix
-    ./parts/neovim.nix
-    ./parts/languages.nix
+    ../parts/terminal.nix
+    ../parts/neovim.nix
+    ../parts/languages.nix
   ];
   config = {
     home.username = "crows";
