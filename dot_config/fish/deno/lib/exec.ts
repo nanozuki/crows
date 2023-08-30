@@ -1,4 +1,5 @@
 async function run(...cmd: string[]): Promise<void> {
+  console.log("===> run:", cmd.join(" "));
   const args = cmd.length > 1 ? cmd.slice(1) : undefined;
   const command = new Deno.Command(cmd[0], {
     args,
@@ -19,6 +20,7 @@ async function runWithOptions(
   cmd: string[],
   opt: Deno.CommandOptions,
 ): Promise<void> {
+  console.log("===> run:", cmd.join(" "));
   const args = cmd.length > 1 ? cmd.slice(1) : undefined;
   opt.args = args;
   opt.stderr = "piped";

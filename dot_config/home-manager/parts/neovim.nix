@@ -21,6 +21,9 @@
 
     # other editors
     helix
+
+    # doc generation
+    pandoc
   ];
 
   programs.neovim = {
