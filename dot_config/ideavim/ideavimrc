@@ -12,6 +12,7 @@ nmap <leader>sf <action>(ReplaceInPath)
 nmap gi <action>(GotoImplementation)
 nmap gu <action>(GotoSuperMethod)
 nmap gr <action>(FindUsagesInFile)
+nmap <leader>rn <action>(RenameElement)
 nmap <leader>ca <action>(ShowIntentionActions)
 
 "" window/tab manager

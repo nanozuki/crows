@@ -29,6 +29,7 @@
         awscli2
         mycli
         wire
+        go-migrate
       ]) ++ (with spkgs; [
         atlas
         go-swagger_0_25_0
