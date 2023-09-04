@@ -19,7 +19,13 @@ return {
     'folke/flash.nvim',
     event = 'VeryLazy',
     ---@type Flash.Config
-    opts = {},
+    opts = {
+      modes = {
+        char = {
+          enabled = false,
+        },
+      },
+    },
     keys = {
       -- stylua: ignore start
       { "s", mode = { "n", "o", "x" }, function() require("flash").jump() end, desc = "Flash" },

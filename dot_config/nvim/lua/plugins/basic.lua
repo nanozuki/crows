@@ -1,6 +1,4 @@
 return {
-  -- boost startup time
-  'lewis6991/impatient.nvim',
   -- keymapping hint
   {
     'folke/which-key.nvim',
