@@ -1,18 +1,25 @@
 return {
   {
     'hrsh7th/nvim-cmp',
-    event = 'InsertEnter',
+    event = { 'InsertEnter', 'CmdlineEnter' },
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
+      'hrsh7th/cmp-cmdline',
       'L3MON4D3/LuaSnip',
       'saadparwaiz1/cmp_luasnip',
     },
     config = function()
       local cmp = require('cmp')
       local luasnip = require('luasnip')
+      local has_words_before = function()
+        unpack = unpack or table.unpack
+        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
+      end
 
+      ---@diagnostic disable
       cmp.setup({
         completion = {
           completeopt = 'menu,menuone,noinsert',
@@ -29,17 +36,19 @@ return {
           ['<Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
+            elseif has_words_before() then
+              cmp.complete()
             else
               fallback()
             end
-          end, { 'i', 's' }),
+          end, { 'i', 's', 'c' }),
           ['<S-Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_prev_item()
             else
               fallback()
             end
-          end, { 'i', 's' }),
+          end, { 'i', 's', 'c' }),
         },
         sources = cmp.config.sources({
           { name = 'nvim_lsp' },
@@ -49,6 +58,26 @@ return {
           { name = 'buffer' },
         }),
       })
+      -- `/` cmdline setup.
+      cmp.setup.cmdline('/', {
+        sources = {
+          { name = 'buffer' },
+        },
+      })
+      -- `:` cmdline setup.
+      cmp.setup.cmdline(':', {
+        sources = cmp.config.sources({
+          { name = 'path' },
+        }, {
+          {
+            name = 'cmdline',
+            option = {
+              ignore_cmds = { 'Man', '!' },
+            },
+          },
+        }),
+      })
+      ---@diagnostic enable
     end,
   },
   {
@@ -71,34 +100,4 @@ return {
       })
     end,
   },
-  {
-    'gelguy/wilder.nvim',
-    event = 'CmdlineEnter',
-    build = ':UpdateRemotePlugins',
-    config = function()
-      local wilder = require('wilder')
-      wilder.setup({
-        modes = { ':', '/', '?' },
-      })
-      wilder.set_option('pipeline', {
-        wilder.branch(
-          wilder.cmdline_pipeline({
-            language = 'python',
-            fuzzy = 1,
-          }),
-          wilder.python_search_pipeline({
-            pattern = wilder.python_fuzzy_pattern(),
-            sorter = wilder.python_difflib_sorter(),
-            engine = 're',
-          })
-        ),
-      })
-      wilder.set_option(
-        'renderer',
-        wilder.popupmenu_renderer({
-          highlighter = wilder.basic_highlighter(),
-        })
-      )
-    end,
-  }, -- cmdline completion
 }
