@@ -59,23 +59,19 @@ return {
         }),
       })
       -- `/` cmdline setup.
-      cmp.setup.cmdline('/', {
+      cmp.setup.cmdline({ '/', '?' }, {
+        completion = { completeopt = 'menu,menuone,noselect' },
         sources = {
           { name = 'buffer' },
         },
       })
       -- `:` cmdline setup.
       cmp.setup.cmdline(':', {
-        sources = cmp.config.sources({
-          { name = 'path' },
-        }, {
-          {
-            name = 'cmdline',
-            option = {
-              ignore_cmds = { 'Man', '!' },
-            },
-          },
-        }),
+        completion = { completeopt = 'menu,menuone,noselect' },
+        sources = cmp.config.sources(
+          { { name = 'path' } },
+          { { name = 'cmdline', option = { ignore_cmds = { 'Man', '!' } } } }
+        ),
       })
       ---@diagnostic enable
     end,
