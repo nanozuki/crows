@@ -6,13 +6,9 @@
     git
     tealdeer
     zstd
-    wezterm
     chezmoi
-    exa
-    (nerdfonts.override { fonts = [ "JetBrainsMono" "IosevkaTerm" "VictorMono" ]; })
+    eza
     starship
-    pinentry
-    pinentry_mac
     btop
     tokei
     bat
@@ -29,11 +25,11 @@
       vi = "nvim";
       vim = "nvim";
       vimdiff = "nvim -d";
-      e = "exa --icons";
-      el = "exa -l --icons";
-      ea = "exa -a --icons";
-      eal = "exa -al --icons";
-      et = "exa -T --icons";
+      e = "eza --icons";
+      el = "eza -l --icons";
+      ea = "eza -a --icons";
+      eal = "eza -al --icons";
+      et = "eza -T --icons";
     };
     interactiveShellInit = ''
       # gpg and gpg-agent
