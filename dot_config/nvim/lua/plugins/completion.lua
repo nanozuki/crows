@@ -68,10 +68,10 @@ return {
       -- `:` cmdline setup.
       cmp.setup.cmdline(':', {
         completion = { completeopt = 'menu,menuone,noselect' },
-        sources = cmp.config.sources(
-          { { name = 'path' } },
-          { { name = 'cmdline', option = { ignore_cmds = { 'Man', '!' } } } }
-        ),
+        sources = cmp.config.sources({
+          { name = 'path' },
+          { name = 'cmdline' },
+        }),
       })
       ---@diagnostic enable
     end,

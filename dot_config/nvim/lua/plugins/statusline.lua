@@ -107,7 +107,13 @@ return {
           'diff',
           'diagnostics',
         },
-        lualine_c = { { 'filename', path = 4 } },
+        lualine_c = {
+          {
+            'filename',
+            path = 1,
+            symbols = { modified = '*', readonly = '' },
+          },
+        },
         lualine_x = { 'filetype', { file_info, icon = '󰋽' } },
         lualine_y = { { lsp, icon = '' } },
         lualine_z = { { position, icon = '󰆤' } },
