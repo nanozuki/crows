@@ -12,7 +12,7 @@ local lsp = {}
 ---@alias LspCapabilitiesMaker fun(caps:table):table
 
 ---@class LangServerMeta
----@field delayed_start? boolean default is true
+---@field delayed_start? boolean default is false
 ---@field root_patterns? string[]
 ---@field pkg? string|string[] the package(s) should be installed
 
@@ -85,7 +85,8 @@ end
 
 -- # about filetypes, move to config/langs.lua later
 
-local langs = require('config.langs')
+local values = require('config.values')
+local has_enable = values.languages
 
 ---@class FiletypeConfig
 ---@field enable boolean
@@ -93,16 +94,16 @@ local langs = require('config.langs')
 ---@field linters? string[]
 ---@type table<string, FiletypeConfig>
 lsp.filetypes = {
-  lua = { enable = langs.lua.enable, formatters = { 'stylua' } },
-  css = { enable = langs.css.enable, formatters = { 'prettier' } },
-  deno = { enable = langs.deno.enable, formatters = { 'prettier' } },
-  html = { enable = langs.html.enable, formatters = { 'prettier' } },
-  json = { enable = langs.json.enable, formatters = { 'prettier' } },
-  yaml = { enable = langs.yaml.enable, formatters = { 'prettier' } },
-  go = { enable = langs.go.enable, formatters = { 'goimports' }, linters = { 'golangci-lint' } },
-  typescript = { enable = langs.typescript.enable, formatters = { 'prettier' }, linters = { 'eslint_d' } },
-  ocaml = { enable = langs.ocaml.enable, formatters = { 'ocamlformat' } },
-  nix = { enable = langs.nix.enable, formatters = { 'nixpkgs-fmt' } },
+  lua = { enable = has_enable.lua, formatters = { 'stylua' } },
+  css = { enable = has_enable.css, formatters = { 'prettier' } },
+  deno = { enable = has_enable.deno, formatters = { 'prettier' } },
+  html = { enable = has_enable.html, formatters = { 'prettier' } },
+  json = { enable = has_enable.json, formatters = { 'prettier' } },
+  yaml = { enable = has_enable.yaml, formatters = { 'prettier' } },
+  go = { enable = has_enable.go, formatters = { 'goimports' }, linters = { 'golangci-lint' } },
+  typescript = { enable = has_enable.typescript, formatters = { 'prettier' }, linters = { 'eslint_d' } },
+  ocaml = { enable = has_enable.ocaml, formatters = { 'ocamlformat' } },
+  nix = { enable = has_enable.nix, formatters = { 'nixpkgs-fmt' } },
 }
 
 return lsp
