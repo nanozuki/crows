@@ -13,8 +13,7 @@
     "deno": false,
     "ocaml": false,
     "terraform": false,
-    "zig": false
-  },
-  "use_nix": false,
-  "use_null_ls": false
+    "zig": false,
+    "nix": false
+  }
 }

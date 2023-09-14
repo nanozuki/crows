@@ -22,9 +22,8 @@ local values = {
     rust = false,
     terraform = false,
     zig = false,
+    nix = false,
   },
-  use_nix = false,
-  use_null_ls = false,
   ---@type table<string, string>
   diagnostic_signs = { Error = '󰅚', Warn = '󰀪', Info = '', Hint = '󰌶' },
 }
