@@ -101,7 +101,7 @@ lsp.filetypes = {
   json = { enable = has_enable.json, formatters = { 'prettier' } },
   yaml = { enable = has_enable.yaml, formatters = { 'prettier' } },
   go = { enable = has_enable.go, formatters = { 'goimports' }, linters = { 'golangci-lint' } },
-  typescript = { enable = has_enable.typescript, formatters = { 'prettier' }, linters = { 'eslint_d' } },
+  typescript = { enable = has_enable.web, formatters = { 'prettier' }, linters = { 'eslint_d' } },
   ocaml = { enable = has_enable.ocaml, formatters = { 'ocamlformat' } },
   nix = { enable = has_enable.nix, formatters = { 'nixpkgs-fmt' } },
 }
