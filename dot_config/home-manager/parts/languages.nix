@@ -37,10 +37,8 @@
     # ocaml-ng.ocamlPackages_latest.utop
 
     ## rust
-    rustc
-    cargo
+    rust-bin.stable.latest.default
     rust-analyzer
-    rustfmt
 
     ## terraform
     terraform
