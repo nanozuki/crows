@@ -31,15 +31,12 @@ local function lsp()
   local clients = vim.lsp.get_active_clients({ bufnr = 0 })
   local status = {
     lang_servers = false,
-    null_ls = false,
     copilot = false,
   }
   if clients and #clients > 0 then
     for _, client in ipairs(clients) do
       if client.name == 'copilot' then
         status.copilot = true
-      elseif client.name == 'null-ls' then
-        status.null_ls = true
       else
         status.lang_servers = true
       end
@@ -47,11 +44,7 @@ local function lsp()
   end
   local text = {}
   if status.lang_servers then
-    if status.null_ls then
-      text[#text + 1] = 'LSP+'
-    else
-      text[#text + 1] = 'LSP'
-    end
+    text[#text + 1] = 'LSP'
   end
   if status.copilot then
     text[#text + 1] = 'AI'

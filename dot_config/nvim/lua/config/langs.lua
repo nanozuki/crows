@@ -156,7 +156,7 @@ langs.zig = {
 }
 
 langs.nix = {
-  enable = values.use_nix,
+  enable = values.languages.nix,
   formatters = { 'nixpkgs-fmt' },
   servers = { nil_ls = {} },
 }

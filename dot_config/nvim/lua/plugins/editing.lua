@@ -37,7 +37,6 @@ return {
   },
   {
     'mfussenegger/nvim-lint',
-    enabled = not values.use_null_ls,
     event = { 'BufReadPost', 'BufNewFile' },
     config = function()
       ---@type table<string,string>
@@ -78,7 +77,6 @@ return {
   },
   {
     'mhartington/formatter.nvim',
-    enabled = not values.use_null_ls,
     event = { 'BufReadPost', 'BufNewFile' },
     config = function()
       ---@type table<string, (fun():table)>

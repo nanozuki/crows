@@ -55,7 +55,7 @@ return {
   {
     'ray-x/go.nvim',
     ft = { 'go', 'gomod' },
-    enabled = (not values.use_null_ls) and langs.go.enable,
+    enabled = langs.go.enable,
     dependencies = {
       'ray-x/guihua.lua',
       'neovim/nvim-lspconfig',
