@@ -38,21 +38,19 @@ langs.lua = {
   },
 }
 
-local has_nodejs = vim.fn.executable('node') == 1
-
 langs.vim = {
-  enable = values.languages.vim and has_nodejs,
+  enable = values.languages.vim,
   servers = { vimls = {} },
 }
 
 langs.yaml = {
-  enable = values.languages.yaml and has_nodejs,
+  enable = values.languages.yaml,
   formatters = { 'prettier' },
   servers = { yamlls = {} },
 }
 
 langs.json = {
-  enable = values.languages.json and has_nodejs,
+  enable = values.languages.json,
   formatters = { 'prettier' },
   servers = { jsonls = {} },
 }
@@ -90,7 +88,7 @@ langs.rust = {
 }
 
 langs.typescript = {
-  enable = values.languages.frontend,
+  enable = values.languages.web,
   linters = { 'eslint_d' },
   formatters = { 'prettier' },
   servers = {
@@ -105,7 +103,7 @@ langs.typescript = {
 }
 
 langs.css = {
-  enable = values.languages.frontend,
+  enable = values.languages.web,
   formatters = { 'prettier' },
   servers = {
     cssls = {
@@ -117,7 +115,7 @@ langs.css = {
 }
 
 langs.html = {
-  enable = values.languages.frontend,
+  enable = values.languages.web,
   formatters = { 'prettier' },
   servers = { html = {} },
 }

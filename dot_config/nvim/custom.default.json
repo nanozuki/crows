@@ -9,7 +9,7 @@
     "json": true,
     "go": false,
     "rust": false,
-    "frontend": false,
+    "web": false,
     "deno": false,
     "ocaml": false,
     "terraform": false,

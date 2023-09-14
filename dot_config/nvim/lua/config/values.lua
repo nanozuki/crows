@@ -16,7 +16,7 @@ local values = {
     json = true,
     -- default disable languages:
     deno = false,
-    frontend = false,
+    web = false,
     go = false,
     ocaml = false,
     rust = false,
@@ -28,6 +28,7 @@ local values = {
   diagnostic_signs = { Error = '󰅚', Warn = '󰀪', Info = '', Hint = '󰌶' },
 }
 
+--- load custom config
 local custom_file = vim.fn.stdpath('config') .. '/custom.json'
 local file = io.open(custom_file, 'r')
 if file then
@@ -35,42 +36,10 @@ if file then
   local cfg = vim.fn.json_decode(content)
   values = vim.tbl_deep_extend('force', values, cfg)
 end
-
----@type table<string, string[]>
-values.formatter_filetypes = {
-  stylua = { 'lua' },
-  prettier = {
-    'javascript',
-    'javascriptreact',
-    'typescript',
-    'typescriptreact',
-    'vue',
-    'css',
-    'scss',
-    'less',
-    'html',
-    'json',
-    'jsonc',
-    'yaml',
-    'markdown',
-    'markdown.mdx',
-    'graphql',
-    'handlebars',
-  },
-  goimports = { 'go' },
-  ['nixpkgs-fmt'] = { 'nix' },
-}
-
----@type table<string, string[]>
-values.linter_filetypes = {
-  eslint_d = {
-    'javascript',
-    'javascriptreact',
-    'typescript',
-    'typescriptreact',
-    'vue',
-  },
-  ['golangci-lint'] = { 'go' },
-}
+if vim.fn.executable('node') ~= 1 then
+  values.languages.vim = false
+  values.languages.yaml = false
+  values.languages.json = false
+end
 
 return values
