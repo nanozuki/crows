@@ -44,7 +44,6 @@ return {
           end
         end
       end
-      lsp.format_on_save()
     end,
     dependencies = {
       'ray-x/lsp_signature.nvim',

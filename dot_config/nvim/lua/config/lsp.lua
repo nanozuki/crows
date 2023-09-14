@@ -83,31 +83,26 @@ function lsp.make_capabilities()
   return caps
 end
 
--- # format settings
+-- # about filetypes, move to config/langs.lua later
 
----set fomatters by {client = [ filetypes ]}
----@type table<string, string[]>
-lsp.formatters = {
-  rust_analyzer = { 'rust' },
-  terraformls = { 'terraform' },
-  zls = { 'zig' },
+local langs = require('config.langs')
+
+---@class FiletypeConfig
+---@field enable boolean
+---@field formatters? string[]
+---@field linters? string[]
+---@type table<string, FiletypeConfig>
+lsp.filetypes = {
+  lua = { enable = langs.lua.enable, formatters = { 'stylua' } },
+  css = { enable = langs.css.enable, formatters = { 'prettier' } },
+  deno = { enable = langs.deno.enable, formatters = { 'prettier' } },
+  html = { enable = langs.html.enable, formatters = { 'prettier' } },
+  json = { enable = langs.json.enable, formatters = { 'prettier' } },
+  yaml = { enable = langs.yaml.enable, formatters = { 'prettier' } },
+  go = { enable = langs.go.enable, formatters = { 'goimports' }, linters = { 'golangci-lint' } },
+  typescript = { enable = langs.typescript.enable, formatters = { 'prettier' }, linters = { 'eslint_d' } },
+  ocaml = { enable = langs.ocaml.enable, formatters = { 'ocamlformat' } },
+  nix = { enable = langs.nix.enable, formatters = { 'nixpkgs-fmt' } },
 }
-
-function lsp.format()
-  vim.lsp.buf.format({
-    filter = function(client)
-      return lsp.formatters[client.name] and vim.tbl_contains(lsp.formatters[client.name], vim.bo.filetype)
-    end,
-  })
-end
-
-function lsp.format_on_save()
-  local format_group = vim.api.nvim_create_augroup('LspFormat', {})
-  vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
-    group = format_group,
-    pattern = '*',
-    callback = lsp.format,
-  })
-end
 
 return lsp
