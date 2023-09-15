@@ -26,22 +26,18 @@ return {
     event = { 'BufReadPre', 'BufNewFile' },
     config = function()
       local lspconfig = require('lspconfig')
-      local setup = function(name, config)
-        local load = (config.meta or {}).delayed_start ~= true
-        if load then
-          config.on_attach = lsp.on_attach
-          config.capabilities = lsp.make_capabilities()
-          if config.meta and config.meta.root_patterns then
-            config.root_dir = require('lspconfig.util').root_pattern(unpack(config.meta.root_patterns))
-          end
-          lspconfig[name].setup(config)
+      lsp.make_config = function(server, on_attach, caps_maker)
+        local config = server.config or {}
+        if server.root_patterns then
+          config.root_dir = require('lspconfig.util').root_pattern(unpack(server.root_patterns))
         end
+        config.on_attach = lsp.on_attach(on_attach)
+        config.capabilities = lsp.make_capabilities(caps_maker)
+        return config
       end
-      for _, lang in pairs(langs) do
-        if lang.enable then
-          for name, config in pairs(lang.servers or {}) do
-            setup(name, config)
-          end
+      for name, srv in pairs(langs.servers) do
+        if srv.autoload then
+          lspconfig[name].setup(lsp.make_config(srv))
         end
       end
     end,

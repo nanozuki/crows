@@ -1,162 +1,144 @@
----@class LanguageSpec
--- To specify whether nvim support edit this language. If enable is true,
--- linters, formatters, tools, and servers should be installed in environment.
----@field enable boolean
----@field linters? string[] list of linter name
----@field formatters? string[] list of formatter name or "lsp:<server_name>"
----@field tools? string[] list of tool name
----@field servers table<string, LspConfig> map lsp config to lsp name
-
--- define all languages requirement specs, won't execute any tool
----@type table<string, LanguageSpec>
-local langs = {}
+---@class LspConfig: table
+---@field autoload boolean if autoload by nvim-lspconfig
+---@field root_patterns? string[] see lspconfig.util.root_pattern
+---@field config? table<string, any> lsp config
 
 local values = require('config.values')
+local has_enabled = values.languages
 
-langs.lua = {
-  enable = true,
-  formatters = { 'stylua' },
-  servers = {
-    lua_ls = {
-      settings = {
-        Lua = {
-          runtime = {
-            version = 'LuaJIT',
-          },
-          diagnostics = {
-            globals = { 'vim' },
-          },
-          workspace = {
-            checkThirdParty = false,
-          },
-          telemetry = {
-            enable = false,
-          },
+local servers = {}; ---@type table<string, LspConfig>
+
+servers.lua_ls = {
+  autoload = true,
+  config = {
+    settings = {
+      Lua = {
+        runtime = {
+          version = 'LuaJIT',
+        },
+        diagnostics = {
+          globals = { 'vim' },
+        },
+        workspace = {
+          checkThirdParty = false,
+        },
+        telemetry = {
+          enable = false,
         },
       },
     },
   },
 }
 
-langs.vim = {
-  enable = values.languages.vim,
-  servers = { vimls = {} },
+servers.vimls = {
+  autoload = has_enabled.vim,
 }
 
-langs.yaml = {
-  enable = values.languages.yaml,
-  formatters = { 'prettier' },
-  servers = { yamlls = {} },
+servers.yamlls = {
+  autoload = has_enabled.yaml,
 }
 
-langs.json = {
-  enable = values.languages.json,
-  formatters = { 'prettier' },
-  servers = { jsonls = {} },
+servers.jsonls = {
+  autoload = has_enabled.json,
 }
 
-langs.go = {
-  enable = values.languages.go,
-  linters = { 'golangci-lint' },
-  formatters = { 'goimports' },
-  tools = {
-    'gomodifytags',
-    'gotests',
-    'gotestsum',
-    'iferr',
-    'impl',
-    'dlv',
-  },
-  servers = { gopls = {} },
+servers.gopls = {
+  autoload = has_enabled.go,
 }
 
-langs.rust = {
-  enable = values.languages.rust,
-  formatters = { 'lsp:rust_analyzer' },
-  servers = {
-    rust_analyzer = {
-      settings = {
-        ['rust-analyzer'] = {
-          diagnostics = {
-            diagnostics = { disabled = { 'unresolved-proc-macro' } },
-            checkOnSave = { command = 'clippy' },
-          },
+servers.rust_analyzer = {
+  autoload = has_enabled.rust,
+  config = {
+    settings = {
+      ['rust-analyzer'] = {
+        diagnostics = {
+          diagnostics = { disabled = { 'unresolved-proc-macro' } },
+          checkOnSave = { command = 'clippy' },
         },
       },
     },
   },
 }
 
-langs.typescript = {
-  enable = values.languages.web,
-  linters = { 'eslint_d' },
-  formatters = { 'prettier' },
-  servers = {
-    tsserver = {
-      meta = { root_patterns = { 'tsconfig.json', 'jsconfig.json', 'package.json' } },
-      single_file_support = not values.languages.deno, -- Don't start in deno files
+servers.tsserver = {
+  autoload = has_enabled.web,
+  root_patterns = { 'tsconfig.json', 'jsconfig.json', 'package.json' },
+  config = {
+    single_file_support = not has_enabled.deno, -- Don't start in deno files
+  },
+}
+
+servers.tailwindcss = {
+  autoload = has_enabled.web,
+  root_patterns = { 'tailwind.config.js', 'tailwind.config.ts' },
+}
+
+servers.cssls = {
+  autoload = has_enabled.web,
+  config = {
+    lint = {
+      unknownAtRules = 'ignore',
     },
-    tailwindcss = {
-      meta = { root_patterns = { 'tailwind.config.js', 'tailwind.config.ts' } },
+  }
+}
+
+servers.html = {
+  autoload = has_enabled.web,
+}
+
+servers.denols = {
+  autoload = has_enabled.deno,
+  root_patterns = { 'deno.json', 'deno.jsonc' },
+  config = {
+    init_options = {
+      enable = true,
+      lint = true,
+      unstable = true,
     },
   },
 }
 
-langs.css = {
-  enable = values.languages.web,
-  formatters = { 'prettier' },
-  servers = {
-    cssls = {
-      lint = {
-        unknownAtRules = 'ignore',
-      },
-    },
+servers.ocamllsp = {
+  autoload = has_enabled.ocaml,
+}
+
+servers.terraformls = {
+  autoload = has_enabled.terraform,
+}
+
+servers.zls = {
+  autoload = has_enabled.zig,
+}
+
+servers.nil_ls = {
+  autoload = has_enabled.nix,
+}
+
+---@class FiletypeConfig
+---@field enable boolean
+---@field formatters? string[]
+---@field linters? string[]
+---@field tools? string[]
+---@type table<string, FiletypeConfig>
+local filetypes = {
+  lua = { enable = has_enabled.lua, formatters = { 'stylua' } },
+  css = { enable = has_enabled.css, formatters = { 'prettier' } },
+  deno = { enable = has_enabled.deno, formatters = { 'prettier' } },
+  html = { enable = has_enabled.html, formatters = { 'prettier' } },
+  json = { enable = has_enabled.json, formatters = { 'prettier' } },
+  yaml = { enable = has_enabled.yaml, formatters = { 'prettier' } },
+  go = {
+    enable = has_enabled.go,
+    formatters = { 'goimports' },
+    linters = { 'golangci-lint' },
+    tools = { 'gomodifytags', 'gotests', 'gotestsum', 'iferr', 'impl', 'dlv', },
   },
+  typescript = { enable = has_enabled.web, formatters = { 'prettier' }, linters = { 'eslint_d' } },
+  ocaml = { enable = has_enabled.ocaml, formatters = { 'ocamlformat' } },
+  nix = { enable = has_enabled.nix, formatters = { 'nixpkgs-fmt' } },
 }
 
-langs.html = {
-  enable = values.languages.web,
-  formatters = { 'prettier' },
-  servers = { html = {} },
+return {
+  servers = servers,
+  filetypes = filetypes,
 }
-
-langs.deno = {
-  enable = values.languages.deno,
-  formatters = { 'prettier' },
-  servers = {
-    denols = {
-      meta = { root_patterns = { 'deno.json', 'deno.jsonc' } },
-      init_options = {
-        enable = true,
-        lint = true,
-        unstable = true,
-      },
-    },
-  },
-}
-
-langs.ocaml = {
-  enable = values.languages.ocaml,
-  formatters = { 'ocamlformat' },
-  servers = { ocamllsp = {} },
-}
-
-langs.terraform = {
-  enable = values.languages.terraform,
-  formatters = { 'lsp:terraformls' },
-  servers = { terraformls = {} },
-}
-
-langs.zig = {
-  enable = values.languages.zig,
-  formatters = { 'lsp:zls' },
-  servers = { zls = {} },
-}
-
-langs.nix = {
-  enable = values.languages.nix,
-  formatters = { 'nixpkgs-fmt' },
-  servers = { nil_ls = {} },
-}
-
-return langs

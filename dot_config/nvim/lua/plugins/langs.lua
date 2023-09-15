@@ -1,6 +1,6 @@
-local values = require('config.values')
 local lsp = require('config.lsp')
 local langs = require('config.langs')
+local values = require('config.values')
 
 return {
   -- fish
@@ -14,23 +14,23 @@ return {
   {
     'b0o/schemastore.nvim',
     lazy = true,
-    enabled = langs.json.enable or langs.yaml.enable,
+    enabled = values.languages.json or values.languages.yaml,
     config = function()
-      langs.json.servers.jsonls = vim.tbl_deep_extend('force', langs.json.servers.jsonls, {
+      langs.servers.jsonls.config = {
         settings = {
           json = {
             schemas = require('schemastore').json.schemas(),
             validate = { enable = true },
           },
         },
-      })
-      langs.yaml.servers.yamlls = vim.tbl_deep_extend('force', langs.yaml.servers.yamlls, {
+      }
+      langs.servers.yamlls.config = {
         settings = {
           yaml = {
             schemas = require('schemastore').yaml.schemas(),
           },
         },
-      })
+      }
     end,
   },
   -- lua
@@ -39,23 +39,19 @@ return {
     ft = { 'lua' },
     dependencies = { 'neovim/nvim-lspconfig' },
     init = function()
-      langs.lua.servers.lua_ls.meta = { delayed_start = true }
+      langs.servers.lua_ls.autoload = false
     end,
     config = function()
       local neodev = require('neodev')
       neodev.setup({ setup_jsonls = false })
-
       local lspconfig = require('lspconfig')
-      local lua_config = langs.lua.servers.lua_ls
-      lua_config.on_attach = lsp.on_attach
-      lua_config.capabilities = lsp.make_capabilities()
-      lspconfig.lua_ls.setup(lua_config)
+      lspconfig.lua_ls.setup(lsp.make_config(langs.servers.lua_ls))
     end,
   },
   {
     'ray-x/go.nvim',
     ft = { 'go', 'gomod' },
-    enabled = langs.go.enable,
+    enabled = values.languages.go,
     dependencies = {
       'ray-x/guihua.lua',
       'neovim/nvim-lspconfig',
@@ -68,25 +64,19 @@ return {
   {
     'simrat39/rust-tools.nvim',
     dependencies = { 'neovim/nvim-lspconfig' },
-    enabled = langs.rust.enable,
+    enabled = values.languages.rust,
     ft = { 'rust' },
     init = function()
-      langs.rust.servers.rust_analyzer.meta = { delayed_start = true }
+      langs.servers.rust_analyzer.autoload = false
     end,
     config = function()
       local rt = require('rust-tools')
-      local config = langs.rust.servers.rust_analyzer
-      config.on_attach = function(client, bufnr)
-        lsp.on_attach(client, bufnr)
+      local on_attach = function(client, bufnr)
         vim.keymap.set('n', '<leader>ha', rt.hover_actions.hover_actions, { buffer = bufnr, desc = 'Hover actions' })
-        vim.keymap.set(
-          'n',
-          '<leader>ag',
-          rt.code_action_group.code_action_group,
-          { buffer = bufnr, desc = 'Code action groups' }
-        )
+        vim.keymap.set('n', '<leader>ag', rt.code_action_group.code_action_group,
+          { buffer = bufnr, desc = 'Code action groups' })
       end
-      config.capabilities = lsp.make_capabilities()
+      local config = lsp.make_config(langs.servers.rust_analyzer, on_attach)
       rt.setup({ server = config })
     end,
   },

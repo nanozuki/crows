@@ -11,13 +11,6 @@ local lsp = {}
 ---@alias LspOnAttachCallback fun(client:table,bufnr:number)
 ---@alias LspCapabilitiesMaker fun(caps:table):table
 
----@class LangServerMeta
----@field delayed_start? boolean default is false
----@field root_patterns? string[]
----@field pkg? string|string[] the package(s) should be installed
-
----@class LspConfig: table
----@field meta? LangServerMeta
 
 -- # keymap settings
 
@@ -59,12 +52,16 @@ lsp.on_attach_callbacks = {
   lsp.set_buffer_keymapping,
 }
 
---- on_attach function base on settings
----@param client table client object
----@param bufnr number buffer number
-function lsp.on_attach(client, bufnr)
-  for _, func in ipairs(lsp.on_attach_callbacks) do
-    func(client, bufnr)
+---@param callback? LspOnAttachCallback Ad hoc additions callback
+---@return LspOnAttachCallback
+function lsp.on_attach(callback)
+  return function(client, bufnr)
+    for _, func in ipairs(lsp.on_attach_callbacks) do
+      func(client, bufnr)
+    end
+    if callback then
+      callback(client, bufnr)
+    end
   end
 end
 
@@ -74,36 +71,21 @@ end
 lsp.capabilities = {}
 
 --- make capabilities base on settings
+---@param cap_maker? LspCapabilitiesMaker Ad hoc additions capabilities maker
 ---@return table capabilities
-function lsp.make_capabilities()
+function lsp.make_capabilities(cap_maker)
   local caps = vim.lsp.protocol.make_client_capabilities()
   for _, func in ipairs(lsp.capabilities) do
     caps = func(caps)
   end
+  if cap_maker then
+    caps = cap_maker(caps)
+  end
   return caps
 end
 
--- # about filetypes, move to config/langs.lua later
-
-local values = require('config.values')
-local has_enable = values.languages
-
----@class FiletypeConfig
----@field enable boolean
----@field formatters? string[]
----@field linters? string[]
----@type table<string, FiletypeConfig>
-lsp.filetypes = {
-  lua = { enable = has_enable.lua, formatters = { 'stylua' } },
-  css = { enable = has_enable.css, formatters = { 'prettier' } },
-  deno = { enable = has_enable.deno, formatters = { 'prettier' } },
-  html = { enable = has_enable.html, formatters = { 'prettier' } },
-  json = { enable = has_enable.json, formatters = { 'prettier' } },
-  yaml = { enable = has_enable.yaml, formatters = { 'prettier' } },
-  go = { enable = has_enable.go, formatters = { 'goimports' }, linters = { 'golangci-lint' } },
-  typescript = { enable = has_enable.web, formatters = { 'prettier' }, linters = { 'eslint_d' } },
-  ocaml = { enable = has_enable.ocaml, formatters = { 'ocamlformat' } },
-  nix = { enable = has_enable.nix, formatters = { 'nixpkgs-fmt' } },
-}
+---setup function, should be registered by lsp config setter
+---@type fun(server:LspConfig,on_attach?:LspOnAttachCallback,caps_maker?:LspCapabilitiesMaker):table
+lsp.make_config = nil
 
 return lsp

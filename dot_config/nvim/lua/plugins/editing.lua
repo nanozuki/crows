@@ -51,8 +51,8 @@ return {
     config = function()
       local translator = { ['golangci-lint'] = 'golangcilint' }
       local linters_by_ft = {} ---@type table<string, string[]>
-      local lsp = require('config.lsp')
-      for ft, ft_config in pairs(lsp.filetypes) do
+      local langs = require('config.langs')
+      for ft, ft_config in pairs(langs.filetypes) do
         if ft_config.enable then
           linters_by_ft[ft] = translate_list(translator, ft_config.linters or {})
         end
@@ -74,8 +74,8 @@ return {
     config = function()
       local translator = { ['nixpkgs-fmt'] = 'nixpkgs_fmt' }
       local formatters_by_ft = {} ---@type table<string, string[]>
-      local lsp = require('config.lsp')
-      for ft, ft_config in pairs(lsp.filetypes) do
+      local langs = require('config.langs')
+      for ft, ft_config in pairs(langs.filetypes) do
         if ft_config.enable then
           formatters_by_ft[ft] = translate_list(translator, ft_config.formatters or {})
         end
