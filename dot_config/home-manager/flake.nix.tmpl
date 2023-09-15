@@ -12,9 +12,10 @@
       url = "git+https://git.sr.ht/~fubuki/stratosphere";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    rust-overlay.url = "github:oxalica/rust-overlay";
   };
 
-  outputs = { nixpkgs, home-manager, stratosphere, ... }:
+  outputs = { nixpkgs, home-manager, stratosphere, rust-overlay, ... }:
     let
       system = "{{if eq .chezmoi.arch "amd64"}}x86_64{{else}}aarch64{{end}}-{{.chezmoi.os}}";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -27,7 +28,10 @@
 
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
-        modules = [ ./home.nix ];
+        modules = [
+          ./home.nix
+          ({ pkgs, ... }: { nixpkgs.overlays = [ rust-overlay.overlays.default ]; })
+        ];
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
