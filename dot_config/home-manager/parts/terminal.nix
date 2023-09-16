@@ -13,7 +13,7 @@
     tokei
     bat
     fd
-  ] ++ [ (if (pkgs.system == "x86_64-darwin" || pkgs.system == "aarch64-darwin") then pkgs.pinentry_mac else pkgs.pinentry) ];
+  ];
   home.sessionPath = [
     "$HOME/.local/bin"
   ];
@@ -52,9 +52,5 @@
       set -x STARSHIP_CONFIG ~/.config/starship/config.toml
       starship init fish | source
     '';
-  };
-  programs.gpg = {
-    enable = true;
-    homedir = "${config.xdg.dataHome}/gnupg";
   };
 }
