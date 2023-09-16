@@ -33,12 +33,12 @@
     };
     interactiveShellInit = ''
       # gpg and gpg-agent
-      set -x GPG_TTY (tty)
+      set -gx GPG_TTY (tty)
       gpg-connect-agent updatestartuptty /bye >/dev/null
-      set -x SSH_AUTH_SOCK $GNUPGHOME/S.gpg-agent.ssh
+      set -gx SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)/S.gpg-agent.ssh
 
       # kubectl
-      set -x KUBECONFIG "$HOME/.config/cluster/config"
+      set -gx KUBECONFIG "$HOME/.config/cluster/config"
 
       # history across fishes
       function save_history --on-event fish_preexec
@@ -49,7 +49,7 @@
       bind \e\[A 'history --merge ; up-or-search'
 
       # starship
-      set -x STARSHIP_CONFIG ~/.config/starship/config.toml
+      set -gx STARSHIP_CONFIG ~/.config/starship/config.toml
       starship init fish | source
     '';
   };
