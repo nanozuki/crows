@@ -1,3 +1,51 @@
 function update-env
-    deno run --allow-run --allow-net --allow-env ~/.config/fish/deno/update_env.ts gpg rime go rust ocaml
+    if type -q home-manager
+        cd $XDG_CONFIG_HOME/home-manager
+        nix flake update
+        home-manager switch
+        cd -
+    end
+    if type -q brew
+        brew update
+        brew upgrade
+        brew upgrade --cask
+        brew cleanup
+    end
+    if type -q paru
+        paru -Syu --noconfirm
+    else if type -q yay
+        yay -Syu --noconfirm
+    else
+        sudo pacman -Syu --noconfirm
+    end
+    if type -q flatpak
+        sudo flatpak upgrade -y
+    end
+    if type -q fisher
+        fisher update
+    end
+    if type -q npm
+        for pkg in (npm -g list --json | jq '.dependencies | keys | join(" ")' | string trim -c '"' | string split ' ')
+            echo "install $pkg"
+        end
+    end
+    if type -q cargo
+        for pkg in (cargo install --list)
+            if string match -r '^ +' $pkg
+                echo pkg (string trim $pkg)
+            end
+        end
+    end
+    if test -d $XDG_DATA_HOME/plum
+        cd $XDG_DATA_HOME/plum && git pull && cd -
+        $XDG_DATA_HOME/plum/rime-install luna-pinyin
+        $XDG_DATA_HOME/plum/rime-install double-pinyin
+        $XDG_DATA_HOME/plum/rime-install emoji
+    end
+    if test -d go-global-update
+        go-global-update
+    end
+    if test -d opam
+        opam update --upgrade -y
+    end
 end
