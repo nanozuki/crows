@@ -25,16 +25,17 @@ function update-env
         fisher update
     end
     if type -q npm
-        if test "null" != (npm -g list --json | jq '.dependencies')
+        if test "null" != "(npm -g list --json | jq '.dependencies')"
             for pkg in (npm -g list --json | jq '.dependencies | keys | join(" ")' | string trim -c '"' | string split ' ')
-                echo "install $pkg"
+                npm install -g $pkg
             end
         end
     end
     if type -q cargo
         for pkg in (cargo install --list)
-            if string match -r '^ +' $pkg
-                echo pkg (string trim $pkg)
+            set words (string split -n ' ' $pkg)
+            if test (count $words) -gt 1
+                cargo install $words[1]
             end
         end
     end
