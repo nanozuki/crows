@@ -15,7 +15,7 @@ function update-env
         paru -Syu --noconfirm
     else if type -q yay
         yay -Syu --noconfirm
-    else
+    else if type -q pacman
         sudo pacman -Syu --noconfirm
     end
     if type -q flatpak
@@ -25,8 +25,10 @@ function update-env
         fisher update
     end
     if type -q npm
-        for pkg in (npm -g list --json | jq '.dependencies | keys | join(" ")' | string trim -c '"' | string split ' ')
-            echo "install $pkg"
+        if test "null" != (npm -g list --json | jq '.dependencies')
+            for pkg in (npm -g list --json | jq '.dependencies | keys | join(" ")' | string trim -c '"' | string split ' ')
+                echo "install $pkg"
+            end
         end
     end
     if type -q cargo
