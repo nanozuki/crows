@@ -6,6 +6,7 @@
     gopls # language server
     golangci-lint # linter
     gotools # goimports, formatter
+    gofumpt
     gomodifytags
     gotests
     gotestsum
@@ -25,6 +26,8 @@
     nodePackages.eslint_d
     # formatter
     nodePackages.prettier
+    # tools
+    nodePackages.npm-check-updates
     # deno runtime
     deno
 
