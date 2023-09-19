@@ -15,6 +15,11 @@
     fd
     jq
     gron
+    (google-cloud-sdk.withExtraComponents ([google-cloud-sdk.components.cloud-firestore-emulator]))
+    openjdk
+    just
+    mkcert
+    nssTools
   ];
   home.sessionPath = [
     "$HOME/.local/bin"
