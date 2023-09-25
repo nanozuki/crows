@@ -10,7 +10,7 @@ return {
   {
     'rmagatti/auto-session',
     config = function()
-      vim.opt.sessionoptions = 'curdir,folds,help,tabpages,terminal,winsize'
+      vim.opt.sessionoptions = 'curdir,folds,globals,help,tabpages,terminal,winsize'
       ---@diagnostic disable
       require('auto-session').setup({
         pre_save_cmds = { 'NvimTreeClose' },

@@ -127,6 +127,7 @@ local filetypes = {
   html = { enable = has_enabled.html, formatters = { 'prettier' } },
   json = { enable = has_enabled.json, formatters = { 'prettier' } },
   yaml = { enable = has_enabled.yaml, formatters = { 'prettier' } },
+  markdown = { enable = true, formatters = { 'prettier' } },
   go = {
     enable = has_enabled.go,
     formatters = { 'goimports' },
