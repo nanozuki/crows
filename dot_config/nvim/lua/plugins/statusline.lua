@@ -95,18 +95,8 @@ return {
       },
       sections = {
         lualine_a = { 'mode' },
-        lualine_b = {
-          { 'branch', draw_empty = true },
-          'diff',
-          'diagnostics',
-        },
-        lualine_c = {
-          {
-            'filename',
-            path = 1,
-            symbols = { modified = '*', readonly = '' },
-          },
-        },
+        lualine_b = { { 'branch', draw_empty = true }, 'diff', 'diagnostics', },
+        lualine_c = { { 'filename', path = 1, symbols = { modified = '*', readonly = '' }, }, },
         lualine_x = { 'filetype', { file_info, icon = '󰋽' } },
         lualine_y = { { lsp, icon = '' } },
         lualine_z = { { position, icon = '󰆤' } },
@@ -114,7 +104,7 @@ return {
       inactive_sections = {
         lualine_a = { block },
         lualine_b = {},
-        lualine_c = { { 'filename', path = 4 } },
+        lualine_c = { { 'filename', path = 1, symbols = { modified = '*', readonly = '' }, }, },
         lualine_x = { { file_info, icon = '󰋽' } },
         lualine_y = {},
         lualine_z = { block },
