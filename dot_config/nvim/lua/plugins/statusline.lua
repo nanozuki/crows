@@ -16,6 +16,7 @@ local function make_theme()
   end
   theme.visual.a.bg = palette.gold
   theme.inactive.a.bg = palette.iris
+  theme.inactive.a.fg = palette.base
   return theme
 end
 
@@ -29,27 +30,8 @@ end
 
 local function lsp()
   local clients = vim.lsp.get_active_clients({ bufnr = 0 })
-  local status = {
-    lang_servers = false,
-    copilot = false,
-  }
-  if clients and #clients > 0 then
-    for _, client in ipairs(clients) do
-      if client.name == 'copilot' then
-        status.copilot = true
-      else
-        status.lang_servers = true
-      end
-    end
-  end
-  local text = {}
-  if status.lang_servers then
-    text[#text + 1] = 'LSP'
-  end
-  if status.copilot then
-    text[#text + 1] = 'AI'
-  end
-  return table.concat(text, ',')
+  local names = vim.tbl_map(function(client) return client.name end, clients)
+  return table.concat(names, ',')
 end
 
 local function position()
@@ -83,33 +65,68 @@ local nvim_tree = {
 }
 
 return {
-  'nvim-lualine/lualine.nvim',
-  event = 'VeryLazy',
-  dependencies = { 'nvim-tree/nvim-web-devicons' },
-  config = function()
-    require('lualine').setup({
-      options = {
-        theme = make_theme(),
-        component_separators = { left = '', right = '' },
-        section_separators = { left = '', right = '' },
-      },
-      sections = {
-        lualine_a = { 'mode' },
-        lualine_b = { { 'branch', draw_empty = true }, 'diff', 'diagnostics', },
-        lualine_c = { { 'filename', path = 1, symbols = { modified = '*', readonly = '' }, }, },
-        lualine_x = { 'filetype', { file_info, icon = '󰋽' } },
-        lualine_y = { { lsp, icon = '' } },
-        lualine_z = { { position, icon = '󰆤' } },
-      },
-      inactive_sections = {
-        lualine_a = { block },
-        lualine_b = {},
-        lualine_c = { { 'filename', path = 1, symbols = { modified = '*', readonly = '' }, }, },
-        lualine_x = { { file_info, icon = '󰋽' } },
-        lualine_y = {},
-        lualine_z = { block },
-      },
-      extensions = { nvim_tree },
-    })
-  end,
+  {
+    'nvim-lualine/lualine.nvim',
+    event = 'VeryLazy',
+    init = function()
+      if values.use_global_statusline then
+        vim.opt.laststatus = 3
+      end
+    end,
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    config = function()
+      require('lualine').setup({
+        options = {
+          theme = make_theme(),
+          component_separators = { left = '', right = '' },
+          section_separators = { left = '', right = '' },
+        },
+        sections = {
+          lualine_a = { 'mode' },
+          lualine_b = { { 'branch', draw_empty = true }, 'diff', 'diagnostics', },
+          lualine_c = { { 'filename', path = 1, symbols = { modified = '*', readonly = '' }, }, },
+          lualine_x = { 'filetype', { file_info, icon = '󰋽' } },
+          lualine_y = { { lsp, icon = '' } },
+          lualine_z = { { position, icon = '󰆤' } },
+        },
+        inactive_sections = {
+          lualine_a = { block },
+          lualine_b = {},
+          lualine_c = { { 'filename', path = 1, symbols = { modified = '*', readonly = '' }, }, },
+          lualine_x = { { file_info, icon = '󰋽' } },
+          lualine_y = {},
+          lualine_z = { block },
+        },
+        extensions = { nvim_tree },
+      })
+    end,
+  },
+  {
+    "b0o/incline.nvim",
+    event = 'VeryLazy',
+    enabled = values.use_global_statusline,
+    config = function()
+      local palette = values.theme.palette
+      require("incline").setup({
+        render = function(props)
+          local filepath = vim.api.nvim_buf_get_name(props.buf)
+          local name = vim.fn.fnamemodify(filepath, ':t')
+          local ext = vim.fn.fnamemodify(filepath, ':e')
+          local relative = vim.fn.fnamemodify(filepath, ':~:.')
+          local icon = require('nvim-web-devicons').get_icon(name, ext)
+          return string.format("%s %s", icon, relative)
+        end,
+        window = {
+          margin = {
+            vertical = 1,
+            horizontal = 1,
+          },
+          winhighlight = {
+            active = { Normal = { guifg = palette.base, guibg = palette.subtle } },
+            inactive = { Normal = { guifg = palette.base, guibg = palette.muted } },
+          }
+        },
+      })
+    end,
+  },
 }
