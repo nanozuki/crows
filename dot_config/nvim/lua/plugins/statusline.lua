@@ -102,31 +102,15 @@ return {
     end,
   },
   {
-    "b0o/incline.nvim",
-    event = 'VeryLazy',
-    enabled = values.use_global_statusline,
-    config = function()
-      local palette = values.theme.palette
-      require("incline").setup({
-        render = function(props)
-          local filepath = vim.api.nvim_buf_get_name(props.buf)
-          local name = vim.fn.fnamemodify(filepath, ':t')
-          local ext = vim.fn.fnamemodify(filepath, ':e')
-          local relative = vim.fn.fnamemodify(filepath, ':~:.')
-          local icon = require('nvim-web-devicons').get_icon(name, ext)
-          return string.format("%s %s", icon, relative)
-        end,
-        window = {
-          margin = {
-            vertical = 1,
-            horizontal = 1,
-          },
-          winhighlight = {
-            active = { Normal = { guifg = palette.base, guibg = palette.subtle } },
-            inactive = { Normal = { guifg = palette.base, guibg = palette.muted } },
-          }
-        },
-      })
-    end,
+    "utilyre/barbecue.nvim",
+    name = "barbecue",
+    version = "*",
+    dependencies = {
+      "SmiteshP/nvim-navic",
+      "nvim-tree/nvim-web-devicons", -- optional dependency
+    },
+    opts = {
+      attach_navic = false,
+    },
   },
 }

@@ -23,19 +23,12 @@ return {
   { 'kevinhwang91/nvim-bqf', ft = 'qf' },
   {
     'nvim-tree/nvim-tree.lua',
-    cmd = { 'NvimTreeToggle', 'NvimTreeClose' },
-    keys = { { '<Leader>fl', ':NvimTreeToggle<CR>', 'n', { desc = 'Toggle filetree' } } },
+    -- cmd = { 'NvimTreeToggle', 'NvimTreeClose' },
+    -- keys = { { '<Leader>fl', ':NvimTreeToggle<CR>', 'n', { desc = 'Toggle filetree' } } },
     dependencies = 'nvim-tree/nvim-web-devicons',
     config = function()
-      require('nvim-tree').setup({
-        disable_netrw = false,
-        update_cwd = true,
-        diagnostics = { enable = true },
-        view = { signcolumn = 'auto' },
-        git = {
-          ignore = false,
-        },
-      })
+      require('nvim-tree').setup()
+      vim.keymap.set('n', '<leader>fl', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
     end,
   },
   {
