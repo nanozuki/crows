@@ -1,16 +1,18 @@
 return {
   -- display sign for marks
-  { 'kshenoy/vim-signature', event = { 'BufReadPre', 'BufNewFile' } },
+  { 'kshenoy/vim-signature',       event = { 'BufReadPre', 'BufNewFile' } },
   -- indent hint
   {
     'lukas-reineke/indent-blankline.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
     event = { 'BufReadPre', 'BufNewFile' },
-    config = function()
-      require('indent_blankline').setup({
-        char = '¦',
-        buftype_exclude = { 'help', 'nofile', 'nowrite', 'quickfix', 'terminal', 'prompt' },
-      })
-    end,
+    main = 'ibl',
+    opts = {
+      indent = { char = '¦', },
+      exclude = {
+        buftypes = { 'help', 'nofile', 'nowrite', 'quickfix', 'terminal', 'prompt' },
+      },
+    },
   },
   -- highlight color value
   { 'norcalli/nvim-colorizer.lua', cmd = 'ColorizerToggle' },
@@ -18,7 +20,6 @@ return {
   {
     'folke/flash.nvim',
     event = 'VeryLazy',
-    ---@type Flash.Config
     opts = {
       modes = {
         char = {

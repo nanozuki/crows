@@ -15,5 +15,7 @@
     "terraform": false,
     "zig": false,
     "nix": false
-  }
+  },
+  "use_global_statusline": false,
+  "use_noice": false
 }
