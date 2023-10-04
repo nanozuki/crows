@@ -1,6 +1,6 @@
 return {
   -- display sign for marks
-  { 'kshenoy/vim-signature',       event = { 'BufReadPre', 'BufNewFile' } },
+  { 'kshenoy/vim-signature', event = { 'BufReadPre', 'BufNewFile' } },
   -- indent hint
   {
     'lukas-reineke/indent-blankline.nvim',
