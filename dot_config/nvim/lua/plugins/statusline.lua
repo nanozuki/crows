@@ -104,7 +104,8 @@ return {
   {
     "utilyre/barbecue.nvim",
     name = "barbecue",
-    version = "*",
+    enabled = values.use_global_statusline,
+    event = 'VeryLazy',
     dependencies = {
       "SmiteshP/nvim-navic",
       "nvim-tree/nvim-web-devicons", -- optional dependency
