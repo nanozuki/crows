@@ -13,6 +13,7 @@ servers.lua_ls = {
   config = {
     settings = {
       Lua = {
+        format = { enable = false },
         runtime = {
           version = 'LuaJIT',
         },
