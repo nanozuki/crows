@@ -10,6 +10,7 @@ local values = {
     palette = {},
   },
   languages = {
+    lua = true,
     -- default enable languages:
     vim = true,
     yaml = true,

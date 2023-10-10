@@ -7,10 +7,9 @@ local lsp = {}
 ---@field [2] string|function command
 ---@field [3] string description
 
----@alias LspKeyMappers table<string, LspKeyMapper>
+---@alias LspKeyMappers table<string, LspKeyMapper|table<string,LspKeyMapper>>
 ---@alias LspOnAttachCallback fun(client:table,bufnr:number)
 ---@alias LspCapabilitiesMaker fun(caps:table):table
-
 
 -- # keymap settings
 
@@ -32,7 +31,18 @@ lsp.buffer_keys = {
   },
   type_def = { '<leader>D', vim.lsp.buf.type_definition, 'Goto type definition' },
   rename = { '<leader>rn', vim.lsp.buf.rename, 'Rename symbol' },
-  code_action = { '<leader>ca', vim.lsp.buf.code_action, 'Code action' },
+  code_action = {
+    n = { '<leader>ca', vim.lsp.buf.code_action, 'Code action' },
+    i = {
+      '<C-a>',
+      function()
+        local key = vim.api.nvim_replace_termcodes('<Esc>', true, false, true)
+        vim.api.nvim_feedkeys(key, 't', false)
+        vim.lsp.buf.code_action()
+      end,
+      'Code action',
+    },
+  },
   codelens = { '<leader>cl', vim.lsp.codelens.run, 'Code action' },
   list_ref = { 'gr', vim.lsp.buf.references, 'List references' },
 
@@ -41,7 +51,13 @@ lsp.buffer_keys = {
 
 function lsp.set_buffer_keymapping(_, bufnr)
   for _, mapper in pairs(lsp.buffer_keys) do
-    vim.keymap.set('n', mapper[1], mapper[2], { desc = mapper[3], buffer = bufnr })
+    if vim.tbl_islist(mapper) then
+      vim.keymap.set('n', mapper[1], mapper[2], { desc = mapper[3], buffer = bufnr })
+    else
+      for mode, keymap in pairs(mapper) do
+        vim.keymap.set(mode, keymap[1], keymap[2], { desc = keymap[3], buffer = bufnr })
+      end
+    end
   end
 end
 
