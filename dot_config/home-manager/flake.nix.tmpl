@@ -30,7 +30,13 @@
         # the path to your home.nix.
         modules = [
           ./home.nix
-          ({ pkgs, ... }: { nixpkgs.overlays = [ rust-overlay.overlays.default ]; })
+          ({ pkgs, ... }: {
+            nixpkgs.overlays = [ rust-overlay.overlays.default ];
+            nixpkgs.config = {
+              allowUnfree = true;
+              allowUnfreePredicate = (_: true);
+            };
+          })
         ];
 
         # Optionally use extraSpecialArgs
