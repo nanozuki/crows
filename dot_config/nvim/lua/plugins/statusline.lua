@@ -30,7 +30,9 @@ end
 
 local function lsp()
   local clients = vim.lsp.get_active_clients({ bufnr = 0 })
-  local names = vim.tbl_map(function(client) return client.name end, clients)
+  local names = vim.tbl_map(function(client)
+    return client.name
+  end, clients)
   return table.concat(names, ',')
 end
 
@@ -64,6 +66,15 @@ local nvim_tree = {
   },
 }
 
+local noice_recording = {
+  function()
+    require('noice').api.status.mode.get()
+  end,
+  cond = function()
+    return package.loaded['noice'] and require('noice').api.status.mode.has()
+  end,
+}
+
 return {
   {
     'nvim-lualine/lualine.nvim',
@@ -83,8 +94,11 @@ return {
         },
         sections = {
           lualine_a = { 'mode' },
-          lualine_b = { { 'branch', draw_empty = true }, 'diff', 'diagnostics', },
-          lualine_c = { { 'filename', path = 1, symbols = { modified = '*', readonly = '' }, }, },
+          lualine_b = { { 'branch', draw_empty = true }, 'diff', 'diagnostics' },
+          lualine_c = {
+            { 'filename', path = 1, symbols = { modified = '*', readonly = '' } },
+            noice_recording,
+          },
           lualine_x = { 'filetype', { file_info, icon = '󰋽' } },
           lualine_y = { { lsp, icon = '' } },
           lualine_z = { { position, icon = '󰆤' } },
@@ -92,7 +106,7 @@ return {
         inactive_sections = {
           lualine_a = { block },
           lualine_b = {},
-          lualine_c = { { 'filename', path = 1, symbols = { modified = '*', readonly = '' }, }, },
+          lualine_c = { { 'filename', path = 1, symbols = { modified = '*', readonly = '' } } },
           lualine_x = { { file_info, icon = '󰋽' } },
           lualine_y = {},
           lualine_z = { block },
@@ -102,16 +116,37 @@ return {
     end,
   },
   {
-    "utilyre/barbecue.nvim",
-    name = "barbecue",
+    'b0o/incline.nvim',
     enabled = values.use_global_statusline,
     event = 'VeryLazy',
-    dependencies = {
-      "SmiteshP/nvim-navic",
-      "nvim-tree/nvim-web-devicons", -- optional dependency
-    },
-    opts = {
-      attach_navic = false,
-    },
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    config = function()
+      local palette = values.theme.palette
+      require('incline').setup({
+        render = function(props)
+          local filepath = vim.api.nvim_buf_get_name(props.buf)
+          local name = vim.fn.fnamemodify(filepath, ':t')
+          local ext = vim.fn.fnamemodify(filepath, ':e')
+          local relative = vim.fn.fnamemodify(filepath, ':.:h')
+          local icon = require('nvim-web-devicons').get_icon(name, ext)
+          return string.format('%s / %s %s', relative, icon, name)
+        end,
+        hide = {
+          cursorline = false,
+          focused_win = false,
+          only_win = false,
+        },
+        window = {
+          margin = {
+            vertical = 0,
+            horizontal = 0,
+          },
+          winhighlight = {
+            active = { Normal = { guifg = palette.base, guibg = palette.pine } },
+            inactive = { Normal = { guifg = palette.base, guibg = palette.foam } },
+          },
+        },
+      })
+    end,
   },
 }
