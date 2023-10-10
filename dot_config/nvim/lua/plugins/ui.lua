@@ -11,7 +11,7 @@ return {
             if opts.kind == 'codeaction' then
               return {
                 backend = 'builtin',
-                builtin = { relative = 'cursor', max_width = 40 },
+                builtin = { relative = 'cursor', max_width = 80 },
               }
             end
           end,
