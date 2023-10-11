@@ -64,7 +64,6 @@ vim.opt.foldlevelstart = 99
 local termcode = function(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
-vim.keymap.set('n', '<leader>tw', ':terminal<CR>', { desc = 'Open terminal in current window' })
 vim.keymap.set('n', '<leader>tt', ':tabnew | terminal<CR>', { desc = 'Open terminal in new tab' })
 vim.keymap.set('t', '<C-K>', termcode([[<C-\><C-N>]]), { desc = 'To normal mode in terminal' })
 
@@ -72,22 +71,10 @@ vim.keymap.set('t', '<C-K>', termcode([[<C-\><C-N>]]), { desc = 'To normal mode 
 vim.keymap.set('n', '<leader>tc', ':$tabnew<CR>', { desc = 'Create new tab' })
 vim.keymap.set('n', '<leader>tx', ':tabclose<CR>', { desc = 'Close current tab' })
 vim.keymap.set('n', '<leader>to', ':tabonly<CR>', { desc = 'Close other tabs' })
-vim.keymap.set('n', '<leader>tn', ':tabn<CR>', { desc = 'Go to next tab' })
-vim.keymap.set('n', '<leader>tp', ':tabp<CR>', { desc = 'Go to previous tab' })
-vim.keymap.set('n', '<leader>tmp', ':-tabmove<CR>', { desc = 'Move current tab to previous position' })
-vim.keymap.set('n', '<leader>tmn', ':+tabmove<CR>', { desc = 'Move current tab to next position ' })
+vim.keymap.set('n', '<leader>tp', ':-tabmove<CR>', { desc = 'Move current tab to previous position' })
+vim.keymap.set('n', '<leader>tn', ':+tabmove<CR>', { desc = 'Move current tab to next position ' })
 
 -- # keymap for win
-local function win_only()
-  local tabid = vim.api.nvim_get_current_tabpage()
-  local wins = vim.api.nvim_tabpage_list_wins(tabid)
-  local current = vim.api.nvim_get_current_win()
-  for _, win in ipairs(wins) do
-    if win ~= current then
-      vim.api.nvim_win_close(win, false)
-    end
-  end
-end
 
 local function close_floating_win()
   local tabid = vim.api.nvim_get_current_tabpage()
@@ -99,8 +86,9 @@ local function close_floating_win()
   end
 end
 
-vim.keymap.set('n', '<leader>wo', win_only, { desc = 'Close other windows in this tab' })
-vim.keymap.set('n', '<leader>wO', close_floating_win, { desc = 'Close floating windows in this tab' })
+-- winonly: use <C-W>o to close other windows
+vim.keymap.set('n', '<leader>wF', close_floating_win, { desc = 'Close floating windows in this tab' })
+vim.keymap.set('n', '<leader>wt', ':vsplit | terminal<CR>', { desc = 'Open terminal window' })
 
 -- # diagnostic
 -- ## keymap

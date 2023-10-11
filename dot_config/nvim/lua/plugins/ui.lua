@@ -23,20 +23,30 @@ return {
   },
   -- improve vim quickfix UI
   { 'kevinhwang91/nvim-bqf', ft = 'qf' },
+  -- file tree
   {
-    'nvim-tree/nvim-tree.lua',
-    -- cmd = { 'NvimTreeToggle', 'NvimTreeClose' },
-    -- keys = { { '<Leader>fl', ':NvimTreeToggle<CR>', 'n', { desc = 'Toggle filetree' } } },
-    dependencies = 'nvim-tree/nvim-web-devicons',
-    config = function()
-      require('nvim-tree').setup()
-      vim.keymap.set('n', '<leader>fl', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
-    end,
+    'nvim-neo-tree/neo-tree.nvim',
+    cmd = { 'Neotree' },
+    keys = {
+      { '<Leader>fl', ':Neotree toggle<CR>', 'n', { desc = 'Toggle filetree' } },
+      { '<Leader>wf', ':vsplit | Neotree position=current<CR>', 'n', { desc = 'Open Neotree Window' } },
+      { '<Leader>tf', ':tabnew | Neotree position=current<CR>', 'n', { desc = 'Open Neotree Tab' } },
+    },
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-tree/nvim-web-devicons',
+      'MunifTanjim/nui.nvim',
+    },
   },
+  -- filesystem editor
   {
     'stevearc/oil.nvim',
+    cmd = { 'Oil' },
+    keys = {
+      { '<Leader>we', ':vsplit | Oil .<CR>', 'n', { desc = 'Open files editor Window' } },
+      { '<leader>te', ':tabnew | Oil .<CR>', 'n', { desc = 'Open files editor Tab' } },
+    },
     opts = {},
-    -- Optional dependencies
     dependencies = { 'nvim-tree/nvim-web-devicons' },
   },
   {

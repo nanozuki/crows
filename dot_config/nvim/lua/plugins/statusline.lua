@@ -58,7 +58,7 @@ local block = {
 
 -- custom extensions
 local nvim_tree = {
-  filetypes = { 'NvimTree' },
+  filetypes = { 'neo-tree' },
   sections = {
     lualine_a = { block },
     lualine_c = { 'filetype' },
@@ -68,9 +68,11 @@ local nvim_tree = {
 
 local noice_recording = {
   function()
-    require('noice').api.status.mode.get()
+    ---@diagnostic disable-next-line: undefined-field
+    return require('noice').api.status.mode.get()
   end,
   cond = function()
+    ---@diagnostic disable-next-line: undefined-field
     return package.loaded['noice'] and require('noice').api.status.mode.has()
   end,
 }
@@ -127,15 +129,10 @@ return {
           local filepath = vim.api.nvim_buf_get_name(props.buf)
           local name = vim.fn.fnamemodify(filepath, ':t')
           local ext = vim.fn.fnamemodify(filepath, ':e')
-          local relative = vim.fn.fnamemodify(filepath, ':.:h')
-          local icon = require('nvim-web-devicons').get_icon(name, ext)
+          local relative = vim.fn.fnamemodify(filepath, ':~::h')
+          local icon = require('nvim-web-devicons').get_icon(name, ext, { default = true })
           return string.format('%s / %s %s', relative, icon, name)
         end,
-        hide = {
-          cursorline = false,
-          focused_win = false,
-          only_win = false,
-        },
         window = {
           margin = {
             vertical = 0,

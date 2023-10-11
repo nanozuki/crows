@@ -71,10 +71,14 @@ return {
     end,
     config = function()
       local rt = require('rust-tools')
-      local on_attach = function(client, bufnr)
+      local on_attach = function(_, bufnr)
         vim.keymap.set('n', '<leader>ha', rt.hover_actions.hover_actions, { buffer = bufnr, desc = 'Hover actions' })
-        vim.keymap.set('n', '<leader>ag', rt.code_action_group.code_action_group,
-          { buffer = bufnr, desc = 'Code action groups' })
+        vim.keymap.set(
+          'n',
+          '<leader>ag',
+          rt.code_action_group.code_action_group,
+          { buffer = bufnr, desc = 'Code action groups' }
+        )
       end
       local config = lsp.make_config(langs.servers.rust_analyzer, on_attach)
       rt.setup({ server = config })
