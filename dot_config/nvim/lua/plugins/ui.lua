@@ -77,11 +77,11 @@ return {
     },
     dependencies = {
       'MunifTanjim/nui.nvim',
-      'nuircarriga/nvim-notify',
+      'rcarriga/nvim-notify',
     },
   },
   {
-    'nuircarriga/nvim-notify',
+    'rcarriga/nvim-notify',
     lazy = true,
     config = function()
       local notify = require('notify')
