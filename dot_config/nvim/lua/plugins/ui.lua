@@ -28,9 +28,9 @@ return {
     'nvim-neo-tree/neo-tree.nvim',
     cmd = { 'Neotree' },
     keys = {
-      { '<Leader>fl', ':Neotree toggle<CR>', 'n', { desc = 'Toggle filetree' } },
-      { '<Leader>wf', ':vsplit | Neotree position=current<CR>', 'n', { desc = 'Open Neotree Window' } },
-      { '<Leader>tf', ':tabnew | Neotree position=current<CR>', 'n', { desc = 'Open Neotree Tab' } },
+      { '<Leader>fl', ':Neotree toggle<CR>', 'n', desc = 'Toggle filetree' },
+      { '<Leader>wf', ':vsplit | Neotree position=current<CR>', 'n', desc = 'Open Neotree Window' },
+      { '<Leader>tf', ':tabnew | Neotree position=current<CR>', 'n', desc = 'Open Neotree Tab' },
     },
     dependencies = {
       'nvim-lua/plenary.nvim',
@@ -43,8 +43,8 @@ return {
     'stevearc/oil.nvim',
     cmd = { 'Oil' },
     keys = {
-      { '<Leader>we', ':vsplit | Oil .<CR>', 'n', { desc = 'Open files editor Window' } },
-      { '<leader>te', ':tabnew | Oil .<CR>', 'n', { desc = 'Open files editor Tab' } },
+      { '<Leader>we', ':vsplit | Oil .<CR>', 'n', desc = 'Open files editor Window' },
+      { '<leader>te', ':tabnew | Oil .<CR>', 'n', desc = 'Open files editor Tab' },
     },
     opts = {},
     dependencies = { 'nvim-tree/nvim-web-devicons' },
