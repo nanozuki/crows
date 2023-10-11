@@ -129,7 +129,7 @@ return {
           local filepath = vim.api.nvim_buf_get_name(props.buf)
           local name = vim.fn.fnamemodify(filepath, ':t')
           local ext = vim.fn.fnamemodify(filepath, ':e')
-          local relative = vim.fn.fnamemodify(filepath, ':~::h')
+          local relative = vim.fn.fnamemodify(filepath, ':~:.:h')
           local icon = require('nvim-web-devicons').get_icon(name, ext, { default = true })
           return string.format('%s / %s %s', relative, icon, name)
         end,
