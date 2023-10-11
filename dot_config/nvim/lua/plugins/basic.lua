@@ -11,7 +11,7 @@ return {
     'rmagatti/auto-session',
     config = function()
       vim.opt.sessionoptions = 'curdir,folds,globals,help,tabpages,terminal,winsize'
-      ---@diagnostic disable
+      ---@diagnostic disable-next-line: missing-fields
       require('auto-session').setup({
         pre_save_cmds = { 'NvimTreeClose' },
         auto_session_suppress_dirs = { '~' },
@@ -19,7 +19,6 @@ return {
           load_on_setup = false,
         },
       })
-      ---@diagnostic enable
       vim.keymap.set('n', '<leader>sr', '<cmd>SessionRestore<cr>', { desc = 'Restore session' })
       vim.keymap.set('n', '<leader>ss', '<cmd>SessionSave<cr>', { desc = 'Save session' })
     end,
