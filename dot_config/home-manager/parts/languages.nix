@@ -40,7 +40,9 @@
     # ocaml-ng.ocamlPackages_latest.utop
 
     ## rust
-    rust-bin.stable.latest.default
+    (rust-bin.stable.latest.default.override {
+      extensions = [ "rust-src" ];
+    })
     rust-analyzer
 
     ## terraform
