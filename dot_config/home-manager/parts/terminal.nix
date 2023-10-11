@@ -15,7 +15,7 @@
     fd
     jq
     gron
-    (google-cloud-sdk.withExtraComponents ([google-cloud-sdk.components.cloud-firestore-emulator]))
+    (google-cloud-sdk.withExtraComponents ([ google-cloud-sdk.components.cloud-firestore-emulator ]))
     openjdk
     just
     mkcert

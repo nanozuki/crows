@@ -52,7 +52,7 @@ return {
   {
     'folke/trouble.nvim',
     cmd = 'TroubleToggle',
-    keys = { { '<leader>xx', ':TroubleToggle<CR>', 'n', { desc = 'Toggle trouble quickfix' } } },
+    keys = { { '<leader>xx', ':TroubleToggle<CR>', 'n', desc = 'Toggle trouble quickfix' } },
     dependencies = { 'nvim-tree/nvim-web-devicons', 'neovim/nvim-lspconfig' },
     config = function()
       require('trouble').setup({
