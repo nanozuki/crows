@@ -133,6 +133,9 @@ return {
           local icon = require('nvim-web-devicons').get_icon(name, ext, { default = true })
           return string.format('%s / %s %s', relative, icon, name)
         end,
+        hide = {
+          cursorline = true,
+        },
         window = {
           margin = {
             vertical = 0,
