@@ -84,4 +84,16 @@ return {
       rt.setup({ server = config })
     end,
   },
+  {
+    'pmizio/typescript-tools.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
+    enabled = values.languages.web,
+    init = function()
+      langs.servers.tsserver.autoload = false
+    end,
+    config = function()
+      local cfg = lsp.make_config(langs.servers.tsserver.config)
+      require('typescript-tools').setup(cfg)
+    end,
+  },
 }

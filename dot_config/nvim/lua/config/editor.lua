@@ -23,19 +23,18 @@ vim.keymap.set('n', '<leader>/', ':nohlsearch<CR>', { desc = 'Clear search' })
 -- filetype
 vim.cmd([[filetype on]])
 vim.cmd([[filetype plugin on]])
-local filetypes = {
-  ['*html'] = 'html',
-  ['tsconfig.json'] = 'jsonc',
-  ['*.mdx'] = 'markdown',
-  ['*.gotmpl'] = 'gotmpl',
-}
-local ft_group = vim.api.nvim_create_augroup('filetypes', {})
-for pattern, filetype in pairs(filetypes) do
-  vim.api.nvim_create_autocmd(
-    { 'BufNewFile', 'BufRead' },
-    { group = ft_group, pattern = pattern, command = 'setfiletype ' .. filetype, once = true }
-  )
-end
+vim.filetype.add({
+  extension = {
+    mdx = 'markdown',
+    gotmpl = 'gotmpl',
+  },
+  name = {
+    ['tsconfig.json'] = 'jsonc',
+  },
+  pattern = {
+    ['.*html'] = 'html',
+  },
+})
 
 -- # indent
 vim.cmd('filetype indent on')
