@@ -9,20 +9,17 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.modelines = 1
 vim.opt.colorcolumn = '120'
-vim.cmd('syntax enable')
-vim.cmd('set wildignore+=*/node_modules/*,*.swp,*.pyc,*/venv/*,*/target/*,.DS_Store')
 vim.keymap.set('c', 'w!!', 'w !sudo tee %', { desc = 'Save as sudo' })
 
 -- # copy paste
 vim.keymap.set('v', '<leader>y', '"+y', { desc = 'Copy to system clipboard' })
 vim.keymap.set('n', '<leader>p', '"+p', { desc = 'Paste from system clipboard' })
 vim.opt.ignorecase = true
+vim.opt.smartcase = true
 vim.keymap.set('n', '<leader>/', ':nohlsearch<CR>', { desc = 'Clear search' })
 
 -- # abount filetypes
 -- filetype
-vim.cmd([[filetype on]])
-vim.cmd([[filetype plugin on]])
 vim.filetype.add({
   extension = {
     mdx = 'markdown',
@@ -41,19 +38,8 @@ vim.cmd('filetype indent on')
 vim.opt.smartindent = true
 vim.opt.expandtab = true
 vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
-local fi_group = vim.api.nvim_create_augroup('fileindent', {})
-vim.api.nvim_create_autocmd('FileType', {
-  group = fi_group,
-  pattern = 'lua,javascript,typescript,javascriptreact,typescriptreact,html,css,scss,xml,yaml,json,terraform,graphql,markdown,jsx,proto,nix',
-  command = 'setlocal expandtab ts=2 sw=2 sts=2',
-})
-vim.api.nvim_create_autocmd('FileType', {
-  group = fi_group,
-  pattern = 'go,gotmpl,make',
-  command = 'setlocal noexpandtab ts=4 sw=4',
-})
+vim.opt.shiftwidth = 4
 
 -- # fold
 vim.opt.foldmethod = 'indent'
