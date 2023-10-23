@@ -9,7 +9,7 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.modelines = 1
 vim.opt.colorcolumn = '120'
-vim.keymap.set('c', 'w!!', 'w !sudo tee %', { desc = 'Save as sudo' })
+vim.keymap.set('c', 'xsave', 'w !sudo tee %', { desc = 'Save as sudo' })
 
 -- # copy paste
 vim.keymap.set('v', '<leader>y', '"+y', { desc = 'Copy to system clipboard' })
