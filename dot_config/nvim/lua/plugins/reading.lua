@@ -8,10 +8,11 @@ return {
     event = { 'BufReadPre', 'BufNewFile' },
     main = 'ibl',
     opts = {
-      indent = { char = '¦', },
+      indent = { char = '¦' },
       exclude = {
         buftypes = { 'help', 'nofile', 'nowrite', 'quickfix', 'terminal', 'prompt' },
       },
+      scope = { enabled = false },
     },
   },
   -- highlight color value
