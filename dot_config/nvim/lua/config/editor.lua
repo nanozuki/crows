@@ -9,7 +9,10 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.modelines = 1
 vim.opt.colorcolumn = '120'
-vim.keymap.set('c', 'xsave', 'w !sudo tee %', { desc = 'Save as sudo' })
+vim.api.nvim_create_user_command('SaveAsSudo', function()
+  local key = vim.api.nvim_replace_termcodes(':w !sudo tee %', true, false, true)
+  vim.api.nvim_feedkeys(key, 't', false)
+end, {})
 
 -- # copy paste
 vim.keymap.set('v', '<leader>y', '"+y', { desc = 'Copy to system clipboard' })
