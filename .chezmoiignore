@@ -17,8 +17,9 @@ Library/*
 .config/wayland
 {{ end }}
 
-# for neovim temporary files
+# for neovim temporary or local files
 .config/nvim/lazy-lock.json
+.config/nvim/custom.json
 .config/nvim/.luarc.json
 .netrwhist
 
