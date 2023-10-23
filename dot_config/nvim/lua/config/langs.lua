@@ -6,7 +6,7 @@
 local values = require('config.values')
 local has_enabled = values.languages
 
-local servers = {}; ---@type table<string, LspConfig>
+local servers = {} ---@type table<string, LspConfig>
 
 servers.lua_ls = {
   autoload = true,
@@ -80,7 +80,7 @@ servers.cssls = {
     lint = {
       unknownAtRules = 'ignore',
     },
-  }
+  },
 }
 
 servers.html = {
@@ -133,7 +133,7 @@ local filetypes = {
     enable = has_enabled.go,
     formatters = { 'goimports' },
     linters = { 'golangci-lint' },
-    tools = { 'gomodifytags', 'gotests', 'gotestsum', 'iferr', 'impl', 'dlv', },
+    tools = { 'gomodifytags', 'gotests', 'gotestsum', 'iferr', 'impl', 'dlv' },
   },
   typescript = { enable = has_enabled.web, formatters = { 'prettier' }, linters = { 'eslint_d' } },
   ocaml = { enable = has_enabled.ocaml, formatters = { 'ocamlformat' } },
