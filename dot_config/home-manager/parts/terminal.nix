@@ -26,7 +26,7 @@
   ];
   programs.fish = {
     enable = true;
-    shellAliases = {
+    shellAbbrs = {
       psg = "ps aux | grep";
       wget = "curl -O";
       vi = "nvim";
