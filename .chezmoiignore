@@ -26,3 +26,5 @@ Library/*
 # use nix to manage fish
 .config/fish/config.fish
 flake.lock
+flake.nix
+*.private.nix

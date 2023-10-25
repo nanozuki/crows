@@ -7,6 +7,7 @@
     ./parts/neovim.nix
     ./parts/languages.nix
     ./parts/working.private.nix # private settings
+    ./parts/rime.nix
   ];
   config = {
     home.username = "crows";
