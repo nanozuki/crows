@@ -9,6 +9,7 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.modelines = 1
 vim.opt.colorcolumn = '120'
+vim.opt.scrolloff = 10
 vim.api.nvim_create_user_command('SaveAsSudo', function()
   local key = vim.api.nvim_replace_termcodes(':w !sudo tee %', true, false, true)
   vim.api.nvim_feedkeys(key, 't', false)
