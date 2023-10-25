@@ -1,9 +1,9 @@
 { config, pkgs, ... }:
 {
   imports = [
-    ../parts/neovim.nix
-    ../parts/languages.nix
-    ../parts/terminal.nix
+    ./parts/neovim.nix
+    ./parts/languages.nix
+    ./parts/terminal.nix
   ];
   config = {
     # Home Manager needs a bit of information about you and the paths it should

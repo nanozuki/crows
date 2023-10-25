@@ -2,7 +2,6 @@
   description = "Home Manager configuration of crows";
 
   inputs = {
-    # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -17,19 +16,18 @@
 
   outputs = { nixpkgs, home-manager, stratosphere, rust-overlay, ... }:
     let
-      system = "{{if eq .chezmoi.arch "amd64"}}x86_64{{else}}aarch64{{end}}-{{.chezmoi.os}}";
+      system = "aarch64-darwin";
       pkgs = nixpkgs.legacyPackages.${system};
       spkgs = stratosphere.packages.${system};
     in
     {
       homeConfigurations."crows" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        extraSpecialArgs = { inherit spkgs; };
 
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
         modules = [
-          ./home.nix
+          ./m1mbp.home.nix
           ({ pkgs, ... }: {
             nixpkgs.overlays = [ rust-overlay.overlays.default ];
             nixpkgs.config = {
@@ -41,6 +39,7 @@
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
+        extraSpecialArgs = { inherit spkgs; inherit system; host = "m1mbp"; };
       };
     };
 }
