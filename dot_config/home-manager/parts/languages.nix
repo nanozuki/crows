@@ -62,6 +62,16 @@
     CARGO_HOME = "${config.xdg.dataHome}/cargo";
   };
 
+  home.file.npmrc = {
+    enable = true;
+    text = ''
+      prefix=${config.xdg.dataHome}/npm
+      cache=${config.xdg.cacheHome}/npm
+      init-module=${config.xdg.configHome}/npm/config/npm-init.js
+    '';
+    target = "${config.xdg.configHome}/npm/npmrc";
+  };
+
   home.sessionPath = [
     ## golang
     "$GOPATH/bin"

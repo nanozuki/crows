@@ -1,8 +1,0 @@
-enable-ssh-support
-max-cache-ttl 60480000
-default-cache-ttl 60480000
-max-cache-ttl-ssh 60480000
-default-cache-ttl-ssh 60480000
-{{- if eq .chezmoi.os "linux" -}}
-pinentry-program /usr/bin/pinentry-tty
-{{- end}}

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, system, ... }:
 {
   xdg.enable = true;
   home.packages = with pkgs; [
@@ -24,6 +24,22 @@
   home.sessionPath = [
     "$HOME/.local/bin"
   ];
+  programs.gpg = {
+    enable = lib.hasSuffix "darwin" system;
+    homedir = "${config.xdg.dataHome}/gnupg";
+  };
+  home.file.gpg_agent = {
+    enable = true;
+    text = ''
+      enable-ssh-support
+      max-cache-ttl 60480000
+      default-cache-ttl 60480000
+      max-cache-ttl-ssh 60480000
+      default-cache-ttl-ssh 60480000
+      ${if lib.hasSuffix "linux" system then "pinentry-program /usr/bin/pinentry-tty" else ""}
+    '';
+    target = "${config.xdg.dataHome}/gnupg/gpg-agent.conf";
+  };
   programs.fish = {
     enable = true;
     shellAbbrs = {
