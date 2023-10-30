@@ -40,6 +40,12 @@
     '';
     target = "${config.xdg.dataHome}/gnupg/gpg-agent.conf";
   };
+  home.file.kitty = {
+    enable = true;
+    source = ../configs/kitty;
+    recursive = true;
+    target = "${config.xdg.configHome}/kitty";
+  };
   programs.fish = {
     enable = true;
     shellAbbrs = {
