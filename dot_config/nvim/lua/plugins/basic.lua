@@ -13,7 +13,6 @@ return {
       vim.opt.sessionoptions = 'curdir,folds,globals,help,tabpages,terminal,winsize'
       ---@diagnostic disable-next-line: missing-fields
       require('auto-session').setup({
-        pre_save_cmds = { 'NvimTreeClose' },
         auto_session_suppress_dirs = { '~' },
         session_lens = {
           load_on_setup = false,
