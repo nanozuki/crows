@@ -40,6 +40,15 @@
     '';
     target = "${config.xdg.dataHome}/gnupg/gpg-agent.conf";
   };
+  programs.kitty = {
+    enable = true;
+    package = pkgs.fish; # just to ignore package installation
+    font.name = "JetBrainsMonoNL Nerd Font";
+    font.size = 14;
+    extraConfig = builtins.readFile ../configs/kitty/kitty.conf;
+    shellIntegration.enableFishIntegration = true;
+    theme = "Rosé Pine Dawn";
+  };
   home.file.kitty = {
     enable = true;
     source = ../configs/kitty;

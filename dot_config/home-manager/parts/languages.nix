@@ -13,6 +13,7 @@
     iferr
     impl
     delve
+    go-mockery
 
     ## frontend languages
     nodePackages.nodejs
