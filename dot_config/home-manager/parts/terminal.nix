@@ -51,9 +51,9 @@
   };
   home.file.kitty = {
     enable = true;
-    source = ../configs/kitty;
+    source = ../configs/kitty/kitty.app.png;
     recursive = true;
-    target = "${config.xdg.configHome}/kitty";
+    target = "${config.xdg.configHome}/kitty/kitty.app.png";
   };
   programs.fish = {
     enable = true;
