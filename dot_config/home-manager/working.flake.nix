@@ -13,9 +13,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     rust-overlay.url = "github:oxalica/rust-overlay";
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, stratosphere, rust-overlay, ... }:
+  outputs = { nixpkgs, home-manager, stratosphere, rust-overlay, agenix, ... }:
     let
       system = "x86_64-darwin";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -28,7 +32,6 @@
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
         modules = [
-          ./working.home.nix
           ({ pkgs, ... }: {
             nixpkgs.overlays = [ rust-overlay.overlays.default ];
             nixpkgs.config = {
@@ -36,6 +39,8 @@
               allowUnfreePredicate = (_: true);
             };
           })
+          agenix.homeManagerModules.age
+          ./working.home.nix
         ];
 
         # Optionally use extraSpecialArgs

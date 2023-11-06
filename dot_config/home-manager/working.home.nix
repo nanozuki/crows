@@ -1,4 +1,4 @@
-{ pkgs, spkgs, ... }:
+{ pkgs, spkgs, config, ... }:
 
 {
   imports = [
@@ -6,14 +6,15 @@
     ./parts/terminal.nix
     ./parts/neovim.nix
     ./parts/languages.nix
-    ./parts/working.private.nix # private settings
     ./parts/rime.nix
+    # ./parts/secrets.nix
   ];
   config = {
     home.username = "crows";
     home.homeDirectory = "/Users/crows";
-
     home.stateVersion = "23.05"; # Please read the comment before changing.
+    # Let Home Manager install and manage itself.
+    programs.home-manager.enable = true;
 
     home.packages =
       (with pkgs; [
@@ -42,7 +43,9 @@
 
     home.file = { };
 
-    # Let Home Manager install and manage itself.
-    programs.home-manager.enable = true;
+    age.secrets.go_private = {
+      file = ./secrets/go_private_on_working.fish;
+      path = "${config.xdg.configHome}/fish/conf.d/go_private.fish";
+    };
   };
 }
