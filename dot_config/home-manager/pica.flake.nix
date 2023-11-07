@@ -1,5 +1,5 @@
 {
-  description = "Home Manager configuration of crows";
+  description = "Home Manager configuration of working laptop";
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
@@ -13,13 +13,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     rust-overlay.url = "github:oxalica/rust-overlay";
-    agenix = {
-      url = "github:ryantm/agenix";
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { nixpkgs, home-manager, stratosphere, rust-overlay, agenix, ... }:
+  outputs = { nixpkgs, home-manager, stratosphere, rust-overlay, sops-nix, ... }:
     let
       system = "x86_64-darwin";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -39,13 +39,21 @@
               allowUnfreePredicate = (_: true);
             };
           })
-          agenix.homeManagerModules.age
-          ./working.home.nix
+          sops-nix.homeManagerModule
+          ./pica.home.nix
         ];
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
-        extraSpecialArgs = { inherit spkgs; inherit system; host = "working"; };
+        extraSpecialArgs = {
+          inherit spkgs;
+          inherit system;
+          # variables for customizing
+          vars = {
+            fontSize = 14;
+            fontFamily = "JetBrainsMonoNL Nerd Font";
+          };
+        };
       };
     };
 }

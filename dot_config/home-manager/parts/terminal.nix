@@ -1,4 +1,4 @@
-{ config, lib, pkgs, system, ... }:
+{ config, lib, pkgs, system, vars, ... }:
 {
   xdg.enable = true;
   home.packages = with pkgs; [
@@ -43,8 +43,8 @@
   programs.kitty = {
     enable = true;
     package = pkgs.fish; # just to ignore package installation
-    font.name = "JetBrainsMonoNL Nerd Font";
-    font.size = 14;
+    font.name = vars.fontFamily;
+    font.size = vars.fontSize;
     extraConfig = builtins.readFile ../configs/kitty/kitty.conf;
     shellIntegration.enableFishIntegration = true;
     theme = "Rosé Pine Dawn";
@@ -55,6 +55,21 @@
     recursive = true;
     target = "${config.xdg.configHome}/kitty/kitty.app.png";
   };
+  home.file.wezterm = {
+    enable = true;
+    source = ../configs/wezterm;
+    recursive = true;
+    target = "${config.xdg.configHome}/wezterm";
+  };
+  home.file.wezterm_vars =
+    let
+      mustache = import ../tools/mustache.nix;
+    in
+    {
+      enable = true;
+      source = mustache pkgs "vars.lua" ../configs/wezterm/vars.lua.mustache vars;
+      target = "${config.xdg.configHome}/wezterm/vars.lua";
+    };
   programs.fish = {
     enable = true;
     shellAbbrs = {
@@ -89,6 +104,11 @@
       # starship
       set -gx STARSHIP_CONFIG ~/.config/starship/config.toml
       starship init fish | source
+
+      # source after snippets
+      for file in $HOME/.config/fish/after/*.fish
+          source $file
+      end
     '';
   };
 }
