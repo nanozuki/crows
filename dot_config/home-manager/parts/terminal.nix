@@ -1,17 +1,23 @@
-{ config, lib, pkgs, system, vars, ... }:
+{ pkgs, ... }:
 {
+  imports = [
+    ../apps/bat.nix
+    ../apps/gpg.nix
+    ../apps/ideavim.nix
+    ../apps/kitty.nix
+    ../apps/starship.nix
+    ../apps/wezterm.nix
+    ../apps/git.nix
+  ];
   xdg.enable = true;
   home.packages = with pkgs; [
     babelfish
-    git
     tealdeer
-    zstd
     chezmoi
     eza
     starship
     btop
     tokei
-    bat
     fd
     jq
     gron
@@ -24,52 +30,6 @@
   home.sessionPath = [
     "$HOME/.local/bin"
   ];
-  programs.gpg = {
-    enable = lib.hasSuffix "darwin" system;
-    homedir = "${config.xdg.dataHome}/gnupg";
-  };
-  home.file.gpg_agent = {
-    enable = true;
-    text = ''
-      enable-ssh-support
-      max-cache-ttl 60480000
-      default-cache-ttl 60480000
-      max-cache-ttl-ssh 60480000
-      default-cache-ttl-ssh 60480000
-      ${if lib.hasSuffix "linux" system then "pinentry-program /usr/bin/pinentry-tty" else ""}
-    '';
-    target = "${config.xdg.dataHome}/gnupg/gpg-agent.conf";
-  };
-  programs.kitty = {
-    enable = true;
-    package = pkgs.fish; # just to ignore package installation
-    font.name = vars.fontFamily;
-    font.size = vars.fontSize;
-    extraConfig = builtins.readFile ../configs/kitty/kitty.conf;
-    shellIntegration.enableFishIntegration = true;
-    theme = "Rosé Pine Dawn";
-  };
-  home.file.kitty = {
-    enable = true;
-    source = ../configs/kitty/kitty.app.png;
-    recursive = true;
-    target = "${config.xdg.configHome}/kitty/kitty.app.png";
-  };
-  home.file.wezterm = {
-    enable = true;
-    source = ../configs/wezterm;
-    recursive = true;
-    target = "${config.xdg.configHome}/wezterm";
-  };
-  home.file.wezterm_vars =
-    let
-      mustache = import ../tools/mustache.nix;
-    in
-    {
-      enable = true;
-      source = mustache pkgs "vars.lua" ../configs/wezterm/vars.lua.mustache vars;
-      target = "${config.xdg.configHome}/wezterm/vars.lua";
-    };
   programs.fish = {
     enable = true;
     shellAbbrs = {
@@ -84,12 +44,12 @@
       eal = "eza -al --icons";
       et = "eza -T --icons";
     };
+    functions = {
+      gitget = { body = builtins.readFile ../configs/fish/functions/gitget.fish; };
+      import_gpg_keys = { body = builtins.readFile ../configs/fish/functions/import_gpg_keys.fish; };
+      update-env = { body = builtins.readFile ../configs/fish/functions/update-env.fish; };
+    };
     interactiveShellInit = ''
-      # gpg and gpg-agent
-      set -gx GPG_TTY (tty)
-      gpg-connect-agent updatestartuptty /bye >/dev/null
-      set -gx SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
-
       # kubectl
       set -gx KUBECONFIG "$HOME/.config/cluster/config"
 
@@ -100,10 +60,6 @@
       end
       alias hr 'history --merge' # read and merge history from disk
       bind \e\[A 'history --merge ; up-or-search'
-
-      # starship
-      set -gx STARSHIP_CONFIG ~/.config/starship/config.toml
-      starship init fish | source
 
       # source after snippets
       for file in $HOME/.config/fish/after/*.fish
