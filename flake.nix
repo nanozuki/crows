@@ -52,8 +52,8 @@
         fontFamily = "JetBrainsMonoNL Nerd Font";
       };
       homeConfigurations.nest = homeConfig ./hosts/nest.nix "x86_64-linux" {
-        fontSize = 14;
-        fontFamily = "JetBrainsMonoNL Nerd Font";
+        fontSize = 12;
+        fontFamily = "monospace";
       };
     };
 }
