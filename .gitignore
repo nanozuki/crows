@@ -1,18 +1,2 @@
-# nvim
-dot_config/nvim/lazy-lock.json
-dot_config/nvim/.luarc.json
-.netrwhist
-
-# kitty
-dots/kitty/local.conf
-
-# vscode
-.vscode
-
 # osx
 .DS_Store
-
-# nix
-flake.lock
-*.private.nix
-symlink_flake.nix

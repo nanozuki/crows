@@ -2,12 +2,12 @@
 
 {
   imports = [
-    ./parts/mac_basic.nix
-    ./parts/terminal.nix
-    ./parts/neovim.nix
-    ./parts/languages.nix
-    ./parts/rime.nix
-    ./parts/secrets.nix
+    ../parts/mac_basic.nix
+    ../parts/terminal.nix
+    ../parts/neovim.nix
+    ../parts/languages.nix
+    ../parts/rime.nix
+    ../parts/secrets.nix
   ];
   config = {
     home.username = "crows";
