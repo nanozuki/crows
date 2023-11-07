@@ -16,5 +16,3 @@ dots/kitty/local.conf
 flake.lock
 *.private.nix
 symlink_flake.nix
-
-secret
