@@ -1,6 +1,0 @@
-data.theme = "rose-pine-dawn"
-
-[data.term]
-    font_size = 14
-    font_family = "Iosevka"
-    use_tmux = "true"
