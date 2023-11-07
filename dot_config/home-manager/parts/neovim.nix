@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   home.packages = with pkgs; [
     # tools
@@ -34,5 +34,12 @@
 
   home.sessionVariables = {
     EDITOR = "nvim";
+  };
+
+  home.file.neovim = {
+    enable = true;
+    source = ../configs/nvim;
+    target = "${config.xdg.configHome}/nvim";
+    recursive = true;
   };
 }
