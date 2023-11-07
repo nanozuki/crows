@@ -42,8 +42,14 @@ return {
       langs.servers.lua_ls.autoload = false
     end,
     config = function()
-      local neodev = require('neodev')
-      neodev.setup({ setup_jsonls = false })
+      require('neodev').setup({
+        override = function(root_dir, options)
+          if root_dir:find('config.*nvim') then
+            -- enable plugins in config managers
+            options.plugins = true
+          end
+        end,
+      })
       local lspconfig = require('lspconfig')
       lspconfig.lua_ls.setup(lsp.make_config(langs.servers.lua_ls))
     end,
