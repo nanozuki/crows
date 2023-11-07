@@ -7,7 +7,7 @@
     ./parts/neovim.nix
     ./parts/languages.nix
     ./parts/rime.nix
-    # ./parts/secrets.nix
+    ./parts/secrets.nix
   ];
   config = {
     home.username = "crows";
@@ -41,11 +41,10 @@
         kratos-protoc-gen-go-errors
       ]);
 
-    home.file = { };
-
-    age.secrets.go_private = {
-      file = ./secrets/go_private_on_working.fish;
-      path = "${config.xdg.configHome}/fish/conf.d/go_private.fish";
+    sops.defaultSopsFile = ./secrets/pica.yaml;
+    sops.age.keyFile = "${config.xdg.configHome}/sops/age/keys.txt";
+    sops.secrets.go_private = {
+      path = "${config.xdg.configHome}/fish/after/go_private.fish";
     };
   };
 }
