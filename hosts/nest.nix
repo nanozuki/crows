@@ -1,12 +1,12 @@
 { config, ... }:
 {
   imports = [
-    ./parts/neovim.nix
-    ./parts/languages.nix
-    ./parts/terminal.nix
-    ./parts/rime.nix
-    ./apps/sway.nix
-    ./apps/waybar.nix
+    ../parts/neovim.nix
+    ../parts/languages.nix
+    ../parts/terminal.nix
+    ../parts/rime.nix
+    ../apps/sway.nix
+    ../apps/waybar.nix
   ];
   config = {
     # Home Manager needs a bit of information about you and the paths it should
