@@ -11,7 +11,7 @@
     home.username = "crows";
     home.homeDirectory = "/Users/crows";
 
-    home.stateVersion = "23.05"; # Please read the comment before changing.
+    home.stateVersion = "23.11";
 
     home.packages = [
       pkgs.ffmpeg
