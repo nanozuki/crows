@@ -32,6 +32,9 @@
       # '';
     };
 
+    home.sessionVariables = {
+      HM_CONFIG_NAME = "raven";
+    };
     # Let Home Manager install and manage itself.
     programs.home-manager.enable = true;
   };

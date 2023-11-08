@@ -1,7 +1,7 @@
 if type -q home-manager
     cd $XDG_CONFIG_HOME/home-manager
     nix flake update
-    home-manager switch
+    home-manager switch --flake .#$HM_CONFIG_NAME
     cd -
 end
 if type -q brew
