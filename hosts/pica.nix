@@ -40,6 +40,9 @@
         kratos-protoc-gen-go-errors
       ]);
 
+    home.sessionVariables = {
+      HM_CONFIG_NAME = "pica";
+    };
     sops.defaultSopsFile = ../secrets/pica.yaml;
     sops.age.keyFile = "${config.xdg.configHome}/sops/age/keys.txt";
     sops.secrets.go_private = {
