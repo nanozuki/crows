@@ -41,7 +41,7 @@
         kratos-protoc-gen-go-errors
       ]);
 
-    sops.defaultSopsFile = ./secrets/pica.yaml;
+    sops.defaultSopsFile = ../secrets/pica.yaml;
     sops.age.keyFile = "${config.xdg.configHome}/sops/age/keys.txt";
     sops.secrets.go_private = {
       path = "${config.xdg.configHome}/fish/after/go_private.fish";
