@@ -16,3 +16,8 @@ jobs:
         uses: DeterminateSystems/update-flake-lock@main
         with:
           pr-title: "Update flake.lock" # Title of PR to be created
+      - name: Merge flake.lock PR
+        uses: peter-evans/enable-pull-request-automerge@v3
+        with:
+          pull-request-number: ${{ steps.update.outputs.pull-request-number }}
+          merge-method: squash
