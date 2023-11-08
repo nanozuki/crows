@@ -43,7 +43,7 @@
         };
     in
     {
-      homeConfigurations.pica = homeConfig ./hosts/pica.nix "x86_64-linux" {
+      homeConfigurations.pica = homeConfig ./hosts/pica.nix "x86_64-darwin" {
         fontSize = 14;
         fontFamily = "JetBrainsMonoNL Nerd Font";
       };

@@ -12,8 +12,7 @@
   config = {
     home.username = "crows";
     home.homeDirectory = "/Users/crows";
-    home.stateVersion = "23.05"; # Please read the comment before changing.
-    # Let Home Manager install and manage itself.
+    home.stateVersion = "23.11";
     programs.home-manager.enable = true;
 
     home.packages =
