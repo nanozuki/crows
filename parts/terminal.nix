@@ -26,6 +26,7 @@
     just
     mkcert
     nssTools
+    helix
   ];
   home.sessionPath = [
     "$HOME/.local/bin"
