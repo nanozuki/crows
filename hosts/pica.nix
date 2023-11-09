@@ -51,7 +51,7 @@
       };
     };
     sops.defaultSopsFile = ../secrets/pica.yaml;
-    sops.age.keyFile = "${config.xdg.configHome}/sops/age/keys.txt";
+    sops.age.keyFile = "${config.xdg.configHome}/sops/age/pica.txt";
     sops.secrets.go_private = {
       path = "${config.xdg.configHome}/fish/after/go_private.fish";
     };
