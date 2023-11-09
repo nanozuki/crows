@@ -4,8 +4,6 @@
   imports = [
     ../parts/mac_basic.nix
     ../parts/terminal.nix
-    ../parts/neovim.nix
-    ../parts/languages.nix
     ../parts/rime.nix
     ../parts/secrets.nix
   ];
@@ -15,33 +13,43 @@
     home.stateVersion = "23.11";
     programs.home-manager.enable = true;
 
-    home.packages =
-      (with pkgs; [
-        # go repo's generate
-        (python3.withPackages
-          (ps: with ps; [
-            pyyaml
-          ]))
-        # grpc
-        protobuf
-        protoc-gen-go
-        protoc-gen-go-grpc
-        protoc-gen-validate
-        gnostic # protoc-gen-openapi
-        awscli2
-        mycli
-        wire
-        go-migrate
-      ]) ++ (with spkgs; [
-        atlas
-        go-swagger_0_25_0
-        kratos
-        kratos-protoc-gen-go-http
-        kratos-protoc-gen-go-errors
-      ]);
+    home.packages = (with pkgs; [
+      # go repo's generate
+      (python3.withPackages (ps: [ ps.pyyaml ]))
+      # grpc
+      protobuf
+      protoc-gen-go
+      protoc-gen-go-grpc
+      protoc-gen-validate
+      gnostic # protoc-gen-openapi
+      awscli2
+      mycli
+      wire
+      go-migrate
+    ]) ++ (with spkgs; [
+      atlas
+      go-swagger_0_25_0
+      kratos
+      kratos-protoc-gen-go-http
+      kratos-protoc-gen-go-errors
+    ]);
 
     home.sessionVariables = {
       HM_CONFIG_NAME = "pica";
+    };
+    apps.neovim = {
+      enable = true;
+      useNoice = true;
+      useGlobalStatusline = true;
+      language = {
+        deno = true;
+        go = true;
+        ocaml = false;
+        rust = true;
+        terraform = true;
+        web = true;
+        zig = true;
+      };
     };
     sops.defaultSopsFile = ../secrets/pica.yaml;
     sops.age.keyFile = "${config.xdg.configHome}/sops/age/keys.txt";

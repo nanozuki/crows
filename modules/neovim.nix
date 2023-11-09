@@ -25,7 +25,7 @@ with lib;
     let
       cfg = config.apps.neovim;
     in
-    mkIf cfg.enable mkMerge [
+    mkIf cfg.enable (mkMerge [
       # default
       {
         home.packages = with pkgs; [
@@ -45,8 +45,6 @@ with lib;
           vscode-langservers-extracted # include {html,css,json,eslint}-language-server
           nodePackages.yaml-language-server
           nodePackages.prettier
-          # other editors
-          helix # TODO: should this be here?
           # doc generation
           pandoc
         ];
@@ -90,11 +88,11 @@ with lib;
           target = "${config.xdg.configHome}/nvim/custom.json";
         };
       }
-      (mkIf cfg.languages.deno {
+      (mkIf cfg.language.deno {
         home.packages = with pkgs;
           [ deno ];
       })
-      (mkIf cfg.languages.go {
+      (mkIf cfg.language.go {
         home.packages = with pkgs; [
           gopls # language server
           golangci-lint # linter
@@ -116,7 +114,7 @@ with lib;
           "$GOPATH/bin"
         ];
       })
-      (mkIf cfg.languages.ocaml {
+      (mkIf cfg.language.ocaml {
         home.packages = with pkgs; [
           ocaml-ng.ocamlPackages_latest.ocaml
           opam
@@ -126,22 +124,22 @@ with lib;
           ocaml-ng.ocamlPackages_latest.utop
         ];
       })
-      (mkIf cfg.languages.rust {
-        home.programs = with pkgs; [
+      (mkIf cfg.language.rust {
+        home.packages = with pkgs; [
           (rust-bin.stable.latest.default.override { extensions = [ "rust-src" ]; })
           rust-analyzer
         ];
         home.sessionVariables = { CARGO_HOME = "${config.xdg.dataHome}/cargo"; };
         home.sessionPath = [ "${config.xdg.dataHome}/cargo/bin" ];
       })
-      (mkIf cfg.languages.terraform {
+      (mkIf cfg.language.terraform {
         home.packages = with pkgs; [
           terraform
           terraform-ls
         ];
       })
-      (mkIf cfg.languages.web {
-        home.programs = with pkgs; [
+      (mkIf cfg.language.web {
+        home.packages = with pkgs; [
           ## frontend languages
           nodePackages.nodejs
           nodePackages.pnpm
@@ -173,11 +171,11 @@ with lib;
           "${config.xdg.dataHome}/npm/bin"
         ];
       })
-      (mkIf cfg.languages.zig {
+      (mkIf cfg.language.zig {
         home.packages = with pkgs; [
           zig
           zls
         ];
       })
-    ];
+    ]);
 }

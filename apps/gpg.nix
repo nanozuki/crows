@@ -3,9 +3,11 @@
     if lib.hasSuffix "darwin" system then
       [ pkgs.pinentry_mac ] else [ ];
   programs.gpg = {
-    enable = lib.hasSuffix "darwin" system;
+    enable = true;
+    package = if (lib.hasSuffix "darwin" system) then pkgs.gnupg else pkgs.hello;
     homedir = "${config.xdg.dataHome}/gnupg";
   };
+
   home.file.gpg_agent = {
     enable = true;
     text = ''
