@@ -10,20 +10,21 @@ local values = {
     palette = {},
   },
   languages = {
+    -- builtin languages:
     lua = true,
     -- default enable languages:
     vim = true,
-    yaml = true,
     json = true,
+    yaml = true,
     -- default disable languages:
-    deno = false,
-    web = false,
     go = false,
+    nix = false,
     ocaml = false,
     rust = false,
     terraform = false,
+    typescript_deno = false,
+    typescript_node = false,
     zig = false,
-    nix = false,
   },
   ---@type table<string, string>
   diagnostic_signs = { Error = '󰅚', Warn = '󰀪', Info = '', Hint = '󰌶' },
