@@ -1,21 +1,19 @@
 { pkgs, ... }:
 {
-  imports = [
-    ../apps/bat.nix
-    ../apps/gpg.nix
-    ../apps/ideavim.nix
-    ../apps/kitty.nix
-    ../apps/starship.nix
-    ../apps/wezterm.nix
-    ../apps/git.nix
-  ];
+  apps.bat.enable = true;
+  apps.gpg.enable = true;
+  apps.ideavim.enable = true;
+  apps.kitty.enable = true;
+  apps.starship.enable = true;
+  apps.wezterm.enable = true;
+  apps.git.enable = true;
+
   xdg.enable = true;
   home.packages = with pkgs; [
     babelfish
     tealdeer
     chezmoi
     eza
-    starship
     btop
     tokei
     fd

@@ -33,7 +33,7 @@
               };
             })
             sops-nix.homeManagerModule
-            ./modules/neovim.nix
+            ./modules/modules.nix
             home
           ];
           extraSpecialArgs = {

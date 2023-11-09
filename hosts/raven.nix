@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ../parts/mac_basic.nix
     ../parts/terminal.nix
   ];
   config = {
@@ -11,8 +10,9 @@
     home.stateVersion = "23.11";
     programs.home-manager.enable = true;
 
-    home.packages = [
-      pkgs.ffmpeg
+    home.packages = with pkgs; [
+      ffmpeg
+      zstd
     ];
     home.sessionVariables = {
       HM_CONFIG_NAME = "raven";
