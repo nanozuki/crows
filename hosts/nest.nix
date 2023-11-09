@@ -3,8 +3,6 @@
   imports = [
     ../parts/terminal.nix
     ../parts/rime.nix
-    ../apps/sway.nix
-    ../apps/waybar.nix
   ];
   config = {
     home.username = "crows";
@@ -15,6 +13,7 @@
     home.sessionVariables = {
       HM_CONFIG_NAME = "nest";
     };
+
     apps.neovim = {
       enable = true;
       useNoice = true;
@@ -29,5 +28,7 @@
         zig = true;
       };
     };
+    apps.sway.enable = true;
+    apps.waybar.enable = true;
   };
 }

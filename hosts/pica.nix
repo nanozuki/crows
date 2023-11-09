@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ../parts/mac_basic.nix
     ../parts/terminal.nix
     ../parts/rime.nix
     ../parts/secrets.nix
