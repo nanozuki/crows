@@ -42,12 +42,12 @@
       useNoice = true;
       useGlobalStatusline = true;
       language = {
-        deno = true;
         go = true;
         ocaml = false;
         rust = true;
         terraform = true;
-        web = true;
+        typescript_deno = true;
+        typescript_node = true;
         zig = true;
       };
     };

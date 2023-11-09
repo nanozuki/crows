@@ -5,16 +5,16 @@
   },
   "languages": {
     "vim": true,
-    "yaml": true,
     "json": true,
+    "yaml": true,
     "go": false,
-    "rust": false,
-    "web": false,
-    "deno": false,
+    "nix": false,
     "ocaml": false,
+    "rust": false,
     "terraform": false,
-    "zig": false,
-    "nix": false
+    "typescript_deno": false,
+    "typescript_node": false,
+    "zig": false
   },
   "use_global_statusline": false,
   "use_noice": false

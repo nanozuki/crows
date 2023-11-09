@@ -62,20 +62,20 @@ servers.rust_analyzer = {
 }
 
 servers.tsserver = {
-  autoload = has_enabled.web,
+  autoload = has_enabled.typescript_node,
   root_patterns = { 'tsconfig.json', 'jsconfig.json', 'package.json' },
   config = {
-    single_file_support = not has_enabled.deno, -- Don't start in deno files
+    single_file_support = not has_enabled.typescript_deno, -- Don't start in deno files
   },
 }
 
 servers.tailwindcss = {
-  autoload = has_enabled.web,
+  autoload = has_enabled.typescript_node,
   root_patterns = { 'tailwind.config.js', 'tailwind.config.ts' },
 }
 
 servers.cssls = {
-  autoload = has_enabled.web,
+  autoload = has_enabled.typescript_node,
   config = {
     lint = {
       unknownAtRules = 'ignore',
@@ -84,11 +84,11 @@ servers.cssls = {
 }
 
 servers.html = {
-  autoload = has_enabled.web,
+  autoload = has_enabled.typescript_node,
 }
 
 servers.denols = {
-  autoload = has_enabled.deno,
+  autoload = has_enabled.typescript_deno,
   root_patterns = { 'deno.json', 'deno.jsonc' },
   config = {
     init_options = {
@@ -124,7 +124,7 @@ servers.nil_ls = {
 local filetypes = {
   lua = { enable = has_enabled.lua, formatters = { 'stylua' } },
   css = { enable = has_enabled.css, formatters = { 'prettier' } },
-  deno = { enable = has_enabled.deno, formatters = { 'prettier' } },
+  deno = { enable = has_enabled.typescript_deno, formatters = { 'prettier' } },
   html = { enable = has_enabled.html, formatters = { 'prettier' } },
   json = { enable = has_enabled.json, formatters = { 'prettier' } },
   yaml = { enable = has_enabled.yaml, formatters = { 'prettier' } },
@@ -135,7 +135,7 @@ local filetypes = {
     linters = { 'golangci-lint' },
     tools = { 'gomodifytags', 'gotests', 'gotestsum', 'iferr', 'impl', 'dlv' },
   },
-  typescript = { enable = has_enabled.web, formatters = { 'prettier' }, linters = { 'eslint_d' } },
+  typescript = { enable = has_enabled.typescript_node, formatters = { 'prettier' }, linters = { 'eslint_d' } },
   ocaml = { enable = has_enabled.ocaml, formatters = { 'ocamlformat' } },
   nix = { enable = has_enabled.nix, formatters = { 'nixpkgs-fmt' } },
 }
