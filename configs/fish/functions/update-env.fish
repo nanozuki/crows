@@ -1,7 +1,12 @@
 if type -q home-manager
     cd $XDG_CONFIG_HOME/home-manager
-    nix flake update
-    home-manager switch --flake .#$HM_CONFIG_NAME
+    if test -z (git status --porcelain); and test "master" = (git branch --show-current)
+        git pull
+        home-manager switch --flake .#$HM_CONFIG_NAME
+    else
+        echo "home-manager is not clean or not in master branch"
+        return 1
+    end
     cd -
 end
 if type -q brew
