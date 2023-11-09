@@ -46,26 +46,22 @@ let
         };
         languages = {
           vim = true;
-          yaml = true;
           json = true;
+          yaml = true;
           go = cfg.language.go;
-          rust = cfg.language.rust;
-          web = cfg.language.web;
-          deno = cfg.language.deno;
-          ocaml = cfg.language.ocaml;
-          terraform = cfg.language.terraform;
-          zig = cfg.language.zig;
           nix = true;
+          ocaml = cfg.language.ocaml;
+          rust = cfg.language.rust;
+          terraform = cfg.language.terraform;
+          typescript_deno = cfg.language.typescript_deno;
+          typescript_node = cfg.language.typescript_node;
+          zig = cfg.language.zig;
         };
         use_global_statusline = cfg.useGlobalStatusline;
         use_noice = cfg.useNoice;
       };
       target = "${config.xdg.configHome}/nvim/custom.json";
     };
-  };
-  language_deno = mkIf cfg.language.deno {
-    home.packages = with pkgs;
-      [ deno ];
   };
   language_go = mkIf cfg.language.go {
     home.packages = with pkgs; [
@@ -113,7 +109,11 @@ let
       terraform-ls
     ];
   };
-  language_web = mkIf cfg.language.web {
+  language_typescript_deno = mkIf cfg.language.typescript_deno {
+    home.packages = with pkgs;
+      [ deno ];
+  };
+  language_typescript_node = mkIf cfg.language.typescript_node {
     home.packages = with pkgs; [
       ## frontend languages
       nodePackages.nodejs
@@ -159,15 +159,15 @@ in
     useNoice = mkEnableOption "Noice";
     useGlobalStatusline = mkEnableOption "Global statusline";
     language = mkOption {
-      # default enable lua, vim, yaml, json, nix
+      description = "Enable language support";
       type = types.submodule {
         options = {
-          deno = mkEnableOption "Deno";
-          go = mkEnableOption "Golang";
+          go = mkEnableOption "Go";
           ocaml = mkEnableOption "OCaml";
           rust = mkEnableOption "Rust";
           terraform = mkEnableOption "Terraform";
-          web = mkEnableOption "Web";
+          typescript_deno = mkEnableOption "Typescript on Deno";
+          typescript_node = mkEnableOption "Typescript on Node.js";
           zig = mkEnableOption "Zig";
         };
       };
@@ -177,12 +177,12 @@ in
   config =
     mkIf cfg.enable (mkMerge [
       basic
-      language_deno
+      language_typescript_deno
       language_go
       language_ocaml
       language_rust
       language_terraform
-      language_web
+      language_typescript_node
       language_zig
     ]);
 }
