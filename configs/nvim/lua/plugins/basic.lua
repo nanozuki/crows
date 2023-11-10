@@ -14,6 +14,7 @@ return {
       ---@diagnostic disable-next-line: missing-fields
       require('auto-session').setup({
         auto_session_suppress_dirs = { '~' },
+        auto_session_enabled = false,
         session_lens = {
           load_on_setup = false,
         },
