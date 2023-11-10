@@ -14,6 +14,9 @@
       ffmpeg
       zstd
     ];
+    home.sessionPath = [
+      "/opt/homebrew/bin"
+    ];
     home.sessionVariables = {
       HM_CONFIG_NAME = "raven";
     };
