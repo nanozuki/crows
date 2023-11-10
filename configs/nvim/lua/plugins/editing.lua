@@ -22,7 +22,13 @@ return {
     end,
   },
   -- surround edit
-  { 'machakann/vim-sandwich', event = { 'BufReadPre', 'BufNewFile' } },
+  {
+    'kylechui/nvim-surround',
+    event = { 'BufReadPost', 'BufNewFile' },
+    config = function()
+      require('nvim-surround').setup({})
+    end,
+  },
   -- comment
   {
     'numToStr/Comment.nvim',
