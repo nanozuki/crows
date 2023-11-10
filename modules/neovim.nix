@@ -125,7 +125,6 @@ let
       nodePackages.pnpm
       # language server
       nodePackages.typescript
-      nodePackages.typescript-language-server
       nodePackages."@tailwindcss/language-server"
       # linter
       nodePackages.eslint

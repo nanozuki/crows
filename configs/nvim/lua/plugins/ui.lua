@@ -77,21 +77,6 @@ return {
     },
     dependencies = {
       'MunifTanjim/nui.nvim',
-      -- 'rcarriga/nvim-notify',
     },
   },
-  -- {
-  --   'rcarriga/nvim-notify',
-  --   lazy = true,
-  --   config = function()
-  --     local notify = require('notify')
-  --     vim.notify = notify
-  --     ---@diagnostic disable
-  --     notify.setup({
-  --       render = 'wrapped-compact',
-  --       stages = 'fade',
-  --     })
-  --     ---@diagnostic enable
-  --   end,
-  -- },
 }
