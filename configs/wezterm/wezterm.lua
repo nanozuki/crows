@@ -11,37 +11,21 @@ local function set(options)
   end
 end
 
-local function get_font(family)
-  if family == 'JetBrainsMonoNL Nerd Font' then
-    return wezterm.font_with_fallback({
-      'JetBrainsMonoNL Nerd Font',
-      'Menlo',
-      'Apple Braille',
-      'Geneva',
-      'Apple Color Emoji',
-      'PingFang SC',
-    })
-  elseif family == 'VictorMono Nerd Font' then
-    return wezterm.font_with_fallback({
-      'VictorMono Nerd Font',
-      'Apple Color Emoji',
-      'PingFang SC',
-    })
-  elseif family == 'Iosevka Term Slab' then
-    return wezterm.font_with_fallback({
-      'Iosevka Term Slab',
-      'Iosevka Nerd Font',
-      'Apple Color Emoji',
-      'PingFang SC',
-    })
-  else
+local function make_font_config(family)
+  if family == 'monospace' then
     return wezterm.font('monospace')
   end
+  return wezterm.font_with_fallback({
+    family,
+    'Symbols Nerd Font',
+    'Apple Color Emoji',
+    'PingFang SC',
+  })
 end
 
 -- font
 set({
-  font = get_font(vars.font_family),
+  font = make_font_config(vars.font_family),
   font_size = vars.font_size,
 })
 
