@@ -1,3 +1,3 @@
-# CrowsEnv
+# Crows
 
-Develop enviroment for me, managed by nix and home-manager.
+My home directory configs, powered by Home Manager.
