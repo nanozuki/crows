@@ -1,6 +1,8 @@
 { config, lib, pkgs, vars, ... }:
 with lib;
-let cfg = config.apps.wezterm;
+let
+  cfg = config.apps.wezterm;
+  mustache = import ../tools/mustache.nix;
 in
 {
   options.apps.wezterm = { enable = mkEnableOption "wezterm"; };
@@ -11,14 +13,10 @@ in
       recursive = true;
       target = "${config.xdg.configHome}/wezterm";
     };
-    home.file.wezterm_vars =
-      let
-        mustache = import ../tools/mustache.nix;
-      in
-      {
-        enable = true;
-        source = mustache pkgs "vars.lua" ../configs/wezterm/vars.lua.mustache vars;
-        target = "${config.xdg.configHome}/wezterm/vars.lua";
-      };
+    home.file.wezterm_vars = {
+      enable = true;
+      source = mustache pkgs "vars.lua" ../configs/wezterm/vars.lua.mustache vars;
+      target = "${config.xdg.configHome}/wezterm/vars.lua";
+    };
   };
 }

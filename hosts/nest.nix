@@ -2,7 +2,6 @@
 {
   imports = [
     ../parts/terminal.nix
-    ../parts/rime.nix
   ];
   config = {
     home.username = "crows";
@@ -28,6 +27,7 @@
         zig = true;
       };
     };
+    apps.rime.enable = true;
     apps.sway.enable = true;
     apps.waybar.enable = true;
   };
