@@ -72,8 +72,7 @@ let
     home.packages = with pkgs; [
       gopls # language server
       golangci-lint # linter
-      gotools # goimports, formatter
-      gofumpt
+      gofumpt # formatter
       gomodifytags
       gotests
       gotestsum
