@@ -45,6 +45,13 @@ servers.jsonls = {
 
 servers.gopls = {
   autoload = has_enabled.go,
+  config = {
+    settings = {
+      gopls = {
+        gofumpt = true,
+      },
+    },
+  },
 }
 
 servers.rust_analyzer = {
@@ -131,7 +138,6 @@ local filetypes = {
   markdown = { enable = true, formatters = { 'prettier' } },
   go = {
     enable = has_enabled.go,
-    formatters = { 'goimports' },
     linters = { 'golangci-lint' },
     tools = { 'gomodifytags', 'gotests', 'gotestsum', 'iferr', 'impl', 'dlv' },
   },
