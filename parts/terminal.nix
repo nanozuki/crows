@@ -36,11 +36,12 @@
       vi = "nvim";
       vim = "nvim";
       vimdiff = "nvim -d";
-      e = "eza --icons";
-      el = "eza -l --icons";
-      ea = "eza -a --icons";
-      eal = "eza -al --icons";
-      et = "eza -T --icons";
+      e = "eza --icons always";
+      el = "eza --icons -l";
+      ea = "eza --icons -a";
+      eal = "eza --icons -al";
+      ela = "eza --icons -al";
+      et = "eza --icons -T";
     };
     functions = {
       gitget = { body = builtins.readFile ../configs/fish/functions/gitget.fish; };
