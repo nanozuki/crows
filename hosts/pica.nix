@@ -1,10 +1,12 @@
 { pkgs, spkgs, config, ... }:
 
+let
+  sops-setup = import ../parts/sops-setup.nix;
+in
 {
   imports = [
     ../parts/terminal.nix
-    ../parts/rime.nix
-    ../parts/secrets.nix
+    (sops-setup "pica")
   ];
   config = {
     home.username = "crows";
@@ -50,8 +52,7 @@
         zig = true;
       };
     };
-    sops.defaultSopsFile = ../secrets/pica.yaml;
-    sops.age.keyFile = "${config.xdg.configHome}/sops/age/pica.txt";
+    apps.rime.enable = true;
     sops.secrets.go_private = {
       path = "${config.xdg.configHome}/fish/after/go_private.fish";
     };

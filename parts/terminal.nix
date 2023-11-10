@@ -12,7 +12,6 @@
   home.packages = with pkgs; [
     babelfish
     tealdeer
-    chezmoi
     eza
     btop
     tokei
