@@ -28,6 +28,11 @@ let
       withPython3 = true;
       withNodeJs = true;
     };
+    programs.fish.shellAbbrs = {
+      vi = "nvim";
+      vim = "nvim";
+      vimdiff = "nvim -d";
+    };
     home.sessionVariables = {
       EDITOR = "nvim";
     };

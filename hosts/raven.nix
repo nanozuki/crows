@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ../parts/terminal.nix
+    ../clips/common.nix
   ];
   config = {
     home.username = "crows";
