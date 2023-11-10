@@ -46,11 +46,11 @@
     {
       homeConfigurations.pica = homeConfig ./hosts/pica.nix "x86_64-darwin" {
         fontSize = 14;
-        fontFamily = "JetBrainsMonoNL Nerd Font";
+        fontFamily = "JetBrains Mono NL";
       };
       homeConfigurations.raven = homeConfig ./hosts/raven.nix "aarch64-darwin" {
         fontSize = 14;
-        fontFamily = "JetBrainsMonoNL Nerd Font";
+        fontFamily = "JetBrains Mono NL";
       };
       homeConfigurations.nest = homeConfig ./hosts/nest.nix "x86_64-linux" {
         fontSize = 12;
