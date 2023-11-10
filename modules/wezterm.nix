@@ -2,7 +2,7 @@
 with lib;
 let
   cfg = config.apps.wezterm;
-  mustache = import ../tools/mustache.nix;
+  mustache = import ../clips/mustache.nix;
 in
 {
   options.apps.wezterm = { enable = mkEnableOption "wezterm"; };

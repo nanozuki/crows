@@ -33,9 +33,6 @@
     shellAbbrs = {
       psg = "ps aux | grep";
       wget = "curl -O";
-      vi = "nvim";
-      vim = "nvim";
-      vimdiff = "nvim -d";
       e = "eza --icons always";
       el = "eza --icons -l";
       ea = "eza --icons -a";

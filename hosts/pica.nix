@@ -1,12 +1,8 @@
 { pkgs, spkgs, config, ... }:
 
-let
-  sops-setup = import ../parts/sops-setup.nix;
-in
 {
   imports = [
-    ../parts/terminal.nix
-    (sops-setup "pica")
+    ../clips/common.nix
   ];
   config = {
     home.username = "crows";
@@ -53,6 +49,7 @@ in
       };
     };
     apps.rime.enable = true;
+    apps.sops.enable = true;
     sops.secrets.go_private = {
       path = "${config.xdg.configHome}/fish/after/go_private.fish";
     };
