@@ -19,9 +19,10 @@ let
       ## json, yaml
       vscode-langservers-extracted # include {html,css,json,eslint}-language-server
       nodePackages.yaml-language-server
-      nodePackages.prettier
       # doc generation
       pandoc
+      #  formatter with many language supportted
+      nodePackages.prettier
     ];
     programs.neovim = {
       enable = true;
@@ -128,8 +129,6 @@ let
       # linter
       nodePackages.eslint
       nodePackages.eslint_d
-      # formatter
-      nodePackages.prettier
       # tools
       nodePackages.npm-check-updates
     ];

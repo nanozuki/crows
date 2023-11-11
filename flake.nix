@@ -54,7 +54,7 @@
       };
       homeConfigurations.nest = homeConfig ./hosts/nest.nix "x86_64-linux" {
         fontSize = 12;
-        fontFamily = "monospace";
+        fontFamily = "JetBrains Mono NL";
       };
     };
 }
