@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
+<fontconfig>
+  <!-- Default system-ui fonts -->
+  <match target="pattern">
+    <test name="family">
+      <string>system-ui</string>
+    </test>
+    <edit binding="strong" name="family" mode="prepend">
+      <string>sans-serif</string>
+    </edit>
+  </match>
+  <!-- Default sans-serif fonts-->
+  <match target="pattern">
+    <test name="family">
+      <string>sans-serif</string>
+    </test>
+    <edit binding="strong" name="family" mode="prepend">
+      <string>Helvetica Neue</string>
+      <string>PingFang SC</string>
+      <string>Apple Color Emoji</string>
+    </edit>
+  </match>
+  <!-- Default serif fonts-->
+  <match target="pattern">
+    <test name="family">
+      <string>serif</string>
+    </test>
+    <edit binding="strong" name="family" mode="prepend">
+      <string>Times</string>
+      <string>Songti SC</string>
+      <string>Apple Color Emoji</string>
+    </edit>
+  </match>
+  <!-- Default monospace fonts-->
+  <match target="pattern">
+    <test name="family">
+      <string>monospace</string>
+    </test>
+    <edit binding="strong" name="family" mode="prepend">
+      <string>{{fontFamily}}</string>
+      <string>Symbols Nerd Font</string>
+      <string>PingFang SC</string>
+      <string>Apple Color Emoji</string>
+    </edit>
+  </match>
+</fontconfig>

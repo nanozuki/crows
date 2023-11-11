@@ -1,4 +1,7 @@
-{ ... }:
+{ config, pkgs, vars, ... }:
+let
+  mustache = import ../clips/mustache.nix;
+in
 {
   imports = [
     ../clips/common.nix
@@ -30,5 +33,12 @@
     apps.rime.enable = true;
     apps.sway.enable = true;
     apps.waybar.enable = true;
+
+    # TODO: make kitty and wezterm use font "monospace", without nerd fonts patch.
+    home.file.fontConfig = {
+      enable = true;
+      source = mustache pkgs "font.conf" ../configs/fontconfig/fonts.conf.mustache vars;
+      target = "${config.xdg.configHome}/fontconfig/fonts.conf";
+    };
   };
 }

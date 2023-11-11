@@ -130,11 +130,11 @@ servers.nil_ls = {
 ---@type table<string, FiletypeConfig>
 local filetypes = {
   lua = { enable = has_enabled.lua, formatters = { 'stylua' } },
-  css = { enable = has_enabled.css, formatters = { 'prettier' } },
+  css = { enable = true, formatters = { 'prettier' } },
   deno = { enable = has_enabled.typescript_deno, formatters = { 'prettier' } },
-  html = { enable = has_enabled.html, formatters = { 'prettier' } },
-  json = { enable = has_enabled.json, formatters = { 'prettier' } },
-  yaml = { enable = has_enabled.yaml, formatters = { 'prettier' } },
+  html = { enable = true, formatters = { 'prettier' } },
+  json = { enable = true, formatters = { 'prettier' } },
+  yaml = { enable = true, formatters = { 'prettier' } },
   markdown = { enable = true, formatters = { 'prettier' } },
   go = {
     enable = has_enabled.go,
