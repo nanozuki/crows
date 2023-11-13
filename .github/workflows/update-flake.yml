@@ -18,7 +18,4 @@ jobs:
         with:
           pr-title: "Update flake.lock" # Title of PR to be created
       - name: Merge flake.lock PR
-        uses: peter-evans/enable-pull-request-automerge@v3
-        with:
-          pull-request-number: ${{ steps.update.outputs.pull-request-number }}
-          merge-method: rebase
+        run: gh pr merge --rebase --delete-branch --auto ${{ steps.update.outputs.pull-request-number }}
