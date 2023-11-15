@@ -55,5 +55,14 @@ in
     sops.secrets.go_private = {
       path = "${config.xdg.configHome}/fish/after/go_private.fish";
     };
+    sops.secrets.git_config_local = {
+      path = "${config.xdg.configHome}/git/config_local";
+    };
+    sops.secrets.git_config_a = {
+      path = "${config.xdg.configHome}/git/config_a";
+    };
+    sops.secrets.git_config_b = {
+      path = "${config.xdg.configHome}/git/config_b";
+    };
   };
 }

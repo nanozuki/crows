@@ -1,10 +1,12 @@
 { config, pkgs, vars, ... }:
 let
   mustache = import ../clips/mustache.nix;
+  sops-setup = import ../clips/sops-setup.nix;
 in
 {
   imports = [
     ../clips/common.nix
+    (sops-setup "nest")
   ];
   config = {
     home.username = "crows";
@@ -34,11 +36,20 @@ in
     apps.sway.enable = true;
     apps.waybar.enable = true;
 
-    # TODO: make kitty and wezterm use font "monospace", without nerd fonts patch.
     home.file.fontConfig = {
       enable = true;
       source = mustache pkgs "font.conf" ../configs/fontconfig/fonts.conf.mustache vars;
       target = "${config.xdg.configHome}/fontconfig/fonts.conf";
+    };
+
+    sops.secrets.git_config_local = {
+      path = "${config.xdg.configHome}/git/config_local";
+    };
+    sops.secrets.git_config_a = {
+      path = "${config.xdg.configHome}/git/config_a";
+    };
+    sops.secrets.git_config_b = {
+      path = "${config.xdg.configHome}/git/config_b";
     };
   };
 }

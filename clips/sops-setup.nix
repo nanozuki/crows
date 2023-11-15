@@ -1,6 +1,6 @@
 # sops-setup
 # 1. install rage and sops
-# 2. use "id" to set defaultSopsKey and age.KeyFile
+# 2. use "id" to set defaultSopsKey
 # @param id: sops identifier
 # @return: home-manager config
 id: { config, pkgs, ... }: {
@@ -9,5 +9,5 @@ id: { config, pkgs, ... }: {
     pkgs.sops
   ];
   sops.defaultSopsFile = ../secrets/${id}.yaml;
-  sops.age.keyFile = "${config.xdg.configHome}/sops/age/${id}.txt";
+  sops.age.keyFile = "${config.xdg.configHome}/sops/age/keys.txt";
 }

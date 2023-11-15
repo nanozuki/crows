@@ -1,8 +1,12 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
+let
+  sops-setup = import ../clips/sops-setup.nix;
+in
 {
   imports = [
     ../clips/common.nix
+    (sops-setup "raven")
   ];
   config = {
     home.username = "crows";
@@ -33,6 +37,16 @@
         typescript_node = true;
         zig = true;
       };
+    };
+
+    sops.secrets.git_config_local = {
+      path = "${config.xdg.configHome}/git/config_local";
+    };
+    sops.secrets.git_config_a = {
+      path = "${config.xdg.configHome}/git/config_a";
+    };
+    sops.secrets.git_config_b = {
+      path = "${config.xdg.configHome}/git/config_b";
     };
   };
 }

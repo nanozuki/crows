@@ -1,7 +1,11 @@
 keys:
+  - &nest age105ksw0d99dq4ylgeg3jduzt03zva3zh7fn3dnc8n6a0szc9znekq9d09gq
+  - &raven age1ey5wzp3h440q44qhnzqqqa8s2q2qguk94dusnrsmmpsxkwrdxvgqqy3ajc
   - &pica age1aa4xue4td06q32vl26js75t78r6dlaelufd23kjs9uanhp6hyv6ql8atkp
 creation_rules:
   - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
     key_groups:
       - age:
+          - *nest
+          - *raven
           - *pica
