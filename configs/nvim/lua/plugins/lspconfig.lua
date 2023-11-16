@@ -69,7 +69,7 @@ return {
   {
     'j-hui/fidget.nvim',
     event = { 'BufReadPre', 'BufNewFile' },
-    -- enabled = not values.use_noice,
+    enabled = not values.use_noice,
     dependencies = { 'neovim/nvim-lspconfig' },
     config = function()
       require('fidget').setup({
