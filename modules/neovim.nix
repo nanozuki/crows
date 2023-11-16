@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, vars, ... }:
 with lib;
 let
   cfg = config.apps.neovim;
@@ -47,8 +47,8 @@ let
       enable = true;
       text = builtins.toJSON {
         theme = {
-          name = "rose_pine";
-          variant = "dawn";
+          name = vars.theme.name;
+          variant = vars.theme.variant;
         };
         languages = {
           vim = true;

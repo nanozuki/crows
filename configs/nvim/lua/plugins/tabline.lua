@@ -3,7 +3,7 @@ local values = require('config.values')
 local function make_theme()
   local theme = values.theme
   local palette = values.theme.palette
-  if theme.name == 'rose_pine' then
+  if theme.name == 'rose-pine' then
     return {
       line = { fg = palette.text, bg = palette.surface },
       head = { fg = palette.surface, bg = palette.iris, style = 'italic' },
