@@ -45,16 +45,34 @@
     in
     {
       homeConfigurations.pica = homeConfig ./hosts/pica.nix "x86_64-darwin" {
-        fontSize = 14;
-        fontFamily = "JetBrains Mono NL";
+        font = {
+          family = "JetBrains Mono NL";
+          size = 14;
+        };
+        theme = {
+          name = "rose-pine";
+          variant = "dawn";
+        };
       };
       homeConfigurations.raven = homeConfig ./hosts/raven.nix "aarch64-darwin" {
-        fontSize = 14;
-        fontFamily = "JetBrains Mono NL";
+        font = {
+          family = "JetBrains Mono NL";
+          size = 14;
+        };
+        theme = {
+          name = "rose-pine";
+          variant = "dawn";
+        };
       };
       homeConfigurations.nest = homeConfig ./hosts/nest.nix "x86_64-linux" {
-        fontSize = 12;
-        fontFamily = "JetBrains Mono NL";
+        font = {
+          family = "JetBrains Mono NL";
+          size = 12;
+        };
+        theme = {
+          name = "rose-pine";
+          variant = "dawn";
+        };
       };
     };
 }

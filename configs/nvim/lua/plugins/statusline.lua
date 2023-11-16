@@ -6,7 +6,7 @@ local modes = { 'normal', 'insert', 'visual', 'replace', 'command', 'inactive' }
 local function make_theme()
   local theme_name = values.theme.name
   local palette = values.theme.palette
-  if theme_name ~= 'rose_pine' then
+  if theme_name ~= 'rose-pine' then
     return nil
   end
   local theme = require('lualine.themes.rose-pine')

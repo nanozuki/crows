@@ -1,10 +1,10 @@
 local values = {
   -- available themes:
-  --  rose_pine (variant: 'main', 'dawn', 'moon'),
+  --  rose-pine (variant: 'main', 'dawn', 'moon'),
   --  edge (variant: 'dark', 'aura', 'neon', 'light'),
   --  nord,
   theme = {
-    name = 'rose_pine',
+    name = 'rose-pine',
     variant = 'dawn',
     ---@type table<string, string>
     palette = {},
