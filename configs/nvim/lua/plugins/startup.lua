@@ -1,6 +1,4 @@
 local function config()
-  local if_nil = vim.F.if_nil
-
   local section = {}
 
   section.header = {
@@ -20,50 +18,46 @@ local function config()
     },
   }
 
-  --- @param sc string
-  --- @param txt string
-  --- @param keybind string? optional
-  --- @param keybind_opts table? optional
-  local function button(sc, txt, keybind, keybind_opts)
-    local leader = 'SPC'
-    local sc_ = sc:gsub('%s', ''):gsub(leader, '<leader>')
-    local opts = {
-      position = 'center',
-      shortcut = sc,
-      cursor = 5,
-      width = 50,
-      align_shortcut = 'right',
-      hl_shortcut = 'Keyword',
-    }
-    if keybind then
-      keybind_opts = if_nil(keybind_opts, { noremap = true, silent = true, nowait = true })
-      opts.keymap = { 'n', sc_, keybind, keybind_opts }
-    end
-
-    local function on_press()
-      -- local key = vim.api.nvim_replace_termcodes(keybind .. "<Ignore>", true, false, true)
-      local key = vim.api.nvim_replace_termcodes(sc_ .. '<Ignore>', true, false, true)
+  local function feed_keys_fn(str)
+    return function()
+      local key = vim.api.nvim_replace_termcodes(str, true, false, true)
       vim.api.nvim_feedkeys(key, 't', false)
     end
+  end
 
+  --- @param shortcut string
+  --- @param text string
+  --- @param on_press function
+  local function button(shortcut, text, on_press)
     return {
       type = 'button',
-      val = txt,
+      val = text,
       on_press = on_press,
-      opts = opts,
+      opts = {
+        keymap = { 'n', shortcut, '', { noremap = true, silent = true, nowait = true, callback = on_press } },
+        position = 'center',
+        hl = 'Special',
+        shortcut = shortcut,
+        align_shortcut = 'right',
+        hl_shortcut = 'Define',
+        cursor = 2,
+        width = 50,
+      },
     }
   end
 
   section.buttons = {
     type = 'group',
     val = {
-      button('e', '  New file', '<cmd>ene <CR>'),
-      button('SPC z', '  Zip to recent folder'),
-      button('SPC f s', '󰉓  Open Session'),
-      button('SPC f f', '󰍉  Find file'),
-      button('SPC f g', '󰈬  Find word'),
-      button('SPC f m', '  Jump to bookmarks'),
-      button('SPC f h', '󰘥  Find help documents'),
+      button('<leader>e', ' New file', feed_keys_fn('<cmd>ene <CR>')),
+      button('<leader>z', '󰎐 Zip to recent folder', feed_keys_fn('<leader>z')),
+      button('<leader>s', '󰉓 Open Session', feed_keys_fn('<leader>fs')),
+      button('<leader>u', '󰚰 Plugin update', function()
+        require('lazy').update()
+      end),
+      button('<leader>p', '󰓅 Starup profile', function()
+        require('lazy').profile()
+      end),
     },
     opts = {
       spacing = 1,
@@ -73,9 +67,9 @@ local function config()
   math.randomseed(os.time())
 
   local footers = {
-    'Hyperextensible Vim-based text editor.             ',
-    'Help poor children in Uganda!                      ',
-    'Customized by @Nanozuki.Crows.                     ',
+    'Hyperextensible Vim-based text editor.            ',
+    'Help poor children in Uganda!                     ',
+    'Customized by @Nanozuki.Crows.                    ',
   }
 
   section.footer = {
@@ -84,7 +78,6 @@ local function config()
     opts = {
       position = 'center',
       hl = 'Tag',
-      width = 50,
     },
   }
 
