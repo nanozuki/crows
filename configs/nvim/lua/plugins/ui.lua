@@ -67,7 +67,7 @@ return {
       },
       lsp = {
         progress = {
-          enabled = false,
+          enabled = false, -- use fidget.nvim
         },
         override = {
           ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
@@ -85,6 +85,33 @@ return {
     },
     dependencies = {
       'MunifTanjim/nui.nvim',
+      'rcarriga/nvim-notify',
     },
+  },
+  {
+    'rcarriga/nvim-notify',
+    event = 'VeryLazy',
+    dependencies = { 'j-hui/fidget.nvim' },
+    config = function()
+      require('notify').notify = require('fidget').notify
+    end,
+  },
+  {
+    'j-hui/fidget.nvim',
+    event = 'VeryLazy',
+    config = function()
+      require('fidget').setup({
+        progress = {
+          poll_rate = 10,
+        },
+        notification = {
+          poll_rate = 10,
+          override_vim_notify = true,
+          window = {
+            max_width = 120,
+          },
+        },
+      })
+    end,
   },
 }

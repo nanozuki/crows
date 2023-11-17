@@ -67,26 +67,6 @@ return {
     end,
   },
   {
-    'j-hui/fidget.nvim',
-    event = { 'BufReadPre', 'BufNewFile' },
-    enabled = not values.use_noice,
-    dependencies = { 'neovim/nvim-lspconfig' },
-    config = function()
-      require('fidget').setup({
-        progress = {
-          poll_rate = 60,
-        },
-        notification = {
-          poll_rate = 60,
-          override_vim_notify = true,
-          window = {
-            max_width = 120,
-          },
-        },
-      })
-    end,
-  },
-  {
     'kosayoda/nvim-lightbulb',
     opts = {
       sign = { enabled = false },
