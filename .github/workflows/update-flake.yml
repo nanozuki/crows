@@ -19,3 +19,5 @@ jobs:
           pr-title: "Update flake.lock" # Title of PR to be created
       - name: Merge flake.lock PR
         run: gh pr merge --rebase --delete-branch --auto ${{ steps.update.outputs.pull-request-number }}
+        env:
+          GH_TOKEN: ${{ github.token }}
