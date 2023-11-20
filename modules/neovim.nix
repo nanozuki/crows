@@ -39,7 +39,7 @@ let
     };
     home.file.neovim = {
       enable = true;
-      source = config.lib.file.mkOutOfStoreSymlink ../configs/nvim;
+      source = ../configs/nvim;
       target = "${config.xdg.configHome}/nvim";
       recursive = true;
     };
