@@ -67,5 +67,8 @@ in
     sops.secrets.git_config_b = {
       path = "${config.xdg.configHome}/git/config_b";
     };
+    sops.secrets.netrc = {
+      path = "${config.home.homeDirectory}/.netrc";
+    };
   };
 }
