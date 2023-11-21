@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, stpkgs, system, ... }:
 {
   apps.bat.enable = true;
   apps.gpg.enable = true;
@@ -14,7 +14,7 @@
     tealdeer
     eza
     btop
-    tokei
+    (if (lib.hasSuffix "darwin" system) then stpkgs.tokei else tokei)
     fd
     jq
     gron

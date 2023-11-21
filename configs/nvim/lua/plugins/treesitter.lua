@@ -7,7 +7,7 @@ return {
     dependencies = { 'JoosepAlviste/nvim-ts-context-commentstring' },
     build = ':TSUpdate',
     config = function()
-      ---@diagnostic disable-next-line: missing-fields
+      ---@diagnostic disable-next-line: miss-field
       require('nvim-treesitter.configs').setup({
         ensure_installed = 'all',
         highlight = {
@@ -27,11 +27,15 @@ return {
             end,
           },
         },
-        -- 'JoosepAlviste/nvim-ts-context-commentstring'
-        context_commentstring = {
-          enable = true,
-        },
       })
+    end,
+  },
+  {
+    'JoosepAlviste/nvim-ts-context-commentstring',
+    event = { 'BufReadPost', 'BufNewFile' },
+    config = function()
+      vim.g.skip_ts_context_commentstring_module = true
+      require('ts_context_commentstring').setup({})
     end,
   },
   {
@@ -39,7 +43,7 @@ return {
     event = { 'BufReadPost', 'BufNewFile' },
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     config = function()
-      ---@diagnostic disable-next-line: missing-fields
+      ---@diagnostic disable-next-line: miss-field
       require('nvim-treesitter.configs').setup({
         textobjects = {
           select = {
