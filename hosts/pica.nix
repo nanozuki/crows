@@ -34,6 +34,9 @@ in
       sspkgs.kratos-protoc-gen-go-errors
     ];
 
+    home.sessionPath = [
+      "/opt/homebrew/bin"
+    ];
     home.sessionVariables = {
       HM_CONFIG_NAME = "pica";
     };
