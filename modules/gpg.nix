@@ -1,16 +1,16 @@
 { lib, config, pkgs, system, ... }:
 with lib;
-let cfg = config.apps.gpg;
+let
+  cfg = config.apps.gpg;
+  darwinOr = import ../clips/darwin-or.nix system;
 in
 {
   options.apps.gpg = { enable = mkEnableOption "gpg"; };
   config = mkIf cfg.enable {
-    home.packages =
-      if lib.hasSuffix "darwin" system then
-        [ pkgs.pinentry_mac ] else [ ];
+    home.packages = darwinOr [ pkgs.pinentry_mac ] [ ];
     programs.gpg = {
       enable = true;
-      package = if (lib.hasSuffix "darwin" system) then pkgs.gnupg else pkgs.hello;
+      package = darwinOr pkgs.gnupg pkgs.hello;
       homedir = "${config.xdg.dataHome}/gnupg";
     };
 
@@ -22,7 +22,7 @@ in
         default-cache-ttl 60480000
         max-cache-ttl-ssh 60480000
         default-cache-ttl-ssh 60480000
-        ${if lib.hasSuffix "linux" system then "pinentry-program /usr/bin/pinentry-tty" else ""}
+        ${darwinOr "" "pinentry-program /usr/bin/pinentry-tty"}
       '';
       target = "${config.xdg.dataHome}/gnupg/gpg-agent.conf";
     };

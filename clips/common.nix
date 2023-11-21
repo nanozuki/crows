@@ -1,4 +1,7 @@
-{ lib, pkgs, stpkgs, system, ... }:
+{ pkgs, stpkgs, system, ... }:
+let
+  darwinOr = import ../clips/darwin-or.nix system;
+in
 {
   apps.bat.enable = true;
   apps.gpg.enable = true;
@@ -14,7 +17,7 @@
     tealdeer
     eza
     btop
-    (if (lib.hasSuffix "darwin" system) then stpkgs.tokei else tokei)
+    (darwinOr stpkgs.tokei tokei)
     fd
     jq
     gron
