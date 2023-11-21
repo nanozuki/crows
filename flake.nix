@@ -2,7 +2,7 @@
   description = "Home Manager configuration of crows";
 
   inputs = {
-    # Specify the source of Home Manager and Nixpkgs.
+    stable-nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -19,7 +19,7 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, stratosphere, rust-overlay, sops-nix, ... }:
+  outputs = { nixpkgs, stable-nixpkgs, stratosphere, home-manager, rust-overlay, sops-nix, ... }:
     let
       homeConfig = home: system: vars:
         home-manager.lib.homeManagerConfiguration {
@@ -37,14 +37,15 @@
             home
           ];
           extraSpecialArgs = {
-            spkgs = stratosphere.packages.${system};
+            sspkgs = stratosphere.packages.${system}; # StratoSphere packages
+            stpkgs = stable-nixpkgs.legacyPackages.${system}; # STable packages
             inherit system;
             inherit vars; # variables for customizing
           };
         };
     in
     {
-      homeConfigurations.pica = homeConfig ./hosts/pica.nix "x86_64-darwin" {
+      homeConfigurations.pica = homeConfig ./hosts/pica.nix "aarch64-darwin" {
         font = {
           family = "JetBrains Mono NL";
           size = 14;
