@@ -4,17 +4,17 @@ let
 in
 {
   apps.bat.enable = true;
+  apps.git.enable = true;
   apps.gpg.enable = true;
   apps.ideavim.enable = true;
   apps.kitty.enable = true;
   apps.starship.enable = true;
+  apps.tealdeer.enable = true;
   apps.wezterm.enable = true;
-  apps.git.enable = true;
 
   xdg.enable = true;
   home.packages = with pkgs; [
     babelfish
-    tealdeer
     eza
     btop
     (darwinOr stpkgs.tokei tokei)
