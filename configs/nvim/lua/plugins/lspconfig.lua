@@ -68,6 +68,8 @@ return {
   },
   {
     'kosayoda/nvim-lightbulb',
+    event = { 'BufReadPre', 'BufNewFile' },
+    dependencies = { 'neovim/nvim-lspconfig' },
     opts = {
       sign = { enabled = false },
       virtual_text = { enabled = true, text = '' },
