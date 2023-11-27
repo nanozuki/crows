@@ -28,7 +28,7 @@ end
 if type -q fisher
     fisher update
 end
-if type -q npm
+if type -q npm; and test -d $XDG_DATA_HOME/npm
     if test "null" != (npm -g list --json | jq '.dependencies' | string join0)
         for pkg in (npm -g list --json | jq '.dependencies | keys | join(" ")' | string trim -c '"' | string split ' ')
             npm install -g $pkg
