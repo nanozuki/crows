@@ -102,6 +102,7 @@ return {
   {
     'pmizio/typescript-tools.nvim',
     dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
+    ft = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' },
     enabled = values.languages.typescript_node,
     init = function()
       langs.servers.tsserver.autoload = false
