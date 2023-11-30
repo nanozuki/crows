@@ -27,7 +27,7 @@ in
       mycli
       wire
       go-migrate
-      sspkgs.atlas
+      atlas
       sspkgs.go-swagger_0_25_0
       sspkgs.kratos
       sspkgs.kratos-protoc-gen-go-http
