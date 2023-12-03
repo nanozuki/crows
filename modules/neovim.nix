@@ -1,4 +1,4 @@
-{ config, lib, pkgs, stpkgs, system, vars, ... }:
+{ config, lib, pkgs, system, vars, ... }:
 with lib;
 let
   cfg = config.apps.neovim;
@@ -13,7 +13,7 @@ let
       nil
       nixpkgs-fmt
       ## lua
-      (darwinOr stpkgs.lua-language-server lua-language-server)
+      lua-language-server
       stylua
       ## vim 
       nodePackages.vim-language-server
