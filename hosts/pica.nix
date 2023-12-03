@@ -1,4 +1,4 @@
-{ pkgs, sspkgs, stpkgs, config, ... }:
+{ pkgs, sspkgs, config, ... }:
 let
   sops-setup = import ../clips/sops-setup.nix;
 in
@@ -23,7 +23,7 @@ in
       protoc-gen-go-grpc
       protoc-gen-validate
       gnostic # protoc-gen-openapi
-      stpkgs.awscli2
+      awscli2
       mycli
       wire
       go-migrate
