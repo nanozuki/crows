@@ -1,8 +1,7 @@
-{ config, lib, pkgs, system, vars, ... }:
+{ config, lib, pkgs, vars, ... }:
 with lib;
 let
   cfg = config.apps.neovim;
-  darwinOr = import ../clips/darwin-or.nix system;
   basic = {
     home.packages = with pkgs; [
       # tools
@@ -59,6 +58,7 @@ let
           nix = true;
           ocaml = cfg.language.ocaml;
           rust = cfg.language.rust;
+          svelte = cfg.language.svelte;
           terraform = cfg.language.terraform;
           typescript_deno = cfg.language.typescript_deno;
           typescript_node = cfg.language.typescript_node;
@@ -108,6 +108,12 @@ let
     ];
     home.sessionVariables = { CARGO_HOME = "${config.xdg.dataHome}/cargo"; };
     home.sessionPath = [ "${config.xdg.dataHome}/cargo/bin" ];
+  };
+  language_svelte = mkIf cfg.language.svelte {
+    home.packages = with pkgs; [
+      nodePackages.svelte-language-server
+      nodePackages.svelte-check
+    ];
   };
   language_terraform = mkIf cfg.language.terraform {
     home.packages = with pkgs; [
@@ -168,6 +174,7 @@ in
           go = mkEnableOption "Go";
           ocaml = mkEnableOption "OCaml";
           rust = mkEnableOption "Rust";
+          svelte = mkEnableOption "Svelte";
           terraform = mkEnableOption "Terraform";
           typescript_deno = mkEnableOption "Typescript on Deno";
           typescript_node = mkEnableOption "Typescript on Node.js";
@@ -184,6 +191,7 @@ in
       language_go
       language_ocaml
       language_rust
+      language_svelte
       language_terraform
       language_typescript_node
       language_zig

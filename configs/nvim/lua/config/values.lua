@@ -21,6 +21,7 @@ local values = {
     nix = false,
     ocaml = false,
     rust = false,
+    svelte = false,
     terraform = false,
     typescript_deno = false,
     typescript_node = false,
