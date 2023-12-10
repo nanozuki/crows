@@ -90,6 +90,10 @@ servers.cssls = {
   },
 }
 
+servers.svelte = {
+  autoload = has_enabled.svelte,
+}
+
 servers.html = {
   autoload = has_enabled.typescript_node,
 }

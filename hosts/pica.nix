@@ -48,6 +48,7 @@ in
         go = true;
         ocaml = false;
         rust = true;
+        svelte = true;
         terraform = true;
         typescript_deno = true;
         typescript_node = true;
