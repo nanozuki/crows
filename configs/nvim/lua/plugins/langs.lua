@@ -102,14 +102,26 @@ return {
   {
     'pmizio/typescript-tools.nvim',
     dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
-    ft = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' },
+    ft = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact', 'svelte' },
     enabled = values.languages.typescript_node,
     init = function()
       langs.servers.tsserver.autoload = false
     end,
     config = function()
-      local cfg = lsp.make_config(langs.servers.tsserver.config)
+      local cfg = lsp.make_config(langs.servers.tsserver)
       require('typescript-tools').setup(cfg)
+      if values.languages.svelte then
+        local lspconfig = require('lspconfig')
+        local on_attach = function(client, _)
+          vim.api.nvim_create_autocmd('BufWritePost', {
+            pattern = { '*.js', '*.ts' },
+            callback = function(ctx)
+              client.notify('$/onDidChangeTsOrJsFile', { uri = ctx.match })
+            end,
+          })
+        end
+        lspconfig.svelte.setup(lsp.make_config(langs.servers.svelte, on_attach))
+      end
     end,
   },
 }

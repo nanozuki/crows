@@ -91,7 +91,7 @@ servers.cssls = {
 }
 
 servers.svelte = {
-  autoload = has_enabled.svelte,
+  autoload = false, -- need setup after tsserver
 }
 
 servers.html = {
