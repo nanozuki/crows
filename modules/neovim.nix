@@ -1,7 +1,8 @@
-{ config, lib, pkgs, vars, ... }:
+{ config, lib, pkgs, stpkgs, system, vars, ... }:
 with lib;
 let
   cfg = config.apps.neovim;
+  darwinOr = import ../clips/darwin-or.nix system;
   basic = {
     home.packages = with pkgs; [
       # tools
@@ -122,8 +123,7 @@ let
     ];
   };
   language_typescript_deno = mkIf cfg.language.typescript_deno {
-    home.packages = with pkgs;
-      [ deno ];
+    home.packages = [ (darwinOr stpkgs.deno pkgs.deno) ];
   };
   language_typescript_node = mkIf cfg.language.typescript_node {
     home.packages = with pkgs; [
