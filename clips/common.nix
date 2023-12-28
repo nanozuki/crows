@@ -73,7 +73,7 @@
       }
       {
         name = "nix-fish";
-        src = sspkgs.fishplugins-nix-fish;
+        src = sspkgs.fishplugins-nix-fish.src;
       }
     ];
   };
