@@ -1,14 +1,5 @@
 return {
   {
-    'dyng/ctrlsf.vim',
-    event = 'VeryLazy',
-    config = function()
-      vim.g.ctrlsf_ackprg = 'rg'
-      vim.keymap.set('n', '<leader>sf', ':CtrlSF ', { desc = 'search in files' })
-      vim.keymap.set('n', '<leader>sp', ':CtrlSF<CR>', { desc = 'Search in cursor' })
-    end,
-  },
-  {
     'nvim-telescope/telescope.nvim',
     event = 'VeryLazy',
     dependencies = {
