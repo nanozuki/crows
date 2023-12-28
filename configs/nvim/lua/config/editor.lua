@@ -22,6 +22,22 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.keymap.set('n', '<leader>/', ':nohlsearch<CR>', { desc = 'Clear search' })
 
+-- # search and replace
+vim.keymap.set('v', '<leader>s', 'y/\\V<C-r>"<CR>', { desc = 'Search visual text' })
+vim.keymap.set('v', '<leader>r', 'y:%s/\\V<C-r>"//g<Left><Left>', { desc = 'Replace visual text' })
+
+vim.opt.grepprg = 'rg --vimgrep'
+vim.keymap.set('n', '<leader>sf', function()
+  vim.ui.input({ prompt = 'Search in files: ' }, function(input)
+    if type(input) ~= 'string' or input == '' then
+      return
+    end
+    vim.cmd(string.format('silent! grep! %s', input))
+    vim.cmd.copen()
+    vim.cmd.wincmd('J')
+  end)
+end, { desc = 'Search in files' })
+
 -- # abount filetypes
 -- filetype
 vim.filetype.add({

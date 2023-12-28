@@ -11,8 +11,6 @@ local function translate_list(translator, names)
 end
 
 return {
-  -- multi select and edit
-  { 'mg979/vim-visual-multi', event = { 'BufReadPre', 'BufNewFile' } },
   -- autopairs
   {
     'windwp/nvim-autopairs',
@@ -26,6 +24,7 @@ return {
     'kylechui/nvim-surround',
     event = { 'BufReadPost', 'BufNewFile' },
     config = function()
+      ---@diagnostic disable-next-line: missing-fields
       require('nvim-surround').setup({})
     end,
   },
