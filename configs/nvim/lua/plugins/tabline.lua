@@ -1,18 +1,12 @@
-local values = require('config.values')
-
 local function make_theme()
-  local theme = values.theme
-  local palette = values.theme.palette
-  if theme.name == 'rose-pine' then
-    return {
-      line = { fg = palette.text, bg = palette.surface },
-      head = { fg = palette.surface, bg = palette.iris, style = 'italic' },
-      current_tab = { fg = palette.surface, bg = palette.rose, style = 'bold' },
-      tab = { fg = palette.text, bg = palette.overlay, style = 'bold' },
-      win = { fg = palette.text, bg = palette.overlay },
-      tail = { fg = palette.surface, bg = palette.rose, style = 'bold' },
-    }
-  end
+  return {
+    line = 'TabLineFill',
+    head = { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_5, style = 'italic' },
+    current_tab = { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_6, style = 'bold' },
+    tab = { fg = vim.g.terminal_color_7, bg = vim.g.terminal_color_0, style = 'bold' },
+    win = { fg = vim.g.terminal_color_7, bg = vim.g.terminal_color_0 },
+    tail = { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_6, style = 'bold' },
+  }
 end
 
 local function config()
