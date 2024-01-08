@@ -13,11 +13,24 @@ return {
   {
     'shaunsingh/nord.nvim',
     enabled = values.theme.name == 'nord',
-    -- TODO: config
+    config = function()
+      vim.cmd.colorscheme('nord')
+    end,
   },
   {
     'sainnhe/edge',
     enabled = values.theme.name == 'edge',
-    -- TODO: config
+    config = function()
+      if values.theme.variant == 'aura' or values.theme.variant == 'neon' then
+        vim.g.edge_style = values.theme.variant
+      elseif values.theme.variant == 'light' then
+        vim.opt.background = 'light'
+      else
+        vim.g.edge_style = 'default'
+      end
+      vim.g.edge_enable_italic = 1
+      -- vim.g.edge_better_performance = 1
+      vim.cmd.colorscheme('edge')
+    end,
   },
 }

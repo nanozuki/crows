@@ -6,6 +6,11 @@ let
     "rose-pine/main" = "Rosé Pine";
     "rose-pine/dawn" = "Rosé Pine Dawn";
     "rose-pine/moon" = "Rosé Pine Moon";
+    "nord/main" = "Nord";
+    "edge/main" = "One Half Dark";
+    "edge/aura" = "One Half Dark";
+    "edge/neon" = "One Half Dark";
+    "edge/light" = "One Half Light";
   };
 in
 {
