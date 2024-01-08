@@ -6,8 +6,6 @@ local values = {
   theme = {
     name = 'rose-pine',
     variant = 'dawn',
-    ---@type table<string, string>
-    palette = {},
   },
   languages = {
     -- builtin languages:

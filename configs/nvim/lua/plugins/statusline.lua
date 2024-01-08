@@ -2,21 +2,26 @@ local values = require('config.values')
 
 -- custom theme
 
-local modes = { 'normal', 'insert', 'visual', 'replace', 'command', 'inactive' }
 local function make_theme()
-  local theme_name = values.theme.name
-  local palette = values.theme.palette
-  if theme_name ~= 'rose-pine' then
-    return nil
+  ---@type table<string, string>
+  local modes = {
+    normal = vim.g.terminal_color_6, -- cyan
+    insert = vim.g.terminal_color_4, -- blue
+    visual = vim.g.terminal_color_3, -- yellow
+    replace = vim.g.terminal_color_2, -- green
+    command = vim.g.termianl_color_1, -- red
+    inactive = vim.g.terminal_color_5, -- magenta
+  }
+  local theme = {}
+  local statusline_hl = vim.api.nvim_get_hl(0, { name = 'StatusLine' })
+  local statusline_bg = string.format('#%06x', statusline_hl.bg)
+  for mode, accent in pairs(modes) do
+    theme[mode] = {
+      a = { fg = vim.g.terminal_color_0, bg = accent },
+      b = { fg = accent, bg = vim.g.terminal_color_0 },
+      c = { fg = vim.g.terminal_color_7, bg = statusline_bg },
+    }
   end
-  local theme = require('lualine.themes.rose-pine')
-  for _, mode in ipairs(modes) do
-    theme[mode].b.bg = palette.overlay
-    theme[mode].c.bg = palette.surface
-  end
-  theme.visual.a.bg = palette.gold
-  theme.inactive.a.bg = palette.iris
-  theme.inactive.a.fg = palette.base
   return theme
 end
 
@@ -123,7 +128,6 @@ return {
     event = 'VeryLazy',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
-      local palette = values.theme.palette
       require('incline').setup({
         render = function(props)
           local filepath = vim.api.nvim_buf_get_name(props.buf)
@@ -142,8 +146,8 @@ return {
             horizontal = 0,
           },
           winhighlight = {
-            active = { Normal = { guifg = palette.base, guibg = palette.pine } },
-            inactive = { Normal = { guifg = palette.base, guibg = palette.foam } },
+            active = { Normal = { guifg = vim.g.terminal_color_0, guibg = vim.g.terminal_color_2 } },
+            inactive = { Normal = { guifg = vim.g.terminal_color_0, guibg = vim.g.terminal_color_4 } },
           },
         },
       })
