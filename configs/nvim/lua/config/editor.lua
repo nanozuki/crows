@@ -21,6 +21,7 @@ vim.keymap.set('v', '<leader>y', '"+y', { desc = 'Copy to system clipboard' })
 vim.keymap.set('n', '<leader>p', '"+p', { desc = 'Paste from system clipboard' })
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+-- Also can Use <C-l> to clear highlight, this is built-in keymap
 vim.keymap.set('n', '<leader>/', ':nohlsearch<CR>', { desc = 'Clear search' })
 
 -- # search and replace
@@ -108,3 +109,30 @@ for sign, text in pairs(signs) do
   local hl = 'DiagnosticSign' .. sign
   vim.fn.sign_define(hl, { text = text, texthl = hl, linehl = '', numhl = '' })
 end
+
+-- debug bufftes
+vim.api.nvim_create_user_command('BufferList', function()
+  local winbufs = vim.tbl_map(vim.api.nvim_win_get_buf, vim.api.nvim_list_wins())
+  local buffers = vim.api.nvim_list_bufs()
+  vim.print('---- buffer list ----')
+  for _, buf in ipairs(buffers) do
+    local name = vim.api.nvim_buf_get_name(buf)
+    if name ~= '' then
+      local strs = { ('#%d\t'):format(buf), name }
+      if not vim.tbl_contains(winbufs, buf) then
+        table.insert(strs, '[hidden]')
+      end
+      if vim.api.nvim_buf_get_option(buf, 'modified') then
+        table.insert(strs, '[modified]')
+      end
+      if vim.api.nvim_buf_get_option(buf, 'buflisted') then
+        table.insert(strs, '[listed]')
+      end
+      local buf_type = vim.api.nvim_buf_get_option(buf, 'buftype')
+      if buf_type ~= '' then
+        table.insert(strs, string.format('[type:%s]', buf_type))
+      end
+      vim.print(table.concat(strs, ''))
+    end
+  end
+end, {})
