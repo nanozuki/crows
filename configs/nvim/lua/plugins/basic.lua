@@ -12,14 +12,12 @@ return {
     config = function()
       vim.opt.sessionoptions = 'curdir,folds,globals,help,tabpages,terminal,winsize'
       local function clean_buffers()
-        local winbufs = vim.tbl_map(vim.api.nvim_win_get_buf, vim.api.nvim_list_wins())
         local bufs = vim.api.nvim_list_bufs()
         for _, buf in ipairs(bufs) do
-          if vim.api.nvim_buf_get_name(buf) ~= '' then
-            local type = vim.api.nvim_buf_get_option(buf, 'buftype')
-            if (type ~= '' and type ~= 'terminal') or not vim.tbl_contains(winbufs, buf) then
-              vim.api.nvim_buf_delete(buf, {})
-            end
+          local name = vim.api.nvim_buf_get_name(buf)
+          local type = vim.api.nvim_buf_get_option(buf, 'buftype')
+          if name ~= '' and type ~= '' and type ~= 'terminal' then
+            vim.api.nvim_buf_delete(buf, {})
           end
         end
       end
