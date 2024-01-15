@@ -1,11 +1,8 @@
-{ pkgs, config, ... }:
-let
-  sops-setup = import ../clips/sops-setup.nix;
-in
+{ clips, pkgs, config, ... }:
 {
   imports = [
-    ../clips/common.nix
-    (sops-setup "pica")
+    clips.common
+    clips.sops-setup
   ];
   config = {
     home.username = "crows";

@@ -1,13 +1,12 @@
-{ config, lib, pkgs, system, ... }:
+{ clips, config, lib, pkgs, ... }:
 with lib;
 let
   cfg = config.apps.git;
-  darwinOr = import ../clips/darwin-or.nix system;
 in
 {
   options.apps.git = { enable = mkEnableOption "git"; };
   config = mkIf cfg.enable {
-    home.packages = darwinOr [ pkgs.git ] [ ];
+    home.packages = clips.darwinOr [ pkgs.git ] [ ];
     home.file.git = {
       enable = true;
       source = ../configs/git;

@@ -1,8 +1,7 @@
-{ config, system, lib, ... }:
+{ clips, config, lib, ... }:
 with lib;
 let
   cfg = config.apps.rime;
-  darwinOr = import ../clips/darwin-or.nix system;
 in
 {
   options.apps.rime = { enable = mkEnableOption "Rime"; };
@@ -18,7 +17,7 @@ in
       );
     };
     home.file.rime_squirrel = {
-      enable = darwinOr true false;
+      enable = clips.darwinOr true false;
       source = ../configs/squirrel/squirrel.custom.yaml;
       recursive = true;
       target = "${config.home.homeDirectory}/Library/Rime/squirrel.custom.yaml";
