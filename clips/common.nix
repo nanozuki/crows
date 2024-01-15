@@ -1,4 +1,7 @@
-{ pkgs, sspkgs, ... }:
+{ pkgs, sspkgs, stpkgs, system, ... }:
+let
+  darwinOr = import ../clips/darwin-or.nix system;
+in
 {
   apps.bat.enable = true;
   apps.git.enable = true;
@@ -13,7 +16,7 @@
   home.packages = with pkgs; [
     babelfish
     eza
-    btop
+    (darwinOr stpkgs.btop btop)
     tokei
     fd
     jq
