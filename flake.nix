@@ -48,13 +48,12 @@
           extraSpecialArgs = {
             inherit system;
             inherit vars; # variables for customizing
-            clips = clips vars.hostId nixpkgs.legacyPackages.${system} system;
+            clips = clips nixpkgs.legacyPackages.${system} system;
           };
         };
     in
     {
       homeConfigurations.pica = homeConfig ./hosts/pica.nix "aarch64-darwin" {
-        hostId = "pica";
         font = {
           family = "JetBrains Mono NL";
           size = 14;
@@ -65,7 +64,6 @@
         };
       };
       homeConfigurations.raven = homeConfig ./hosts/raven.nix "aarch64-darwin" {
-        hostId = "raven";
         font = {
           family = "JetBrains Mono NL";
           size = 14;
@@ -76,7 +74,6 @@
         };
       };
       homeConfigurations.nest = homeConfig ./hosts/nest.nix "x86_64-linux" {
-        hostId = "nest";
         font = {
           family = "JetBrains Mono NL";
           size = 12;

@@ -2,7 +2,6 @@
 {
   imports = [
     clips.common
-    clips.sops-setup
   ];
   config = {
     home.username = "crows";
@@ -35,15 +34,20 @@
         zig = true;
       };
     };
-
-    sops.secrets.git_config_local = {
-      path = "${config.xdg.configHome}/git/config_local";
-    };
-    sops.secrets.git_config_a = {
-      path = "${config.xdg.configHome}/git/config_a";
-    };
-    sops.secrets.git_config_b = {
-      path = "${config.xdg.configHome}/git/config_b";
+    apps.sops-secrets = {
+      enable = true;
+      name = "raven";
+      secrets = {
+        git_config_local = {
+          path = "${config.xdg.configHome}/git/config_local";
+        };
+        git_config_a = {
+          path = "${config.xdg.configHome}/git/config_a";
+        };
+        git_config_b = {
+          path = "${config.xdg.configHome}/git/config_b";
+        };
+      };
     };
   };
 }
