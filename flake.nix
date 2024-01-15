@@ -28,7 +28,6 @@
             (name: { name = name; value = stable-nixpkgs.legacyPackages.${prev.system}.${name}; })
             stablePackages);
       stratosphereOverlay = final: prev: { stra = stratosphere.packages.${prev.system}; };
-      clips = import ./clips/clips.nix;
       homeConfig = home: system: vars:
         home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${system};
@@ -42,46 +41,19 @@
               nixpkgs.config = { allowUnfree = true; allowUnfreePredicate = (_: true); };
             })
             sops-nix.homeManagerModule
-            ./modules/modules.nix
+            ./modules
             home
           ];
           extraSpecialArgs = {
             inherit system;
             inherit vars; # variables for customizing
-            clips = clips nixpkgs.legacyPackages.${system} system;
+            clips = import ./clips nixpkgs.legacyPackages.${system} system;
           };
         };
     in
     {
-      homeConfigurations.pica = homeConfig ./hosts/pica.nix "aarch64-darwin" {
-        font = {
-          family = "JetBrains Mono NL";
-          size = 14;
-        };
-        theme = {
-          name = "rose-pine";
-          variant = "dawn";
-        };
-      };
-      homeConfigurations.raven = homeConfig ./hosts/raven.nix "aarch64-darwin" {
-        font = {
-          family = "JetBrains Mono NL";
-          size = 14;
-        };
-        theme = {
-          name = "rose-pine";
-          variant = "dawn";
-        };
-      };
-      homeConfigurations.nest = homeConfig ./hosts/nest.nix "x86_64-linux" {
-        font = {
-          family = "JetBrains Mono NL";
-          size = 12;
-        };
-        theme = {
-          name = "rose-pine";
-          variant = "dawn";
-        };
-      };
+      homeConfigurations = builtins.mapAttrs
+        (host: config: homeConfig config.homeConfig config.system config.vars)
+        (import ./hosts);
     };
 }
