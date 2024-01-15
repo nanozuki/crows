@@ -2,7 +2,6 @@
 {
   imports = [
     clips.common
-    clips.sops-setup
   ];
   config = {
     home.username = "crows";
@@ -51,6 +50,10 @@
         typescript_node = true;
         zig = true;
       };
+    };
+    apps.secrets = {
+      enable = true;
+      name = "pica";
     };
     apps.rime.enable = true;
     sops.secrets.go_private = {
