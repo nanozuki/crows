@@ -1,7 +1,4 @@
-{ pkgs, sspkgs, stpkgs, system, ... }:
-let
-  darwinOr = import ../clips/darwin-or.nix system;
-in
+{ pkgs, ... }:
 {
   apps.bat.enable = true;
   apps.git.enable = true;
@@ -16,7 +13,7 @@ in
   home.packages = with pkgs; [
     babelfish
     eza
-    (darwinOr stpkgs.btop btop)
+    btop
     tokei
     fd
     jq
@@ -76,7 +73,7 @@ in
       }
       {
         name = "nix-fish";
-        src = sspkgs.fishplugins-nix-fish.src;
+        src = pkgs.stra.fishplugins-nix-fish.src;
       }
     ];
   };
