@@ -1,11 +1,7 @@
-{ pkgs, config, ... }:
-let
-  sops-setup = import ../clips/sops-setup.nix;
-in
+{ clips, pkgs, config, ... }:
 {
   imports = [
-    ../clips/common.nix
-    (sops-setup "pica")
+    clips.common
   ];
   config = {
     home.username = "crows";
@@ -55,21 +51,27 @@ in
         zig = true;
       };
     };
+    apps.sops-secrets = {
+      enable = true;
+      name = "pica";
+      secrets = {
+        go_private = {
+          path = "${config.xdg.configHome}/fish/after/go_private.fish";
+        };
+        git_config_local = {
+          path = "${config.xdg.configHome}/git/config_local";
+        };
+        git_config_a = {
+          path = "${config.xdg.configHome}/git/config_a";
+        };
+        git_config_b = {
+          path = "${config.xdg.configHome}/git/config_b";
+        };
+        netrc = {
+          path = "${config.home.homeDirectory}/.netrc";
+        };
+      };
+    };
     apps.rime.enable = true;
-    sops.secrets.go_private = {
-      path = "${config.xdg.configHome}/fish/after/go_private.fish";
-    };
-    sops.secrets.git_config_local = {
-      path = "${config.xdg.configHome}/git/config_local";
-    };
-    sops.secrets.git_config_a = {
-      path = "${config.xdg.configHome}/git/config_a";
-    };
-    sops.secrets.git_config_b = {
-      path = "${config.xdg.configHome}/git/config_b";
-    };
-    sops.secrets.netrc = {
-      path = "${config.home.homeDirectory}/.netrc";
-    };
   };
 }

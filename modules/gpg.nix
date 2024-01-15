@@ -1,16 +1,15 @@
-{ lib, config, pkgs, system, ... }:
+{ clips, lib, config, pkgs, ... }:
 with lib;
 let
   cfg = config.apps.gpg;
-  darwinOr = import ../clips/darwin-or.nix system;
 in
 {
   options.apps.gpg = { enable = mkEnableOption "gpg"; };
   config = mkIf cfg.enable {
-    home.packages = darwinOr [ pkgs.pinentry_mac ] [ ];
+    home.packages = clips.darwinOr [ pkgs.pinentry_mac ] [ ];
     programs.gpg = {
       enable = true;
-      package = darwinOr pkgs.gnupg pkgs.hello;
+      package = clips.darwinOr pkgs.gnupg pkgs.hello;
       homedir = "${config.xdg.dataHome}/gnupg";
     };
 
@@ -22,7 +21,7 @@ in
         default-cache-ttl 60480000
         max-cache-ttl-ssh 60480000
         default-cache-ttl-ssh 60480000
-        ${darwinOr "" "pinentry-program /usr/bin/pinentry-tty"}
+        ${clips.darwinOr "" "pinentry-program /usr/bin/pinentry-tty"}
       '';
       target = "${config.xdg.dataHome}/gnupg/gpg-agent.conf";
     };
