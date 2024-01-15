@@ -11,7 +11,7 @@ in
       enable = true;
       source = ../configs/rime;
       recursive = true;
-      target = (darwinOr
+      target = (clips.darwinOr
         "${config.home.homeDirectory}/Library/Rime"
         "${config.home.homeDirectory}/.local/share/fcitx5/rime"
       );

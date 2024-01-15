@@ -1,8 +1,8 @@
 # snippets and functions
-{ id, pkgs, system }:
+id: pkgs: system:
 {
   common = import ./common.nix;
-  darwinOr = import ./darwinOr.nix system;
+  darwinOr = import ./darwin-or.nix system;
   mustache = import ./mustache.nix pkgs;
   sops-setup = import ./sops-setup.nix id;
 }
