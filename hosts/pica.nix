@@ -1,4 +1,4 @@
-{ pkgs, sspkgs, config, ... }:
+{ pkgs, config, ... }:
 let
   sops-setup = import ../clips/sops-setup.nix;
 in
@@ -28,10 +28,10 @@ in
       wire
       go-migrate
       atlas
-      sspkgs.go-swagger_0_25_0
-      sspkgs.kratos
-      sspkgs.kratos-protoc-gen-go-http
-      sspkgs.kratos-protoc-gen-go-errors
+      stra.go-swagger_0_25_0
+      stra.kratos
+      stra.kratos-protoc-gen-go-http
+      stra.kratos-protoc-gen-go-errors
     ];
 
     home.sessionPath = [

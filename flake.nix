@@ -21,24 +21,30 @@
 
   outputs = { nixpkgs, stable-nixpkgs, stratosphere, home-manager, rust-overlay, sops-nix, ... }:
     let
+      stablePackages = [ "deno" "btop" ];
+      stableOverlay = final: prev:
+        builtins.listToAttrs
+          (map
+            (name: { name = name; value = stable-nixpkgs.legacyPackages.${prev.system}.${name}; })
+            stablePackages);
+      stratosphereOverlay = final: prev: { stra = stratosphere.packages.${prev.system}; };
       homeConfig = home: system: vars:
         home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${system};
           modules = [
             ({ pkgs, ... }: {
-              nixpkgs.overlays = [ rust-overlay.overlays.default ];
-              nixpkgs.config = {
-                allowUnfree = true;
-                allowUnfreePredicate = (_: true);
-              };
+              nixpkgs.overlays = [
+                rust-overlay.overlays.default
+                stableOverlay
+                stratosphereOverlay
+              ];
+              nixpkgs.config = { allowUnfree = true; allowUnfreePredicate = (_: true); };
             })
             sops-nix.homeManagerModule
             ./modules/modules.nix
             home
           ];
           extraSpecialArgs = {
-            sspkgs = stratosphere.packages.${system}; # StratoSphere packages
-            stpkgs = stable-nixpkgs.legacyPackages.${system}; # STable packages
             inherit system;
             inherit vars; # variables for customizing
           };
