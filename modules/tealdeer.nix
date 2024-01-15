@@ -1,8 +1,7 @@
-{ config, lib, pkgs, system, ... }:
+{ clips, config, lib, pkgs, ... }:
 with lib;
 let
   cfg = config.apps.tealdeer;
-  darwinOr = import ../clips/darwin-or.nix system;
 in
 {
   options.apps.tealdeer = {
@@ -17,7 +16,7 @@ in
           auto_update = true
           auto_update_interval_hours = 24
       '';
-      target = darwinOr
+      target = clips.darwinOr
         "${config.home.homeDirectory}/Library/Application Support/tealdeer/config.toml"
         "${config.xdg.configHome}/tealdeer/config.toml";
     };

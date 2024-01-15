@@ -1,12 +1,8 @@
-{ config, pkgs, vars, ... }:
-let
-  mustache = import ../clips/mustache.nix;
-  sops-setup = import ../clips/sops-setup.nix;
-in
+{ clips, config, vars, ... }:
 {
   imports = [
-    ../clips/common.nix
-    (sops-setup "nest")
+    clips.common
+    clips.sops-setup
   ];
   config = {
     home.username = "crows";
@@ -39,7 +35,7 @@ in
 
     home.file.fontConfig = {
       enable = true;
-      source = mustache pkgs "font.conf" ../configs/fontconfig/fonts.conf.mustache vars;
+      source = clips.mustache "font.conf" ../configs/fontconfig/fonts.conf.mustache vars;
       target = "${config.xdg.configHome}/fontconfig/fonts.conf";
     };
 

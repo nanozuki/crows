@@ -1,13 +1,12 @@
-{ lib, config, pkgs, system, ... }:
+{ clips, lib, config, pkgs, ... }:
 with lib;
 let
   cfg = config.apps.gpg;
-  darwinOr = import ../clips/darwin-or.nix system;
 in
 {
   options.apps.gpg = { enable = mkEnableOption "gpg"; };
   config = mkIf cfg.enable {
-    home.packages = darwinOr [ pkgs.pinentry_mac ] [ ];
+    home.packages = clips.darwinOr [ pkgs.pinentry_mac ] [ ];
     programs.gpg = {
       enable = true;
       package = darwinOr pkgs.gnupg pkgs.hello;
