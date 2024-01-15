@@ -28,6 +28,7 @@
             (name: { name = name; value = stable-nixpkgs.legacyPackages.${prev.system}.${name}; })
             stablePackages);
       stratosphereOverlay = final: prev: { stra = stratosphere.packages.${prev.system}; };
+      clips = import ./clips/clips.nix;
       homeConfig = home: system: vars:
         home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${system};
@@ -47,6 +48,7 @@
           extraSpecialArgs = {
             inherit system;
             inherit vars; # variables for customizing
+            clips = clips nixpkgs.legacyPackages.${system} system;
           };
         };
     in

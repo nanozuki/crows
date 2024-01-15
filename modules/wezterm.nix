@@ -1,8 +1,7 @@
-{ config, lib, pkgs, vars, ... }:
+{ clips, config, lib, vars, ... }:
 with lib;
 let
   cfg = config.apps.wezterm;
-  mustache = import ../clips/mustache.nix;
   themeSet = {
     "rose-pine/main" = "rose-pine";
     "rose-pine/dawn" = "rose-pine-dawn";
@@ -29,7 +28,7 @@ in
     };
     home.file.wezterm_vars = {
       enable = true;
-      source = mustache pkgs "vars.lua" ../configs/wezterm/vars.lua.mustache wezVars;
+      source = clips.mustache "vars.lua" ../configs/wezterm/vars.lua.mustache wezVars;
       target = "${config.xdg.configHome}/wezterm/vars.lua";
     };
   };

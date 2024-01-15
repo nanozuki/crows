@@ -1,12 +1,7 @@
-{ config, pkgs, vars, ... }:
-let
-  mustache = import ../clips/mustache.nix;
-  sops-setup = import ../clips/sops-setup.nix;
-in
+{ clips, config, vars, ... }:
 {
   imports = [
-    ../clips/common.nix
-    (sops-setup "nest")
+    clips.common
   ];
   config = {
     home.username = "crows";
@@ -16,6 +11,11 @@ in
 
     home.sessionVariables = {
       HM_CONFIG_NAME = "nest";
+    };
+    home.file.fontConfig = {
+      enable = true;
+      source = clips.mustache "font.conf" ../configs/fontconfig/fonts.conf.mustache vars;
+      target = "${config.xdg.configHome}/fontconfig/fonts.conf";
     };
 
     apps.neovim = {
@@ -36,21 +36,20 @@ in
     apps.rime.enable = true;
     apps.sway.enable = true;
     apps.waybar.enable = true;
-
-    home.file.fontConfig = {
+    apps.sops-secrets = {
       enable = true;
-      source = mustache pkgs "font.conf" ../configs/fontconfig/fonts.conf.mustache vars;
-      target = "${config.xdg.configHome}/fontconfig/fonts.conf";
-    };
-
-    sops.secrets.git_config_local = {
-      path = "${config.xdg.configHome}/git/config_local";
-    };
-    sops.secrets.git_config_a = {
-      path = "${config.xdg.configHome}/git/config_a";
-    };
-    sops.secrets.git_config_b = {
-      path = "${config.xdg.configHome}/git/config_b";
+      name = "nest";
+      secrets = {
+        git_config_local = {
+          path = "${config.xdg.configHome}/git/config_local";
+        };
+        git_config_a = {
+          path = "${config.xdg.configHome}/git/config_a";
+        };
+        git_config_b = {
+          path = "${config.xdg.configHome}/git/config_b";
+        };
+      };
     };
   };
 }
