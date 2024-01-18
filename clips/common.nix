@@ -39,6 +39,7 @@
       eal = "eza --icons -al";
       ela = "eza --icons -al";
       et = "eza --icons -T";
+      hmf = "home-manager --flake .#$HM_CONFIG_NAME";
     };
     functions = {
       gitget = { body = builtins.readFile ../configs/fish/functions/gitget.fish; };
