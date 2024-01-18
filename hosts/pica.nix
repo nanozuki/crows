@@ -14,7 +14,7 @@
       # go repo's generate
       (python3.withPackages (ps: [ ps.pyyaml ]))
       # grpc and protobuf
-      protobuf
+      protobuf_25
       protoc-gen-go
       protoc-gen-go-grpc
       protoc-gen-validate
