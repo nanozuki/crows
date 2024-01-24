@@ -83,6 +83,17 @@ return {
         lsp_doc_border = false, -- add a border to hover docs and signature help
       },
     },
+    config = function(_, opts)
+      require('noice').setup(opts)
+      local noice_fix = vim.api.nvim_create_augroup('noice_fix', {})
+      -- FIX: sometimes, the cmdline height will be changed to 1
+      vim.api.nvim_create_autocmd({ 'TabEnter' }, {
+        group = noice_fix,
+        callback = function()
+          vim.opt.cmdheight = 0
+        end,
+      })
+    end,
     dependencies = {
       'MunifTanjim/nui.nvim',
       'rcarriga/nvim-notify',

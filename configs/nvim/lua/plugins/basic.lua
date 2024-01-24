@@ -16,7 +16,7 @@ return {
         for _, buf in ipairs(bufs) do
           local name = vim.api.nvim_buf_get_name(buf)
           local type = vim.api.nvim_buf_get_option(buf, 'buftype')
-          if name ~= '' and type ~= '' and type ~= 'terminal' then
+          if name ~= '' and type ~= '' then
             vim.api.nvim_buf_delete(buf, {})
           end
         end
