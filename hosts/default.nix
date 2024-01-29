@@ -8,8 +8,8 @@
         size = 14;
       };
       theme = {
-        name = "rose-pine";
-        variant = "dawn";
+        name = "nord";
+        variant = "main";
       };
     };
   };
