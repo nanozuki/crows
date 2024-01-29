@@ -7,10 +7,6 @@ let
     "rose-pine/dawn" = "rose-pine-dawn";
     "rose-pine/moon" = "rose-pine-moon";
     "nord/main" = "nord";
-    "edge/main" = "Edge Dark (base16)";
-    "edge/aura" = "Edge Dark (base16)";
-    "edge/neon" = "Edge Dark (base16)";
-    "edge/light" = "Edge Light (base16)";
   };
   wezVars = {
     font = vars.font;
