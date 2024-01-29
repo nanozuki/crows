@@ -9,7 +9,7 @@ in
     home.packages = clips.darwinOr [ pkgs.pinentry_mac ] [ ];
     programs.gpg = {
       enable = true;
-      package = clips.darwinOr pkgs.gnupg pkgs.hello;
+      package = clips.darwinOr pkgs.gnupg pkgs.emptyDirectory;
       homedir = "${config.xdg.dataHome}/gnupg";
     };
 

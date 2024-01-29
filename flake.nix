@@ -21,7 +21,7 @@
 
   outputs = { nixpkgs, stable-nixpkgs, stratosphere, home-manager, rust-overlay, sops-nix, ... }:
     let
-      stablePackages = [ "deno" "btop" ];
+      stablePackages = [ ];
       stableOverlay = final: prev:
         builtins.listToAttrs
           (map

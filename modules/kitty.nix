@@ -18,7 +18,7 @@ in
   config = mkIf cfg.enable {
     programs.kitty = {
       enable = true;
-      package = pkgs.hello; # ignore package
+      package = pkgs.emptyDirectory;
       font.name = vars.font.family;
       font.size = vars.font.size;
       extraConfig = builtins.readFile ../configs/kitty/kitty.conf;
