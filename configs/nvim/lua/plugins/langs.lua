@@ -67,13 +67,15 @@ return {
       require('go').setup()
 
       local org_imports_group = vim.api.nvim_create_augroup('GoOrgImports', {})
-      vim.api.nvim_create_autocmd('BufWritePost', {
+      vim.api.nvim_create_autocmd('BufWritePre', {
         pattern = { '*.go', 'go.mod' },
         callback = function()
-          require('go.format').org_imports()
+          vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })
         end,
         group = org_imports_group,
       })
+      vim.keymap.set('n', '<leader>ie', '<cmd>GoIfErr<cr>', { desc = 'Insert if err != nil' })
+      vim.keymap.set('i', '<C-i>', '<cmd>GoIfErr<cr>', { desc = 'Insert if err != nil' })
     end,
   },
   {
