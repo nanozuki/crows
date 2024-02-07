@@ -12,8 +12,7 @@ vim.opt.colorcolumn = '120'
 vim.opt.termguicolors = true
 vim.opt.scrolloff = 10
 vim.api.nvim_create_user_command('SaveAsSudo', function()
-  local key = vim.api.nvim_replace_termcodes(':w !sudo tee %', true, false, true)
-  vim.api.nvim_feedkeys(key, 't', false)
+  require('config.lib').feedkeys(':w !sudo tee %')
 end, {})
 
 -- # copy paste

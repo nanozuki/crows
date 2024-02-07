@@ -18,13 +18,6 @@ local function config()
     },
   }
 
-  local function feed_keys_fn(str)
-    return function()
-      local key = vim.api.nvim_replace_termcodes(str, true, false, true)
-      vim.api.nvim_feedkeys(key, 't', false)
-    end
-  end
-
   --- @param shortcut string
   --- @param text string
   --- @param on_press function
@@ -49,11 +42,18 @@ local function config()
   section.buttons = {
     type = 'group',
     val = {
-      button('<leader>e', ' New file', feed_keys_fn('<cmd>ene <CR>')),
-      button('<leader>z', '󰎐 Zip to recent folder', feed_keys_fn('<leader>z')),
-      button('<leader>s', '󰉓 Open Session', feed_keys_fn('<leader>fs')),
+      button('<leader>e', ' New file', function()
+        local bufnr = vim.api.nvim_create_buf(true, false)
+        vim.api.nvim_set_current_buf(bufnr)
+      end),
+      button('<leader>z', '󰎐 Zip to recent folder', function()
+        require('telescope').extensions.z.list()
+      end),
+      button('<leader>s', '󰉓 Open Session', function()
+        require('auto-session.session-lens').search_session()
+      end),
       button('<leader>u', '󰚰 Plugin update', function()
-        require('lazy').update()
+        require('lazy').sync()
       end),
       button('<leader>p', '󰓅 Starup profile', function()
         require('lazy').profile()

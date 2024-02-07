@@ -36,8 +36,7 @@ lsp.buffer_keys = {
     i = {
       '<C-a>',
       function()
-        local key = vim.api.nvim_replace_termcodes('<Esc>', true, false, true)
-        vim.api.nvim_feedkeys(key, 't', false)
+        require('config.lib').feedkeys('<Esc>')
         vim.lsp.buf.code_action()
       end,
       'Code action',
