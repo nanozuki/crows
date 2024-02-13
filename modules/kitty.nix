@@ -18,7 +18,10 @@ in
       font.name = vars.font.family;
       font.size = vars.font.size;
       extraConfig = builtins.readFile ../configs/kitty/kitty.conf;
-      shellIntegration.enableFishIntegration = true;
+      shellIntegration = {
+        enableFishIntegration = true;
+        mode = "no-cursor";
+      };
       theme = themeSet."${vars.theme.name}/${vars.theme.variant}";
     };
     home.file.kitty = {
