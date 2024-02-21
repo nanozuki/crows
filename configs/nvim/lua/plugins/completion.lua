@@ -85,6 +85,10 @@ return {
     init = function()
       vim.g.copilot_no_tab_map = true
     end,
+    enabled = function()
+      local cwd = vim.fn.getcwd()
+      return not string.match(cwd, 'leetcode')
+    end,
     cmd = 'Copilot',
     event = 'InsertEnter',
     config = function()
