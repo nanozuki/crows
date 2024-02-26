@@ -90,6 +90,7 @@ lsp.capabilities = {}
 ---@return table capabilities
 function lsp.make_capabilities(cap_maker)
   local caps = vim.lsp.protocol.make_client_capabilities()
+  caps.workspace.didChangeWatchedFiles.dynamicRegistration = true
   for _, func in ipairs(lsp.capabilities) do
     caps = func(caps)
   end
