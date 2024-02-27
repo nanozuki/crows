@@ -86,6 +86,7 @@ let
     programs.go = {
       enable = true;
       goPath = ".local/share/go";
+      package = pkgs.go_1_22;
     };
     home.sessionPath = [
       "$GOPATH/bin"
