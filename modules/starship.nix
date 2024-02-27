@@ -1,24 +1,51 @@
 { config, lib, pkgs, ... }:
 with lib;
-let cfg = config.apps.starship;
+let
+  cfg = config.apps.starship;
+  presetsPath = "${pkgs.starship}/share/starship/presets/nerd-font-symbols.toml";
+  preset = builtins.fromTOML (builtins.readFile presetsPath);
 in
 {
   options.apps.starship = { enable = mkEnableOption "starship"; };
   config = mkIf cfg.enable {
-    home.packages = [
-      pkgs.starship
-    ];
-    home.file.starship = {
+    programs.starship = {
       enable = true;
-      source = ../configs/starship/config.toml;
-      target = "${config.xdg.configHome}/starship.toml";
-    };
-    home.file.starship_fish = {
-      enable = true;
-      text = ''
-        starship init fish | source
-      '';
-      target = "${config.xdg.configHome}/fish/after/starship.fish";
+      enableFishIntegration = true;
+      settings = mkMerge [
+        preset
+        {
+          character = {
+            success_symbol = "[»](bold purple)";
+            error_symbol = "[»](bold red)";
+          };
+          directory = {
+            truncation_length = 10;
+            truncate_to_repo = false;
+            fish_style_pwd_dir_length = 1;
+          };
+          git_metrics = {
+            added_style = "green";
+            deleted_style = "red";
+            format = "([+$added]($added_style))([-$deleted]($deleted_style)) ";
+            disabled = false;
+          };
+          status = {
+            disabled = false;
+          };
+          golang = {
+            symbol = " ";
+          };
+          lua = {
+            disabled = true;
+          };
+          aws = {
+            disabled = true;
+          };
+          gcloud = {
+            disabled = true;
+          };
+        }
+      ];
     };
   };
 }
