@@ -28,6 +28,8 @@ let
       enable = true;
       withPython3 = true;
       withNodeJs = true;
+      # dependencies for CopilotChat.nvim
+      extraPython3Packages = (pyPkgs: with pyPkgs; [ python-dotenv requests prompt-toolkit tiktoken ]);
     };
     programs.fish.shellAbbrs = {
       vi = "nvim";
