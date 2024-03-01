@@ -80,28 +80,4 @@ return {
       })
     end,
   },
-  {
-    'zbirenbaum/copilot.lua',
-    init = function()
-      vim.g.copilot_no_tab_map = true
-    end,
-    enabled = function()
-      local cwd = vim.fn.getcwd()
-      return not string.match(cwd, 'leetcode')
-    end,
-    cmd = 'Copilot',
-    event = 'InsertEnter',
-    config = function()
-      require('copilot').setup({
-        suggestion = {
-          auto_trigger = true,
-          keymap = {
-            accept = '<C-e>',
-            next = '<C-.>',
-            prev = '<C-,>',
-          },
-        },
-      })
-    end,
-  },
 }
