@@ -1,0 +1,96 @@
+Project Specialize Dependencies
+atlas
+awscli2
+gnostic
+go-migrate
+go-mockery
+go-swagger
+google-cloud-sdk
+kratos
+kratos-protoc-gen-go-errors
+kratos-protoc-gen-go-http
+mkcert
+ngrok
+nss (-tools)
+pandoc-cli
+protobuf
+protoc-gen-go
+protoc-gen-go-grpc
+protoc-gen-validate
+python3 (with pyyaml)
+
+Language Dependencies
+- go
+delve
+go
+gofumpt
+golangci-lint
+gomodifytags
+gopls
+gotests
+gotestsum
+iferr
+impl
+wire
+- typescript
+deno
+eslint
+eslint_d
+nodejs
+npm-check-updates
+pnpm
+prettier
+tailwindcss-language-server
+typescript
+- lua
+lua-language-server
+stylua
+- nix
+nil
+nixpkgs-fmt
+- rust
+rust-analyzer
+rust-default
+- svelte
+svelte-check
+svelte-language-server
+- terraform
+terraform
+terraform-ls
+- zig
+zig
+zls
+- misc
+vim-language-server
+vscode-langservers-extracted
+yaml-language-server
+
+Global Dependencies
+atuin
+babelfish
+bat
+btop
+direnv
+eza
+fd
+fish
+fzf
+git
+gnupg
+gron
+helix
+jq
+just
+neovim
+pinentry-mac
+ripgrep
+sops
+starship
+tealdeer
+tokei
+zstd
+
+# Want to remove
+mycli
+rage
+zulu-ca-jdk
