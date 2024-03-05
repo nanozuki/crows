@@ -83,7 +83,7 @@ let
       iferr
       impl
       delve
-      go-mockery
+      wire
     ];
     programs.go = {
       enable = true;

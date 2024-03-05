@@ -11,23 +11,7 @@
 
     home.packages = with pkgs; [
       zstd
-      # go repo's generate
-      (python3.withPackages (ps: [ ps.pyyaml ]))
-      # grpc and protobuf
-      protobuf_25
-      protoc-gen-go
-      protoc-gen-go-grpc
-      protoc-gen-validate
-      gnostic # protoc-gen-openapi
       awscli2
-      mycli
-      wire
-      go-migrate
-      atlas
-      stra.go-swagger_0_25_0
-      stra.kratos
-      stra.kratos-protoc-gen-go-http
-      stra.kratos-protoc-gen-go-errors
     ];
 
     home.sessionPath = [

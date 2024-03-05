@@ -1,24 +1,3 @@
-Project Specialize Dependencies
-atlas
-awscli2
-gnostic
-go-migrate
-go-mockery
-go-swagger
-google-cloud-sdk
-kratos
-kratos-protoc-gen-go-errors
-kratos-protoc-gen-go-http
-mkcert
-ngrok
-nss (-tools)
-pandoc-cli
-protobuf
-protoc-gen-go
-protoc-gen-go-grpc
-protoc-gen-validate
-python3 (with pyyaml)
-
 Language Dependencies
 - go
 delve
@@ -89,8 +68,3 @@ starship
 tealdeer
 tokei
 zstd
-
-# Want to remove
-mycli
-rage
-zulu-ca-jdk
