@@ -91,4 +91,9 @@
       invert = true;
     };
   };
+  programs.direnv = {
+    enable = true;
+    # enableFishIntegration = true; # default enable
+    nix-direnv.enable = true;
+  };
 }
