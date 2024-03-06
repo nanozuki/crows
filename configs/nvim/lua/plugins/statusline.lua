@@ -71,16 +71,16 @@ local nvim_tree = {
   },
 }
 
-local noice_recording = {
-  function()
-    ---@diagnostic disable-next-line: undefined-field
-    return require('noice').api.status.mode.get()
-  end,
-  cond = function()
-    ---@diagnostic disable-next-line: undefined-field
-    return package.loaded['noice'] and require('noice').api.status.mode.has()
-  end,
-}
+local noice_recording = function()
+  if not values.use_noice then
+    return ''
+  end
+  local reg = vim.fn.reg_recording()
+  if reg == '' then
+    return ''
+  end
+  return string.format('recording @%s', reg)
+end
 
 return {
   {
