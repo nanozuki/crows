@@ -32,9 +32,6 @@ in
           status = {
             disabled = false;
           };
-          golang = {
-            symbol = " ";
-          };
           lua = {
             disabled = true;
           };

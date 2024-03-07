@@ -52,20 +52,7 @@ let
           name = vars.theme.name;
           variant = vars.theme.variant;
         };
-        languages = {
-          vim = true;
-          json = true;
-          yaml = true;
-          go = cfg.language.go;
-          nix = true;
-          ocaml = cfg.language.ocaml;
-          rust = cfg.language.rust;
-          svelte = cfg.language.svelte;
-          terraform = cfg.language.terraform;
-          typescript_deno = cfg.language.typescript_deno;
-          typescript_node = cfg.language.typescript_node;
-          zig = cfg.language.zig;
-        };
+        languages = { vim = true; json = true; yaml = true; nix = true; } // cfg.language;
         use_global_statusline = cfg.useGlobalStatusline;
         use_noice = cfg.useNoice;
       };
