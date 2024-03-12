@@ -55,15 +55,7 @@ return {
     enabled = values.use_noice,
     opts = {
       views = {
-        -- FIX: I want to use
-        -- cmdline_popup = { position = { row = 0, col = -2 }, relative = 'cursor', }
-        -- but it may cause issue: https://github.com/folke/noice.nvim/issues/636
-        -- I guess the noice.nvim keep the winid of nui.PopUp() and use it to open cmdline_popup again.
-        -- Before fix it, I make a workaround here:
-        cmdline_popup = {
-          position = { row = '25%', col = '50%' },
-          relative = { type = 'editor' },
-        },
+        cmdline_popup = { position = { row = 0, col = -2 }, relative = 'cursor' },
       },
       lsp = {
         progress = {
