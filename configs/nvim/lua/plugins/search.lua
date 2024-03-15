@@ -17,6 +17,7 @@ return {
             filesize_limit = 0.5,
             timeout = 100,
           },
+          file_ignore_patterns = { '.*%.pb.*%.go', '.*api.yaml', 'swagger.yaml' },
         },
         extensions = {
           fzf = {
