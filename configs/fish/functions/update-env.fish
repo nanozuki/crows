@@ -3,7 +3,7 @@ if type -q home-manager
     if test -z (git status --porcelain); and test "master" = (git branch --show-current)
         git pull
         home-manager switch --flake .#$HM_CONFIG_NAME
-        nix-collect-garbage --delete-older-than 30d
+        and nix-collect-garbage --delete-older-than 30d
     else
         echo "home-manager is not clean or not in master branch"
         return 1
