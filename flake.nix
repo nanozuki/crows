@@ -25,7 +25,7 @@
 
   outputs = { nixpkgs, stable-nixpkgs, stratosphere, home-manager, rust-overlay, sops-nix, ... }:
     let
-      stablePackages = [ ];
+      stablePackages = [ "awscli2" ];
       stableOverlay = final: prev:
         builtins.listToAttrs
           (map
