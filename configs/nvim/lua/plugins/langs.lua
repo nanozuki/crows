@@ -55,19 +55,16 @@ return {
     end,
   },
   {
-    'ray-x/go.nvim',
-    ft = { 'go', 'gomod' },
-    enabled = values.languages.go,
-    dependencies = {
-      'ray-x/guihua.lua',
-      'neovim/nvim-lspconfig',
+    'olexsmir/gopher.nvim',
+    requires = { -- dependencies
+      'nvim-lua/plenary.nvim',
       'nvim-treesitter/nvim-treesitter',
     },
     config = function()
-      require('go').setup()
-
+      require('gopher').setup({})
+      -- organize imports
       local org_imports_group = vim.api.nvim_create_augroup('GoOrgImports', {})
-      vim.api.nvim_create_autocmd('BufWritePre', {
+      vim.api.nvim_create_autocmd('BufWritePost', {
         pattern = { '*.go', 'go.mod' },
         callback = function()
           vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })
