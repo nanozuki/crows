@@ -45,6 +45,7 @@ vim.filetype.add({
   extension = {
     mdx = 'markdown',
     gotmpl = 'gotmpl',
+    typ = 'typst',
   },
   name = {
     ['tsconfig.json'] = 'jsonc',

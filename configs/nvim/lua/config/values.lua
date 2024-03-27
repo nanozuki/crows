@@ -23,6 +23,7 @@ local values = {
     terraform = false,
     typescript_deno = false,
     typescript_node = false,
+    typst = false,
     zig = false,
   },
   ---@type table<string, string>

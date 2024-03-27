@@ -118,6 +118,10 @@ servers.terraformls = {
   autoload = has_enabled.terraform,
 }
 
+servers.typst_lsp = {
+  autoload = has_enabled.typst,
+}
+
 servers.zls = {
   autoload = has_enabled.zig,
 }
