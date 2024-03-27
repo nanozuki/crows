@@ -20,7 +20,7 @@
     gron
     just
     helix
-    ngrok
+    lazygit
   ];
   home.sessionPath = [
     "$HOME/.local/bin"
