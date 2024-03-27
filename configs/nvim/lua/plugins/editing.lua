@@ -65,7 +65,7 @@ return {
 
       require('lint').linters_by_ft = linters_by_ft
       local lint_group = vim.api.nvim_create_augroup('NvimLint', {})
-      vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
+      vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufWritePost' }, {
         group = lint_group,
         callback = function()
           require('lint').try_lint()

@@ -127,15 +127,11 @@ return {
       -- _G.ScLa = get_lnum_action
       require('statuscol').setup({
         segments = {
-          -- {
-          --   sign = { name = { 'Diagnostic' }, maxwidth = 2, auto = true },
-          --   click = 'v:lua.ScSa',
-          -- },
           {
             text = { builtin.lnumfunc },
             sign = {
-              name = { 'Diagnostic' },
-              colwidth = 1,
+              name = { '.*' },
+              colwidth = 2,
               auto = true,
             },
             click = 'v:lua.ScLa',
@@ -162,7 +158,35 @@ return {
       end
     end,
     config = function()
-      require('ufo').setup()
+      local handler = function(virtText, lnum, endLnum, width, truncate)
+        local newVirtText = {}
+        local suffix = (' 󰁂 %d '):format(endLnum - lnum)
+        local sufWidth = vim.fn.strdisplaywidth(suffix)
+        local targetWidth = width - sufWidth
+        local curWidth = 0
+        for _, chunk in ipairs(virtText) do
+          local chunkText = chunk[1]
+          local chunkWidth = vim.fn.strdisplaywidth(chunkText)
+          if targetWidth > curWidth + chunkWidth then
+            table.insert(newVirtText, chunk)
+          else
+            chunkText = truncate(chunkText, targetWidth - curWidth)
+            local hlGroup = chunk[2]
+            table.insert(newVirtText, { chunkText, hlGroup })
+            chunkWidth = vim.fn.strdisplaywidth(chunkText)
+            -- str width returned from truncate() may less than 2nd argument, need padding
+            if curWidth + chunkWidth < targetWidth then
+              suffix = suffix .. (' '):rep(targetWidth - curWidth - chunkWidth)
+            end
+            break
+          end
+          curWidth = curWidth + chunkWidth
+        end
+        table.insert(newVirtText, { suffix, 'MoreMsg' })
+        return newVirtText
+      end
+      ---@diagnostic disable-next-line: missing-fields
+      require('ufo').setup({ fold_virt_text_handler = handler })
     end,
   },
 }
