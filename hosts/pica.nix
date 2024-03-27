@@ -32,6 +32,7 @@
         terraform = true;
         typescript_deno = true;
         typescript_node = true;
+        typst = true;
         zig = true;
       };
     };

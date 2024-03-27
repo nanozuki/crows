@@ -143,6 +143,12 @@ let
       "${config.xdg.dataHome}/npm/bin"
     ];
   };
+  language_typst = mkIf cfg.language.typst {
+    home.packages = with pkgs; [
+      typst
+      typst-lsp
+    ];
+  };
   language_zig = mkIf cfg.language.zig {
     home.packages = with pkgs; [
       zig
@@ -166,6 +172,7 @@ in
           terraform = mkEnableOption "Terraform";
           typescript_deno = mkEnableOption "Typescript on Deno";
           typescript_node = mkEnableOption "Typescript on Node.js";
+          typst = mkEnableOption "Typst";
           zig = mkEnableOption "Zig";
         };
       };
@@ -175,13 +182,14 @@ in
   config =
     mkIf cfg.enable (mkMerge [
       basic
-      language_typescript_deno
       language_go
       language_ocaml
       language_rust
       language_svelte
       language_terraform
+      language_typescript_deno
       language_typescript_node
+      language_typst
       language_zig
     ]);
 }
