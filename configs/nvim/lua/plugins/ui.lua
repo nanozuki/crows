@@ -7,16 +7,14 @@ return {
     event = 'VeryLazy',
     config = function()
       require('dressing').setup({
-        input = { win_options = { winblend = 0 } },
+        input = {
+          insert_only = false,
+        },
         select = {
-          get_config = function(opts)
-            if opts.kind == 'codeaction' then
-              return {
-                backend = 'builtin',
-                builtin = { relative = 'cursor', max_width = 80 },
-              }
-            end
-          end,
+          backend = 'native',
+          builtin = {
+            relative = 'cursor',
+          },
         },
       })
     end,
@@ -115,6 +113,56 @@ return {
           },
         },
       })
+    end,
+  },
+  {
+    'luukvbaal/statuscol.nvim',
+    config = function()
+      vim.opt.foldcolumn = '1'
+      vim.opt.fillchars = { foldopen = '', foldclose = '', foldsep = ' ' }
+      vim.opt.signcolumn = 'number'
+      local builtin = require('statuscol.builtin')
+      -- _G.ScFa = get_fold_action
+      -- _G.ScSa = get_sign_action
+      -- _G.ScLa = get_lnum_action
+      require('statuscol').setup({
+        segments = {
+          -- {
+          --   sign = { name = { 'Diagnostic' }, maxwidth = 2, auto = true },
+          --   click = 'v:lua.ScSa',
+          -- },
+          {
+            text = { builtin.lnumfunc },
+            sign = {
+              name = { 'Diagnostic' },
+              colwidth = 1,
+              auto = true,
+            },
+            click = 'v:lua.ScLa',
+          },
+          { text = { builtin.foldfunc }, click = 'v:lua.ScFa' },
+        },
+      })
+    end,
+  },
+  {
+    'kevinhwang91/nvim-ufo',
+    dependencies = {
+      'kevinhwang91/promise-async',
+      'neovim/nvim-lspconfig',
+    },
+    init = function()
+      local lsp = require('config.lsp')
+      lsp.capabilities[#lsp.capabilities + 1] = function(caps)
+        caps.textDocument.foldingRange = {
+          dynamicRegistration = false,
+          lineFoldingOnly = true,
+        }
+        return caps
+      end
+    end,
+    config = function()
+      require('ufo').setup()
     end,
   },
 }
