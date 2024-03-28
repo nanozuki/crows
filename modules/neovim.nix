@@ -19,8 +19,6 @@ let
       ## json, yaml
       vscode-langservers-extracted # include {html,css,json,eslint}-language-server
       nodePackages.yaml-language-server
-      # doc generation
-      pandoc
       #  formatter with many language supportted
       nodePackages.prettier
     ];

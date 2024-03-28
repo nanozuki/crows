@@ -43,6 +43,8 @@ local function config()
       hl = theme.line,
     }
   end, {})
+  vim.keymap.set('n', '<leader>wp', ':Tabby pick_window<CR>', { desc = 'Select a window' })
+  vim.keymap.set('n', '<leader>tr', ':Tabby rename_tab ', { desc = 'Rename current tab' })
 end
 
 return {
