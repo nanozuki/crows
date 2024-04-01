@@ -21,6 +21,7 @@
     just
     helix
     lazygit
+    ngrok
   ];
   home.sessionPath = [
     "$HOME/.local/bin"
