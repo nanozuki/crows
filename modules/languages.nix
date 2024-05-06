@@ -13,15 +13,16 @@ let
   };
   go = {
     home.packages = with pkgs; [
-      gopls # language server
-      golangci-lint # linter
+      delve
       gofumpt # formatter
+      golangci-lint # linter
       gomodifytags
+      gopls # language server
       gotests
       gotestsum
+      gotools
       iferr
       impl
-      delve
       wire
     ];
     programs.go = {

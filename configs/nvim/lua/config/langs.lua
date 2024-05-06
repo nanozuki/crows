@@ -39,13 +39,6 @@ servers.jsonls = {
 
 servers.gopls = {
   autoload = true,
-  config = {
-    settings = {
-      gopls = {
-        gofumpt = true,
-      },
-    },
-  },
 }
 
 servers.rust_analyzer = {
@@ -147,6 +140,7 @@ local filetypes = {
   go = {
     enable = true,
     linters = { 'golangci-lint' },
+    formatters = { 'goimports', 'gofumpt' },
     tools = { 'gomodifytags', 'gotests', 'gotestsum', 'iferr', 'impl', 'dlv' },
   },
   typescript = { enable = true, formatters = { 'prettier' }, linters = { 'eslint_d' } },

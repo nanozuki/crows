@@ -60,15 +60,6 @@ return {
     },
     config = function()
       require('gopher').setup({})
-      -- organize imports
-      local org_imports_group = vim.api.nvim_create_augroup('GoOrgImports', {})
-      vim.api.nvim_create_autocmd('BufWritePost', {
-        pattern = { '*.go', 'go.mod' },
-        callback = function()
-          vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })
-        end,
-        group = org_imports_group,
-      })
       vim.keymap.set('n', '<leader>ie', '<cmd>GoIfErr<cr>', { desc = 'Insert if err != nil' })
       vim.keymap.set('i', '<C-i>', '<cmd>GoIfErr<cr>', { desc = 'Insert if err != nil' })
     end,
