@@ -32,7 +32,15 @@ return {
         if server.root_patterns then
           config.root_dir = require('lspconfig.util').root_pattern(unpack(server.root_patterns))
         end
-        config.on_attach = lsp.on_attach(on_attach)
+        config.on_attach = function(client, bufnr)
+          lsp.on_attach(client, bufnr)
+          if server.on_attach then
+            server.on_attach(client, bufnr)
+          end
+          if on_attach then
+            on_attach(client, bufnr)
+          end
+        end
         config.capabilities = lsp.make_capabilities(caps_maker)
         return config
       end
