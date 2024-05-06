@@ -3,9 +3,6 @@
 ---@field root_patterns? string[] see lspconfig.util.root_pattern
 ---@field config? table<string, any> lsp config
 
-local values = require('config.values')
-local has_enabled = values.languages
-
 local servers = {} ---@type table<string, LspConfig>
 
 servers.lua_ls = {
@@ -31,20 +28,16 @@ servers.lua_ls = {
   },
 }
 
-servers.vimls = {
-  autoload = has_enabled.vim,
-}
-
 servers.yamlls = {
-  autoload = has_enabled.yaml,
+  autoload = true,
 }
 
 servers.jsonls = {
-  autoload = has_enabled.json,
+  autoload = true,
 }
 
 servers.gopls = {
-  autoload = has_enabled.go,
+  autoload = true,
   config = {
     settings = {
       gopls = {
@@ -55,7 +48,7 @@ servers.gopls = {
 }
 
 servers.rust_analyzer = {
-  autoload = has_enabled.rust,
+  autoload = true,
   config = {
     settings = {
       ['rust-analyzer'] = {
@@ -69,20 +62,18 @@ servers.rust_analyzer = {
 }
 
 servers.tsserver = {
-  autoload = has_enabled.typescript_node,
+  autoload = true,
   root_patterns = { 'tsconfig.json', 'jsconfig.json', 'package.json' },
-  config = {
-    single_file_support = not has_enabled.typescript_deno, -- Don't start in deno files
-  },
+  config = { single_file_support = false },
 }
 
 servers.tailwindcss = {
-  autoload = has_enabled.typescript_node,
+  autoload = true,
   root_patterns = { 'tailwind.config.js', 'tailwind.config.ts' },
 }
 
 servers.cssls = {
-  autoload = has_enabled.typescript_node,
+  autoload = true,
   config = {
     lint = {
       unknownAtRules = 'ignore',
@@ -95,11 +86,11 @@ servers.svelte = {
 }
 
 servers.html = {
-  autoload = has_enabled.typescript_node,
+  autoload = true,
 }
 
 servers.denols = {
-  autoload = has_enabled.typescript_deno,
+  autoload = true,
   root_patterns = { 'deno.json', 'deno.jsonc' },
   config = {
     init_options = {
@@ -111,23 +102,23 @@ servers.denols = {
 }
 
 servers.ocamllsp = {
-  autoload = has_enabled.ocaml,
+  autoload = true,
 }
 
 servers.terraformls = {
-  autoload = has_enabled.terraform,
+  autoload = true,
 }
 
 servers.typst_lsp = {
-  autoload = has_enabled.typst,
+  autoload = true,
 }
 
 servers.zls = {
-  autoload = has_enabled.zig,
+  autoload = true,
 }
 
 servers.nil_ls = {
-  autoload = has_enabled.nix,
+  autoload = true,
 }
 
 ---@class FiletypeConfig
@@ -137,21 +128,21 @@ servers.nil_ls = {
 ---@field tools? string[]
 ---@type table<string, FiletypeConfig>
 local filetypes = {
-  lua = { enable = has_enabled.lua, formatters = { 'stylua' } },
+  lua = { enable = true, formatters = { 'stylua' } },
   css = { enable = true, formatters = { 'prettier' } },
-  deno = { enable = has_enabled.typescript_deno, formatters = { 'prettier' } },
+  deno = { enable = true, formatters = { 'prettier' } },
   html = { enable = true, formatters = { 'prettier' } },
   json = { enable = true, formatters = { 'prettier' } },
   yaml = { enable = true, formatters = { 'prettier' } },
   markdown = { enable = true, formatters = { 'prettier' } },
   go = {
-    enable = has_enabled.go,
+    enable = true,
     linters = { 'golangci-lint' },
     tools = { 'gomodifytags', 'gotests', 'gotestsum', 'iferr', 'impl', 'dlv' },
   },
-  typescript = { enable = has_enabled.typescript_node, formatters = { 'prettier' }, linters = { 'eslint_d' } },
-  ocaml = { enable = has_enabled.ocaml, formatters = { 'ocamlformat' } },
-  nix = { enable = has_enabled.nix, formatters = { 'nixpkgs-fmt' } },
+  typescript = { enable = true, formatters = { 'prettier' }, linters = { 'eslint_d' } },
+  ocaml = { enable = true, formatters = { 'ocamlformat' } },
+  nix = { enable = true, formatters = { 'nixpkgs-fmt' } },
 }
 
 return {

@@ -14,7 +14,6 @@ return {
   {
     'b0o/schemastore.nvim',
     lazy = true,
-    enabled = values.languages.json or values.languages.yaml,
     config = function()
       langs.servers.jsonls.config = {
         settings = {
@@ -78,7 +77,6 @@ return {
   {
     'mrcjkb/rustaceanvim',
     dependencies = { 'neovim/nvim-lspconfig' },
-    enabled = values.languages.rust,
     ft = { 'rust' },
     init = function()
       langs.servers.rust_analyzer.autoload = false
@@ -100,25 +98,26 @@ return {
     'pmizio/typescript-tools.nvim',
     dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
     ft = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact', 'svelte' },
-    enabled = values.languages.typescript_node,
     init = function()
       langs.servers.tsserver.autoload = false
+      langs.servers.svelte.autoload = false
     end,
     config = function()
       local cfg = lsp.make_config(langs.servers.tsserver)
       require('typescript-tools').setup(cfg)
-      if values.languages.svelte then
-        local lspconfig = require('lspconfig')
-        local on_attach = function(client, _)
-          vim.api.nvim_create_autocmd('BufWritePost', {
-            pattern = { '*.js', '*.ts' },
-            callback = function(ctx)
-              client.notify('$/onDidChangeTsOrJsFile', { uri = ctx.match })
-            end,
-          })
-        end
-        lspconfig.svelte.setup(lsp.make_config(langs.servers.svelte, on_attach))
+
+      -- svelte language server
+      -- TODO: this is not belong to this plugin, move out.
+      local lspconfig = require('lspconfig')
+      local on_attach = function(client, _)
+        vim.api.nvim_create_autocmd('BufWritePost', {
+          pattern = { '*.js', '*.ts' },
+          callback = function(ctx)
+            client.notify('$/onDidChangeTsOrJsFile', { uri = ctx.match })
+          end,
+        })
       end
+      lspconfig.svelte.setup(lsp.make_config(langs.servers.svelte, on_attach))
     end,
   },
 }
