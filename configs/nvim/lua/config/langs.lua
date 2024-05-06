@@ -39,6 +39,18 @@ servers.jsonls = {
 
 servers.gopls = {
   autoload = true,
+  config = {
+    settings = {
+      gopls = {
+        gofumpt = true,
+      },
+    },
+  },
+  on_attach = function(_, bufnr)
+    vim.keymap.set('n', '<leader>oi', function()
+      vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })
+    end, { desc = 'Organize imports', buffer = bufnr })
+  end,
 }
 
 servers.rust_analyzer = {
@@ -140,7 +152,6 @@ local filetypes = {
   go = {
     enable = true,
     linters = { 'golangci-lint' },
-    formatters = { 'goimports', 'gofumpt' },
     tools = { 'gomodifytags', 'gotests', 'gotestsum', 'iferr', 'impl', 'dlv' },
   },
   typescript = { enable = true, formatters = { 'prettier' }, linters = { 'eslint_d' } },

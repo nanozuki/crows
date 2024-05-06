@@ -60,8 +60,6 @@ return {
     },
     config = function()
       require('gopher').setup({})
-      vim.keymap.set('n', '<leader>ie', '<cmd>GoIfErr<cr>', { desc = 'Insert if err != nil' })
-      vim.keymap.set('i', '<C-i>', '<cmd>GoIfErr<cr>', { desc = 'Insert if err != nil' })
     end,
   },
   {
