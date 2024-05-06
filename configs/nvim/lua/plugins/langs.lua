@@ -1,6 +1,5 @@
 local lsp = require('config.lsp')
 local langs = require('config.langs')
-local values = require('config.values')
 
 return {
   -- fish
@@ -100,24 +99,10 @@ return {
     ft = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact', 'svelte' },
     init = function()
       langs.servers.tsserver.autoload = false
-      langs.servers.svelte.autoload = false
     end,
     config = function()
       local cfg = lsp.make_config(langs.servers.tsserver)
       require('typescript-tools').setup(cfg)
-
-      -- svelte language server
-      -- TODO: this is not belong to this plugin, move out.
-      local lspconfig = require('lspconfig')
-      local on_attach = function(client, _)
-        vim.api.nvim_create_autocmd('BufWritePost', {
-          pattern = { '*.js', '*.ts' },
-          callback = function(ctx)
-            client.notify('$/onDidChangeTsOrJsFile', { uri = ctx.match })
-          end,
-        })
-      end
-      lspconfig.svelte.setup(lsp.make_config(langs.servers.svelte, on_attach))
     end,
   },
 }

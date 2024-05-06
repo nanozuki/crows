@@ -31,20 +31,9 @@ lsp.buffer_keys = {
   },
   type_def = { '<leader>D', vim.lsp.buf.type_definition, 'Goto type definition' },
   rename = { '<leader>rn', vim.lsp.buf.rename, 'Rename symbol' },
-  code_action = {
-    n = { '<leader>ca', vim.lsp.buf.code_action, 'Code action' },
-    i = {
-      '<C-a>',
-      function()
-        require('config.lib').feedkeys('<Esc>')
-        vim.lsp.buf.code_action()
-      end,
-      'Code action',
-    },
-  },
+  code_action = { '<leader>ca', vim.lsp.buf.code_action, 'Code action' },
   codelens = { '<leader>cl', vim.lsp.codelens.run, 'Code action' },
   list_ref = { 'gr', vim.lsp.buf.references, 'List references' },
-
   -- format = { '<leader>f', vim.lsp.buf.formatting, 'Format buffer' },
 }
 
@@ -67,16 +56,10 @@ lsp.on_attach_callbacks = {
   lsp.set_buffer_keymapping,
 }
 
----@param callback? LspOnAttachCallback Ad hoc additions callback
----@return LspOnAttachCallback
-function lsp.on_attach(callback)
-  return function(client, bufnr)
-    for _, func in ipairs(lsp.on_attach_callbacks) do
-      func(client, bufnr)
-    end
-    if callback then
-      callback(client, bufnr)
-    end
+---@type LspOnAttachCallback
+function lsp.on_attach(client, bufnr)
+  for _, func in ipairs(lsp.on_attach_callbacks) do
+    func(client, bufnr)
   end
 end
 

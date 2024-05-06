@@ -2,6 +2,7 @@
 ---@field autoload boolean if autoload by nvim-lspconfig
 ---@field root_patterns? string[] see lspconfig.util.root_pattern
 ---@field config? table<string, any> lsp config
+---@field on_attach? LspOnAttachCallback additional on_attach function
 
 local servers = {} ---@type table<string, LspConfig>
 
@@ -83,6 +84,14 @@ servers.cssls = {
 
 servers.svelte = {
   autoload = false, -- need setup after tsserver
+  on_attach = function(client, _)
+    vim.api.nvim_create_autocmd('BufWritePost', {
+      pattern = { '*.js', '*.ts' },
+      callback = function(ctx)
+        client.notify('$/onDidChangeTsOrJsFile', { uri = ctx.match })
+      end,
+    })
+  end,
 }
 
 servers.html = {
