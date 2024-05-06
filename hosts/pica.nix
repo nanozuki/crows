@@ -22,7 +22,7 @@
     };
     apps.neovim = {
       enable = true;
-      useNoice = true;
+      hideCommandLine = true;
       useGlobalStatusline = true;
     };
     apps.sops-secrets = {

@@ -6,8 +6,8 @@ in
 {
   options.apps.neovim = {
     enable = mkEnableOption "Neovim";
-    useNoice = mkEnableOption "Noice";
-    useGlobalStatusline = mkEnableOption "Global statusline";
+    hideCommandLine = mkEnableOption "Hide Command Line";
+    useGlobalStatusline = mkEnableOption "Use global statusline";
   };
 
   config = mkIf cfg.enable {
@@ -41,7 +41,7 @@ in
           variant = vars.theme.variant;
         };
         use_global_statusline = cfg.useGlobalStatusline;
-        use_noice = cfg.useNoice;
+        hide_command_line = cfg.hideCommandLine;
       };
       target = "${config.xdg.configHome}/nvim/custom.json";
     };

@@ -36,7 +36,7 @@ let
     home.packages = with pkgs; [ lua-language-server stylua ];
   };
   nix = {
-    home.packages = with pkgs; [ nixfmt nixpkgs-fmt ];
+    home.packages = with pkgs; [ nil nixpkgs-fmt ];
   };
   ocaml = {
     home.packages = with pkgs; [

@@ -72,7 +72,7 @@ local nvim_tree = {
 }
 
 local noice_recording = function()
-  if not values.use_noice then
+  if not values.hide_command_line then
     return ''
   end
   local reg = vim.fn.reg_recording()
