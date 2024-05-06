@@ -7,7 +7,7 @@ return {
   {
     'ray-x/lsp_signature.nvim',
     lazy = true,
-    enabled = not values.use_noice,
+    enabled = not values.hide_command_line,
     config = function()
       lsp.on_attach_callbacks[#lsp.on_attach_callbacks + 1] = function(_, _)
         require('lsp_signature').on_attach({ bind = true, handler_opts = { border = 'none' } })

@@ -50,7 +50,7 @@ return {
   {
     'folke/noice.nvim',
     event = 'VeryLazy',
-    enabled = values.use_noice,
+    enabled = values.hide_command_line,
     opts = {
       views = {
         cmdline_popup = { position = { row = 0, col = -2 }, relative = 'cursor' },

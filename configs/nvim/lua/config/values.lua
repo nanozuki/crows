@@ -10,7 +10,7 @@ local values = {
   ---@type table<string, string>
   diagnostic_signs = { Error = '󰅚', Warn = '󰀪', Info = '', Hint = '󰌶' },
   use_global_statusline = false,
-  use_noice = false,
+  hide_command_line = false,
 }
 
 --- load custom config
