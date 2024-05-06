@@ -3,19 +3,6 @@
     "name": "rose-pine",
     "variant": "dawn"
   },
-  "languages": {
-    "vim": true,
-    "json": true,
-    "yaml": true,
-    "go": false,
-    "nix": false,
-    "ocaml": false,
-    "rust": false,
-    "terraform": false,
-    "typescript_deno": false,
-    "typescript_node": false,
-    "zig": false
-  },
   "use_global_statusline": false,
   "use_noice": false
 }
