@@ -22,17 +22,6 @@
       enable = true;
       useNoice = true;
       useGlobalStatusline = true;
-      language = {
-        go = true;
-        ocaml = false;
-        rust = true;
-        svelte = true;
-        terraform = true;
-        typescript_deno = true;
-        typescript_node = true;
-        typst = true;
-        zig = true;
-      };
     };
     apps.rime.enable = true;
     apps.sway.enable = true;
@@ -52,5 +41,6 @@
         };
       };
     };
+    languages.nix.enable = true;
   };
 }

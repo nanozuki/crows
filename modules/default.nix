@@ -5,6 +5,7 @@
     ./gpg.nix
     ./ideavim.nix
     ./kitty.nix
+    ./languages.nix
     ./neovim.nix
     ./rime.nix
     ./sops-secrets.nix
