@@ -1,6 +1,7 @@
 { ... }: {
   imports = [
     ./bat.nix
+    ./g.nix
     ./git.nix
     ./gpg.nix
     ./ideavim.nix

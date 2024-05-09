@@ -1,4 +1,4 @@
-{ clips, config, vars, ... }:
+{ clips, config, ... }:
 {
   imports = [
     clips.common
@@ -14,10 +14,10 @@
     };
     home.file.fontConfig = {
       enable = true;
-      source = clips.mustache "font.conf" ../configs/fontconfig/fonts.conf.mustache vars;
+      source = clips.mustache "font.conf" ../configs/fontconfig/fonts.conf.mustache config.g;
       target = "${config.xdg.configHome}/fontconfig/fonts.conf";
     };
-
+    g.font.size = 12;
     apps.neovim = {
       enable = true;
       hideCommandLine = true;

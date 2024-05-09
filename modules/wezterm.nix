@@ -1,4 +1,4 @@
-{ clips, config, lib, vars, ... }:
+{ clips, config, lib, ... }:
 with lib;
 let
   cfg = config.apps.wezterm;
@@ -9,8 +9,8 @@ let
     "nord/main" = "nord";
   };
   wezVars = {
-    font = vars.font;
-    theme = themeSet."${vars.theme.name}/${vars.theme.variant}";
+    font = config.g.font;
+    theme = themeSet."${config.g.theme.name}/${config.g.theme.variant}";
   };
 in
 {

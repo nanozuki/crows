@@ -23,41 +23,40 @@
     };
   };
 
-  outputs = { nixpkgs, stable-nixpkgs, stratosphere, home-manager, rust-overlay, sops-nix, ... }:
+  outputs = input@{ nixpkgs, stable-nixpkgs, stratosphere, home-manager, ... }:
     let
       stablePackages = [ "awscli2" ];
-      stableOverlay = final: prev:
-        builtins.listToAttrs
-          (map
-            (name: { name = name; value = stable-nixpkgs.legacyPackages.${prev.system}.${name}; })
-            stablePackages);
+      stableOverlay = final: prev: builtins.listToAttrs
+        (map (name: { name = name; value = stable-nixpkgs.legacyPackages.${prev.system}.${name}; }) stablePackages);
       stratosphereOverlay = final: prev: { stra = stratosphere.packages.${prev.system}; };
-      homeConfig = home: system: vars:
+      pkgModule = { pkgs, ... }: {
+        nixpkgs.overlays = [
+          input.rust-overlay.overlays.default
+          stableOverlay
+          stratosphereOverlay
+        ];
+        nixpkgs.config = { allowUnfree = true; allowUnfreePredicate = (_: true); };
+      };
+      mkHome = home: system:
         home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${system};
           modules = [
-            ({ pkgs, ... }: {
-              nixpkgs.overlays = [
-                rust-overlay.overlays.default
-                stableOverlay
-                stratosphereOverlay
-              ];
-              nixpkgs.config = { allowUnfree = true; allowUnfreePredicate = (_: true); };
-            })
-            sops-nix.homeManagerModule
+            pkgModule
+            input.sops-nix.homeManagerModule
             ./modules
             home
           ];
           extraSpecialArgs = {
             inherit system;
-            inherit vars; # variables for customizing
             clips = import ./clips nixpkgs.legacyPackages.${system} system;
           };
         };
     in
     {
-      homeConfigurations = builtins.mapAttrs
-        (host: config: homeConfig config.homeConfig config.system config.vars)
-        (import ./hosts);
+      homeConfigurations = {
+        nest = mkHome ./homes/nest.nix "x86_64-linux";
+        pica = mkHome ./homes/pica.nix "aarch64-darwin";
+        raven = mkHome ./homes/raven.nix "aarch64-darwin";
+      };
     };
 }
