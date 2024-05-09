@@ -9,6 +9,7 @@
     ./languages.nix
     ./neovim.nix
     ./rime.nix
+    ./shell.nix
     ./sops-secrets.nix
     ./starship.nix
     ./sway.nix

@@ -1,8 +1,5 @@
-{ clips, pkgs, config, ... }:
+{ pkgs, config, ... }:
 {
-  imports = [
-    clips.common
-  ];
   config = {
     home.username = "crows";
     home.homeDirectory = "/Users/crows";
