@@ -1,4 +1,4 @@
-{ config, lib, pkgs, vars, ... }:
+{ config, lib, pkgs, ... }:
 with lib;
 let
   cfg = config.apps.neovim;
@@ -37,8 +37,8 @@ in
       enable = true;
       text = builtins.toJSON {
         theme = {
-          name = vars.theme.name;
-          variant = vars.theme.variant;
+          name = config.g.theme.name;
+          variant = config.g.theme.variant;
         };
         use_global_statusline = cfg.useGlobalStatusline;
         hide_command_line = cfg.hideCommandLine;

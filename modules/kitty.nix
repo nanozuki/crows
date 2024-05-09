@@ -1,4 +1,4 @@
-{ config, lib, pkgs, vars, ... }:
+{ config, lib, pkgs, ... }:
 with lib;
 let
   cfg = config.apps.kitty;
@@ -15,14 +15,14 @@ in
     programs.kitty = {
       enable = true;
       package = pkgs.emptyDirectory;
-      font.name = vars.font.family;
-      font.size = vars.font.size;
+      font.name = config.g.font.family;
+      font.size = config.g.font.size;
       extraConfig = builtins.readFile ../configs/kitty/kitty.conf;
       shellIntegration = {
         enableFishIntegration = true;
         mode = "no-cursor";
       };
-      theme = themeSet."${vars.theme.name}/${vars.theme.variant}";
+      theme = themeSet."${config.g.theme.name}/${config.g.theme.variant}";
     };
     home.file.kitty = {
       enable = true;
