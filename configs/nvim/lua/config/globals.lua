@@ -1,0 +1,201 @@
+-- definition and default of global variables
+local globals = {}
+
+---@class Settings
+---@field theme ThemeSettings
+---@field use_global_statusline boolean
+---@field hide_command_line boolean
+---@class ThemeSettings
+---@field name 'rose-pine' | 'nord'
+---@field variant string
+-- theme variants:
+-- - rose-pine: 'main', 'dawn', 'moon'
+-- - nord: none
+
+---@type Settings
+globals.settings = {
+  theme = {
+    name = 'rose-pine',
+    variant = 'dawn',
+  },
+  use_global_statusline = false,
+  hide_command_line = false,
+}
+
+---@class DiagnosticSigns
+---@field Error string
+---@field Warn string
+---@field Info string
+---@field Hint string
+---@type DiagnosticSigns
+globals.diagnostic_signs = { Error = '󰅚', Warn = '󰀪', Info = '', Hint = '󰌶' }
+
+---@class LspConfig
+---@field keys table<string, LspKeyMapper>
+---@field on_attach_hooks LspOnAttachHook[]
+---@field cap_makers LspCapabilitiesMaker[]
+---@field servers table<string, LangServerConfig>
+---@field setup fun(server_name:string)
+---@field make_config fun(server_name:string):table
+
+---@alias LspOnAttachHook fun(client:table,bufnr:number)
+---@alias LspCapabilitiesMaker fun(caps:table):table
+
+---@class LspKeyMapper
+---@field [1] string key
+---@field [2] string|function command
+---@field [3] string description
+
+---@class LangServerConfig: table
+---@field lazyload? boolean when lazyload = true, lsp server won't be setup by nvim-lspconfig
+---@field root_patterns? string[] see lspconfig.util.root_pattern
+---@field config? table<string, any> lsp config
+---@field on_attach? LspOnAttachHook additional on_attach function
+
+---@type LspConfig
+globals.lsp = {
+  keys = {
+    goto_decl = { 'gD', vim.lsp.buf.declaration, 'Goto declaration' },
+    goto_def = { 'gd', vim.lsp.buf.definition, 'Goto definition' },
+    hover = { 'K', vim.lsp.buf.hover, 'Display hover information' },
+    goto_impl = { 'gi', vim.lsp.buf.implementation, 'Goto implementation' },
+    sign_help = { '<C-k>', vim.lsp.buf.signature_help, 'Display signature information' },
+    add_folder = { '<leader>wa', vim.lsp.buf.add_workspace_folder, 'Add workspace folder' },
+    del_folder = { '<leader>wr', vim.lsp.buf.remove_workspace_folder, 'Remove workspace folder' },
+    list_folders = {
+      '<leader>wl',
+      function()
+        vim.print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+      end,
+      'List workspace folder',
+    },
+    type_def = { '<leader>D', vim.lsp.buf.type_definition, 'Goto type definition' },
+    rename = { '<leader>rn', vim.lsp.buf.rename, 'Rename symbol' },
+    code_action = { '<leader>ca', vim.lsp.buf.code_action, 'Code action' },
+    codelens = { '<leader>cl', vim.lsp.codelens.run, 'Code action' },
+    list_ref = { 'gr', vim.lsp.buf.references, 'List references' },
+    format = { '<leader>bf', vim.lsp.buf.formatting, 'Format buffer' },
+  },
+  on_attach_hooks = {
+    -- set buffer keymapping
+    function(_, bufnr)
+      for _, mapper in pairs(globals.lsp.keys) do
+        vim.keymap.set('n', mapper[1], mapper[2], { desc = mapper[3], buffer = bufnr })
+      end
+    end,
+  },
+  cap_makers = {
+    -- neovim default capabilities
+    function(_)
+      return vim.lsp.protocol.make_client_capabilities()
+    end,
+  },
+  setup = function(_) end,
+  make_config = function(_)
+    return {}
+  end,
+  servers = {
+    lua_ls = {
+      config = {
+        settings = {
+          Lua = {
+            format = { enable = false },
+            runtime = { version = 'LuaJIT' },
+            diagnostics = { globals = { 'vim' } },
+            workspace = { checkThirdParty = false },
+            telemetry = { enable = false },
+          },
+        },
+      },
+    },
+    yamlls = {},
+    jsonls = {},
+    gopls = {
+      config = {
+        settings = {
+          gopls = {
+            gofumpt = true,
+          },
+        },
+      },
+      on_attach = function(_, bufnr)
+        vim.keymap.set('n', '<leader>oi', function()
+          vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })
+        end, { desc = 'Organize imports', buffer = bufnr })
+      end,
+    },
+    rust_analyzer = {
+      config = {
+        settings = {
+          ['rust-analyzer'] = {
+            diagnostics = {
+              diagnostics = { disabled = { 'unresolved-proc-macro' } },
+              checkOnSave = { command = 'clippy' },
+            },
+          },
+        },
+      },
+    },
+    tsserver = {
+      root_patterns = { 'tsconfig.json', 'jsconfig.json', 'package.json' }, -- remove '.git' to avoid setup in deno project
+      config = { single_file_support = false },
+    },
+    tailwindcss = {},
+    cssls = {
+      config = {
+        lint = {
+          unknownAtRules = 'ignore',
+        },
+      },
+    },
+    svelte = {
+      lazyload = true, -- need setup after tsserver
+      on_attach = function(client, _)
+        vim.api.nvim_create_autocmd('BufWritePost', {
+          pattern = { '*.js', '*.ts' },
+          callback = function(ctx)
+            client.notify('$/onDidChangeTsOrJsFile', { uri = ctx.match })
+          end,
+        })
+      end,
+    },
+    html = {},
+    denols = {
+      root_patterns = { 'deno.json', 'deno.jsonc' }, -- remove '.git' to avoid setup in node project
+      config = {
+        init_options = {
+          enable = true,
+          lint = true,
+          unstable = true,
+        },
+      },
+    },
+    ocamllsp = {},
+    terraformls = {},
+    typst_lsp = {},
+    zls = {},
+    nil_ls = {},
+  },
+}
+
+---@type table<string, string[]> filetypes and their linters
+globals.linters = {
+  go = { 'golangci-lint' },
+  typescript = { 'eslint_d' },
+}
+
+---@type table<string, string[]> filetypes and their formatters
+globals.formatters = {
+  lua = { 'stylua' },
+  css = { 'prettier' },
+  deno = { 'prettier' },
+  html = { 'prettier' },
+  json = { 'prettier' },
+  yaml = { 'prettier' },
+  markdown = { 'prettier' },
+  typescript = { 'prettier' },
+  ocaml = { 'ocamlformat' },
+  nix = { 'nixpkgs-fmt' },
+}
+
+return globals
