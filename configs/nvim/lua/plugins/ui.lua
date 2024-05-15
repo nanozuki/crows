@@ -1,4 +1,4 @@
-local values = require('config.values')
+local settings = require('config.globals').settings
 
 return {
   -- improve vim select/input UI
@@ -50,7 +50,7 @@ return {
   {
     'folke/noice.nvim',
     event = 'VeryLazy',
-    enabled = values.hide_command_line,
+    enabled = settings.hide_command_line,
     opts = {
       views = {
         cmdline_popup = { position = { row = 0, col = -2 }, relative = 'cursor' },

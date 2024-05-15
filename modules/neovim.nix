@@ -33,7 +33,7 @@ in
       target = "${config.xdg.configHome}/nvim";
       recursive = true;
     };
-    home.file.neovim_custom = {
+    home.file.neovim_settings = {
       enable = true;
       text = builtins.toJSON {
         theme = {
@@ -43,7 +43,7 @@ in
         use_global_statusline = cfg.useGlobalStatusline;
         hide_command_line = cfg.hideCommandLine;
       };
-      target = "${config.xdg.configHome}/nvim/custom.json";
+      target = "${config.xdg.configHome}/nvim/settings.json";
     };
     languages.dataAndMarkup.enable = true;
     languages.lua.enable = true;

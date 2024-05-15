@@ -1,7 +1,6 @@
-local values = require('config.values')
+local settings = require('config.globals').settings
 
 -- custom theme
-
 local function make_theme()
   ---@type table<string, string>
   local modes = {
@@ -72,7 +71,7 @@ local nvim_tree = {
 }
 
 local noice_recording = function()
-  if not values.hide_command_line then
+  if not settings.hide_command_line then
     return ''
   end
   local reg = vim.fn.reg_recording()
@@ -87,7 +86,7 @@ return {
     'nvim-lualine/lualine.nvim',
     event = 'VeryLazy',
     init = function()
-      if values.use_global_statusline then
+      if settings.use_global_statusline then
         vim.opt.laststatus = 3
       end
     end,
@@ -124,7 +123,7 @@ return {
   },
   {
     'b0o/incline.nvim',
-    enabled = values.use_global_statusline,
+    enabled = settings.use_global_statusline,
     event = 'VeryLazy',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()

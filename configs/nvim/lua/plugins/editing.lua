@@ -1,3 +1,5 @@
+local globals = require('config.globals')
+
 ---@function translate
 ---@param translator table<string,string>
 ---@param names string[]
@@ -56,11 +58,8 @@ return {
     config = function()
       local translator = { ['golangci-lint'] = 'golangcilint' }
       local linters_by_ft = {} ---@type table<string, string[]>
-      local langs = require('config.langs')
-      for ft, ft_config in pairs(langs.filetypes) do
-        if ft_config.enable then
-          linters_by_ft[ft] = translate_list(translator, ft_config.linters or {})
-        end
+      for ft, linters in pairs(globals.linters) do
+        linters_by_ft[ft] = translate_list(translator, linters)
       end
 
       require('lint').linters_by_ft = linters_by_ft
@@ -79,11 +78,8 @@ return {
     config = function()
       local translator = { ['nixpkgs-fmt'] = 'nixpkgs_fmt' }
       local formatters_by_ft = {} ---@type table<string, string[]>
-      local langs = require('config.langs')
-      for ft, ft_config in pairs(langs.filetypes) do
-        if ft_config.enable then
-          formatters_by_ft[ft] = translate_list(translator, ft_config.formatters or {})
-        end
+      for ft, formatters in pairs(globals.formatters) do
+        formatters_by_ft[ft] = translate_list(translator, formatters or {})
       end
       require('conform').setup({
         formatters_by_ft = formatters_by_ft,

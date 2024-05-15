@@ -1,5 +1,4 @@
-local lsp = require('config.lsp')
-local langs = require('config.langs')
+local lsp = require('config.globals').lsp
 
 return {
   -- fish
@@ -14,7 +13,7 @@ return {
     'b0o/schemastore.nvim',
     lazy = true,
     config = function()
-      langs.servers.jsonls.config = {
+      lsp.servers.jsonls.config = {
         settings = {
           json = {
             schemas = require('schemastore').json.schemas(),
@@ -22,9 +21,16 @@ return {
           },
         },
       }
-      langs.servers.yamlls.config = {
+      lsp.servers.yamlls.config = {
         settings = {
           yaml = {
+            schemaStore = {
+              -- You must disable built-in schemaStore support if you want to use
+              -- this plugin and its advanced options like `ignore`.
+              enable = false,
+              -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+              url = '',
+            },
             schemas = require('schemastore').yaml.schemas(),
           },
         },
@@ -37,7 +43,7 @@ return {
     ft = { 'lua' },
     dependencies = { 'neovim/nvim-lspconfig' },
     init = function()
-      langs.servers.lua_ls.autoload = false
+      lsp.servers.lua_ls.lazyload = true
     end,
     config = function()
       require('neodev').setup({
@@ -48,8 +54,7 @@ return {
           end
         end,
       })
-      local lspconfig = require('lspconfig')
-      lspconfig.lua_ls.setup(lsp.make_config(langs.servers.lua_ls))
+      lsp.setup('lua_ls')
     end,
   },
   {
@@ -67,10 +72,10 @@ return {
     dependencies = { 'neovim/nvim-lspconfig' },
     ft = { 'rust' },
     init = function()
-      langs.servers.rust_analyzer.autoload = false
+      lsp.servers.rust_analyzer.lazyload = true
     end,
     config = function()
-      local on_attach = function(_, bufnr)
+      lsp.servers.rust_analyzer.on_attach = function(_, bufnr)
         vim.keymap.set('n', '<leader>ca', function()
           vim.cmd.RustLsp('codeAction')
         end, { buffer = bufnr, desc = 'Code actions' })
@@ -78,8 +83,7 @@ return {
           vim.cmd.RustLsp({ 'hover', 'actions' })
         end, { buffer = bufnr, desc = 'Code action groups' })
       end
-      local server = lsp.make_config(langs.servers.rust_analyzer, on_attach)
-      vim.g.rustaceanvim = { server = server }
+      vim.g.rustaceanvim = { server = lsp.make_config('rust_analyzer') }
     end,
   },
   {
@@ -87,11 +91,11 @@ return {
     dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
     ft = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact', 'svelte' },
     init = function()
-      langs.servers.tsserver.autoload = false
+      lsp.servers.tsserver.lazyload = true
     end,
     config = function()
-      local cfg = lsp.make_config(langs.servers.tsserver)
-      require('typescript-tools').setup(cfg)
+      require('typescript-tools').setup(lsp.make_config('tsserver'))
+      lsp.setup('svelte')
     end,
   },
 }
