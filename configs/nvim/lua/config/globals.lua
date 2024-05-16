@@ -1,3 +1,4 @@
+local utils = require('config.utils')
 -- definition and default of global variables
 local globals = {}
 
@@ -74,7 +75,7 @@ globals.lsp = {
     code_action = { '<leader>ca', vim.lsp.buf.code_action, 'Code action' },
     codelens = { '<leader>cl', vim.lsp.codelens.run, 'Code action' },
     list_ref = { 'gr', vim.lsp.buf.references, 'List references' },
-    format = { '<leader>bf', vim.lsp.buf.formatting, 'Format buffer' },
+    format = { '<leader>bf', vim.lsp.buf.format, 'Format buffer' },
   },
   on_attach_hooks = {
     -- set buffer keymapping
