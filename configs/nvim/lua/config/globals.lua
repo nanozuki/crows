@@ -1,4 +1,3 @@
-local utils = require('config.utils')
 -- definition and default of global variables
 local globals = {}
 
@@ -76,6 +75,13 @@ globals.lsp = {
     codelens = { '<leader>cl', vim.lsp.codelens.run, 'Code action' },
     list_ref = { 'gr', vim.lsp.buf.references, 'List references' },
     format = { '<leader>bf', vim.lsp.buf.format, 'Format buffer' },
+    inlay_hint = {
+      '<leader>lh',
+      function()
+        vim.lsp.inlay_hint.enable(vim.lsp.inlay_hint.is_enable())
+      end,
+      'Toogle in[l]ay [h]int',
+    },
   },
   on_attach_hooks = {
     -- set buffer keymapping
@@ -101,6 +107,7 @@ globals.lsp = {
         settings = {
           Lua = {
             format = { enable = false },
+            hint = { enable = true },
             runtime = { version = 'LuaJIT' },
             diagnostics = { globals = { 'vim' } },
             workspace = { checkThirdParty = false },
@@ -116,6 +123,15 @@ globals.lsp = {
         settings = {
           gopls = {
             gofumpt = true,
+            hints = {
+              assignVariableTypes = true,
+              compositeLiteralFields = true,
+              compositeLiteralTypes = true,
+              constantValues = true,
+              functionTypeParameters = true,
+              parameterNames = true,
+              rangeVariableTypes = true,
+            },
           },
         },
       },

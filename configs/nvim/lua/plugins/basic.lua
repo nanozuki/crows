@@ -15,7 +15,7 @@ return {
         local bufs = vim.api.nvim_list_bufs()
         for _, buf in ipairs(bufs) do
           local name = vim.api.nvim_buf_get_name(buf)
-          local type = vim.api.nvim_buf_get_option(buf, 'buftype')
+          local type = vim.api.nvim_get_option_value('buftype', { buf = buf })
           if name ~= '' and type ~= '' and type ~= 'terminal' then
             vim.api.nvim_buf_delete(buf, {})
           end
