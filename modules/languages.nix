@@ -29,6 +29,9 @@ let
       enable = true;
       goPath = ".local/share/go";
     };
+    home.sessionVariables = {
+      GOROOT = "${pkgs.go}/share/go";
+    };
     home.sessionPath = [
       "$GOPATH/bin"
     ];
