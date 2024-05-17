@@ -28,6 +28,7 @@ return {
     'neovim/nvim-lspconfig',
     event = { 'BufReadPre', 'BufNewFile' },
     config = function()
+      vim.lsp.inlay_hint.enable()
       local lspconfig = require('lspconfig')
       lsp.make_config = function(server_name)
         local server = lsp.servers[server_name] or {}
