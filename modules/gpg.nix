@@ -21,7 +21,6 @@ in
         default-cache-ttl 60480000
         max-cache-ttl-ssh 60480000
         default-cache-ttl-ssh 60480000
-        ${clips.darwinOr "" "pinentry-program /usr/bin/pinentry-tty"}
       '';
       target = "${config.xdg.dataHome}/gnupg/gpg-agent.conf";
     };
