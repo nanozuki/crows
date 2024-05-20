@@ -17,7 +17,7 @@ in
       withPython3 = true;
       withNodeJs = true;
       # dependencies for CopilotChat.nvim
-      extraPython3Packages = (pyPkgs: with pyPkgs; [ python-dotenv requests prompt-toolkit tiktoken ]);
+      extraLuaPackages = ps: [ ps.tiktoken_core ];
     };
     programs.fish.shellAbbrs = {
       vi = "nvim";
