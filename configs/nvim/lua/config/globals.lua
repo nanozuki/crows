@@ -78,7 +78,8 @@ globals.lsp = {
     inlay_hint = {
       '<leader>lh',
       function()
-        vim.lsp.inlay_hint.enable(vim.lsp.inlay_hint.is_enable())
+        local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = 0 })
+        vim.lsp.inlay_hint.enable(not enabled)
       end,
       'Toogle in[l]ay [h]int',
     },
@@ -137,7 +138,10 @@ globals.lsp = {
       },
       on_attach = function(_, bufnr)
         vim.keymap.set('n', '<leader>oi', function()
-          vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })
+          vim.lsp.buf.code_action({
+            context = { diagnostics = {}, only = { 'source.organizeImports' } },
+            apply = true,
+          })
         end, { desc = 'Organize imports', buffer = bufnr })
       end,
     },
