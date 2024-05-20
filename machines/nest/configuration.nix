@@ -90,7 +90,6 @@
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
   services.xserver.xkb.layout = "us";
-  environment.plasma6.excludePackages = [ pkgs.kdePackages.baloo ];
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
