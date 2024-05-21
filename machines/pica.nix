@@ -7,7 +7,12 @@
   # Homebrew packages
   homebrew = {
     enable = true;
-    brews = [ "mas" "sing-box" ];
+    onActivation.cleanup = "zap";
+    brews = [
+      "fish" # for root shell
+      "mas"
+      "sing-box"
+    ];
     taps = [
       "chase/tap"
       "gromgit/fuse"
@@ -24,7 +29,6 @@
       "font-symbols-only-nerd-font"
       "fork"
       "google-chrome"
-      "grammarly"
       "iina"
       "jetbrains-toolbox"
       "kitty"
@@ -32,7 +36,6 @@
       "macfuse"
       "obsidian"
       "orbstack"
-      "pgadmin4"
       "postman"
       "shottr"
       "steam"
@@ -40,7 +43,6 @@
       "telegram"
       "visual-studio-code"
       "wezterm"
-      "zed"
     ];
     masApps = {
       Things = 904280696;
