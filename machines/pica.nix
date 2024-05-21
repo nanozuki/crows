@@ -25,6 +25,7 @@
       "fork"
       "google-chrome"
       "grammarly"
+      "iina"
       "jetbrains-toolbox"
       "kitty"
       "logitech-options"
