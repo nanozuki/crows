@@ -36,12 +36,14 @@
     fsType = "xfs";
   };
   zramSwap.enable = true;
-
+  # bluetooth
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
     settings = { General = { Experimental = true; }; };
   };
+  # GPU and Drivers
+  boot.initrd.kernelModules = [ "amdgpu" ];
 
   # networking.hostName = "homeport"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -193,6 +195,9 @@
     neovim
     pinentry-curses
   ];
+  environment.sessionVariables = {
+    STEAM_FORCE_DESKTOPUI_SCALING = "1.5";
+  };
   fonts.packages = with pkgs; [
     jetbrains-mono
     nerdfonts
@@ -219,6 +224,11 @@
       max-cache-ttl-ssh = 60480000;
       default-cache-ttl-ssh = 60480000;
     };
+  };
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
   };
 
   # List services that you want to enable:
