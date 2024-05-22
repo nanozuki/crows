@@ -193,7 +193,7 @@
     gnumake
     gnupg
     neovim
-    pinentry-curses
+    pinentry-qt
   ];
   environment.sessionVariables = {
     STEAM_FORCE_DESKTOPUI_SCALING = "1.5";
@@ -217,7 +217,7 @@
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
-    pinentryPackage = pkgs.pinentry-curses;
+    pinentryPackage = pkgs.pinentry-qt;
     settings = {
       max-cache-ttl = 60480000;
       default-cache-ttl = 60480000;
