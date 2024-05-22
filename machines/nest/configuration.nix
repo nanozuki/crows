@@ -37,6 +37,12 @@
   };
   zramSwap.enable = true;
 
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = { General = { Experimental = true; }; };
+  };
+
   # networking.hostName = "homeport"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -179,13 +185,13 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    git
-    neovim
-    gnupg
-    pinentry-curses
-    gnumake
-    gcc
     fastfetch
+    gcc
+    git
+    gnumake
+    gnupg
+    neovim
+    pinentry-curses
   ];
   fonts.packages = with pkgs; [
     jetbrains-mono
