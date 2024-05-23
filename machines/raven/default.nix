@@ -9,7 +9,6 @@
     enable = true;
     onActivation.cleanup = "zap";
     brews = [
-      "fish" # for root shell
       "mas" # for Mac App Store
     ];
     casks = [

@@ -9,15 +9,11 @@
     enable = true;
     onActivation.cleanup = "zap";
     brews = [
-      "fish" # for root shell
+      "fastfetch"
       "mas"
       "sing-box"
     ];
-    taps = [
-      "chase/tap"
-      "gromgit/fuse"
-      "homebrew/cask-fonts"
-    ];
+    taps = [ ];
     casks = [
       "1password"
       "arc"
@@ -33,7 +29,6 @@
       "jetbrains-toolbox"
       "kitty"
       "logitech-options"
-      "macfuse"
       "obsidian"
       "orbstack"
       "postman"
