@@ -8,8 +8,12 @@
   };
 
   outputs = { self, nix-darwin, nixpkgs }: {
+    darwinConfigurations."raven" = nix-darwin.lib.darwinSystem {
+      modules = [ ./machines/raven ];
+      specialArgs = { inherit self; };
+    };
     darwinConfigurations."pica" = nix-darwin.lib.darwinSystem {
-      modules = [ ./machines/pica.nix ];
+      modules = [ ./machines/pica ];
       specialArgs = { inherit self; };
     };
     nixosConfigurations."nest" = nixpkgs.lib.nixosSystem {
