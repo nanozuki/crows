@@ -13,6 +13,7 @@
     ];
     casks = [
       "1password"
+      "android-file-transfer"
       "dbeaver-community"
       "deepl"
       "discord"
