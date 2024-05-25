@@ -15,6 +15,7 @@
       "/opt/homebrew/bin"
     ];
     home.sessionVariables = {
+      OS_CONFIG_NAME = "pica";
       HM_CONFIG_NAME = "pica";
     };
     apps.neovim = {

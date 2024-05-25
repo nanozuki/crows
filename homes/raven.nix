@@ -14,6 +14,7 @@
       "/opt/homebrew/bin"
     ];
     home.sessionVariables = {
+      OS_CONFIG_NAME = "raven";
       HM_CONFIG_NAME = "raven";
     };
     apps.neovim = {

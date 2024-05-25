@@ -7,6 +7,7 @@
     programs.home-manager.enable = true;
 
     home.sessionVariables = {
+      OS_CONFIG_NAME = "nest";
       HM_CONFIG_NAME = "nest";
     };
     home.file.fontConfig = {
