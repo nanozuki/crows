@@ -32,23 +32,24 @@ return {
     },
     opts = {},
     keys = {
+      { '<leader>cco', '<cmd>CopilotChatOpen<cr>', desc = 'CopilotChat Open' },
+      { '<leader>ccr', '<cmd>CopilotChatReset<cr>', desc = 'CopilotChat Reset' },
       {
-        '<leader>cch',
+        '<leader>ccq',
         function()
-          local actions = require('CopilotChat.actions')
-          require('CopilotChat.integrations.telescope').pick(actions.help_actions())
+          local input = vim.fn.input('Quick Chat: ')
+          if input ~= '' then
+            require('CopilotChat').ask(input, { selection = require('CopilotChat.select').buffer })
+          end
         end,
-        desc = 'CopilotChat - Help actions',
+        desc = 'CopilotChat - Quick chat for buffer',
       },
       {
         '<leader>ccp',
-        function()
-          local actions = require('CopilotChat.actions')
-          require('CopilotChat.integrations.telescope').pick(actions.prompt_actions())
-        end,
-        desc = 'CopilotChat - Prompt actions',
+        ':lua require("CopilotChat.integrations.telescope").pick(require("CopilotChat.actions").prompt_actions())<cr>',
+        mode = { 'n', 'v' },
+        desc = 'CopilotChat Commands',
       },
-      { '<leader>ccc', '<cmd>CopilotChat', desc = 'CopilotChat Command Line' },
     },
   },
 }
