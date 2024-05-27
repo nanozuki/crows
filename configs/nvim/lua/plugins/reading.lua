@@ -2,17 +2,30 @@ return {
   -- display sign for marks
   { 'kshenoy/vim-signature', event = { 'BufReadPre', 'BufNewFile' } },
   -- indent hint
+  -- {
+  --   'lukas-reineke/indent-blankline.nvim',
+  --   dependencies = { 'nvim-treesitter/nvim-treesitter' },
+  --   event = { 'BufReadPre', 'BufNewFile' },
+  --   main = 'ibl',
+  --   opts = {
+  --     indent = { char = '¦' },
+  --     exclude = {
+  --       buftypes = { 'help', 'nofile', 'nowrite', 'quickfix', 'terminal', 'prompt' },
+  --     },
+  --     -- scope = { enabled = false },
+  --   },
+  -- },
   {
-    'lukas-reineke/indent-blankline.nvim',
-    dependencies = { 'nvim-treesitter/nvim-treesitter' },
-    event = { 'BufReadPre', 'BufNewFile' },
-    main = 'ibl',
+    'shellRaining/hlchunk.nvim',
+    branch = 'dev',
     opts = {
-      indent = { char = '¦' },
-      exclude = {
-        buftypes = { 'help', 'nofile', 'nowrite', 'quickfix', 'terminal', 'prompt' },
+      chunk = {
+        enable = true,
       },
-      scope = { enabled = false },
+      indent = {
+        enable = true,
+        chars = { '¦' },
+      },
     },
   },
   -- highlight color value
