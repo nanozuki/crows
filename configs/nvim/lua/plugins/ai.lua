@@ -1,6 +1,6 @@
 return {
   {
-    'zbirenbaum/copilot.lua',
+    'github/copilot.vim',
     init = function()
       vim.g.copilot_no_tab_map = true
     end,
@@ -8,27 +8,18 @@ return {
       local cwd = vim.fn.getcwd()
       return not string.match(cwd, 'leetcode')
     end,
-    cmd = 'Copilot',
-    event = 'InsertEnter',
     config = function()
-      require('copilot').setup({
-        suggestion = {
-          auto_trigger = true,
-          keymap = {
-            accept = '<C-e>',
-            next = '<C-.>',
-            prev = '<C-,>',
-          },
-        },
-      })
+      vim.keymap.set('i', '<C-e>', [[copilot#Accept("\<CR>")]], { expr = true, replace_keycodes = false })
+      vim.keymap.set('i', '<C-.>', '<Plug>(copilot-next)')
+      vim.keymap.set('i', '<C-,>', '<Plug>(copilot-previous)')
     end,
   },
   {
     'CopilotC-Nvim/CopilotChat.nvim',
     branch = 'canary',
     dependencies = {
-      { 'zbirenbaum/copilot.lua' }, -- or github/copilot.vim
-      { 'nvim-lua/plenary.nvim' }, -- for curl, log wrapper
+      { 'github/copilot.vim' },
+      { 'nvim-lua/plenary.nvim' },
     },
     opts = {},
     keys = {
