@@ -35,6 +35,9 @@ end
 local function lsp()
   local clients = vim.lsp.get_clients({ bufnr = 0 })
   local names = vim.tbl_map(function(client)
+    if client.name == 'GitHub Copilot' then
+      return 'copilot'
+    end
     return client.name
   end, clients)
   return table.concat(names, ',')
