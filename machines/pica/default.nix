@@ -20,6 +20,7 @@
     casks = [
       "1password"
       "arc"
+      "calibre"
       "dbeaver-community"
       "deepl"
       "firefox"
@@ -32,6 +33,7 @@
       "jetbrains-toolbox"
       "kitty"
       "logitech-options"
+      "logseq"
       "obsidian"
       "orbstack"
       "postman"
