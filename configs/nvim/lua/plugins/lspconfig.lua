@@ -66,19 +66,16 @@ return {
   {
     'folke/trouble.nvim',
     cmd = 'TroubleToggle',
-    keys = { { '<leader>xx', ':TroubleToggle<CR>', 'n', desc = 'Toggle trouble quickfix' } },
+    keys = {
+      { '<leader>xx', '<cmd>Trouble diagnostics toggle<cr>', 'n', desc = 'Toggle trouble quickfix' },
+      {
+        '<leader>xX',
+        '<cmd>Trouble diagnostics toggle filter.buf=0<cr>',
+        desc = 'Buffer Diagnostics (Trouble)',
+      },
+    },
     dependencies = { 'nvim-tree/nvim-web-devicons', 'neovim/nvim-lspconfig' },
-    config = function()
-      require('trouble').setup({
-        signs = {
-          error = globals.diagnostic_signs.Error,
-          warning = globals.diagnostic_signs.Warn,
-          information = globals.diagnostic_signs.Info,
-          hint = globals.diagnostic_signs.Hint,
-          other = '󰗡',
-        },
-      })
-    end,
+    opts = {},
   },
   {
     'kosayoda/nvim-lightbulb',
