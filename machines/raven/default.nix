@@ -14,6 +14,7 @@
     casks = [
       "1password"
       "android-file-transfer"
+      "calibre"
       "dbeaver-community"
       "deepl"
       "discord"
