@@ -39,24 +39,17 @@ return {
   },
   -- lua
   {
-    'folke/neodev.nvim',
+    'folke/lazydev.nvim',
     ft = { 'lua' },
-    dependencies = { 'neovim/nvim-lspconfig' },
-    init = function()
-      lsp.servers.lua_ls.lazyload = true
-    end,
-    config = function()
-      require('neodev').setup({
-        override = function(root_dir, options)
-          if root_dir:find('config.*nvim') then
-            -- enable plugins in config managers
-            options.plugins = true
-          end
-        end,
-      })
-      lsp.setup('lua_ls')
-    end,
+    opts = {
+      library = {
+        vim.env.LAZY .. '/luvit-meta/library',
+      },
+    },
   },
+  -- optional `vim.uv` typings, auto-loaded by `lazydev.nvim`
+  { 'Bilal2453/luvit-meta', lazy = true },
+  -- golang
   {
     'olexsmir/gopher.nvim',
     requires = { -- dependencies
@@ -64,6 +57,7 @@ return {
       'nvim-treesitter/nvim-treesitter',
     },
     config = function()
+      ---@diagnostic disable-next-line: missing-fields
       require('gopher').setup({})
     end,
   },
