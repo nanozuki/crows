@@ -17,4 +17,22 @@ return {
       vim.cmd.colorscheme('nordic')
     end,
   },
+  {
+    'mcchrish/zenbones.nvim',
+    enabled = settings.theme.name == 'zenbones',
+    dependencies = { 'rktjmp/lush.nvim' },
+    config = function()
+      local v = settings.theme.variant
+      if v == 'light' or v == 'rose-light' then
+        vim.opt.background = 'light'
+      else
+        vim.opt.background = 'dark'
+      end
+      if v == 'rose-light' or v == 'rose-dark' then
+        vim.cmd.colorscheme('rosebones')
+      else
+        vim.cmd.colorscheme('zenbones')
+      end
+    end,
+  },
 }

@@ -11,6 +11,7 @@ local globals = {}
 -- theme variants:
 -- - rose-pine: 'main', 'dawn', 'moon'
 -- - nord: none
+-- - zenbones: 'light', 'dark', 'rose-light', 'rose-dark'
 
 ---@type Settings
 globals.settings = {

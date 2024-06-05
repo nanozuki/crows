@@ -7,6 +7,10 @@ let
     "rose-pine/dawn" = "rose-pine-dawn";
     "rose-pine/moon" = "rose-pine-moon";
     "nord/main" = "nord";
+    "zenbones/light" = "zenbones";
+    "zenbones/dark" = "zenbones_dark";
+    "zenbones/rose-light" = "rose-pine-dawn";
+    "zenbones/rose-dark" = "rose-pine";
   };
   wezVars = {
     font = config.g.font;
