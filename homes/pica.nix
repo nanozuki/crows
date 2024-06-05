@@ -6,6 +6,11 @@
     home.stateVersion = "24.05";
     programs.home-manager.enable = true;
 
+    g.theme = {
+      name = "zenbones";
+      variant = "light";
+    };
+
     home.packages = with pkgs; [
       zstd
       awscli2
