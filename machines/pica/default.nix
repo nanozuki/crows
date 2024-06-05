@@ -31,6 +31,7 @@
       "google-chrome"
       "iina"
       "jetbrains-toolbox"
+      "jordanbaird-ice"
       "kitty"
       "logitech-options"
       "logseq"
