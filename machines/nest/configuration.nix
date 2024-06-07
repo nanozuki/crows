@@ -169,7 +169,7 @@
   users.users.crows = {
     isNormalUser = true;
     description = "crows";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     shell = pkgs.fish;
     packages = with pkgs; [
       _1password-gui
@@ -194,6 +194,7 @@
     gnupg
     neovim
     pinentry-qt
+    docker-compose
   ];
   environment.sessionVariables = {
     STEAM_FORCE_DESKTOPUI_SCALING = "1.5";
@@ -230,6 +231,9 @@
     remotePlay.openFirewall = true;
     dedicatedServer.openFirewall = true;
   };
+  hardware.steam-hardware.enable = true;
+
+  virtualisation.docker.enable = true;
 
   # List services that you want to enable:
 
