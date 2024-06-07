@@ -11,6 +11,9 @@ let
       nodePackages.prettier
     ];
   };
+  gleam = {
+    home.packages = [ pkgs.gleam pkgs.erlang ];
+  };
   go = {
     home.packages = with pkgs; [
       delve
@@ -106,6 +109,7 @@ let
 in
 {
   options.languages.dataAndMarkup = { enable = mkEnableOption "Data and Markup Languages"; };
+  options.languages.gleam = { enable = mkEnableOption "Gleam"; };
   options.languages.go = { enable = mkEnableOption "Go"; };
   options.languages.lua = { enable = mkEnableOption "Lua"; };
   options.languages.nix = { enable = mkEnableOption "Nix"; };
@@ -121,6 +125,7 @@ in
 
   config = mkMerge [
     (mkIf cfg.dataAndMarkup.enable dataAndMarkup)
+    (mkIf cfg.gleam.enable gleam)
     (mkIf cfg.go.enable go)
     (mkIf cfg.lua.enable lua)
     (mkIf cfg.nix.enable nix)
