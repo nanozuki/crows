@@ -197,6 +197,7 @@ globals.lsp = {
     typst_lsp = {},
     zls = {},
     nil_ls = {},
+    gleam = {},
   },
 }
 
