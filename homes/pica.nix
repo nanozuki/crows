@@ -50,7 +50,6 @@
       };
     };
     apps.rime.enable = true;
-    languages.gleam.enable = true;
     languages.go.enable = true;
     languages.nix.enable = true;
   };
