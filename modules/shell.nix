@@ -10,6 +10,8 @@
     apps.tealdeer.enable = true;
     apps.wezterm.enable = true;
 
+    nix.package = pkgs.nix;
+
     xdg.enable = true;
     home.packages = with pkgs; [
       babelfish
