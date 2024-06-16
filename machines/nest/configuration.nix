@@ -187,14 +187,15 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    docker-compose
     fastfetch
     gcc
     git
     gnumake
     gnupg
     neovim
+    obsidian
     pinentry-qt
-    docker-compose
   ];
   environment.sessionVariables = {
     STEAM_FORCE_DESKTOPUI_SCALING = "1.5";
@@ -239,6 +240,28 @@
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
+  services.syncthing = {
+    enable = true;
+    relay.enable = true;
+    user = "crows";
+    configDir = "/home/crows/.config/syncthing";
+    settings = {
+      devices = {
+        raven = { id = "ZHC6K6C-EYPF7T4-QBJ2A7L-6STSA6A-WX65ANE-XVOHHWZ-POFJKEP-YBWTBAJ"; };
+        pica = { id = "242PIDE-35ZL7BR-L7ICJDQ-EBGCGUU-ZOQHJPK-O5SFAPK-7USWJO3-RBNBFAQ"; };
+      };
+      folders = {
+        iCloud = {
+          path = "/home/crows/Documents/iCloud";
+          devices = [ "raven" "pica" ];
+        };
+        obsidian = {
+          path = "/home/crows/Documents/Obsidian";
+          devices = [ "raven" "pica" ];
+        };
+      };
+    };
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
