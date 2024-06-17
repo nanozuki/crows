@@ -23,6 +23,7 @@
       "calibre"
       "dbeaver-community"
       "deepl"
+      "discord"
       "firefox"
       "font-jetbrains-mono"
       "font-jetbrains-mono-nerd-font"
