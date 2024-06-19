@@ -61,6 +61,7 @@ return {
       require('gopher').setup({})
     end,
   },
+  -- rust
   {
     'mrcjkb/rustaceanvim',
     dependencies = { 'neovim/nvim-lspconfig' },
@@ -80,6 +81,7 @@ return {
       vim.g.rustaceanvim = { server = lsp.make_config('rust_analyzer') }
     end,
   },
+  -- typescript
   {
     'pmizio/typescript-tools.nvim',
     dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
@@ -90,6 +92,23 @@ return {
     config = function()
       require('typescript-tools').setup(lsp.make_config('tsserver'))
       lsp.setup('svelte')
+    end,
+  },
+  -- sql
+  {
+    'kristijanhusak/vim-dadbod-ui',
+    dependencies = {
+      { 'tpope/vim-dadbod', lazy = true },
+      { 'kristijanhusak/vim-dadbod-completion', ft = { 'sql', 'mysql', 'plsql' }, lazy = true },
+    },
+    cmd = {
+      'DBUI',
+      'DBUIToggle',
+      'DBUIAddConnection',
+      'DBUIFindBuffer',
+    },
+    init = function()
+      vim.g.db_ui_use_nerd_fonts = 1
     end,
   },
 }
