@@ -4,9 +4,6 @@
   environment.systemPackages = [
     pkgs.vim
   ];
-  environment.variables = {
-    OBSIDIAN_REST_API_KEY = "55be947074fadb57abcdf1070d551d4f3718c43e9e9ee246901c7cdfb1b63f7d";
-  };
   # Homebrew packages
   homebrew = {
     enable = true;
