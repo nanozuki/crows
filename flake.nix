@@ -2,12 +2,13 @@
   description = "Configurations for NixOS and Darwin";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    crows.url = "github:nanozuki/crows";
+    nixpkgs.follows = "crows/nixpkgs";
     nix-darwin.url = "github:LnL7/nix-darwin";
-    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    nix-darwin.inputs.nixpkgs.follows = "crows/nixpkgs";
   };
 
-  outputs = { self, nix-darwin, nixpkgs }: {
+  outputs = { self, nix-darwin, nixpkgs, ... }: {
     darwinConfigurations."raven" = nix-darwin.lib.darwinSystem {
       modules = [ ./machines/raven ];
       specialArgs = { inherit self; };
