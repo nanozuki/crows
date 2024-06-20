@@ -10,16 +10,25 @@
 
   outputs = { self, nix-darwin, nixpkgs, ... }: {
     darwinConfigurations."raven" = nix-darwin.lib.darwinSystem {
-      modules = [ ./machines/raven ];
+      modules = [
+        ./modules/darwin
+        ./machines/raven
+      ];
       specialArgs = { inherit self; };
     };
     darwinConfigurations."pica" = nix-darwin.lib.darwinSystem {
-      modules = [ ./machines/pica ];
+      modules = [
+        ./modules/darwin
+        ./machines/pica
+      ];
       specialArgs = { inherit self; };
     };
     nixosConfigurations."nest" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      modules = [ ./machines/nest/configuration.nix ];
+      modules = [
+        ./modules/nixos
+        ./machines/nest/configuration.nix
+      ];
     };
   };
 }
