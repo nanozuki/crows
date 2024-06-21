@@ -6,12 +6,15 @@ in
 {
   options.apps.vimr = {
     enable = mkEnableOption "VimR";
+    snapshot = mkEnableOption "Use snapshot version";
   };
   config = mkIf cfg.enable {
-    homebrew.casks = [ "vimr" ];
+    homebrew.casks = if cfg.snapshot then [ ] else [ "vimr" ];
+    # check neovim.nix in nanozuki/crows to get dependencies
     environment.systemPackages = with pkgs; [
       nodePackages.neovim
       nodePackages.nodejs
+      luajitPackages.tiktoken_core
     ];
   };
 }
