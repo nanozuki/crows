@@ -12,12 +12,16 @@ local function make_theme()
     inactive = vim.g.terminal_color_5, -- magenta
   }
   local theme = {}
-  local statusline_hl = vim.api.nvim_get_hl(0, { name = 'StatusLine' })
+  local statusline_hl = vim.api.nvim_get_hl(0, { name = 'TabLineFill', link = false })
   local statusline_bg = string.format('#%06x', statusline_hl.bg)
+  local b_bg = vim.g.terminal_color_0
+  if settings.theme.name == 'zenbones' then
+    b_bg = vim.g.terminal_color_8
+  end
   for mode, accent in pairs(modes) do
     theme[mode] = {
       a = { fg = vim.g.terminal_color_0, bg = accent },
-      b = { fg = accent, bg = vim.g.terminal_color_0 },
+      b = { fg = accent, bg = b_bg },
       c = { fg = vim.g.terminal_color_7, bg = statusline_bg },
     }
   end

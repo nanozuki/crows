@@ -6,7 +6,7 @@ local globals = {}
 ---@field use_global_statusline boolean
 ---@field hide_command_line boolean
 ---@class ThemeSettings
----@field name 'rose-pine' | 'nord'
+---@field name 'rose-pine' | 'nord' | 'zenbones'
 ---@field variant string
 -- theme variants:
 -- - rose-pine: 'main', 'dawn', 'moon'
