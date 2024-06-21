@@ -1,10 +1,18 @@
+local settings = require('config.globals').settings
+local utils = require('config.utils')
+
 local function make_theme()
+  local alt_bg = vim.g.terminal_color_0
+  if settings.theme.name == 'zenbones' then
+    alt_bg = vim.g.terminal_color_8
+  end
+  utils.logf('Using alt_bg: %s, theme: %s', alt_bg, settings.theme)
   return {
     line = 'TabLineFill',
     head = { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_5, style = 'italic' },
     current_tab = { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_6, style = 'bold' },
-    tab = { fg = vim.g.terminal_color_7, bg = vim.g.terminal_color_0, style = 'bold' },
-    win = { fg = vim.g.terminal_color_7, bg = vim.g.terminal_color_0 },
+    tab = { fg = vim.g.terminal_color_7, bg = alt_bg, style = 'bold' },
+    win = { fg = vim.g.terminal_color_7, bg = alt_bg },
     tail = { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_6, style = 'bold' },
   }
 end
