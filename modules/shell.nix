@@ -48,6 +48,7 @@
         import_gpg_keys = { body = builtins.readFile ../configs/fish/functions/import_gpg_keys.fish; };
         update-env = { body = builtins.readFile ../configs/fish/functions/update-env.fish; };
         check-true-color = { body = builtins.readFile ../configs/fish/functions/check-true-color.fish; };
+        sha-rename = { body = builtins.readFile ../configs/fish/functions/sha-rename.fish; };
       } // lib.optionalAttrs (system == "x86_64-linux") {
         reload-bluetooth = { body = builtins.readFile ../configs/fish/functions/reload-bluetooth.fish; };
       };
