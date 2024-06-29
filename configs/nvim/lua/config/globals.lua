@@ -162,7 +162,11 @@ globals.lsp = {
       root_patterns = { 'tsconfig.json', 'jsconfig.json', 'package.json' }, -- remove '.git' to avoid setup in deno project
       config = { single_file_support = false },
     },
-    tailwindcss = {},
+    tailwindcss = {
+      config = {
+        filetypes = { 'html', 'css', 'javascriptreact', 'typescriptreact', 'svelte' },
+      },
+    },
     cssls = {
       config = {
         lint = {
@@ -171,7 +175,6 @@ globals.lsp = {
       },
     },
     svelte = {
-      lazyload = true, -- need setup after tsserver
       on_attach = function(client, _)
         vim.api.nvim_create_autocmd('BufWritePost', {
           pattern = { '*.js', '*.ts' },
