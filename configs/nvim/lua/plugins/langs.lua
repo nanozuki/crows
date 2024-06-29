@@ -85,13 +85,12 @@ return {
   {
     'pmizio/typescript-tools.nvim',
     dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
-    ft = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact', 'svelte' },
+    ft = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' },
     init = function()
       lsp.servers.tsserver.lazyload = true
     end,
     config = function()
       require('typescript-tools').setup(lsp.make_config('tsserver'))
-      lsp.setup('svelte')
     end,
   },
   -- sql
@@ -110,5 +109,13 @@ return {
     init = function()
       vim.g.db_ui_use_nerd_fonts = 1
     end,
+  },
+  -- markdown
+  {
+    'OXY2DEV/markview.nvim',
+    dependencies = {
+      'nvim-tree/nvim-web-devicons',
+    },
+    opts = {},
   },
 }
