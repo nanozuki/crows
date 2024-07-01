@@ -201,6 +201,8 @@ globals.lsp = {
     zls = {},
     nil_ls = {},
     gleam = {},
+    pyright = {},
+    ruff = {},
   },
 }
 
