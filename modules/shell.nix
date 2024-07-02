@@ -1,4 +1,4 @@
-{ pkgs, lib, system, ... }:
+{ config, lib, pkgs, system, ... }:
 {
   config = {
     apps.bat.enable = true;
@@ -97,6 +97,11 @@
       enable = true;
       # enableFishIntegration = true; # default enable
       nix-direnv.enable = true;
+    };
+    home.file.editorconfig = {
+      enable = true;
+      source = ../configs/editorconfig/editorconfig;
+      target = "${config.home.homeDirectory}/.editorconfig";
     };
   };
 }

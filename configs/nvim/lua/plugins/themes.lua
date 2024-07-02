@@ -33,6 +33,7 @@ return {
       else
         vim.cmd.colorscheme('zenbones')
       end
+      vim.cmd.highlight({ args = { 'link', 'ColorColumn', 'CursorLine' }, bang = true })
     end,
   },
 }
