@@ -110,12 +110,4 @@ return {
       vim.g.db_ui_use_nerd_fonts = 1
     end,
   },
-  -- markdown
-  {
-    'OXY2DEV/markview.nvim',
-    dependencies = {
-      'nvim-tree/nvim-web-devicons',
-    },
-    opts = {},
-  },
 }
