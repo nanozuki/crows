@@ -110,4 +110,13 @@ return {
       vim.g.db_ui_use_nerd_fonts = 1
     end,
   },
+  -- markdown
+  {
+    'iamcco/markdown-preview.nvim',
+    cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
+    ft = { 'markdown' },
+    build = function()
+      vim.fn['mkdp#util#install']()
+    end,
+  },
 }
