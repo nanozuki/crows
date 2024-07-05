@@ -39,7 +39,6 @@
       "shottr"
       "steam"
       "tailscale"
-      "telegram"
       "visual-studio-code"
       "wezterm"
     ];
