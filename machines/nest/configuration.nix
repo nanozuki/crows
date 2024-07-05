@@ -246,6 +246,10 @@
     user = "crows";
     configDir = "/home/crows/.config/syncthing";
     settings = {
+      options = {
+        localAnnounceEnabled = true;
+        localAnnouncePort = 8384;
+      };
       devices = {
         raven = { id = "ZHC6K6C-EYPF7T4-QBJ2A7L-6STSA6A-WX65ANE-XVOHHWZ-POFJKEP-YBWTBAJ"; };
         pica = { id = "242PIDE-35ZL7BR-L7ICJDQ-EBGCGUU-ZOQHJPK-O5SFAPK-7USWJO3-RBNBFAQ"; };
