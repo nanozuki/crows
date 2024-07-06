@@ -175,6 +175,7 @@
       _1password-gui
       kitty
       telegram-desktop
+      wezterm
     ];
   };
 
