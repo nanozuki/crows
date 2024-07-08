@@ -23,6 +23,14 @@ return {
       end
     end,
   },
+  {
+    'chrisgrieser/nvim-lsp-endhints',
+    event = 'LspAttach',
+    init = function()
+      vim.lsp.inlay_hint.enable()
+    end,
+    opts = {}, -- required, even if empty
+  },
   -- # nvim-lspconfig
   {
     'neovim/nvim-lspconfig',
