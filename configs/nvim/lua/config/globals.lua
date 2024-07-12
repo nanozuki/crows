@@ -104,22 +104,24 @@ globals.lsp = {
     return {}
   end,
   servers = {
-    lua_ls = {
+    cssls = {
       config = {
-        settings = {
-          Lua = {
-            format = { enable = false },
-            hint = { enable = true },
-            runtime = { version = 'LuaJIT' },
-            diagnostics = { globals = { 'vim' } },
-            workspace = { checkThirdParty = false },
-            telemetry = { enable = false },
-          },
+        lint = {
+          unknownAtRules = 'ignore',
         },
       },
     },
-    yamlls = {},
-    jsonls = {},
+    denols = {
+      root_patterns = { 'deno.json', 'deno.jsonc' }, -- remove '.git' to avoid setup in node project
+      config = {
+        init_options = {
+          enable = true,
+          lint = true,
+          unstable = true,
+        },
+      },
+    },
+    gleam = {},
     gopls = {
       config = {
         settings = {
@@ -146,6 +148,26 @@ globals.lsp = {
         end, { desc = 'Organize imports', buffer = bufnr })
       end,
     },
+    html = {},
+    jsonls = {},
+    lua_ls = {
+      config = {
+        settings = {
+          Lua = {
+            format = { enable = false },
+            hint = { enable = true },
+            runtime = { version = 'LuaJIT' },
+            diagnostics = { globals = { 'vim' } },
+            workspace = { checkThirdParty = false },
+            telemetry = { enable = false },
+          },
+        },
+      },
+    },
+    nil_ls = {},
+    ocamllsp = {},
+    pyright = {},
+    ruff = {},
     rust_analyzer = {
       config = {
         settings = {
@@ -155,22 +177,6 @@ globals.lsp = {
               checkOnSave = { command = 'clippy' },
             },
           },
-        },
-      },
-    },
-    tsserver = {
-      root_patterns = { 'tsconfig.json', 'jsconfig.json', 'package.json' }, -- remove '.git' to avoid setup in deno project
-      config = { single_file_support = false },
-    },
-    tailwindcss = {
-      config = {
-        filetypes = { 'html', 'css', 'javascriptreact', 'typescriptreact', 'svelte' },
-      },
-    },
-    cssls = {
-      config = {
-        lint = {
-          unknownAtRules = 'ignore',
         },
       },
     },
@@ -184,32 +190,26 @@ globals.lsp = {
         })
       end,
     },
-    html = {},
-    denols = {
-      root_patterns = { 'deno.json', 'deno.jsonc' }, -- remove '.git' to avoid setup in node project
+    tailwindcss = {
       config = {
-        init_options = {
-          enable = true,
-          lint = true,
-          unstable = true,
-        },
+        filetypes = { 'html', 'css', 'javascriptreact', 'typescriptreact', 'svelte' },
       },
     },
-    ocamllsp = {},
     terraformls = {},
+    tsserver = {
+      root_patterns = { 'tsconfig.json', 'jsconfig.json', 'package.json' }, -- remove '.git' to avoid setup in deno project
+      config = { single_file_support = false },
+    },
     typst_lsp = {},
+    yamlls = {},
     zls = {},
-    nil_ls = {},
-    gleam = {},
-    pyright = {},
-    ruff = {},
   },
 }
 
 ---@type table<string, string[]> filetypes and their linters
 globals.linters = {
   go = { 'golangci-lint' },
-  typescript = { 'eslint_d' },
+  typescript = { 'eslint' },
 }
 
 ---@type table<string, string[]> filetypes and their formatters
