@@ -10,11 +10,11 @@
         "stratosphere": "stratosphere"
       },
       "locked": {
-        "lastModified": 1720195555,
-        "narHash": "sha256-Ag5ch6DIYATR8Ru1D+/tCT3eLfYWQhPcDuvk26XM8nQ=",
+        "lastModified": 1720800381,
+        "narHash": "sha256-wf7GGgSDIKowP0MTsxzs0QA5SIjyROriCs8Udy+chV0=",
         "owner": "nanozuki",
         "repo": "crows",
-        "rev": "3a957d9227f26a30484ce27fad6be525cf814ad6",
+        "rev": "f09edd71486d5eab7f096b9be747144527e2cc39",
         "type": "github"
       },
       "original": {
@@ -31,11 +31,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1720167120,
-        "narHash": "sha256-K9JYdlPiyaXp33JRg7CT8rMwH56e4ncXSsXW/YKnNXc=",
+        "lastModified": 1720734513,
+        "narHash": "sha256-neWQ8eNtLTd+YMesb7WjKl1SVCbDyCm46LUgP/g/hdo=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "bbe6e94737289c8cb92d4d8f9199fbfe4f11c0ba",
+        "rev": "90ae324e2c56af10f20549ab72014804a3064c7f",
         "type": "github"
       },
       "original": {
@@ -52,11 +52,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1719845423,
-        "narHash": "sha256-ZLHDmWAsHQQKnmfyhYSHJDlt8Wfjv6SQhl2qek42O7A=",
+        "lastModified": 1720599442,
+        "narHash": "sha256-jdm+sKVbBXoyrxcHbVaV0htlpq2iFR+eJw3Xe/DPcDo=",
         "owner": "LnL7",
         "repo": "nix-darwin",
-        "rev": "ec12b88104d6c117871fad55e931addac4626756",
+        "rev": "cf297a8d248db6a455b60133f6c0029c04ebe50e",
         "type": "github"
       },
       "original": {
@@ -67,11 +67,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1720031269,
-        "narHash": "sha256-rwz8NJZV+387rnWpTYcXaRNvzUSnnF9aHONoJIYmiUQ=",
+        "lastModified": 1720542800,
+        "narHash": "sha256-ZgnNHuKV6h2+fQ5LuqnUaqZey1Lqqt5dTUAiAnqH0QQ=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "9f4128e00b0ae8ec65918efeba59db998750ead6",
+        "rev": "feb2849fdeb70028c70d73b848214b00d324a497",
         "type": "github"
       },
       "original": {
@@ -99,11 +99,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1720145907,
-        "narHash": "sha256-mNO3vfM43+w4Bp+zMC8Dkf4ktLpYYRpk9tAOp4iumio=",
+        "lastModified": 1720750737,
+        "narHash": "sha256-hPXe9Pr3s2EKRdDki3UkCKoPGlNkOhplCooNoC/L7Qc=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "5ad2d5884b9b16319c9c5ca4e80a5b8606b083ae",
+        "rev": "a17c5d38c6fe47880eb8c6bede15d943ac2c4d17",
         "type": "github"
       },
       "original": {
@@ -124,11 +124,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1720187017,
-        "narHash": "sha256-Zq+T1Bvd0ShZB9XM+bP0VJK3HjsSVQBLolkaCLBQnfQ=",
+        "lastModified": 1720479166,
+        "narHash": "sha256-jqvhLDXzTLTHq9ZviFOpcTmXXmnbLfz7mWhgMNipMN4=",
         "owner": "Mic92",
         "repo": "sops-nix",
-        "rev": "1b11e208cee97c47677439625dc22e5289dcdead",
+        "rev": "67035a355b1d52d2d238501f8cc1a18706979760",
         "type": "github"
       },
       "original": {
@@ -139,11 +139,11 @@
     },
     "stable-nixpkgs": {
       "locked": {
-        "lastModified": 1719956923,
-        "narHash": "sha256-nNJHJ9kfPdzYsCOlHOnbiiyKjZUW5sWbwx3cakg3/C4=",
+        "lastModified": 1720691131,
+        "narHash": "sha256-CWT+KN8aTPyMIx8P303gsVxUnkinIz0a/Cmasz1jyIM=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "706eef542dec88cc0ed25b9075d3037564b2d164",
+        "rev": "a046c1202e11b62cbede5385ba64908feb7bfac4",
         "type": "github"
       },
       "original": {
@@ -161,11 +161,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1711869183,
-        "narHash": "sha256-qtO3cNkx3vs2+BZXwU4HG7vkmROPsWwMcc2g7++fIlk=",
+        "lastModified": 1720626049,
+        "narHash": "sha256-NmdQR8c2IXcCFtTH5x3Jgx6eRJcokdM8XfSZ4k+pUgM=",
         "ref": "refs/heads/roze",
-        "rev": "64b0a037533686d5f690c08e3c81e47f4671e1c8",
-        "revCount": 41,
+        "rev": "b94eb8d3736d1a8611e569e515b66eb5a29ab623",
+        "revCount": 42,
         "type": "git",
         "url": "https://git.sr.ht/~fubuki/stratosphere"
       },
