@@ -67,6 +67,7 @@ end
 if test -d $XDG_DATA_HOME/plum
     echo "----==== Rime Plum ====----"
     cd $XDG_DATA_HOME/plum && git pull && cd -
+    set -lx rime_frontend fcitx5-rime
     $XDG_DATA_HOME/plum/rime-install luna-pinyin
     $XDG_DATA_HOME/plum/rime-install double-pinyin
     $XDG_DATA_HOME/plum/rime-install emoji
