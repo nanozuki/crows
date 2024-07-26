@@ -1,5 +1,5 @@
 # global variables
-{ lib, ... }:
+{ lib, pkgs, ... }:
 with lib;
 {
   options.g.font = {
@@ -21,5 +21,10 @@ with lib;
       type = types.str;
       default = "dawn";
     };
+  };
+  config = {
+    home.packages = [
+      pkgs.mustache-go # dependency of clips.mustache, avoid nix gc
+    ];
   };
 }
