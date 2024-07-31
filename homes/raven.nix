@@ -8,7 +8,7 @@
 
     g.theme = {
       name = "zenbones";
-      variant = "dark";
+      variant = "light";
     };
 
     home.packages = with pkgs; [
