@@ -42,6 +42,7 @@
       "vimr"
       "visual-studio-code"
       "wezterm"
+      "zed"
     ];
     masApps = {
       Things = 904280696;
