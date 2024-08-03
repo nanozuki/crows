@@ -12,5 +12,5 @@ indent_size = 4
 [{*.go,*.gotmpl,go.mod,Makefile,justfile}]
 indent_style = tab
 
-[{*.css,*.html,*.js,*.jsx,*.json,*.lua,*.md,*.nix,*.proto,*.svelte,*.tf,*.ts,*.tsx,*.xml,*.yaml,*.yml}]
+[{*.css,*.html,*.js,*.jsx,*.json,*.lua,*.md,*.mdx,*.nix,*.proto,*.svelte,*.tf,*.ts,*.tsx,*.xml,*.yaml,*.yml}]
 indent_size = 2
