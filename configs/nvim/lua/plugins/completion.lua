@@ -7,10 +7,12 @@ return {
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-cmdline',
-      'garymjr/nvim-snippets',
+      'L3MON4D3/LuaSnip',
+      'saadparwaiz1/cmp_luasnip',
     },
     config = function()
       local cmp = require('cmp')
+      local luasnip = require('luasnip')
       local has_words_before = function()
         unpack = unpack or table.unpack
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -22,6 +24,11 @@ return {
         ---@diagnostic disable-next-line: missing-fields
         completion = {
           completeopt = 'menu,menuone,noinsert',
+        },
+        snippet = {
+          expand = function(args)
+            luasnip.lsp_expand(args.body)
+          end,
         },
         mapping = {
           ['<C-p>'] = cmp.mapping.select_prev_item(),
@@ -46,7 +53,7 @@ return {
         },
         sources = cmp.config.sources({
           { name = 'nvim_lsp' },
-          { name = 'snippets' },
+          { name = 'luasnip' },
         }, {
           { name = 'path' },
           { name = 'buffer' },
