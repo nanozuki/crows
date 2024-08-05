@@ -16,6 +16,7 @@
     taps = [ ];
     casks = [
       "1password"
+      "anki"
       "arc"
       "calibre"
       "dbeaver-community"
