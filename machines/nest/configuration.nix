@@ -193,6 +193,7 @@
     git
     gnumake
     gnupg
+    google-chrome
     neovim
     obsidian
     pinentry-qt
