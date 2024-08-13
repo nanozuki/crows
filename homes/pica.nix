@@ -12,8 +12,9 @@
     };
 
     home.packages = with pkgs; [
-      zstd
       awscli2
+      google-cloud-sdk
+      zstd
     ];
 
     home.sessionPath = [
