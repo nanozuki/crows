@@ -210,6 +210,7 @@ globals.lsp = {
 globals.linters = {
   go = { 'golangci-lint' },
   typescript = { 'eslint' },
+  python = { 'ruff' },
 }
 
 ---@type table<string, string[]> filetypes and their formatters
@@ -224,6 +225,7 @@ globals.formatters = {
   typescript = { 'prettier' },
   ocaml = { 'ocamlformat' },
   nix = { 'nixpkgs-fmt' },
+  python = { 'ruff_format', 'ruff_organaize_imports', 'ruff_fix' },
 }
 
 return globals
