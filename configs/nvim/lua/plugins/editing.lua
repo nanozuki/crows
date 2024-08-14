@@ -45,9 +45,12 @@ return {
   -- git command enhancement
   { 'tpope/vim-fugitive', cmd = 'Git' },
   {
-    'TimUntersberger/neogit',
+    'NeogitOrg/neogit',
     cmd = 'Neogit',
-    dependencies = { 'nvim-lua/plenary.nvim', 'sindrets/diffview.nvim' },
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'sindrets/diffview.nvim',
+    },
     config = function()
       require('neogit').setup({ integrations = { diffview = true } })
     end,

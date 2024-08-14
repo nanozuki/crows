@@ -14,7 +14,9 @@ in
     home.packages = with pkgs; [ ripgrep fzf ];
     programs.neovim = {
       enable = true;
-      withPython3 = true;
+      defaultEditor = true;
+      withPython3 = false;
+      withRuby = false;
       withNodeJs = true;
       # dependencies for CopilotChat.nvim
       extraLuaPackages = ps: [ ps.tiktoken_core ];
