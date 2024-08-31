@@ -21,16 +21,18 @@ return {
           end
         end
       end
-      ---@diagnostic disable-next-line: missing-fields
       require('auto-session').setup({
         auto_session_suppress_dirs = { '~' },
         pre_save_cmds = { clean_buffers },
+        cwd_change_handling = true,
+        pre_cwd_changed_cmds = { clean_buffers },
         session_lens = {
           load_on_setup = false,
         },
       })
       vim.keymap.set('n', '<leader>sr', '<cmd>SessionRestore<cr>', { desc = 'Restore session' })
       vim.keymap.set('n', '<leader>ss', '<cmd>SessionSave<cr>', { desc = 'Save session' })
+      vim.keymap.set('n', '<leader>fs', '<cmd>SessionSearch<cr>', { desc = 'Find session' })
     end,
   },
   { 'dstein64/vim-startuptime', cmd = 'StartupTime' },

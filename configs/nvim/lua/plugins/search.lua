@@ -5,7 +5,6 @@ return {
     dependencies = {
       { 'nvim-lua/plenary.nvim' },
       { 'nvim-telescope/telescope-z.nvim' },
-      'rmagatti/auto-session',
     },
     config = function()
       require('telescope').load_extension('z')
@@ -37,8 +36,6 @@ return {
       )
       vim.keymap.set('n', '<leader>ft', require('telescope.builtin').treesitter, { desc = 'List item by treesitter' })
       vim.keymap.set('n', '<leader>z', require('telescope').extensions.z.list, { desc = 'Find path by z' })
-      require('auto-session').setup_session_lens()
-      vim.keymap.set('n', '<leader>fs', require('auto-session.session-lens').search_session, { desc = 'Find session' })
     end,
   },
 }
