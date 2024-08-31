@@ -50,7 +50,7 @@ local function config()
         require('telescope').extensions.z.list()
       end),
       button('<leader>s', '󰉓 Open Session', function()
-        require('auto-session.session-lens').search_session()
+        vim.cmd('SessionSearch')
       end),
       button('<leader>u', '󰚰 Plugin update', function()
         require('lazy').sync()
