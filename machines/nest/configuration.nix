@@ -57,10 +57,18 @@
     hostName = "homeport";
     useDHCP = true;
     nameservers = [ "127.0.0.1:10053" ];
+    firewall.enable = true;
+    firewall.allowPing = true;
   };
   services.resolved = {
     enable = true;
     fallbackDns = [ "192.168.1.1" ];
+  };
+  services.mihomo = {
+    enable = true;
+    tunMode = true;
+    webui = pkgs.metacubexd;
+    configFile = ./mihomo.config.yaml;
   };
 
   # Set your time zone.
@@ -156,8 +164,6 @@
     enable = true;
     openFirewall = true;
   };
-  networking.firewall.enable = true;
-  networking.firewall.allowPing = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
