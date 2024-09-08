@@ -56,6 +56,11 @@
   networking = {
     hostName = "homeport";
     useDHCP = true;
+    nameservers = [ "127.0.0.1:10053" ];
+  };
+  services.resolved = {
+    enable = true;
+    fallbackDns = [ "192.168.1.1" ];
   };
 
   # Set your time zone.
