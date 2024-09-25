@@ -91,6 +91,7 @@ return {
     end,
     config = function()
       require('typescript-tools').setup(lsp.make_config('tsserver'))
+      vim.keymap.set('n', '<leader>oi', '<cmd>TSToolsOrganizeImports', { desc = 'Organize imports' })
     end,
   },
   -- sql
