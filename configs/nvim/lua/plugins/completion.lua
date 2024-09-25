@@ -9,6 +9,13 @@ return {
       'hrsh7th/cmp-cmdline',
       'L3MON4D3/LuaSnip',
       'saadparwaiz1/cmp_luasnip',
+      {
+        'jdrupal-dev/css-vars.nvim',
+        opts = {
+          cmp_filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'svelte' },
+          search_extensions = { '.js', '.ts', '.jsx', '.tsx', '.svelte', '.css' },
+        },
+      },
     },
     config = function()
       local cmp = require('cmp')
@@ -53,6 +60,7 @@ return {
         },
         sources = cmp.config.sources({
           { name = 'nvim_lsp' },
+          { name = 'css_vars' },
           { name = 'luasnip' },
         }, {
           { name = 'path' },
