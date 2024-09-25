@@ -4,14 +4,14 @@ let
   cfg = config.apps.kitty;
   # choose themes by comman "kitten themes"
   themeSet = {
-    "rose-pine/main" = "Rosé Pine";
-    "rose-pine/dawn" = "Rosé Pine Dawn";
-    "rose-pine/moon" = "Rosé Pine Moon";
+    "rose-pine/main" = "rose-pine";
+    "rose-pine/dawn" = "rose-pine-dawn";
+    "rose-pine/moon" = "rose-pine-moon";
     "nord/main" = "Nord";
     "zenbones/light" = "zenbones_light";
     "zenbones/dark" = "zenbones_dark";
-    "zenbones/rose-light" = "Rosé Pine Dawn";
-    "zenbones/rose-dark" = "Rosé Pine";
+    "zenbones/rose-light" = "rose-pine-dawn";
+    "zenbones/rose-dark" = "rose-pine";
   };
 in
 {
@@ -27,7 +27,7 @@ in
         enableFishIntegration = true;
         mode = "no-cursor";
       };
-      theme = themeSet."${config.g.theme.name}/${config.g.theme.variant}";
+      themeFile = themeSet."${config.g.theme.name}/${config.g.theme.variant}";
     };
     home.file.kitty = {
       enable = true;
