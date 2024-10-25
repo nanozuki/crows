@@ -45,6 +45,9 @@ return {
       library = {
         'luvit-meta/library',
       },
+      enabled = function(root_dir)
+        return not vim.uv.fs_stat(root_dir .. '/.luarc.json')
+      end,
     },
   },
   -- optional `vim.uv` typings, auto-loaded by `lazydev.nvim`
