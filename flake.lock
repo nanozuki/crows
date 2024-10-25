@@ -10,11 +10,11 @@
         "stratosphere": "stratosphere"
       },
       "locked": {
-        "lastModified": 1729267588,
-        "narHash": "sha256-pDvwOkbMR/7KYoNqr1oXFf3/EdDD5Z2Khs5ICo8OA2I=",
+        "lastModified": 1729843950,
+        "narHash": "sha256-YUdcrXa3PW7xwB/QiS3KuBdnjmc2Fy3eey5i1Vd0ESw=",
         "owner": "nanozuki",
         "repo": "crows",
-        "rev": "6d60a172fc59f706fcd35e3f6dd7b0f0c09ba03b",
+        "rev": "d777d28399718b54c3e504076deff19b464b3f92",
         "type": "github"
       },
       "original": {
@@ -52,11 +52,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1728901530,
-        "narHash": "sha256-I9Qd0LnAsEGHtKE9+uVR0iDFmsijWSy7GT0g3jihG4Q=",
+        "lastModified": 1729826725,
+        "narHash": "sha256-w3WNlYxqWYsuzm/jgFPyhncduoDNjot28aC8j39TW0U=",
         "owner": "LnL7",
         "repo": "nix-darwin",
-        "rev": "a60ac02f9466f85f092e576fd8364dfc4406b5a6",
+        "rev": "7840909b00fbd5a183008a6eb251ea307fe4a76e",
         "type": "github"
       },
       "original": {
