@@ -3,7 +3,7 @@
   config = {
     apps.bat.enable = true;
     apps.git.enable = true;
-    apps.gpg.enable = true;
+    apps.one_password.enable = true;
     apps.ideavim.enable = true;
     apps.kitty.enable = true;
     apps.starship.enable = true;
