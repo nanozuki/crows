@@ -13,7 +13,7 @@ in
       enable = true;
       text = ''
         Host *
-        	IdentityAgent "${sock}"
+        	IdentityAgent ${sock}
       '';
       target = "${config.xdg.configHome}/ssh/1p_config";
     };
