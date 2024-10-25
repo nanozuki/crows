@@ -44,9 +44,6 @@
         git_config_a = {
           path = "${config.xdg.configHome}/git/config_a";
         };
-        git_config_b = {
-          path = "${config.xdg.configHome}/git/config_b";
-        };
         netrc = {
           path = "${config.home.homeDirectory}/.netrc";
         };

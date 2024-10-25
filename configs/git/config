@@ -1,10 +1,8 @@
 [core]
 	editor = nvim
-	sshcommand = ssh -i ~/.ssh/id_ed25519
 [user]
 	name = Nanozuki Crows
 	email = nanozuki.crows@gmail.com
-	signingkey = 2037F9D19C6BF918
 [sendemail]
     smtpserver = smtp.gmail.com
     smtpuser = nanozuki.crows@gmail.com

@@ -8,6 +8,7 @@
     ./kitty.nix
     ./languages.nix
     ./neovim.nix
+    ./one-password.nix
     ./rime.nix
     ./shell.nix
     ./sops-secrets.nix
