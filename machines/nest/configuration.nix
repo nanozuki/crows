@@ -132,17 +132,17 @@
   # samba configurations
   services.samba = {
     enable = true;
-    securityType = "user";
     openFirewall = true;
-    extraConfig = ''
-      allow insecure wide links = yes
-      workgroup = CROWSGROUP
-      server string = HomeportSMB
-      server role = standalone server
-      logging = systemd
-      max log size = 50
-    '';
-    shares = {
+    settings = {
+      global = {
+        "allow insecure wide links" = "yes";
+        "workgroup" = "CROWSGROUP";
+        "server string" = "HomeportSMB";
+        "server role" = "standalone server";
+        "logging" = "systemd";
+        "max log size" = "50";
+        "security" = "user";
+      };
       share = {
         comment = "Homeport Share";
         path = "/disks/970/share";
@@ -197,7 +197,6 @@
     gcc
     git
     gnumake
-    gnupg
     google-chrome
     neovim
     obsidian
@@ -221,17 +220,6 @@
   programs.fish = {
     enable = true;
     useBabelfish = true;
-  };
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-    pinentryPackage = pkgs.pinentry-qt;
-    settings = {
-      max-cache-ttl = 60480000;
-      default-cache-ttl = 60480000;
-      max-cache-ttl-ssh = 60480000;
-      default-cache-ttl-ssh = 60480000;
-    };
   };
   programs.steam = {
     enable = true;
