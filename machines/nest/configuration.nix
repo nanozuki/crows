@@ -176,7 +176,6 @@
     extraGroups = [ "networkmanager" "wheel" "docker" ];
     shell = pkgs.fish;
     packages = with pkgs; [
-      _1password-gui
       kitty
       telegram-desktop
       wezterm
@@ -185,6 +184,11 @@
 
   # Install firefox.
   programs.firefox.enable = true;
+  programs._1password.enable = true;
+  programs._1password-gui = {
+    enable = true;
+    polkitPolicyOwners = [ "crows" ];
+  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
