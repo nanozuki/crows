@@ -23,9 +23,6 @@
       "deepl"
       "discord"
       "firefox"
-      "font-jetbrains-mono"
-      "font-jetbrains-mono-nerd-font"
-      "font-symbols-only-nerd-font"
       "fork"
       "google-chrome"
       "iina"
@@ -54,6 +51,14 @@
     enable = true;
     snapshot = true;
   };
+
+  fonts.packages = with pkgs; [
+    jetbrains-mono
+    nerdfonts
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
+  ];
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
