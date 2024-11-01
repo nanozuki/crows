@@ -104,7 +104,7 @@ globals.lsp = {
     return {}
   end,
   servers = {
-    cssls = {
+    css = {
       config = {
         lint = {
           unknownAtRules = 'ignore',
