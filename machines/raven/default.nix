@@ -19,9 +19,6 @@
       "deepl"
       "discord"
       "firefox"
-      "font-jetbrains-mono"
-      "font-jetbrains-mono-nerd-font"
-      "font-symbols-only-nerd-font"
       "fork"
       "google-chrome"
       "iina"
@@ -50,6 +47,14 @@
       Keka = 470158793;
     };
   };
+
+  fonts.packages = with pkgs; [
+    jetbrains-mono
+    nerdfonts
+    noto-fonts
+    noto-fonts-cjk-sans
+    noto-fonts-emoji
+  ];
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
