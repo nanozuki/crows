@@ -26,6 +26,7 @@
       "fork"
       "google-chrome"
       "iina"
+      "jetbrains-toolbox"
       "jordanbaird-ice"
       "kitty"
       "logitech-options"
@@ -39,6 +40,7 @@
       "visual-studio-code"
       "wezterm"
       "zed"
+      "zen-browser"
     ];
     masApps = {
       Things = 904280696;

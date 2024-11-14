@@ -23,6 +23,7 @@
       "google-chrome"
       "iina"
       "iterm2"
+      "jetbrains-toolbox"
       "jordanbaird-ice"
       "kitty"
       "obsidian"
