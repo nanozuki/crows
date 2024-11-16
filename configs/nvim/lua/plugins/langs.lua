@@ -55,10 +55,11 @@ return {
   -- golang
   {
     'olexsmir/gopher.nvim',
-    requires = { -- dependencies
+    dependencies = { -- dependencies
       'nvim-lua/plenary.nvim',
       'nvim-treesitter/nvim-treesitter',
     },
+    ft = { 'go', 'gomod', 'gotmpl' },
     config = function()
       ---@diagnostic disable-next-line: missing-fields
       require('gopher').setup({})
