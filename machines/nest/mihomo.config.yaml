@@ -52,27 +52,61 @@ dns:
   #     - "https://dns.google/dns-query"
 
 proxies:
-  - name: "dmit-la"
+  - name: "hy-la"
     type: hysteria2
     server: 154.17.14.23
     port: 34989
     password: "N@L-Q9CMt!VP"
-    sni: hy2.crows.moe
+    sni: hy-la.crows.moe
     skip-cert-verify: false
-  - name: "dmit-la-2"
+  - name: "hy-la-2"
     type: hysteria2
     server: 154.26.188.57
     port: 53583
     password: "FATW.tymfE6jUJb!"
-    sni: hy2.crows.moe
+    sni: hy-la2.crows.moe
     skip-cert-verify: false
+  - name: "ss-la"
+    type: ss
+    server: 154.17.14.23
+    port: 60058
+    cipher: 2022-blake3-aes-128-gcm
+    password: "F7zYiRxu5g7j1m1s60PSQQ=="
+    udp: true
+    smux:
+      enabled: true
+      padding: true
+  - name: "ss-la-2"
+    type: ss
+    server: 154.26.188.57
+    port: 43639
+    cipher: 2022-blake3-aes-128-gcm
+    password: "K+G+GuevuSGfVCocWVDtgA=="
+    udp: true
+    smux:
+      enabled: true
+      padding: true
 
 proxy-groups:
-  - name: "proxy"
+  - name: "hy"
     type: url-test
     proxies:
-      - dmit-la
-      - dmit-la-2
+      - hy-la
+      - hy-la-2
+    url: "http://www.gstatic.com/generate_204"
+    interval: 300
+  - name: "ss"
+    type: url-test
+    proxies:
+      - ss-la
+      - ss-la-2
+    url: "http://www.gstatic.com/generate_204"
+    interval: 300
+  - name: "proxy"
+    type: fallback
+    proxies:
+      - hy
+      - ss
     url: "http://www.gstatic.com/generate_204"
     interval: 300
 
