@@ -53,34 +53,26 @@ dns:
 
 proxies:
   - name: "dmit-la"
-    type: ss
-    server: 154.17.8.183
-    port: 32103
-    cipher: chacha20-ietf-poly1305
-    password: "CrowsShadow"
-    udp: true
-    plugin: obfs
-    plugin-opts:
-      mode: http
-      host: download.windowsupdate.com
-  # - name: "dmit-jp"
-  #   type: ss
-  #   server: 45.88.193.112
-  #   port: 32103
-  #   cipher: chacha20-ietf-poly1305
-  #   password: "CrowsShadow"
-  #   udp: true
-  #   plugin: obfs
-  #   plugin-opts:
-  #     mode: http
-  #     host: download.windowsupdate.com
+    type: hysteria2
+    server: 154.17.14.23
+    port: 34989
+    password: "N@L-Q9CMt!VP"
+    sni: hy2.crows.moe
+    skip-cert-verify: false
+  - name: "dmit-la-2"
+    type: hysteria2
+    server: 154.26.188.57
+    port: 53583
+    password: "FATW.tymfE6jUJb!"
+    sni: hy2.crows.moe
+    skip-cert-verify: false
 
 proxy-groups:
   - name: "proxy"
-    type: fallback
+    type: url-test
     proxies:
-      # - dmit-jp
       - dmit-la
+      - dmit-la-2
     url: "http://www.gstatic.com/generate_204"
     interval: 300
 
