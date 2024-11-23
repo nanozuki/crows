@@ -1,4 +1,4 @@
-{ clips, config, lib, ... }:
+{ clips, config, lib, pkgs, ... }:
 with lib;
 let
   cfg = config.apps.one_password;
@@ -19,6 +19,11 @@ in
     };
     home.sessionVariables = {
       SSH_AUTH_SOCK = sock;
+    };
+    programs.git.extraConfig = clips.darwinOr { } {
+      "gpg \"ssh\"" = {
+        program = "${lib.getExe' pkgs._1password-gui "op-ssh-sign"}";
+      };
     };
   };
 }
