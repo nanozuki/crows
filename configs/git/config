@@ -10,15 +10,6 @@
     smtpserverport = 587
 [diff]
     tool = nvimdiff
-[alias]
-	st = status
-	df = difftool
-	ci = commit -S
-	co = checkout
-	rb = rebase -i
-	aa = add .
-	tg = tag -s
-    tree = log --all --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr, %ad) %C(bold blue)<%an>%Creset' --abbrev-commit --date=short
 [include]
     path = ~/.config/git/config_local
 [filter "lfs"]
