@@ -57,7 +57,7 @@
     hostName = "homeport";
     useDHCP = true;
     nameservers = [ "127.0.0.1:10053" ];
-    firewall.enable = true;
+    firewall.enable = false;
     firewall.allowPing = true;
   };
   services.resolved = {
