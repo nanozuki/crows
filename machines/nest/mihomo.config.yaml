@@ -122,7 +122,6 @@ rules:
   - DOMAIN-SUFFIX,steamserver.net,DIRECT
   - DOMAIN-KEYWORD,leetcode,proxy
   - DOMAIN-KEYWORD,linkedin,proxy
-  - DOMAIN-KEYWORD,nixos,proxy
   - DOMAIN-SUFFIX,mikanani.me,proxy
   - DOMAIN-SUFFIX,exhentai.org,proxy
   - DOMAIN-SUFFIX,hath.network,proxy
