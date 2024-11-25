@@ -7,8 +7,8 @@
     programs.home-manager.enable = true;
 
     g.theme = {
-      name = "zenbones";
-      variant = "light";
+      name = "rose-pine";
+      variant = "dawn";
     };
 
     home.packages = with pkgs; [
