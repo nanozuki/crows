@@ -12,7 +12,7 @@ in
     homebrew.casks = if cfg.snapshot then [ ] else [ "vimr" ];
     # check neovim.nix in nanozuki/crows to get dependencies
     environment.systemPackages = with pkgs; [
-      nodePackages.neovim
+      neovim-node-client
       nodePackages.nodejs
       luajitPackages.tiktoken_core
     ];
