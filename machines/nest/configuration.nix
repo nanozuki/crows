@@ -211,8 +211,8 @@
   };
   fonts.packages = with pkgs; [
     jetbrains-mono
-    nerdfonts
-    noto-fonts
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.symbols-only
     noto-fonts-cjk-sans
     noto-fonts-emoji
   ];
