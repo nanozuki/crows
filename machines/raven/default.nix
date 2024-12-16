@@ -14,6 +14,7 @@
     casks = [
       "1password"
       "android-file-transfer"
+      "anki"
       "calibre"
       "dbeaver-community"
       "deepl"
@@ -22,7 +23,6 @@
       "fork"
       "google-chrome"
       "iina"
-      "iterm2"
       "jetbrains-toolbox"
       "jordanbaird-ice"
       "kitty"
@@ -34,13 +34,13 @@
       "shottr"
       "squirrel"
       "steam"
-      "syncthing"
       "tailscale"
       "telegram"
       "vimr"
       "visual-studio-code"
       "wezterm"
       "zed"
+      "zen-browser"
     ];
     masApps = {
       Things = 904280696;
