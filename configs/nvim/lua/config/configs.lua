@@ -97,9 +97,14 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open diagn
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Goto prev diagnostic' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Goto next diagnostic' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Add buffer diagnostics to the location list.' })
--- ## sign
-local signs = globals.diagnostic_signs
-for sign, text in pairs(signs) do
-  local hl = 'DiagnosticSign' .. sign
-  vim.fn.sign_define(hl, { text = text, texthl = hl, linehl = '', numhl = '' })
-end
+-- ## config
+vim.diagnostic.config({
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = globals.diagnostic_signs.Error,
+      [vim.diagnostic.severity.WARN] = globals.diagnostic_signs.Warn,
+      [vim.diagnostic.severity.INFO] = globals.diagnostic_signs.Info,
+      [vim.diagnostic.severity.HINT] = globals.diagnostic_signs.Hint,
+    },
+  },
+})
