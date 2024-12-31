@@ -21,6 +21,7 @@
       "discord"
       "firefox"
       "fork"
+      "ghostty"
       "google-chrome"
       "iina"
       "jetbrains-toolbox"
