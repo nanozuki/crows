@@ -29,7 +29,7 @@
       "kitty"
       "obsidian"
       "orbstack"
-      "paw"
+      "rapidapi"
       "postman"
       "qbittorrent"
       "shottr"
