@@ -9,6 +9,7 @@
     apps.starship.enable = true;
     apps.tealdeer.enable = true;
     apps.wezterm.enable = true;
+    apps.ghostty.enable = true;
 
     nix.package = pkgs.nix;
 

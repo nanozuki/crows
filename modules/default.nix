@@ -2,6 +2,7 @@
   imports = [
     ./bat.nix
     ./g.nix
+    ./ghostty.nix
     ./git.nix
     ./gpg.nix
     ./ideavim.nix
