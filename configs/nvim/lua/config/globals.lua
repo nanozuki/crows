@@ -104,7 +104,7 @@ globals.lsp = {
     return {}
   end,
   servers = {
-    css = {
+    cssls = {
       config = {
         lint = {
           unknownAtRules = 'ignore',
@@ -200,7 +200,7 @@ globals.lsp = {
       root_patterns = { 'tsconfig.json', 'jsconfig.json', 'package.json' }, -- remove '.git' to avoid setup in deno project
       config = { single_file_support = false },
     },
-    typst_lsp = {},
+    tinymist = {},
     yamlls = {},
     zls = {},
   },
