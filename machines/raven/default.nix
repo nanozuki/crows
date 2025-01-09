@@ -28,6 +28,7 @@
       "jordanbaird-ice"
       "kitty"
       "obsidian"
+      "ollama"
       "orbstack"
       "rapidapi"
       "postman"
