@@ -20,7 +20,6 @@
       "arc"
       "calibre"
       "dbeaver-community"
-      "deepl"
       "discord"
       "firefox"
       "fork"

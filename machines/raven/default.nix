@@ -17,7 +17,6 @@
       "anki"
       "calibre"
       "dbeaver-community"
-      "deepl"
       "discord"
       "firefox"
       "fork"
