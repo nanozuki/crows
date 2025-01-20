@@ -12,6 +12,7 @@ vim.opt.modelines = 1
 vim.opt.colorcolumn = '120'
 vim.opt.termguicolors = true
 vim.opt.scrolloff = 10
+vim.opt.jumpoptions = 'stack,view'
 
 vim.api.nvim_create_user_command('SaveAsSudo', function()
   local keys = utils.termcode(':w !sudo tee %')
