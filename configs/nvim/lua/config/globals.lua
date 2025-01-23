@@ -53,6 +53,15 @@ globals.diagnostic_signs = { Error = '󰅚', Warn = '󰀪', Info = '', Hint =
 ---@field config? table<string, any> lsp config
 ---@field on_attach? LspOnAttachHook additional on_attach function
 
+local function list_workspace_folders()
+  vim.print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+end
+
+local function toogle_inlay_hint()
+  local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = 0 })
+  vim.lsp.inlay_hint.enable(not enabled)
+end
+
 ---@type LspConfig
 globals.lsp = {
   keys = {
@@ -63,27 +72,14 @@ globals.lsp = {
     sign_help = { '<C-k>', vim.lsp.buf.signature_help, 'Display signature information' },
     add_folder = { '<leader>wa', vim.lsp.buf.add_workspace_folder, 'Add workspace folder' },
     del_folder = { '<leader>wr', vim.lsp.buf.remove_workspace_folder, 'Remove workspace folder' },
-    list_folders = {
-      '<leader>wl',
-      function()
-        vim.print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-      end,
-      'List workspace folder',
-    },
+    list_folders = { '<leader>wl', list_workspace_folders, 'List workspace folder' },
     type_def = { '<leader>D', vim.lsp.buf.type_definition, 'Goto type definition' },
     rename = { '<leader>rn', vim.lsp.buf.rename, 'Rename symbol' },
     code_action = { '<leader>ca', vim.lsp.buf.code_action, 'Code action' },
     codelens = { '<leader>cl', vim.lsp.codelens.run, 'Code action' },
     list_ref = { 'gr', vim.lsp.buf.references, 'List references' },
     format = { '<leader>bf', vim.lsp.buf.format, 'Format buffer' },
-    inlay_hint = {
-      '<leader>lh',
-      function()
-        local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = 0 })
-        vim.lsp.inlay_hint.enable(not enabled)
-      end,
-      'Toogle in[l]ay [h]int',
-    },
+    inlay_hint = { '<leader>lh', toogle_inlay_hint, 'Toogle in[l]ay [h]int' },
   },
   on_attach_hooks = {
     -- set buffer keymapping
