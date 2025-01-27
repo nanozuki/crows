@@ -16,6 +16,7 @@
       "android-file-transfer"
       "anki"
       "calibre"
+      "chatgpt"
       "dbeaver-community"
       "discord"
       "firefox"
