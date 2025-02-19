@@ -1,5 +1,6 @@
 theme = zenbones
 font-family = JetBrains Mono
+font-family = PingFang SC
 font-size = 14
 
 keybind = super+ctrl+\=new_split:right
