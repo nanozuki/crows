@@ -27,6 +27,7 @@
       "jetbrains-toolbox"
       "jordanbaird-ice"
       "kitty"
+      "microsoft-teams"
       "obsidian"
       "ollama"
       "orbstack"
@@ -61,11 +62,11 @@
   ];
 
   # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
   # nix.package = pkgs.nix;
   # nixpkgs.config.allowUnfree = true;
 
   # Necessary for using flakes on this ystem.
+  # nix.enable = true;
   nix.settings.experimental-features = "nix-command flakes";
   nix.gc = {
     automatic = true;
@@ -85,7 +86,7 @@
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
-  system.stateVersion = 4;
+  system.stateVersion = 6;
 
   system.activationScripts.postUserActivation.text = ''
     # activateSettings -u will reload the settings from the database and apply them to the current session,
