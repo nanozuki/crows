@@ -100,6 +100,7 @@ globals.lsp = {
     return {}
   end,
   servers = {
+    astro = {},
     cssls = {
       config = {
         lint = {
