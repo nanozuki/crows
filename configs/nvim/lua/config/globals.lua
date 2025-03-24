@@ -222,7 +222,7 @@ globals.formatters = {
   typescript = { 'prettier' },
   ocaml = { 'ocamlformat' },
   nix = { 'nixpkgs-fmt' },
-  python = { 'ruff_format', 'ruff_organaize_imports', 'ruff_fix' },
+  python = { 'ruff_format', 'ruff_organize_imports', 'ruff_fix' },
 }
 
 return globals
