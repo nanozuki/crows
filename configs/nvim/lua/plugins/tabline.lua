@@ -5,9 +5,9 @@ local function make_theme()
   if settings.theme.name == 'zenbones' then
     alt_bg = vim.g.terminal_color_8
   end
+  -- workaround for https://github.com/nvim-lualine/lualine.nvim/issues/1397
   local line = vim.api.nvim_get_hl(0, { name = 'TabLineFill', link = false })
   return {
-    -- workaround for tabby.nvim's highlighting, TODO: use new api in tabby.nvim
     line = { fg = string.format('#%06x', line.fg), bg = string.format('#%06x', line.bg) },
     head = { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_5, style = 'italic' },
     current_tab = { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_6, style = 'bold' },
