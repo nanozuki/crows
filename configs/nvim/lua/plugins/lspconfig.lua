@@ -1,28 +1,8 @@
 local globals = require('config.globals')
-local settings = globals.settings
 local lsp = globals.lsp
 
 return {
   -- # load before nvim-lspconfig
-  {
-    'ray-x/lsp_signature.nvim',
-    lazy = true,
-    enabled = not settings.hide_command_line,
-    init = function()
-      lsp.on_attach_hooks[#lsp.on_attach_hooks + 1] = function(client, bufnr)
-        require('lsp_signature').on_attach({ bind = true, handler_opts = { border = 'none' } }, client, bufnr)
-      end
-    end,
-  },
-  {
-    'hrsh7th/cmp-nvim-lsp',
-    lazy = true,
-    init = function()
-      lsp.cap_makers[#lsp.cap_makers + 1] = function(caps)
-        return vim.tbl_deep_extend('force', caps, require('cmp_nvim_lsp').default_capabilities())
-      end
-    end,
-  },
   {
     'chrisgrieser/nvim-lsp-endhints',
     event = 'LspAttach',
