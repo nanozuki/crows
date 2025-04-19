@@ -34,6 +34,7 @@
       "rapidapi"
       "postman"
       "qbittorrent"
+      "syncthing"
       "shottr"
       "squirrel"
       "steam"
