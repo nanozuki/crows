@@ -1,91 +1,39 @@
+local globals = require('config.globals')
+
 return {
   {
-    'hrsh7th/nvim-cmp',
-    event = { 'InsertEnter', 'CmdlineEnter' },
-    dependencies = {
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-path',
-      'hrsh7th/cmp-cmdline',
-      'L3MON4D3/LuaSnip',
-      'saadparwaiz1/cmp_luasnip',
-      {
-        'jdrupal-dev/css-vars.nvim',
-        opts = {
-          cmp_filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'svelte' },
-          search_extensions = { '.js', '.ts', '.jsx', '.tsx', '.svelte', '.css' },
-        },
-      },
-    },
-    config = function()
-      local cmp = require('cmp')
-      local luasnip = require('luasnip')
-      local has_words_before = function()
-        unpack = unpack or table.unpack
-        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
+    'saghen/blink.cmp',
+    version = '1.*',
+    init = function()
+      globals.lsp.cap_makers[#globals.lsp.cap_makers + 1] = function(caps)
+        local blink_caps = require('blink.cmp').get_lsp_capabilities({}, false)
+        caps = vim.tbl_deep_extend('force', caps, blink_caps)
+        caps = vim.tbl_deep_extend('force', caps, {
+          textDocument = {
+            foldingRange = {
+              dynamicRegistration = false,
+              lineFoldingOnly = true,
+            },
+          },
+        })
+        return caps
       end
-
-      ---@diagnostic disable-next-line: missing-fields
-      cmp.setup({
-        ---@diagnostic disable-next-line: missing-fields
-        completion = {
-          completeopt = 'menu,menuone,noinsert',
-        },
-        snippet = {
-          expand = function(args)
-            luasnip.lsp_expand(args.body)
-          end,
-        },
-        mapping = {
-          ['<C-p>'] = cmp.mapping.select_prev_item(),
-          ['<C-n>'] = cmp.mapping.select_next_item(),
-          ['<CR>'] = cmp.mapping.confirm({ select = true }),
-          ['<Tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            elseif has_words_before() then
-              cmp.complete()
-            else
-              fallback()
-            end
-          end, { 'i', 's', 'c' }),
-          ['<S-Tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item()
-            else
-              fallback()
-            end
-          end, { 'i', 's', 'c' }),
-        },
-        sources = cmp.config.sources({
-          { name = 'nvim_lsp' },
-          { name = 'css_vars' },
-          { name = 'luasnip' },
-        }, {
-          { name = 'path' },
-          { name = 'buffer' },
-        }),
-      })
-      -- `/` cmdline setup.
-      ---@diagnostic disable-next-line: missing-fields
-      cmp.setup.cmdline({ '/', '?' }, {
-        ---@diagnostic disable-next-line: missing-fields
-        completion = { completeopt = 'menu,menuone,noselect' },
-        sources = {
-          { name = 'buffer' },
-        },
-      })
-      -- `:` cmdline setup.
-      ---@diagnostic disable-next-line: missing-fields
-      cmp.setup.cmdline(':', {
-        ---@diagnostic disable-next-line: missing-fields
-        completion = { completeopt = 'menu,menuone,noselect' },
-        sources = cmp.config.sources({
-          { name = 'path' },
-          { name = 'cmdline' },
-        }),
-      })
     end,
+
+    ---@module 'blink.cmp'
+    ---@type blink.cmp.Config
+    opts = {
+      keymap = {
+        preset = 'enter',
+        ['<Tab>'] = { 'select_next', 'fallback' },
+        ['<S-Tab>'] = { 'select_prev', 'fallback' },
+      },
+      appearance = { nerd_font_variant = 'normal' },
+      sources = { default = { 'lsp', 'path', 'snippets', 'buffer' } },
+      fuzzy = { implementation = 'prefer_rust_with_warning' },
+      completion = { documentation = { auto_show = true } },
+      signature = { enabled = true, window = { show_documentation = false } },
+    },
+    opts_extend = { 'sources.default' },
   },
 }
