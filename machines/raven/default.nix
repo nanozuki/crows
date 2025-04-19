@@ -8,9 +8,6 @@
   homebrew = {
     enable = true;
     onActivation.cleanup = "zap";
-    brews = [
-      "mas" # for Mac App Store
-    ];
     casks = [
       "1password"
       "android-file-transfer"
@@ -46,11 +43,6 @@
       "zed"
       "zen-browser"
     ];
-    masApps = {
-      Things = 904280696;
-      iStatMenus = 1319778037;
-      Keka = 470158793;
-    };
   };
 
   fonts.packages = with pkgs; [
