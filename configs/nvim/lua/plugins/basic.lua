@@ -29,6 +29,8 @@ return {
         session_lens = {
           load_on_setup = false,
         },
+        -- remove sessions older than 30 days
+        purge_after_minutes = 1440 * 30,
       })
       vim.keymap.set('n', '<leader>sr', '<cmd>SessionRestore<cr>', { desc = 'Restore session' })
       vim.keymap.set('n', '<leader>ss', '<cmd>SessionSave<cr>', { desc = 'Save session' })
