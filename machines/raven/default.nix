@@ -14,6 +14,7 @@
       "anki"
       "calibre"
       "chatgpt"
+      "cursor"
       "dbeaver-community"
       "discord"
       "firefox"
