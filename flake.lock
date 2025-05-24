@@ -10,11 +10,11 @@
         "stratosphere": "stratosphere"
       },
       "locked": {
-        "lastModified": 1748016445,
-        "narHash": "sha256-sVWyebskkf+3NqTAMNT9OBsv98i1ncQmv4yxwCe88cI=",
+        "lastModified": 1748072180,
+        "narHash": "sha256-Dx8yfadJXx8f2KcEhNEUZ+hQc91czTFI7fDolND3IFs=",
         "owner": "nanozuki",
         "repo": "crows",
-        "rev": "aab55e003ae562502674cb6f9888c1133f1d2cd4",
+        "rev": "6fd11264ec8e0727ec6d38f144509c805299e237",
         "type": "github"
       },
       "original": {
@@ -52,11 +52,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1748004251,
-        "narHash": "sha256-XodjkVWTth3A2JpBqGBkdLD9kkWn94rnv98l3xwKukg=",
+        "lastModified": 1748065210,
+        "narHash": "sha256-dFqlLNW6UW19m0vg5FHWLH2G2LGkqYyPs/4YqfoZMoM=",
         "owner": "LnL7",
         "repo": "nix-darwin",
-        "rev": "33220d4791784e4dd4739edd3f6c028020082f91",
+        "rev": "acd6aa5a9065c6695212be313e06f08f7184cb25",
         "type": "github"
       },
       "original": {
@@ -99,11 +99,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1747967795,
-        "narHash": "sha256-76s4jDRbQzxRO+5y8ilMp5V30qVgY9R6n8U7aOap8ig=",
+        "lastModified": 1748054080,
+        "narHash": "sha256-rwFiLLNCwkj9bqePtH1sMqzs1xmohE0Ojq249piMzF4=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "f1d5bfa8c692cacd798a3e1fb93d54c1b9ac701a",
+        "rev": "2221d8d53c128beb69346fa3ab36da3f19bb1691",
         "type": "github"
       },
       "original": {
