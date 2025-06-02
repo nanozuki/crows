@@ -1,21 +1,17 @@
 { pkgs, config, ... }:
 {
   config = {
-    home.username = "crows";
-    home.homeDirectory = "/Users/crows";
+    home.username = "wtang";
+    home.homeDirectory = "/Users/wtang";
     home.stateVersion = "25.11";
     programs.home-manager.enable = true;
 
     g.theme = {
-      name = "rose-pine";
-      variant = "dawn";
+      name = "zenbones";
+      variant = "light";
     };
 
     home.packages = with pkgs; [
-      awscli2
-      (google-cloud-sdk.withExtraComponents [
-        google-cloud-sdk.components.gke-gcloud-auth-plugin
-      ])
       zstd
     ];
 
