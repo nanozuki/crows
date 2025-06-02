@@ -8,49 +8,17 @@
   homebrew = {
     enable = true;
     onActivation.cleanup = "zap";
-    brews = [
-      "fastfetch"
-      "mas"
-      "sing-box"
-    ];
     taps = [ ];
     casks = [
       "1password"
-      "anki"
-      "arc"
-      "calibre"
-      "dbeaver-community"
-      "discord"
       "firefox"
       "fork"
-      "google-chrome"
-      "iina"
-      "jetbrains-toolbox"
-      "jordanbaird-ice"
+      "ghostty"
       "kitty"
-      "logitech-options"
+      "microsoft-teams"
       "obsidian"
-      "orbstack"
-      "postman"
       "shottr"
-      "steam"
-      "tailscale"
-      "telegram"
-      "visual-studio-code"
-      "wezterm"
-      "zed"
-      "zen-browser"
     ];
-    masApps = {
-      Things = 904280696;
-      iStatMenus = 1319778037;
-      Keka = 470158793;
-    };
-  };
-
-  apps.vimr = {
-    enable = true;
-    snapshot = true;
   };
 
   fonts.packages = with pkgs; [
@@ -63,7 +31,7 @@
   ];
 
   # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
+  # services.nix-daemon.enable = true;
   # nix.package = pkgs.nix;
   # nixpkgs.config.allowUnfree = true;
 
@@ -88,7 +56,7 @@
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
   system.stateVersion = 6;
-  system.primaryUser = "crows";
+  system.primaryUser = "wtang";
   system.activationScripts.reload-settings.text = ''
     # activateSettings -u will reload the settings from the database and apply them to the current session,
     # so we do not need to logout and login again to make the changes take effect.
@@ -97,7 +65,7 @@
   # macOS's defaults configuration
   # system.defaults = {};
   # Add ability to used TouchID for sudo authentication
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   # The platform the configuration will be used on.
   nixpkgs.hostPlatform = "aarch64-darwin";
