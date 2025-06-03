@@ -12,7 +12,22 @@
     };
 
     home.packages = with pkgs; [
+      git
+      jq
+      k9s
+      kustomize
+      libxml2
+      gnumake
+      pkg-config
+      go-protobuf
+      protoc-gen-go-grpc
+      protobuf
+      yq-go
       zstd
+      (google-cloud-sdk.withExtraComponents [
+        google-cloud-sdk.components.gke-gcloud-auth-plugin
+      ])
+      pipenv
     ];
 
     home.sessionPath = [
@@ -48,5 +63,6 @@
     apps.rime.enable = true;
     languages.go.enable = true;
     languages.nix.enable = true;
+    languages.typescript_node.enable = true;
   };
 }
