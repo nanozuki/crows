@@ -8,17 +8,26 @@
   homebrew = {
     enable = true;
     onActivation.cleanup = "zap";
+    brews = [ "tfenv" ];
     taps = [ ];
     casks = [
       "1password"
+      "chatgpt"
       "firefox"
       "fork"
+      "fork"
       "ghostty"
+      "jetbrains-toolbox"
       "kitty"
       "microsoft-teams"
       "obsidian"
+      "orbstack"
       "shottr"
+      "telegram"
     ];
+  };
+  environment.variables = {
+    TFENV_ARCH = "amd64";
   };
 
   fonts.packages = with pkgs; [
