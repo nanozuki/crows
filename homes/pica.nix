@@ -46,17 +46,11 @@
       enable = true;
       name = "pica";
       secrets = {
-        go_private = {
-          path = "${config.xdg.configHome}/fish/after/go_private.fish";
-        };
         git_config_local = {
           path = "${config.xdg.configHome}/git/config_local";
         };
         git_config_a = {
           path = "${config.xdg.configHome}/git/config_a";
-        };
-        netrc = {
-          path = "${config.home.homeDirectory}/.netrc";
         };
       };
     };
