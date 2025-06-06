@@ -24,21 +24,8 @@ in
         core = {
           editor = "nvim";
         };
-        user = {
-          name = "Nanozuki Crows";
-          email = "nanozuki.crows@gmail.com";
-        };
-        sendemail = {
-          smtpserver = "smtp.gmail.com";
-          smtpuser = "nanozuki.crows@gmail.com";
-          smtpencryption = "tls";
-          smtpserverport = "587";
-        };
         diff = {
           tool = "nvimdiff";
-        };
-        include = {
-          path = "${config.xdg.configHome}/git/config_local";
         };
         "filter \"lfs\"" = {
           clean = "git-lfs clean -- %f";
@@ -46,16 +33,33 @@ in
           process = "git-lfs filter-process";
           required = true;
         };
-        pull = {
-          rebase = true;
-        };
         init = {
           defaultBranch = "main";
+        };
+        pull = {
+          rebase = true;
         };
         push = {
           autoSetupRemote = true;
         };
+        sendemail = {
+          smtpserver = "smtp.gmail.com";
+          smtpuser = "nanozuki.crows@gmail.com";
+          smtpencryption = "tls";
+          smtpserverport = "587";
+        };
       };
+      includes = [
+        { path = "${config.xdg.configHome}/git/config_local"; }
+      ];
+      signing = {
+        key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDlyirz8SBnqzKPX6kvGX6eoBtFCOK87KTmIVZC7R2N9";
+        format = "ssh";
+        signByDefault = true;
+        signer = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
+      };
+      userName = "Nanozuki Crows";
+      userEmail = "nanozuki.crows@gmail.com";
     };
   };
 }
