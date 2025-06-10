@@ -15,32 +15,11 @@ return {
     end,
   },
   {
-    'CopilotC-Nvim/CopilotChat.nvim',
-    branch = 'canary',
-    dependencies = {
-      { 'github/copilot.vim' },
-      { 'nvim-lua/plenary.nvim' },
-    },
+    'olimorris/codecompanion.nvim',
     opts = {},
-    keys = {
-      { '<leader>cco', '<cmd>CopilotChatOpen<cr>', desc = 'CopilotChat Open' },
-      { '<leader>ccr', '<cmd>CopilotChatReset<cr>', desc = 'CopilotChat Reset' },
-      {
-        '<leader>ccq',
-        function()
-          local input = vim.fn.input('Quick Chat: ')
-          if input ~= '' then
-            require('CopilotChat').ask(input, { selection = require('CopilotChat.select').buffer })
-          end
-        end,
-        desc = 'CopilotChat - Quick chat for buffer',
-      },
-      {
-        '<leader>ccp',
-        ':lua require("CopilotChat.integrations.telescope").pick(require("CopilotChat.actions").prompt_actions())<cr>',
-        mode = { 'n', 'v' },
-        desc = 'CopilotChat Commands',
-      },
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-treesitter/nvim-treesitter',
     },
   },
 }
