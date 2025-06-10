@@ -8,7 +8,10 @@
   homebrew = {
     enable = true;
     onActivation.cleanup = "zap";
-    brews = [ "tfenv" ];
+    brews = [
+      "tfenv"
+      "libxml2"
+    ];
     taps = [ ];
     casks = [
       "1password"
@@ -28,6 +31,9 @@
   };
   environment.variables = {
     TFENV_ARCH = "amd64";
+    PKG_CONFIG_PATH = "/opt/homebrew/opt/libxml2/lib/pkgconfig";
+    GCP_PROJECT_ID = "cinemo-pace";
+    NEW_GCP_PROJECT_ID = "cinemo-pace";
   };
 
   fonts.packages = with pkgs; [
