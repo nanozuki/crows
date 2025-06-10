@@ -17,7 +17,7 @@ if type -q darwin-rebuild
     if test -z (git status --porcelain); and test "main" = (git branch --show-current)
         git pull
         sudo rm -rf /etc/bashrc /etc/zshrc /etc/zshenv
-        darwin-rebuild switch --flake .#$OS_CONFIG_NAME
+        sudo darwin-rebuild switch --flake .#$OS_CONFIG_NAME
     else
         echo "nix-darwin is not clean or not in main branch"
         return 1
