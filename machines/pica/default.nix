@@ -18,7 +18,6 @@
       "chatgpt"
       "firefox"
       "fork"
-      "fork"
       "ghostty"
       "jetbrains-toolbox"
       "kitty"
@@ -26,7 +25,6 @@
       "obsidian"
       "orbstack"
       "shottr"
-      "telegram"
     ];
   };
   environment.variables = {
