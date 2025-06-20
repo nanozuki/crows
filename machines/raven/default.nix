@@ -93,7 +93,8 @@
   # macOS's defaults configuration
   # system.defaults = {};
   # Add ability to used TouchID for sudo authentication
-  # security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
+  security.pam.services.sudo_local.watchIdAuth = true;
 
   # The platform the configuration will be used on.
   nixpkgs.hostPlatform = "aarch64-darwin";
