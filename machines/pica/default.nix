@@ -20,6 +20,7 @@
       "fork"
       "ghostty"
       "google-chrome"
+      "iina"
       "jetbrains-toolbox"
       "kitty"
       "microsoft-teams"
