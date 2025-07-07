@@ -17,17 +17,18 @@
       k9s
       kustomize
       libxml2
+      gemini-cli
       gnumake
+      (google-cloud-sdk.withExtraComponents [
+        google-cloud-sdk.components.gke-gcloud-auth-plugin
+      ])
+      pipenv
       pkg-config
       go-protobuf
       protoc-gen-go-grpc
       protobuf
       yq-go
       zstd
-      (google-cloud-sdk.withExtraComponents [
-        google-cloud-sdk.components.gke-gcloud-auth-plugin
-      ])
-      pipenv
     ];
 
     home.sessionPath = [
