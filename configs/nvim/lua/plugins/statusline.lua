@@ -144,7 +144,7 @@ return {
           return string.format('%s / %s %s', relative, icon, name)
         end,
         hide = {
-          cursorline = true,
+          focused_win = true,
         },
         window = {
           margin = {
