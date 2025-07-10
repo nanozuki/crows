@@ -97,6 +97,7 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Goto next diagnost
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Add buffer diagnostics to the location list.' })
 -- ## config
 vim.diagnostic.config({
+  virtual_lines = true,
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = globals.diagnostic_signs.Error,
