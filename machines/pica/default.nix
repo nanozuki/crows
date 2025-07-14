@@ -27,6 +27,7 @@
       "obsidian"
       "orbstack"
       "shottr"
+      "superlist"
     ];
   };
   environment.variables = {
