@@ -28,6 +28,7 @@
       "orbstack"
       "shottr"
       "superlist"
+      "telegram"
     ];
   };
   environment.variables = {
