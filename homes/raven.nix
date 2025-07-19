@@ -13,6 +13,7 @@
 
     home.packages = with pkgs; [
       ffmpeg
+      gemini-cli
       zstd
     ];
     home.sessionPath = [
