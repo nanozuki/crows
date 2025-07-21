@@ -26,6 +26,7 @@
       "microsoft-teams"
       "obsidian"
       "orbstack"
+      "rancher"
       "shottr"
       "superlist"
       "telegram"
