@@ -10,8 +10,8 @@ local globals = {}
 ---@field variant string
 -- theme variants:
 -- - rose-pine: 'main', 'dawn', 'moon'
--- - nord: none
--- - zenbones: 'light', 'dark', 'rose-light', 'rose-dark'
+-- - nord: 'main'
+-- - zenbones: 'light', 'dark'
 
 ---@type Settings
 globals.settings = {
