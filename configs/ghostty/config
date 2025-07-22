@@ -1,4 +1,4 @@
-theme = zenbones
+theme = {{theme}}
 font-family = JetBrains Mono
 font-family = PingFang SC
 font-family = Menlo

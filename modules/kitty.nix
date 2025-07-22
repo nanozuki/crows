@@ -10,8 +10,6 @@ let
     "nord/main" = "Nord";
     "zenbones/light" = "zenbones_light";
     "zenbones/dark" = "zenbones_dark";
-    "zenbones/rose-light" = "rose-pine-dawn";
-    "zenbones/rose-dark" = "rose-pine";
   };
 in
 {
