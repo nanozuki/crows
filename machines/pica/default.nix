@@ -25,7 +25,6 @@
       "kitty"
       "microsoft-teams"
       "obsidian"
-      "orbstack"
       "rancher"
       "shottr"
       "superlist"
