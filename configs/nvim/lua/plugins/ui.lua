@@ -1,4 +1,4 @@
-local settings = require('config.globals').settings
+local settings = require('config.globals').settings()
 
 return {
   -- improve vim select/input UI
@@ -26,15 +26,19 @@ return {
   {
     'nvim-neo-tree/neo-tree.nvim',
     cmd = { 'Neotree' },
-    keys = {
-      { '<Leader>fl', ':Neotree toggle<CR>', 'n', desc = 'Toggle filetree' },
-      { '<Leader>wf', ':vsplit | Neotree position=current<CR>', 'n', desc = 'Open Neotree Window' },
-      { '<Leader>tf', ':tabnew | Neotree position=current<CR>', 'n', desc = 'Open Neotree Tab' },
-    },
     dependencies = {
       'nvim-lua/plenary.nvim',
       'nvim-tree/nvim-web-devicons',
       'MunifTanjim/nui.nvim',
+    },
+    keys = {
+      { '<Leader>fl', ':Neotree toggle<CR>', 'n', desc = 'Toggle file list' },
+      { '<Leader>sl', ':Neotree document_symbols toggle<CR>', 'n', desc = 'Toggle symbol list' },
+      { '<Leader>wf', ':vsplit | Neotree position=current<CR>', 'n', desc = 'Open Neotree Window' },
+      { '<Leader>tf', ':tabnew | Neotree position=current<CR>', 'n', desc = 'Open Neotree Tab' },
+    },
+    opts = {
+      sources = { 'filesystem', 'document_symbols' },
     },
   },
   -- filesystem editor
