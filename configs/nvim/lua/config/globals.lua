@@ -5,6 +5,7 @@ local globals = {}
 ---@field theme ThemeSettings
 ---@field use_global_statusline boolean
 ---@field hide_command_line boolean
+---@field use_gofumpt boolean
 ---@class ThemeSettings
 ---@field name 'rose-pine' | 'nord' | 'zenbones'
 ---@field variant string
@@ -13,15 +14,34 @@ local globals = {}
 -- - nord: 'main'
 -- - zenbones: 'light', 'dark'
 
----@type Settings
-globals.settings = {
-  theme = {
-    name = 'rose-pine',
-    variant = 'dawn',
-  },
-  use_global_statusline = false,
-  hide_command_line = false,
-}
+---@type Settings|nil
+local settings = nil
+
+---@return Settings
+function globals.settings()
+  if settings then
+    return settings
+  end
+  local default = {
+    theme = {
+      name = 'rose-pine',
+      variant = 'dawn',
+    },
+    use_global_statusline = false,
+    hide_command_line = false,
+    use_gofumpt = true,
+  }
+  local settings_file = vim.fn.stdpath('config') .. '/settings.json'
+  local file = io.open(settings_file, 'r')
+  if file then
+    local content = file:read('*a')
+    local cfg = vim.fn.json_decode(content)
+    settings = vim.tbl_deep_extend('force', default, cfg)
+    return settings
+  else
+    return default
+  end
+end
 
 ---@class DiagnosticSigns
 ---@field Error string
@@ -123,7 +143,7 @@ globals.lsp = {
       config = {
         settings = {
           gopls = {
-            gofumpt = true,
+            gofumpt = globals.settings().use_gofumpt,
             hints = {
               assignVariableTypes = true,
               compositeLiteralFields = true,
