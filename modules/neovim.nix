@@ -8,6 +8,11 @@ in
     enable = mkEnableOption "Neovim";
     hideCommandLine = mkEnableOption "Hide Command Line";
     useGlobalStatusline = mkEnableOption "Use global statusline";
+    useGofumpt = mkOption {
+      description = "Use gofumpt for Go formatting";
+      type = types.bool;
+      default = true;
+    };
   };
 
   config = mkIf cfg.enable {
@@ -44,6 +49,7 @@ in
         };
         use_global_statusline = cfg.useGlobalStatusline;
         hide_command_line = cfg.hideCommandLine;
+        use_gofumpt = cfg.useGofumpt;
       };
       target = "${config.xdg.configHome}/nvim/settings.json";
     };

@@ -1,16 +1,6 @@
 vim.loader.enable()
 
---- load custom settings
-local settings_file = vim.fn.stdpath('config') .. '/settings.json'
-local file = io.open(settings_file, 'r')
-if file then
-  local content = file:read('*a')
-  local cfg = vim.fn.json_decode(content)
-  local globals = require('config.globals')
-  globals.settings = vim.tbl_deep_extend('force', globals.settings, cfg)
-end
-
---- apply configs
+require('config.globals')
 require('config.configs')
 
 --- plugin manager
