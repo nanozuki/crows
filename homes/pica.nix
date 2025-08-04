@@ -12,6 +12,7 @@
     };
 
     home.packages = with pkgs; [
+      buf
       git
       jq
       k9s
@@ -43,6 +44,7 @@
       enable = true;
       hideCommandLine = true;
       useGlobalStatusline = true;
+      useGofumpt = false;
     };
     apps.sops-secrets = {
       enable = true;
