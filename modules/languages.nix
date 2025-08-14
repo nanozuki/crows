@@ -79,7 +79,6 @@ let
       nodePackages."@tailwindcss/language-server"
       # linter
       nodePackages.eslint
-      nodePackages.eslint_d
     ];
     home.sessionVariables = {
       NPM_CONFIG_USERCONFIG = "${config.xdg.configHome}/npm/npmrc";

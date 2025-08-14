@@ -226,10 +226,10 @@ globals.lsp = {
 ---@type table<string, string[]> filetypes and their linters
 globals.linters = {
   go = { 'golangci-lint' },
-  javascript = { 'eslint_d' },
-  typescript = { 'eslint_d' },
-  javascriptreact = { 'eslint_d' },
-  typescriptreact = { 'eslint_d' },
+  javascript = { 'eslint' },
+  typescript = { 'eslint' },
+  javascriptreact = { 'eslint' },
+  typescriptreact = { 'eslint' },
   python = { 'ruff' },
 }
 
