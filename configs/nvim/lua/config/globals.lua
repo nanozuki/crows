@@ -227,28 +227,30 @@ globals.lsp = {
 globals.linters = {
   go = { 'golangci-lint' },
   javascript = { 'eslint' },
-  typescript = { 'eslint' },
   javascriptreact = { 'eslint' },
-  typescriptreact = { 'eslint' },
   python = { 'ruff' },
+  typescript = { 'eslint' },
+  typescriptreact = { 'eslint' },
 }
 
 ---@type table<string, string[]> filetypes and their formatters
 globals.formatters = {
-  lua = { 'stylua' },
   css = { 'prettier' },
   deno = { 'prettier' },
   html = { 'prettier' },
-  json = { 'prettier' },
-  yaml = { 'prettier' },
-  markdown = { 'prettier' },
   javascript = { 'prettier' },
-  typescript = { 'prettier' },
   javascriptreact = { 'prettier' },
-  typescriptreact = { 'prettier' },
-  ocaml = { 'ocamlformat' },
+  json = { 'prettier' },
+  jsonc = { 'prettier' },
+  lua = { 'stylua' },
+  markdown = { 'prettier' },
   nix = { 'nixpkgs-fmt' },
+  ocaml = { 'ocamlformat' },
+  proto = { 'buf' },
   python = { 'ruff_format', 'ruff_organize_imports', 'ruff_fix' },
+  typescript = { 'prettier' },
+  typescriptreact = { 'prettier' },
+  yaml = { 'prettier' },
 }
 
 return globals
