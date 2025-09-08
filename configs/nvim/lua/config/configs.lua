@@ -4,15 +4,17 @@ local utils = require('config.utils')
 -- # globals
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+vim.g.clipboard = 'osc52'
 
 -- # options
 -- ## basic
 vim.opt.colorcolumn = '120'
+vim.opt.clipboard = { 'unnamed', 'unnamedplus' }
 vim.opt.ignorecase = true
 vim.opt.inccommand = 'split'
 vim.opt.jumpoptions = 'stack,view'
-vim.opt.modelines = 1
 vim.opt.mouse = 'ar'
+vim.opt.modelines = 1
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.scrolloff = 10
