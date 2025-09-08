@@ -14,3 +14,6 @@ keybind = super+ctrl+k=goto_split:top
 # keybind = super+ctrl+equal=equalize_splits
 # keybind = super+left_bracket=goto_split:previous
 # keybind = super+right_bracket=goto_split:next
+
+clipboard-read = allow
+clipboard-write = allow
