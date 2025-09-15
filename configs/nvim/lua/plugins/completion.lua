@@ -4,7 +4,6 @@ return {
   {
     'saghen/blink.cmp',
     version = '1.*',
-    build = 'nix run .#build-plugin',
     event = { 'InsertEnter', 'CmdlineEnter' },
     init = function()
       globals.lsp.cap_makers[#globals.lsp.cap_makers + 1] = function(caps)
