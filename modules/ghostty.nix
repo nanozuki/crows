@@ -4,12 +4,12 @@ let
   cfg = config.apps.ghostty;
   # choose themes by comman "ghostty +list-themes"
   themeSet = {
-    "rose-pine/main" = "rose-pine";
-    "rose-pine/dawn" = "rose-pine-dawn";
-    "rose-pine/moon" = "rose-pine-moon";
-    "nord/main" = "nord";
-    "zenbones/light" = "zenbones";
-    "zenbones/dark" = "zenbones_dark";
+    "rose-pine/main" = "Rose Pine";
+    "rose-pine/dawn" = "Rose Pine Dawn";
+    "rose-pine/moon" = "Rose Pine Moon";
+    "nord/main" = "Nord";
+    "zenbones/light" = "Zenbones";
+    "zenbones/dark" = "Zenbones Dark";
   };
   vars = {
     theme = themeSet."${config.g.theme.name}/${config.g.theme.variant}";
