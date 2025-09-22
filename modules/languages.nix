@@ -30,7 +30,9 @@ let
     ];
     programs.go = {
       enable = true;
-      goPath = ".local/share/go";
+      env = {
+        GOPATH = "${config.xdg.dataHome}/go";
+      };
     };
     home.sessionVariables = {
       GOROOT = "${pkgs.go}/share/go";
