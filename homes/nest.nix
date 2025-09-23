@@ -1,6 +1,7 @@
 { clips, config, ... }:
 {
   config = {
+    xdg.enable = true;
     home.username = "crows";
     home.homeDirectory = "/home/crows";
     home.stateVersion = "25.11";

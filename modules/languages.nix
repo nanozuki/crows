@@ -38,7 +38,7 @@ let
       GOROOT = "${pkgs.go}/share/go";
     };
     home.sessionPath = [
-      "$GOPATH/bin"
+      "${config.xdg.dataHome}/go/bin"
     ];
   };
   lua = {

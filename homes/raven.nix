@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 {
   config = {
+    xdg.enable = true;
     home.username = "crows";
     home.homeDirectory = "/Users/crows";
     home.stateVersion = "25.11";
