@@ -31,6 +31,8 @@
       "shottr"
       "superlist"
       "telegram"
+      "zed"
+      "zen"
     ];
   };
   environment.variables = {
