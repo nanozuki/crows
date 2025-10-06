@@ -36,6 +36,7 @@ vim.opt.grepprg = 'rg --vimgrep'
 vim.opt.foldmethod = 'indent'
 vim.opt.foldlevelstart = 99
 
+-- # commands
 vim.api.nvim_create_user_command('SaveAsSudo', function()
   local keys = utils.termcode(':w !sudo tee %')
   vim.api.nvim_feedkeys(keys, 't', true)
@@ -45,6 +46,11 @@ end, {})
 -- ## copy paste
 vim.keymap.set('v', '<leader>y', '"+y', { desc = 'Copy to system clipboard' })
 vim.keymap.set('n', '<leader>p', '"+p', { desc = 'Paste from system clipboard' })
+vim.keymap.set('n', 'yp', function()
+  local path = vim.fn.expand('%:.')
+  vim.fn.setreg('+', path)
+  vim.notify('Copied file path: ' .. path, vim.log.levels.INFO)
+end, { desc = 'Copy file path to system clipboard' })
 
 -- ## search and replace
 vim.keymap.set('v', '<leader>s', 'y/\\V<C-r>"<CR>', { desc = 'Search visual text' })
