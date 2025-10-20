@@ -14,6 +14,7 @@
 
     home.packages = with pkgs; [
       buf
+      codex
       git
       jq
       k9s
