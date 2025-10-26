@@ -1,4 +1,5 @@
-{ pkgs, self, ... }: {
+{ pkgs, self, ... }:
+{
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = [
@@ -27,22 +28,22 @@
       "kitty"
       "microsoft-teams"
       "obsidian"
-      "ollama"
+      "ollama-app"
       "orbstack"
       "rapidapi"
       "postman"
       "qbittorrent"
-      "syncthing"
+      "syncthing-app"
       "shottr"
-      "squirrel"
+      "squirrel-app"
       "steam"
-      "tailscale"
+      "tailscale-app"
       "telegram"
       "vimr"
       "visual-studio-code"
       "wezterm"
       "zed"
-      "zen-browser"
+      "zen"
     ];
   };
 
@@ -66,7 +67,11 @@
     };
     gc = {
       automatic = true;
-      interval = { Weekday = 0; Hour = 10; Minute = 0; };
+      interval = {
+        Weekday = 0;
+        Hour = 10;
+        Minute = 0;
+      };
       options = "--delete-older-than 30d";
     };
   };
