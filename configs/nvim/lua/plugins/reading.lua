@@ -19,9 +19,10 @@ return {
   { 'norcalli/nvim-colorizer.lua', cmd = 'ColorizerToggle' },
   -- jump
   {
-    'https://github.com/ggandor/leap.nvim',
+    'ggandor/leap.nvim',
     config = function()
-      require('leap').add_default_mappings()
+      vim.keymap.set({ 'n', 'x', 'o' }, 's', '<Plug>(leap)')
+      vim.keymap.set('n', 'S', '<Plug>(leap-from-window)')
     end,
   },
 }

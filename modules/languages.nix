@@ -79,6 +79,7 @@ let
       # language server
       nodePackages.typescript
       nodePackages."@tailwindcss/language-server"
+      vtsls
       # linter
       nodePackages.eslint
     ];
