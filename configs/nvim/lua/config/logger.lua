@@ -1,12 +1,8 @@
-local utils = {}
-
-function utils.termcode(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
+local M = {}
 
 local log_file = vim.fn.stdpath('state') .. '/config.log'
 
-function utils.log(string)
+function M.log(string)
   local time = os.date('%Y-%m-%d %H:%M:%S')
   local file = io.open(log_file, 'a')
   if file then
@@ -17,8 +13,8 @@ function utils.log(string)
   end
 end
 
-function utils.logf(format, ...)
-  utils.log(string.format(format, ...))
+function M.logf(format, ...)
+  M.log(string.format(format, ...))
 end
 
-return utils
+return M

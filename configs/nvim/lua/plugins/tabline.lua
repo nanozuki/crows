@@ -1,4 +1,4 @@
-local settings = require('config.globals').settings()
+local settings = require('config.settings')
 
 local function make_theme()
   local alt_bg = vim.g.terminal_color_0
