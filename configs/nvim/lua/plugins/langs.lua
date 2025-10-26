@@ -1,5 +1,3 @@
-local lsp = require('config.globals').lsp
-
 return {
   -- fish
   { 'dag/vim-fish', ft = { 'fish' } },
@@ -13,15 +11,15 @@ return {
     'b0o/schemastore.nvim',
     lazy = true,
     config = function()
-      lsp.servers.jsonls.config = {
+      vim.lsp.config('jsonls', {
         settings = {
           json = {
             schemas = require('schemastore').json.schemas(),
             validate = { enable = true },
           },
         },
-      }
-      lsp.servers.yamlls.config = {
+      })
+      vim.lsp.config('yamlls', {
         settings = {
           yaml = {
             schemaStore = {
@@ -34,7 +32,7 @@ return {
             schemas = require('schemastore').yaml.schemas(),
           },
         },
-      }
+      })
     end,
   },
   -- lua
@@ -70,32 +68,18 @@ return {
     'mrcjkb/rustaceanvim',
     dependencies = { 'neovim/nvim-lspconfig' },
     ft = { 'rust' },
-    init = function()
-      lsp.servers.rust_analyzer.lazyload = true
-    end,
     config = function()
-      lsp.servers.rust_analyzer.on_attach = function(_, bufnr)
-        vim.keymap.set('n', '<leader>ca', function()
-          vim.cmd.RustLsp('codeAction')
-        end, { buffer = bufnr, desc = 'Code actions' })
-        vim.keymap.set('n', '<leader>ha', function()
-          vim.cmd.RustLsp({ 'hover', 'actions' })
-        end, { buffer = bufnr, desc = 'Code action groups' })
-      end
-      vim.g.rustaceanvim = { server = lsp.make_config('rust_analyzer') }
-    end,
-  },
-  -- typescript
-  {
-    'pmizio/typescript-tools.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
-    ft = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact', 'svelte' },
-    init = function()
-      lsp.servers.tsserver.lazyload = true
-    end,
-    config = function()
-      require('typescript-tools').setup(lsp.make_config('tsserver'))
-      vim.keymap.set('n', '<leader>oi', '<cmd>TSToolsOrganizeImports', { desc = 'Organize imports' })
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = 'rust',
+        callback = function(args)
+          vim.keymap.set('n', '<leader>ca', function()
+            vim.cmd.RustLsp('codeAction')
+          end, { buffer = args.buf, desc = 'Code actions' })
+          vim.keymap.set('n', '<leader>ha', function()
+            vim.cmd.RustLsp({ 'hover', 'actions' })
+          end, { buffer = args.buf, desc = 'Code action groups' })
+        end,
+      })
     end,
   },
   -- sql

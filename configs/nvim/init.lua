@@ -1,7 +1,6 @@
 vim.loader.enable()
-
-require('config.globals')
 require('config.configs')
+require('config.lsp')
 
 --- plugin manager
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
