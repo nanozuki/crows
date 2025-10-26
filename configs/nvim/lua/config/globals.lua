@@ -70,108 +70,33 @@ globals.lsp = {
     return {}
   end,
   servers = {
-    astro = {},
-    cssls = {
-      config = {
-        lint = {
-          unknownAtRules = 'ignore',
-        },
-      },
-    },
-    denols = {
-      root_patterns = { 'deno.json', 'deno.jsonc' }, -- remove '.git' to avoid setup in node project
-      config = {
-        init_options = {
-          enable = true,
-          lint = true,
-          unstable = true,
-        },
-      },
-    },
-    gleam = {},
-    gopls = {
-      config = {
-        settings = {
-          gopls = {
-            gofumpt = globals.settings().use_gofumpt,
-            hints = {
-              assignVariableTypes = true,
-              compositeLiteralFields = true,
-              compositeLiteralTypes = true,
-              constantValues = true,
-              functionTypeParameters = true,
-              parameterNames = true,
-              rangeVariableTypes = true,
-            },
-          },
-        },
-      },
-      on_attach = function(_, bufnr)
-        vim.keymap.set('n', '<leader>oi', function()
-          vim.lsp.buf.code_action({
-            context = { diagnostics = {}, only = { 'source.organizeImports' } },
-            apply = true,
-          })
-        end, { desc = 'Organize imports', buffer = bufnr })
-      end,
-    },
-    html = {},
-    jsonls = {},
-    lua_ls = {
-      config = {
-        settings = {
-          Lua = {
-            format = { enable = false },
-            hint = { enable = true },
-            runtime = { version = 'LuaJIT' },
-            diagnostics = { globals = { 'vim' } },
-            workspace = { checkThirdParty = false },
-            telemetry = { enable = false },
-          },
-        },
-      },
-    },
-    nil_ls = {},
-    ocamllsp = {},
-    pyright = {},
-    ruff = {},
-    rust_analyzer = {
-      config = {
-        settings = {
-          ['rust-analyzer'] = {
-            diagnostics = {
-              diagnostics = { disabled = { 'unresolved-proc-macro' } },
-              checkOnSave = { command = 'clippy' },
-            },
-          },
-        },
-      },
-    },
-    svelte = {
-      on_attach = function(client, _)
-        vim.api.nvim_create_autocmd('BufWritePost', {
-          pattern = { '*.js', '*.ts' },
-          callback = function(ctx)
-            client.notify('$/onDidChangeTsOrJsFile', { uri = ctx.match })
-          end,
-        })
-      end,
-    },
-    tailwindcss = {
-      config = {
-        filetypes = { 'html', 'css', 'javascriptreact', 'typescriptreact', 'svelte' },
-      },
-    },
-    terraformls = {},
-    tsserver = {
-      root_patterns = { 'tsconfig.json', 'jsconfig.json', 'package.json' }, -- remove '.git' to avoid setup in deno project
-      config = { single_file_support = false },
-    },
     tinymist = {},
     yamlls = {},
     zls = {},
   },
 }
 
+vim.lsp.enable({
+  'astro',
+  'cssls',
+  'denols',
+  'gleam',
+  'gopls',
+  'html',
+  'jsonls',
+  'lua_ls',
+  'nil_ls',
+  'ocamllsp',
+  'pyright',
+  'ruff',
+  'rust_analyzer',
+  'svelte',
+  'tailwindcss',
+  'terraformls',
+  'tinymist',
+  'vtsls',
+  'yamlls',
+  'zls',
+})
 
 return globals
