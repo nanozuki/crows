@@ -59,15 +59,17 @@ return {
     'mfussenegger/nvim-lint',
     event = { 'BufReadPost', 'BufNewFile' },
     config = function()
-      local translator = { ['golangci-lint'] = 'golangcilint' }
-      local linters_by_ft = {} ---@type table<string, string[]>
-      for ft, linters in pairs(globals.linters) do
-        linters_by_ft[ft] = translate_list(translator, linters)
-      end
-
-      require('lint').linters_by_ft = linters_by_ft
+      require('lint').linters_by_ft = {
+        go = { 'golangcilint' },
+        javascript = { 'eslint' },
+        javascriptreact = { 'eslint' },
+        python = { 'ruff' },
+        svelte = { 'eslint' },
+        typescript = { 'eslint' },
+        typescriptreact = { 'eslint' },
+      }
       local lint_group = vim.api.nvim_create_augroup('NvimLint', {})
-      vim.api.nvim_create_autocmd({ 'BufWinEnter', 'BufWritePost' }, {
+      vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
         group = lint_group,
         callback = function()
           require('lint').try_lint()
@@ -79,19 +81,31 @@ return {
     'stevearc/conform.nvim',
     event = { 'BufReadPost', 'BufNewFile' },
     config = function()
-      local translator = { ['nixpkgs-fmt'] = 'nixpkgs_fmt' }
-      local formatters_by_ft = {} ---@type table<string, string[]>
-      for ft, formatters in pairs(globals.formatters) do
-        formatters_by_ft[ft] = translate_list(translator, formatters or {})
-      end
       require('conform').setup({
-        formatters_by_ft = formatters_by_ft,
+        formatters_by_ft = {
+          css = { 'prettier' },
+          deno = { 'prettier' },
+          html = { 'prettier' },
+          javascript = { 'prettier' },
+          javascriptreact = { 'prettier' },
+          json = { 'prettier' },
+          jsonc = { 'prettier' },
+          lua = { 'stylua' },
+          markdown = { 'prettier' },
+          nix = { 'nixfmt' },
+          ocaml = { 'ocamlformat' },
+          proto = { 'buf' },
+          python = { 'ruff_format', 'ruff_organize_imports', 'ruff_fix' },
+          typescript = { 'prettier' },
+          typescriptreact = { 'prettier' },
+          yaml = { 'prettier' },
+        },
         format_on_save = {
-          lsp_fallback = true,
-          timeout_ms = 3000,
+          lsp_format = 'fallback',
+          timeout_ms = 500,
         },
       })
-      vim.opt.formatexpr = "v:lua.require'conform'.formatexpr()"
+      vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
     end,
   },
 }

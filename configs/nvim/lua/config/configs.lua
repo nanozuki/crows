@@ -1,6 +1,3 @@
-local globals = require('config.globals')
-local utils = require('config.utils')
-
 -- # globals
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
@@ -36,9 +33,13 @@ vim.opt.grepprg = 'rg --vimgrep'
 vim.opt.foldmethod = 'indent'
 vim.opt.foldlevelstart = 99
 
+local function termcode(str)
+  return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
+
 -- # commands
 vim.api.nvim_create_user_command('SaveAsSudo', function()
-  local keys = utils.termcode(':w !sudo tee %')
+  local keys = termcode(':w !sudo tee %')
   vim.api.nvim_feedkeys(keys, 't', true)
 end, {})
 
@@ -58,7 +59,7 @@ vim.keymap.set('v', '<leader>r', 'y:%s/\\V<C-r>"//g<Left><Left>', { desc = 'Repl
 
 -- ## terminal
 vim.keymap.set('n', '<leader>tt', ':tabnew | terminal<CR>', { desc = 'Open terminal in new tab' })
-vim.keymap.set('t', '<C-K>', utils.termcode([[<C-\><C-N>]]), { desc = 'To normal mode in terminal' })
+vim.keymap.set('t', '<C-K>', termcode([[<C-\><C-N>]]), { desc = 'To normal mode in terminal' })
 
 -- ## keymap for tab
 vim.keymap.set('n', '<leader>tc', ':$tabnew<CR>', { desc = 'Create new tab' })
@@ -116,10 +117,10 @@ vim.diagnostic.config({
   virtual_lines = { current_line = true },
   signs = {
     text = {
-      [vim.diagnostic.severity.ERROR] = globals.diagnostic_signs.Error,
-      [vim.diagnostic.severity.WARN] = globals.diagnostic_signs.Warn,
-      [vim.diagnostic.severity.INFO] = globals.diagnostic_signs.Info,
-      [vim.diagnostic.severity.HINT] = globals.diagnostic_signs.Hint,
+      [vim.diagnostic.severity.ERROR] = '󰅚',
+      [vim.diagnostic.severity.WARN] = '󰀪',
+      [vim.diagnostic.severity.INFO] = '',
+      [vim.diagnostic.severity.HINT] = '󰌶',
     },
   },
 })
