@@ -1,16 +1,13 @@
 return {
-  -- # load before nvim-lspconfig
   {
     'chrisgrieser/nvim-lsp-endhints',
     event = 'LspAttach',
     init = function()
       vim.lsp.inlay_hint.enable()
     end,
-    opts = {}, -- required, even if empty
+    opts = {},
   },
-  -- # nvim-lspconfig
   { 'neovim/nvim-lspconfig' },
-  -- # load after nvim-lspconfig
   {
     'folke/trouble.nvim',
     cmd = 'TroubleToggle',
@@ -22,13 +19,12 @@ return {
         desc = 'Buffer Diagnostics (Trouble)',
       },
     },
-    dependencies = { 'nvim-tree/nvim-web-devicons', 'neovim/nvim-lspconfig' },
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
     opts = {},
   },
   {
     'kosayoda/nvim-lightbulb',
     event = { 'BufReadPre', 'BufNewFile' },
-    dependencies = { 'neovim/nvim-lspconfig' },
     opts = {
       sign = { enabled = false },
       virtual_text = { enabled = true, text = '' },

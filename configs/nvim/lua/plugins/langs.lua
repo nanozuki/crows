@@ -66,7 +66,6 @@ return {
   -- rust
   {
     'mrcjkb/rustaceanvim',
-    dependencies = { 'neovim/nvim-lspconfig' },
     ft = { 'rust' },
     config = function()
       vim.api.nvim_create_autocmd('FileType', {
