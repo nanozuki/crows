@@ -1,4 +1,4 @@
-local settings = require('config.globals').settings()
+local settings = require('config.settings')
 
 return {
   -- improve vim select/input UI

@@ -1,17 +1,3 @@
-local globals = require('config.globals')
-
----@function translate
----@param translator table<string,string>
----@param names string[]
----@return string[]
-local function translate_list(translator, names)
-  local result = {}
-  for _, name in ipairs(names) do
-    table.insert(result, translator[name] or name)
-  end
-  return result
-end
-
 return {
   -- autopairs
   {
