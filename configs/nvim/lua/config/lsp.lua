@@ -2,7 +2,7 @@ local function list_workspace_folders()
   vim.print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 end
 
-local function toogle_inlay_hint()
+local function toggle_inlay_hint()
   local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = 0 })
   vim.lsp.inlay_hint.enable(not enabled)
 end
@@ -24,7 +24,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       codelens = { '<leader>cl', vim.lsp.codelens.run, 'Code action' },
       list_ref = { 'gr', vim.lsp.buf.references, 'List references' },
       format = { '<leader>bf', vim.lsp.buf.format, 'Format buffer' },
-      inlay_hint = { '<leader>lh', toogle_inlay_hint, 'Toogle in[l]ay [h]int' },
+      inlay_hint = { '<leader>lh', toggle_inlay_hint, 'Toggle in[l]ay [h]int' },
     }
     for _, mapper in pairs(keys) do
       vim.keymap.set('n', mapper[1], mapper[2], { desc = mapper[3], buffer = args.buf })
