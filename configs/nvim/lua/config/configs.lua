@@ -39,7 +39,7 @@ end
 
 -- # commands
 vim.api.nvim_create_user_command('SaveAsSudo', function()
-  local keys = termcode(':w !sudo tee %')
+  local keys = termcode(':w !sudo tee %<CR>')
   vim.api.nvim_feedkeys(keys, 't', true)
 end, {})
 

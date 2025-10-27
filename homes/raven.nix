@@ -13,6 +13,7 @@
     };
 
     home.packages = with pkgs; [
+      codex
       ffmpeg
       gemini-cli
       zstd

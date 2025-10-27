@@ -8,7 +8,7 @@ local function make_theme()
     insert = vim.g.terminal_color_4, -- blue
     visual = vim.g.terminal_color_3, -- yellow
     replace = vim.g.terminal_color_2, -- green
-    command = vim.g.termianl_color_1, -- red
+    command = vim.g.terminal_color_1, -- red
     inactive = vim.g.terminal_color_5, -- magenta
   }
   local theme = {}
