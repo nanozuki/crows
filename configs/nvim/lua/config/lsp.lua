@@ -7,8 +7,18 @@ local function toggle_inlay_hint()
   vim.lsp.inlay_hint.enable(not enabled)
 end
 
+local function do_code_action(name)
+  return function()
+    vim.lsp.buf.code_action({
+      context = { diagnostics = {}, only = { name } },
+      apply = true,
+    })
+  end
+end
+
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
+    -- Generally keymsps for LSP
     local keys = {
       goto_decl = { 'gD', vim.lsp.buf.declaration, 'Goto declaration' },
       goto_def = { 'gd', vim.lsp.buf.definition, 'Goto definition' },
@@ -25,6 +35,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       list_ref = { 'gr', vim.lsp.buf.references, 'List references' },
       format = { '<leader>bf', vim.lsp.buf.format, 'Format buffer' },
       inlay_hint = { '<leader>lh', toggle_inlay_hint, 'Toggle in[l]ay [h]int' },
+      organize_imports = { '<leader>oi', do_code_action('source.organizeImports'), 'Organize imports' },
     }
     for _, mapper in pairs(keys) do
       vim.keymap.set('n', mapper[1], mapper[2], { desc = mapper[3], buffer = args.buf })
