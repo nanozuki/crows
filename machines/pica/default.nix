@@ -1,4 +1,5 @@
-{ pkgs, self, ... }: {
+{ pkgs, self, ... }:
+{
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = [
@@ -48,7 +49,7 @@
     nerd-fonts.symbols-only
     noto-fonts
     noto-fonts-cjk-sans
-    noto-fonts-emoji
+    noto-fonts-color-emoji
   ];
 
   # Auto upgrade nix package and the daemon service.
@@ -63,7 +64,11 @@
     };
     gc = {
       automatic = true;
-      interval = { Weekday = 0; Hour = 10; Minute = 0; };
+      interval = {
+        Weekday = 0;
+        Hour = 10;
+        Minute = 0;
+      };
       options = "--delete-older-than 30d";
     };
   };

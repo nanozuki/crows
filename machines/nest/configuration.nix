@@ -9,7 +9,10 @@
     ./hardware-configuration.nix
   ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -40,7 +43,11 @@
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
-    settings = { General = { Experimental = true; }; };
+    settings = {
+      General = {
+        Experimental = true;
+      };
+    };
   };
   # GPU and Drivers
   boot.initrd.kernelModules = [ "amdgpu" ];
@@ -173,7 +180,11 @@
   users.users.crows = {
     isNormalUser = true;
     description = "crows";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "docker"
+    ];
     shell = pkgs.fish;
     packages = with pkgs; [
       kitty
@@ -214,7 +225,7 @@
     nerd-fonts.jetbrains-mono
     nerd-fonts.symbols-only
     noto-fonts-cjk-sans
-    noto-fonts-emoji
+    noto-fonts-color-emoji
   ];
   fonts.fontDir.enable = true;
 
@@ -249,17 +260,27 @@
         localAnnouncePort = 8384;
       };
       devices = {
-        raven = { id = "ZHC6K6C-EYPF7T4-QBJ2A7L-6STSA6A-WX65ANE-XVOHHWZ-POFJKEP-YBWTBAJ"; };
-        pica = { id = "242PIDE-35ZL7BR-L7ICJDQ-EBGCGUU-ZOQHJPK-O5SFAPK-7USWJO3-RBNBFAQ"; };
+        raven = {
+          id = "ZHC6K6C-EYPF7T4-QBJ2A7L-6STSA6A-WX65ANE-XVOHHWZ-POFJKEP-YBWTBAJ";
+        };
+        pica = {
+          id = "242PIDE-35ZL7BR-L7ICJDQ-EBGCGUU-ZOQHJPK-O5SFAPK-7USWJO3-RBNBFAQ";
+        };
       };
       folders = {
         iCloud = {
           path = "/home/crows/Documents/iCloud";
-          devices = [ "raven" "pica" ];
+          devices = [
+            "raven"
+            "pica"
+          ];
         };
         obsidian = {
           path = "/home/crows/Documents/Obsidian";
-          devices = [ "raven" "pica" ];
+          devices = [
+            "raven"
+            "pica"
+          ];
         };
       };
     };
