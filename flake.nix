@@ -20,23 +20,48 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = input@{ nixpkgs, stable-nixpkgs, stratosphere, home-manager, ... }:
+  outputs =
+    input@{
+      self,
+      nixpkgs,
+      stable-nixpkgs,
+      stratosphere,
+      home-manager,
+      nix-darwin,
+      ...
+    }:
     let
       stablePackages = [ "awscli2" ];
-      stableOverlay = final: prev: builtins.listToAttrs
-        (map (name: { name = name; value = stable-nixpkgs.legacyPackages.${prev.system}.${name}; }) stablePackages);
+      stableOverlay =
+        final: prev:
+        builtins.listToAttrs (
+          map (name: {
+            name = name;
+            value = stable-nixpkgs.legacyPackages.${prev.system}.${name};
+          }) stablePackages
+        );
       stratosphereOverlay = final: prev: { stra = stratosphere.packages.${prev.system}; };
-      pkgModule = { pkgs, ... }: {
-        nixpkgs.overlays = [
-          input.rust-overlay.overlays.default
-          stableOverlay
-          stratosphereOverlay
-        ];
-        nixpkgs.config = { allowUnfree = true; allowUnfreePredicate = (_: true); };
-      };
-      mkHome = home: system:
+      pkgModule =
+        { pkgs, ... }:
+        {
+          nixpkgs.overlays = [
+            input.rust-overlay.overlays.default
+            stableOverlay
+            stratosphereOverlay
+          ];
+          nixpkgs.config = {
+            allowUnfree = true;
+            allowUnfreePredicate = (_: true);
+          };
+        };
+      mkHome =
+        home: system:
         home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${system};
           modules = [
@@ -53,9 +78,22 @@
     in
     {
       homeConfigurations = {
-        nest = mkHome ./homes/nest.nix "x86_64-linux";
         pica = mkHome ./homes/pica.nix "aarch64-darwin";
         raven = mkHome ./homes/raven.nix "aarch64-darwin";
+      };
+      darwinConfigurations."raven" = nix-darwin.lib.darwinSystem {
+        modules = [
+          ./modules/darwin
+          ./machines/raven
+        ];
+        specialArgs = { inherit self; };
+      };
+      darwinConfigurations."pica" = nix-darwin.lib.darwinSystem {
+        modules = [
+          ./modules/darwin
+          ./machines/pica
+        ];
+        specialArgs = { inherit self; };
       };
     };
 }
