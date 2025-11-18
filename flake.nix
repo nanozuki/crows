@@ -1,3 +1,9 @@
+# TODO:
+# - remove ${config.xdg.configHome} in sops-secrets.nix
+# - uncomment home-manager.users lines and remove sharedModules
+# - refactor clips import to a module
+# - update "update-env" script, adapt to nix-darwin, instead of home-manager
+# - fix "bind: the -k/--key syntax is no longer supported. See `bind --help` and `bind --key-names`" in fish
 {
   description = "Home Manager configuration of crows";
 
@@ -37,7 +43,7 @@
       ...
     }:
     let
-      stablePackages = [ "awscli2" ];
+      stablePackages = [ ];
       stableOverlay =
         final: prev:
         builtins.listToAttrs (
