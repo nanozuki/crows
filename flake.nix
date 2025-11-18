@@ -48,7 +48,7 @@
         );
       stratosphereOverlay = final: prev: { stra = stratosphere.packages.${prev.system}; };
       pkgModule =
-        { pkgs, ... }:
+        { ... }:
         {
           nixpkgs.overlays = [
             input.rust-overlay.overlays.default
@@ -60,38 +60,51 @@
             allowUnfreePredicate = (_: true);
           };
         };
-      mkHome =
-        home: system:
-        home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.${system};
-          modules = [
-            pkgModule
-            input.sops-nix.homeManagerModule
-            ./modules
-            home
-          ];
-          extraSpecialArgs = {
-            inherit system;
-            clips = import ./clips nixpkgs.legacyPackages.${system} system;
-          };
-        };
     in
     {
-      homeConfigurations = {
-        pica = mkHome ./homes/pica.nix "aarch64-darwin";
-        raven = mkHome ./homes/raven.nix "aarch64-darwin";
-      };
       darwinConfigurations."raven" = nix-darwin.lib.darwinSystem {
         modules = [
+          pkgModule
           ./modules/darwin
           ./machines/raven
+          home-manager.darwinModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.sharedModules = [
+              input.sops-nix.homeManagerModule
+              ./homes/raven.nix
+              ./modules
+            ];
+            # home-manager.users."raven" = ./homes/raven.nix;
+            home-manager.extraSpecialArgs = {
+              system = "aarch64-darwin";
+              clips = import ./clips nixpkgs.legacyPackages."aarch64-darwin" "aarch64-darwin";
+            };
+          }
         ];
         specialArgs = { inherit self; };
       };
       darwinConfigurations."pica" = nix-darwin.lib.darwinSystem {
         modules = [
+          pkgModule
           ./modules/darwin
           ./machines/pica
+          home-manager.darwinModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.sharedModules = [
+              input.sops-nix.homeManagerModule
+              ./homes/pica.nix
+              ./modules
+            ];
+            # home-manager.users."pica" = ./homes/pica.nix;
+            home-manager.extraSpecialArgs = {
+              system = "aarch64-darwin";
+              clips = import ./clips nixpkgs.legacyPackages."aarch64-darwin" "aarch64-darwin";
+            };
+          }
         ];
         specialArgs = { inherit self; };
       };
