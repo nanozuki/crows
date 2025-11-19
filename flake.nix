@@ -1,7 +1,3 @@
-# TODO:
-# - move nixplgs overlays and config to a separate file
-# - consider using nix-darwin sops module
-# - refactor clips import to a module
 {
   description = "Home Manager configuration of crows";
 
@@ -31,42 +27,17 @@
   };
 
   outputs =
-    input@{
+    inputs@{
       self,
       nixpkgs,
       home-manager,
       nix-darwin,
       ...
     }:
-    let
-      stablePackages = [ ];
-      stableOverlay =
-        final: prev:
-        builtins.listToAttrs (
-          map (name: {
-            name = name;
-            value = input.stable-nixpkgs.legacyPackages.${prev.system}.${name};
-          }) stablePackages
-        );
-      stratosphereOverlay = final: prev: { stra = input.stratosphere.packages.${prev.system}; };
-      pkgModule =
-        { ... }:
-        {
-          nixpkgs.overlays = [
-            input.rust-overlay.overlays.default
-            stableOverlay
-            stratosphereOverlay
-          ];
-          nixpkgs.config = {
-            allowUnfree = true;
-            allowUnfreePredicate = (_: true);
-          };
-        };
-    in
     {
       darwinConfigurations.raven = nix-darwin.lib.darwinSystem {
         modules = [
-          pkgModule
+          ./overlays.nix
           ./modules/darwin
           ./machines/raven
           home-manager.darwinModules.home-manager
@@ -74,7 +45,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.sharedModules = [
-              input.sops-nix.homeManagerModule
+              inputs.sops-nix.homeManagerModule
               ./modules
             ];
             home-manager.users.crows = ./homes/raven.nix;
@@ -84,11 +55,11 @@
             };
           }
         ];
-        specialArgs = { inherit self; };
+        specialArgs = { inherit self inputs; };
       };
       darwinConfigurations.pica = nix-darwin.lib.darwinSystem {
         modules = [
-          pkgModule
+          ./overlays.nix
           ./modules/darwin
           ./machines/pica
           home-manager.darwinModules.home-manager
@@ -96,7 +67,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.sharedModules = [
-              input.sops-nix.homeManagerModule
+              inputs.sops-nix.homeManagerModule
               ./modules
             ];
             home-manager.users.wtang = import ./homes/pica.nix;
@@ -106,7 +77,7 @@
             };
           }
         ];
-        specialArgs = { inherit self; };
+        specialArgs = { inherit self inputs; };
       };
     };
 }
