@@ -1,9 +1,12 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.apps.waybar;
+let
+  cfg = config.apps.waybar;
 in
 {
-  options.apps.waybar = { enable = mkEnableOption "waybar"; };
+  options.apps.waybar = {
+    enable = mkEnableOption "waybar";
+  };
   config = mkIf cfg.enable {
     home.file.waybar = {
       enable = true;

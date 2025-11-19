@@ -1,4 +1,9 @@
-{ clips, config, lib, ... }:
+{
+  clips,
+  config,
+  lib,
+  ...
+}:
 with lib;
 let
   cfg = config.apps.wezterm;
@@ -16,7 +21,9 @@ let
   };
 in
 {
-  options.apps.wezterm = { enable = mkEnableOption "wezterm"; };
+  options.apps.wezterm = {
+    enable = mkEnableOption "wezterm";
+  };
   config = mkIf cfg.enable {
     home.file.wezterm = {
       enable = true;

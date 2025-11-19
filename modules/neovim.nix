@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 let
   cfg = config.apps.neovim;
@@ -16,7 +21,10 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [ ripgrep fzf ];
+    home.packages = with pkgs; [
+      ripgrep
+      fzf
+    ];
     programs.neovim = {
       enable = true;
       defaultEditor = true;
