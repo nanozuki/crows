@@ -1,9 +1,17 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
-let cfg = config.apps.bat;
+let
+  cfg = config.apps.bat;
 in
 {
-  options.apps.bat = { enable = mkEnableOption "bat"; };
+  options.apps.bat = {
+    enable = mkEnableOption "bat";
+  };
   config = mkIf cfg.enable {
     home.packages = [ pkgs.bat ];
     home.file.bat = {

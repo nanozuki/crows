@@ -1,5 +1,10 @@
 # Global settings for languages and related tools
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 let
   cfg = config.languages;
@@ -12,7 +17,10 @@ let
     ];
   };
   gleam = {
-    home.packages = [ pkgs.gleam pkgs.erlang ];
+    home.packages = [
+      pkgs.gleam
+      pkgs.erlang
+    ];
   };
   go = {
     home.packages = with pkgs; [
@@ -42,10 +50,16 @@ let
     ];
   };
   lua = {
-    home.packages = with pkgs; [ lua-language-server stylua ];
+    home.packages = with pkgs; [
+      lua-language-server
+      stylua
+    ];
   };
   nix = {
-    home.packages = with pkgs; [ nil nixpkgs-fmt ];
+    home.packages = with pkgs; [
+      nil
+      nixfmt
+    ];
   };
   ocaml = {
     home.packages = with pkgs; [
@@ -59,7 +73,9 @@ let
       (rust-bin.stable.latest.default.override { extensions = [ "rust-src" ]; })
       rust-analyzer
     ];
-    home.sessionVariables = { CARGO_HOME = "${config.xdg.dataHome}/cargo"; };
+    home.sessionVariables = {
+      CARGO_HOME = "${config.xdg.dataHome}/cargo";
+    };
     home.sessionPath = [ "${config.xdg.dataHome}/cargo/bin" ];
   };
   svelte = {
@@ -100,30 +116,64 @@ let
     ];
   };
   typst = mkIf cfg.language.typst {
-    home.packages = with pkgs; [ typst typst-lsp ];
+    home.packages = with pkgs; [
+      typst
+      typst-lsp
+    ];
   };
   vim = {
     home.packages = with pkgs; [ nodePackages.vim-language-server ];
   };
   zig = mkIf cfg.language.zig {
-    home.packages = with pkgs; [ zig zls ];
+    home.packages = with pkgs; [
+      zig
+      zls
+    ];
   };
 in
 {
-  options.languages.dataAndMarkup = { enable = mkEnableOption "Data and Markup Languages"; };
-  options.languages.gleam = { enable = mkEnableOption "Gleam"; };
-  options.languages.go = { enable = mkEnableOption "Go"; };
-  options.languages.lua = { enable = mkEnableOption "Lua"; };
-  options.languages.nix = { enable = mkEnableOption "Nix"; };
-  options.languages.ocaml = { enable = mkEnableOption "OCaml"; };
-  options.languages.rust = { enable = mkEnableOption "Rust"; };
-  options.languages.svelte = { enable = mkEnableOption "Svelte"; };
-  options.languages.terraform = { enable = mkEnableOption "Terraform"; };
-  options.languages.typescript_deno = { enable = mkEnableOption "Typescript on Deno"; };
-  options.languages.typescript_node = { enable = mkEnableOption "Typescript on Node.js"; };
-  options.languages.typst = { enable = mkEnableOption "Typst"; };
-  options.languages.vim = { enable = mkEnableOption "Vim"; };
-  options.languages.zig = { enable = mkEnableOption "Zig"; };
+  options.languages.dataAndMarkup = {
+    enable = mkEnableOption "Data and Markup Languages";
+  };
+  options.languages.gleam = {
+    enable = mkEnableOption "Gleam";
+  };
+  options.languages.go = {
+    enable = mkEnableOption "Go";
+  };
+  options.languages.lua = {
+    enable = mkEnableOption "Lua";
+  };
+  options.languages.nix = {
+    enable = mkEnableOption "Nix";
+  };
+  options.languages.ocaml = {
+    enable = mkEnableOption "OCaml";
+  };
+  options.languages.rust = {
+    enable = mkEnableOption "Rust";
+  };
+  options.languages.svelte = {
+    enable = mkEnableOption "Svelte";
+  };
+  options.languages.terraform = {
+    enable = mkEnableOption "Terraform";
+  };
+  options.languages.typescript_deno = {
+    enable = mkEnableOption "Typescript on Deno";
+  };
+  options.languages.typescript_node = {
+    enable = mkEnableOption "Typescript on Node.js";
+  };
+  options.languages.typst = {
+    enable = mkEnableOption "Typst";
+  };
+  options.languages.vim = {
+    enable = mkEnableOption "Vim";
+  };
+  options.languages.zig = {
+    enable = mkEnableOption "Zig";
+  };
 
   config = mkMerge [
     (mkIf cfg.dataAndMarkup.enable dataAndMarkup)
