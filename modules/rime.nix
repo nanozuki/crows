@@ -1,19 +1,25 @@
-{ clips, config, lib, ... }:
+{
+  clips,
+  config,
+  lib,
+  ...
+}:
 with lib;
 let
   cfg = config.apps.rime;
 in
 {
-  options.apps.rime = { enable = mkEnableOption "Rime"; };
+  options.apps.rime = {
+    enable = mkEnableOption "Rime";
+  };
 
   config = mkIf cfg.enable {
     home.file.rime_common = {
       enable = true;
       source = ../configs/rime;
       recursive = true;
-      target = (clips.darwinOr
-        "${config.home.homeDirectory}/Library/Rime"
-        "${config.home.homeDirectory}/.local/share/fcitx5/rime"
+      target = (
+        clips.darwinOr "${config.home.homeDirectory}/Library/Rime" "${config.home.homeDirectory}/.local/share/fcitx5/rime"
       );
     };
     home.file.rime_squirrel = {

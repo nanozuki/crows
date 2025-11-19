@@ -1,4 +1,10 @@
-{ config, lib, pkgs, system, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  system,
+  ...
+}:
 {
   config = {
     apps.bat.enable = true;
@@ -10,8 +16,6 @@
     apps.tealdeer.enable = true;
     apps.wezterm.enable = true;
     apps.ghostty.enable = true;
-
-    nix.package = pkgs.nix;
 
     xdg.enable = true;
     home.packages = with pkgs; [
@@ -45,13 +49,26 @@
         hm = "home-manager --flake ~/.config/home-manager#$HM_CONFIG_NAME";
       };
       functions = {
-        gitget = { body = builtins.readFile ../configs/fish/functions/gitget.fish; };
-        import_gpg_keys = { body = builtins.readFile ../configs/fish/functions/import_gpg_keys.fish; };
-        update-env = { body = builtins.readFile ../configs/fish/functions/update-env.fish; };
-        check-true-color = { body = builtins.readFile ../configs/fish/functions/check-true-color.fish; };
-        sha-rename = { body = builtins.readFile ../configs/fish/functions/sha-rename.fish; };
-      } // lib.optionalAttrs (system == "x86_64-linux") {
-        reload-bluetooth = { body = builtins.readFile ../configs/fish/functions/reload-bluetooth.fish; };
+        gitget = {
+          body = builtins.readFile ../configs/fish/functions/gitget.fish;
+        };
+        import_gpg_keys = {
+          body = builtins.readFile ../configs/fish/functions/import_gpg_keys.fish;
+        };
+        update-env = {
+          body = builtins.readFile ../configs/fish/functions/update-env.fish;
+        };
+        check-true-color = {
+          body = builtins.readFile ../configs/fish/functions/check-true-color.fish;
+        };
+        sha-rename = {
+          body = builtins.readFile ../configs/fish/functions/sha-rename.fish;
+        };
+      }
+      // lib.optionalAttrs (system == "x86_64-linux") {
+        reload-bluetooth = {
+          body = builtins.readFile ../configs/fish/functions/reload-bluetooth.fish;
+        };
       };
       interactiveShellInit = ''
         # kubectl
@@ -78,10 +95,6 @@
         {
           name = "fzf-fish";
           src = pkgs.fishPlugins.fzf-fish.src;
-        }
-        {
-          name = "nix-fish";
-          src = pkgs.stra.fishplugins-nix-fish.src;
         }
       ];
     };

@@ -1,4 +1,10 @@
-{ clips, config, lib, pkgs, ... }:
+{
+  clips,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 let
   cfg = config.apps.tealdeer;
@@ -16,9 +22,7 @@ in
           auto_update = true
           auto_update_interval_hours = 24
       '';
-      target = clips.darwinOr
-        "${config.home.homeDirectory}/Library/Application Support/tealdeer/config.toml"
-        "${config.xdg.configHome}/tealdeer/config.toml";
+      target = clips.darwinOr "${config.home.homeDirectory}/Library/Application Support/tealdeer/config.toml" "${config.xdg.configHome}/tealdeer/config.toml";
     };
   };
 }
