@@ -1,7 +1,7 @@
 # TODO:
+# - move nixplgs overlays and config to a separate file
+# - consider using nix-darwin sops module
 # - refactor clips import to a module
-# - update "update-env" script, adapt to nix-darwin, instead of home-manager
-# - fix "bind: the -k/--key syntax is no longer supported. See `bind --help` and `bind --key-names`" in fish
 {
   description = "Home Manager configuration of crows";
 
@@ -34,8 +34,6 @@
     input@{
       self,
       nixpkgs,
-      stable-nixpkgs,
-      stratosphere,
       home-manager,
       nix-darwin,
       ...
@@ -47,10 +45,10 @@
         builtins.listToAttrs (
           map (name: {
             name = name;
-            value = stable-nixpkgs.legacyPackages.${prev.system}.${name};
+            value = input.stable-nixpkgs.legacyPackages.${prev.system}.${name};
           }) stablePackages
         );
-      stratosphereOverlay = final: prev: { stra = stratosphere.packages.${prev.system}; };
+      stratosphereOverlay = final: prev: { stra = input.stratosphere.packages.${prev.system}; };
       pkgModule =
         { ... }:
         {

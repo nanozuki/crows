@@ -1,10 +1,18 @@
-{ clips, lib, config, pkgs, ... }:
+{
+  clips,
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 with lib;
 let
   cfg = config.apps.gpg;
 in
 {
-  options.apps.gpg = { enable = mkEnableOption "gpg"; };
+  options.apps.gpg = {
+    enable = mkEnableOption "gpg";
+  };
   config = mkIf cfg.enable {
     home.packages = clips.darwinOr [ pkgs.pinentry_mac ] [ ];
     programs.gpg = {

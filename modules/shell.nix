@@ -96,10 +96,6 @@
           name = "fzf-fish";
           src = pkgs.fishPlugins.fzf-fish.src;
         }
-        {
-          name = "nix-fish";
-          src = pkgs.stra.fishplugins-nix-fish.src;
-        }
       ];
     };
     programs.atuin = {

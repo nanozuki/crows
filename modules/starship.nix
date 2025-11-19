@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 let
   cfg = config.apps.starship;
@@ -6,7 +11,9 @@ let
   preset = builtins.fromTOML (builtins.readFile presetsPath);
 in
 {
-  options.apps.starship = { enable = mkEnableOption "starship"; };
+  options.apps.starship = {
+    enable = mkEnableOption "starship";
+  };
   config = mkIf cfg.enable {
     programs.starship = {
       enable = true;

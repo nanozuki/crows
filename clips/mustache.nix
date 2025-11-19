@@ -10,7 +10,10 @@ pkgs.stdenv.mkDerivation {
 
   # Disable phases which are not needed. In particular the unpackPhase will
   # fail, if no src attribute is set
-  phases = [ "buildPhase" "installPhase" ];
+  phases = [
+    "buildPhase"
+    "installPhase"
+  ];
 
   buildPhase = ''
     ${pkgs.mustache-go}/bin/mustache $jsonDataPath ${template} > rendered_file
