@@ -2,8 +2,6 @@
 {
   config = {
     xdg.enable = true;
-    home.username = "wtang";
-    home.homeDirectory = "/Users/wtang";
     home.stateVersion = "25.11";
     programs.home-manager.enable = true;
 

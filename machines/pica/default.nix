@@ -1,5 +1,9 @@
 { pkgs, self, ... }:
 {
+  users.users.wtang = {
+    home = "/Users/wtang";
+    shell = pkgs.fish;
+  };
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = [

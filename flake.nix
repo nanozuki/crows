@@ -1,6 +1,4 @@
 # TODO:
-# - remove ${config.xdg.configHome} in sops-secrets.nix
-# - uncomment home-manager.users lines and remove sharedModules
 # - refactor clips import to a module
 # - update "update-env" script, adapt to nix-darwin, instead of home-manager
 # - fix "bind: the -k/--key syntax is no longer supported. See `bind --help` and `bind --key-names`" in fish
@@ -68,7 +66,7 @@
         };
     in
     {
-      darwinConfigurations."raven" = nix-darwin.lib.darwinSystem {
+      darwinConfigurations.raven = nix-darwin.lib.darwinSystem {
         modules = [
           pkgModule
           ./modules/darwin
@@ -79,10 +77,9 @@
             home-manager.useUserPackages = true;
             home-manager.sharedModules = [
               input.sops-nix.homeManagerModule
-              ./homes/raven.nix
               ./modules
             ];
-            # home-manager.users."raven" = ./homes/raven.nix;
+            home-manager.users.crows = ./homes/raven.nix;
             home-manager.extraSpecialArgs = {
               system = "aarch64-darwin";
               clips = import ./clips nixpkgs.legacyPackages."aarch64-darwin" "aarch64-darwin";
@@ -91,7 +88,7 @@
         ];
         specialArgs = { inherit self; };
       };
-      darwinConfigurations."pica" = nix-darwin.lib.darwinSystem {
+      darwinConfigurations.pica = nix-darwin.lib.darwinSystem {
         modules = [
           pkgModule
           ./modules/darwin
@@ -102,10 +99,9 @@
             home-manager.useUserPackages = true;
             home-manager.sharedModules = [
               input.sops-nix.homeManagerModule
-              ./homes/pica.nix
               ./modules
             ];
-            # home-manager.users."pica" = ./homes/pica.nix;
+            home-manager.users.wtang = import ./homes/pica.nix;
             home-manager.extraSpecialArgs = {
               system = "aarch64-darwin";
               clips = import ./clips nixpkgs.legacyPackages."aarch64-darwin" "aarch64-darwin";
