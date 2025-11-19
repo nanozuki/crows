@@ -2,7 +2,7 @@ pkgs: name: template: data:
 pkgs.stdenv.mkDerivation {
   name = "${name}";
 
-  nativeBuildInpts = [ pkgs.mustache-go ];
+  nativeBuildInputs = [ pkgs.mustache-go ];
 
   # Pass Json as file to avoid escaping
   passAsFile = [ "jsonData" ];
