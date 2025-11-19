@@ -1,6 +1,6 @@
 { inputs, ... }:
 let
-  stablePackages = [ ];
+  stablePackages = [ "tealdeer" ];
   stableOverlay =
     final: prev:
     builtins.listToAttrs (
