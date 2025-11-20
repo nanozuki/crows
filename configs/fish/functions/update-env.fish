@@ -1,11 +1,11 @@
 if type -q home-manager
     echo "----==== Home Manager ====----"
     cd $XDG_CONFIG_HOME/home-manager
-    if test -z (git status --porcelain); and test "master" = (git branch --show-current)
+    if test -z (git status --porcelain); and test "main" = (git branch --show-current)
         git pull
         home-manager switch --flake .#$HM_CONFIG_NAME
     else
-        echo "home-manager is not clean or not in master branch"
+        echo "home-manager is not clean or not in main branch"
         return 1
     end
     cd -
