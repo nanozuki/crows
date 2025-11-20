@@ -16,7 +16,7 @@ pkgs.stdenv.mkDerivation {
   ];
 
   buildPhase = ''
-    ${pkgs.mustache-go}/bin/mustache $jsonDataPath ${template} > rendered_file
+    mustache $jsonDataPath ${template} > rendered_file
   '';
 
   installPhase = ''
