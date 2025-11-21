@@ -74,11 +74,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1763519912,
-        "narHash": "sha256-N2YN0ZNBoz2zRRjmATePp9GbmGSGpVh3+piXn6mtgKc=",
+        "lastModified": 1763692705,
+        "narHash": "sha256-tCKCyMYU0Vy+ph/xswlNsYXXjnFVweWBV+ew/5FS9tA=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "a9c35d6e7cb70c5719170b6c2d3bb589c5e048af",
+        "rev": "6fbf5d328dce1828d887b8ee7d44a785196a34e7",
         "type": "github"
       },
       "original": {
@@ -94,11 +94,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1763509310,
-        "narHash": "sha256-s2WzTAD3vJtPACBCZXezNUMTG/wC6SFsU9DxazB9wDI=",
+        "lastModified": 1763607916,
+        "narHash": "sha256-VefBA1JWRXM929mBAFohFUtQJLUnEwZ2vmYUNkFnSjE=",
         "owner": "Mic92",
         "repo": "sops-nix",
-        "rev": "3ee33c0ed7c5aa61b4e10484d2ebdbdc98afb03e",
+        "rev": "877bb495a6f8faf0d89fc10bd142c4b7ed2bcc0b",
         "type": "github"
       },
       "original": {
@@ -130,11 +130,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1745159503,
-        "narHash": "sha256-pVT25VPoHjQ4mBd8d6YsoElP/fFAs9WpqrBjzOvu2Do=",
+        "lastModified": 1763650384,
+        "narHash": "sha256-WTfyMwvtHBHBh33SoFzDe9NPBPVkoRO9weGKbL70IPU=",
         "ref": "refs/heads/roze",
-        "rev": "3cf7e8a6922554db9ef9eced6741f50a137e3563",
-        "revCount": 77,
+        "rev": "8efedc852cd93b9412ee4541635771e230e20736",
+        "revCount": 81,
         "type": "git",
         "url": "https://git.sr.ht/~fubuki/stratosphere"
       },
