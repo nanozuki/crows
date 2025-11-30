@@ -15,6 +15,10 @@ in
       type = types.str;
       description = "name of the secrets";
     };
+    sopsFile = mkOption {
+      type = types.path;
+      description = "path to the sops file";
+    };
     secrets = mkOption {
       type = types.anything;
       description = "list of secrets' definitions";
@@ -26,7 +30,7 @@ in
       pkgs.rage
       pkgs.sops
     ];
-    sops.defaultSopsFile = ../../secrets/${cfg.name}.yaml;
+    sops.defaultSopsFile = cfg.sopsFile;
     sops.age.keyFile = "${config.xdg.configHome}/sops/age/keys.txt";
     sops.secrets = cfg.secrets;
   };
