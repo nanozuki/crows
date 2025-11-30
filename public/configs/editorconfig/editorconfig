@@ -1,0 +1,16 @@
+# vim: ft=ini
+root = true
+
+[*]
+end_of_line = lf
+charset = utf-8
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 4
+
+[{*.go,*.gotmpl,go.mod,Makefile,justfile}]
+indent_style = tab
+
+[{*.css,*.html,*.js,*.jsx,*.json,*.lua,*.md,*.mdx,*.nix,*.proto,*.svelte,*.tf,*.ts,*.tsx,*.xml,*.yaml,*.yml}]
+indent_size = 2
