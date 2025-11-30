@@ -7,7 +7,7 @@
 }:
 with lib;
 let
-  cfg = config.apps.ghostty;
+  cfg = config.crows.ghostty;
   # choose themes by comman "ghostty +list-themes"
   themeSet = {
     "rose-pine/main" = "Rose Pine";
@@ -22,7 +22,7 @@ let
   };
 in
 {
-  options.apps.ghostty = {
+  options.crows.ghostty = {
     enable = mkEnableOption "ghostty";
   };
   config = mkIf cfg.enable {

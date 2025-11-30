@@ -1,10 +1,10 @@
 { config, lib, ... }:
 with lib;
 let
-  cfg = config.apps.ideavim;
+  cfg = config.crows.ideavim;
 in
 {
-  options.apps.ideavim = {
+  options.crows.ideavim = {
     enable = mkEnableOption "ideavim";
   };
   config = mkIf cfg.enable {

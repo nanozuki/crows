@@ -7,10 +7,10 @@
 }:
 with lib;
 let
-  cfg = config.apps.tealdeer;
+  cfg = config.crows.tealdeer;
 in
 {
-  options.apps.tealdeer = {
+  options.crows.tealdeer = {
     enable = mkEnableOption "tealdeer";
   };
   config = mkIf cfg.enable {

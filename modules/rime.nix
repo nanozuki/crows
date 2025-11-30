@@ -6,10 +6,10 @@
 }:
 with lib;
 let
-  cfg = config.apps.rime;
+  cfg = config.crows.rime;
 in
 {
-  options.apps.rime = {
+  options.crows.rime = {
     enable = mkEnableOption "Rime";
   };
 

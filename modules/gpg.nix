@@ -7,10 +7,10 @@
 }:
 with lib;
 let
-  cfg = config.apps.gpg;
+  cfg = config.crows.gpg;
 in
 {
-  options.apps.gpg = {
+  options.crows.gpg = {
     enable = mkEnableOption "gpg";
   };
   config = mkIf cfg.enable {

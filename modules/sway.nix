@@ -1,10 +1,10 @@
 { config, lib, ... }:
 with lib;
 let
-  cfg = config.apps.sway;
+  cfg = config.crows.sway;
 in
 {
-  options.apps.sway = {
+  options.crows.sway = {
     enable = mkEnableOption "sway";
   };
   config = mkIf cfg.enable {

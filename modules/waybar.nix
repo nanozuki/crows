@@ -1,10 +1,10 @@
 { config, lib, ... }:
 with lib;
 let
-  cfg = config.apps.waybar;
+  cfg = config.crows.waybar;
 in
 {
-  options.apps.waybar = {
+  options.crows.waybar = {
     enable = mkEnableOption "waybar";
   };
   config = mkIf cfg.enable {

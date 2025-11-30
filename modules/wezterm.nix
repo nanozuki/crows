@@ -6,7 +6,7 @@
 }:
 with lib;
 let
-  cfg = config.apps.wezterm;
+  cfg = config.crows.wezterm;
   themeSet = {
     "rose-pine/main" = "rose-pine";
     "rose-pine/dawn" = "rose-pine-dawn";
@@ -21,7 +21,7 @@ let
   };
 in
 {
-  options.apps.wezterm = {
+  options.crows.wezterm = {
     enable = mkEnableOption "wezterm";
   };
   config = mkIf cfg.enable {

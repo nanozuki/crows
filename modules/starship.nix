@@ -6,12 +6,12 @@
 }:
 with lib;
 let
-  cfg = config.apps.starship;
+  cfg = config.crows.starship;
   presetsPath = "${pkgs.starship}/share/starship/presets/nerd-font-symbols.toml";
   preset = builtins.fromTOML (builtins.readFile presetsPath);
 in
 {
-  options.apps.starship = {
+  options.crows.starship = {
     enable = mkEnableOption "starship";
   };
   config = mkIf cfg.enable {

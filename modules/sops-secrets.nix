@@ -6,10 +6,10 @@
 }:
 with lib;
 let
-  cfg = config.apps.sops-secrets;
+  cfg = config.crows.sops-secrets;
 in
 {
-  options.apps.sops-secrets = {
+  options.crows.sops-secrets = {
     enable = mkEnableOption "secrets";
     name = mkOption {
       type = types.str;

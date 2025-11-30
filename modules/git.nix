@@ -7,10 +7,10 @@
 }:
 with lib;
 let
-  cfg = config.apps.git;
+  cfg = config.crows.git;
 in
 {
-  options.apps.git = {
+  options.crows.git = {
     enable = mkEnableOption "git";
   };
   config = mkIf cfg.enable {

@@ -7,11 +7,11 @@
 }:
 with lib;
 let
-  cfg = config.apps.one_password;
+  cfg = config.crows.one_password;
   sock = clips.darwinOr "${config.home.homeDirectory}/Library/Group\\ Containers/2BUA8C4S2C.com.1password/t/agent.sock" "${config.home.homeDirectory}/.1password/agent.sock";
 in
 {
-  options.apps.one_password = {
+  options.crows.one_password = {
     enable = mkEnableOption "1Password";
   };
   config = mkIf cfg.enable {

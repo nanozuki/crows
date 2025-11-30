@@ -6,10 +6,10 @@
 }:
 with lib;
 let
-  cfg = config.apps.bat;
+  cfg = config.crows.bat;
 in
 {
-  options.apps.bat = {
+  options.crows.bat = {
     enable = mkEnableOption "bat";
   };
   config = mkIf cfg.enable {

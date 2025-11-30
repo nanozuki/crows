@@ -6,10 +6,10 @@
 }:
 with lib;
 let
-  cfg = config.apps.neovim;
+  cfg = config.crows.neovim;
 in
 {
-  options.apps.neovim = {
+  options.crows.neovim = {
     enable = mkEnableOption "Neovim";
     hideCommandLine = mkEnableOption "Hide Command Line";
     useGlobalStatusline = mkEnableOption "Use global statusline";

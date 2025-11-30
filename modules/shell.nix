@@ -7,15 +7,15 @@
 }:
 {
   config = {
-    apps.bat.enable = true;
-    apps.git.enable = true;
-    apps.one_password.enable = true;
-    apps.ideavim.enable = true;
-    apps.kitty.enable = true;
-    apps.starship.enable = true;
-    apps.tealdeer.enable = true;
-    apps.wezterm.enable = true;
-    apps.ghostty.enable = true;
+    crows.bat.enable = true;
+    crows.git.enable = true;
+    crows.one_password.enable = true;
+    crows.ideavim.enable = true;
+    crows.kitty.enable = true;
+    crows.starship.enable = true;
+    crows.tealdeer.enable = true;
+    crows.wezterm.enable = true;
+    crows.ghostty.enable = true;
 
     xdg.enable = true;
     home.packages = with pkgs; [

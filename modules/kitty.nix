@@ -6,7 +6,7 @@
 }:
 with lib;
 let
-  cfg = config.apps.kitty;
+  cfg = config.crows.kitty;
   # choose themes by comman "kitten themes"
   themeSet = {
     "rose-pine/main" = "rose-pine";
@@ -18,7 +18,7 @@ let
   };
 in
 {
-  options.apps.kitty = {
+  options.crows.kitty = {
     enable = mkEnableOption "kitty";
   };
   config = mkIf cfg.enable {
