@@ -1,0 +1,8 @@
+{
+  "theme": {
+    "name": "rose-pine",
+    "variant": "dawn"
+  },
+  "use_global_statusline": false,
+  "hide_command_line": false
+}

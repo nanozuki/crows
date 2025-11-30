@@ -1,0 +1,13 @@
+patch:
+  style/candidate_list_layout: linear
+  style/corner_radius: 4
+  style/hilited_corner_radius: 4
+  style/border_height: 2
+  style/border_width: 2
+  style/spacing: 0
+  style/font_face: "苹方 简"
+  style/font_point: 16
+  style/label_font_face: "苹方 简"
+  style/label_font_point: 12
+  style/comment_font_face: '苹方 简'
+  style/comment_font_point: 16

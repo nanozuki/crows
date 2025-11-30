@@ -1,0 +1,72 @@
+{
+    "spacing": 4, // Gaps between modules (4px)
+    // Choose the order of the modules
+    "modules-left": ["sway/workspaces", "sway/mode", "custom/window", "sway/window"],
+    "modules-center": ["clock"],
+    "modules-right": [
+        "cpu", "memory", "temperature", "pulseaudio",
+        "network", "custom/dunst", "custom/tray", "tray"
+    ],
+    // Modules configuration
+    "sway/workspaces": {
+        "disable-scroll": false,
+        "format": "{name}",
+    },
+    "sway/mode": {
+        "format": "{}"
+    },
+    "custom/window": {
+        "format": " 󰀻 "
+    },
+    "sway/window": {
+        "rewrite": {
+            ".*tmux.*": "Terminal",
+            ".*fish.*": "Terminal",
+            ".*Firefox.*": "Firefox",
+            "": "Sway!"
+        }
+    },
+    "clock": {
+        "format": "󰃰 {:%Y-%m-%d %a %H:%M}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    },
+    "cpu": {
+        "format": " {usage}%",
+        "tooltip": true
+    },
+    "memory": {
+        "format": " {}%"
+    },
+    "temperature": {
+        "format": "{icon} {temperatureC}°C",
+        "format-icons": [""]
+    },
+    "network": {
+        "format-ethernet": " wired",
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-linked": "󰊗 {ifname} [No IP]",
+        "format-disconnected": "⚠ Disconnected",
+        "format-alt": "{ipaddr}/{cidr}"
+    },
+    "pulseaudio": {
+        "scroll-step": 5,
+        "format": "{icon} {volume}%",
+        "format-icons": {
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+    "custom/dunst": {
+        "exec": "~/.config/waybar/dunst.sh",
+        "on-click": "dunstctl set-paused toggle",
+        "restart-interval": 1,
+    },
+    "custom/tray": {
+        "format": " "
+    },
+    "tray": {
+        "icon-size": 12,
+        "spacing": 8
+    }
+}
+// vim: set filetype=jsonc :
