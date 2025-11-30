@@ -59,6 +59,7 @@
     crows.sops-secrets = {
       enable = true;
       name = "pica";
+      sopsFile = ../secrets/pica.yaml;
       secrets = {
         git_config_local = {
           path = "${config.xdg.configHome}/git/config_local";

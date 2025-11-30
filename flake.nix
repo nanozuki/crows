@@ -38,7 +38,7 @@
       darwinConfigurations.raven = nix-darwin.lib.darwinSystem {
         modules = [
           ./overlays.nix
-          ./modules/darwin
+          ./public/modules/darwin
           ./machines/raven
           home-manager.darwinModules.home-manager
           {
@@ -46,12 +46,12 @@
             home-manager.useUserPackages = true;
             home-manager.sharedModules = [
               inputs.sops-nix.homeManagerModule
-              ./modules/home
+              ./public/modules/home
             ];
             home-manager.users.crows = ./homes/raven.nix;
             home-manager.extraSpecialArgs = {
               system = "aarch64-darwin";
-              clips = import ./clips nixpkgs.legacyPackages."aarch64-darwin" "aarch64-darwin";
+              clips = import ./public/clips nixpkgs.legacyPackages."aarch64-darwin" "aarch64-darwin";
             };
           }
         ];
@@ -60,7 +60,7 @@
       darwinConfigurations.pica = nix-darwin.lib.darwinSystem {
         modules = [
           ./overlays.nix
-          ./modules/darwin
+          ./public/modules/darwin
           ./machines/pica
           home-manager.darwinModules.home-manager
           {
@@ -68,12 +68,12 @@
             home-manager.useUserPackages = true;
             home-manager.sharedModules = [
               inputs.sops-nix.homeManagerModule
-              ./modules/home
+              ./public/modules/home
             ];
             home-manager.users.wtang = import ./homes/pica.nix;
             home-manager.extraSpecialArgs = {
               system = "aarch64-darwin";
-              clips = import ./clips nixpkgs.legacyPackages."aarch64-darwin" "aarch64-darwin";
+              clips = import ./public/clips nixpkgs.legacyPackages."aarch64-darwin" "aarch64-darwin";
             };
           }
         ];
