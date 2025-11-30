@@ -1,5 +1,9 @@
 { pkgs, self, ... }:
 {
+  users.users.wtang = {
+    home = "/Users/wtang";
+    shell = pkgs.fish;
+  };
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = [
@@ -39,8 +43,6 @@
   environment.variables = {
     TFENV_ARCH = "amd64";
     PKG_CONFIG_PATH = "/opt/homebrew/opt/libxml2/lib/pkgconfig";
-    GCP_PROJECT_ID = "cinemo-pace";
-    NEW_GCP_PROJECT_ID = "cinemo-pace";
   };
 
   fonts.packages = with pkgs; [

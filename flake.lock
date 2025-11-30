@@ -1,42 +1,17 @@
 {
   "nodes": {
-    "crows": {
-      "inputs": {
-        "home-manager": "home-manager",
-        "nix-darwin": "nix-darwin",
-        "nixpkgs": "nixpkgs",
-        "rust-overlay": "rust-overlay",
-        "sops-nix": "sops-nix",
-        "stable-nixpkgs": "stable-nixpkgs",
-        "stratosphere": "stratosphere"
-      },
-      "locked": {
-        "lastModified": 1764104663,
-        "narHash": "sha256-sWNWBeWG9ZI5/qHLh9f8o+tjzsJzFjI8jjL3rmxtkQM=",
-        "owner": "nanozuki",
-        "repo": "crows",
-        "rev": "bba9dd1eb76510465c4c1f16f4b746b353ac245e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nanozuki",
-        "repo": "crows",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
-          "crows",
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1763416652,
-        "narHash": "sha256-8EBEEvtzQ11LCxpQHMNEBQAGtQiCu/pqP9zSovDSbNM=",
+        "lastModified": 1764304195,
+        "narHash": "sha256-bO7FN/bF6gG7TlZpKAZjO3VvfsLaPFkefeUfJJ7F/7w=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "ea164b7c9ccdc2321379c2ff78fd4317b4c41312",
+        "rev": "86ff0ef506c209bb397849706e85cc3a913cb577",
         "type": "github"
       },
       "original": {
@@ -48,28 +23,6 @@
     "nix-darwin": {
       "inputs": {
         "nixpkgs": [
-          "crows",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1763505477,
-        "narHash": "sha256-nJRd4LY2kT3OELfHqdgWjvToNZ4w+zKCMzS2R6z4sXE=",
-        "owner": "LnL7",
-        "repo": "nix-darwin",
-        "rev": "3bda9f6b14161becbd07b3c56411f1670e19b9b5",
-        "type": "github"
-      },
-      "original": {
-        "owner": "LnL7",
-        "repo": "nix-darwin",
-        "type": "github"
-      }
-    },
-    "nix-darwin_2": {
-      "inputs": {
-        "nixpkgs": [
-          "crows",
           "nixpkgs"
         ]
       },
@@ -89,11 +42,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1763421233,
-        "narHash": "sha256-Stk9ZYRkGrnnpyJ4eqt9eQtdFWRRIvMxpNRf4sIegnw=",
+        "lastModified": 1764242076,
+        "narHash": "sha256-sKoIWfnijJ0+9e4wRvIgm/HgE27bzwQxcEmo2J/gNpI=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "89c2b2330e733d6cdb5eae7b899326930c2c0648",
+        "rev": "2fad6eac6077f03fe109c4d4eb171cf96791faa4",
         "type": "github"
       },
       "original": {
@@ -105,27 +58,27 @@
     },
     "root": {
       "inputs": {
-        "crows": "crows",
-        "nix-darwin": "nix-darwin_2",
-        "nixpkgs": [
-          "crows",
-          "nixpkgs"
-        ]
+        "home-manager": "home-manager",
+        "nix-darwin": "nix-darwin",
+        "nixpkgs": "nixpkgs",
+        "rust-overlay": "rust-overlay",
+        "sops-nix": "sops-nix",
+        "stable-nixpkgs": "stable-nixpkgs",
+        "stratosphere": "stratosphere"
       }
     },
     "rust-overlay": {
       "inputs": {
         "nixpkgs": [
-          "crows",
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1763692705,
-        "narHash": "sha256-tCKCyMYU0Vy+ph/xswlNsYXXjnFVweWBV+ew/5FS9tA=",
+        "lastModified": 1764297505,
+        "narHash": "sha256-qrLpVu2/hA9Cu6IovMEsgh9YRyvmmWS+bSx7C1JGChA=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "6fbf5d328dce1828d887b8ee7d44a785196a34e7",
+        "rev": "9623580f8ce09ec444b9aca107566ec5db110e62",
         "type": "github"
       },
       "original": {
@@ -137,16 +90,15 @@
     "sops-nix": {
       "inputs": {
         "nixpkgs": [
-          "crows",
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1763607916,
-        "narHash": "sha256-VefBA1JWRXM929mBAFohFUtQJLUnEwZ2vmYUNkFnSjE=",
+        "lastModified": 1764021963,
+        "narHash": "sha256-1m84V2ROwNEbqeS9t37/mkry23GBhfMt8qb6aHHmjuc=",
         "owner": "Mic92",
         "repo": "sops-nix",
-        "rev": "877bb495a6f8faf0d89fc10bd142c4b7ed2bcc0b",
+        "rev": "c482a1c1bbe030be6688ed7dc84f7213f304f1ec",
         "type": "github"
       },
       "original": {
@@ -174,7 +126,6 @@
     "stratosphere": {
       "inputs": {
         "nixpkgs": [
-          "crows",
           "nixpkgs"
         ]
       },

@@ -1,2 +1,3 @@
-# machines
-Configuation for machines usging NixOS or nix-darwin.
+# Crows
+
+My home directory configs, powered by Home Manager.
