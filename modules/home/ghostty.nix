@@ -7,7 +7,7 @@
 }:
 with lib;
 let
-  cfg = config.apps.ghostty;
+  cfg = config.crows.ghostty;
   # choose themes by comman "ghostty +list-themes"
   themeSet = {
     "rose-pine/main" = "Rose Pine";
@@ -22,14 +22,14 @@ let
   };
 in
 {
-  options.apps.ghostty = {
+  options.crows.ghostty = {
     enable = mkEnableOption "ghostty";
   };
   config = mkIf cfg.enable {
     home.packages = clips.darwinOr [ ] [ pkgs.ghostty ];
     home.file.ghostty = {
       enable = true;
-      source = clips.mustache "config" ../configs/ghostty/config vars;
+      source = clips.mustache "config" ../../configs/ghostty/config vars;
       target = "${config.xdg.configHome}/ghostty/config";
     };
   };

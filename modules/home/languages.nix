@@ -7,7 +7,7 @@
 }:
 with lib;
 let
-  cfg = config.languages;
+  cfg = config.crows.languages;
   dataAndMarkup = {
     home.packages = with pkgs; [
       vscode-langservers-extracted # include {html,css,json,eslint}-language-server
@@ -132,46 +132,46 @@ let
   };
 in
 {
-  options.languages.dataAndMarkup = {
+  options.crows.languages.dataAndMarkup = {
     enable = mkEnableOption "Data and Markup Languages";
   };
-  options.languages.gleam = {
+  options.crows.languages.gleam = {
     enable = mkEnableOption "Gleam";
   };
-  options.languages.go = {
+  options.crows.languages.go = {
     enable = mkEnableOption "Go";
   };
-  options.languages.lua = {
+  options.crows.languages.lua = {
     enable = mkEnableOption "Lua";
   };
-  options.languages.nix = {
+  options.crows.languages.nix = {
     enable = mkEnableOption "Nix";
   };
-  options.languages.ocaml = {
+  options.crows.languages.ocaml = {
     enable = mkEnableOption "OCaml";
   };
-  options.languages.rust = {
+  options.crows.languages.rust = {
     enable = mkEnableOption "Rust";
   };
-  options.languages.svelte = {
+  options.crows.languages.svelte = {
     enable = mkEnableOption "Svelte";
   };
-  options.languages.terraform = {
+  options.crows.languages.terraform = {
     enable = mkEnableOption "Terraform";
   };
-  options.languages.typescript_deno = {
+  options.crows.languages.typescript_deno = {
     enable = mkEnableOption "Typescript on Deno";
   };
-  options.languages.typescript_node = {
+  options.crows.languages.typescript_node = {
     enable = mkEnableOption "Typescript on Node.js";
   };
-  options.languages.typst = {
+  options.crows.languages.typst = {
     enable = mkEnableOption "Typst";
   };
-  options.languages.vim = {
+  options.crows.languages.vim = {
     enable = mkEnableOption "Vim";
   };
-  options.languages.zig = {
+  options.crows.languages.zig = {
     enable = mkEnableOption "Zig";
   };
 

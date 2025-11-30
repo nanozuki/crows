@@ -6,10 +6,10 @@
 }:
 with lib;
 let
-  cfg = config.apps.vimr;
+  cfg = config.crows.vimr;
 in
 {
-  options.apps.vimr = {
+  options.crows.vimr = {
     enable = mkEnableOption "VimR";
     snapshot = mkEnableOption "Use snapshot version";
   };

@@ -6,10 +6,10 @@
 }:
 with lib;
 let
-  cfg = config.apps.sops-secrets;
+  cfg = config.crows.sops-secrets;
 in
 {
-  options.apps.sops-secrets = {
+  options.crows.sops-secrets = {
     enable = mkEnableOption "secrets";
     name = mkOption {
       type = types.str;
@@ -26,7 +26,7 @@ in
       pkgs.rage
       pkgs.sops
     ];
-    sops.defaultSopsFile = ../secrets/${cfg.name}.yaml;
+    sops.defaultSopsFile = ../../secrets/${cfg.name}.yaml;
     sops.age.keyFile = "${config.xdg.configHome}/sops/age/keys.txt";
     sops.secrets = cfg.secrets;
   };
