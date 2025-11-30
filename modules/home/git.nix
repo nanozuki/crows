@@ -14,7 +14,6 @@ in
     enable = mkEnableOption "git";
   };
   config = mkIf cfg.enable {
-    home.packages = clips.darwinOr [ pkgs.git ] [ ];
     programs.git = {
       enable = true;
       package = clips.darwinOr pkgs.emptyDirectory pkgs.git;
@@ -71,5 +70,6 @@ in
         signer = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
       };
     };
+    programs.lazygit.enable = true;
   };
 }

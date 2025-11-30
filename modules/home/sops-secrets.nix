@@ -26,7 +26,7 @@ in
       pkgs.rage
       pkgs.sops
     ];
-    sops.defaultSopsFile = ../secrets/${cfg.name}.yaml;
+    sops.defaultSopsFile = ../../secrets/${cfg.name}.yaml;
     sops.age.keyFile = "${config.xdg.configHome}/sops/age/keys.txt";
     sops.secrets = cfg.secrets;
   };

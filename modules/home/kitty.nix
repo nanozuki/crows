@@ -27,7 +27,7 @@ in
       package = pkgs.emptyDirectory;
       font.name = config.g.font.family;
       font.size = config.g.font.size;
-      extraConfig = builtins.readFile ../configs/kitty/kitty.conf;
+      extraConfig = builtins.readFile ../../configs/kitty/kitty.conf;
       shellIntegration = {
         enableFishIntegration = true;
         mode = "no-cursor";
@@ -36,7 +36,7 @@ in
     };
     home.file.kitty = {
       enable = true;
-      source = ../configs/kitty/kitty.app.png;
+      source = ../../configs/kitty/kitty.app.png;
       recursive = true;
       target = "${config.xdg.configHome}/kitty/kitty.app.png";
     };

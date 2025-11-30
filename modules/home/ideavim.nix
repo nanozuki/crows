@@ -10,7 +10,7 @@ in
   config = mkIf cfg.enable {
     home.file.ideavim = {
       enable = true;
-      source = ../configs/ideavim/ideavimrc;
+      source = ../../configs/ideavim/ideavimrc;
       target = "${config.xdg.configHome}/ideavim/ideavimrc";
     };
   };

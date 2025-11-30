@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 with lib;
@@ -21,18 +20,12 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      ripgrep
-      fzf
-    ];
     programs.neovim = {
       enable = true;
       defaultEditor = true;
       withPython3 = false;
       withRuby = false;
       withNodeJs = true;
-      # dependencies for CopilotChat.nvim
-      extraLuaPackages = ps: [ ps.tiktoken_core ];
     };
     programs.fish.shellAbbrs = {
       vi = "nvim";
@@ -44,7 +37,7 @@ in
     };
     home.file.neovim = {
       enable = true;
-      source = ../configs/nvim;
+      source = ../../configs/nvim;
       target = "${config.xdg.configHome}/nvim";
       recursive = true;
     };
@@ -61,7 +54,7 @@ in
       };
       target = "${config.xdg.configHome}/nvim/settings.json";
     };
-    languages.dataAndMarkup.enable = true;
-    languages.lua.enable = true;
+    crows.languages.dataAndMarkup.enable = true;
+    crows.languages.lua.enable = true;
   };
 }

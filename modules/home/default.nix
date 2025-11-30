@@ -1,7 +1,6 @@
 { ... }:
 {
   imports = [
-    ./bat.nix
     ./g.nix
     ./ghostty.nix
     ./git.nix
@@ -14,9 +13,7 @@
     ./rime.nix
     ./shell.nix
     ./sops-secrets.nix
-    ./starship.nix
     ./sway.nix
-    ./tealdeer.nix
     ./waybar.nix
     ./wezterm.nix
   ];

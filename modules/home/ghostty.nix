@@ -29,7 +29,7 @@ in
     home.packages = clips.darwinOr [ ] [ pkgs.ghostty ];
     home.file.ghostty = {
       enable = true;
-      source = clips.mustache "config" ../configs/ghostty/config vars;
+      source = clips.mustache "config" ../../configs/ghostty/config vars;
       target = "${config.xdg.configHome}/ghostty/config";
     };
   };
