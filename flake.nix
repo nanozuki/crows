@@ -2,7 +2,7 @@
   description = "Nix configurations of crows";
 
   inputs = {
-    stable-nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.05";
+    stable-nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.11";
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";

@@ -93,7 +93,7 @@
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
-  system.stateVersion = 6;
+  # system.stateVersion = "I use latest version";
   system.primaryUser = "crows";
   system.activationScripts.reload-settings.text = ''
     # activateSettings -u will reload the settings from the database and apply them to the current session,
