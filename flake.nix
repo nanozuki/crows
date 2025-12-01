@@ -82,7 +82,21 @@
       nixosConfigurations.treepie = nixpkgs.lib.nixosSystem {
         modules = [
           ./overlays.nix
-          ./machines/treepie/configuration.nix
+          ./machines/treepie
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.sharedModules = [
+              inputs.sops-nix.homeManagerModule
+              ./public/modules/home
+            ];
+            home-manager.users.treepie = import ./homes/treepie.nix;
+            home-manager.extraSpecialArgs = {
+              system = "x86_64-linux";
+              clips = import ./public/clips nixpkgs.legacyPackages."x86_64-linux" "x86_64-linux";
+            };
+          }
         ];
         specialArgs = { inherit self inputs; };
       };
