@@ -29,7 +29,6 @@
       "google-chrome"
       "iina"
       "jetbrains-toolbox"
-      "jordanbaird-ice"
       "kitty"
       "microsoft-teams"
       "obsidian"
