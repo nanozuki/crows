@@ -97,10 +97,15 @@
       "networkmanager"
       "wheel"
     ];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDlyirz8SBnqzKPX6kvGX6eoBtFCOK87KTmIVZC7R2N9"
+    ];
   };
 
   # Install firefox.
   programs.firefox.enable = true;
+  programs._1password.enable = true;
+  programs._1password-gui.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -108,8 +113,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    gnome-tweaks
-    neovim
+    ghostty
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -125,6 +129,10 @@
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
+    settings = {
+      PermitRootLogin = "no";
+      PasswordAuthentication = false;
+    };
   };
 
   # Open ports in the firewall.

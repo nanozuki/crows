@@ -22,6 +22,7 @@
       hideCommandLine = true;
       useGlobalStatusline = true;
     };
+    crows.one_password.enable = true;
     crows.shell.enable = true;
   };
 }
