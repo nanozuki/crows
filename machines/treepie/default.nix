@@ -65,6 +65,7 @@
   services.xserver.xkb = {
     layout = "us";
     variant = "";
+    options = "ctrl:nocaps";
   };
 
   # Enable CUPS to print documents.
@@ -100,10 +101,20 @@
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDlyirz8SBnqzKPX6kvGX6eoBtFCOK87KTmIVZC7R2N9"
     ];
+    shell = pkgs.fish;
   };
+
+  fonts.packages = with pkgs; [
+    jetbrains-mono
+    nerd-fonts.symbols-only
+    noto-fonts
+    noto-fonts-cjk-sans
+    noto-fonts-color-emoji
+  ];
 
   # Install firefox.
   programs.firefox.enable = true;
+  programs.fish.enable = true;
   programs._1password.enable = true;
   programs._1password-gui.enable = true;
 
@@ -114,6 +125,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     ghostty
+    gcc
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

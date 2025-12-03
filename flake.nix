@@ -91,7 +91,7 @@
               inputs.sops-nix.homeManagerModule
               ./public/modules/home
             ];
-            home-manager.users.treepie = import ./homes/treepie.nix;
+            home-manager.users.crows = import ./homes/treepie.nix;
             home-manager.extraSpecialArgs = {
               system = "x86_64-linux";
               clips = import ./public/clips nixpkgs.legacyPackages."x86_64-linux" "x86_64-linux";
