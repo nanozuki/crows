@@ -4,10 +4,7 @@
     home.stateVersion = "26.05";
     programs.home-manager.enable = true;
 
-    g.theme = {
-      name = "rose-pine";
-      variant = "dawn";
-    };
+    g.theme.name = "rose-pine";
 
     home.packages = with pkgs; [
       buf
@@ -68,6 +65,5 @@
         };
       };
     };
-    crows.wezterm.enable = true;
   };
 }

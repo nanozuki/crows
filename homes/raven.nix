@@ -4,10 +4,7 @@
     home.stateVersion = "26.05";
     programs.home-manager.enable = true;
 
-    g.theme = {
-      name = "zenbones";
-      variant = "light";
-    };
+    g.theme.name = "zenbones";
 
     home.packages = with pkgs; [
       codex
@@ -50,6 +47,5 @@
         };
       };
     };
-    crows.wezterm.enable = true;
   };
 }

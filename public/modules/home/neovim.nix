@@ -46,7 +46,6 @@ in
       text = builtins.toJSON {
         theme = {
           name = config.g.theme.name;
-          variant = config.g.theme.variant;
         };
         use_global_statusline = cfg.useGlobalStatusline;
         hide_command_line = cfg.hideCommandLine;

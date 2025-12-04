@@ -15,8 +15,16 @@ local function make_theme()
   }
 end
 
+local theme = make_theme()
+
+vim.api.nvim_create_autocmd('ColorScheme', {
+  pattern = '*',
+  callback = function()
+    theme = make_theme()
+  end,
+})
+
 local function config()
-  local theme = make_theme()
   vim.opt.showtabline = 2
   require('tabby').setup({
     line = function(line)
