@@ -1,5 +1,0 @@
-return {
-  lint = {
-    unknownAtRules = 'ignore',
-  },
-}
