@@ -10,7 +10,7 @@ let
   cfg = config.crows.ghostty;
   themeOptionValues = {
     "rose-pine" = "light:Rose Pine Dawn,dark:Rose Pine";
-    "zonbones" = "light:Zenbones,dark:Zenbones Dark";
+    "zenbones" = "light:Zenbones,dark:Zenbones Dark";
   };
   vars = {
     theme = themeOptionValues.${config.g.theme.name};

@@ -12,7 +12,7 @@ with lib;
       default = 14;
     };
   };
-  # avaliable theme names: ["rose-pine" "zonbones"]
+  # avaliable theme names: ["rose-pine" "zenbones"]
   options.g.theme = {
     name = mkOption {
       type = types.str;
