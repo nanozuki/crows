@@ -1,3 +1,4 @@
+# inactive: Wezterm hasn't release new version in a long time, don't maintain this for now.
 {
   clips,
   config,

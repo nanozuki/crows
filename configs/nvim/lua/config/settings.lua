@@ -8,20 +8,14 @@
 ---@field use_global_statusline boolean
 ---@field hide_command_line boolean
 ---@field use_gofumpt boolean
+
+---Theme must support dynamic switching dark/light mode based on system settings.
 ---@class ThemeSettings
----@field name 'rose-pine' | 'nord' | 'zenbones'
----@field variant string
--- theme variants:
--- - rose-pine: 'main', 'dawn', 'moon'
--- - nord: 'main'
--- - zenbones: 'light', 'dark'
+---@field name 'rose-pine' | 'zenbones'
 
 ---@type Settings
 local M = {
-  theme = {
-    name = 'rose-pine',
-    variant = 'dawn',
-  },
+  theme = { name = 'rose-pine' },
   use_global_statusline = false,
   hide_command_line = false,
   use_gofumpt = true,

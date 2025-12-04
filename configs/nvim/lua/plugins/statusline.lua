@@ -88,6 +88,36 @@ local noice_recording = function()
   return string.format('recording @%s', reg)
 end
 
+local function lualine_setup(theme)
+  require('lualine').setup({
+    options = {
+      theme = theme,
+      component_separators = { left = '', right = '' },
+      section_separators = { left = '', right = '' },
+    },
+    sections = {
+      lualine_a = { 'mode' },
+      lualine_b = { { 'branch', draw_empty = true }, 'diff', 'diagnostics' },
+      lualine_c = {
+        { 'filename', path = 1, symbols = { modified = '*', readonly = '' } },
+        noice_recording,
+      },
+      lualine_x = { 'filetype', { file_info, icon = '󰋽' } },
+      lualine_y = { { lsp, icon = '' } },
+      lualine_z = { { position, icon = '󰆤' } },
+    },
+    inactive_sections = {
+      lualine_a = { block },
+      lualine_b = {},
+      lualine_c = { { 'filename', path = 1, symbols = { modified = '*', readonly = '' } } },
+      lualine_x = { { file_info, icon = '󰋽' } },
+      lualine_y = {},
+      lualine_z = { block },
+    },
+    extensions = { nvim_tree },
+  })
+end
+
 return {
   {
     'nvim-lualine/lualine.nvim',
@@ -99,32 +129,14 @@ return {
     end,
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
-      require('lualine').setup({
-        options = {
-          theme = make_theme(),
-          component_separators = { left = '', right = '' },
-          section_separators = { left = '', right = '' },
-        },
-        sections = {
-          lualine_a = { 'mode' },
-          lualine_b = { { 'branch', draw_empty = true }, 'diff', 'diagnostics' },
-          lualine_c = {
-            { 'filename', path = 1, symbols = { modified = '*', readonly = '' } },
-            noice_recording,
-          },
-          lualine_x = { 'filetype', { file_info, icon = '󰋽' } },
-          lualine_y = { { lsp, icon = '' } },
-          lualine_z = { { position, icon = '󰆤' } },
-        },
-        inactive_sections = {
-          lualine_a = { block },
-          lualine_b = {},
-          lualine_c = { { 'filename', path = 1, symbols = { modified = '*', readonly = '' } } },
-          lualine_x = { { file_info, icon = '󰋽' } },
-          lualine_y = {},
-          lualine_z = { block },
-        },
-        extensions = { nvim_tree },
+      local theme = make_theme()
+      lualine_setup(theme)
+      vim.api.nvim_create_autocmd('ColorScheme', {
+        pattern = '*',
+        callback = function()
+          theme = make_theme()
+          lualine_setup(theme)
+        end,
       })
     end,
   },

@@ -67,7 +67,7 @@ in
         key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDlyirz8SBnqzKPX6kvGX6eoBtFCOK87KTmIVZC7R2N9";
         format = "ssh";
         signByDefault = true;
-        signer = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
+        signer = clips.darwinOr "/Applications/1Password.app/Contents/MacOS/op-ssh-sign" "op-ssh-sign";
       };
     };
     programs.lazygit.enable = true;

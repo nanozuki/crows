@@ -8,13 +8,15 @@ with lib;
 let
   cfg = config.crows.kitty;
   # choose themes by comman "kitten themes"
-  themeSet = {
-    "rose-pine/main" = "rose-pine";
-    "rose-pine/dawn" = "rose-pine-dawn";
-    "rose-pine/moon" = "rose-pine-moon";
-    "nord/main" = "Nord";
-    "zenbones/light" = "zenbones_light";
-    "zenbones/dark" = "zenbones_dark";
+  themeFiles = {
+    "rose-pine" = {
+      light = "${pkgs.kitty-themes}/share/kitty-themes/themes/rose-pine-dawn.conf";
+      dark = "${pkgs.kitty-themes}/share/kitty-themes/themes/rose-pine.conf";
+    };
+    "zenbones" = {
+      light = "${pkgs.kitty-themes}/share/kitty-themes/themes/zenbones_light.conf";
+      dark = "${pkgs.kitty-themes}/share/kitty-themes/themes/zenbones_dark.conf";
+    };
   };
 in
 {
@@ -32,13 +34,22 @@ in
         enableFishIntegration = true;
         mode = "no-cursor";
       };
-      themeFile = themeSet."${config.g.theme.name}/${config.g.theme.variant}";
     };
     home.file.kitty = {
       enable = true;
       source = ../../configs/kitty/kitty.app.png;
       recursive = true;
       target = "${config.xdg.configHome}/kitty/kitty.app.png";
+    };
+    home.file.kitty-light-theme = {
+      enable = true;
+      source = themeFiles.${config.g.theme.name}.light;
+      target = "${config.xdg.configHome}/kitty/light-theme.auto.conf";
+    };
+    home.file.kitty-dark-theme = {
+      enable = true;
+      source = themeFiles.${config.g.theme.name}.dark;
+      target = "${config.xdg.configHome}/kitty/dark-theme.auto.conf";
     };
   };
 }

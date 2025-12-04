@@ -15,6 +15,5 @@
     ./sops-secrets.nix
     ./sway.nix
     ./waybar.nix
-    ./wezterm.nix
   ];
 }

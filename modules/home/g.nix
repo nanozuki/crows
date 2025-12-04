@@ -12,14 +12,12 @@ with lib;
       default = 14;
     };
   };
+  # avaliable theme names: ["rose-pine" "zonbones"]
   options.g.theme = {
     name = mkOption {
       type = types.str;
       default = "rose-pine";
-    };
-    variant = mkOption {
-      type = types.str;
-      default = "dawn";
+      description = "theme name, theme must be able to dynamic switch light/dark based on system";
     };
   };
   config = {
