@@ -2,7 +2,7 @@
   description = "Nix configurations of crows";
 
   inputs = {
-    stable-nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.11";
+    stable-nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.05";
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -27,78 +27,10 @@
   };
 
   outputs =
-    inputs@{
-      self,
-      nixpkgs,
-      home-manager,
-      nix-darwin,
-      ...
-    }:
+    { ... }:
     {
-      darwinConfigurations.raven = nix-darwin.lib.darwinSystem {
-        modules = [
-          ./overlays.nix
-          ./public/modules/darwin
-          ./machines/raven
-          home-manager.darwinModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.sharedModules = [
-              inputs.sops-nix.homeManagerModule
-              ./public/modules/home
-            ];
-            home-manager.users.crows = ./homes/raven.nix;
-            home-manager.extraSpecialArgs = {
-              system = "aarch64-darwin";
-              clips = import ./public/clips nixpkgs.legacyPackages."aarch64-darwin" "aarch64-darwin";
-            };
-          }
-        ];
-        specialArgs = { inherit self inputs; };
-      };
-      darwinConfigurations.pica = nix-darwin.lib.darwinSystem {
-        modules = [
-          ./overlays.nix
-          ./public/modules/darwin
-          ./machines/pica
-          home-manager.darwinModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.sharedModules = [
-              inputs.sops-nix.homeManagerModule
-              ./public/modules/home
-            ];
-            home-manager.users.wtang = import ./homes/pica.nix;
-            home-manager.extraSpecialArgs = {
-              system = "aarch64-darwin";
-              clips = import ./public/clips nixpkgs.legacyPackages."aarch64-darwin" "aarch64-darwin";
-            };
-          }
-        ];
-        specialArgs = { inherit self inputs; };
-      };
-      nixosConfigurations.treepie = nixpkgs.lib.nixosSystem {
-        modules = [
-          ./overlays.nix
-          ./machines/treepie
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.sharedModules = [
-              inputs.sops-nix.homeManagerModule
-              ./public/modules/home
-            ];
-            home-manager.users.crows = import ./homes/treepie.nix;
-            home-manager.extraSpecialArgs = {
-              system = "x86_64-linux";
-              clips = import ./public/clips nixpkgs.legacyPackages."x86_64-linux" "x86_64-linux";
-            };
-          }
-        ];
-        specialArgs = { inherit self inputs; };
-      };
+      nixosModules = ./modules/nixos;
+      darwinModules = ./modules/darwin;
+      homeModules = ./modules/home;
     };
 }

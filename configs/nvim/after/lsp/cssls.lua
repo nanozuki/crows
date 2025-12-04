@@ -1,0 +1,5 @@
+return {
+  lint = {
+    unknownAtRules = 'ignore',
+  },
+}

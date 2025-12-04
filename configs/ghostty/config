@@ -1,0 +1,19 @@
+theme = {{theme}}
+font-family = JetBrains Mono
+font-family = PingFang SC
+font-family = Menlo
+font-size = 14
+
+keybind = super+ctrl+\=new_split:right
+keybind = super+ctrl+-=new_split:down
+keybind = super+ctrl+h=goto_split:left
+keybind = super+ctrl+l=goto_split:right
+keybind = super+ctrl+j=goto_split:bottom
+keybind = super+ctrl+k=goto_split:top
+# Default keybindings for split
+# keybind = super+ctrl+equal=equalize_splits
+# keybind = super+left_bracket=goto_split:previous
+# keybind = super+right_bracket=goto_split:next
+
+clipboard-read = allow
+clipboard-write = allow
