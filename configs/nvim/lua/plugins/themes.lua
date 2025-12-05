@@ -14,8 +14,13 @@ return {
     enabled = settings.theme.name == 'zenbones',
     dependencies = { 'rktjmp/lush.nvim' },
     config = function()
+      vim.api.nvim_create_autocmd('ColorScheme', {
+        pattern = 'zenbones',
+        callback = function()
+          vim.cmd.highlight({ args = { 'link', 'ColorColumn', 'CursorLine' }, bang = true })
+        end,
+      })
       vim.cmd.colorscheme('zenbones')
-      vim.cmd.highlight({ args = { 'link', 'ColorColumn', 'CursorLine' }, bang = true })
     end,
   },
 }
