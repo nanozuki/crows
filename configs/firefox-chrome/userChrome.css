@@ -1,0 +1,15 @@
+#main-window[titlepreface*="| "] #sidebar-main {
+  display: none;
+}
+
+#main-window[titlepreface*="| "] #sidebar-box {
+  padding: 0 !important;
+}
+
+#main-window[titlepreface*="| "] #sidebar {
+  border-radius: 0 !important;
+}
+
+#main-window[titlepreface*="| "] #sidebar-splitter {
+  display: none !important;
+}
