@@ -11,5 +11,5 @@
 }
 
 #main-window[titlepreface*="| "] #sidebar-splitter {
-  display: none !important;
+  width: 0 !important;
 }
