@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib;
@@ -53,6 +54,8 @@ in
       };
       target = "${config.xdg.configHome}/nvim/settings.json";
     };
+    home.packages = with pkgs; [ tree-sitter ];
+
     crows.languages.dataAndMarkup.enable = true;
     crows.languages.lua.enable = true;
   };

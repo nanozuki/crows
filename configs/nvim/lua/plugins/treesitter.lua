@@ -2,86 +2,76 @@ return {
   -- treesitter
   {
     'nvim-treesitter/nvim-treesitter',
-    event = { 'BufReadPost', 'BufNewFile' },
-    cmd = { 'TSUpdate', 'TSUpdateSync' },
-    dependencies = { 'JoosepAlviste/nvim-ts-context-commentstring' },
+    branch = 'main',
     build = ':TSUpdate',
     config = function()
-      ---@diagnostic disable-next-line: missing-fields
-      require('nvim-treesitter.configs').setup({
-        ensure_installed = 'all',
-        ignore_install = { 'ipkg' },
-        highlight = {
-          enable = true,
-          disable = function(lang, bufnr)
-            if lang == 'html' and vim.api.nvim_buf_line_count(bufnr) > 500 then
-              return true
+      local parsers, installed ---@type string[], string[]
+      vim.api.nvim_create_autocmd('FileType', {
+        callback = function(args)
+          if parsers == nil then
+            parsers = require('nvim-treesitter').get_available()
+            installed = require('nvim-treesitter').get_installed()
+          end
+          local language = vim.treesitter.language.get_lang(args.match)
+          if vim.tbl_contains(parsers, language) == false then
+            return
+          end
+          if vim.tbl_contains(installed, language) == false then
+            if require('nvim-treesitter').install({ language }) == true then
+              installed[#installed + 1] = language
+              vim.treesitter.start()
             end
-            for _, line in ipairs(vim.api.nvim_buf_get_lines(bufnr, 0, 3, false)) do
-              if #line > 500 then
-                return true
-              end
-            end
-            return false
-          end,
-        },
+          else
+            vim.treesitter.start()
+          end
+        end,
       })
     end,
   },
   {
     'JoosepAlviste/nvim-ts-context-commentstring',
     event = { 'BufReadPost', 'BufNewFile' },
-    config = function()
-      vim.g.skip_ts_context_commentstring_module = true
-      ---@diagnostic disable-next-line: missing-fields
-      require('ts_context_commentstring').setup({})
-    end,
+    opts = {},
   },
   {
     'nvim-treesitter/nvim-treesitter-textobjects',
+    branch = 'main',
     event = { 'BufReadPost', 'BufNewFile' },
-    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    init = function()
+      vim.g.no_plugin_maps = true
+    end,
     config = function()
-      ---@diagnostic disable-next-line: missing-fields
-      require('nvim-treesitter.configs').setup({
-        textobjects = {
-          select = {
-            enable = true,
-            lookahead = true,
-            keymaps = {
-              -- You can use the capture groups defined in textobjects.scm
-              ['af'] = '@function.outer',
-              ['if'] = '@function.inner',
-              ['ac'] = '@class.outer',
-              -- You can optionally set descriptions to the mappings (used in the desc parameter of
-              -- nvim_buf_set_keymap) which plugins like which-key display
-              ['ic'] = { query = '@class.inner', desc = 'Select inner part of a class region' },
-              -- You can also use captures from other query groups like `locals.scm`
-              ['as'] = { query = '@scope', query_group = 'locals', desc = 'Select language scope' },
-            },
-          },
-          move = {
-            enable = true,
-            set_jumps = true, -- whether to set jumps in the jumplist
-            goto_next_start = {
-              [']m'] = '@function.outer',
-              [']c'] = '@class.outer',
-            },
-            goto_next_end = {
-              [']M'] = '@function.outer',
-              [']C'] = '@class.outer',
-            },
-            goto_previous_start = {
-              ['[m'] = '@function.outer',
-              ['[c'] = '@class.outer',
-            },
-            goto_previous_end = {
-              ['[M'] = '@function.outer',
-              ['[C'] = '@class.outer',
-            },
-          },
+      require('nvim-treesitter-textobjects').setup({
+        select = {
+          lookahead = true,
         },
       })
+      local select_keys = {
+        af = '@function.outer',
+        ['if'] = '@function.inner',
+        ac = '@class.outer',
+        ic = '@class.inner',
+      }
+      for key, query in pairs(select_keys) do
+        vim.keymap.set({ 'o', 'x' }, key, function()
+          require('nvim-treesitter-textobjects.select').select_textobject(query)
+        end, { desc = 'Select textobject: ' .. query })
+      end
+      local move_keys = {
+        [']m'] = '@function.outer',
+        [']M'] = '@function.outer',
+        ['[m'] = '@function.outer',
+        ['[M'] = '@function.outer',
+        [']c'] = '@class.outer',
+        [']C'] = '@class.outer',
+        ['[c'] = '@class.outer',
+        ['[C'] = '@class.outer',
+      }
+      for key, query in pairs(move_keys) do
+        vim.keymap.set({ 'n', 'x', 'o' }, key, function()
+          require('nvim-treesitter-textobjects.move').goto_next_start(query, 'textobjects')
+        end)
+      end
     end,
   },
 }
