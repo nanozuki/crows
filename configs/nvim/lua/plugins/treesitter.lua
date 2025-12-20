@@ -5,25 +5,19 @@ return {
     branch = 'main',
     build = ':TSUpdate',
     config = function()
-      local parsers, installed ---@type string[], string[]
+      local ts = require('nvim-treesitter')
+      local parsers = ts.get_available()
+      ts.install(parsers, { max_jobs = 8 })
       vim.api.nvim_create_autocmd('FileType', {
         callback = function(args)
-          if parsers == nil then
-            parsers = require('nvim-treesitter').get_available()
-            installed = require('nvim-treesitter').get_installed()
-          end
           local language = vim.treesitter.language.get_lang(args.match)
-          if vim.tbl_contains(parsers, language) == false then
+          if (not language) or (not vim.tbl_contains(parsers, language)) then
             return
           end
-          if vim.tbl_contains(installed, language) == false then
-            if require('nvim-treesitter').install({ language }) == true then
-              installed[#installed + 1] = language
-              vim.treesitter.start()
-            end
-          else
-            vim.treesitter.start()
-          end
+          vim.treesitter.start()
+          vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+          vim.wo[0][0].foldmethod = 'expr'
+          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
         end,
       })
     end,
