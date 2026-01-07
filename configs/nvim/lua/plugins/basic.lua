@@ -10,7 +10,7 @@ return {
   {
     'rmagatti/auto-session',
     config = function()
-      vim.opt.sessionoptions = 'curdir,folds,globals,help,tabpages,terminal,winsize'
+      vim.opt.sessionoptions = 'buffers,curdir,folds,globals,help,tabpages,terminal,localoptions,winsize,winpos'
       local function clean_buffers()
         local bufs = vim.api.nvim_list_bufs()
         for _, buf in ipairs(bufs) do
@@ -22,15 +22,14 @@ return {
         end
       end
       require('auto-session').setup({
-        auto_session_suppress_dirs = { '~' },
-        pre_save_cmds = { clean_buffers },
         cwd_change_handling = true,
         pre_cwd_changed_cmds = { clean_buffers },
+        pre_save_cmds = { clean_buffers },
+        purge_after_minutes = 1440 * 30, -- (minutes) remove sessions older than 30 days
         session_lens = {
           load_on_setup = false,
         },
-        -- remove sessions older than 30 days
-        purge_after_minutes = 1440 * 30,
+        suppressed_dirs = { '~' },
       })
       vim.keymap.set('n', '<leader>sr', '<cmd>SessionRestore<cr>', { desc = 'Restore session' })
       vim.keymap.set('n', '<leader>ss', '<cmd>SessionSave<cr>', { desc = 'Save session' })
