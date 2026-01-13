@@ -8,6 +8,10 @@
 with lib;
 let
   cfg = config.crows.git;
+  user = {
+    name = "Nanozuki Crows";
+    email = "nanozuki.crows@gmail.com";
+  };
 in
 {
   options.crows.git = {
@@ -55,10 +59,7 @@ in
           smtpencryption = "tls";
           smtpserverport = "587";
         };
-        user = {
-          name = "Nanozuki Crows";
-          email = "nanozuki.crows@gmail.com";
-        };
+        user = user;
       };
       includes = [
         { path = "${config.xdg.configHome}/git/config_local"; }
@@ -71,5 +72,11 @@ in
       };
     };
     programs.lazygit.enable = true;
+    programs.jujutsu = {
+      enable = true;
+      settings = {
+        user = user;
+      };
+    };
   };
 }
