@@ -1,23 +1,22 @@
 return {
-  -- keymapping hint
-  {
-    'folke/which-key.nvim',
-    event = 'VeryLazy',
-    config = function()
-      require('which-key').setup()
-    end,
-  },
   {
     'rmagatti/auto-session',
     config = function()
       vim.opt.sessionoptions = 'buffers,curdir,folds,globals,help,tabpages,terminal,localoptions,winsize,winpos'
       local function clean_buffers()
+        local wins = vim.api.nvim_list_wins()
+        local active_bufs = {}
+        for _, win in ipairs(wins) do
+          local buf = vim.api.nvim_win_get_buf(win)
+          local type = vim.api.nvim_get_option_value('buftype', { buf = buf })
+          if type == '' and type == 'terminal' then -- '' is normal file buffer
+            active_bufs[buf] = true
+          end
+        end
         local bufs = vim.api.nvim_list_bufs()
         for _, buf in ipairs(bufs) do
-          local name = vim.api.nvim_buf_get_name(buf)
-          local type = vim.api.nvim_get_option_value('buftype', { buf = buf })
-          if name ~= '' and type ~= '' and type ~= 'terminal' then
-            vim.api.nvim_buf_delete(buf, {})
+          if not active_bufs[buf] then
+            vim.api.nvim_buf_delete(buf, { force = true })
           end
         end
       end
