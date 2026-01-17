@@ -54,6 +54,9 @@ return {
         typescript = { 'eslint' },
         typescriptreact = { 'eslint' },
       }
+      local eslint = require('lint.linters.eslint')
+      eslint.args[#eslint.args + 1] = '--flag'
+      eslint.args[#eslint.args + 1] = 'v10_config_lookup_from_file'
       local lint_group = vim.api.nvim_create_augroup('NvimLint', {})
       vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
         group = lint_group,

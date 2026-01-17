@@ -16,7 +16,12 @@ return {
   },
   {
     'folke/sidekick.nvim',
-    opts = {},
+    ---@module 'sidekick'
+    ---@type sidekick.Config
+    opts = {
+      nes = { enabled = false },
+      cli = { win = { keys = { buffers = nil } } },
+    },
     keys = {
       {
         '<c-.>',
@@ -27,25 +32,16 @@ return {
         mode = { 'n', 't', 'i', 'x' },
       },
       {
-        '<leader>aa',
-        function()
-          require('sidekick.cli').toggle({ filter = { installed = true } })
-        end,
-        desc = 'Sidekick Toggle CLI',
-      },
-      {
         '<leader>as',
         function()
-          require('sidekick.cli').select()
+          require('sidekick.cli').select({ filter = { installed = true } })
         end,
-        -- Or to select only installed tools:
-        -- require("sidekick.cli").select({ filter = { installed = true } })
         desc = 'Select CLI',
       },
       {
         '<leader>at',
         function()
-          require('sidekick.cli').send({ msg = '{this}' })
+          require('sidekick.cli').send({ msg = '{this}', filter = { name = 'opencode' } })
         end,
         mode = { 'x', 'n' },
         desc = 'Send This',
@@ -53,14 +49,14 @@ return {
       {
         '<leader>af',
         function()
-          require('sidekick.cli').send({ msg = '{file}' })
+          require('sidekick.cli').send({ msg = '{file}', filter = { name = 'opencode' } })
         end,
         desc = 'Send File',
       },
       {
         '<leader>av',
         function()
-          require('sidekick.cli').send({ msg = '{selection}' })
+          require('sidekick.cli').send({ msg = '{selection}', filter = { name = 'opencode' } })
         end,
         mode = { 'x' },
         desc = 'Send Visual Selection',
@@ -68,7 +64,7 @@ return {
       {
         '<leader>ap',
         function()
-          require('sidekick.cli').prompt()
+          require('sidekick.cli').prompt({ filter = { name = 'opencode' } })
         end,
         mode = { 'n', 'x' },
         desc = 'Sidekick Select Prompt',

@@ -9,7 +9,7 @@ return {
         for _, win in ipairs(wins) do
           local buf = vim.api.nvim_win_get_buf(win)
           local type = vim.api.nvim_get_option_value('buftype', { buf = buf })
-          if type == '' and type == 'terminal' then -- '' is normal file buffer
+          if type == '' or type == 'terminal' then -- '' is normal file buffer
             active_bufs[buf] = true
           end
         end
