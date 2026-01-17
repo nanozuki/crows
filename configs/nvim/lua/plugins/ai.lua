@@ -20,7 +20,15 @@ return {
     ---@type sidekick.Config
     opts = {
       nes = { enabled = false },
-      cli = { win = { keys = { buffers = nil } } },
+      cli = {
+        win = {
+          keys = { -- Replace "Ctrl" by "Alt"
+            buffers = { '<M-b>', 'buffers', mode = 'nt', desc = 'open buffer picker' },
+            files = { '<M-f>', 'files', mode = 'nt', desc = 'open file picker' },
+            prompt = { '<M-p>', 'prompt', mode = 't', desc = 'insert prompt or context' },
+          },
+        },
+      },
     },
     keys = {
       {
