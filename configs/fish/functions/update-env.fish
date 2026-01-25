@@ -3,7 +3,7 @@ if type -q home-manager
     cd $XDG_CONFIG_HOME/home-manager
     if test -z (git status --porcelain); and test "main" = (git branch --show-current)
         git pull
-        home-manager switch --flake .#$HM_CONFIG_NAME
+        home-manager switch --flake .#$HM_CONFIG_NAME; or return 1
     else
         echo "home-manager is not clean or not in main branch"
         return 1
@@ -17,7 +17,7 @@ if type -q darwin-rebuild
     if test -z (git status --porcelain); and test "main" = (git branch --show-current)
         git pull
         sudo rm -rf /etc/bashrc /etc/zshrc /etc/zshenv
-        sudo darwin-rebuild switch --flake .#$OS_CONFIG_NAME
+        sudo darwin-rebuild switch --flake .#$OS_CONFIG_NAME; or return 1
     else
         echo "nix-darwin is not clean or not in main branch"
         return 1
@@ -35,7 +35,7 @@ if type -q nixos-rebuild
     cd /etc/nixos
     if test -z (git status --porcelain); and test "main" = (git branch --show-current)
         git pull
-        sudo nixos-rebuild switch --flake .#$OS_CONFIG_NAME
+        sudo nixos-rebuild switch --flake .#$OS_CONFIG_NAME; or return 1
     else
         echo "/etc/nixos is not clean or not in main branch"
         return 1
@@ -45,23 +45,23 @@ end
 
 if type -q nix-collect-garbage
     echo "----==== Nix Collect Garbage ====----"
-    sudo nix-collect-garbage --delete-older-than 30d
+    sudo nix-collect-garbage --delete-older-than 30d; or return 1
 end
 
 if type -q paru
     echo "----==== Paru ====----"
-    paru -Syu --noconfirm
+    paru -Syu --noconfirm; or return 1
 else if type -q yay
     echo "----==== Yay ====----"
     yay -Syu --noconfirm
-else if type -q pacman
+else if type -q pacman; or return 1
     echo "----==== Pacman ====----"
-    sudo pacman -Syu --noconfirm
+    sudo pacman -Syu --noconfirm; or return 1
 end
 
 if type -q flatpak
     echo "----==== Flatpak ====----"
-    sudo flatpak upgrade -y
+    sudo flatpak upgrade -y; or return 1
 end
 
 if test -d $XDG_DATA_HOME/plum
