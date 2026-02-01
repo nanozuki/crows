@@ -64,6 +64,19 @@ return {
           require('lint').try_lint()
         end,
       })
+      vim.api.nvim_create_user_command('Lint', function()
+        require('lint').try_lint()
+      end, {})
+      vim.api.nvim_create_user_command('LintInfo', function()
+        local linters = require('lint').get_running()
+        if #linters == 0 then
+          print('No running linters.')
+          return
+        end
+        for _, linter in ipairs(linters) do
+          print(' - ' .. linter)
+        end
+      end, {})
     end,
   },
   {
