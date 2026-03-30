@@ -1,3 +1,6 @@
+local settings = require('config.settings')
+local agent = settings.agent
+
 return {
   {
     'github/copilot.vim',
@@ -34,7 +37,7 @@ return {
       {
         '<c-.>',
         function()
-          require('sidekick.cli').toggle({ name = 'opencode', focus = true })
+          require('sidekick.cli').toggle({ name = agent, focus = true })
         end,
         desc = 'Sidekick Toggle',
         mode = { 'n', 't', 'i', 'x' },
@@ -49,7 +52,7 @@ return {
       {
         '<leader>at',
         function()
-          require('sidekick.cli').send({ msg = '{this}', filter = { name = 'opencode' } })
+          require('sidekick.cli').send({ msg = '{this}', filter = { name = agent } })
         end,
         mode = { 'x', 'n' },
         desc = 'Send This',
@@ -57,14 +60,14 @@ return {
       {
         '<leader>af',
         function()
-          require('sidekick.cli').send({ msg = '{file}', filter = { name = 'opencode' } })
+          require('sidekick.cli').send({ msg = '{file}', filter = { name = agent } })
         end,
         desc = 'Send File',
       },
       {
         '<leader>av',
         function()
-          require('sidekick.cli').send({ msg = '{selection}', filter = { name = 'opencode' } })
+          require('sidekick.cli').send({ msg = '{selection}', filter = { name = agent } })
         end,
         mode = { 'x' },
         desc = 'Send Visual Selection',
@@ -72,7 +75,7 @@ return {
       {
         '<leader>ap',
         function()
-          require('sidekick.cli').prompt({ filter = { name = 'opencode' } })
+          require('sidekick.cli').prompt({ filter = { name = agent } })
         end,
         mode = { 'n', 'x' },
         desc = 'Sidekick Select Prompt',

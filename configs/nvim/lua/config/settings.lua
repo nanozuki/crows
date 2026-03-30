@@ -8,6 +8,7 @@
 ---@field use_global_statusline boolean
 ---@field hide_command_line boolean
 ---@field use_gofumpt boolean
+---@field agent string
 
 ---Theme must support dynamic switching dark/light mode based on system settings.
 ---@class ThemeSettings
@@ -19,6 +20,7 @@ local M = {
   use_global_statusline = false,
   hide_command_line = false,
   use_gofumpt = true,
+  agent = 'opencode',
 }
 
 -- Load local settings from settings.json
