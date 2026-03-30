@@ -18,6 +18,11 @@ in
       type = types.bool;
       default = true;
     };
+    agent = mkOption {
+      description = "AI agent to use for Neovim features";
+      type = types.str;
+      default = "opencode";
+    };
   };
 
   config = mkIf cfg.enable {
