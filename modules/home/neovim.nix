@@ -56,6 +56,7 @@ in
         use_global_statusline = cfg.useGlobalStatusline;
         hide_command_line = cfg.hideCommandLine;
         use_gofumpt = cfg.useGofumpt;
+        agent = cfg.agent;
       };
       target = "${config.xdg.configHome}/nvim/settings.json";
     };
