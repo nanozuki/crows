@@ -11,9 +11,9 @@ let
   dataAndMarkup = {
     home.packages = with pkgs; [
       vscode-langservers-extracted # include {html,css,json,eslint}-language-server
-      nodePackages.yaml-language-server
+      yaml-language-server
       #  formatter with many language supportted
-      nodePackages.prettier
+      prettier
     ];
   };
   gleam = {
@@ -80,8 +80,8 @@ let
   };
   svelte = {
     home.packages = with pkgs; [
-      nodePackages.svelte-language-server
-      nodePackages.svelte-check
+      svelte-language-server
+      svelte-check
     ];
   };
   typescript_deno = {
@@ -90,14 +90,14 @@ let
   typescript_node = {
     home.packages = with pkgs; [
       ## runtime and package manager
-      nodePackages.nodejs
-      nodePackages.pnpm
+      nodejs
+      pnpm
       # language server
-      nodePackages.typescript
-      nodePackages."@tailwindcss/language-server"
+      typescript
+      "@tailwindcss/language-server"
       vtsls
       # linter
-      nodePackages.eslint
+      eslint
     ];
     home.sessionVariables = {
       NPM_CONFIG_USERCONFIG = "${config.xdg.configHome}/npm/npmrc";
@@ -122,7 +122,7 @@ let
     ];
   };
   vim = {
-    home.packages = with pkgs; [ nodePackages.vim-language-server ];
+    home.packages = with pkgs; [ vim-language-server ];
   };
   zig = mkIf cfg.language.zig {
     home.packages = with pkgs; [

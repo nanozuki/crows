@@ -18,7 +18,7 @@ in
     # check neovim.nix in nanozuki/crows to get dependencies
     environment.systemPackages = with pkgs; [
       neovim-node-client
-      nodePackages.nodejs
+      nodejs
       luajitPackages.tiktoken_core
     ];
   };
