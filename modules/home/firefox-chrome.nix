@@ -7,7 +7,7 @@ in
 {
   options.crows.firefoxChrome = {
     profilePath = mkOption {
-      type = types.path;
+      type = types.nullOr types.path;
       default = null;
       description = "Path to the Firefox profile";
     };
