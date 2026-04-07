@@ -1,4 +1,5 @@
 vim.loader.enable()
+require('config.local_config').load()
 require('config.configs')
 require('config.lsp')
 
