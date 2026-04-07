@@ -94,7 +94,7 @@ let
       pnpm
       # language server
       typescript
-      "@tailwindcss/language-server"
+      tailwindcss-language-server
       vtsls
       # linter
       eslint
