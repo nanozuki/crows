@@ -13,6 +13,11 @@ in
     enable = mkEnableOption "Neovim";
     hideCommandLine = mkEnableOption "Hide Command Line";
     useGlobalStatusline = mkEnableOption "Use global statusline";
+    configRepoRoot = mkOption {
+      description = "Absolute path to the nix-darwin checkout that contains public/configs/nvim";
+      type = types.str;
+      default = "${config.home.homeDirectory}/.config/nix-darwin";
+    };
     useGofumpt = mkOption {
       description = "Use gofumpt for Go formatting";
       type = types.bool;
@@ -43,9 +48,8 @@ in
     };
     home.file.neovim = {
       enable = true;
-      source = ../../configs/nvim;
+      source = config.lib.file.mkOutOfStoreSymlink "${cfg.configRepoRoot}/public/configs/nvim";
       target = "${config.xdg.configHome}/nvim";
-      recursive = true;
     };
     home.file.neovim_settings = {
       enable = true;
@@ -58,7 +62,7 @@ in
         use_gofumpt = cfg.useGofumpt;
         agent = cfg.agent;
       };
-      target = "${config.xdg.configHome}/nvim/settings.json";
+      target = "${config.xdg.configHome}/crows/settings.json";
     };
     home.packages = with pkgs; [ tree-sitter ];
 
