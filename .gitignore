@@ -1,2 +1,6 @@
 # osx
 .DS_Store
+
+# nvim
+nvim.log
+lazy-lock.json

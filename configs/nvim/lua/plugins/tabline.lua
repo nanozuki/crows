@@ -5,12 +5,14 @@ local function make_theme()
   if settings.theme.name == 'zenbones' then
     alt_bg = vim.g.terminal_color_8
   end
+  local normal_bg = vim.api.nvim_get_hl(0, { name = 'Normal' }).bg
   return {
     line = 'TabLineFill',
-    head = { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_5, style = 'italic' },
-    current_tab = { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_6, style = 'bold' },
-    tab = { fg = vim.g.terminal_color_7, bg = alt_bg, style = 'bold' },
+    head = { fg = vim.g.terminal_color_5, style = 'bold' },
+    current_tab = { fg = vim.g.terminal_color_6, bg = normal_bg, style = 'bold' },
+    tab = 'TabLine',
     win = { fg = vim.g.terminal_color_7, bg = alt_bg },
+    current_win = { fg = vim.g.terminal_color_2, bg = alt_bg, style = 'bold' },
     tail = { fg = vim.g.terminal_color_0, bg = vim.g.terminal_color_6, style = 'bold' },
   }
 end
@@ -24,37 +26,42 @@ vim.api.nvim_create_autocmd('ColorScheme', {
   end,
 })
 
+local tab_numbers = { '󰎤', '󰎧', '󰎪', '󰎭', '󰎱', '󰎳', '󰎶', '󰎹', '󰎼', '󰽽' }
+
 local function config()
   vim.opt.showtabline = 2
   require('tabby').setup({
     line = function(line)
-      local cwd = ' ' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':t') .. ' '
+      local cwd = ' 󰉋 ' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':t') .. ' '
+      local git_head = vim.g.gitsigns_head
+      if git_head and git_head ~= '' then
+        cwd = cwd .. '󰘬 ' .. git_head .. ' '
+      end
       return {
-        { { cwd, hl = theme.head }, line.sep('', theme.head, theme.line) },
+        { cwd, ' ', hl = theme.head },
         line.tabs().foreach(function(tab)
           local hl = tab.is_current() and theme.current_tab or theme.tab
           return {
-            line.sep('', hl, theme.line),
-            tab.is_current() and '󰆤' or '󰆣',
-            string.format('%s:', tab.number()),
+            ' ',
+            tab_numbers[tab.number()] or string.format('%d:', tab.number()),
             tab.name(),
-            line.sep('', hl, theme.line),
             margin = ' ',
+            ' ',
             hl = hl,
           }
         end),
         line.spacer(),
-        line.wins_in_tab(line.api.get_current_tab()).foreach(function(win)
-          return {
-            line.sep('', theme.win, theme.line),
-            win.is_current() and '' or '',
-            win.buf_name(),
-            line.sep('', theme.win, theme.line),
-            margin = ' ',
-            hl = theme.win,
-          }
-        end),
-        { line.sep('', theme.tail, theme.line), { '  ', hl = theme.tail } },
+        {
+          { '  ', hl = theme.current_win },
+          line.wins_in_tab(line.api.get_current_tab()).foreach(function(win)
+            return {
+              win.buf_name(),
+              hl = win.is_current() and theme.current_win or theme.win,
+            }
+          end, { margin = ' ' }),
+          ' ',
+          hl = theme.win,
+        },
         hl = theme.line,
       }
     end,

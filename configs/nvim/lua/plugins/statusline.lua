@@ -4,8 +4,8 @@ local settings = require('config.settings')
 local function make_theme()
   ---@type table<string, string>
   local modes = {
-    normal = vim.g.terminal_color_6, -- cyan
-    insert = vim.g.terminal_color_4, -- blue
+    normal = vim.g.terminal_color_4, -- cyan
+    insert = vim.g.terminal_color_6, -- blue
     visual = vim.g.terminal_color_3, -- yellow
     replace = vim.g.terminal_color_2, -- green
     command = vim.g.terminal_color_1, -- red
@@ -24,6 +24,9 @@ local function make_theme()
       b = { fg = accent, bg = b_bg },
       c = { fg = vim.g.terminal_color_7, bg = statusline_bg },
     }
+    if mode == 'inactive' then
+      theme[mode].c = 'PmenuKindSel'
+    end
   end
   return theme
 end
@@ -38,13 +41,10 @@ end
 
 local function lsp()
   local clients = vim.lsp.get_clients({ bufnr = 0 })
-  local names = vim.tbl_map(function(client)
-    if client.name == 'GitHub Copilot' then
-      return 'copilot'
-    end
-    return client.name
-  end, clients)
-  return table.concat(names, ',')
+  if #clients == 0 then
+    return ''
+  end
+  return string.format('LSP(%d)', #clients)
 end
 
 local function position()
@@ -61,19 +61,25 @@ local function position()
   return text
 end
 
-local block = {
+local left_block = {
   '',
   draw_empty = true,
-  separator = { left = '█' },
+  separator = { left = '▎' },
+}
+
+local right_block = {
+  '',
+  draw_empty = true,
+  separator = { right = '🮇' },
 }
 
 -- custom extensions
 local nvim_tree = {
   filetypes = { 'neo-tree' },
   sections = {
-    lualine_a = { block },
+    -- lualine_a = { left_block },
     lualine_c = { 'filetype' },
-    lualine_z = { block },
+    -- lualine_z = { right_block },
   },
 }
 
@@ -92,27 +98,35 @@ local function lualine_setup(theme)
   require('lualine').setup({
     options = {
       theme = theme,
-      component_separators = { left = '', right = '' },
-      section_separators = { left = '', right = '' },
+      component_separators = { left = '', right = '' },
+      section_separators = { left = '', right = '' },
     },
     sections = {
-      lualine_a = { 'mode' },
-      lualine_b = { { 'branch', draw_empty = true }, 'diff', 'diagnostics' },
+      lualine_a = { {
+        'mode',
+        fmt = function(str)
+          return str:sub(1, 3)
+        end,
+      } },
+      lualine_b = {},
       lualine_c = {
-        { 'filename', path = 1, symbols = { modified = '*', readonly = '' } },
+        { 'filename', path = 4, symbols = { modified = '*', readonly = '' } },
         noice_recording,
       },
-      lualine_x = { 'filetype', { file_info, icon = '󰋽' } },
-      lualine_y = { { lsp, icon = '' } },
-      lualine_z = { { position, icon = '󰆤' } },
+      lualine_x = { 'filetype', { file_info, icon = '󰋽' }, { lsp, icon = '' }, { position, icon = '󰆤' } },
+      lualine_y = {},
+      lualine_z = {},
     },
     inactive_sections = {
-      lualine_a = { block },
+      lualine_a = {},
       lualine_b = {},
-      lualine_c = { { 'filename', path = 1, symbols = { modified = '*', readonly = '' } } },
+      lualine_c = {
+        { 'filetype', icon_only = true },
+        { 'filename', path = 1, symbols = { modified = '*', readonly = '' } },
+      },
       lualine_x = { { file_info, icon = '󰋽' } },
       lualine_y = {},
-      lualine_z = { block },
+      lualine_z = {},
     },
     extensions = { nvim_tree },
   })
