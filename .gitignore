@@ -4,3 +4,4 @@
 # nvim
 nvim.log
 lazy-lock.json
+local.lua
