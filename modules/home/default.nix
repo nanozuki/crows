@@ -1,6 +1,7 @@
 { ... }:
 {
   imports = [
+    ./agents.nix
     ./firefox-chrome.nix
     ./g.nix
     ./ghostty.nix

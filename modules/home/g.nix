@@ -20,6 +20,10 @@ with lib;
       description = "theme name, theme must be able to dynamic switch light/dark based on system";
     };
   };
+  options.g.configRoot = mkOption {
+    type = types.str;
+    description = "absolute path to current project root";
+  };
   config = {
     home.packages = [
       pkgs.mustache-go # dependency of clips.mustache, avoid nix gc
