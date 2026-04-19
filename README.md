@@ -49,21 +49,7 @@ My dotfiles and public nix modules.
         modules = [
           ./overlays.nix
           ./modules/darwin
-          ./machines/<machine-name>.nix
-          home-manager.darwinModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.sharedModules = [
-              inputs.sops-nix.homeManagerModule
-              ./modules/home
-            ];
-            home-manager.users.<user-name> = ./homes/<profile-name>.nix;
-            home-manager.extraSpecialArgs = {
-              system = "aarch64-darwin";
-              clips = import ./clips nixpkgs.legacyPackages."aarch64-darwin" "aarch64-darwin";
-            };
-          }
+          ./machines/<machine-name>
         ];
         specialArgs = { inherit self inputs; };
       };
