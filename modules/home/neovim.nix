@@ -32,6 +32,7 @@ in
       withPython3 = false;
       withRuby = false;
       withNodeJs = true;
+      sideloadInitLua = true;
     };
     programs.fish.shellAbbrs = {
       vi = "nvim";
