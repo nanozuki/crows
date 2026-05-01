@@ -1,5 +1,10 @@
 # global variables
-{ lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 {
   options.g.font = {
@@ -23,6 +28,7 @@ with lib;
   options.g.configRoot = mkOption {
     type = types.str;
     description = "absolute path to current project root";
+    default = "${config.xdg.configHome}/nix-configs";
   };
   config = {
     home.packages = [

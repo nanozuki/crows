@@ -13,13 +13,13 @@ end
 
 if type -q darwin-rebuild
     echo "----==== Nix Darwin ====----"
-    cd $XDG_CONFIG_HOME/nix-darwin
+    cd $XDG_CONFIG_HOME/nix-configs
     if test -z (git status --porcelain); and test "main" = (git branch --show-current)
         git pull
         sudo rm -rf /etc/bashrc /etc/zshrc /etc/zshenv
         sudo darwin-rebuild switch --flake .#$OS_CONFIG_NAME; or return 1
     else
-        echo "nix-darwin is not clean or not in main branch"
+        echo "nix-configs is not clean or not in main branch"
         return 1
     end
     cd -
@@ -32,12 +32,12 @@ end
 
 if type -q nixos-rebuild
     echo "----==== NixOS ====----"
-    cd /etc/nixos
+    cd $XDG_CONFIG_HOME/nix-configs
     if test -z (git status --porcelain); and test "main" = (git branch --show-current)
         git pull
         sudo nixos-rebuild switch --flake .#$OS_CONFIG_NAME; or return 1
     else
-        echo "/etc/nixos is not clean or not in main branch"
+        echo "nix-configs is not clean or not in main branch"
         return 1
     end
     cd -
