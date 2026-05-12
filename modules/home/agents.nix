@@ -12,6 +12,7 @@ in
   options.crows.agents = {
     claude = mkEnableOption "Claude agent";
     codex = mkEnableOption "Codex agent";
+    pi = mkEnableOption "Pi agent";
   };
 
   config = mkMerge [
@@ -35,6 +36,14 @@ in
         enable = true;
         source = ../../configs/agents/AGENTS.md;
         target = "${config.xdg.configHome}/codex/AGENTS.md";
+      };
+    })
+    (mkIf cfg.pi {
+      home.packages = with pkgs; [ pi-coding-agent ];
+      home.file.pi_config = {
+        enable = true;
+        source = ../../configs/agents/AGENTS.md;
+        target = ".pi/agent/AGENTS.md";
       };
     })
   ];
