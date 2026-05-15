@@ -40,10 +40,18 @@ in
     })
     (mkIf cfg.pi {
       home.packages = with pkgs; [ pi-coding-agent ];
+      home.sessionVariables = {
+        PI_CODING_AGENT_DIR = "${config.xdg.configHome}/pi/agent";
+      };
       home.file.pi_config = {
         enable = true;
         source = ../../configs/agents/AGENTS.md;
-        target = ".pi/agent/AGENTS.md";
+        target = "${config.xdg.configHome}/pi/agent/AGENTS.md";
+      };
+      home.file.pi_keybindings = {
+        enable = true;
+        source = ../../configs/agents/pi_keybindings.json;
+        target = "${config.xdg.configHome}/pi/agent/keybindings.json";
       };
     })
   ];
