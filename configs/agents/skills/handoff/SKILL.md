@@ -38,10 +38,8 @@ Do not record routine edits, trivial steps, or anything already obvious from
   subdirectory: `.handoff/feat/foo.md`.
 - Create parent directories as needed.
 
-Each worktree has its own `.handoff/`; they are not shared. Whether `.handoff/`
-is committed or gitignored is up to the project — do not change that on the
-user's behalf. Remind the user that deleting the worktree also deletes its
-handoff notes.
+Whether `.handoff/` is committed or gitignored is up to the project — do not
+change that on the user's behalf.
 
 ## Note structure
 
@@ -50,7 +48,8 @@ body if empty, but keep the heading so future updates have a place to land.
 
 ```markdown
 # <branch>
-Created: <YYYY-MM-DD HH:MM>  Updated: <YYYY-MM-DD HH:MM>
+
+Created: <YYYY-MM-DD HH:MM> Updated: <YYYY-MM-DD HH:MM>
 
 ## Goal
 
