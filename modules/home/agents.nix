@@ -26,6 +26,11 @@ in
         source = ../../configs/agents/AGENTS.md;
         target = "${config.xdg.configHome}/claude/CLAUDE.md";
       };
+      home.file.claude_skills = {
+        enable = true;
+        source = ../../configs/agents/skills;
+        target = "${config.xdg.configHome}/claude/skills";
+      };
     })
     (mkIf cfg.codex {
       home.packages = with pkgs; [ codex ];
@@ -37,6 +42,11 @@ in
         source = ../../configs/agents/AGENTS.md;
         target = "${config.xdg.configHome}/codex/AGENTS.md";
       };
+      home.file.codex_skills = {
+        enable = true;
+        source = ../../configs/agents/skills;
+        target = "${config.xdg.configHome}/codex/skills";
+      };
     })
     (mkIf cfg.pi {
       home.packages = with pkgs; [ pi-coding-agent ];
@@ -47,6 +57,11 @@ in
         enable = true;
         source = ../../configs/agents/AGENTS.md;
         target = "${config.xdg.configHome}/pi/agent/AGENTS.md";
+      };
+      home.file.pi_skills = {
+        enable = true;
+        source = ../../configs/agents/skills;
+        target = "${config.xdg.configHome}/pi/agent/skills";
       };
       home.file.pi_keybindings = {
         enable = true;
