@@ -2,7 +2,6 @@
   clips,
   config,
   lib,
-  pkgs,
   ...
 }:
 with lib;
@@ -20,7 +19,6 @@ in
   config = mkIf cfg.enable {
     programs.git = {
       enable = true;
-      package = clips.darwinOr pkgs.emptyDirectory pkgs.git;
       settings = {
         alias = {
           st = "status";
