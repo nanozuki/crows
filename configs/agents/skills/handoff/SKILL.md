@@ -1,13 +1,13 @@
 ---
 name: handoff
-description: Maintains a per-branch handoff note under .handoff/<branch>.md to help future sessions resume work on the same git branch. Use when the user invokes this skill or asks to read, create, or update a handoff note.
+description: Maintains a cache-backed per-branch handoff note to help future sessions resume work on the same git branch across checkouts and worktrees. Use when the user invokes this skill or asks to read, create, or update a handoff note.
 ---
 
 # Handoff
 
-Per-branch working notes that travel with a git branch inside a worktree. The
-goal is to help the next session — usually future you — resume quickly without
-re-deriving context from code and git history alone.
+Per-branch working notes that persist outside a worktree. The goal is to help
+the next session — usually future you — resume quickly without re-deriving
+context from code and git history alone.
 
 ## Preconditions
 
@@ -31,15 +31,19 @@ Do not record routine edits, trivial steps, or anything already obvious from
 
 ## Location
 
-- Path: `<worktree-root>/.handoff/<branch-name>.md`
-- `<worktree-root>` is the output of `git rev-parse --show-toplevel`.
+- Path:
+  `${XDG_CACHE_HOME:-$HOME/.cache}/agents/handoff/<encoded-git-common-dir>/<encoded-branch-name>.md`
+- Git common directory is the absolute output of
+  `git rev-parse --path-format=absolute --git-common-dir`.
 - Branch name is the output of `git branch --show-current`.
-- If the branch name contains `/` (e.g. `feat/foo`), keep the slash as a
-  subdirectory: `.handoff/feat/foo.md`.
+- Encode the git common directory and branch name as URL percent-encoded UTF-8
+  bytes for separate filesystem path components. Encode `/` as `%2F` so each
+  value stays in one component.
 - Create parent directories as needed.
 
-Whether `.handoff/` is committed or gitignored is up to the project — do not
-change that on the user's behalf.
+Use the git common directory, not the worktree root. Linked worktrees for the
+same local repository share a common Git directory, while their worktree roots
+can differ.
 
 ## Note structure
 
@@ -84,6 +88,6 @@ Unresolved questions or blockers to carry into the next session.
 
 ## Orphan notes
 
-Notes for branches that no longer exist are left alone. Do not delete or
-archive them automatically. If the user asks to clean up, list the orphan
-files and let them decide.
+Notes for branch keys that no longer resolve from the current local repository
+are left alone. Do not delete or archive them automatically. If the user asks
+to clean up, list the orphan files and let them decide.
