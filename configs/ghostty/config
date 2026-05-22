@@ -21,3 +21,5 @@ keybind = super+ctrl+k=goto_split:top
 
 clipboard-read = allow
 clipboard-write = allow
+
+shell-integration-features = true
