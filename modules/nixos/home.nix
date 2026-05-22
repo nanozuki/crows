@@ -7,6 +7,8 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
+    backupFileExtension = "backup";
+    overwriteBackup = true;
     sharedModules = [
       inputs.sops-nix.homeManagerModule
       ../home
