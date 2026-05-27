@@ -23,6 +23,7 @@ vim.opt.termguicolors = true
 vim.opt.timeoutlen = 500
 vim.opt.undofile = true
 vim.opt.updatetime = 250
+vim.opt.exrc = true
 -- ## linebreak
 vim.opt.linebreak = true
 vim.opt.showbreak = '->'
