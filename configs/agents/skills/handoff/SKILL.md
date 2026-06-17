@@ -1,18 +1,22 @@
 ---
 name: handoff
-description: Maintains a cache-backed per-branch handoff note to help future sessions resume work on the same git branch across checkouts and worktrees. Use when the user invokes this skill or asks to read, create, or update a handoff note.
+description: Maintains an Obsidian-backed per-branch handoff note to help future sessions resume work on the same git branch across checkouts and worktrees. Use when the user invokes this skill or asks to read, create, or update a handoff note.
 ---
 
 # Handoff
 
-Per-branch working notes that persist outside a worktree. The goal is to help
-the next session — usually future you — resume quickly without re-deriving
+Per-branch working notes that persist in Obsidian outside a worktree. The goal
+is to help the next session — usually future you — resume quickly without re-deriving
 context from code and git history alone.
 
 ## Preconditions
 
 If not inside a git repository, or if the repository is in detached HEAD with no
 current branch, explain the reason and stop without creating a note.
+
+If the handoff path helper cannot determine the first Obsidian vault path, or if
+the repository has no `origin` remote URL, explain the reason and stop without
+creating a note.
 
 ## When to act
 
@@ -31,19 +35,40 @@ Do not record routine edits, trivial steps, or anything already obvious from
 
 ## Location
 
+Prefer resolving the note path with the helper beside this skill:
+
+```sh
+nix run nixpkgs#nodejs -- <path-to-this-skill>/handoff-path.ts
+```
+
+The helper prints the absolute handoff note path for the current repository and
+branch. Run it from the target repository worktree so Git commands resolve the
+current repository and branch. If the helper fails, explain the error and stop
+without creating a note.
+
+Treat the printed path as a single filesystem path. Quote it when passing it to
+shell commands because vault paths may contain spaces.
+
 - Path:
-  `${XDG_CACHE_HOME:-$HOME/.cache}/agents/handoff/<encoded-git-common-dir>/<encoded-branch-name>.md`
-- Git common directory is the absolute output of
-  `git rev-parse --path-format=absolute --git-common-dir`.
+  `<first-obsidian-vault>/Logbook/<encoded-remote-key>/<encoded-branch-name>.md`
+- First Obsidian vault path comes from local Obsidian configuration. On macOS,
+  the helper reads `~/Library/Application Support/obsidian/obsidian.json`.
+  Use the first configured vault, then store notes under that vault's `Logbook`
+  directory.
+- Remote URL is the output of `git remote get-url origin`.
 - Branch name is the output of `git branch --show-current`.
-- Encode the git common directory and branch name as URL percent-encoded UTF-8
-  bytes for separate filesystem path components. Encode `/` as `%2F` so each
-  value stays in one component.
+- Remote key is derived from the remote URL by trimming leading `git@`, trimming
+  leading `https://`, trimming trailing `.git`, and replacing `:` with `/`.
+- Encode the remote key and branch name as URL percent-encoded UTF-8 bytes for
+  separate filesystem path components.
 - Create parent directories as needed.
 
-Use the git common directory, not the worktree root. Linked worktrees for the
-same local repository share a common Git directory, while their worktree roots
-can differ.
+Example: `git@github.com:nanozuki/kiniro.git` becomes
+`<first-obsidian-vault>/Logbook/github.com%2Fnanozuki%2Fkiniro/<encoded-branch-name>.md`.
+
+Use the remote key, not the worktree root or local Git directory. Linked
+worktrees, reclones, and checkouts on different machines should resolve to the
+same handoff note when they use the same `origin` remote and branch name.
 
 ## Note structure
 
