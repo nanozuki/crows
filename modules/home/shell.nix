@@ -10,20 +10,46 @@ let
   cfg = config.crows.shell;
   startshipPresetsPath = "${pkgs.starship}/share/starship/presets/nerd-font-symbols.toml";
   startshipPresets = builtins.fromTOML (builtins.readFile startshipPresetsPath);
+  publicFishFunctions = {
+    gitget = ../../configs/fish/functions/gitget.fish;
+    import_gpg_keys = ../../configs/fish/functions/import_gpg_keys.fish;
+    update-env = ../../configs/fish/functions/update-env.fish;
+    check-true-color = ../../configs/fish/functions/check-true-color.fish;
+    sha-rename = ../../configs/fish/functions/sha-rename.fish;
+  }
+  // lib.optionalAttrs (system == "x86_64-linux") {
+    reload-bluetooth = ../../configs/fish/functions/reload-bluetooth.fish;
+  };
+  fishFunctions = publicFishFunctions // cfg.fishFunctions;
+  fishFunctionFiles = lib.mapAttrs' (
+    name: source:
+    lib.nameValuePair "fish_function_${name}" {
+      enable = true;
+      inherit source;
+      target = "${config.xdg.configHome}/fish/functions/${name}.fish";
+    }
+  ) fishFunctions;
 in
 {
   options.crows.shell = {
     enable = lib.mkEnableOption "shell and related tools";
+    fishFunctions = lib.mkOption {
+      type = lib.types.attrsOf lib.types.path;
+      default = { };
+      description = "Extra fish functions keyed by function name.";
+    };
   };
   config = lib.mkIf cfg.enable {
     xdg.enable = true;
 
     home = {
-      file.editorconfig = {
-        enable = true;
-        source = ../../configs/editorconfig/editorconfig;
-        target = "${config.home.homeDirectory}/.editorconfig";
-      };
+      file = {
+        editorconfig = {
+          enable = true;
+          source = ../../configs/editorconfig/editorconfig;
+          target = "${config.home.homeDirectory}/.editorconfig";
+        };
+      } // fishFunctionFiles;
       packages = with pkgs; [
         babelfish
         tokei
@@ -71,28 +97,6 @@ in
           eal = "eza -al";
           ela = "eza -al";
           et = "eza -T";
-        };
-        functions = {
-          gitget = {
-            body = builtins.readFile ../../configs/fish/functions/gitget.fish;
-          };
-          import_gpg_keys = {
-            body = builtins.readFile ../../configs/fish/functions/import_gpg_keys.fish;
-          };
-          update-env = {
-            body = builtins.readFile ../../configs/fish/functions/update-env.fish;
-          };
-          check-true-color = {
-            body = builtins.readFile ../../configs/fish/functions/check-true-color.fish;
-          };
-          sha-rename = {
-            body = builtins.readFile ../../configs/fish/functions/sha-rename.fish;
-          };
-        }
-        // lib.optionalAttrs (system == "x86_64-linux") {
-          reload-bluetooth = {
-            body = builtins.readFile ../../configs/fish/functions/reload-bluetooth.fish;
-          };
         };
         interactiveShellInit = ''
           # kubectl
