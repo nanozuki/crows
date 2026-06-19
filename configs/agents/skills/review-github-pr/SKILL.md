@@ -30,8 +30,16 @@ Do not submit a final `COMMENT` review.
 Rules:
 
 - If no findings are found, submit APPROVE.
-- If findings are non-blocking, submit `APPROVE` with comments.
-- If findings are blocking, submit `REQUEST_CHANGES`.
+- If any finding is blocking, submit `REQUEST_CHANGES`. Blocking covers both
+  **correctness** (bugs, regressions, unsafe assumptions, missing edge cases,
+  broken or missing tests, API misuse) **and maintainability**.
+- **Maintainability is blocking, not optional polish.** A change that makes the
+  project materially harder to maintain — unnecessary complexity, avoidable
+  duplication / coupling / cognitive load, anti-patterns, or shortcut and
+  patch-style fixes that leave technical debt — warrants `REQUEST_CHANGES` and a
+  required fix, **even when the code is otherwise correct and the tests pass**.
+- Submit `APPROVE` with comments only when the findings are genuinely minor —
+  cosmetic, or subjective style with no real maintenance cost.
 - If a finding requires human judgment, depends on team preference, involves
   unclear tradeoffs, or would benefit from user guidance before choosing between
   approval and change request, pause and ask the user before submitting
@@ -113,7 +121,9 @@ Focus on high-signal review findings such as:
 
 Review maintainability proactively, not only correctness. Prefer solutions that
 reduce unnecessary complexity. Consider whether the change makes the code
-harder to understand, extend, test, or safely modify.
+harder to understand, extend, test, or safely modify — and when it materially
+does, treat that as a **blocking** finding (see Review outcomes), not an optional
+follow-up.
 
 If the implementation relies on a shortcut, workaround, or narrow fix, call it
 out clearly and recommend a more robust approach when appropriate.
@@ -163,6 +173,7 @@ For example:
 
 - `Approved PR #123. Only non-blocking issues were found.`
 - `Requested changes on PR #123. The change introduces a blocking correctness issue in the retry flow.`
+- `Requested changes on PR #123. The new retry logic adds avoidable complexity and tech debt that will make the module harder to maintain.`
 
 If the process pauses for user judgment, explain the decision point briefly and
 do not submit the review yet.
