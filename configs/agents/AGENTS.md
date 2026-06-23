@@ -17,3 +17,9 @@ that may require an SSH key, such as `git commit`, `git push`, `git pull`,
 `git fetch`, or operations that create signed commits or tags, wait for the user
 to approve the request in 1Password. Do not bypass, replace, disable, or work
 around the 1Password SSH agent approval flow.
+
+## Interface-Specific Features
+
+The user often uses agents in a terminal interface. If you need a feature that
+may not work in the terminal, ask the user to switch to an interface that
+supports that feature before attempting to use it.
