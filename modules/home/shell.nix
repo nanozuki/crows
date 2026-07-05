@@ -49,7 +49,8 @@ in
           source = ../../configs/editorconfig/editorconfig;
           target = "${config.home.homeDirectory}/.editorconfig";
         };
-      } // fishFunctionFiles;
+      }
+      // fishFunctionFiles;
       packages = with pkgs; [
         babelfish
         tokei
@@ -118,7 +119,10 @@ in
           }
         ];
       };
-      fzf.enable = true;
+      fzf = {
+        enable = true;
+        historyWidget.command = ""; # avoid conflict with atuin history widget
+      };
       jq.enable = true;
       ripgrep.enable = true;
       starship = {
