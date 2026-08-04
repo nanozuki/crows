@@ -45,6 +45,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 vim.lsp.enable({
   'astro',
+  'basedpyright',
   'cssls',
   'denols',
   'gleam',
@@ -54,7 +55,6 @@ vim.lsp.enable({
   'lua_ls',
   'nil_ls',
   'ocamllsp',
-  'pyright',
   'ruff',
   'rust_analyzer',
   'svelte',

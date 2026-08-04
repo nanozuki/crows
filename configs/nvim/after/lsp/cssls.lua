@@ -1,5 +1,9 @@
 return {
-  lint = {
-    unknownAtRules = 'ignore',
+  settings = {
+    css = {
+      lint = {
+        unknownAtRules = 'ignore',
+      },
+    },
   },
 }
