@@ -24,11 +24,11 @@ function update-env --description "update Home Manager, nix-darwin or NixOS, and
             return 1
         end
         cd -
-    else if type -q brew
-        brew update
-        brew upgrade
-        brew upgrade --cask
-        brew cleanup
+    end
+
+    if type -q brew
+        echo "----==== Homebrew ====----"
+        brew upgrade; or return 1
     end
 
     if type -q nixos-rebuild
