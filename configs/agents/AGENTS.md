@@ -36,9 +36,10 @@ as "Rust module," "Go package," or "Java interface."
 
 ### Planning and Reviewing
 
-- Before implementing, present a concise plan at the module-and-interface level.
-  Identify the affected modules and the intended changes to their
-  responsibilities, interfaces, and interactions.
+- Present a concise plan at the module-and-interface level. Identify the
+  affected modules and the intended changes to their responsibilities,
+  interfaces, and interactions. Once the user confirms the plan, begin
+  implementation.
 - Before reviewing implementation details or reporting individual changes,
   present a concise change summary at the module-and-interface level. Identify
   the affected modules, interface changes, and resulting behavior.
