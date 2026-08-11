@@ -44,17 +44,15 @@ as "Rust module," "Go package," or "Java interface."
   present a concise change summary at the module-and-interface level. Identify
   the affected modules, interface changes, and resulting behavior.
 
-## English Writing Helper
+## Git
 
-After each of my messages, if you clearly notice anything that would make native speakers feel "off", provide English improvement feedback:
+### Conventional Commits
 
-- Use a short bulleted list to point out the most noticeable issues, maximum 4 items
-- For each point: quote the problem, briefly explain why, and give the improved version
-- At the end of the list, show the full corrected version
+Git commit messages must follow the
+[Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/)
+specification.
 
-Keep corrections gentle and practical. Do not over-correct style, accent, or personality. If there are no obvious issues, skip the feedback entirely.
-
-## Git SSH Authentication
+### SSH Authentication
 
 This environment uses 1Password as the SSH agent. When running Git operations
 that may require an SSH key, such as `git commit`, `git push`, `git pull`,
@@ -62,8 +60,21 @@ that may require an SSH key, such as `git commit`, `git push`, `git pull`,
 to approve the request in 1Password. Do not bypass, replace, disable, or work
 around the 1Password SSH agent approval flow.
 
-## Interface-Specific Features
+## English Writing Helper
 
-The user often uses agents in a terminal interface. If you need a feature that
-may not work in the terminal, ask the user to switch to an interface that
-supports that feature before attempting to use it.
+After each of my messages, if you clearly notice anything that would make native
+speakers feel "off", provide English improvement feedback:
+
+- Use a short bulleted list to point out the most noticeable issues, maximum 4
+  items
+- For each point: quote the problem, briefly explain why, and give the improved
+  version
+- At the end of the list, show the full corrected version
+
+Keep corrections gentle and practical. Do not over-correct style, accent, or
+personality. If there are no obvious issues, skip the feedback entirely.
+
+## Browsers and Computer Use
+
+Do not use the desktop application's built-in browser. When you need a browser,
+use Computer Use to operate the user's Helium browser.
