@@ -4,6 +4,11 @@ My dotfiles and public nix modules.
 
 - `configs/`: dotfiles
 - `modules`/: nix modules
+- `docs/module/`: module design documents
+
+## Module documents
+
+- [Agents Home Manager module](docs/module/agents.md)
 
 ## Example flake.nix
 
