@@ -28,12 +28,12 @@ Pass the input path and select skills in Home Manager:
     pi = true;
 
     skillSources = {
-      matt = inputs.matt-skills.outPath;
+      matt = "${inputs.matt-skills.outPath}/skills/productivity";
       local = ./agents/skills;
     };
 
     skills = {
-      frontend-design = "matt";
+      grilling = "matt";
       local-skill = "local";
     };
   };
@@ -159,7 +159,7 @@ Home Manager-native evaluation tests use
 `home.file`, package, and session-variable interfaces. Flake checks cover:
 
 - the module-provided `crows` source;
-- flake-input and local-path sources;
+- configured path sources;
 - explicit skill selection and path resolution;
 - identical skill installation across multiple enabled agents;
 - an empty skill selection;

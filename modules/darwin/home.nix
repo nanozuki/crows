@@ -14,6 +14,7 @@
       ../home
     ];
     extraSpecialArgs = {
+      inherit inputs;
       system = pkgs.stdenv.hostPlatform.system;
       clips = import ../../clips pkgs pkgs.stdenv.hostPlatform.system;
     };

@@ -1,12 +1,8 @@
-{
-  agentsModule,
-  home-manager,
-  inputSkillsRoot,
-  pkgs,
-  skillsRoot,
-}:
+{ home-manager, pkgs }:
 let
   inherit (pkgs) lib;
+  agentsModule = ../modules/home/agents.nix;
+  skillsRoot = ../configs/agents/skills;
 
   mkHome =
     agents:
@@ -27,13 +23,9 @@ let
     claude = true;
     codex = true;
     pi = true;
-    skillSources = {
-      input = inputSkillsRoot;
-      local = ../configs/agents/skills;
-    };
+    skillSources.local = skillsRoot;
     skills = {
       software-design = "crows";
-      grilling = "input";
       handoff = "local";
     };
   };
@@ -65,9 +57,6 @@ let
     "claude_skill_software-design"
     "codex_skill_software-design"
     "pi_skill_software-design"
-    "claude_skill_grilling"
-    "codex_skill_grilling"
-    "pi_skill_grilling"
     "claude_skill_handoff"
     "codex_skill_handoff"
     "pi_skill_handoff"
@@ -78,7 +67,6 @@ in
   module =
     assert lib.all (name: builtins.hasAttr name files) expectedSkillFiles;
     assert files.claude_skill_software-design.source == "${skillsRoot}/software-design";
-    assert files.codex_skill_grilling.source == "${inputSkillsRoot}/grilling";
     assert files.pi_skill_handoff.source == "${skillsRoot}/handoff";
     assert integrated.config.crows.agents.skillSources.crows == skillsRoot;
     assert lib.elem pkgs.claude-code integrated.config.home.packages;
