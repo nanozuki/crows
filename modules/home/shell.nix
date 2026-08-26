@@ -60,6 +60,10 @@ in
       sessionPath = [
         "$HOME/.local/bin"
       ];
+      sessionVariables = {
+        GOPATH = "${config.xdg.dataHome}/go";
+        GOBIN = "${config.home.homeDirectory}/.local/bin";
+      };
     };
 
     programs = {
