@@ -97,13 +97,4 @@ return {
       vim.g.db_ui_use_nerd_fonts = 1
     end,
   },
-  -- markdown
-  {
-    'MeanderingProgrammer/render-markdown.nvim',
-    ft = { 'markdown' },
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-    ---@module 'render-markdown'
-    ---@type render.md.UserConfig
-    opts = {},
-  },
 }
