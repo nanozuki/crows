@@ -59,9 +59,6 @@ in
         };
         user = user;
       };
-      includes = [
-        { path = "${config.xdg.configHome}/git/config_local"; }
-      ];
       signing = {
         key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDlyirz8SBnqzKPX6kvGX6eoBtFCOK87KTmIVZC7R2N9";
         format = "ssh";
