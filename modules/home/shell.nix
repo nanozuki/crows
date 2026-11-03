@@ -1,4 +1,5 @@
-# configs for shell application and related tools
+# Shell applications and shared user-level tool directories.
+# Project flakes provide toolchains, language servers, and formatters.
 {
   config,
   lib,
@@ -49,6 +50,15 @@ in
           source = ../../configs/editorconfig/editorconfig;
           target = "${config.home.homeDirectory}/.editorconfig";
         };
+        npmrc = {
+          enable = true;
+          text = ''
+            prefix=${config.xdg.dataHome}/npm
+            cache=${config.xdg.cacheHome}/npm
+            init-module=${config.xdg.configHome}/npm/config/npm-init.js
+          '';
+          target = "${config.xdg.configHome}/npm/npmrc";
+        };
       }
       // fishFunctionFiles;
       packages = with pkgs; [
@@ -56,14 +66,15 @@ in
         tokei
         gron
       ];
+      sessionVariables = {
+        GOPATH = "${config.xdg.dataHome}/go";
+        CARGO_HOME = "${config.xdg.dataHome}/cargo";
+        NPM_CONFIG_USERCONFIG = "${config.xdg.configHome}/npm/npmrc";
+      };
       shell.enableShellIntegration = true;
       sessionPath = [
         "$HOME/.local/bin"
       ];
-      sessionVariables = {
-        GOPATH = "${config.xdg.dataHome}/go";
-        GOBIN = "${config.home.homeDirectory}/.local/bin";
-      };
     };
 
     programs = {

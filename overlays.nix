@@ -13,7 +13,6 @@ let
 in
 {
   nixpkgs.overlays = [
-    inputs.rust-overlay.overlays.default
     stableOverlay
     stratosphereOverlay
   ];

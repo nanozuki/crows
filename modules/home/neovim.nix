@@ -61,8 +61,5 @@ in
       target = "${config.xdg.configHome}/crows/settings.json";
     };
     home.packages = with pkgs; [ tree-sitter ];
-
-    crows.languages.dataAndMarkup.enable = true;
-    crows.languages.lua.enable = true;
   };
 }

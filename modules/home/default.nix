@@ -9,7 +9,6 @@
     ./gpg.nix
     ./ideavim.nix
     ./kitty.nix
-    ./languages.nix
     ./neovim.nix
     ./one-password.nix
     ./rime.nix
