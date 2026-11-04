@@ -58,10 +58,13 @@ vim.lsp.enable({
   'ruff',
   'rust_analyzer',
   'svelte',
-  'tailwindcss',
   'terraformls',
   'tinymist',
   'vtsls',
   'yamlls',
   'zls',
 })
+
+if vim.fn.executable('tailwindcss-language-server') == 1 then
+  vim.lsp.enable('tailwindcss')
+end
