@@ -20,7 +20,7 @@ local M = {
   use_global_statusline = false,
   hide_command_line = false,
   use_gofumpt = true,
-  agent = 'opencode',
+  agent = 'pi',
 }
 
 local function get_settings_path()
